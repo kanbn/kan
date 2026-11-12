@@ -10,7 +10,7 @@ import { encryptTrelloToken } from "@kan/server/utils/trello-token";
 import { env } from "~/env";
 
 export default withRateLimit(
-  { points: 100, duration: 60 },
+  { keyPrefix: "trello-authenticate", points: 100, duration: 60 },
   withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "POST") {
       return res.status(405).json({ message: "Method not allowed" });

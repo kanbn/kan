@@ -35,6 +35,7 @@ services:
 
       # Redis (optional - for rate limiting)
       - REDIS_URL=${REDIS_URL}
+      - RATE_LIMIT_IP_HEADER=${RATE_LIMIT_IP_HEADER}
 
       # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)
       - LOG_LEVEL=${LOG_LEVEL}

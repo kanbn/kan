@@ -49,7 +49,12 @@ const unavailable = (res: NextApiResponse, status: number, message: string) =>
   res.status(status).json({ code: API_UNAVAILABLE, message });
 
 export default withRateLimit(
-  { points: 600, duration: 60, identifier: tokenOrIpIdentifier },
+  {
+    keyPrefix: "api-v1",
+    points: 600,
+    duration: 60,
+    identifier: tokenOrIpIdentifier,
+  },
   async (req: NextApiRequest, res: NextApiResponse) => {
     await cors(req, res);
 

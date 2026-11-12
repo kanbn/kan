@@ -83,7 +83,7 @@ async function fetchLicenseDetail(
 }
 
 export default withRateLimit(
-  { points: 20, duration: 60 },
+  { keyPrefix: "partner-callback", points: 20, duration: 60 },
   withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== "GET") {
       return res.status(405).json({ message: "Method not allowed" });

@@ -14,6 +14,7 @@ export const initAuth = (db: dbClient) => {
   const baseURL = env("NEXT_PUBLIC_BASE_URL") || env("BETTER_AUTH_URL");
   const trustedOrigins =
     env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",").filter(Boolean) ?? [];
+  const ipHeader = env("RATE_LIMIT_IP_HEADER")?.toLowerCase();
 
   return betterAuth({
     secret: env("BETTER_AUTH_SECRET"),
@@ -81,6 +82,7 @@ export const initAuth = (db: dbClient) => {
             },
           }
         : {}),
+      ...(ipHeader ? { ipAddress: { ipAddressHeaders: [ipHeader] } } : {}),
       database: {
         generateId: false,
       },

@@ -10,6 +10,7 @@ import { getApiToken } from "./apiToken";
 const log = createLogger("rateLimit");
 
 export interface RateLimitOptions {
+  keyPrefix: string;
   points?: number;
   duration?: number;
   identifier?: (req: NextApiRequest) => string | Promise<string>;
@@ -21,23 +22,34 @@ export interface RateLimitOptions {
   ) => unknown;
 }
 
-const defaultIdentifier = (req: NextApiRequest): string => {
-  // Try to identify the IP address of the request
-  const forwardedFor = req.headers["x-forwarded-for"];
-  const realIp = req.headers["x-real-ip"];
-  const cfConnectingIp = req.headers["cf-connecting-ip"];
+type RequestHeaders = Record<string, string | string[] | undefined>;
 
-  const ip =
-    (typeof forwardedFor === "string"
-      ? forwardedFor.split(",")[0]?.trim()
-      : null) ??
-    (typeof realIp === "string" ? realIp : null) ??
-    (typeof cfConnectingIp === "string" ? cfConnectingIp : null) ??
-    req.socket.remoteAddress ??
-    "unknown";
-
-  return ip;
+const firstHeader = (headers: RequestHeaders, name: string) => {
+  const value = headers[name];
+  return (Array.isArray(value) ? value[0] : value)?.trim() || undefined;
 };
+
+// Without RATE_LIMIT_IP_HEADER the first X-Forwarded-For entry is used, which
+// clients can set; it stays the default so multi-proxy setups keep working.
+export const getClientIp = (
+  headers: RequestHeaders,
+  remoteAddress?: string,
+): string => {
+  const trustedHeader = process.env.RATE_LIMIT_IP_HEADER?.toLowerCase();
+  if (trustedHeader)
+    return firstHeader(headers, trustedHeader) ?? remoteAddress ?? "unknown";
+
+  return (
+    firstHeader(headers, "x-forwarded-for")?.split(",")[0]?.trim() ||
+    firstHeader(headers, "x-real-ip") ||
+    firstHeader(headers, "cf-connecting-ip") ||
+    remoteAddress ||
+    "unknown"
+  );
+};
+
+const defaultIdentifier = (req: NextApiRequest): string =>
+  getClientIp(req.headers, req.socket.remoteAddress);
 
 export const tokenOrIpIdentifier = (req: NextApiRequest): string => {
   const token = getApiToken(req);
@@ -54,27 +66,23 @@ const DEFAULT_OPTIONS = {
   identifier: defaultIdentifier,
 } as const;
 
-function createRateLimiter(options: RateLimitOptions = {}) {
+function createRateLimiter(options: RateLimitOptions) {
   const redis = getRedisClient();
-  const points = options.points ?? DEFAULT_OPTIONS.points;
-  const duration = options.duration ?? DEFAULT_OPTIONS.duration;
+  const limiterOptions = {
+    keyPrefix: `kan-rl:${options.keyPrefix}`,
+    points: options.points ?? DEFAULT_OPTIONS.points,
+    duration: options.duration ?? DEFAULT_OPTIONS.duration,
+  };
 
-  // Use Redis if available, otherwise fall back to in-memory storage
-  if (redis) {
-    log.debug("Using Redis for rate limiting");
-    return new RateLimiterRedis({
-      storeClient: redis,
-      points,
-      duration,
-    });
-  }
-
-  log.debug("Redis unavailable, falling back to in-memory rate limiting");
-  return new RateLimiterMemory({
-    points,
-    duration,
-  });
+  return redis
+    ? new RateLimiterRedis({ storeClient: redis, ...limiterOptions })
+    : new RateLimiterMemory(limiterOptions);
 }
+
+const isLimitExceeded = (error: unknown) =>
+  !!error &&
+  typeof error === "object" &&
+  ("msBeforeNext" in error || "remainingPoints" in error);
 
 export function withRateLimit(
   options: RateLimitOptions,
@@ -93,30 +101,20 @@ export function withRateLimit(
 
   return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      const id = await identifier(req);
-      const key = `ratelimit_${id}`;
-
-      await rateLimiter.consume(key);
-
-      return await handler(req, res);
+      await rateLimiter.consume(`ratelimit_${await identifier(req)}`);
     } catch (error) {
-      // rate-limiter-flexible throws an error with msBeforeNext or remainingPoints
-      // when limit is exceeded. Check for these properties directly.
-      if (
-        error &&
-        typeof error === "object" &&
-        ("msBeforeNext" in error || "remainingPoints" in error)
-      ) {
+      if (isLimitExceeded(error)) {
         if (options.onRateLimit) {
           return options.onRateLimit(req, res, errorMessage);
         }
-
-        return res.status(429).json({
-          message: errorMessage,
-        });
+        return res.status(429).json({ message: errorMessage });
       }
-
-      return await handler(req, res);
+      log.warn(
+        { err: error, keyPrefix: options.keyPrefix },
+        "Rate limiter unavailable, allowing request",
+      );
     }
+
+    return handler(req, res);
   };
 }

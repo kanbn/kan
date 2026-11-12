@@ -30,7 +30,7 @@ interface CheckoutSessionRequest {
 }
 
 export default withRateLimit(
-  { points: 100, duration: 60 },
+  { keyPrefix: "stripe-checkout-session", points: 100, duration: 60 },
   withApiLogging(async (req: NextApiRequest, res: NextApiResponse) => {
     const stripe = createStripeClient();
 
