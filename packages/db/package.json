@@ -47,7 +47,6 @@
     "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
     "drizzle-orm": "^0.45.4",
-    "drizzle-zod": "^0.5.1",
     "ioredis": "^5.9.2",
     "pg": "^8.11.3",
     "pg-connection-string": "^2.9.1",

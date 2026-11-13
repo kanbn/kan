@@ -39,11 +39,7 @@ const buildSchema = (hasPassword: boolean) => {
     );
 };
 
-interface FormValues {
-  currentPassword?: string;
-  newPassword: string;
-  confirmPassword: string;
-}
+type FormValues = z.infer<ReturnType<typeof buildSchema>>;
 
 interface Props {
   hasPassword: boolean;
