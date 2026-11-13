@@ -112,7 +112,7 @@ const SelectSource = ({
           name="source"
           control={control}
           render={({ field }) => (
-            <Listbox {...field}>
+            <Listbox value={field.value} onChange={field.onChange}>
               {({ open }) => (
                 <>
                   <div className="relative">

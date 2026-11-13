@@ -149,7 +149,7 @@ export function LabelForm({
           name="colour"
           control={control}
           render={({ field }) => (
-            <Listbox {...field}>
+            <Listbox value={field.value} onChange={field.onChange}>
               {({ open }) => (
                 <>
                   <div className="relative mt-4">
