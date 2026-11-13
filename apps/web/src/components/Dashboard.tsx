@@ -135,8 +135,15 @@ export default function Dashboard({
     }
   }, [searchParams, showPopup, router]);
 
+  // Router changes re-run this before a newly created workspace is in the list, so only prompt once.
+  const hasPromptedForWorkspace = useRef(false);
   useEffect(() => {
-    if (hasLoaded && availableWorkspaces.length === 0) {
+    if (
+      hasLoaded &&
+      availableWorkspaces.length === 0 &&
+      !hasPromptedForWorkspace.current
+    ) {
+      hasPromptedForWorkspace.current = true;
       if (env("NEXT_PUBLIC_KAN_ENV") === "cloud") {
         router.push(
           `/onboarding/select-plan?returnUrl=${encodeURIComponent(window.location.pathname)}`,
