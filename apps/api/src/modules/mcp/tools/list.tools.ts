@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { CreateListSchema, UpdateListSchema } from "../../list/dto/list.dto.js";
@@ -15,7 +21,8 @@ const UpdateListWithIdSchema = UpdateListSchema.extend({
   listPublicId,
 });
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class ListTools {
   constructor(private readonly listService: ListService) {}
 
@@ -25,9 +32,9 @@ export class ListTools {
     parameters: CreateListSchema,
   })
   async createList(
-    args: z.infer<typeof CreateListSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof CreateListSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.listService.create({
@@ -43,9 +50,9 @@ export class ListTools {
     parameters: DeleteListSchema,
   })
   async deleteList(
-    args: z.infer<typeof DeleteListSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof DeleteListSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.listService.delete({
@@ -61,9 +68,9 @@ export class ListTools {
     parameters: UpdateListWithIdSchema,
   })
   async updateList(
-    args: z.infer<typeof UpdateListWithIdSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof UpdateListWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.listService.update({

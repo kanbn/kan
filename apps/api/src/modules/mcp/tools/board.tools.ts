@@ -1,5 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { NotFoundException, UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { BoardService } from "../../board/board.service.js";
@@ -90,7 +96,8 @@ const MoveBoardWithIdSchema = MoveBoardSchema.extend(BoardIdSchema.shape);
 
 type McpRequest = { user?: unknown } | undefined;
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class BoardTools {
   constructor(
     private readonly boardService: BoardService,
@@ -104,9 +111,9 @@ export class BoardTools {
     parameters: ListBoardsSchema,
   })
   async listBoards(
-    args: z.infer<typeof ListBoardsSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof ListBoardsSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardService.all({ ...args, userId: user.id });
@@ -119,9 +126,9 @@ export class BoardTools {
     parameters: GetBoardSchema,
   })
   async getBoard(
-    args: z.infer<typeof GetBoardSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof GetBoardSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardService.byId({
@@ -142,9 +149,9 @@ export class BoardTools {
     parameters: BoardNameSchema,
   })
   async findBoardByName(
-    args: z.infer<typeof BoardNameSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof BoardNameSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     const workspace = await findWorkspaceByName(
@@ -173,9 +180,9 @@ export class BoardTools {
     parameters: BoardSlugSchema,
   })
   async getBoardBySlug(
-    args: z.infer<typeof BoardSlugSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof BoardSlugSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     requireMcpUser(rawRequest);
     return this.boardService.bySlug(args);
@@ -188,9 +195,9 @@ export class BoardTools {
     parameters: CreateBoardWithWorkspaceSchema,
   })
   async createBoard(
-    args: z.infer<typeof CreateBoardWithWorkspaceSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof CreateBoardWithWorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardService.create({ ...args, userId: user.id });
@@ -203,9 +210,9 @@ export class BoardTools {
     parameters: UpdateBoardWithIdSchema,
   })
   async updateBoard(
-    args: z.infer<typeof UpdateBoardWithIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof UpdateBoardWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardService.update({ ...args, userId: user.id });
@@ -217,9 +224,9 @@ export class BoardTools {
     parameters: BoardIdSchema,
   })
   async deleteBoard(
-    args: z.infer<typeof BoardIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof BoardIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardService.delete({ ...args, userId: user.id });
@@ -231,9 +238,9 @@ export class BoardTools {
     parameters: MoveBoardWithIdSchema,
   })
   async moveBoard(
-    args: z.infer<typeof MoveBoardWithIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof MoveBoardWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardService.move({ ...args, userId: user.id });

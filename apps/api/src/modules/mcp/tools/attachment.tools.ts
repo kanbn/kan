@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { AttachmentService } from "../../attachment/attachment.service.js";
@@ -10,7 +16,8 @@ const DeleteAttachmentSchema = z.object({
   attachmentPublicId,
 });
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class AttachmentTools {
   constructor(private readonly attachmentService: AttachmentService) {}
 
@@ -21,9 +28,9 @@ export class AttachmentTools {
     parameters: DeleteAttachmentSchema,
   })
   async deleteAttachment(
-    args: z.infer<typeof DeleteAttachmentSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof DeleteAttachmentSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.attachmentService.delete({

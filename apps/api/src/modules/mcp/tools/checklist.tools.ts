@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { ChecklistService } from "../../checklist/checklist.service.js";
@@ -42,7 +48,8 @@ const DeleteChecklistItemSchema = z.object({
   checklistItemPublicId,
 });
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class ChecklistTools {
   constructor(private readonly checklistService: ChecklistService) {}
 
@@ -52,9 +59,9 @@ export class ChecklistTools {
     parameters: CreateChecklistWithCardSchema,
   })
   async createChecklist(
-    args: z.infer<typeof CreateChecklistWithCardSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof CreateChecklistWithCardSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.checklistService.create({
@@ -70,9 +77,9 @@ export class ChecklistTools {
     parameters: UpdateChecklistWithIdSchema,
   })
   async updateChecklist(
-    args: z.infer<typeof UpdateChecklistWithIdSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof UpdateChecklistWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.checklistService.update({
@@ -88,9 +95,9 @@ export class ChecklistTools {
     parameters: DeleteChecklistSchema,
   })
   async deleteChecklist(
-    args: z.infer<typeof DeleteChecklistSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof DeleteChecklistSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.checklistService.delete({
@@ -105,9 +112,9 @@ export class ChecklistTools {
     parameters: CreateChecklistItemWithChecklistSchema,
   })
   async createChecklistItem(
-    args: z.infer<typeof CreateChecklistItemWithChecklistSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof CreateChecklistItemWithChecklistSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.checklistService.createItem({
@@ -124,9 +131,9 @@ export class ChecklistTools {
     parameters: UpdateChecklistItemWithIdSchema,
   })
   async updateChecklistItem(
-    args: z.infer<typeof UpdateChecklistItemWithIdSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof UpdateChecklistItemWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.checklistService.updateItem({
@@ -144,9 +151,9 @@ export class ChecklistTools {
     parameters: DeleteChecklistItemSchema,
   })
   async deleteChecklistItem(
-    args: z.infer<typeof DeleteChecklistItemSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof DeleteChecklistItemSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.checklistService.deleteItem({

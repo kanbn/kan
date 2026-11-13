@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { CardService } from "../../card/card.service.js";
@@ -44,7 +50,8 @@ const ToggleMemberSchema = CardIdSchema.extend({
 
 type McpRequest = { user?: unknown } | undefined;
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class CardTools {
   constructor(private readonly cardService: CardService) {}
 
@@ -55,9 +62,9 @@ export class CardTools {
     parameters: CardIdSchema,
   })
   async getCard(
-    args: z.infer<typeof CardIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof CardIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.byId({ ...args, userId: user.id });
@@ -69,9 +76,9 @@ export class CardTools {
     parameters: ActivitiesWithIdSchema,
   })
   async getCardActivities(
-    args: z.infer<typeof ActivitiesWithIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof ActivitiesWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.getActivities({ ...args, userId: user.id });
@@ -84,9 +91,9 @@ export class CardTools {
     parameters: CreateCardWithDefaultsSchema,
   })
   async createCard(
-    args: z.infer<typeof CreateCardWithDefaultsSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof CreateCardWithDefaultsSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.create({
@@ -103,9 +110,9 @@ export class CardTools {
     parameters: UpdateCardWithIdSchema,
   })
   async updateCard(
-    args: z.infer<typeof UpdateCardWithIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof UpdateCardWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.update({
@@ -121,9 +128,9 @@ export class CardTools {
     parameters: CardIdSchema,
   })
   async deleteCard(
-    args: z.infer<typeof CardIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof CardIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.delete({
@@ -140,9 +147,9 @@ export class CardTools {
     parameters: DuplicateCardWithIdSchema,
   })
   async duplicateCard(
-    args: z.infer<typeof DuplicateCardWithIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof DuplicateCardWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.duplicate({ ...args, userId: user.id });
@@ -154,9 +161,9 @@ export class CardTools {
     parameters: ToggleLabelSchema,
   })
   async toggleCardLabel(
-    args: z.infer<typeof ToggleLabelSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof ToggleLabelSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.addOrRemoveLabel({ ...args, userId: user.id });
@@ -168,9 +175,9 @@ export class CardTools {
     parameters: ToggleMemberSchema,
   })
   async toggleCardMember(
-    args: z.infer<typeof ToggleMemberSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof ToggleMemberSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.addOrRemoveMember({ ...args, userId: user.id });
@@ -182,9 +189,9 @@ export class CardTools {
     parameters: AddCommentSchema,
   })
   async addCardComment(
-    args: z.infer<typeof AddCommentSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof AddCommentSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.addComment({ ...args, userId: user.id });
@@ -196,9 +203,9 @@ export class CardTools {
     parameters: UpdateCommentSchema,
   })
   async updateCardComment(
-    args: z.infer<typeof UpdateCommentSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof UpdateCommentSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.updateComment({ ...args, userId: user.id });
@@ -210,9 +217,9 @@ export class CardTools {
     parameters: CommentIdSchema,
   })
   async deleteCardComment(
-    args: z.infer<typeof CommentIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof CommentIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.deleteComment({ ...args, userId: user.id });
