@@ -19,7 +19,7 @@
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
-    "lint:ws": "pnpm dlx sherif@latest -i zod",
+    "lint:ws": "pnpm dlx sherif@latest -i zod -i @modelcontextprotocol/sdk",
     "postinstall": "pnpm lint:ws",
     "test": "pnpm --filter=\"!@kan/e2e\" -r --if-present test",
     "test:e2e": "pnpm --filter @kan/e2e test",
@@ -58,7 +58,18 @@
     },
     "overrides": {
       "@types/minimatch": "npm:minimatch@*",
-      "@types/glob": "npm:@types/glob@^8.1.0"
+      "@types/glob": "npm:@types/glob@^8.1.0",
+      "proxy-addr": "^2.0.8",
+      "body-parser@2": "^2.4.0",
+      "fast-uri@3": "^3.1.7",
+      "hono@4": "^4.12.25",
+      "ip-address@10": "^10.3.1",
+      "preact@10": "^10.27.3",
+      "linkify-it@5": "^5.0.2",
+      "markdown-it@14": "^14.3.3",
+      "prosemirror-view": "^1.42.3",
+      "js-yaml@4": "^4.3.2",
+      "prosemirror-model": "^1.25.13"
     }
   }
 }

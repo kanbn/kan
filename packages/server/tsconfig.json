@@ -3,6 +3,10 @@
   "include": ["packages/**/*", "src"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]

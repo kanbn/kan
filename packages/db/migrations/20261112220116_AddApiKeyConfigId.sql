@@ -1,0 +1,1 @@
+ALTER TABLE "apiKey" ADD COLUMN "configId" text DEFAULT 'default' NOT NULL;

@@ -1,5 +1,6 @@
 import { stripe } from "@better-auth/stripe";
-import { apiKey, genericOAuth } from "better-auth/plugins";
+import { apiKey } from "@better-auth/api-key";
+import { genericOAuth } from "better-auth/plugins";
 import { magicLink } from "better-auth/plugins/magic-link";
 
 import type { dbClient } from "@kan/db/client";
@@ -159,6 +160,7 @@ export function createPlugins(db: dbClient) {
         ]
       : []),
     apiKey({
+      schema: { apikey: { fields: { referenceId: "userId" } } },
       enableSessionForAPIKeys: true,
       customAPIKeyGetter: (ctx) => getApiKeyFromHeaders(ctx.headers),
       rateLimit: {
@@ -253,7 +255,8 @@ export function createPlugins(db: dbClient) {
                 discoveryUrl: process.env.OIDC_DISCOVERY_URL,
                 scopes: ["openid", "email", "profile"],
                 pkce: true,
-                mapProfileToUser: (profile: {
+                mapProfileToUser: (raw) => {
+                  const profile = raw as {
                   name?: string;
                   display_name?: string;
                   preferred_username?: string;
@@ -264,7 +267,7 @@ export function createPlugins(db: dbClient) {
                   sub?: string;
                   picture?: string;
                   avatar?: string;
-                }) => {
+                  };
                   log.debug({ profile }, "OIDC profile received");
 
                   const name =
@@ -281,7 +284,7 @@ export function createPlugins(db: dbClient) {
                     email: profile.email,
                     name: name,
                     emailVerified: profile.email_verified ?? false,
-                    image: profile.picture ?? profile.avatar ?? null,
+                    image: profile.picture ?? profile.avatar,
                   };
                 },
               },

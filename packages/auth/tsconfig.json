@@ -1,6 +1,10 @@
 {
   "extends": "@kan/tsconfig/internal-package.json",
   "compilerOptions": {
+    "declaration": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
     "jsx": "react-jsx"
   },
   "include": ["*.ts", "src"],

@@ -12,8 +12,8 @@ import { redactSensitive } from "@kan/server/utils/redact";
 import { cancelWorkspaceAccess } from "@kan/server/utils/workspace";
 import { getActiveSubscriptions } from "@kan/shared/utils";
 
-import type { TierConfig } from "./_utils";
-import { tierConfig } from "./_utils";
+import type { TierConfig } from "~/utils/partnerTiers";
+import { tierConfig } from "~/utils/partnerTiers";
 
 const log = createLogger("api");
 

@@ -6,7 +6,7 @@ import { createNextApiContext } from "@kan/server/context";
 import { withApiLogging } from "@kan/server/utils/apiLogging";
 import { withRateLimit } from "@kan/server/utils/rateLimit";
 
-import { tierConfig } from "./_utils";
+import { tierConfig } from "~/utils/partnerTiers";
 
 const log = createLogger("api");
 

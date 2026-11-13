@@ -53,6 +53,7 @@ export const verification = pgTable("verification", {
 
 export const apikey = pgTable("apiKey", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
+  configId: text("configId").notNull().default("default"),
   name: text("name"),
   start: text("start"),
   prefix: text("prefix"),
