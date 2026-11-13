@@ -13,7 +13,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "mintlify": "^4.2.1166"
+    "mintlify": "^4.3.23"
   },
   "prettier": "@kan/prettier-config"
 }

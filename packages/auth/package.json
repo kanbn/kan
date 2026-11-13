@@ -36,13 +36,13 @@
   },
   "prettier": "@kan/prettier-config",
   "dependencies": {
-    "@better-auth/api-key": "^1.7.22",
-    "@better-auth/stripe": "^1.7.22",
+    "@better-auth/api-key": "^1.7.23",
+    "@better-auth/stripe": "^1.7.23",
     "@kan/db": "workspace:*",
     "@kan/email": "workspace:*",
     "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:*",
     "@kan/stripe": "workspace:*",
-    "better-auth": "^1.7.22"
+    "better-auth": "^1.7.23"
   }
 }

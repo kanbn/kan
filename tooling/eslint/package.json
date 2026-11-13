@@ -15,20 +15,20 @@
   },
   "dependencies": {
     "@eslint/compat": "^1.2.3",
-    "@next/eslint-plugin-next": "^14.2.15",
+    "@next/eslint-plugin-next": "^16.4.6",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-turbo": "^2.3.1",
-    "typescript-eslint": "^8.15.0"
+    "eslint-plugin-turbo": "~2.5.6",
+    "typescript-eslint": "^8.72.2"
   },
   "devDependencies": {
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
-    "@types/eslint__js": "8.42.3",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "turbo": "~2.5.6",
     "typescript": "catalog:"
   },
   "prettier": "@kan/prettier-config"
