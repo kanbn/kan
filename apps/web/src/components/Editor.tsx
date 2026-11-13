@@ -12,12 +12,12 @@ import Mention from "@tiptap/extension-mention";
 import Placeholder from "@tiptap/extension-placeholder";
 import Typography from "@tiptap/extension-typography";
 import {
-  BubbleMenu,
   EditorContent,
   Extension,
   ReactRenderer,
   useEditor,
 } from "@tiptap/react";
+import { BubbleMenu } from "@tiptap/react/menus";
 import StarterKit from "@tiptap/starter-kit";
 import Suggestion from "@tiptap/suggestion";
 import {
@@ -342,7 +342,7 @@ const SlashCommands = Extension.create<SlashCommandsOptions>({
         },
         items: ({ query }: { query: string }) => {
           return filterSlashCommandItems(
-            this.parent().commandItems ?? [],
+            this.parent?.().commandItems ?? [],
             query,
           );
         },
@@ -479,6 +479,9 @@ export default function Editor({
       extensions: [
         StarterKit.configure({
           heading: disableHeadings ? false : undefined,
+          link: false,
+          underline: false,
+          trailingNode: false,
         }),
         Link.configure({
           openOnClick: true,
@@ -575,9 +578,9 @@ export default function Editor({
       onUpdate: ({ editor }) => onChangeRef.current?.(editor.getHTML()),
       onBlur: ({ event }) => {
         if (
-          document
-            .querySelector(".tippy-box")
-            ?.contains(event.relatedTarget as Node)
+          (event.relatedTarget as Element | null)?.closest(
+            ".tippy-box, .editor-bubble-menu",
+          )
         )
           return;
         // Only trigger onBlur if the click was outside both the editor and menu
@@ -599,6 +602,7 @@ export default function Editor({
       },
       editable: !readOnly,
       injectCSS: false,
+      shouldRerenderOnTransaction: true,
     },
     [], // creating the editor only once
   );
@@ -609,7 +613,7 @@ export default function Editor({
     const currentHTML = editor.getHTML();
     const safeContent = content ?? "";
     if (safeContent !== currentHTML) {
-      editor.commands.setContent(safeContent, false);
+      editor.commands.setContent(safeContent, { emitUpdate: false });
     }
   }, [content, editor]);
 
@@ -656,7 +660,7 @@ export default function Editor({
   );
 }
 
-function EditorBubbleMenu({ editor }: { editor: TiptapEditor | null }) {
+function EditorBubbleMenu({ editor }: { editor: TiptapEditor }) {
   const isMac = navigator.platform.includes("Mac");
 
   const bubbleMenuItems = [
@@ -690,7 +694,7 @@ function EditorBubbleMenu({ editor }: { editor: TiptapEditor | null }) {
     },
   ];
   return (
-    <BubbleMenu editor={editor}>
+    <BubbleMenu editor={editor} className="editor-bubble-menu">
       <div className="flex items-center gap-2 rounded-md border border-light-600 bg-light-50 p-1 dark:border-dark-600 dark:bg-dark-50">
         {bubbleMenuItems.map((item) => (
           <Button
