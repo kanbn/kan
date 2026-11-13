@@ -38,7 +38,7 @@ export class StripeCheckoutPage {
           ),
         );
         throw new Error(
-          `Stripe checkout: no ${role} "${String(name)}" at ${this.page.url()}\n${snapshots.join("\n---\n")}`,
+          `Stripe checkout: no ${role} "${String(name)}" at ${this.page.url()}\n${snapshots.join("\n---\n").replace(/^\s*- option .*\n/gm, "")}`,
         );
       }
       await this.page.waitForTimeout(250);
@@ -59,15 +59,28 @@ export class StripeCheckoutPage {
     const emailField = await this.find("textbox", "Email");
     if (await emailField?.isEditable()) await emailField?.fill(email);
     await cardNumber.fill(TEST_CARD_NUMBER);
-    await (await this.findRequired("textbox", "Expiration")).fill("12/34");
-    await (await this.findRequired("textbox", "CVC")).fill("123");
-    await (await this.find("textbox", "Cardholder name"))?.fill("E2E Test");
+    await (await this.findRequired("textbox", /^Expiration/)).fill("12/34");
     await (
-      await this.find("combobox", "Country or region")
+      await this.findRequired("textbox", /^(CVC|Security code)/)
+    ).fill("123");
+    await (
+      await this.find("textbox", /^(Cardholder name|Name on card)/)
+    )?.fill("E2E Test");
+    await (
+      await this.find("combobox", /^Country/)
     )?.selectOption({ label: "United Kingdom" });
-    await (await this.find("textbox", "Postal code"))?.fill("SW1A 1AA");
+    await (
+      await this.findRequired("textbox", /^(Postal code|ZIP)/i, 5_000).catch(
+        () => null,
+      )
+    )?.fill("SW1A 1AA");
 
-    await (await this.findRequired("button", "Start trial")).click();
+    await (
+      await this.findRequired(
+        "button",
+        /^(Start trial|Subscribe|Start free trial)/,
+      )
+    ).click();
   }
 
   async cancel() {
