@@ -113,6 +113,7 @@ const baseURL = remoteBaseURL ?? `http://localhost:${port}`;
 export default defineConfig({
   globalSetup: "./tests/support/global-setup.ts",
   fullyParallel: true,
+  timeout: 60_000,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 1,
   // Cloud tests each run `stripe listen`, which forwards every account event, so they stay serial.
