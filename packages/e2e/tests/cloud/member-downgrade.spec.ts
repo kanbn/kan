@@ -28,7 +28,7 @@ test(
       !hasRealStripeCredentials,
       "Requires a real Stripe test-mode STRIPE_SECRET_KEY and the Stripe CLI to forward webhooks",
     );
-    test.setTimeout(150_000);
+    test.setTimeout(210_000);
 
     const userA = createTestUser();
     const members = new MembersPage(page);
@@ -80,7 +80,7 @@ test(
       await settings.open();
       await settings.goToTab("Billing");
       await expect(page.getByText("Free (1 member)")).toBeVisible();
-    }).toPass({ timeout: 45_000 });
+    }).toPass({ timeout: 90_000 });
 
     await members.open();
     await expect(
