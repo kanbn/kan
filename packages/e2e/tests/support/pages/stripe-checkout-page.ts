@@ -56,7 +56,8 @@ export class StripeCheckoutPage {
     }
     cardNumber ??= await this.findRequired("textbox", "Card number", 0);
 
-    await (await this.find("textbox", "Email"))?.fill(email);
+    const emailField = await this.find("textbox", "Email");
+    if (await emailField?.isEditable()) await emailField?.fill(email);
     await cardNumber.fill(TEST_CARD_NUMBER);
     await (await this.findRequired("textbox", "Expiration")).fill("12/34");
     await (await this.findRequired("textbox", "CVC")).fill("123");
