@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import {
@@ -28,7 +34,8 @@ const UpdateWebhookWithIdSchema = UpdateWebhookSchema.extend(
 
 type McpRequest = { user?: unknown } | undefined;
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class WebhookTools {
   constructor(private readonly webhookService: WebhookService) {}
 
@@ -39,9 +46,9 @@ export class WebhookTools {
     parameters: WorkspaceIdSchema,
   })
   async listWebhooks(
-    args: z.infer<typeof WorkspaceIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof WorkspaceIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.webhookService.list({ ...args, userId: user.id });
@@ -53,9 +60,9 @@ export class WebhookTools {
     parameters: CreateWebhookWithWorkspaceSchema,
   })
   async createWebhook(
-    args: z.infer<typeof CreateWebhookWithWorkspaceSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof CreateWebhookWithWorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.webhookService.create({ ...args, userId: user.id });
@@ -67,9 +74,9 @@ export class WebhookTools {
     parameters: UpdateWebhookWithIdSchema,
   })
   async updateWebhook(
-    args: z.infer<typeof UpdateWebhookWithIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof UpdateWebhookWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.webhookService.update({ ...args, userId: user.id });
@@ -81,9 +88,9 @@ export class WebhookTools {
     parameters: WebhookIdSchema,
   })
   async deleteWebhook(
-    args: z.infer<typeof WebhookIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof WebhookIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.webhookService.delete({ ...args, userId: user.id });
@@ -95,9 +102,9 @@ export class WebhookTools {
     parameters: WebhookIdSchema,
   })
   async testWebhook(
-    args: z.infer<typeof WebhookIdSchema>,
-    _context: unknown,
-    rawRequest: McpRequest,
+    @Payload() args: z.infer<typeof WebhookIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.webhookService.test({

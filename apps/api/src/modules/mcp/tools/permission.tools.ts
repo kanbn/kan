@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { PermissionActionSchema } from "../../permission/dto/permission.dto.js";
@@ -33,7 +39,8 @@ const RolePermissionActionSchema = WorkspaceRoleSchema.extend(
   PermissionActionSchema.shape,
 );
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class PermissionTools {
   constructor(private readonly permissionService: PermissionService) {}
 
@@ -43,9 +50,9 @@ export class PermissionTools {
     parameters: WorkspaceSchema,
   })
   async getMyPermissions(
-    args: z.infer<typeof WorkspaceSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.getMyPermissions({
@@ -60,9 +67,9 @@ export class PermissionTools {
     parameters: WorkspaceMemberSchema,
   })
   async getMemberPermissions(
-    args: z.infer<typeof WorkspaceMemberSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceMemberSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.getMemberPermissions({
@@ -79,9 +86,9 @@ export class PermissionTools {
     parameters: MemberPermissionActionSchema,
   })
   async grantMemberPermission(
-    args: z.infer<typeof MemberPermissionActionSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof MemberPermissionActionSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.grantPermission({
@@ -99,9 +106,9 @@ export class PermissionTools {
     parameters: MemberPermissionActionSchema,
   })
   async revokeMemberPermission(
-    args: z.infer<typeof MemberPermissionActionSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof MemberPermissionActionSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.revokePermission({
@@ -119,9 +126,9 @@ export class PermissionTools {
     parameters: WorkspaceMemberSchema,
   })
   async resetMemberPermissions(
-    args: z.infer<typeof WorkspaceMemberSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceMemberSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.resetMemberPermissions({
@@ -138,9 +145,9 @@ export class PermissionTools {
     parameters: WorkspaceSchema,
   })
   async resetWorkspaceMemberPermissions(
-    args: z.infer<typeof WorkspaceSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.resetWorkspaceMemberPermissions({
@@ -155,9 +162,9 @@ export class PermissionTools {
     parameters: WorkspaceSchema,
   })
   async getWorkspaceRoles(
-    args: z.infer<typeof WorkspaceSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.getWorkspaceRoles({
@@ -173,9 +180,9 @@ export class PermissionTools {
     parameters: WorkspaceSchema,
   })
   async getWorkspaceRolePermissions(
-    args: z.infer<typeof WorkspaceSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.getWorkspaceRolePermissions({
@@ -190,9 +197,9 @@ export class PermissionTools {
     parameters: WorkspaceRoleSchema,
   })
   async getRolePermissions(
-    args: z.infer<typeof WorkspaceRoleSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceRoleSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.getRolePermissions({
@@ -209,9 +216,9 @@ export class PermissionTools {
     parameters: RolePermissionActionSchema,
   })
   async grantRolePermission(
-    args: z.infer<typeof RolePermissionActionSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof RolePermissionActionSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.grantRolePermission({
@@ -229,9 +236,9 @@ export class PermissionTools {
     parameters: RolePermissionActionSchema,
   })
   async revokeRolePermission(
-    args: z.infer<typeof RolePermissionActionSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof RolePermissionActionSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.permissionService.revokeRolePermission({

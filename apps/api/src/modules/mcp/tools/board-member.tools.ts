@@ -1,5 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { BoardMemberService } from "../../board-member/board-member.service.js";
@@ -28,7 +34,8 @@ const RemoveBoardMemberSchema = z.object({
   workspaceMemberPublicId,
 });
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class BoardMemberTools {
   constructor(private readonly boardMemberService: BoardMemberService) {}
 
@@ -38,9 +45,9 @@ export class BoardMemberTools {
     parameters: ListBoardMembersSchema,
   })
   async listBoardMembers(
-    args: z.infer<typeof ListBoardMembersSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof ListBoardMembersSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardMemberService.all({
@@ -56,9 +63,9 @@ export class BoardMemberTools {
     parameters: AddBoardMemberWithBoardSchema,
   })
   async addBoardMember(
-    args: z.infer<typeof AddBoardMemberWithBoardSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof AddBoardMemberWithBoardSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardMemberService.add({
@@ -75,9 +82,9 @@ export class BoardMemberTools {
     parameters: UpdateBoardMemberRoleWithIdsSchema,
   })
   async updateBoardMemberRole(
-    args: z.infer<typeof UpdateBoardMemberRoleWithIdsSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof UpdateBoardMemberRoleWithIdsSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardMemberService.updateRole({
@@ -94,9 +101,9 @@ export class BoardMemberTools {
     parameters: RemoveBoardMemberSchema,
   })
   async removeBoardMember(
-    args: z.infer<typeof RemoveBoardMemberSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof RemoveBoardMemberSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.boardMemberService.remove({

@@ -10,6 +10,7 @@ import { createLogger } from "@kan/logger";
 import { AppModule } from "./app.module.js";
 import { NestPinoLogger } from "./common/logging/nest-pino.logger.js";
 import { db } from "./common/session.util.js";
+import { mcpStrategy } from "./modules/mcp/mcp.strategy.js";
 import { buildOpenApiDocument } from "./openapi.js";
 
 async function bootstrap() {
@@ -37,6 +38,10 @@ async function bootstrap() {
   app
     .getHttpAdapter()
     .get("/openapi.json", (_req, res: Response) => res.json(document));
+
+  mcpStrategy.setHttpAdapter(app.getHttpAdapter());
+  app.connectMicroservice({ strategy: mcpStrategy });
+  await app.startAllMicroservices();
 
   const port = process.env.API_PORT ?? 4000;
   await app.listen(port);

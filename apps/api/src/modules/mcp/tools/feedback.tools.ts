@@ -1,12 +1,19 @@
 import type { z } from "zod";
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 
 import { CreateFeedbackSchema } from "../../feedback/dto/create-feedback.dto.js";
 import { FeedbackService } from "../../feedback/feedback.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class FeedbackTools {
   constructor(private readonly feedbackService: FeedbackService) {}
 
@@ -16,9 +23,9 @@ export class FeedbackTools {
     parameters: CreateFeedbackSchema,
   })
   async submitFeedback(
-    args: z.infer<typeof CreateFeedbackSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof CreateFeedbackSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.feedbackService.create({
