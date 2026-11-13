@@ -22,7 +22,7 @@ test(
     await dashboard.expectSignedInAs(owner);
 
     const invitedEmail = createTestUser().email;
-    await clearMailpitInbox();
+    await clearMailpitInbox(invitedEmail);
 
     await members.open();
     await members.inviteByEmail(invitedEmail);

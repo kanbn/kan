@@ -70,8 +70,11 @@ export async function getResetPasswordUrl(email: string): Promise<string> {
   return match[1].replace(/&amp;/g, "&");
 }
 
-export async function clearMailpitInbox() {
-  await fetch(`${mailpitBaseUrl}/api/v1/messages`, { method: "DELETE" });
+export async function clearMailpitInbox(email: string) {
+  await fetch(
+    `${mailpitBaseUrl}/api/v1/search?query=${encodeURIComponent(`to:${email}`)}`,
+    { method: "DELETE" },
+  );
 }
 
 export async function getMailpitMessageCount(email: string): Promise<number> {

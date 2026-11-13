@@ -10,9 +10,13 @@ export class StripeCheckoutPage {
     if (await emailField.count()) {
       await emailField.fill(email);
     }
-    await this.page
-      .getByRole("textbox", { name: "Card number" })
-      .fill(TEST_CARD_NUMBER);
+    const cardNumber = this.page.getByRole("textbox", { name: "Card number" });
+    const cardOption = this.page
+      .getByRole("radio", { name: /^card$/i })
+      .or(this.page.getByRole("button", { name: /^(pay with )?card$/i }));
+    await cardNumber.or(cardOption).first().waitFor({ timeout: 30_000 });
+    if (!(await cardNumber.isVisible())) await cardOption.first().click();
+    await cardNumber.fill(TEST_CARD_NUMBER);
     await this.page.getByRole("textbox", { name: "Expiration" }).fill("12/34");
     await this.page.getByRole("textbox", { name: "CVC" }).fill("123");
     await this.page
