@@ -87,7 +87,7 @@
     "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
     "@kan/stripe": "workspace:^",
-    "@nestjs/common": "^11.2.7",
+    "@nestjs/common": "^12.5.0",
     "rate-limiter-flexible": "^11.4.1",
     "zod": "catalog:"
   },
