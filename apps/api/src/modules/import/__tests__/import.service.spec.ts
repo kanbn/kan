@@ -285,6 +285,28 @@ describe("ImportService.importTrelloBoards", () => {
     });
   });
 
+  it("trims a long board name in the failure it reports", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValue(
+          jsonResponse({ ...trelloBoard, name: "R".repeat(5000) }),
+        ),
+    );
+    vi.spyOn(checklistRepo, "bulkCreateItems").mockRejectedValue(
+      new Error("insert failed"),
+    );
+
+    const { failures } = await service.importTrelloBoards({
+      boardIds: ["tb1"],
+      workspacePublicId: "workspace_12345",
+      userId: "user_1",
+    });
+
+    expect(failures[0]?.boardName).toBe("R".repeat(255));
+  });
+
   it("marks the import failed when no boards import", async () => {
     vi.stubGlobal(
       "fetch",

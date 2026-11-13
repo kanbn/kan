@@ -391,7 +391,7 @@ export class ImportService {
             );
 
           const data = (await response.json()) as TrelloBoard;
-          boardName = data.name;
+          boardName = clip(data.name, NAME_MAX);
           await importTrelloBoard(data, {
             userId,
             workspaceId: workspace.id,
