@@ -23,7 +23,7 @@ function resolveLoginUrl(request: NextRequest) {
   return new URL("/login", request.url);
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const host = request.headers.get("host")?.split(":")[0];
 
   if (

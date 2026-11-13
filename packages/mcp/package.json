@@ -38,6 +38,6 @@
   "devDependencies": {
     "@kan/tsconfig": "workspace:*",
     "typescript": "catalog:",
-    "vitest": "^3.0.0"
+    "vitest": "^5.1.0"
   }
 }

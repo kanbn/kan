@@ -84,7 +84,7 @@
     "@lingui/loader": "^5.3.2",
     "@lingui/swc-plugin": "^6.7.1",
     "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20.17.7",
+    "@types/node": "^24.19.2",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",
     "dotenv-cli": "^11.1.0",
@@ -93,7 +93,7 @@
     "prettier": "catalog:",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
-    "vitest": "^3.0.0"
+    "vitest": "^5.1.0"
   },
   "prettier": "@kan/prettier-config"
 }
