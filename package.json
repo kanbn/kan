@@ -68,7 +68,8 @@
       "linkify-it@5": "^5.0.2",
       "markdown-it@14": "^14.3.3",
       "prosemirror-view": "^1.42.3",
-      "js-yaml@4": "^4.3.2"
+      "js-yaml@4": "^4.3.2",
+      "prosemirror-model": "^1.25.13"
     }
   }
 }

@@ -32,8 +32,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.32.2",
-    "zod": "^4.3.5"
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@kan/tsconfig": "workspace:*",

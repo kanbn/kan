@@ -51,6 +51,7 @@ overrides:
   markdown-it@14: ^14.3.3
   prosemirror-view: ^1.42.3
   js-yaml@4: ^4.3.2
+  prosemirror-model: ^1.25.13
 
 importers:
 
@@ -238,8 +239,8 @@ importers:
         specifier: ^5.3.2
         version: 5.4.1(@lingui/babel-plugin-lingui-macro@5.4.1(typescript@5.9.2))(react@18.3.1)
       '@modelcontextprotocol/sdk':
-        specifier: ^1.32.2
-        version: 1.32.2(zod@3.25.76)
+        specifier: 1.32.1
+        version: 1.32.1(zod@3.25.76)
       '@t3-oss/env-nextjs':
         specifier: ^0.11.1
         version: 0.11.1(typescript@5.9.2)(zod@3.25.76)
@@ -664,11 +665,11 @@ importers:
   packages/mcp:
     dependencies:
       '@modelcontextprotocol/sdk':
-        specifier: ^1.32.2
-        version: 1.32.2(zod@4.6.7)
+        specifier: 1.32.1
+        version: 1.32.1(zod@3.25.76)
       zod:
-        specifier: ^4.3.5
-        version: 4.6.7
+        specifier: 'catalog:'
+        version: 3.25.76
     devDependencies:
       '@kan/tsconfig':
         specifier: workspace:*
@@ -3504,6 +3505,16 @@ packages:
 
   '@mintlify/validation@0.1.953':
     resolution: {integrity: sha512-3k1kaqC/8W0erNixlZg9SP2DX8TRSt8sMHm9wTJ1iDDHl9LlM2L+oH5bectUtLudt4oweRzRdWi+9M/vY8PJzg==}
+
+  '@modelcontextprotocol/sdk@1.32.1':
+    resolution: {integrity: sha512-2DdE+SJDtzLEEWzY1ZjY7Q+VcPhcV1KisD3zI4u0XZyktsjHum1mwbMI+JaulUBi2OZk+KJAi2uPXzxichPkdw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@cfworker/json-schema': ^4.1.1
+      zod: ^3.25 || ^4.0
+    peerDependenciesMeta:
+      '@cfworker/json-schema':
+        optional: true
 
   '@modelcontextprotocol/sdk@1.32.2':
     resolution: {integrity: sha512-SWsVtH/0vULSQStoZ6xxH2K09Li8fXYTMC64ZeogCdpZ3XSi1eCPOByV1OpuJxuI3OcmHhosDWYyii07tpPsLw==}
@@ -9277,12 +9288,6 @@ packages:
   prosemirror-model@1.25.13:
     resolution: {integrity: sha512-MlDMWGjYXaYOeCiO17jcybntCOzPnN+97U0809ke2QsgPtxW3n5/sD6ZKyJONUgMw1iP93ohZTjeKjnRJ7L6kQ==}
 
-  prosemirror-model@1.25.3:
-    resolution: {integrity: sha512-dY2HdaNXlARknJbrManZ1WyUtos+AP97AmvqdOQtWtrrC5g4mohVX5DTi9rXNFSk09eczLq9GuNTtq3EfMeMGA==}
-
-  prosemirror-model@1.25.4:
-    resolution: {integrity: sha512-PIM7E43PBxKce8OQeezAs9j4TP+5yDpZVbuurd1h5phUxEKIu+G2a+EUZzIC5nS1mJktDJWzbqS23n1tsAf5QA==}
-
   prosemirror-schema-basic@1.2.4:
     resolution: {integrity: sha512-ELxP4TlX3yr2v5rM7Sb70SqStq5NvI15c0j9j/gjsrO5vaw+fnnpovCLEGIcpeGfifkuqJwl4fon6b+KdrODYQ==}
 
@@ -9298,7 +9303,7 @@ packages:
   prosemirror-trailing-node@3.0.0:
     resolution: {integrity: sha512-xiun5/3q0w5eRnGYfNlW1uU9W6x5MoFKWwq/0TIRgt09lv7Hcser2QYV8t4muXbEr+Fwo0geYn79Xs4GKywrRQ==}
     peerDependencies:
-      prosemirror-model: ^1.22.1
+      prosemirror-model: ^1.25.13
       prosemirror-state: ^1.4.2
       prosemirror-view: ^1.42.3
 
@@ -13465,7 +13470,7 @@ snapshots:
       open: 8.4.2
       openid-client: 6.8.2
       posthog-node: 5.17.2
-      prosemirror-model: 1.25.4
+      prosemirror-model: 1.25.13
       react: 19.2.3
       remark: 15.0.1
       remark-frontmatter: 5.0.0
@@ -13779,7 +13784,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@modelcontextprotocol/sdk@1.32.2(zod@3.25.76)':
+  '@modelcontextprotocol/sdk@1.32.1(zod@3.25.76)':
     dependencies:
       '@hono/node-server': 1.19.14(hono@4.13.18)
       ajv: 8.20.0
@@ -15181,12 +15186,12 @@ snapshots:
       prosemirror-keymap: 1.2.3
       prosemirror-markdown: 1.13.2
       prosemirror-menu: 1.2.5
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
       prosemirror-schema-basic: 1.2.4
       prosemirror-schema-list: 1.5.1
       prosemirror-state: 1.4.3
       prosemirror-tables: 1.8.1
-      prosemirror-trailing-node: 3.0.0(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)(prosemirror-view@1.42.9)
+      prosemirror-trailing-node: 3.0.0(prosemirror-model@1.25.13)(prosemirror-state@1.4.3)(prosemirror-view@1.42.9)
       prosemirror-transform: 1.10.4
       prosemirror-view: 1.42.9
 
@@ -20432,7 +20437,7 @@ snapshots:
 
   prosemirror-commands@1.7.1:
     dependencies:
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
       prosemirror-state: 1.4.3
       prosemirror-transform: 1.10.4
 
@@ -20445,7 +20450,7 @@ snapshots:
   prosemirror-gapcursor@1.3.2:
     dependencies:
       prosemirror-keymap: 1.2.3
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
       prosemirror-state: 1.4.3
       prosemirror-view: 1.42.9
 
@@ -20470,7 +20475,7 @@ snapshots:
     dependencies:
       '@types/markdown-it': 14.1.2
       markdown-it: 14.3.3
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
 
   prosemirror-menu@1.2.5:
     dependencies:
@@ -20483,49 +20488,41 @@ snapshots:
     dependencies:
       orderedmap: 2.1.1
 
-  prosemirror-model@1.25.3:
-    dependencies:
-      orderedmap: 2.1.1
-
-  prosemirror-model@1.25.4:
-    dependencies:
-      orderedmap: 2.1.1
-
   prosemirror-schema-basic@1.2.4:
     dependencies:
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
 
   prosemirror-schema-list@1.5.1:
     dependencies:
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
       prosemirror-state: 1.4.3
       prosemirror-transform: 1.10.4
 
   prosemirror-state@1.4.3:
     dependencies:
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
       prosemirror-transform: 1.10.4
       prosemirror-view: 1.42.9
 
   prosemirror-tables@1.8.1:
     dependencies:
       prosemirror-keymap: 1.2.3
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
       prosemirror-state: 1.4.3
       prosemirror-transform: 1.10.4
       prosemirror-view: 1.42.9
 
-  prosemirror-trailing-node@3.0.0(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)(prosemirror-view@1.42.9):
+  prosemirror-trailing-node@3.0.0(prosemirror-model@1.25.13)(prosemirror-state@1.4.3)(prosemirror-view@1.42.9):
     dependencies:
       '@remirror/core-constants': 3.0.0
       escape-string-regexp: 4.0.0
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
       prosemirror-state: 1.4.3
       prosemirror-view: 1.42.9
 
   prosemirror-transform@1.10.4:
     dependencies:
-      prosemirror-model: 1.25.3
+      prosemirror-model: 1.25.13
 
   prosemirror-view@1.42.9:
     dependencies:
