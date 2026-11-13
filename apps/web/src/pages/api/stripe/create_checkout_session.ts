@@ -9,7 +9,7 @@ import { withApiLogging } from "@kan/server/utils/apiLogging";
 import { assertPermission } from "@kan/server/utils/permissions";
 import { withRateLimit } from "@kan/server/utils/rateLimit";
 import { generateUID } from "@kan/shared/utils";
-import { createStripeClient } from "@kan/stripe";
+import { createStripeClient, subscriptionBillingMode } from "@kan/stripe";
 
 const workspaceSlugSchema = z
   .string()
@@ -129,7 +129,10 @@ export default withRateLimit(
       mode: "subscription",
       payment_method_collection: "always",
       line_items: [{ price: priceId, quantity: 1 }],
-      subscription_data: { trial_period_days: 14 },
+      subscription_data: {
+        trial_period_days: 14,
+        billing_mode: subscriptionBillingMode,
+      },
       success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}?workspacePublicId=${resolvedWorkspacePublicId}`,
       cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
       client_reference_id: resolvedWorkspacePublicId,

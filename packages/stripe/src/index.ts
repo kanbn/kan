@@ -2,6 +2,10 @@ import { Stripe } from "stripe";
 
 export const name = "stripe";
 
+// Stripe defaults new subscriptions to flexible billing since 2025-09-30.clover, which
+// can't be reverted per subscription and changes seat proration, so keep classic for now.
+export const subscriptionBillingMode = { type: "classic" } as const;
+
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
 const createStripeClient = () => {
@@ -10,7 +14,7 @@ const createStripeClient = () => {
   }
 
   const stripe = new Stripe(stripeSecretKey, {
-    apiVersion: "2025-08-27.basil",
+    apiVersion: "2026-10-28.endive",
   });
 
   return stripe;
