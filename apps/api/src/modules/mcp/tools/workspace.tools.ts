@@ -1,5 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { NotFoundException, UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import {
@@ -53,7 +59,8 @@ export async function findWorkspaceByName(
   return match;
 }
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class WorkspaceTools {
   constructor(private readonly workspaceService: WorkspaceService) {}
 
@@ -64,9 +71,9 @@ export class WorkspaceTools {
     parameters: z.object({}),
   })
   async listWorkspaces(
-    _args: Record<string, never>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() _args: Record<string, never>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.all({ userId: user.id });
@@ -79,9 +86,9 @@ export class WorkspaceTools {
     parameters: WorkspaceNameSchema,
   })
   async findWorkspaceByName(
-    args: z.infer<typeof WorkspaceNameSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceNameSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return findWorkspaceByName(this.workspaceService, user.id, args.name);
@@ -93,9 +100,9 @@ export class WorkspaceTools {
     parameters: CheckSlugAvailabilityQuerySchema,
   })
   async checkWorkspaceSlugAvailability(
-    args: z.infer<typeof CheckSlugAvailabilityQuerySchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof CheckSlugAvailabilityQuerySchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.checkSlugAvailability({
@@ -111,9 +118,9 @@ export class WorkspaceTools {
     parameters: WorkspaceIdSchema,
   })
   async getWorkspace(
-    args: z.infer<typeof WorkspaceIdSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.byId({
@@ -128,9 +135,9 @@ export class WorkspaceTools {
     parameters: WorkspaceSlugSchema,
   })
   async getWorkspaceBySlug(
-    args: z.infer<typeof WorkspaceSlugSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceSlugSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.bySlug({
@@ -145,9 +152,9 @@ export class WorkspaceTools {
     parameters: CreateWorkspaceSchema,
   })
   async createWorkspace(
-    args: z.infer<typeof CreateWorkspaceSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof CreateWorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.create({
@@ -165,9 +172,9 @@ export class WorkspaceTools {
     parameters: UpdateWorkspaceWithIdSchema,
   })
   async updateWorkspace(
-    args: z.infer<typeof UpdateWorkspaceWithIdSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof UpdateWorkspaceWithIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.update({
@@ -187,9 +194,9 @@ export class WorkspaceTools {
     parameters: WorkspaceIdSchema,
   })
   async deleteWorkspace(
-    args: z.infer<typeof WorkspaceIdSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.delete({
@@ -204,9 +211,9 @@ export class WorkspaceTools {
     parameters: SearchWorkspaceSchema,
   })
   async searchWorkspace(
-    args: z.infer<typeof SearchWorkspaceSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof SearchWorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.workspaceService.search({

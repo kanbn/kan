@@ -1,6 +1,12 @@
 import type { IncomingHttpHeaders } from "http";
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { headersFromRaw } from "../../../common/session.util.js";
@@ -28,7 +34,8 @@ const WorkspaceInviteLinkSchema = z.object({
   workspacePublicId,
 });
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class MemberTools {
   constructor(private readonly memberService: MemberService) {}
 
@@ -39,8 +46,9 @@ export class MemberTools {
     parameters: InviteMemberWithWorkspaceSchema,
   })
   async inviteMember(
-    args: z.infer<typeof InviteMemberWithWorkspaceSchema>,
-    _context: unknown,
+    @Payload() args: z.infer<typeof InviteMemberWithWorkspaceSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest()
     rawRequest: { user?: unknown; headers?: IncomingHttpHeaders } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
@@ -60,9 +68,9 @@ export class MemberTools {
     parameters: RemoveMemberSchema,
   })
   async removeMember(
-    args: z.infer<typeof RemoveMemberSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof RemoveMemberSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.memberService.delete({
@@ -79,9 +87,9 @@ export class MemberTools {
     parameters: UpdateMemberRoleWithIdsSchema,
   })
   async updateMemberRole(
-    args: z.infer<typeof UpdateMemberRoleWithIdsSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof UpdateMemberRoleWithIdsSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.memberService.updateRole({
@@ -99,9 +107,9 @@ export class MemberTools {
     parameters: WorkspaceInviteLinkSchema,
   })
   async getWorkspaceInviteLink(
-    args: z.infer<typeof WorkspaceInviteLinkSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceInviteLinkSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.memberService.getActiveInviteLink({
@@ -117,9 +125,9 @@ export class MemberTools {
     parameters: WorkspaceInviteLinkSchema,
   })
   async createWorkspaceInviteLink(
-    args: z.infer<typeof WorkspaceInviteLinkSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceInviteLinkSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.memberService.createInviteLink({
@@ -135,9 +143,9 @@ export class MemberTools {
     parameters: WorkspaceInviteLinkSchema,
   })
   async deactivateWorkspaceInviteLinks(
-    args: z.infer<typeof WorkspaceInviteLinkSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof WorkspaceInviteLinkSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.memberService.deactivateInviteLink({

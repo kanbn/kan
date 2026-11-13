@@ -1,12 +1,19 @@
-import { Injectable } from "@nestjs/common";
-import { Tool } from "@rekog/mcp-nest";
+import { UseFilters } from "@nestjs/common";
+import { Ctx, Payload } from "@nestjs/microservices";
+import {
+  McpController,
+  McpExceptionFilter,
+  McpRawRequest,
+  Tool,
+} from "@rekog/mcp-nest";
 import { z } from "zod";
 
 import { UpdateUserSchema } from "../../user/dto/user.dto.js";
 import { UserService } from "../../user/user.service.js";
 import { requireMcpUser } from "../mcp-user.util.js";
 
-@Injectable()
+@UseFilters(McpExceptionFilter)
+@McpController()
 export class UserTools {
   constructor(private readonly userService: UserService) {}
 
@@ -16,9 +23,9 @@ export class UserTools {
     parameters: z.object({}),
   })
   async getCurrentUser(
-    _args: Record<string, never>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() _args: Record<string, never>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.userService.getUser({ userId: user.id });
@@ -30,9 +37,9 @@ export class UserTools {
     parameters: UpdateUserSchema,
   })
   async updateCurrentUser(
-    args: z.infer<typeof UpdateUserSchema>,
-    _context: unknown,
-    rawRequest: { user?: unknown } | undefined,
+    @Payload() args: z.infer<typeof UpdateUserSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: { user?: unknown } | undefined,
   ) {
     const user = requireMcpUser(rawRequest);
     return this.userService.update({ userId: user.id, ...args });

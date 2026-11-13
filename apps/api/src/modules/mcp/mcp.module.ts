@@ -1,7 +1,5 @@
 import { Module } from "@nestjs/common";
-import { McpTransportType, McpModule as RekogMcpModule } from "@rekog/mcp-nest";
 
-import { AuthGuard } from "../../common/guards/auth.guard.js";
 import { AttachmentModule } from "../attachment/attachment.module.js";
 import { BoardMemberModule } from "../board-member/board-member.module.js";
 import { BoardModule } from "../board/board.module.js";
@@ -15,7 +13,7 @@ import { PermissionModule } from "../permission/permission.module.js";
 import { UserModule } from "../user/user.module.js";
 import { WebhookModule } from "../webhook/webhook.module.js";
 import { WorkspaceModule } from "../workspace/workspace.module.js";
-import { McpPlanGuard } from "./mcp-plan.guard.js";
+import { McpHttpController } from "./mcp.controller.js";
 import { AttachmentTools } from "./tools/attachment.tools.js";
 import { BoardMemberTools } from "./tools/board-member.tools.js";
 import { BoardTools } from "./tools/board.tools.js";
@@ -30,16 +28,8 @@ import { UserTools } from "./tools/user.tools.js";
 import { WebhookTools } from "./tools/webhook.tools.js";
 import { WorkspaceTools } from "./tools/workspace.tools.js";
 
-const SERVER_NAME = "kan";
-
 @Module({
   imports: [
-    RekogMcpModule.forRoot({
-      name: SERVER_NAME,
-      version: "0.1.0",
-      transport: [McpTransportType.STREAMABLE_HTTP],
-      guards: [AuthGuard, McpPlanGuard],
-    }),
     AttachmentModule,
     BoardModule,
     BoardMemberModule,
@@ -54,7 +44,8 @@ const SERVER_NAME = "kan";
     WebhookModule,
     WorkspaceModule,
   ],
-  providers: [
+  controllers: [
+    McpHttpController,
     AttachmentTools,
     BoardTools,
     BoardMemberTools,
