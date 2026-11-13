@@ -107,7 +107,7 @@ it("registers every @Tool in the tools folder with the MCP module", async () => 
     .filter((value): value is Type => typeof value === "function")
     .flatMap((cls) =>
       Object.values(Object.getOwnPropertyDescriptors(cls.prototype ?? {})).map(
-        ({ value }) =>
+        ({ value }: { value?: unknown }) =>
           typeof value === "function"
             ? (
                 Reflect.getMetadata(MCP_TOOL_METADATA_KEY, value) as
