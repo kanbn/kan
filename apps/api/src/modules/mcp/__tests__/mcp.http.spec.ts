@@ -1,13 +1,16 @@
-import type { INestApplication } from "@nestjs/common";
+/// <reference types="vite/client" />
+import type { INestApplication, Type } from "@nestjs/common";
+import { GUARDS_METADATA, MODULE_METADATA } from "@nestjs/common/constants.js";
 import { Test } from "@nestjs/testing";
+import { MCP_TOOL_METADATA_KEY } from "@rekog/mcp-nest";
 import { afterAll, beforeAll, expect, it, vi } from "vitest";
 
 import { AuthGuard } from "../../../common/guards/auth.guard.js";
 import { WorkspaceService } from "../../workspace/workspace.service.js";
 import { McpPlanGuard } from "../mcp-plan.guard.js";
 import { McpHttpController } from "../mcp.controller.js";
+import { McpModule } from "../mcp.module.js";
 import { mcpStrategy } from "../mcp.strategy.js";
-import { WorkspaceTools } from "../tools/workspace.tools.js";
 
 const all = vi.fn();
 let app: INestApplication;
@@ -15,9 +18,13 @@ let baseUrl: string;
 
 beforeAll(async () => {
   const module = await Test.createTestingModule({
-    controllers: [McpHttpController, WorkspaceTools],
+    controllers: Reflect.getMetadata(
+      MODULE_METADATA.CONTROLLERS,
+      McpModule,
+    ) as Type[],
     providers: [{ provide: WorkspaceService, useValue: { all } }],
   })
+    .useMocker(() => ({}))
     .overrideGuard(AuthGuard)
     .useValue({
       canActivate: (ctx: {
@@ -88,4 +95,38 @@ it("returns a tool's Nest exception message as an error result", async () => {
   });
   expect(call.body.result.isError).toBe(true);
   expect(JSON.stringify(call.body.result.content)).toMatch(/Missing/);
+});
+
+it("registers every @Tool in the tools folder with the MCP module", async () => {
+  const toolFiles = import.meta.glob<Record<string, unknown>>(
+    "../tools/*.tools.ts",
+    { eager: true },
+  );
+  const declared = Object.values(toolFiles)
+    .flatMap((exports) => Object.values(exports))
+    .filter((value): value is Type => typeof value === "function")
+    .flatMap((cls) =>
+      Object.values(Object.getOwnPropertyDescriptors(cls.prototype ?? {})).map(
+        ({ value }) =>
+          typeof value === "function"
+            ? (
+                Reflect.getMetadata(MCP_TOOL_METADATA_KEY, value) as
+                  { name: string } | undefined
+              )?.name
+            : undefined,
+      ),
+    )
+    .filter((name): name is string => !!name)
+    .sort();
+
+  const list = await rpc("tools/list", {});
+  expect(declared).toHaveLength(71);
+  expect(list.body.result.tools?.map((t) => t.name).sort()).toEqual(declared);
+});
+
+it("guards the MCP route with auth and the paid-plan check", () => {
+  expect(Reflect.getMetadata(GUARDS_METADATA, McpHttpController)).toEqual([
+    AuthGuard,
+    McpPlanGuard,
+  ]);
 });
