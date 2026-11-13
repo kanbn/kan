@@ -10,7 +10,7 @@ let client: Stripe | undefined;
 
 export function getStripeClient() {
   client ??= new Stripe(requireEnv("STRIPE_SECRET_KEY"), {
-    apiVersion: "2025-08-27.basil",
+    apiVersion: "2026-10-28.endive",
   });
   return client;
 }

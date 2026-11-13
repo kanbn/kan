@@ -25,6 +25,6 @@
   },
   "prettier": "@kan/prettier-config",
   "dependencies": {
-    "stripe": "^18.2.0"
+    "stripe": "^23.1.0"
   }
 }
