@@ -24,7 +24,7 @@ test(
     await dashboard.expectSignedInAs(user);
     await dashboard.logOut(user);
 
-    await clearMailpitInbox();
+    await clearMailpitInbox(user.email);
 
     await page.goto("/forgot-password");
     await page.getByPlaceholder("Enter your email address").fill(user.email);

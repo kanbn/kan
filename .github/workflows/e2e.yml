@@ -12,6 +12,10 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [self-hosted, cloud]
     services:
       postgres:
         image: postgres:15
@@ -71,6 +75,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Stripe CLI
+        if: matrix.mode == 'cloud'
         run: npm install -g @stripe/cli
 
       - name: Install MinIO
@@ -112,12 +117,12 @@ jobs:
         run: pnpm --filter @kan/e2e exec playwright install --with-deps chromium
 
       - name: Run e2e tests
-        run: pnpm test:e2e
+        run: pnpm --filter @kan/e2e test:${{ matrix.mode }}
 
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.mode }}
           path: packages/e2e/playwright-report/
           retention-days: 7
