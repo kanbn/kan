@@ -11,7 +11,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { sendEmail } from "@kan/email";
 import { createLogger } from "@kan/logger";
 import { generateUID } from "@kan/shared/utils";
-import { createStripeClient } from "@kan/stripe";
+import { createStripeClient, subscriptionBillingMode } from "@kan/stripe";
 
 import { socialProvidersPlugin } from "./providers";
 
@@ -112,6 +112,9 @@ export function createPlugins(db: dbClient) {
                 return {
                   params: {
                     allow_promotion_codes: true,
+                    subscription_data: {
+                      billing_mode: subscriptionBillingMode,
+                    },
                   },
                 };
               },

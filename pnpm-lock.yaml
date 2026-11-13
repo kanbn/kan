@@ -450,7 +450,7 @@ importers:
         version: 1.7.23(@better-auth/core@1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(better-auth@1.7.23(drizzle-kit@0.31.11)(drizzle-orm@0.45.4(@electric-sql/pglite@0.3.7)(@types/pg@8.23.1)(kysely@0.29.9)(pg@8.23.1))(next@16.4.6(@playwright/test@1.65.0)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.5(zod@4.6.7))
       '@better-auth/stripe':
         specifier: ^1.7.23
-        version: 1.7.23(@better-auth/core@1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5))(better-auth@1.7.23(drizzle-kit@0.31.11)(drizzle-orm@0.45.4(@electric-sql/pglite@0.3.7)(@types/pg@8.23.1)(kysely@0.29.9)(pg@8.23.1))(next@16.4.6(@playwright/test@1.65.0)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.5(zod@4.6.7))(stripe@18.5.0(@types/node@26.6.6))
+        version: 1.7.23(@better-auth/core@1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5))(better-auth@1.7.23(drizzle-kit@0.31.11)(drizzle-orm@0.45.4(@electric-sql/pglite@0.3.7)(@types/pg@8.23.1)(kysely@0.29.9)(pg@8.23.1))(next@16.4.6(@playwright/test@1.65.0)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.5(zod@4.6.7))(stripe@23.1.0(@types/node@26.6.6))
       '@kan/db':
         specifier: workspace:*
         version: link:../db
@@ -583,8 +583,8 @@ importers:
         specifier: 'catalog:'
         version: 3.10.1
       stripe:
-        specifier: ^18.2.0
-        version: 18.5.0(@types/node@26.6.6)
+        specifier: ^23.1.0
+        version: 23.1.0(@types/node@26.6.6)
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -780,8 +780,8 @@ importers:
   packages/stripe:
     dependencies:
       stripe:
-        specifier: ^18.2.0
-        version: 18.5.0(@types/node@26.6.6)
+        specifier: ^23.1.0
+        version: 23.1.0(@types/node@26.6.6)
     devDependencies:
       '@kan/eslint-config':
         specifier: workspace:*
@@ -7471,6 +7471,10 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
+  picomatch@4.0.3:
+    resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
+    engines: {node: '>=12'}
+
   picomatch@4.0.7:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
@@ -7775,10 +7779,6 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
-
-  qs@6.14.0:
-    resolution: {integrity: sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==}
-    engines: {node: '>=0.6'}
 
   qs@6.15.1:
     resolution: {integrity: sha512-6YHEFRL9mfgcAvql/XhwTvf5jKcOiiupt2FiJxHkiX1z4j7WL8J/jRHYLluORvc1XxB5rV20KoeK00gVJamspg==}
@@ -8318,11 +8318,11 @@ packages:
     resolution: {integrity: sha512-1tB5mhVo7U+ETBKNf92xT4hrQa3pm0MZ0PQvuDnWgAAGHDsfp4lPSpiS6psrSiet87wyGPh9ft6wmhOMQ0hDiw==}
     engines: {node: '>=14.16'}
 
-  stripe@18.5.0:
-    resolution: {integrity: sha512-Hp+wFiEQtCB0LlNgcFh5uVyKznpDjzyUZ+CNVEf+I3fhlYvh7rZruIg+jOwzJRCpy0ZTPMjlzm7J2/M2N6d+DA==}
-    engines: {node: '>=12.*'}
+  stripe@23.1.0:
+    resolution: {integrity: sha512-fVUfMSfTPoukfoV//MUKAx2+YxyKmYaYtnAL9VkfnHfaPNQylFdWZMD+zgUFerI8rjbaiER8Vzj2XEUQ2AhAsQ==}
+    engines: {node: '>=20'}
     peerDependencies:
-      '@types/node': '>=12.x.x'
+      '@types/node': '>=20'
     peerDependenciesMeta:
       '@types/node':
         optional: true
@@ -10146,13 +10146,13 @@ snapshots:
       '@better-auth/core': 1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5)
       '@better-auth/utils': 0.5.1
 
-  '@better-auth/stripe@1.7.23(@better-auth/core@1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5))(better-auth@1.7.23(drizzle-kit@0.31.11)(drizzle-orm@0.45.4(@electric-sql/pglite@0.3.7)(@types/pg@8.23.1)(kysely@0.29.9)(pg@8.23.1))(next@16.4.6(@playwright/test@1.65.0)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.5(zod@4.6.7))(stripe@18.5.0(@types/node@26.6.6))':
+  '@better-auth/stripe@1.7.23(@better-auth/core@1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5))(better-auth@1.7.23(drizzle-kit@0.31.11)(drizzle-orm@0.45.4(@electric-sql/pglite@0.3.7)(@types/pg@8.23.1)(kysely@0.29.9)(pg@8.23.1))(next@16.4.6(@playwright/test@1.65.0)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.5(zod@4.6.7))(stripe@23.1.0(@types/node@26.6.6))':
     dependencies:
       '@better-auth/core': 1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5)
       better-auth: 1.7.23(drizzle-kit@0.31.11)(drizzle-orm@0.45.4(@electric-sql/pglite@0.3.7)(@types/pg@8.23.1)(kysely@0.29.9)(pg@8.23.1))(next@16.4.6(@playwright/test@1.65.0)(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(pg@8.23.1)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(vitest@5.1.0(@types/node@26.6.6)(vite@7.3.1(@types/node@26.6.6)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)))
       better-call: 1.4.5(zod@4.6.7)
       defu: 6.1.7
-      stripe: 18.5.0(@types/node@26.6.6)
+      stripe: 23.1.0(@types/node@26.6.6)
       zod: 4.6.7
 
   '@better-auth/telemetry@1.7.23(@better-auth/core@1.7.23(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)(better-call@1.4.5(zod@4.6.7))(jose@6.2.17)(kysely@0.29.9)(nanostores@1.5.5))(@better-auth/utils@0.5.1)(@better-fetch/fetch@1.3.3)':
@@ -11677,7 +11677,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.8
       estree-walker: 2.0.2
-      picomatch: 4.0.7
+      picomatch: 4.0.3
     optionalDependencies:
       rollup: 4.56.0
 
@@ -12412,7 +12412,7 @@ snapshots:
 
   '@types/glob@8.1.0':
     dependencies:
-      '@types/minimatch': minimatch@11.0.8
+      '@types/minimatch': minimatch@10.2.6
       '@types/node': 24.19.2
 
   '@types/hast@3.0.4':
@@ -15840,6 +15840,8 @@ snapshots:
 
   picomatch@2.3.1: {}
 
+  picomatch@4.0.3: {}
+
   picomatch@4.0.7: {}
 
   picospinner@3.1.2: {}
@@ -16148,10 +16150,6 @@ snapshots:
   punycode.js@2.3.1: {}
 
   punycode@2.3.1: {}
-
-  qs@6.14.0:
-    dependencies:
-      side-channel: 1.1.0
 
   qs@6.15.1:
     dependencies:
@@ -16926,9 +16924,7 @@ snapshots:
 
   strip-json-comments@5.0.3: {}
 
-  stripe@18.5.0(@types/node@26.6.6):
-    dependencies:
-      qs: 6.14.0
+  stripe@23.1.0(@types/node@26.6.6):
     optionalDependencies:
       '@types/node': 26.6.6
 
