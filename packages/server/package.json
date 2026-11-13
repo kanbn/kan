@@ -88,7 +88,7 @@
     "@kan/shared": "workspace:^",
     "@kan/stripe": "workspace:^",
     "@nestjs/common": "^11.2.7",
-    "rate-limiter-flexible": "^9.0.1",
+    "rate-limiter-flexible": "^11.4.1",
     "zod": "catalog:"
   },
   "devDependencies": {

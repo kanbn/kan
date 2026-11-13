@@ -43,7 +43,7 @@
     "@aws-sdk/s3-request-presigner": "^3.1168.0",
     "date-fns": "^4.4.0",
     "jose": "^6.2.17",
-    "nanoid": "^5.1.16",
+    "nanoid": "^6.0.2",
     "next-runtime-env": "^1.7.2"
   }
 }

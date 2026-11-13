@@ -4,7 +4,7 @@ import { config as loadDotenv } from "dotenv";
 
 import { apiBaseURL, apiPort } from "./tests/support/api-base-url";
 
-loadDotenv({ path: "../../.env" });
+loadDotenv({ path: "../../.env", quiet: true });
 
 const stripeEnv = (key: string, placeholder: string) =>
   process.env[key] || placeholder;
