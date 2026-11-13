@@ -32,7 +32,7 @@ import { useBoardCache } from "~/utils/boardCache";
 
 const integrationProviders: Record<
   string,
-  { name: string; icon: JSX.Element }
+  { name: string; icon: React.JSX.Element }
 > = {
   trello: {
     name: "Trello",
