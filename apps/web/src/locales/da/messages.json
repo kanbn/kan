@@ -1112,7 +1112,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        122
+        118
       ]
     ],
     "translation": "Der opstod en uventet fejl. Prøv igen senere."
@@ -2545,7 +2545,7 @@
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        206
+        202
       ],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
@@ -2705,11 +2705,11 @@
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        142
+        138
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        216
+        212
       ]
     ],
     "translation": "Skift adgangskode"
@@ -3146,7 +3146,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        188
+        184
       ]
     ],
     "translation": "Bekræft din nye adgangskode"
@@ -4825,7 +4825,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        159
+        155
       ]
     ],
     "translation": "Indtast din nuværende adgangskode"
@@ -4837,7 +4837,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        146
+        142
       ]
     ],
     "translation": "Indtast din nuværende adgangskode, og vælg en ny sikker adgangskode."
@@ -4877,7 +4877,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        174
+        170
       ]
     ],
     "translation": "Indtast din nye adgangskode"
@@ -4937,7 +4937,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        120
+        116
       ]
     ],
     "translation": "Fejl ved ændring af adgangskode"
@@ -5061,7 +5061,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        121
+        117
       ]
     ],
     "translation": "Fejl ved indstilling af adgangskode"
@@ -8183,7 +8183,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        93
+        89
       ]
     ],
     "translation": "Adgangskode ændret"
@@ -8235,7 +8235,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        93
+        89
       ]
     ],
     "translation": "Adgangskode indstillet"
@@ -9992,11 +9992,11 @@
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        142
+        138
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        216
+        212
       ]
     ],
     "translation": "Indstil adgangskode"
@@ -11005,7 +11005,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        114
+        110
       ]
     ],
     "translation": "Den nuværende adgangskode, du indtastede, er forkert."
@@ -13478,7 +13478,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        147
+        143
       ]
     ],
     "translation": "Du loggede ind uden en adgangskode. Indstil en adgangskode for at aktivere login med adgangskode."
@@ -13674,7 +13674,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        95
+        91
       ]
     ],
     "translation": "Din adgangskode er blevet ændret."
@@ -13698,7 +13698,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        96
+        92
       ]
     ],
     "translation": "Din adgangskode er blevet indstillet."

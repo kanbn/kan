@@ -655,7 +655,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 118]
     ],
     "translation": "Er is een onverwachte fout opgetreden. Probeer het later opnieuw."
   },
@@ -1512,7 +1512,7 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
       ["src/views/onboarding/select-plan/index.tsx", 248],
       ["src/views/settings/components/Avatar.tsx", 284],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 202],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         39
@@ -1603,8 +1603,8 @@
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 93],
       ["src/views/settings/AccountSettings.tsx", 105],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 138],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 212]
     ],
     "translation": "Wachtwoord wijzigen"
   },
@@ -1877,7 +1877,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 188]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 184]
     ],
     "translation": "Bevestig je nieuwe wachtwoord"
   },
@@ -2880,7 +2880,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 159]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 155]
     ],
     "translation": "Voer je huidige wachtwoord in"
   },
@@ -2889,7 +2889,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 146]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142]
     ],
     "translation": "Voer je huidige wachtwoord in en kies een nieuw veilig wachtwoord."
   },
@@ -2915,7 +2915,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 174]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 170]
     ],
     "translation": "Voer je nieuwe wachtwoord in"
   },
@@ -2952,7 +2952,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
     ],
     "translation": "Fout bij wijzigen wachtwoord"
   },
@@ -3031,7 +3031,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 117]
     ],
     "translation": "Fout bij instellen wachtwoord"
   },
@@ -4895,7 +4895,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
     ],
     "translation": "Wachtwoord gewijzigd"
   },
@@ -4928,7 +4928,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
     ],
     "translation": "Wachtwoord ingesteld"
   },
@@ -5895,8 +5895,8 @@
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 93],
       ["src/views/settings/AccountSettings.tsx", 105],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 138],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 212]
     ],
     "translation": "Wachtwoord instellen"
   },
@@ -6499,7 +6499,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 110]
     ],
     "translation": "Het huidige wachtwoord dat je hebt ingevoerd is onjuist."
   },
@@ -8033,7 +8033,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 143]
     ],
     "translation": "U bent ingelogd zonder wachtwoord. Stel een wachtwoord in om inloggen met wachtwoord mogelijk te maken."
   },
@@ -8151,7 +8151,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 95]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 91]
     ],
     "translation": "Je wachtwoord is gewijzigd."
   },
@@ -8167,7 +8167,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 92]
     ],
     "translation": "Uw wachtwoord is ingesteld."
   },

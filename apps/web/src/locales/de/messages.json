@@ -655,7 +655,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 118]
     ],
     "translation": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
   },
@@ -1512,7 +1512,7 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
       ["src/views/onboarding/select-plan/index.tsx", 248],
       ["src/views/settings/components/Avatar.tsx", 284],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 202],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         39
@@ -1603,8 +1603,8 @@
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 93],
       ["src/views/settings/AccountSettings.tsx", 105],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 138],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 212]
     ],
     "translation": "Passwort ändern"
   },
@@ -1877,7 +1877,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 188]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 184]
     ],
     "translation": "Bestätigen Sie Ihr neues Passwort"
   },
@@ -2880,7 +2880,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 159]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 155]
     ],
     "translation": "Geben Sie Ihr aktuelles Passwort ein"
   },
@@ -2889,7 +2889,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 146]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142]
     ],
     "translation": "Geben Sie Ihr aktuelles Passwort ein und wählen Sie ein neues sicheres Passwort."
   },
@@ -2915,7 +2915,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 174]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 170]
     ],
     "translation": "Geben Sie Ihr neues Passwort ein"
   },
@@ -2952,7 +2952,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
     ],
     "translation": "Fehler beim Ändern des Passworts"
   },
@@ -3031,7 +3031,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 117]
     ],
     "translation": "Fehler beim Festlegen des Passworts"
   },
@@ -4895,7 +4895,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
     ],
     "translation": "Passwort geändert"
   },
@@ -4928,7 +4928,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
     ],
     "translation": "Passwort festgelegt"
   },
@@ -5895,8 +5895,8 @@
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 93],
       ["src/views/settings/AccountSettings.tsx", 105],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 138],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 212]
     ],
     "translation": "Passwort festlegen"
   },
@@ -6499,7 +6499,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 110]
     ],
     "translation": "Das eingegebene aktuelle Passwort ist falsch."
   },
@@ -8033,7 +8033,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 143]
     ],
     "translation": "Sie haben sich ohne Passwort angemeldet. Legen Sie ein Passwort fest, um die passwortbasierte Anmeldung zu aktivieren."
   },
@@ -8151,7 +8151,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 95]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 91]
     ],
     "translation": "Ihr Passwort wurde geändert."
   },
@@ -8167,7 +8167,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 92]
     ],
     "translation": "Ihr Passwort wurde festgelegt."
   },

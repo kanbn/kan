@@ -1112,7 +1112,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        122
+        118
       ]
     ],
     "translation": "An unexpected error occurred. Please try again later."
@@ -2545,7 +2545,7 @@
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        206
+        202
       ],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
@@ -2705,11 +2705,11 @@
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        142
+        138
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        216
+        212
       ]
     ],
     "translation": "Change Password"
@@ -3159,7 +3159,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        188
+        184
       ]
     ],
     "translation": "Confirm your new password"
@@ -4864,7 +4864,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        159
+        155
       ]
     ],
     "translation": "Enter your current password"
@@ -4876,7 +4876,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        146
+        142
       ]
     ],
     "translation": "Enter your current password and choose a new secure password."
@@ -4916,7 +4916,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        174
+        170
       ]
     ],
     "translation": "Enter your new password"
@@ -4976,7 +4976,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        120
+        116
       ]
     ],
     "translation": "Error Changing Password"
@@ -5100,7 +5100,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        121
+        117
       ]
     ],
     "translation": "Error Setting Password"
@@ -8261,7 +8261,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        93
+        89
       ]
     ],
     "translation": "Password Changed"
@@ -8313,7 +8313,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        93
+        89
       ]
     ],
     "translation": "Password Set"
@@ -10070,11 +10070,11 @@
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        142
+        138
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        216
+        212
       ]
     ],
     "translation": "Set Password"
@@ -11083,7 +11083,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        114
+        110
       ]
     ],
     "translation": "The current password you entered is incorrect."
@@ -13625,7 +13625,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        147
+        143
       ]
     ],
     "translation": "You signed in without a password. Set a password to enable password-based login."
@@ -13821,7 +13821,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        95
+        91
       ]
     ],
     "translation": "Your password has been changed."
@@ -13845,7 +13845,7 @@
     "origin": [
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
-        96
+        92
       ]
     ],
     "translation": "Your password has been set."

@@ -655,7 +655,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 122]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 118]
     ],
     "translation": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie później."
   },
@@ -1512,7 +1512,7 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
       ["src/views/onboarding/select-plan/index.tsx", 248],
       ["src/views/settings/components/Avatar.tsx", 284],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 206],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 202],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
         39
@@ -1603,8 +1603,8 @@
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 93],
       ["src/views/settings/AccountSettings.tsx", 105],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 138],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 212]
     ],
     "translation": "Zmień hasło"
   },
@@ -1877,7 +1877,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 188]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 184]
     ],
     "translation": "Potwierdź nowe hasło"
   },
@@ -2880,7 +2880,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 159]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 155]
     ],
     "translation": "Wprowadź swoje obecne hasło"
   },
@@ -2889,7 +2889,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 146]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142]
     ],
     "translation": "Wprowadź swoje obecne hasło i wybierz nowe, bezpieczne hasło."
   },
@@ -2915,7 +2915,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 174]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 170]
     ],
     "translation": "Wprowadź nowe hasło"
   },
@@ -2952,7 +2952,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 120]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 116]
     ],
     "translation": "Błąd podczas zmiany hasła"
   },
@@ -3031,7 +3031,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 121]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 117]
     ],
     "translation": "Błąd podczas ustawiania hasła"
   },
@@ -4895,7 +4895,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
     ],
     "translation": "Hasło zostało zmienione"
   },
@@ -4928,7 +4928,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 93]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 89]
     ],
     "translation": "Hasło ustawione"
   },
@@ -5895,8 +5895,8 @@
     "origin": [
       ["src/views/settings/AccountSettings.tsx", 93],
       ["src/views/settings/AccountSettings.tsx", 105],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 142],
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 216]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 138],
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 212]
     ],
     "translation": "Ustaw hasło"
   },
@@ -6499,7 +6499,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 114]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 110]
     ],
     "translation": "Wprowadzone obecne hasło jest nieprawidłowe."
   },
@@ -8033,7 +8033,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 147]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 143]
     ],
     "translation": "Zalogowałeś się bez hasła. Ustaw hasło, aby włączyć logowanie za pomocą hasła."
   },
@@ -8151,7 +8151,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 95]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 91]
     ],
     "translation": "Twoje hasło zostało zmienione."
   },
@@ -8167,7 +8167,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 96]
+      ["src/views/settings/components/ChangePasswordConfirmation.tsx", 92]
     ],
     "translation": "Twoje hasło zostało ustawione."
   },
