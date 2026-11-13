@@ -33,7 +33,7 @@
     "@swc-node/register": "^1.12.1",
     "@swc/core": "^1.16.13",
     "nestjs-zod": "^5.5.0",
-    "rate-limiter-flexible": "^9.0.1",
+    "rate-limiter-flexible": "^11.4.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "zod": "catalog:"
@@ -43,7 +43,7 @@
     "@kan/prettier-config": "workspace:*",
     "@nestjs/testing": "^11.2.7",
     "@types/express": "^5.0.6",
-    "dotenv-cli": "^7.4.4",
+    "dotenv-cli": "^11.1.0",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",

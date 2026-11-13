@@ -1,10 +1,9 @@
-import { fileURLToPath } from "url";
-import createJiti from "jiti";
+import { createJiti } from "jiti";
 import { env } from "next-runtime-env";
 import { configureRuntimeEnv } from "next-runtime-env/build/configure.js";
 
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
-createJiti(fileURLToPath(import.meta.url))("./src/env");
+await createJiti(import.meta.url).import("./src/env");
 
 configureRuntimeEnv();
 

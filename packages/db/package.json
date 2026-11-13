@@ -47,10 +47,10 @@
     "@kan/logger": "workspace:^",
     "@kan/shared": "workspace:^",
     "drizzle-orm": "^0.45.4",
-    "ioredis": "^5.9.2",
+    "ioredis": "^6.0.0",
     "pg": "^8.23.1",
     "pg-connection-string": "^2.14.1",
-    "uuid": "^11.1.0",
+    "uuid": "^14.0.3",
     "zod": "catalog:"
   },
   "devDependencies": {
@@ -58,7 +58,7 @@
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "@types/pg": "^8.23.1",
-    "dotenv-cli": "^7.4.4",
+    "dotenv-cli": "^11.1.0",
     "drizzle-kit": "^0.31.11",
     "eslint": "catalog:",
     "prettier": "catalog:",
