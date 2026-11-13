@@ -1,50 +1,72 @@
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 
 const TEST_CARD_NUMBER = "4242424242424242";
+
+type Role = Parameters<Page["getByRole"]>[0];
 
 export class StripeCheckoutPage {
   constructor(private readonly page: Page) {}
 
-  async payWithTestCard(email: string) {
-    const emailField = this.page.getByRole("textbox", { name: "Email" });
-    if (await emailField.count()) {
-      await emailField.fill(email);
+  // Stripe Checkout renders its form inside (possibly nested) iframes, so look in every frame.
+  private async find(
+    role: Role,
+    name: string | RegExp,
+  ): Promise<Locator | null> {
+    for (const frame of this.page.frames()) {
+      const locator = frame.getByRole(role, { name }).first();
+      if (await locator.isVisible().catch(() => false)) return locator;
     }
-    const cardNumber = this.page.getByRole("textbox", { name: "Card number" });
-    const cardOption = this.page
-      .getByRole("radio", { name: /^card$/i })
-      .or(this.page.getByRole("button", { name: /^(pay with )?card$/i }));
-    await cardNumber
-      .or(cardOption)
-      .first()
-      .waitFor({ timeout: 30_000 })
-      .catch(async (error: unknown) => {
-        const snapshot = await this.page.locator("body").ariaSnapshot();
-        throw new Error(
-          `Stripe checkout card fields not found at ${this.page.url()}\n${snapshot}`,
-          { cause: error },
+    return null;
+  }
+
+  private async findRequired(
+    role: Role,
+    name: string | RegExp,
+    timeout = 30_000,
+  ): Promise<Locator> {
+    const deadline = Date.now() + timeout;
+    for (;;) {
+      const locator = await this.find(role, name);
+      if (locator) return locator;
+      if (Date.now() > deadline) {
+        const snapshots = await Promise.all(
+          this.page.frames().map((frame) =>
+            frame
+              .locator("body")
+              .ariaSnapshot()
+              .catch(() => "(unreadable)"),
+          ),
         );
-      });
-    if (!(await cardNumber.isVisible())) await cardOption.first().click();
+        throw new Error(
+          `Stripe checkout: no ${role} "${String(name)}" at ${this.page.url()}\n${snapshots.join("\n---\n")}`,
+        );
+      }
+      await this.page.waitForTimeout(250);
+    }
+  }
+
+  async payWithTestCard(email: string) {
+    const deadline = Date.now() + 30_000;
+    let cardNumber = await this.find("textbox", "Card number");
+    while (!cardNumber && Date.now() < deadline) {
+      const cardOption = await this.find("radio", /^card$/i);
+      if (cardOption) await cardOption.click();
+      await this.page.waitForTimeout(250);
+      cardNumber = await this.find("textbox", "Card number");
+    }
+    cardNumber ??= await this.findRequired("textbox", "Card number", 0);
+
+    await (await this.find("textbox", "Email"))?.fill(email);
     await cardNumber.fill(TEST_CARD_NUMBER);
-    await this.page.getByRole("textbox", { name: "Expiration" }).fill("12/34");
-    await this.page.getByRole("textbox", { name: "CVC" }).fill("123");
-    await this.page
-      .getByRole("textbox", { name: "Cardholder name" })
-      .fill("E2E Test");
+    await (await this.findRequired("textbox", "Expiration")).fill("12/34");
+    await (await this.findRequired("textbox", "CVC")).fill("123");
+    await (await this.find("textbox", "Cardholder name"))?.fill("E2E Test");
+    await (
+      await this.find("combobox", "Country or region")
+    )?.selectOption({ label: "United Kingdom" });
+    await (await this.find("textbox", "Postal code"))?.fill("SW1A 1AA");
 
-    const country = this.page.getByRole("combobox", {
-      name: "Country or region",
-    });
-    if (await country.count()) {
-      await country.selectOption({ label: "United Kingdom" });
-    }
-    const postalCode = this.page.getByRole("textbox", { name: "Postal code" });
-    if (await postalCode.count()) {
-      await postalCode.fill("SW1A 1AA");
-    }
-
-    await this.page.getByRole("button", { name: "Start trial" }).click();
+    await (await this.findRequired("button", "Start trial")).click();
   }
 
   async cancel() {
