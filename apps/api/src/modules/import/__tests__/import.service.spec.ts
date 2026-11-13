@@ -14,7 +14,7 @@ import * as encryption from "@kan/server/utils/encryption";
 import * as permissions from "@kan/server/utils/permissions";
 import * as trelloToken from "@kan/server/utils/trello-token";
 
-import { ImportService } from "../import.service.js";
+import { clip, ImportService } from "../import.service.js";
 
 const workspace = { id: 1, publicId: "workspace_12345" };
 
@@ -285,6 +285,28 @@ describe("ImportService.importTrelloBoards", () => {
     });
   });
 
+  it("shortens a long board name in the failure it reports", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValue(
+          jsonResponse({ ...trelloBoard, name: "R".repeat(5000) }),
+        ),
+    );
+    vi.spyOn(checklistRepo, "bulkCreateItems").mockRejectedValue(
+      new Error("insert failed"),
+    );
+
+    const { failures } = await service.importTrelloBoards({
+      boardIds: ["tb1"],
+      workspacePublicId: "workspace_12345",
+      userId: "user_1",
+    });
+
+    expect(failures[0]?.boardName).toBe(`${"R".repeat(60)}…`);
+  });
+
   it("marks the import failed when no boards import", async () => {
     vi.stubGlobal(
       "fetch",
@@ -355,6 +377,83 @@ describe("ImportService board:create authorization", () => {
       expect(create).not.toHaveBeenCalled();
     },
   );
+});
+
+describe("clip", () => {
+  it("leaves short text alone and never splits an emoji", () => {
+    expect(clip("short", 10)).toBe("short");
+    expect(clip("abc😀def", 4)).toBe("abc😀");
+    expect(clip("😀".repeat(600), 500)).toBe("😀".repeat(500));
+  });
+});
+
+describe("ImportService.importGitHubProjects", () => {
+  it("trims long names and still files items under a long status", async () => {
+    const longStatus = "s".repeat(300);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        jsonResponse({
+          data: {
+            node: {
+              title: "P".repeat(300),
+              field: {
+                options: [
+                  { id: "o1", name: "Todo" },
+                  { id: "o2", name: longStatus },
+                ],
+              },
+              areaField: {
+                options: [{ id: "a1", name: "a".repeat(300), color: "RED" }],
+              },
+              items: {
+                nodes: [
+                  {
+                    fieldValueByName: { name: longStatus },
+                    content: { title: "t".repeat(2500), body: "" },
+                  },
+                ],
+              },
+            },
+          },
+        }),
+      ),
+    );
+    const createBoard = vi
+      .spyOn(boardRepo, "create")
+      .mockResolvedValue({ id: 10 } as never);
+    const createLabels = vi
+      .spyOn(labelRepo, "bulkCreate")
+      .mockResolvedValue([{ id: 20 }] as never);
+    const createLists = vi
+      .spyOn(listRepo, "bulkCreate")
+      .mockResolvedValue([{ id: 30 }, { id: 31 }] as never);
+    const createCards = vi
+      .spyOn(cardRepo, "bulkCreate")
+      .mockResolvedValue([{ id: 40 }] as never);
+    vi.spyOn(cardActivityRepo, "bulkCreate").mockResolvedValue(
+      undefined as never,
+    );
+
+    await expect(
+      service.importGitHubProjects({
+        projectIds: ["PVT_1"],
+        workspacePublicId: "workspace_12345",
+        userId: "user_1",
+      }),
+    ).resolves.toEqual({ projectsImported: 1 });
+
+    const board = createBoard.mock.calls[0]?.[1];
+    expect(board?.name).toHaveLength(255);
+    expect(board?.slug).toHaveLength(255);
+    expect(createLabels.mock.calls[0]?.[1][0]?.name).toHaveLength(255);
+    expect(
+      createLists.mock.calls[0]?.[1].map((list) => list.name.length),
+    ).toEqual([4, 255]);
+    const [cardInput] = createCards.mock.calls[0]?.[1] ?? [];
+    expect(cardInput?.title).toHaveLength(2000);
+    expect(cardInput?.listId).toBe(31);
+  });
 });
 
 describe("ImportService.getGitHubProjects", () => {

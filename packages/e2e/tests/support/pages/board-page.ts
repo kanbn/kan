@@ -27,7 +27,9 @@ export class BoardPage {
   }
 
   async createList(name: string) {
-    await this.page.getByRole("button", { name: "New list" }).click();
+    await this.page
+      .getByRole("button", { name: "New list", exact: true })
+      .click();
     await this.page.getByPlaceholder("List name").fill(name);
     const created = waitForResponsePath(this.page, "/lists");
     await this.page.getByRole("button", { name: "Create list" }).click();

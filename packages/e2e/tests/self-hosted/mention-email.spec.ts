@@ -125,7 +125,7 @@ test(
     await addToBoard(page, boardPublicId, recipient.email);
     await page.goto(boardUrl);
     await board.openCard("Mention email card");
-    await clearMailpitInbox();
+    await clearMailpitInbox(recipient.email);
 
     const newCommentEditor = commentEditor(page);
     await newCommentEditor.click();
