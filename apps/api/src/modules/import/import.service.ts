@@ -182,6 +182,12 @@ export const clip = (text: string, max: number) => {
   return chars.length > max ? chars.slice(0, max).join("") : text;
 };
 
+// Enough to recognise a board in an error message without flooding it.
+const shortName = (name: string) => {
+  const short = clip(name, 60);
+  return short === name ? name : `${short}…`;
+};
+
 // One transaction per board, so a failure leaves nothing half-imported.
 const importTrelloBoard = (
   data: TrelloBoard,
@@ -391,7 +397,7 @@ export class ImportService {
             );
 
           const data = (await response.json()) as TrelloBoard;
-          boardName = clip(data.name, NAME_MAX);
+          boardName = shortName(data.name);
           await importTrelloBoard(data, {
             userId,
             workspaceId: workspace.id,

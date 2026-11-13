@@ -285,7 +285,7 @@ describe("ImportService.importTrelloBoards", () => {
     });
   });
 
-  it("trims a long board name in the failure it reports", async () => {
+  it("shortens a long board name in the failure it reports", async () => {
     vi.stubGlobal(
       "fetch",
       vi
@@ -304,7 +304,7 @@ describe("ImportService.importTrelloBoards", () => {
       userId: "user_1",
     });
 
-    expect(failures[0]?.boardName).toBe("R".repeat(255));
+    expect(failures[0]?.boardName).toBe(`${"R".repeat(60)}…`);
   });
 
   it("marks the import failed when no boards import", async () => {
