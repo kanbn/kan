@@ -16,7 +16,7 @@ declare module "react-contenteditable" {
     className?: string;
     style?: React.CSSProperties;
     innerRef?:
-      | React.RefObject<HTMLElement>
+      | React.RefObject<HTMLElement | null>
       | ((instance: HTMLElement | null) => void);
     placeholder?: string;
   }
