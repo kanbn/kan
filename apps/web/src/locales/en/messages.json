@@ -3331,7 +3331,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        477
+        465
       ]
     ],
     "translation": "Continue with "
@@ -3347,7 +3347,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        364
+        352
       ]
     ],
     "translation": "Continue with {0}"
@@ -4720,7 +4720,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        478
+        466
       ]
     ],
     "translation": "email"
@@ -4888,7 +4888,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        432
+        420
       ],
       [
         "src/views/auth/forgot-password/index.tsx",
@@ -4904,7 +4904,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        420
+        408
       ]
     ],
     "translation": "Enter your name"
@@ -4928,7 +4928,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        446
+        434
       ]
     ],
     "translation": "Enter your password"
@@ -5358,7 +5358,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        300
+        288
       ]
     ],
     "translation": "Failed to login with {0}. Please try again."
@@ -5594,7 +5594,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        460
+        448
       ]
     ],
     "translation": "Forgot password?"
@@ -7138,7 +7138,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        478
+        466
       ]
     ],
     "translation": "magic link"
@@ -7833,7 +7833,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        379
+        367
       ]
     ],
     "translation": "No authentication methods are currently available"
@@ -8137,7 +8137,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        410
+        398
       ]
     ],
     "translation": "or"
@@ -8589,7 +8589,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        436
+        424
       ],
       [
         "src/views/auth/forgot-password/index.tsx",
@@ -8605,7 +8605,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        424
+        412
       ]
     ],
     "translation": "Please enter a valid name"
@@ -8617,7 +8617,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        451
+        439
       ],
       [
         "src/views/auth/reset-password/index.tsx",
@@ -9958,7 +9958,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        385
+        373
       ]
     ],
     "translation": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>."
@@ -10366,7 +10366,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        477
+        465
       ]
     ],
     "translation": "Sign up with "

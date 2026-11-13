@@ -1979,7 +1979,7 @@
     "message": "Continue with ",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 477]],
+    "origin": [["src/components/AuthForm.tsx", 465]],
     "translation": "Kontynuuj przez "
   },
   "gkzAEM": {
@@ -1988,7 +1988,7 @@
       "0": ["key === \"oidc\" ? oidcProviderName : provider.name"]
     },
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 364]],
+    "origin": [["src/components/AuthForm.tsx", 352]],
     "translation": "Kontynuuj przez {0}"
   },
   "va/3u1": {
@@ -2791,7 +2791,7 @@
     "message": "email",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 478]],
+    "origin": [["src/components/AuthForm.tsx", 466]],
     "translation": "email"
   },
   "O3oNi5": {
@@ -2898,7 +2898,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/AuthForm.tsx", 432],
+      ["src/components/AuthForm.tsx", 420],
       ["src/views/auth/forgot-password/index.tsx", 85]
     ],
     "translation": "Wprowadź swój adres e-mail"
@@ -2907,7 +2907,7 @@
     "message": "Enter your name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 420]],
+    "origin": [["src/components/AuthForm.tsx", 408]],
     "translation": "Wprowadź swoje imię i nazwisko"
   },
   "0StR7t": {
@@ -2923,7 +2923,7 @@
     "message": "Enter your password",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 446]],
+    "origin": [["src/components/AuthForm.tsx", 434]],
     "translation": "Wprowadź hasło"
   },
   "GpB8YV": {
@@ -3197,7 +3197,7 @@
       "0": ["provider.at(0)?.toUpperCase() + provider.slice(1)"]
     },
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 300]],
+    "origin": [["src/components/AuthForm.tsx", 288]],
     "translation": "Nie udało się zalogować przez {0}. Spróbuj ponownie."
   },
   "5ntVtp": {
@@ -3334,7 +3334,7 @@
     "message": "Forgot password?",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 460]],
+    "origin": [["src/components/AuthForm.tsx", 448]],
     "translation": "Nie pamiętasz hasła?"
   },
   "glx6on": {
@@ -4243,7 +4243,7 @@
     "message": "magic link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 478]],
+    "origin": [["src/components/AuthForm.tsx", 466]],
     "translation": "magic link"
   },
   "DbZgsJ": {
@@ -4640,7 +4640,7 @@
     "message": "No authentication methods are currently available",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 379]],
+    "origin": [["src/components/AuthForm.tsx", 367]],
     "translation": "Obecnie nie są dostępne żadne metody uwierzytelniania"
   },
   "2Bu8xj": {
@@ -4821,7 +4821,7 @@
     "message": "or",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 410]],
+    "origin": [["src/components/AuthForm.tsx", 398]],
     "translation": "lub"
   },
   "Uci+Ph": {
@@ -5093,7 +5093,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/AuthForm.tsx", 436],
+      ["src/components/AuthForm.tsx", 424],
       ["src/views/auth/forgot-password/index.tsx", 89]
     ],
     "translation": "Wprowadź poprawny adres e-mail"
@@ -5102,7 +5102,7 @@
     "message": "Please enter a valid name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 424]],
+    "origin": [["src/components/AuthForm.tsx", 412]],
     "translation": "Wprowadź poprawne imię"
   },
   "7b2yuC": {
@@ -5110,7 +5110,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/AuthForm.tsx", 451],
+      ["src/components/AuthForm.tsx", 439],
       ["src/views/auth/reset-password/index.tsx", 104]
     ],
     "translation": "Wprowadź poprawne hasło"
@@ -5832,7 +5832,7 @@
       "CREDENTIALS_ENV_HINT": ["CREDENTIALS_ENV_HINT"]
     },
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 385]],
+    "origin": [["src/components/AuthForm.tsx", 373]],
     "translation": "Hostujesz samodzielnie? Ustaw <0>{CREDENTIALS_ENV_HINT}</0>, aby włączyć logowanie za pomocą e-maila i hasła, lub skonfiguruj dostawcę OAuth. Zobacz <1>poradnik dotyczący samodzielnego hostingu</1>."
   },
   "RoafuO": {
@@ -6069,7 +6069,7 @@
     "message": "Sign up with ",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/AuthForm.tsx", 477]],
+    "origin": [["src/components/AuthForm.tsx", 465]],
     "translation": "Zarejestruj się przez "
   },
   "m2nk0i": {
