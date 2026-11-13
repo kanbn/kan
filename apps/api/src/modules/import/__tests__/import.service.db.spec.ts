@@ -299,6 +299,65 @@ describe("Trello import (database)", () => {
     expect(items).toHaveLength(2500);
   });
 
+  it("trims text longer than its column instead of failing the board", async () => {
+    const long = (prefix: string, length: number) =>
+      prefix + "x".repeat(length - prefix.length);
+    const name = long(`Long ${suffix} `, 300);
+    // The emoji straddles the 500 limit, so a UTF-16 slice would split it.
+    const item = `${"y".repeat(499)}😀${"z".repeat(100)}`;
+    stubTrello({
+      tb3: {
+        id: "tb3",
+        name,
+        labels: [{ id: "l1", name: long("label", 300), color: "red" }],
+        lists: [{ id: "list", name: long("list", 300), pos: 1 }],
+        cards: [
+          card("c1", "list", 1, {
+            name: long("card", 2500),
+            labels: [{ id: "l1" }],
+          }),
+        ],
+        checklists: [
+          {
+            id: "k1",
+            idCard: "c1",
+            name: long("checklist", 300),
+            pos: 1,
+            checkItems: [checkItem("i1", item, 1)],
+          },
+        ],
+      },
+    });
+
+    await expect(importBoards(["tb3"])).resolves.toEqual({
+      boardsCreated: 1,
+      failures: [],
+    });
+
+    const board = must(await boardNamed(name.slice(0, 255)));
+    const [list] = await db.query.lists.findMany({
+      where: eq(lists.boardId, board.id),
+      with: {
+        cards: {
+          with: {
+            labels: { with: { label: true } },
+            checklists: { with: { items: true } },
+          },
+        },
+      },
+    });
+    const importedCard = must(must(list).cards[0]);
+    const checklist = must(importedCard.checklists[0]);
+
+    expect({
+      list: must(list).name.length,
+      card: importedCard.title.length,
+      label: must(importedCard.labels[0]).label.name.length,
+      checklist: checklist.name.length,
+    }).toEqual({ list: 255, card: 2000, label: 255, checklist: 255 });
+    expect(must(checklist.items[0]).title).toBe(`${"y".repeat(499)}😀`);
+  });
+
   it("leaves nothing behind when a board fails partway, and imports the others", async () => {
     const failing = `Half ${suffix}`;
     const fine = `Fine ${suffix}`;

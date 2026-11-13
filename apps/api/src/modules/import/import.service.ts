@@ -170,6 +170,24 @@ const inBatches = async <T, R>(
 const byPos = (a: { pos?: number }, b: { pos?: number }) =>
   (a.pos ?? 0) - (b.pos ?? 0);
 
+// Names are varchar(255) and checklist item titles varchar(500), but Trello
+// and GitHub allow far longer text, which would abort the whole import.
+const NAME_MAX = 255;
+const CHECKLIST_ITEM_MAX = 500;
+const CARD_TITLE_MAX = 2000;
+
+// Counts code points like Postgres does, so an emoji is never split in half.
+export const clip = (text: string, max: number) => {
+  const chars = Array.from(text);
+  return chars.length > max ? chars.slice(0, max).join("") : text;
+};
+
+// Enough to recognise a board in an error message without flooding it.
+const shortName = (name: string) => {
+  const short = clip(name, 60);
+  return short === name ? name : `${short}…`;
+};
+
 // One transaction per board, so a failure leaves nothing half-imported.
 const importTrelloBoard = (
   data: TrelloBoard,
@@ -182,7 +200,7 @@ const importTrelloBoard = (
     const boardPublicId = generateUID();
     const newBoard = await boardRepo.create(txDb, {
       publicId: boardPublicId,
-      name: data.name,
+      name: clip(data.name, NAME_MAX),
       slug: boardPublicId,
       createdBy: userId,
       importId,
@@ -201,7 +219,7 @@ const importTrelloBoard = (
         txDb,
         labelsToCreate.map((label) => ({
           publicId: generateUID(),
-          name: label.name,
+          name: clip(label.name, NAME_MAX),
           colourCode: getTrelloLabelColour(label.colour),
           createdBy: userId,
           boardId,
@@ -225,7 +243,7 @@ const importTrelloBoard = (
     const cardsInsert: Parameters<typeof cardRepo.bulkCreate>[1] = [];
     for (const list of [...data.lists].sort(byPos)) {
       const newList = await listRepo.create(txDb, {
-        name: list.name,
+        name: clip(list.name, NAME_MAX),
         createdBy: userId,
         boardId,
         importId,
@@ -235,9 +253,9 @@ const importTrelloBoard = (
         trelloCardIdByPublicId.set(publicId, card.id);
         cardsInsert.push({
           publicId,
-          title: (card.name?.trim() ? card.name.trim() : "Untitled Card").slice(
-            0,
-            2000,
+          title: clip(
+            card.name?.trim() ? card.name.trim() : "Untitled Card",
+            CARD_TITLE_MAX,
           ),
           description: normalizeDescription(card.desc),
           createdBy: userId,
@@ -284,7 +302,7 @@ const importTrelloBoard = (
         txDb,
         batch.map(({ cardId, checklist }) => ({
           cardId,
-          name: checklist.name,
+          name: clip(checklist.name, NAME_MAX),
           createdBy: userId,
           index: checklist.pos ?? 0,
         })),
@@ -299,7 +317,7 @@ const importTrelloBoard = (
         .sort((a, b) => a.pos - b.pos)
         .map((item) => ({
           checklistId,
-          title: item.name,
+          title: clip(item.name, CHECKLIST_ITEM_MAX),
           createdBy: userId,
           index: item.pos,
           completed: item.state === "complete",
@@ -379,7 +397,7 @@ export class ImportService {
             );
 
           const data = (await response.json()) as TrelloBoard;
-          boardName = data.name;
+          boardName = shortName(data.name);
           await importTrelloBoard(data, {
             userId,
             workspaceId: workspace.id,
@@ -595,9 +613,9 @@ export class ImportService {
       const boardPublicId = generateUID();
       const board = await boardRepo.create(db, {
         publicId: boardPublicId,
-        name: projectData.title,
+        name: clip(projectData.title, NAME_MAX),
         workspaceId: workspace.id,
-        slug: generateSlug(projectData.title),
+        slug: clip(generateSlug(projectData.title), NAME_MAX),
         createdBy: userId,
         importId: newImportId,
       });
@@ -621,7 +639,7 @@ export class ImportService {
 
         return {
           publicId: generateUID(),
-          name: option.name,
+          name: clip(option.name, NAME_MAX),
           colourCode,
           createdBy: userId,
           boardId: board.id,
@@ -662,7 +680,7 @@ export class ImportService {
         statusOptions.forEach((option, index) => {
           listsInsert.push({
             publicId: generateUID(),
-            name: option.name,
+            name: clip(option.name, NAME_MAX),
             createdBy: userId,
             boardId: board.id,
             index: index,
@@ -673,8 +691,9 @@ export class ImportService {
 
       const createdLists = await listRepo.bulkCreate(db, listsInsert);
       const listIdMap = new Map<string, number>();
+      // Keyed by the untrimmed status name, which is what items reference.
       createdLists.forEach((list, index) => {
-        const originalName = listsInsert[index]?.name;
+        const originalName = statusOptions[index]?.name;
         if (originalName) {
           listIdMap.set(originalName, list.id);
         }
@@ -717,7 +736,7 @@ export class ImportService {
 
       const cardsInput = itemsToInsert.map((data, index) => ({
         publicId: generateUID(),
-        title: data.title,
+        title: clip(data.title, CARD_TITLE_MAX),
         description: normalizeDescription(data.description),
         createdBy: userId,
         listId: data.listId,
