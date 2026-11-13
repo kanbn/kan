@@ -22,7 +22,7 @@
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
-    "@playwright/test": "^1.55.0",
+    "@playwright/test": "^1.65.0",
     "dotenv": "^16.4.5",
     "eslint": "catalog:",
     "prettier": "catalog:",
