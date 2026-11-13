@@ -1743,7 +1743,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 278],
+      ["src/components/Dashboard.tsx", 285],
       ["src/views/card/index.tsx", 391],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -4887,7 +4887,7 @@
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 268]],
+    "origin": [["src/components/Dashboard.tsx", 275]],
     "translation": "Hasło już ustawione"
   },
   "IrZaAn": {
@@ -8071,7 +8071,7 @@
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 270]],
+    "origin": [["src/components/Dashboard.tsx", 277]],
     "translation": "Twoje konto ma już ustawione hasło. Możesz je zmienić w ustawieniach konta."
   },
   "GoDLB9": {
