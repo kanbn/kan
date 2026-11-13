@@ -14,7 +14,17 @@ export class StripeCheckoutPage {
     const cardOption = this.page
       .getByRole("radio", { name: /^card$/i })
       .or(this.page.getByRole("button", { name: /^(pay with )?card$/i }));
-    await cardNumber.or(cardOption).first().waitFor({ timeout: 30_000 });
+    await cardNumber
+      .or(cardOption)
+      .first()
+      .waitFor({ timeout: 30_000 })
+      .catch(async (error: unknown) => {
+        const snapshot = await this.page.locator("body").ariaSnapshot();
+        throw new Error(
+          `Stripe checkout card fields not found at ${this.page.url()}\n${snapshot}`,
+          { cause: error },
+        );
+      });
     if (!(await cardNumber.isVisible())) await cardOption.first().click();
     await cardNumber.fill(TEST_CARD_NUMBER);
     await this.page.getByRole("textbox", { name: "Expiration" }).fill("12/34");
