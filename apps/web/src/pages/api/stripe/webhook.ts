@@ -91,6 +91,10 @@ export default async function handler(
               referenceId: meta.workspacePublicId,
               userId: meta.userId,
               stripeCustomerId: checkoutSession.customer as string,
+              stripeSubscriptionId:
+                typeof checkoutSession.subscription === "string"
+                  ? checkoutSession.subscription
+                  : checkoutSession.subscription?.id,
               status: "active",
             });
           }

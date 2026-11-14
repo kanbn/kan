@@ -108,6 +108,7 @@ export const create = async (
     userId: string;
     stripeCustomerId: string;
     status: string;
+    stripeSubscriptionId?: string;
   },
 ) => {
   const [result] = await db.insert(subscription).values(data).returning();
