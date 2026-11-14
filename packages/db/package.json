@@ -50,8 +50,7 @@
     "ioredis": "^6.0.0",
     "pg": "^8.23.1",
     "pg-connection-string": "^2.14.1",
-    "uuid": "^14.0.3",
-    "zod": "catalog:"
+    "uuid": "^14.0.3"
   },
   "devDependencies": {
     "@kan/eslint-config": "workspace:*",
