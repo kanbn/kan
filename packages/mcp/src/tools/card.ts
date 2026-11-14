@@ -40,7 +40,7 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
       const data = await client.request("POST", "/cards", {
         listPublicId,
         title,
-        description,
+        description: description ?? "",
         dueDate,
         labelPublicIds: labelPublicIds ?? [],
         memberPublicIds: memberPublicIds ?? [],
@@ -66,7 +66,7 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
 
   server.tool(
     "update_card",
-    "Update a card's title, description, due date, or move it to another list",
+    "Update a card's title, description, due date, position, or move it to another list",
     {
       cardPublicId: z.string().describe("The card's public ID"),
       title: z.string().optional().describe("New card title"),
@@ -80,13 +80,29 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
         .string()
         .optional()
         .describe("Move card to this list (public ID)"),
+      index: z
+        .number()
+        .int()
+        .min(0)
+        .optional()
+        .describe(
+          "Zero-based position in the list (0 is the top; defaults to the end when moving to another list)",
+        ),
     },
-    async ({ cardPublicId, title, description, dueDate, listPublicId }) => {
+    async ({
+      cardPublicId,
+      title,
+      description,
+      dueDate,
+      listPublicId,
+      index,
+    }) => {
       const data = await client.request("PUT", `/cards/${cardPublicId}`, {
         title,
         description,
         dueDate,
         listPublicId,
+        index,
       });
       return {
         content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
