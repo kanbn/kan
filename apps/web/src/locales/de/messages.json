@@ -13,7 +13,7 @@
     "origin": [["src/components/FeedbackModal.tsx", 106]],
     "translation": ", oder siehe unsere"
   },
-  "J/hVSQ": {
+  "J_hVSQ": {
     "message": "{0}",
     "placeholders": {
       "0": ["isTemplate ? \"Templates\" : \"Boards\""]
@@ -54,7 +54,7 @@
     "origin": [["src/views/board/components/CalendarView.tsx", 468]],
     "translation": "{0} fällige Karten"
   },
-  "mU+M00": {
+  "mU-M00": {
     "message": "{0} has been added to your favorites.",
     "placeholders": {
       "0": ["boardName ?? \"Board\""]
@@ -117,7 +117,7 @@
     "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 548]],
     "translation": "{boardCount, plural, one {Board importieren (1)} other {Boards importieren ({boardCount})}}"
   },
-  "yndBF+": {
+  "yndBF-": {
     "message": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}",
     "placeholders": {
       "projectCount": ["projectCount"]
@@ -134,7 +134,7 @@
     "translation": "/Monat",
     "obsolete": true
   },
-  "h/eDNV": {
+  "h_eDNV": {
     "message": "+ {overflowCount} more",
     "placeholders": {
       "overflowCount": ["overflowCount"]
@@ -214,7 +214,7 @@
     "origin": [["src/pages/404.tsx", 11]],
     "translation": "404 - Seite nicht gefunden | kan.bn"
   },
-  "/rn4RE": {
+  "_rn4RE": {
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
     "placeholders": {},
     "comments": [],
@@ -334,7 +334,7 @@
     ],
     "translation": "Boardmitglied hinzufügen"
   },
-  "sFY+gw": {
+  "sFY-gw": {
     "message": "Add card",
     "placeholders": {},
     "comments": [],
@@ -371,7 +371,7 @@
     ],
     "translation": "Kommentar hinzufügen... (‚/' für Befehle oder ‚@' zum Erwähnen eingeben)"
   },
-  "gL/7jw": {
+  "gL_7jw": {
     "message": "Add description... (type '/' to open commands or '@' to mention)",
     "placeholders": {},
     "comments": [],
@@ -414,7 +414,7 @@
     "origin": [["src/views/board/components/BoardDropdown.tsx", 198]],
     "translation": "Zu Favoriten hinzufügen"
   },
-  "cWXW+7": {
+  "cWXW-7": {
     "message": "Add webhook",
     "placeholders": {},
     "comments": [],
@@ -445,7 +445,7 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 132]],
     "translation": "hat ein Checklisten-Element hinzugefügt"
   },
-  "T21jY/": {
+  "T21jY_": {
     "message": "added a label to the card",
     "placeholders": {},
     "comments": [],
@@ -519,7 +519,7 @@
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 346]],
     "translation": "Das Hinzufügen eines neuen Mitglieds kostet zusätzlich {price} ({billingType}) pro Platz."
   },
-  "D7/JvJ": {
+  "D7_JvJ": {
     "message": "Adjust the square crop to fit your avatar.",
     "placeholders": {},
     "comments": [],
@@ -550,14 +550,14 @@
     ],
     "translation": "Administrator-Rollen"
   },
-  "Kec+/t": {
+  "Kec-_t": {
     "message": "Advanced admin controls",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 82]],
     "translation": "Erweiterte Administrator-Steuerung"
   },
-  "/jd3aj": {
+  "_jd3aj": {
     "message": "Advanced admin roles",
     "placeholders": {},
     "comments": [],
@@ -602,7 +602,7 @@
     "origin": [["src/views/home/components/Footer.tsx", 18]],
     "translation": "Alle Systeme betriebsbereit"
   },
-  "EII/X8": {
+  "EII_X8": {
     "message": "All Teams features +",
     "placeholders": {},
     "comments": [],
@@ -631,7 +631,7 @@
     ],
     "translation": "Haben Sie bereits ein Konto? <0><1>Anmelden</1></0>"
   },
-  "j1+HPc": {
+  "j1-HPc": {
     "message": "An error occurred while connecting your GitHub account.",
     "placeholders": {},
     "comments": [],
@@ -720,7 +720,7 @@
     "origin": [["src/views/settings/ApiSettings.tsx", 22]],
     "translation": "API-Schlüssel"
   },
-  "j2+d/o": {
+  "j2-d_o": {
     "message": "API Reference",
     "placeholders": {},
     "comments": [],
@@ -734,14 +734,14 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
     "translation": "Bewerber"
   },
-  "yb/fjw": {
+  "yb_fjw": {
     "message": "Approval",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 53]],
     "translation": "Genehmigung"
   },
-  "aKJHG+": {
+  "aKJHG-": {
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
@@ -755,7 +755,7 @@
     "origin": [["src/views/boards/index.tsx", 34]],
     "translation": "Archiviert"
   },
-  "T5/ohn": {
+  "T5_ohn": {
     "message": "Archived lists and cards aren't imported.",
     "placeholders": {},
     "comments": [],
@@ -834,7 +834,7 @@
     "origin": [["src/components/DeleteLabelConfirmation.tsx", 44]],
     "translation": "Möchten Sie dieses Label wirklich löschen?"
   },
-  "74F7N/": {
+  "74F7N_": {
     "message": "Are you sure you want to delete your account?",
     "placeholders": {},
     "comments": [],
@@ -857,7 +857,7 @@
     ],
     "translation": "Möchten Sie {entityLabel} wirklich entfernen?"
   },
-  "PyYD/v": {
+  "PyYD_v": {
     "message": "assigned <0>{0}</0> to the card",
     "placeholders": {
       "0": ["truncate(displayName)"]
@@ -875,7 +875,7 @@
     ],
     "translation": "Zugewiesene Personen"
   },
-  "N7m8E+": {
+  "N7m8E-": {
     "message": "Attach files",
     "placeholders": {},
     "comments": [],
@@ -930,7 +930,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 28]],
     "translation": "Basis-Roadmap"
   },
-  "/XCg57": {
+  "_XCg57": {
     "message": "Best for growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
@@ -951,7 +951,7 @@
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 77]],
     "translation": "Ideal für große Organisationen mit erweiterten Anforderungen"
   },
-  "UoSI+i": {
+  "UoSI-i": {
     "message": "Best for small and growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
@@ -959,7 +959,7 @@
     "translation": "Ideal für kleine und wachsende Teams, die zusammenarbeiten müssen",
     "obsolete": true
   },
-  "zt/6cS": {
+  "zt_6cS": {
     "message": "Best for small teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
@@ -967,7 +967,7 @@
     "translation": "Ideal für kleine Teams, die gemeinsam arbeiten und schneller vorankommen möchten.",
     "obsolete": true
   },
-  "qaS+1/": {
+  "qaS-1_": {
     "message": "Best for teams that want to scale without limits",
     "placeholders": {},
     "comments": [],
@@ -982,21 +982,21 @@
     "origin": [["src/views/onboarding/select-plan/index.tsx", 100]],
     "translation": "Am besten für Teams, die zusammenarbeiten und gemeinsam schneller vorankommen möchten."
   },
-  "ARvBT/": {
+  "ARvBT_": {
     "message": "billed annually",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 205]],
     "translation": "jährlich abgerechnet"
   },
-  "+VoTOr": {
+  "-VoTOr": {
     "message": "billed monthly",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 205]],
     "translation": "monatlich abgerechnet"
   },
-  "R+w/Va": {
+  "R-w_Va": {
     "message": "Billing",
     "placeholders": {},
     "comments": [],
@@ -1118,7 +1118,7 @@
     "origin": [["src/views/public/board/index.tsx", 174]],
     "translation": "Board nicht gefunden"
   },
-  "Mu1Zy/": {
+  "Mu1Zy_": {
     "message": "Board options",
     "placeholders": {},
     "comments": [],
@@ -1155,7 +1155,7 @@
     "origin": [["src/views/board/components/UpdateBoardSlugForm.tsx", 49]],
     "translation": "Board-URL darf 60 Zeichen nicht überschreiten"
   },
-  "8+BY11": {
+  "8-BY11": {
     "message": "Board URL copied to clipboard",
     "placeholders": {},
     "comments": [],
@@ -1197,7 +1197,7 @@
     "origin": [["src/views/board/components/VisibilityButton.tsx", 52]],
     "translation": "Board-Sichtbarkeit aktualisiert"
   },
-  "8TveY+": {
+  "8TveY-": {
     "message": "Boards",
     "placeholders": {},
     "comments": [],
@@ -1231,7 +1231,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 24]],
     "translation": "Bug"
   },
-  "/asTmx": {
+  "_asTmx": {
     "message": "Bug Report",
     "placeholders": {},
     "comments": [],
@@ -1302,7 +1302,7 @@
     ],
     "translation": "Kann Boards löschen"
   },
-  "jNuzV/": {
+  "jNuzV_": {
     "message": "Can delete cards",
     "placeholders": {},
     "comments": [],
@@ -1352,7 +1352,7 @@
     ],
     "translation": "Kann Boards bearbeiten"
   },
-  "I+AROe": {
+  "I-AROe": {
     "message": "Can edit cards",
     "placeholders": {},
     "comments": [],
@@ -1392,7 +1392,7 @@
     ],
     "translation": "Kann Mitgliederrollen und Berechtigungen bearbeiten"
   },
-  "iLbjv+": {
+  "iLbjv-": {
     "message": "Can edit workspace",
     "placeholders": {},
     "comments": [],
@@ -1525,7 +1525,7 @@
     ],
     "translation": "Abbrechen"
   },
-  "kryGs+": {
+  "kryGs-": {
     "message": "Card",
     "placeholders": {},
     "comments": [],
@@ -1624,7 +1624,7 @@
     "origin": [["src/views/settings/AccountSettings.tsx", 58]],
     "translation": "Ändern Sie Ihre Spracheinstellungen."
   },
-  "gZxH/p": {
+  "gZxH_p": {
     "message": "changed the due date to <0>{formattedDate}</0>",
     "placeholders": {
       "formattedDate": ["formattedDate"]
@@ -1828,7 +1828,7 @@
     "origin": [["src/views/pricing/components/Pricing.tsx", 70]],
     "translation": "Vollständige Kontrolle und Eigentümerschaft:"
   },
-  "Lt+ZP3": {
+  "Lt-ZP3": {
     "message": "completed a checklist item",
     "placeholders": {},
     "comments": [],
@@ -1859,7 +1859,7 @@
     "origin": [["src/views/settings/WebhookSettings.tsx", 27]],
     "translation": "Konfigurieren Sie Webhooks, um Benachrichtigungen zu erhalten, wenn Karten erstellt, aktualisiert, verschoben oder gelöscht werden."
   },
-  "/f3t6v": {
+  "_f3t6v": {
     "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
     "placeholders": {},
     "comments": [],
@@ -1932,7 +1932,7 @@
     "origin": [["src/views/settings/IntegrationsSettings.tsx", 164]],
     "translation": "Verbinden Sie Ihr Trello-Konto, um Boards zu importieren."
   },
-  "jfC/xh": {
+  "jfC_xh": {
     "message": "Contact",
     "placeholders": {},
     "comments": [],
@@ -1993,7 +1993,7 @@
     "origin": [["src/components/AuthForm.tsx", 352]],
     "translation": "Weiter mit {0}"
   },
-  "va/3u1": {
+  "va_3u1": {
     "message": "Control who can view and edit your boards.",
     "placeholders": {},
     "comments": [],
@@ -2159,7 +2159,7 @@
     "origin": [["src/views/settings/ApiSettings.tsx", 30]],
     "translation": "Neuen Schlüssel erstellen"
   },
-  "0+0/3e": {
+  "0-0_3e": {
     "message": "Create new label",
     "placeholders": {},
     "comments": [],
@@ -2169,7 +2169,7 @@
     ],
     "translation": "Neues Label erstellen"
   },
-  "aWlSc/": {
+  "aWlSc_": {
     "message": "Create new list",
     "placeholders": {},
     "comments": [],
@@ -2203,7 +2203,7 @@
     ],
     "translation": "Workspace erstellen"
   },
-  "d+F6q9": {
+  "d-F6q9": {
     "message": "Created",
     "placeholders": {},
     "comments": [],
@@ -2290,7 +2290,7 @@
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 84]],
     "translation": "Benutzerdefiniertes SLA"
   },
-  "u2+JIh": {
+  "u2-JIh": {
     "message": "Custom URLs require upgrading to a Pro plan",
     "placeholders": {},
     "comments": [],
@@ -2298,7 +2298,7 @@
     "translation": "Benutzerdefinierte URLs erfordern ein Upgrade auf einen Pro-Plan",
     "obsolete": true
   },
-  "7RpHg/": {
+  "7RpHg_": {
     "message": "Custom username",
     "placeholders": {},
     "comments": [],
@@ -2340,7 +2340,7 @@
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 58]],
     "translation": "Benutzerdefinierter Workspace-Benutzername"
   },
-  "n+xLOH": {
+  "n-xLOH": {
     "message": "Customer Support",
     "placeholders": {},
     "comments": [],
@@ -2405,7 +2405,7 @@
     ],
     "translation": "Account löschen"
   },
-  "tmpW+w": {
+  "tmpW-w": {
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
@@ -2470,7 +2470,7 @@
     ],
     "translation": "Workspace löschen"
   },
-  "mTGd3+": {
+  "mTGd3-": {
     "message": "deleted a checklist",
     "placeholders": {},
     "comments": [],
@@ -2509,7 +2509,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 52]],
     "translation": "Design"
   },
-  "Uf+1DF": {
+  "Uf-1DF": {
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
@@ -2604,7 +2604,7 @@
     "origin": [["src/views/home/components/Header.tsx", 20]],
     "translation": "Docs"
   },
-  "TvY/XA": {
+  "TvY_XA": {
     "message": "Documentation",
     "placeholders": {},
     "comments": [],
@@ -2681,7 +2681,7 @@
     "origin": [["src/views/board/components/Filters.tsx", 127]],
     "translation": "Heute fällig"
   },
-  "zxKs+y": {
+  "zxKs-y": {
     "message": "Due tomorrow",
     "placeholders": {},
     "comments": [],
@@ -2789,7 +2789,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 51]],
     "translation": "Bearbeitung"
   },
-  "b/LfJo": {
+  "b_LfJo": {
     "message": "email",
     "placeholders": {},
     "comments": [],
@@ -2845,7 +2845,7 @@
     "origin": [["src/views/onboarding/workspace-details/index.tsx", 193]],
     "translation": "Technik"
   },
-  "0+ewPp": {
+  "0-ewPp": {
     "message": "Enhancement",
     "placeholders": {},
     "comments": [],
@@ -2905,7 +2905,7 @@
     ],
     "translation": "Geben Sie Ihre E-Mail-Adresse ein"
   },
-  "n9V+ps": {
+  "n9V-ps": {
     "message": "Enter your name",
     "placeholders": {},
     "comments": [],
@@ -2948,7 +2948,7 @@
     ],
     "translation": "Fehler"
   },
-  "55xJ/O": {
+  "55xJ_O": {
     "message": "Error Changing Password",
     "placeholders": {},
     "comments": [],
@@ -2987,7 +2987,7 @@
     ],
     "translation": "Fehler beim Löschen des Kontos"
   },
-  "q+lt9D": {
+  "q-lt9D": {
     "message": "Error deleting label",
     "placeholders": {},
     "comments": [],
@@ -3003,7 +3003,7 @@
     ],
     "translation": "Fehler beim Löschen des Arbeitsbereichs"
   },
-  "gQ/02p": {
+  "gQ_02p": {
     "message": "Error disconnecting GitHub",
     "placeholders": {},
     "comments": [],
@@ -3017,7 +3017,7 @@
     "origin": [["src/views/settings/IntegrationsSettings.tsx", 97]],
     "translation": "Fehler beim Trennen von Trello"
   },
-  "rarRW/": {
+  "rarRW_": {
     "message": "Error inviting member",
     "placeholders": {},
     "comments": [],
@@ -3061,7 +3061,7 @@
     ],
     "translation": "Fehler beim Aktualisieren des Workspace-Namens"
   },
-  "x0kMO/": {
+  "x0kMO_": {
     "message": "Error updating workspace URL",
     "placeholders": {},
     "comments": [],
@@ -3088,7 +3088,7 @@
     "translation": "Fehler beim Upgrade auf Pro",
     "obsolete": true
   },
-  "CYWHT+": {
+  "CYWHT-": {
     "message": "Error uploading profile image",
     "placeholders": {},
     "comments": [],
@@ -3108,7 +3108,7 @@
     ],
     "translation": "Ereignisse"
   },
-  "6ZIzI/": {
+  "6ZIzI_": {
     "message": "Every active workspace member is already on this board.",
     "placeholders": {},
     "comments": [],
@@ -3131,7 +3131,7 @@
     "origin": [["src/views/pricing/components/Pricing.tsx", 33]],
     "translation": "Alles, was Sie brauchen, für immer kostenlos. Unbegrenzte Boards, unbegrenzte Listen, unbegrenzte Karten. Jederzeit upgraden."
   },
-  "t+R8+P": {
+  "t-R8-P": {
     "message": "Execution",
     "placeholders": {},
     "comments": [],
@@ -3182,7 +3182,7 @@
     ],
     "translation": "Webhook konnte nicht gelöscht werden"
   },
-  "W8oT+L": {
+  "W8oT-L": {
     "message": "Failed to fetch video information",
     "placeholders": {},
     "comments": [],
@@ -3215,14 +3215,14 @@
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 157]],
     "translation": "Webhook konnte nicht aktualisiert werden"
   },
-  "ZL1A+p": {
+  "ZL1A-p": {
     "message": "Failed to upload attachment. Please try again.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/card/components/AttachmentUpload.tsx", 52]],
     "translation": "Anhang konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut."
   },
-  "/lDBHm": {
+  "_lDBHm": {
     "message": "FAQ",
     "placeholders": {},
     "comments": [],
@@ -3316,7 +3316,7 @@
     "origin": [["src/views/settings/AccountSettings.tsx", 65]],
     "translation": "Schriftgröße"
   },
-  "+3TYXa": {
+  "-3TYXa": {
     "message": "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.",
     "placeholders": {},
     "comments": [],
@@ -3372,7 +3372,7 @@
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 31]],
     "translation": "Kostenlos für alle"
   },
-  "W/nQk1": {
+  "W_nQk1": {
     "message": "Free Plan",
     "placeholders": {},
     "comments": [],
@@ -3399,7 +3399,7 @@
     ],
     "translation": "Vollständiger API-Zugriff"
   },
-  "KiVc+q": {
+  "KiVc-q": {
     "message": "Full-time",
     "placeholders": {},
     "comments": [],
@@ -3466,7 +3466,7 @@
     "origin": [["src/views/home/components/Cta.tsx", 54]],
     "translation": "Starten Sie noch heute kostenlos"
   },
-  "+OhFss": {
+  "-OhFss": {
     "message": "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.",
     "placeholders": {},
     "comments": [],
@@ -3504,14 +3504,14 @@
     "origin": [["src/views/settings/IntegrationsSettings.tsx", 112]],
     "translation": "GitHub verbunden"
   },
-  "/bBVaD": {
+  "_bBVaD": {
     "message": "GitHub disconnected",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/settings/IntegrationsSettings.tsx", 136]],
     "translation": "GitHub getrennt"
   },
-  "7eMo+U": {
+  "7eMo-U": {
     "message": "Go Home",
     "placeholders": {},
     "comments": [],
@@ -3559,7 +3559,7 @@
     "origin": [["src/components/SideNavigation.tsx", 146]],
     "translation": "Zu den Einstellungen"
   },
-  "csFbe+": {
+  "csFbe-": {
     "message": "Go to templates",
     "placeholders": {},
     "comments": [],
@@ -3623,7 +3623,7 @@
     "origin": [["src/components/Editor.tsx", 396]],
     "translation": "Überschrift 3"
   },
-  "CB/NpV": {
+  "CB_NpV": {
     "message": "High Priority",
     "placeholders": {},
     "comments": [],
@@ -3665,7 +3665,7 @@
     "origin": [["src/views/home/components/Faqs.tsx", 46]],
     "translation": "Wie importiere ich meine Trello-Boards?"
   },
-  "nol/Fb": {
+  "nol_Fb": {
     "message": "How do I invite team members?",
     "placeholders": {},
     "comments": [],
@@ -3702,7 +3702,7 @@
     ],
     "translation": "Ich bestätige, dass alle meine Kontodaten dauerhaft gelöscht werden und möchte fortfahren."
   },
-  "2Py5S/": {
+  "2Py5S_": {
     "message": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed.",
     "placeholders": {},
     "comments": [],
@@ -3725,7 +3725,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 95]],
     "translation": "Ideen"
   },
-  "F/vB2g": {
+  "F_vB2g": {
     "message": "Ideas to improve this page...",
     "placeholders": {},
     "comments": [],
@@ -3767,14 +3767,14 @@
     "origin": [["src/views/home/components/Features.tsx", 96]],
     "translation": "Importieren Sie Ihre Trello-Boards und legen Sie direkt los."
   },
-  "c/IAuR": {
+  "c_IAuR": {
     "message": "Important",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 103]],
     "translation": "Wichtig"
   },
-  "xMn+V9": {
+  "xMn-V9": {
     "message": "Importing from Trello",
     "placeholders": {},
     "comments": [],
@@ -3902,14 +3902,14 @@
     ],
     "translation": "Einladungslinks"
   },
-  "25mvI+": {
+  "25mvI-": {
     "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 152]],
     "translation": "Einladungslinks erfordern ein Team- oder Pro-Abonnement. Bitte upgraden Sie Ihren Workspace."
   },
-  "+djOzj": {
+  "-djOzj": {
     "message": "Invite member",
     "placeholders": {},
     "comments": [],
@@ -3982,7 +3982,7 @@
     "origin": [["src/views/pricing/components/Pricing.tsx", 51]],
     "translation": "Kanban ist besser im Team. Perfekt für kleine und wachsende Teams, die zusammenarbeiten möchten."
   },
-  "Xjj/kS": {
+  "Xjj_kS": {
     "message": "Kanban reimagined",
     "placeholders": {},
     "comments": [],
@@ -4019,7 +4019,7 @@
     ],
     "translation": "Labels"
   },
-  "AZI/wb": {
+  "AZI_wb": {
     "message": "Labels & filters",
     "placeholders": {},
     "comments": [],
@@ -4028,7 +4028,7 @@
     ],
     "translation": "Labels & Filter"
   },
-  "+nvZ6j": {
+  "-nvZ6j": {
     "message": "Labels & Filters",
     "placeholders": {},
     "comments": [],
@@ -4042,7 +4042,7 @@
     "origin": [["src/views/settings/AccountSettings.tsx", 55]],
     "translation": "Sprache"
   },
-  "k7rCa/": {
+  "k7rCa_": {
     "message": "Large",
     "placeholders": {},
     "comments": [],
@@ -4121,7 +4121,7 @@
     "origin": [["src/components/UserMenu.tsx", 172]],
     "translation": "Hell"
   },
-  "TCt/8K": {
+  "TCt_8K": {
     "message": "Limited API access",
     "placeholders": {},
     "comments": [],
@@ -4163,7 +4163,7 @@
     ],
     "translation": "Listenname"
   },
-  "jf++dj": {
+  "jf--dj": {
     "message": "List options",
     "placeholders": {},
     "comments": [],
@@ -4204,7 +4204,7 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 661]],
     "translation": "Wird geladen ..."
   },
-  "N/bcWA": {
+  "N_bcWA": {
     "message": "Login | kan.bn",
     "placeholders": {},
     "comments": [],
@@ -4279,7 +4279,7 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 255]],
     "translation": "hat Checklistenelement <0>{0}</0> als unvollständig markiert"
   },
-  "vo2a+a": {
+  "vo2a-a": {
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
@@ -4293,7 +4293,7 @@
     "origin": [["src/components/FontSizeSelector.tsx", 9]],
     "translation": "Mittel"
   },
-  "W/Elkg": {
+  "W_Elkg": {
     "message": "Medium Priority",
     "placeholders": {},
     "comments": [],
@@ -4360,7 +4360,7 @@
     "origin": [["src/views/members/index.tsx", 290]],
     "translation": "Mitglieder | {0}"
   },
-  "/bZzdR": {
+  "_bZzdR": {
     "message": "Mentions",
     "placeholders": {},
     "comments": [],
@@ -4378,7 +4378,7 @@
     ],
     "translation": "Montag"
   },
-  "+8Nek/": {
+  "-8Nek_": {
     "message": "Monthly",
     "placeholders": {},
     "comments": [],
@@ -4396,7 +4396,7 @@
     "origin": [["src/views/members/components/InviteMemberForm.tsx", 193]],
     "translation": "Monatliche Abrechnung"
   },
-  "sZ/WDz": {
+  "sZ_WDz": {
     "message": "Move board",
     "placeholders": {},
     "comments": [],
@@ -4417,7 +4417,7 @@
     "origin": [["src/views/board/components/CardContextMenu.tsx", 45]],
     "translation": "In andere Liste verschieben"
   },
-  "J4+OTA": {
+  "J4-OTA": {
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
@@ -4553,7 +4553,7 @@
     ],
     "translation": "Neue Liste"
   },
-  "+MdEsf": {
+  "-MdEsf": {
     "message": "New password is required",
     "placeholders": {},
     "comments": [],
@@ -4578,7 +4578,7 @@
     "origin": [["src/views/board/components/NewTemplateForm.tsx", 101]],
     "translation": "Neue Vorlage"
   },
-  "RJA+sg": {
+  "RJA-sg": {
     "message": "New Ticket",
     "placeholders": {},
     "comments": [],
@@ -4620,7 +4620,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 100]],
     "translation": "Nächste Schritte"
   },
-  "/glL9Q": {
+  "_glL9Q": {
     "message": "No {0}",
     "placeholders": {
       "0": ["isTemplate ? \"templates\" : \"boards\""]
@@ -4794,14 +4794,14 @@
     "origin": [["src/components/WorkspaceMenu.tsx", 39]],
     "translation": "Befehlsmenü öffnen"
   },
-  "cFQEU/": {
+  "cFQEU_": {
     "message": "Open keyboard shortcuts",
     "placeholders": {},
     "comments": [],
     "origin": [["src/providers/keyboard-shortcuts.tsx", 171]],
     "translation": "Tastenkombinationen öffnen"
   },
-  "v+Wp++": {
+  "v-Wp--": {
     "message": "Open source",
     "placeholders": {},
     "comments": [],
@@ -4810,7 +4810,7 @@
     ],
     "translation": "Open Source"
   },
-  "qfUS/w": {
+  "qfUS_w": {
     "message": "Open Source Friends",
     "placeholders": {},
     "comments": [],
@@ -4824,7 +4824,7 @@
     "origin": [["src/components/AuthForm.tsx", 398]],
     "translation": "oder"
   },
-  "Uci+Ph": {
+  "Uci-Ph": {
     "message": "Ordered List",
     "placeholders": {},
     "comments": [],
@@ -5041,7 +5041,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 93]],
     "translation": "Persönliches Projekt"
   },
-  "Oi+J+N": {
+  "Oi-J-N": {
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
@@ -5239,7 +5239,7 @@
     ],
     "translation": "Position in Liste (0 = erste, leer lassen für Ende)"
   },
-  "1xwZj/": {
+  "1xwZj_": {
     "message": "Previous month",
     "placeholders": {},
     "comments": [],
@@ -5297,7 +5297,7 @@
     "translation": "Pro",
     "obsolete": true
   },
-  "oyRjD/": {
+  "oyRjD_": {
     "message": "Pro Plan",
     "placeholders": {},
     "comments": [],
@@ -5349,7 +5349,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 54]],
     "translation": "Veröffentlichung"
   },
-  "bfgr/e": {
+  "bfgr_e": {
     "message": "Question",
     "placeholders": {},
     "comments": [],
@@ -5401,7 +5401,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "Remote"
   },
-  "t/YqKh": {
+  "t_YqKh": {
     "message": "Remove",
     "placeholders": {},
     "comments": [],
@@ -5428,7 +5428,7 @@
     "origin": [["src/views/board/members/index.tsx", 206]],
     "translation": "Vom Board entfernen"
   },
-  "T/pF0Z": {
+  "T_pF0Z": {
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
@@ -5466,7 +5466,7 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 128]],
     "translation": "hat ein Mitglied von der Karte entfernt"
   },
-  "KEim/+": {
+  "KEim_-": {
     "message": "removed an attachment",
     "placeholders": {},
     "comments": [],
@@ -5580,7 +5580,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 67]],
     "translation": "Auflösung"
   },
-  "s+MGs7": {
+  "s-MGs7": {
     "message": "Resources",
     "placeholders": {},
     "comments": [],
@@ -5594,7 +5594,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 99]],
     "translation": "Review"
   },
-  "/gaSVU": {
+  "_gaSVU": {
     "message": "Roadmap",
     "placeholders": {},
     "comments": [],
@@ -5634,7 +5634,7 @@
     "translation": "Rollen & Berechtigungen",
     "obsolete": true
   },
-  "vAR/I8": {
+  "vAR_I8": {
     "message": "Run on your own infrastructure",
     "placeholders": {},
     "comments": [],
@@ -5648,7 +5648,7 @@
     "origin": [["src/views/pricing/components/PricingTiers.tsx", 81]],
     "translation": "SAML SSO"
   },
-  "+5kO8P": {
+  "-5kO8P": {
     "message": "Saturday",
     "placeholders": {},
     "comments": [],
@@ -5682,7 +5682,7 @@
     "origin": [["src/views/home/components/Features.tsx", 116]],
     "translation": "Sparen Sie Zeit mit wiederverwendbaren Board-Vorlagen."
   },
-  "cOh+MI": {
+  "cOh-MI": {
     "message": "Screening",
     "placeholders": {},
     "comments": [],
@@ -5720,14 +5720,14 @@
     ],
     "translation": "Plätze"
   },
-  "e1v+J3": {
+  "e1v-J3": {
     "message": "Secret (optional)",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 279]],
     "translation": "Secret (optional)"
   },
-  "OkTY4+": {
+  "OkTY4-": {
     "message": "Secret cannot exceed 512 characters",
     "placeholders": {},
     "comments": [],
@@ -5743,7 +5743,7 @@
     ],
     "translation": "Sicherheit"
   },
-  "iL+dpm": {
+  "iL-dpm": {
     "message": "See all your cards across the month, then drag and drop to reschedule. Available on paid plans.",
     "placeholders": {},
     "comments": [],
@@ -5792,7 +5792,7 @@
     ],
     "translation": "Alle auswählen"
   },
-  "o4e/70": {
+  "o4e_70": {
     "message": "Select at least one event",
     "placeholders": {},
     "comments": [],
@@ -5827,7 +5827,7 @@
     "origin": [["src/views/card/components/ActivityList.tsx", 166]],
     "translation": "hat sich die Karte selbst zugewiesen"
   },
-  "f2zPy/": {
+  "f2zPy_": {
     "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
     "placeholders": {
       "CREDENTIALS_ENV_HINT": ["CREDENTIALS_ENV_HINT"]
@@ -5864,7 +5864,7 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "Senior"
   },
-  "+DlsTY": {
+  "-DlsTY": {
     "message": "Set a new password",
     "placeholders": {},
     "comments": [],
@@ -5932,7 +5932,7 @@
     "origin": [["src/views/settings/AccountSettings.tsx", 29]],
     "translation": "Einstellungen | Konto"
   },
-  "iy1wb+": {
+  "iy1wb-": {
     "message": "Settings | API",
     "placeholders": {},
     "comments": [],
@@ -5953,21 +5953,21 @@
     "origin": [["src/views/settings/IntegrationsSettings.tsx", 153]],
     "translation": "Einstellungen | Integrationen"
   },
-  "F/FPk/": {
+  "F_FPk_": {
     "message": "Settings | Permissions",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/settings/PermissionsSettings.tsx", 54]],
     "translation": "Einstellungen | Berechtigungen"
   },
-  "+h2faV": {
+  "-h2faV": {
     "message": "Settings | Webhooks",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/settings/WebhookSettings.tsx", 20]],
     "translation": "Einstellungen | Webhooks"
   },
-  "Ci/KUX": {
+  "Ci_KUX": {
     "message": "Settings | Workspace",
     "placeholders": {},
     "comments": [],
@@ -5988,7 +5988,7 @@
     "origin": [["src/views/card/components/ActivitySortOrderToggle.tsx", 17]],
     "translation": "Neueste Aktivität zuerst anzeigen"
   },
-  "EL+7I2": {
+  "EL-7I2": {
     "message": "Show oldest activity first",
     "placeholders": {},
     "comments": [],
@@ -6059,7 +6059,7 @@
     "origin": [["src/views/auth/signup/index.tsx", 46]],
     "translation": "Registrierung deaktiviert"
   },
-  "s6iE/c": {
+  "s6iE_c": {
     "message": "Sign up is currently disabled. Please try again later.",
     "placeholders": {},
     "comments": [],
@@ -6083,7 +6083,7 @@
     ],
     "translation": "Einfache Preisgestaltung"
   },
-  "/ty94x": {
+  "_ty94x": {
     "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
@@ -6113,7 +6113,7 @@
     "origin": [["src/components/FontSizeSelector.tsx", 8]],
     "translation": "Klein"
   },
-  "++rVAm": {
+  "--rVAm": {
     "message": "Social Media",
     "placeholders": {},
     "comments": [],
@@ -6148,14 +6148,14 @@
     "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 430]],
     "translation": "Einige Boards wurden nicht importiert"
   },
-  "J9+zIR": {
+  "J9-zIR": {
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/pages/partner/activate.tsx", 73]],
     "translation": "Während der Aktivierung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   },
-  "r+dxEH": {
+  "r-dxEH": {
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
@@ -6195,7 +6195,7 @@
     "translation": "14-tägige kostenlose Testversion starten",
     "obsolete": true
   },
-  "4+JaWo": {
+  "4-JaWo": {
     "message": "Start free trial",
     "placeholders": {},
     "comments": [],
@@ -6268,7 +6268,7 @@
     ],
     "translation": "Sonntag"
   },
-  "uZg2+w": {
+  "uZg2-w": {
     "message": "Supercharge your workspace for just $29/month. Here's what you'll get:",
     "placeholders": {},
     "comments": [],
@@ -6295,7 +6295,7 @@
     "origin": [["src/views/pricing/components/Pricing.tsx", 57]],
     "translation": "Unterstützen Sie die Entwicklung des Projekts"
   },
-  "D+NlUC": {
+  "D-NlUC": {
     "message": "System",
     "placeholders": {},
     "comments": [],
@@ -6331,7 +6331,7 @@
     ],
     "translation": "Teams"
   },
-  "/K2CvV": {
+  "_K2CvV": {
     "message": "Template",
     "placeholders": {},
     "comments": [],
@@ -6446,7 +6446,7 @@
     "origin": [["src/components/FeedbackModal.tsx", 35]],
     "translation": "Vielen Dank für Ihr Feedback!"
   },
-  "ssK7k+": {
+  "ssK7k-": {
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
@@ -6521,14 +6521,14 @@
     ],
     "translation": "Die Berechtigungen des Mitglieds wurden aktualisiert."
   },
-  "bfZE+Y": {
+  "bfZE-Y": {
     "message": "The member's role has been updated.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/members/index.tsx", 71]],
     "translation": "Die Rolle des Mitglieds wurde aktualisiert."
   },
-  "gUX7b+": {
+  "gUX7b-": {
     "message": "The open source <0/> alternative to Trello",
     "placeholders": {},
     "comments": [],
@@ -6606,7 +6606,7 @@
     "origin": [["src/views/public/board/index.tsx", 177]],
     "translation": "Dieses Board ist privat oder existiert nicht"
   },
-  "wY+6Ye": {
+  "wY-6Ye": {
     "message": "This board URL has already been taken",
     "placeholders": {},
     "comments": [],
@@ -6665,7 +6665,7 @@
     ],
     "translation": "Dadurch werden alle benutzerdefinierten Mitgliederberechtigungen in diesem Workspace entfernt. Mitglieder erben Berechtigungen nur von ihren Rollen."
   },
-  "MeO/vH": {
+  "MeO_vH": {
     "message": "This will result in the permanent deletion of all data associated with this workspace.",
     "placeholders": {},
     "comments": [],
@@ -6739,7 +6739,7 @@
     ],
     "translation": "Titel (optional)"
   },
-  "Se/UIp": {
+  "Se_UIp": {
     "message": "To Do",
     "placeholders": {},
     "comments": [],
@@ -6770,7 +6770,7 @@
     "origin": [["src/views/settings/IntegrationsSettings.tsx", 27]],
     "translation": "Token ist erforderlich"
   },
-  "eEQyz+": {
+  "eEQyz-": {
     "message": "Track all card changes with detailed activity history.",
     "placeholders": {},
     "comments": [],
@@ -6810,14 +6810,14 @@
     "origin": [["src/views/boards/components/ImportBoardsForm.tsx", 385]],
     "translation": "Trello ist gerade ausgelastet. Bitte versuche, {board} in einigen Minuten erneut zu importieren."
   },
-  "HO+uOC": {
+  "HO-uOC": {
     "message": "Triaging",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 64]],
     "translation": "Triage"
   },
-  "o+JCfN": {
+  "o-JCfN": {
     "message": "Trusted by fast-moving teams<0/>around the world",
     "placeholders": {},
     "comments": [],
@@ -6982,7 +6982,7 @@
     ],
     "translation": "Karte konnte nicht dupliziert werden"
   },
-  "d196/6": {
+  "d196_6": {
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
@@ -7162,7 +7162,7 @@
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 154]],
     "translation": "Webhook konnte nicht aktualisiert werden"
   },
-  "It4/FS": {
+  "It4_FS": {
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
@@ -7261,7 +7261,7 @@
     "origin": [["src/views/settings/BillingSettings.tsx", 38]],
     "translation": "unbegrenzte Mitglieder"
   },
-  "mx8+1u": {
+  "mx8-1u": {
     "message": "Unlimited members",
     "placeholders": {},
     "comments": [],
@@ -7285,7 +7285,7 @@
     "origin": [["src/views/members/index.tsx", 330]],
     "translation": "Unbegrenzte Plätze"
   },
-  "Ws+3X+": {
+  "Ws-3X-": {
     "message": "Unlimited seats and advanced features for growing teams.",
     "placeholders": {},
     "comments": [],
@@ -7441,7 +7441,7 @@
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 31]],
     "translation": "URL darf 2048 Zeichen nicht überschreiten"
   },
-  "i5rE2/": {
+  "i5rE2_": {
     "message": "URL cannot exceed 64 characters",
     "placeholders": {},
     "comments": [],
@@ -7541,7 +7541,7 @@
     "origin": [["src/views/public/board/index.tsx", 180]],
     "translation": "Workspace anzeigen"
   },
-  "2q/Q7x": {
+  "2q_Q7x": {
     "message": "Visibility",
     "placeholders": {},
     "comments": [],
@@ -7555,7 +7555,7 @@
     "origin": [["src/views/home/components/Faqs.tsx", 94]],
     "translation": "Wir verwenden die <0>AGPL-3.0-Lizenz</0>."
   },
-  "+EkBs0": {
+  "-EkBs0": {
     "message": "We couldn't update your preferences. Please try again.",
     "placeholders": {},
     "comments": [],
@@ -7579,7 +7579,7 @@
     "origin": [["src/views/home/components/Features.tsx", 152]],
     "translation": "Wir fangen gerade erst an. "
   },
-  "nB44E/": {
+  "nB44E_": {
     "message": "We've sent a password reset link to {emailSentTo}.",
     "placeholders": {
       "emailSentTo": ["emailSentTo"]
@@ -7595,7 +7595,7 @@
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 121]],
     "translation": "Webhook erstellt"
   },
-  "GdWB+V": {
+  "GdWB-V": {
     "message": "Webhook created successfully",
     "placeholders": {},
     "comments": [],
@@ -7627,7 +7627,7 @@
     "origin": [["src/views/settings/components/NewWebhookModal.tsx", 26]],
     "translation": "Webhook-Name darf 255 Zeichen nicht überschreiten"
   },
-  "U2+rn0": {
+  "U2-rn0": {
     "message": "Webhook name is required",
     "placeholders": {},
     "comments": [],
@@ -7703,7 +7703,7 @@
     "origin": [["src/views/home/components/Faqs.tsx", 91]],
     "translation": "Welche Lizenz verwenden Sie?"
   },
-  "H5G+qG": {
+  "H5G-qG": {
     "message": "What's the difference between Kan and Trello?",
     "placeholders": {},
     "comments": [],
@@ -7763,7 +7763,7 @@
     ],
     "translation": "Workspace-Beschreibung"
   },
-  "Ax/hYa": {
+  "Ax_hYa": {
     "message": "Workspace description cannot exceed 280 characters",
     "placeholders": {},
     "comments": [],
@@ -7883,7 +7883,7 @@
     ],
     "translation": "Workspace-URL"
   },
-  "DSGzV+": {
+  "DSGzV-": {
     "message": "Workspace username",
     "placeholders": {},
     "comments": [],
@@ -7892,7 +7892,7 @@
     ],
     "translation": "Workspace-Benutzername"
   },
-  "/8pTF/": {
+  "_8pTF_": {
     "message": "workspace-url",
     "placeholders": {},
     "comments": [],
@@ -7937,7 +7937,7 @@
     "origin": [["src/views/onboarding/workspace-details/index.tsx", 216]],
     "translation": "Sie können diese später jederzeit in den Einstellungen ändern."
   },
-  "aelko+": {
+  "aelko-": {
     "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
     "placeholders": {},
     "comments": [],
@@ -7988,7 +7988,7 @@
     ],
     "translation": "Sie haben keine Berechtigung"
   },
-  "p/hk9N": {
+  "p_hk9N": {
     "message": "You have been logged in successfully.",
     "placeholders": {},
     "comments": [],
@@ -8087,7 +8087,7 @@
     "origin": [["src/views/onboarding/select-plan/index.tsx", 272]],
     "translation": "Ihr Avatar"
   },
-  "evg7+A": {
+  "evg7-A": {
     "message": "Your boards have been imported.",
     "placeholders": {},
     "comments": [],
@@ -8101,7 +8101,7 @@
     "origin": [["src/views/settings/components/UpdateDisplayNameForm.tsx", 45]],
     "translation": "Ihr Anzeigename wurde aktualisiert."
   },
-  "tca56/": {
+  "tca56_": {
     "message": "Your file has been uploaded successfully.",
     "placeholders": {},
     "comments": [],
@@ -8136,7 +8136,7 @@
     "origin": [["src/components/Dashboard.tsx", 113]],
     "translation": "Ihre Lizenz wurde erfolgreich aktiviert."
   },
-  "+A6Wuq": {
+  "-A6Wuq": {
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
@@ -8168,14 +8168,14 @@
     ],
     "translation": "Ihr Passwort wurde festgelegt."
   },
-  "/tOdd2": {
+  "_tOdd2": {
     "message": "Your profile image has been updated.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/settings/components/Avatar.tsx", 187]],
     "translation": "Ihr Profilbild wurde aktualisiert."
   },
-  "+jbXzb": {
+  "-jbXzb": {
     "message": "Your projects have been imported.",
     "placeholders": {},
     "comments": [],

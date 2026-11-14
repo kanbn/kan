@@ -23,7 +23,7 @@
     ],
     "translation": ", eller se vores"
   },
-  "J/hVSQ": {
+  "J_hVSQ": {
     "message": "{0}",
     "placeholders": {
       "0": [
@@ -97,7 +97,7 @@
     ],
     "translation": ""
   },
-  "mU+M00": {
+  "mU-M00": {
     "message": "{0} has been added to your favorites.",
     "placeholders": {
       "0": [
@@ -209,7 +209,7 @@
     ],
     "translation": "{boardCount, plural, one {Importér tavle (1)} other {Importér tavler ({boardCount})}}"
   },
-  "yndBF+": {
+  "yndBF-": {
     "message": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}",
     "placeholders": {
       "projectCount": [
@@ -238,7 +238,7 @@
     "translation": "/måned",
     "obsolete": true
   },
-  "h/eDNV": {
+  "h_eDNV": {
     "message": "+ {overflowCount} more",
     "placeholders": {
       "overflowCount": [
@@ -370,7 +370,7 @@
     ],
     "translation": "404 - Siden blev ikke fundet | kan.bn"
   },
-  "/rn4RE": {
+  "_rn4RE": {
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
     "placeholders": {},
     "comments": [],
@@ -562,7 +562,7 @@
     ],
     "translation": ""
   },
-  "sFY+gw": {
+  "sFY-gw": {
     "message": "Add card",
     "placeholders": {},
     "comments": [],
@@ -622,7 +622,7 @@
     ],
     "translation": "Tilføj kommentar... (skriv '/' for at åbne kommandoer eller '@' for at nævne)"
   },
-  "gL/7jw": {
+  "gL_7jw": {
     "message": "Add description... (type '/' to open commands or '@' to mention)",
     "placeholders": {},
     "comments": [],
@@ -698,7 +698,7 @@
     ],
     "translation": "Føj til favoritter"
   },
-  "cWXW+7": {
+  "cWXW-7": {
     "message": "Add webhook",
     "placeholders": {},
     "comments": [],
@@ -753,7 +753,7 @@
     ],
     "translation": "tilføjede et punkt på tjeklisten"
   },
-  "T21jY/": {
+  "T21jY_": {
     "message": "added a label to the card",
     "placeholders": {},
     "comments": [],
@@ -884,7 +884,7 @@
     ],
     "translation": "Tilføjelse af et nyt medlem koster yderligere {price} ({billingType}) pr. plads."
   },
-  "D7/JvJ": {
+  "D7_JvJ": {
     "message": "Adjust the square crop to fit your avatar.",
     "placeholders": {},
     "comments": [],
@@ -944,7 +944,7 @@
     ],
     "translation": "Administratorroller"
   },
-  "Kec+/t": {
+  "Kec-_t": {
     "message": "Advanced admin controls",
     "placeholders": {},
     "comments": [],
@@ -956,7 +956,7 @@
     ],
     "translation": "Avancerede administratorkontroller"
   },
-  "/jd3aj": {
+  "_jd3aj": {
     "message": "Advanced admin roles",
     "placeholders": {},
     "comments": [],
@@ -1029,7 +1029,7 @@
     ],
     "translation": "Alle systemer fungerer normalt"
   },
-  "EII/X8": {
+  "EII_X8": {
     "message": "All Teams features +",
     "placeholders": {},
     "comments": [],
@@ -1069,7 +1069,7 @@
     ],
     "translation": "Har du allerede en konto? <0><1>Log ind</1></0>"
   },
-  "j1+HPc": {
+  "j1-HPc": {
     "message": "An error occurred while connecting your GitHub account.",
     "placeholders": {},
     "comments": [],
@@ -1217,7 +1217,7 @@
     ],
     "translation": "API-nøgler"
   },
-  "j2+d/o": {
+  "j2-d_o": {
     "message": "API Reference",
     "placeholders": {},
     "comments": [],
@@ -1241,7 +1241,7 @@
     ],
     "translation": "Ansøgere"
   },
-  "yb/fjw": {
+  "yb_fjw": {
     "message": "Approval",
     "placeholders": {},
     "comments": [],
@@ -1253,7 +1253,7 @@
     ],
     "translation": "Godkendelse"
   },
-  "aKJHG+": {
+  "aKJHG-": {
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
@@ -1277,7 +1277,7 @@
     ],
     "translation": "Arkiveret"
   },
-  "T5/ohn": {
+  "T5_ohn": {
     "message": "Archived lists and cards aren't imported.",
     "placeholders": {},
     "comments": [],
@@ -1401,7 +1401,7 @@
     ],
     "translation": "Er du sikker på, at du vil slette denne etiket?"
   },
-  "74F7N/": {
+  "74F7N_": {
     "message": "Are you sure you want to delete your account?",
     "placeholders": {},
     "comments": [],
@@ -1429,7 +1429,7 @@
     ],
     "translation": ""
   },
-  "PyYD/v": {
+  "PyYD_v": {
     "message": "assigned <0>{0}</0> to the card",
     "placeholders": {
       "0": [
@@ -1457,7 +1457,7 @@
     ],
     "translation": "Ansvarlige"
   },
-  "N7m8E+": {
+  "N7m8E-": {
     "message": "Attach files",
     "placeholders": {},
     "comments": [],
@@ -1549,7 +1549,7 @@
     ],
     "translation": "Grundlæggende roadmap"
   },
-  "/XCg57": {
+  "_XCg57": {
     "message": "Best for growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
@@ -1585,7 +1585,7 @@
     ],
     "translation": "Bedst til store organisationer med avancerede behov"
   },
-  "UoSI+i": {
+  "UoSI-i": {
     "message": "Best for small and growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
@@ -1598,7 +1598,7 @@
     "translation": "Bedst til små og voksende teams, der har brug for samarbejde",
     "obsolete": true
   },
-  "zt/6cS": {
+  "zt_6cS": {
     "message": "Best for small teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
@@ -1611,7 +1611,7 @@
     "translation": "Bedst til små teams, der vil samarbejde og komme hurtigere frem sammen.",
     "obsolete": true
   },
-  "qaS+1/": {
+  "qaS-1_": {
     "message": "Best for teams that want to scale without limits",
     "placeholders": {},
     "comments": [],
@@ -1636,7 +1636,7 @@
     ],
     "translation": ""
   },
-  "ARvBT/": {
+  "ARvBT_": {
     "message": "billed annually",
     "placeholders": {},
     "comments": [],
@@ -1648,7 +1648,7 @@
     ],
     "translation": "faktureres årligt"
   },
-  "+VoTOr": {
+  "-VoTOr": {
     "message": "billed monthly",
     "placeholders": {},
     "comments": [],
@@ -1660,7 +1660,7 @@
     ],
     "translation": "faktureres månedligt"
   },
-  "R+w/Va": {
+  "R-w_Va": {
     "message": "Billing",
     "placeholders": {},
     "comments": [],
@@ -1869,7 +1869,7 @@
     ],
     "translation": "Tavlen blev ikke fundet"
   },
-  "Mu1Zy/": {
+  "Mu1Zy_": {
     "message": "Board options",
     "placeholders": {},
     "comments": [],
@@ -1929,7 +1929,7 @@
     ],
     "translation": "Tavlens URL må højst være 60 tegn"
   },
-  "8+BY11": {
+  "8-BY11": {
     "message": "Board URL copied to clipboard",
     "placeholders": {},
     "comments": [],
@@ -1998,7 +1998,7 @@
     ],
     "translation": "Tavlens synlighed er opdateret"
   },
-  "8TveY+": {
+  "8TveY-": {
     "message": "Boards",
     "placeholders": {},
     "comments": [],
@@ -2062,7 +2062,7 @@
     ],
     "translation": "Fejl"
   },
-  "/asTmx": {
+  "_asTmx": {
     "message": "Bug Report",
     "placeholders": {},
     "comments": [],
@@ -2178,7 +2178,7 @@
     ],
     "translation": "Kan slette tavler"
   },
-  "jNuzV/": {
+  "jNuzV_": {
     "message": "Can delete cards",
     "placeholders": {},
     "comments": [],
@@ -2258,7 +2258,7 @@
     ],
     "translation": "Kan redigere tavler"
   },
-  "I+AROe": {
+  "I-AROe": {
     "message": "Can edit cards",
     "placeholders": {},
     "comments": [],
@@ -2322,7 +2322,7 @@
     ],
     "translation": "Kan redigere medlemsroller og rettigheder"
   },
-  "iLbjv+": {
+  "iLbjv-": {
     "message": "Can edit workspace",
     "placeholders": {},
     "comments": [],
@@ -2566,7 +2566,7 @@
     ],
     "translation": "Annuller"
   },
-  "kryGs+": {
+  "kryGs-": {
     "message": "Card",
     "placeholders": {},
     "comments": [],
@@ -2738,7 +2738,7 @@
     ],
     "translation": "Skift dine sprogindstillinger."
   },
-  "gZxH/p": {
+  "gZxH_p": {
     "message": "changed the due date to <0>{formattedDate}</0>",
     "placeholders": {
       "formattedDate": [
@@ -3074,7 +3074,7 @@
     ],
     "translation": "Fuld kontrol og ejerskab:"
   },
-  "Lt+ZP3": {
+  "Lt-ZP3": {
     "message": "completed a checklist item",
     "placeholders": {},
     "comments": [],
@@ -3127,7 +3127,7 @@
     ],
     "translation": "Konfigurer webhooks til at modtage notifikationer, når kort oprettes, opdateres, flyttes eller slettes."
   },
-  "/f3t6v": {
+  "_f3t6v": {
     "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
     "placeholders": {},
     "comments": [],
@@ -3235,7 +3235,7 @@
     ],
     "translation": "Forbind din Trello-konto for at importere tavler."
   },
-  "jfC/xh": {
+  "jfC_xh": {
     "message": "Contact",
     "placeholders": {},
     "comments": [],
@@ -3339,7 +3339,7 @@
     ],
     "translation": "Fortsæt med {0}"
   },
-  "va/3u1": {
+  "va_3u1": {
     "message": "Control who can view and edit your boards.",
     "placeholders": {},
     "comments": [],
@@ -3611,7 +3611,7 @@
     ],
     "translation": "Opret ny nøgle"
   },
-  "0+0/3e": {
+  "0-0_3e": {
     "message": "Create new label",
     "placeholders": {},
     "comments": [],
@@ -3627,7 +3627,7 @@
     ],
     "translation": "Opret ny etiket"
   },
-  "aWlSc/": {
+  "aWlSc_": {
     "message": "Create new list",
     "placeholders": {},
     "comments": [],
@@ -3683,7 +3683,7 @@
     ],
     "translation": "Opret arbejdsområde"
   },
-  "d+F6q9": {
+  "d-F6q9": {
     "message": "Created",
     "placeholders": {},
     "comments": [],
@@ -3828,7 +3828,7 @@
     ],
     "translation": "Brugerdefineret SLA"
   },
-  "7RpHg/": {
+  "7RpHg_": {
     "message": "Custom username",
     "placeholders": {},
     "comments": [],
@@ -3894,7 +3894,7 @@
     ],
     "translation": "Brugerdefineret brugernavn til arbejdsområde"
   },
-  "n+xLOH": {
+  "n-xLOH": {
     "message": "Customer Support",
     "placeholders": {},
     "comments": [],
@@ -4018,7 +4018,7 @@
     ],
     "translation": "Slet konto"
   },
-  "tmpW+w": {
+  "tmpW-w": {
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
@@ -4126,7 +4126,7 @@
     ],
     "translation": "Slet arbejdsområde"
   },
-  "mTGd3+": {
+  "mTGd3-": {
     "message": "deleted a checklist",
     "placeholders": {},
     "comments": [],
@@ -4194,7 +4194,7 @@
     ],
     "translation": "Design"
   },
-  "Uf+1DF": {
+  "Uf-1DF": {
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
@@ -4342,7 +4342,7 @@
     ],
     "translation": "Dokumentation"
   },
-  "TvY/XA": {
+  "TvY_XA": {
     "message": "Documentation",
     "placeholders": {},
     "comments": [],
@@ -4498,7 +4498,7 @@
     ],
     "translation": "Forfalder i dag"
   },
-  "zxKs+y": {
+  "zxKs-y": {
     "message": "Due tomorrow",
     "placeholders": {},
     "comments": [],
@@ -4674,7 +4674,7 @@
     ],
     "translation": "Redigerer"
   },
-  "b/LfJo": {
+  "b_LfJo": {
     "message": "email",
     "placeholders": {},
     "comments": [],
@@ -4762,7 +4762,7 @@
     ],
     "translation": "Udvikling"
   },
-  "0+ewPp": {
+  "0-ewPp": {
     "message": "Enhancement",
     "placeholders": {},
     "comments": [],
@@ -4858,7 +4858,7 @@
     ],
     "translation": "Indtast din e-mailadresse"
   },
-  "n9V+ps": {
+  "n9V-ps": {
     "message": "Enter your name",
     "placeholders": {},
     "comments": [],
@@ -4926,7 +4926,7 @@
     ],
     "translation": "Fejl"
   },
-  "55xJ/O": {
+  "55xJ_O": {
     "message": "Error Changing Password",
     "placeholders": {},
     "comments": [],
@@ -4986,7 +4986,7 @@
     ],
     "translation": "Fejl ved sletning af konto"
   },
-  "q+lt9D": {
+  "q-lt9D": {
     "message": "Error deleting label",
     "placeholders": {},
     "comments": [],
@@ -5010,7 +5010,7 @@
     ],
     "translation": "Fejl ved sletning af arbejdsområde"
   },
-  "gQ/02p": {
+  "gQ_02p": {
     "message": "Error disconnecting GitHub",
     "placeholders": {},
     "comments": [],
@@ -5034,7 +5034,7 @@
     ],
     "translation": "Fejl ved afbrydelse af Trello"
   },
-  "rarRW/": {
+  "rarRW_": {
     "message": "Error inviting member",
     "placeholders": {},
     "comments": [],
@@ -5098,7 +5098,7 @@
     ],
     "translation": "Fejl ved opdatering af navn på arbejdsområde"
   },
-  "x0kMO/": {
+  "x0kMO_": {
     "message": "Error updating workspace URL",
     "placeholders": {},
     "comments": [],
@@ -5123,7 +5123,7 @@
     "translation": "Fejl ved opgradering af abonnement",
     "obsolete": true
   },
-  "CYWHT+": {
+  "CYWHT-": {
     "message": "Error uploading profile image",
     "placeholders": {},
     "comments": [],
@@ -5155,7 +5155,7 @@
     ],
     "translation": "Hændelser"
   },
-  "6ZIzI/": {
+  "6ZIzI_": {
     "message": "Every active workspace member is already on this board.",
     "placeholders": {},
     "comments": [],
@@ -5191,7 +5191,7 @@
     ],
     "translation": "Alt, hvad du behøver, gratis for altid. Ubegrænsede tavler, ubegrænsede lister og ubegrænsede kort. Opgrader når som helst."
   },
-  "t+R8+P": {
+  "t-R8-P": {
     "message": "Execution",
     "placeholders": {},
     "comments": [],
@@ -5275,7 +5275,7 @@
     ],
     "translation": "Webhooken kunne ikke slettes"
   },
-  "W8oT+L": {
+  "W8oT-L": {
     "message": "Failed to fetch video information",
     "placeholders": {},
     "comments": [],
@@ -5331,7 +5331,7 @@
     ],
     "translation": "Webhooken kunne ikke opdateres"
   },
-  "ZL1A+p": {
+  "ZL1A-p": {
     "message": "Failed to upload attachment. Please try again.",
     "placeholders": {},
     "comments": [],
@@ -5343,7 +5343,7 @@
     ],
     "translation": "Den vedhæftede fil kunne ikke uploades. Prøv igen."
   },
-  "/lDBHm": {
+  "_lDBHm": {
     "message": "FAQ",
     "placeholders": {},
     "comments": [],
@@ -5503,7 +5503,7 @@
     ],
     "translation": "Skriftstørrelse"
   },
-  "+3TYXa": {
+  "-3TYXa": {
     "message": "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.",
     "placeholders": {},
     "comments": [],
@@ -5607,7 +5607,7 @@
     ],
     "translation": "Gratis for alle"
   },
-  "W/nQk1": {
+  "W_nQk1": {
     "message": "Free Plan",
     "placeholders": {},
     "comments": [],
@@ -5651,7 +5651,7 @@
     ],
     "translation": "Fuld API-adgang"
   },
-  "KiVc+q": {
+  "KiVc-q": {
     "message": "Full-time",
     "placeholders": {},
     "comments": [],
@@ -5771,7 +5771,7 @@
     ],
     "translation": "Kom gratis i gang i dag"
   },
-  "+OhFss": {
+  "-OhFss": {
     "message": "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.",
     "placeholders": {},
     "comments": [],
@@ -5835,7 +5835,7 @@
     ],
     "translation": "GitHub forbundet"
   },
-  "/bBVaD": {
+  "_bBVaD": {
     "message": "GitHub disconnected",
     "placeholders": {},
     "comments": [],
@@ -5847,7 +5847,7 @@
     ],
     "translation": "GitHub afbrudt"
   },
-  "7eMo+U": {
+  "7eMo-U": {
     "message": "Go Home",
     "placeholders": {},
     "comments": [],
@@ -5927,7 +5927,7 @@
     ],
     "translation": "Gå til indstillinger"
   },
-  "csFbe+": {
+  "csFbe-": {
     "message": "Go to templates",
     "placeholders": {},
     "comments": [],
@@ -6031,7 +6031,7 @@
     ],
     "translation": ""
   },
-  "CB/NpV": {
+  "CB_NpV": {
     "message": "High Priority",
     "placeholders": {},
     "comments": [],
@@ -6103,7 +6103,7 @@
     ],
     "translation": "Hvordan importerer jeg mine Trello-tavler?"
   },
-  "nol/Fb": {
+  "nol_Fb": {
     "message": "How do I invite team members?",
     "placeholders": {},
     "comments": [],
@@ -6163,7 +6163,7 @@
     ],
     "translation": "Jeg bekræfter, at alle mine kontodata slettes permanent, og ønsker at fortsætte."
   },
-  "2Py5S/": {
+  "2Py5S_": {
     "message": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed.",
     "placeholders": {},
     "comments": [],
@@ -6199,7 +6199,7 @@
     ],
     "translation": "Idéer"
   },
-  "F/vB2g": {
+  "F_vB2g": {
     "message": "Ideas to improve this page...",
     "placeholders": {},
     "comments": [],
@@ -6271,7 +6271,7 @@
     ],
     "translation": "Importér dine Trello-tavler, og kom hurtigt i gang."
   },
-  "c/IAuR": {
+  "c_IAuR": {
     "message": "Important",
     "placeholders": {},
     "comments": [],
@@ -6283,7 +6283,7 @@
     ],
     "translation": "Vigtigt"
   },
-  "xMn+V9": {
+  "xMn-V9": {
     "message": "Importing from Trello",
     "placeholders": {},
     "comments": [],
@@ -6499,7 +6499,7 @@
     ],
     "translation": "Invitationslinks"
   },
-  "25mvI+": {
+  "25mvI-": {
     "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
     "placeholders": {},
     "comments": [],
@@ -6511,7 +6511,7 @@
     ],
     "translation": "Invitationslinks kræver et Team- eller Pro-abonnement. Opgrader dit arbejdsområde."
   },
-  "+djOzj": {
+  "-djOzj": {
     "message": "Invite member",
     "placeholders": {},
     "comments": [],
@@ -6620,7 +6620,7 @@
     ],
     "translation": "Kanban er bedre med et team. Perfekt til små og voksende teams, der vil samarbejde."
   },
-  "Xjj/kS": {
+  "Xjj_kS": {
     "message": "Kanban reimagined",
     "placeholders": {},
     "comments": [],
@@ -6688,7 +6688,7 @@
     ],
     "translation": "Etiketter"
   },
-  "AZI/wb": {
+  "AZI_wb": {
     "message": "Labels & filters",
     "placeholders": {},
     "comments": [],
@@ -6700,7 +6700,7 @@
     ],
     "translation": "Etiketter og filtre"
   },
-  "+nvZ6j": {
+  "-nvZ6j": {
     "message": "Labels & Filters",
     "placeholders": {},
     "comments": [],
@@ -6724,7 +6724,7 @@
     ],
     "translation": "Sprog"
   },
-  "k7rCa/": {
+  "k7rCa_": {
     "message": "Large",
     "placeholders": {},
     "comments": [],
@@ -6845,7 +6845,7 @@
     ],
     "translation": "Lys"
   },
-  "TCt/8K": {
+  "TCt_8K": {
     "message": "Limited API access",
     "placeholders": {},
     "comments": [],
@@ -6917,7 +6917,7 @@
     ],
     "translation": "Listenavn"
   },
-  "jf++dj": {
+  "jf--dj": {
     "message": "List options",
     "placeholders": {},
     "comments": [],
@@ -6985,7 +6985,7 @@
     ],
     "translation": "Indlæser..."
   },
-  "N/bcWA": {
+  "N_bcWA": {
     "message": "Login | kan.bn",
     "placeholders": {},
     "comments": [],
@@ -7113,7 +7113,7 @@
     ],
     "translation": "markerede tjeklistepunktet <0>{0}</0> som ikke fuldført"
   },
-  "vo2a+a": {
+  "vo2a-a": {
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
@@ -7137,7 +7137,7 @@
     ],
     "translation": "Mellem"
   },
-  "W/Elkg": {
+  "W_Elkg": {
     "message": "Medium Priority",
     "placeholders": {},
     "comments": [],
@@ -7273,7 +7273,7 @@
     ],
     "translation": "Medlemmer | {0}"
   },
-  "/bZzdR": {
+  "_bZzdR": {
     "message": "Mentions",
     "placeholders": {},
     "comments": [],
@@ -7297,7 +7297,7 @@
     ],
     "translation": "Mandag"
   },
-  "+8Nek/": {
+  "-8Nek_": {
     "message": "Monthly",
     "placeholders": {},
     "comments": [],
@@ -7329,7 +7329,7 @@
     ],
     "translation": "månedlig fakturering"
   },
-  "sZ/WDz": {
+  "sZ_WDz": {
     "message": "Move board",
     "placeholders": {},
     "comments": [],
@@ -7365,7 +7365,7 @@
     ],
     "translation": "Flyt til en anden liste"
   },
-  "J4+OTA": {
+  "J4-OTA": {
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
@@ -7604,7 +7604,7 @@
     ],
     "translation": "Ny liste"
   },
-  "+MdEsf": {
+  "-MdEsf": {
     "message": "New password is required",
     "placeholders": {},
     "comments": [],
@@ -7640,7 +7640,7 @@
     ],
     "translation": "Ny skabelon"
   },
-  "RJA+sg": {
+  "RJA-sg": {
     "message": "New Ticket",
     "placeholders": {},
     "comments": [],
@@ -7712,7 +7712,7 @@
     ],
     "translation": "Næste trin"
   },
-  "/glL9Q": {
+  "_glL9Q": {
     "message": "No {0}",
     "placeholders": {
       "0": [
@@ -8008,7 +8008,7 @@
     ],
     "translation": "Åbn kommandomenu"
   },
-  "cFQEU/": {
+  "cFQEU_": {
     "message": "Open keyboard shortcuts",
     "placeholders": {},
     "comments": [],
@@ -8020,7 +8020,7 @@
     ],
     "translation": "Åbn tastaturgenveje"
   },
-  "v+Wp++": {
+  "v-Wp--": {
     "message": "Open source",
     "placeholders": {},
     "comments": [],
@@ -8032,7 +8032,7 @@
     ],
     "translation": "Open source"
   },
-  "qfUS/w": {
+  "qfUS_w": {
     "message": "Open Source Friends",
     "placeholders": {},
     "comments": [],
@@ -8056,7 +8056,7 @@
     ],
     "translation": "eller"
   },
-  "Uci+Ph": {
+  "Uci-Ph": {
     "message": "Ordered List",
     "placeholders": {},
     "comments": [],
@@ -8420,7 +8420,7 @@
     ],
     "translation": "Personligt projekt"
   },
-  "Oi+J+N": {
+  "Oi-J-N": {
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
@@ -8864,7 +8864,7 @@
     ],
     "translation": "Placering på listen (0 = først, lad feltet være tomt for sidst)"
   },
-  "1xwZj/": {
+  "1xwZj_": {
     "message": "Previous month",
     "placeholders": {},
     "comments": [],
@@ -8973,7 +8973,7 @@
     "translation": "Pro",
     "obsolete": true
   },
-  "oyRjD/": {
+  "oyRjD_": {
     "message": "Pro Plan",
     "placeholders": {},
     "comments": [],
@@ -9061,7 +9061,7 @@
     ],
     "translation": "Publicering"
   },
-  "bfgr/e": {
+  "bfgr_e": {
     "message": "Question",
     "placeholders": {},
     "comments": [],
@@ -9149,7 +9149,7 @@
     ],
     "translation": "Fjernarbejde"
   },
-  "t/YqKh": {
+  "t_YqKh": {
     "message": "Remove",
     "placeholders": {},
     "comments": [],
@@ -9189,7 +9189,7 @@
     ],
     "translation": ""
   },
-  "T/pF0Z": {
+  "T_pF0Z": {
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
@@ -9256,7 +9256,7 @@
     ],
     "translation": "fjernede et medlem fra kortet"
   },
-  "KEim/+": {
+  "KEim_-": {
     "message": "removed an attachment",
     "placeholders": {},
     "comments": [],
@@ -9448,7 +9448,7 @@
     ],
     "translation": "Løsning"
   },
-  "s+MGs7": {
+  "s-MGs7": {
     "message": "Resources",
     "placeholders": {},
     "comments": [],
@@ -9472,7 +9472,7 @@
     ],
     "translation": "Gennemgang"
   },
-  "/gaSVU": {
+  "_gaSVU": {
     "message": "Roadmap",
     "placeholders": {},
     "comments": [],
@@ -9541,7 +9541,7 @@
     "translation": "Roller og rettigheder",
     "obsolete": true
   },
-  "vAR/I8": {
+  "vAR_I8": {
     "message": "Run on your own infrastructure",
     "placeholders": {},
     "comments": [],
@@ -9565,7 +9565,7 @@
     ],
     "translation": "SAML SSO"
   },
-  "+5kO8P": {
+  "-5kO8P": {
     "message": "Saturday",
     "placeholders": {},
     "comments": [],
@@ -9621,7 +9621,7 @@
     ],
     "translation": "Spar tid med genanvendelige tavleskabeloner."
   },
-  "cOh+MI": {
+  "cOh-MI": {
     "message": "Screening",
     "placeholders": {},
     "comments": [],
@@ -9685,7 +9685,7 @@
     ],
     "translation": "pladser"
   },
-  "e1v+J3": {
+  "e1v-J3": {
     "message": "Secret (optional)",
     "placeholders": {},
     "comments": [],
@@ -9697,7 +9697,7 @@
     ],
     "translation": "Hemmelighed (valgfrit)"
   },
-  "OkTY4+": {
+  "OkTY4-": {
     "message": "Secret cannot exceed 512 characters",
     "placeholders": {},
     "comments": [],
@@ -9721,7 +9721,7 @@
     ],
     "translation": "Sikkerhed"
   },
-  "iL+dpm": {
+  "iL-dpm": {
     "message": "See all your cards across the month, then drag and drop to reschedule. Available on paid plans.",
     "placeholders": {},
     "comments": [],
@@ -9797,7 +9797,7 @@
     ],
     "translation": "Vælg alle"
   },
-  "o4e/70": {
+  "o4e_70": {
     "message": "Select at least one event",
     "placeholders": {},
     "comments": [],
@@ -9857,7 +9857,7 @@
     ],
     "translation": "tildelte sig selv til kortet"
   },
-  "f2zPy/": {
+  "f2zPy_": {
     "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
     "placeholders": {
       "CREDENTIALS_ENV_HINT": [
@@ -9921,7 +9921,7 @@
     ],
     "translation": "Senior"
   },
-  "+DlsTY": {
+  "-DlsTY": {
     "message": "Set a new password",
     "placeholders": {},
     "comments": [],
@@ -10041,7 +10041,7 @@
     ],
     "translation": "Indstillinger | Konto"
   },
-  "iy1wb+": {
+  "iy1wb-": {
     "message": "Settings | API",
     "placeholders": {},
     "comments": [],
@@ -10077,7 +10077,7 @@
     ],
     "translation": "Indstillinger | Integrationer"
   },
-  "F/FPk/": {
+  "F_FPk_": {
     "message": "Settings | Permissions",
     "placeholders": {},
     "comments": [],
@@ -10089,7 +10089,7 @@
     ],
     "translation": "Indstillinger | Rettigheder"
   },
-  "+h2faV": {
+  "-h2faV": {
     "message": "Settings | Webhooks",
     "placeholders": {},
     "comments": [],
@@ -10101,7 +10101,7 @@
     ],
     "translation": "Indstillinger | Webhooks"
   },
-  "Ci/KUX": {
+  "Ci_KUX": {
     "message": "Settings | Workspace",
     "placeholders": {},
     "comments": [],
@@ -10137,7 +10137,7 @@
     ],
     "translation": ""
   },
-  "EL+7I2": {
+  "EL-7I2": {
     "message": "Show oldest activity first",
     "placeholders": {},
     "comments": [],
@@ -10257,7 +10257,7 @@
     ],
     "translation": "Oprettelse af konto deaktiveret"
   },
-  "s6iE/c": {
+  "s6iE_c": {
     "message": "Sign up is currently disabled. Please try again later.",
     "placeholders": {},
     "comments": [],
@@ -10297,7 +10297,7 @@
     ],
     "translation": "Enkle priser"
   },
-  "/ty94x": {
+  "_ty94x": {
     "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
@@ -10345,7 +10345,7 @@
     ],
     "translation": "Lille"
   },
-  "++rVAm": {
+  "--rVAm": {
     "message": "Social Media",
     "placeholders": {},
     "comments": [],
@@ -10405,7 +10405,7 @@
     ],
     "translation": ""
   },
-  "J9+zIR": {
+  "J9-zIR": {
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
     "comments": [],
@@ -10417,7 +10417,7 @@
     ],
     "translation": "Noget gik galt under aktiveringen. Prøv igen."
   },
-  "r+dxEH": {
+  "r-dxEH": {
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
@@ -10478,7 +10478,7 @@
     "translation": "Start 14 dages gratis prøveperiode",
     "obsolete": true
   },
-  "4+JaWo": {
+  "4-JaWo": {
     "message": "Start free trial",
     "placeholders": {},
     "comments": [],
@@ -10602,7 +10602,7 @@
     ],
     "translation": "Søndag"
   },
-  "uZg2+w": {
+  "uZg2-w": {
     "message": "Supercharge your workspace for just $29/month. Here's what you'll get:",
     "placeholders": {},
     "comments": [],
@@ -10643,7 +10643,7 @@
     ],
     "translation": "Støt udviklingen af projektet"
   },
-  "D+NlUC": {
+  "D-NlUC": {
     "message": "System",
     "placeholders": {},
     "comments": [],
@@ -10707,7 +10707,7 @@
     ],
     "translation": "Teams"
   },
-  "/K2CvV": {
+  "_K2CvV": {
     "message": "Template",
     "placeholders": {},
     "comments": [],
@@ -10903,7 +10903,7 @@
     ],
     "translation": "Tak for din feedback!"
   },
-  "ssK7k+": {
+  "ssK7k-": {
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
@@ -11026,7 +11026,7 @@
     ],
     "translation": "Medlemmets rettigheder er blevet opdateret."
   },
-  "bfZE+Y": {
+  "bfZE-Y": {
     "message": "The member's role has been updated.",
     "placeholders": {},
     "comments": [],
@@ -11038,7 +11038,7 @@
     ],
     "translation": "Medlemmets rolle er blevet opdateret."
   },
-  "gUX7b+": {
+  "gUX7b-": {
     "message": "The open source <0/> alternative to Trello",
     "placeholders": {},
     "comments": [],
@@ -11166,7 +11166,7 @@
     ],
     "translation": "Denne tavle er privat eller findes ikke"
   },
-  "wY+6Ye": {
+  "wY-6Ye": {
     "message": "This board URL has already been taken",
     "placeholders": {},
     "comments": [],
@@ -11254,7 +11254,7 @@
     ],
     "translation": "Dette fjerner alle brugerdefinerede medlemsrettigheder i arbejdsområdet. Medlemmer vil derefter kun arve rettigheder fra deres roller."
   },
-  "MeO/vH": {
+  "MeO_vH": {
     "message": "This will result in the permanent deletion of all data associated with this workspace.",
     "placeholders": {},
     "comments": [],
@@ -11366,7 +11366,7 @@
     ],
     "translation": "Titel (valgfrit)"
   },
-  "Se/UIp": {
+  "Se_UIp": {
     "message": "To Do",
     "placeholders": {},
     "comments": [],
@@ -11418,7 +11418,7 @@
     ],
     "translation": "Token er påkrævet"
   },
-  "eEQyz+": {
+  "eEQyz-": {
     "message": "Track all card changes with detailed activity history.",
     "placeholders": {},
     "comments": [],
@@ -11486,7 +11486,7 @@
     ],
     "translation": ""
   },
-  "HO+uOC": {
+  "HO-uOC": {
     "message": "Triaging",
     "placeholders": {},
     "comments": [],
@@ -11498,7 +11498,7 @@
     ],
     "translation": "Triagering"
   },
-  "o+JCfN": {
+  "o-JCfN": {
     "message": "Trusted by fast-moving teams<0/>around the world",
     "placeholders": {},
     "comments": [],
@@ -11774,7 +11774,7 @@
     ],
     "translation": "Kunne ikke duplikere kort"
   },
-  "d196/6": {
+  "d196_6": {
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
@@ -12066,7 +12066,7 @@
     ],
     "translation": "Kunne ikke opdatere webhook"
   },
-  "It4/FS": {
+  "It4_FS": {
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
@@ -12242,7 +12242,7 @@
     ],
     "translation": "ubegrænset antal medlemmer"
   },
-  "mx8+1u": {
+  "mx8-1u": {
     "message": "Unlimited members",
     "placeholders": {},
     "comments": [],
@@ -12279,7 +12279,7 @@
     ],
     "translation": "Ubegrænset antal pladser"
   },
-  "Ws+3X+": {
+  "Ws-3X-": {
     "message": "Unlimited seats and advanced features for growing teams.",
     "placeholders": {},
     "comments": [],
@@ -12526,7 +12526,7 @@
     ],
     "translation": "URL må højst være 2048 tegn"
   },
-  "i5rE2/": {
+  "i5rE2_": {
     "message": "URL cannot exceed 64 characters",
     "placeholders": {},
     "comments": [],
@@ -12694,7 +12694,7 @@
     ],
     "translation": "Se arbejdsområde"
   },
-  "2q/Q7x": {
+  "2q_Q7x": {
     "message": "Visibility",
     "placeholders": {},
     "comments": [],
@@ -12746,7 +12746,7 @@
     ],
     "translation": "Vi er kun lige begyndt. "
   },
-  "nB44E/": {
+  "nB44E_": {
     "message": "We've sent a password reset link to {emailSentTo}.",
     "placeholders": {
       "emailSentTo": [
@@ -12774,7 +12774,7 @@
     ],
     "translation": "Webhook oprettet"
   },
-  "GdWB+V": {
+  "GdWB-V": {
     "message": "Webhook created successfully",
     "placeholders": {},
     "comments": [],
@@ -12822,7 +12822,7 @@
     ],
     "translation": "Webhookens navn må højst være 255 tegn"
   },
-  "U2+rn0": {
+  "U2-rn0": {
     "message": "Webhook name is required",
     "placeholders": {},
     "comments": [],
@@ -12950,7 +12950,7 @@
     ],
     "translation": "Hvilken licens bruger I?"
   },
-  "H5G+qG": {
+  "H5G-qG": {
     "message": "What's the difference between Kan and Trello?",
     "placeholders": {},
     "comments": [],
@@ -13038,7 +13038,7 @@
     ],
     "translation": "Beskrivelse af arbejdsområde"
   },
-  "Ax/hYa": {
+  "Ax_hYa": {
     "message": "Workspace description cannot exceed 280 characters",
     "placeholders": {},
     "comments": [],
@@ -13222,7 +13222,7 @@
     ],
     "translation": "URL til arbejdsområde"
   },
-  "DSGzV+": {
+  "DSGzV-": {
     "message": "Workspace username",
     "placeholders": {},
     "comments": [],
@@ -13234,7 +13234,7 @@
     ],
     "translation": "Brugernavn til arbejdsområde"
   },
-  "/8pTF/": {
+  "_8pTF_": {
     "message": "workspace-url",
     "placeholders": {},
     "comments": [],
@@ -13310,7 +13310,7 @@
     ],
     "translation": "Du kan altid ændre dette senere under indstillinger."
   },
-  "aelko+": {
+  "aelko-": {
     "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
     "placeholders": {},
     "comments": [],
@@ -13407,7 +13407,7 @@
     ],
     "translation": "Du har ikke tilladelse"
   },
-  "p/hk9N": {
+  "p_hk9N": {
     "message": "You have been logged in successfully.",
     "placeholders": {},
     "comments": [],
@@ -13543,7 +13543,7 @@
     ],
     "translation": "Din avatar"
   },
-  "evg7+A": {
+  "evg7-A": {
     "message": "Your boards have been imported.",
     "placeholders": {},
     "comments": [],
@@ -13567,7 +13567,7 @@
     ],
     "translation": "Dit viste navn er blevet opdateret."
   },
-  "tca56/": {
+  "tca56_": {
     "message": "Your file has been uploaded successfully.",
     "placeholders": {},
     "comments": [],
@@ -13627,7 +13627,7 @@
     ],
     "translation": "Din licens er blevet aktiveret."
   },
-  "+A6Wuq": {
+  "-A6Wuq": {
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
@@ -13675,7 +13675,7 @@
     ],
     "translation": "Din adgangskode er blevet indstillet."
   },
-  "/tOdd2": {
+  "_tOdd2": {
     "message": "Your profile image has been updated.",
     "placeholders": {},
     "comments": [],
@@ -13687,7 +13687,7 @@
     ],
     "translation": "Dit profilbillede er blevet opdateret."
   },
-  "+jbXzb": {
+  "-jbXzb": {
     "message": "Your projects have been imported.",
     "placeholders": {},
     "comments": [],
