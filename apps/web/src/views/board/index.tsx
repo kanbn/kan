@@ -140,6 +140,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     ? `?returnUrl=${encodeURIComponent(router.asPath)}`
     : "";
 
+  const openNewListForm = useCallback(
+    (publicBoardId: string) => {
+      openModal("NEW_LIST");
+      setSelectedPublicListId(publicBoardId);
+    },
+    [openModal],
+  );
+
   const createListShortcut = useMemo(
     () => ({
       type: "PRESS" as const,
@@ -148,7 +156,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       description: t`Create new list`,
       group: "ACTIONS" as const,
     }),
-    [boardId, canCreateList],
+    [boardId, canCreateList, openNewListForm],
   );
 
   const { tooltipContent: createListShortcutTooltipContent } =
@@ -410,11 +418,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       setValue("name", boardData.name || "");
     }
   }, [isSuccess, boardData, setValue]);
-
-  const openNewListForm = (publicBoardId: string) => {
-    openModal("NEW_LIST");
-    setSelectedPublicListId(publicBoardId);
-  };
 
   const openNewCardForDate = (date: Date) => {
     const targetListPublicId = boardData?.lists[0]?.publicId;

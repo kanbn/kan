@@ -140,6 +140,7 @@ const NewChecklistItemForm = ({
 
   useEffect(() => {
     refocusEditable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- focus once on open
   }, []);
 
   return (
