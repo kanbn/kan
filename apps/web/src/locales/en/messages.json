@@ -389,7 +389,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        42
+        43
       ]
     ],
     "translation": "Account"
@@ -585,7 +585,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        125
+        126
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -891,7 +891,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        253
+        254
       ]
     ],
     "translation": "Adjust the square crop to fit your avatar."
@@ -1148,7 +1148,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        66
+        67
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -1480,7 +1480,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        45
+        46
       ]
     ],
     "translation": "Attachment uploaded"
@@ -1667,7 +1667,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        59
+        60
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
@@ -2541,7 +2541,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        284
+        285
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -3747,7 +3747,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        250
+        251
       ]
     ],
     "translation": "Crop your avatar"
@@ -5182,11 +5182,11 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        69
+        70
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        196
+        197
       ]
     ],
     "translation": "Error uploading profile image"
@@ -5390,7 +5390,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        52
+        53
       ]
     ],
     "translation": "Failed to upload attachment. Please try again."
@@ -6442,7 +6442,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        78
+        79
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -8453,7 +8453,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        54
+        55
       ]
     ],
     "translation": "Permissions"
@@ -8653,7 +8653,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        70
+        71
       ]
     ],
     "translation": "Please select a file to upload."
@@ -8837,7 +8837,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        197
+        198
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -9086,7 +9086,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        186
+        187
       ]
     ],
     "translation": "Profile image updated"
@@ -9670,7 +9670,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        287
+        288
       ]
     ],
     "translation": "Save"
@@ -10098,7 +10098,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        103
+        104
       ],
       [
         "src/components/SideNavigation.tsx",
@@ -12556,7 +12556,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        51
+        52
       ]
     ],
     "translation": "Upload failed"
@@ -13013,7 +13013,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        72
+        73
       ],
       [
         "src/views/settings/WebhookSettings.tsx",
@@ -13101,7 +13101,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        48
+        49
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -13721,7 +13721,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        46
+        47
       ]
     ],
     "translation": "Your file has been uploaded successfully."
@@ -13829,7 +13829,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        187
+        188
       ]
     ],
     "translation": "Your profile image has been updated."

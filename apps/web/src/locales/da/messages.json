@@ -389,7 +389,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        42
+        43
       ]
     ],
     "translation": "Konto"
@@ -585,7 +585,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        125
+        126
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -891,7 +891,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        253
+        254
       ]
     ],
     "translation": "Juster den kvadratiske beskæring, så den passer til din avatar."
@@ -1148,7 +1148,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        66
+        67
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -1480,7 +1480,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        45
+        46
       ]
     ],
     "translation": "Vedhæftet fil uploadet"
@@ -1667,7 +1667,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        59
+        60
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
@@ -2541,7 +2541,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        284
+        285
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -3734,7 +3734,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        250
+        251
       ]
     ],
     "translation": "Beskær din avatar"
@@ -5130,11 +5130,11 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        69
+        70
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        196
+        197
       ]
     ],
     "translation": "Fejl ved upload af profilbillede"
@@ -5338,7 +5338,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        52
+        53
       ]
     ],
     "translation": "Den vedhæftede fil kunne ikke uploades. Prøv igen."
@@ -6390,7 +6390,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        78
+        79
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -8375,7 +8375,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        54
+        55
       ]
     ],
     "translation": "Rettigheder"
@@ -8575,7 +8575,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        70
+        71
       ]
     ],
     "translation": "Vælg en fil, der skal uploades."
@@ -8759,7 +8759,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        197
+        198
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -9008,7 +9008,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        186
+        187
       ]
     ],
     "translation": "Profilbillede opdateret"
@@ -9592,7 +9592,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        287
+        288
       ]
     ],
     "translation": "Gem"
@@ -10020,7 +10020,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        103
+        104
       ],
       [
         "src/components/SideNavigation.tsx",
@@ -12461,7 +12461,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        51
+        52
       ]
     ],
     "translation": "Upload mislykkedes"
@@ -12905,7 +12905,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        72
+        73
       ],
       [
         "src/views/settings/WebhookSettings.tsx",
@@ -12993,7 +12993,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        48
+        49
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -13574,7 +13574,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        46
+        47
       ]
     ],
     "translation": "Din fil er blevet uploadet."
@@ -13682,7 +13682,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        187
+        188
       ]
     ],
     "translation": "Dit profilbillede er blevet opdateret."

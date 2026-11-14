@@ -225,7 +225,7 @@
     "message": "Account",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SettingsLayout.tsx", 42]],
+    "origin": [["src/components/SettingsLayout.tsx", 43]],
     "translation": "Account"
   },
   "TKFUnX": {
@@ -349,7 +349,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/AttachmentUpload.tsx", 125],
+      ["src/views/card/components/AttachmentUpload.tsx", 126],
       ["src/views/card/components/Dropdown.tsx", 126]
     ],
     "translation": "Checklist toevoegen"
@@ -523,7 +523,7 @@
     "message": "Adjust the square crop to fit your avatar.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 253]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 254]],
     "translation": "Pas de vierkante uitsnede aan zodat deze bij je avatar past."
   },
   "U3pytU": {
@@ -680,7 +680,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 66],
+      ["src/components/SettingsLayout.tsx", 67],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 289]
     ],
     "translation": "API"
@@ -889,7 +889,7 @@
     "message": "Attachment uploaded",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 45]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 46]],
     "translation": "Bijlage geüpload"
   },
   "1rWxEw": {
@@ -1001,7 +1001,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 59],
+      ["src/components/SettingsLayout.tsx", 60],
       ["src/views/boards/components/TemplateBoards.tsx", 75],
       ["src/views/settings/BillingSettings.tsx", 91]
     ],
@@ -1513,7 +1513,7 @@
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 81],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
       ["src/views/onboarding/select-plan/index.tsx", 248],
-      ["src/views/settings/components/Avatar.tsx", 284],
+      ["src/views/settings/components/Avatar.tsx", 285],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 202],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
@@ -2232,7 +2232,7 @@
     "message": "Crop your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 250]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 251]],
     "translation": "Bijsnijden van je avatar"
   },
   "MtNNDo": {
@@ -3093,8 +3093,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/Avatar.tsx", 69],
-      ["src/views/settings/components/Avatar.tsx", 196]
+      ["src/views/settings/components/Avatar.tsx", 70],
+      ["src/views/settings/components/Avatar.tsx", 197]
     ],
     "translation": "Fout bij uploaden van profielafbeelding"
   },
@@ -3219,7 +3219,7 @@
     "message": "Failed to upload attachment. Please try again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 52]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 53]],
     "translation": "Bijlage uploaden mislukt. Probeer het opnieuw."
   },
   "_lDBHm": {
@@ -3836,7 +3836,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 78],
+      ["src/components/SettingsLayout.tsx", 79],
       ["src/views/home/components/Features.tsx", 121]
     ],
     "translation": "Integraties"
@@ -5012,7 +5012,7 @@
     "message": "Permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SettingsLayout.tsx", 54]],
+    "origin": [["src/components/SettingsLayout.tsx", 55]],
     "translation": "Toestemmingen"
   },
   "Jgaz7E": {
@@ -5138,7 +5138,7 @@
     "message": "Please select a file to upload.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 70]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 71]],
     "translation": "Selecteer een bestand om te uploaden."
   },
   "tyHiOa": {
@@ -5192,7 +5192,7 @@
       ["src/views/members/index.tsx", 78],
       ["src/views/onboarding/workspace-details/index.tsx", 134],
       ["src/views/onboarding/workspace-details/index.tsx", 184],
-      ["src/views/settings/components/Avatar.tsx", 197],
+      ["src/views/settings/components/Avatar.tsx", 198],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 39],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 54],
       ["src/views/settings/components/UpdateDisplayNameForm.tsx", 58],
@@ -5318,7 +5318,7 @@
     "message": "Profile image updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 186]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 187]],
     "translation": "Profielafbeelding bijgewerkt"
   },
   "4XF0BB": {
@@ -5664,7 +5664,7 @@
     "origin": [
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 182],
       ["src/views/card/components/Comment.tsx", 207],
-      ["src/views/settings/components/Avatar.tsx", 287]
+      ["src/views/settings/components/Avatar.tsx", 288]
     ],
     "translation": "Opslaan"
   },
@@ -5920,7 +5920,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 103],
+      ["src/components/SettingsLayout.tsx", 104],
       ["src/components/SideNavigation.tsx", 138]
     ],
     "translation": "Instellingen"
@@ -7401,7 +7401,7 @@
     "message": "Upload failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 51]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 52]],
     "translation": "Upload mislukt"
   },
   "BBUDfW": {
@@ -7677,7 +7677,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 72],
+      ["src/components/SettingsLayout.tsx", 73],
       ["src/views/settings/WebhookSettings.tsx", 24]
     ],
     "translation": "Webhooks"
@@ -7729,7 +7729,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 48],
+      ["src/components/SettingsLayout.tsx", 49],
       ["src/utils/permission-category-label.ts", 10],
       ["src/views/public/board/index.tsx", 118],
       ["src/views/public/boards/index.tsx", 78]
@@ -8105,7 +8105,7 @@
     "message": "Your file has been uploaded successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 46]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 47]],
     "translation": "Je bestand is succesvol geüpload."
   },
   "HcT8J4": {
@@ -8172,7 +8172,7 @@
     "message": "Your profile image has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 187]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 188]],
     "translation": "Je profielafbeelding is bijgewerkt."
   },
   "-jbXzb": {
