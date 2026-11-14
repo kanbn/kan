@@ -96,7 +96,7 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden">
-      <div className="h-full max-h-[calc(100vdh-3rem)] overflow-y-auto md:max-h-[calc(100vdh-4rem)]">
+      <div className="h-full overflow-y-auto">
         <div className="m-auto max-w-[1100px] px-5 py-6 md:px-28 md:py-12">
           <div className="mb-8 flex w-full justify-between">
             <h1 className="font-bold tracking-tight text-neutral-900 sm:text-[1.2rem] dark:text-dark-1000">
