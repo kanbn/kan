@@ -84,7 +84,7 @@ export default function Checklists({
             return { ...cl, items };
           });
 
-          return { ...old, checklists: updatedChecklists } as typeof old;
+          return { ...old, checklists: updatedChecklists };
         });
 
         return { previous };

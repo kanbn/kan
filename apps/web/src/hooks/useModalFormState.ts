@@ -8,7 +8,7 @@ interface UseModalFormStateOptions<T> {
   resetOnClose?: boolean;
 }
 
-export function useModalFormState<T extends Record<string, any>>({
+export function useModalFormState<T extends object>({
   modalType,
   initialValues,
   resetOnClose = false,
@@ -25,7 +25,7 @@ export function useModalFormState<T extends Record<string, any>>({
   const savedState = getModalState(modalType) as T | undefined;
 
   // get current form state (using the saved values if available, otherwise the initial values)
-  const formState = savedState || initialValues;
+  const formState = savedState ?? initialValues;
 
   // Keep refs so the callbacks below stay stable across re-renders.
   const modalTypeRef = useRef(modalType);
@@ -39,7 +39,8 @@ export function useModalFormState<T extends Record<string, any>>({
     (state: Partial<T>) => {
       const type = modalTypeRef.current;
       const currentState =
-        getModalStateRef.current(type) ?? initialValuesRef.current;
+        (getModalStateRef.current(type) as T | undefined) ??
+        initialValuesRef.current;
       const newState = { ...currentState, ...state };
       setModalState(type, newState);
     },

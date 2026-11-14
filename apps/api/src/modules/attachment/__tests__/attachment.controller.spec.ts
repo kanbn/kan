@@ -38,7 +38,7 @@ describe("CardAttachmentController", () => {
       filename: "a.png",
       contentType: "image/png",
       size: 10,
-    } as never);
+    });
 
     expect(mockAttachmentService.generateUploadUrl).toHaveBeenCalledWith({
       cardPublicId: "card_12345678",
@@ -57,7 +57,7 @@ describe("CardAttachmentController", () => {
       size: 10,
     };
 
-    await cardController.confirm(user as never, "card_12345678", body as never);
+    await cardController.confirm(user as never, "card_12345678", body);
 
     expect(mockAttachmentService.confirm).toHaveBeenCalledWith({
       cardPublicId: "card_12345678",

@@ -1,6 +1,5 @@
 import { t } from "@lingui/core/macro";
 
-import type { Subscription } from "@kan/shared/utils";
 import { useGetWorkspace } from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";

@@ -140,10 +140,10 @@ describe("LabelService.delete", () => {
     ).mockResolvedValue(label as never);
     const hardDelete = vi
       .spyOn(cardRepo, "hardDeleteAllCardLabelRelationships")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
     const softDelete = vi
       .spyOn(labelRepo, "softDelete")
-      .mockResolvedValue({ id: 1 } as never);
+      .mockResolvedValue({ id: 1 });
 
     const result = await service.delete({
       labelPublicId: "label_12345",

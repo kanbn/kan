@@ -23,7 +23,7 @@ export class PermissionService {
   private async getMemberOrThrow(memberPublicId: string, workspaceId: number) {
     const member = await memberRepo.getByPublicId(db, memberPublicId);
 
-    if (!member || member.workspaceId !== workspaceId)
+    if (member?.workspaceId !== workspaceId)
       throw new NotFoundException("Member not found");
 
     return member;

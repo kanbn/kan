@@ -15,10 +15,6 @@ export default function WebhookSettings() {
   const { modalContentType, openModal, isOpen } = useModal();
   const { workspace } = useWorkspace();
 
-  if (!workspace) {
-    return null;
-  }
-
   return (
     <>
       <PageHead title={t`Settings | Webhooks`} />

@@ -189,7 +189,6 @@ export function InviteMemberForm({
     teamSubscription?.partnerTier ?? proSubscription?.partnerTier
   );
 
-  let isYearly = false;
   let price = t`$10/month`;
   let billingType = t`monthly billing`;
 
@@ -201,7 +200,7 @@ export function InviteMemberForm({
         (1000 * 60 * 60 * 24),
     );
 
-    isYearly = diffInDays > 31;
+    const isYearly = diffInDays > 31;
     price = isYearly ? t`$8/month` : t`$10/month`;
     billingType = isYearly ? t`billed annually` : t`billed monthly`;
   }

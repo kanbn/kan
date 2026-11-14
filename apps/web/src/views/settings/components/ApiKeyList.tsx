@@ -16,7 +16,8 @@ export default function ApiKeyList() {
   });
   const apiKeys = data?.data?.apiKeys ?? [];
 
-  const TableRow = ({
+  const renderTableRow = ({
+    key,
     keyId,
     keyName,
     keyStart,
@@ -25,6 +26,7 @@ export default function ApiKeyList() {
     isLastRow,
     showSkeleton,
   }: {
+    key?: string;
     keyId?: string;
     keyName?: string | null | undefined;
     keyStart?: string | null | undefined;
@@ -44,7 +46,7 @@ export default function ApiKeyList() {
     };
 
     return (
-      <tr className="rounded-b-lg">
+      <tr key={key} className="rounded-b-lg">
         <td className={twMerge("w-[30%]", isLastRow ? "rounded-bl-lg" : "")}>
           <div className="flex items-center p-4">
             <div className="ml-2 min-w-0 flex-1">
@@ -175,23 +177,23 @@ export default function ApiKeyList() {
               </thead>
               <tbody className="divide-y divide-light-600 bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
                 {!isLoading &&
-                  apiKeys.map((apiKey, index) => (
-                    <TableRow
-                      key={apiKey.id}
-                      keyId={apiKey.id}
-                      keyName={apiKey.name}
-                      keyStart={apiKey.start}
-                      createdAt={apiKey.createdAt}
-                      lastRequest={apiKey.lastRequest}
-                      isLastRow={index === apiKeys.length - 1}
-                    />
-                  ))}
+                  apiKeys.map((apiKey, index) =>
+                    renderTableRow({
+                      key: apiKey.id,
+                      keyId: apiKey.id,
+                      keyName: apiKey.name,
+                      keyStart: apiKey.start,
+                      createdAt: apiKey.createdAt,
+                      lastRequest: apiKey.lastRequest,
+                      isLastRow: index === apiKeys.length - 1,
+                    }),
+                  )}
 
                 {isLoading && (
                   <>
-                    <TableRow showSkeleton />
-                    <TableRow showSkeleton />
-                    <TableRow showSkeleton isLastRow />
+                    {renderTableRow({ showSkeleton: true })}
+                    {renderTableRow({ showSkeleton: true })}
+                    {renderTableRow({ showSkeleton: true, isLastRow: true })}
                   </>
                 )}
               </tbody>

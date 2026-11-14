@@ -1,7 +1,8 @@
 import { describe, it, expect, beforeEach } from "vitest";
 
 import * as webhookRepo from "@kan/db/repository/webhook.repo";
-import { createTestDb, seedTestData, type TestDbClient } from "./test-db";
+import { createTestDb, seedTestData } from "./test-db";
+import type { TestDbClient } from "./test-db";
 
 describe("webhook repository integration tests", () => {
   let db: TestDbClient;

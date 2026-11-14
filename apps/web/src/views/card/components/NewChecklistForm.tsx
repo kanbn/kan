@@ -41,7 +41,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
         });
         const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
         cardCache.byId.setData({ cardPublicId: args.cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const placeholderChecklist = {
             publicId: optimisticPublicId,
             name: args.data.name,
@@ -56,7 +56,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
           return {
             ...old,
             checklists: [...old.checklists, placeholderChecklist],
-          } as typeof old;
+          };
         });
         return { previous, optimisticPublicId };
       },
@@ -64,15 +64,14 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
         setModalState("ADD_CHECKLIST", {
           createdChecklistId: result.data.publicId,
         });
-        if (!context) return;
         cardCache.byId.setData({ cardPublicId: vars.cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const updatedChecklists = old.checklists.map((cl) =>
             cl.publicId === context.optimisticPublicId
               ? { ...cl, publicId: result.data.publicId }
               : cl,
           );
-          return { ...old, checklists: updatedChecklists } as typeof old;
+          return { ...old, checklists: updatedChecklists };
         });
       },
       onError: (_error, vars, ctx) => {

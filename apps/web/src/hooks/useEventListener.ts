@@ -101,8 +101,6 @@ function useEventListener<
     // Define the listening target
     const targetElement: T | Window = element?.current ?? window;
 
-    if (!(targetElement && targetElement.addEventListener)) return;
-
     // Create event listener that calls handler function stored in ref
     const listener: typeof handler = (event) => {
       savedHandler.current(event);

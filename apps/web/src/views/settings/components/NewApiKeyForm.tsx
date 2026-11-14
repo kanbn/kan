@@ -28,7 +28,7 @@ export default function NewApiKeyForm() {
     mutationFn: ({ name }: { name: string }) =>
       authClient.apiKey.create({ name, prefix: "kan_" }),
     onSuccess: ({ data: apiKey }) => {
-      qc.invalidateQueries({
+      void qc.invalidateQueries({
         queryKey: ["apiKeys"],
       });
       openModal("API_KEY_CREATED", apiKey?.key, apiKey?.name ?? "");

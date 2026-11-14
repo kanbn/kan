@@ -601,7 +601,7 @@ function removePathAndPrune(tree: ShortcutTreeLevel, path: string[]): void {
   }
 
   const node = tree[first];
-  if (!node || node.type !== "STEP") return;
+  if (node?.type !== "STEP") return;
 
   removePathAndPrune(node.children, rest);
 

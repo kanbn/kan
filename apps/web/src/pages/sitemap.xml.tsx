@@ -12,7 +12,7 @@ const PUBLIC_PATHS = [
   "/signup",
 ];
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = ({ req, res }) => {
   const baseUrl = env("NEXT_PUBLIC_BASE_URL") || `https://${req.headers.host}`;
 
   const urls = PUBLIC_PATHS.map(
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   res.write(body);
   res.end();
 
-  return { props: {} };
+  return Promise.resolve({ props: {} });
 };
 
 export default function Sitemap() {

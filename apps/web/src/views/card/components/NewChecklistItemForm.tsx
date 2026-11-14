@@ -60,7 +60,7 @@ const NewChecklistItemForm = ({
         const optimisticPublicId = `PLACEHOLDER_${generateUID()}`;
 
         cardCache.byId.setData({ cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const placeholder = {
             publicId: optimisticPublicId,
             clientId: optimisticPublicId,
@@ -86,9 +86,8 @@ const NewChecklistItemForm = ({
         return { previous, optimisticPublicId };
       },
       onSuccess: (result, _vars, context) => {
-        if (!context) return;
         cardCache.byId.setData({ cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const updatedChecklists = old.checklists.map((cl) => ({
             ...cl,
             items: cl.items.map((item) =>
@@ -97,7 +96,7 @@ const NewChecklistItemForm = ({
                 : item,
             ),
           }));
-          return { ...old, checklists: updatedChecklists } as typeof old;
+          return { ...old, checklists: updatedChecklists };
         });
       },
       onError: (_err, _vars, ctx) => {
@@ -127,7 +126,7 @@ const NewChecklistItemForm = ({
   const submitIfNotEmpty = (keepOpen: boolean) => {
     if (readOnly) return;
     keepOpenRef.current = keepOpen;
-    const currentHtml = getValues("title") ?? "";
+    const currentHtml = getValues("title");
     const plain = sanitizeHtmlToPlainText(currentHtml);
     if (!plain) {
       onCancel();
@@ -163,7 +162,7 @@ const NewChecklistItemForm = ({
             onChange={(e) => setValue("title", e.target.value)}
             className="m-0 min-h-[20px] w-full p-0 text-sm leading-5 text-light-900 outline-none focus-visible:outline-none dark:text-dark-950"
             onBlur={() => submitIfNotEmpty(false)}
-            onKeyDown={async (e) => {
+            onKeyDown={(e) => {
               if (readOnly) return;
               if (e.key === "Enter") {
                 e.preventDefault();

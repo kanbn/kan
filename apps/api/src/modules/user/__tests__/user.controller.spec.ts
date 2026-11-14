@@ -33,7 +33,7 @@ describe("UserController", () => {
   });
 
   it("passes the current user's id and body through to update", async () => {
-    await controller.update(user as never, { name: "New" } as never);
+    await controller.update(user as never, { name: "New" });
 
     expect(mockUserService.update).toHaveBeenCalledWith({
       userId: "user_1",
@@ -45,7 +45,7 @@ describe("UserController", () => {
   it("passes the current user's id, body and request headers through to setPassword", async () => {
     await controller.setPassword(
       user as never,
-      { newPassword: "hunter2hunter2" } as never,
+      { newPassword: "hunter2hunter2" },
       { headers: { cookie: "session=abc" } } as never,
     );
 

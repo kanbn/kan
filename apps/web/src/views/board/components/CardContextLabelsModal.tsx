@@ -9,14 +9,14 @@ import LabelSelector from "~/views/card/components/LabelSelector";
 export function CardContextLabelsModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
 
-  const { data: card, isLoading } = useGetCard(cardPublicId ?? "", {
+  const { data: card, isLoading } = useGetCard(cardPublicId, {
     query: {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
       select: (res) => res.data,
     },
   });
 
-  const boardLabels = card?.list?.board?.labels ?? [];
+  const boardLabels = card?.list.board.labels ?? [];
   const selectedLabels = card?.labels ?? [];
 
   const formattedLabels = boardLabels.map((label) => ({

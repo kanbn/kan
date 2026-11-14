@@ -87,7 +87,7 @@ describe("IntegrationService", () => {
     vi.stubEnv("BETTER_AUTH_SECRET", "test-secret");
     const save = vi
       .spyOn(integrationsRepo, "createOrUpdateProvider")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     await service.saveGitHubToken({ userId: "user_1", token: "ghp_secret" });
 

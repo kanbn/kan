@@ -1,3 +1,4 @@
+import type { Editor } from "@tiptap/react";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -47,6 +48,7 @@ export default function PlainTextEditor({
     contentRef.current = content;
   }, [content]);
 
+  // Null on the first render despite the types
   const editor = useEditor(
     {
       extensions: [
@@ -99,7 +101,7 @@ export default function PlainTextEditor({
       },
     },
     [],
-  );
+  ) as Editor | null;
 
   useEffect(() => {
     if (!editor) return;

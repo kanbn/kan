@@ -54,7 +54,7 @@ export default function NewApiKeyModal() {
       void qc.invalidateQueries({
         queryKey: ["apiKeys"],
       });
-      if (apiKey && apiKey.key && apiKey.name) {
+      if (apiKey?.key && apiKey.name) {
         setCreatedApiKey({
           key: apiKey.key,
           name: apiKey.name,

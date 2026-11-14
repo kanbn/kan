@@ -13,6 +13,7 @@ import { cancelWorkspaceAccess } from "@kan/server/utils/workspace";
 import { getActiveSubscriptions } from "@kan/shared/utils";
 
 import type { TierConfig } from "~/utils/partnerTiers";
+import { env } from "~/env";
 import { tierConfig } from "~/utils/partnerTiers";
 
 const log = createLogger("api");
@@ -74,7 +75,7 @@ async function createAndLinkSlots(
           await Promise.all(
             available.map((workspace, i) => {
               const slot = newSlots[i];
-              if (!slot) return;
+              if (!slot) return Promise.resolve();
               return Promise.all([
                 subscriptionRepo.updateById(db, slot.id, {
                   referenceId: workspace.publicId,
@@ -112,7 +113,9 @@ async function createAndLinkSlots(
 async function buffer(readable: Readable) {
   const chunks: Buffer[] = [];
   for await (const chunk of readable) {
-    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
+    chunks.push(
+      typeof chunk === "string" ? Buffer.from(chunk) : (chunk as Buffer),
+    );
   }
   return Buffer.concat(chunks);
 }
@@ -122,7 +125,7 @@ function verifySignature(
   signature: string,
   timestamp: string,
 ): boolean {
-  const secret = process.env.PARTNER_API_KEY;
+  const secret = env.PARTNER_API_KEY;
   if (!secret) return false;
 
   const ts = Number(timestamp);
@@ -164,8 +167,8 @@ export default withApiLogging(
       return res.status(405).json({ message: "Method not allowed" });
     }
 
-    const signatureHeader = process.env.PARTNER_SIGNATURE_HEADER;
-    const timestampHeader = process.env.PARTNER_TIMESTAMP_HEADER;
+    const signatureHeader = env.PARTNER_SIGNATURE_HEADER;
+    const timestampHeader = env.PARTNER_TIMESTAMP_HEADER;
 
     if (!signatureHeader || !timestampHeader) {
       log.error("Webhook signature headers not configured");
@@ -179,7 +182,7 @@ export default withApiLogging(
       return res.status(400).json({ message: "Missing signature headers" });
     }
 
-    const buf = await buffer(req as unknown as Readable);
+    const buf = await buffer(req);
     const rawBody = buf.toString("utf8");
 
     if (!verifySignature(rawBody, signature, timestamp)) {

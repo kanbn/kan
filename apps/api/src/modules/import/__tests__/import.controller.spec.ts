@@ -35,20 +35,14 @@ describe("Import controllers", () => {
   it("pass the current user's id and body through to the service", async () => {
     await sourceController.getTrelloBoards(user as never);
     await sourceController.getGitHubProjects(user as never);
-    await importController.importTrelloBoards(
-      user as never,
-      {
-        boardIds: ["tb1"],
-        workspacePublicId: "workspace_12345",
-      } as never,
-    );
-    await importController.importGitHubProjects(
-      user as never,
-      {
-        projectIds: ["p1"],
-        workspacePublicId: "workspace_12345",
-      } as never,
-    );
+    await importController.importTrelloBoards(user as never, {
+      boardIds: ["tb1"],
+      workspacePublicId: "workspace_12345",
+    });
+    await importController.importGitHubProjects(user as never, {
+      projectIds: ["p1"],
+      workspacePublicId: "workspace_12345",
+    });
 
     expect(mockImportService.getTrelloBoards).toHaveBeenCalledWith({
       userId: "user_1",

@@ -15,10 +15,10 @@ export default withRateLimit(
       if (!response.ok) {
         throw new Error("Failed to fetch from Formbricks");
       }
-      const data = await response.json();
+      const data: unknown = await response.json();
 
       return res.status(200).json(data);
-    } catch (error) {
+    } catch {
       return res.status(500).json({ message: "Failed to fetch OSS friends" });
     }
   }),

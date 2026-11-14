@@ -105,8 +105,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const boardCache = useBoardCache();
   const { showPopup } = usePopup();
   const { workspace, selectWorkspaceById } = useWorkspace();
-  const { openModal, modalContentType, entityId, isOpen, setModalState } =
-    useModal();
+  const { openModal, modalContentType, entityId, isOpen } = useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
   const [newCardInitialDueDate, setNewCardInitialDueDate] =
@@ -233,8 +232,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   // Redirect to 404 if board doesn't exist
   useEffect(() => {
     if (router.isReady && boardId && !isQueryLoading) {
-      if (getApiErrorStatus(error) === 404 || (!boardData && !isQueryLoading)) {
-        router.replace("/404");
+      if (getApiErrorStatus(error) === 404 || !boardData) {
+        void router.replace("/404");
       }
     }
   }, [router, boardId, isQueryLoading, error, boardData]);
@@ -407,7 +406,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   });
 
   useEffect(() => {
-    if (isSuccess && boardData) {
+    if (isSuccess) {
       setValue("name", boardData.name || "");
     }
   }, [isSuccess, boardData, setValue]);
@@ -813,7 +812,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           isVisible={isOpen && modalContentType === "CREATE_TEMPLATE"}
         >
           <NewTemplateForm
-            workspacePublicId={workspace.publicId ?? ""}
+            workspacePublicId={workspace.publicId}
             sourceBoardPublicId={boardId ?? ""}
             sourceBoardName={boardData?.name ?? ""}
           />
@@ -873,7 +872,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <>
       <PageHead
-        title={`${boardData?.name ?? (isTemplate ? t`Template` : t`Board`)} | ${workspace.name ?? t`Workspace`}`}
+        title={`${boardData?.name ?? (isTemplate ? t`Template` : t`Board`)} | ${workspace.name}`}
       />
       <div className="relative flex h-full flex-col">
         <PatternedBackground />

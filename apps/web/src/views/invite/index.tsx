@@ -12,6 +12,15 @@ import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import { getApiErrorStatus } from "~/utils/apiError";
 
+const PageWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <>
+      <PageHead title={t`Join workspace | kan.bn`} />
+      {children}
+    </>
+  );
+};
+
 export default function InvitePage() {
   const router = useRouter();
   const { code } = router.query;
@@ -97,15 +106,6 @@ export default function InvitePage() {
       </>
     );
   }
-
-  const PageWrapper = ({ children }: { children: React.ReactNode }) => {
-    return (
-      <>
-        <PageHead title={t`Join workspace | kan.bn`} />
-        {children}
-      </>
-    );
-  };
 
   if (isInviteInfoError || (!isInviteInfoLoading && !inviteInfo)) {
     return (

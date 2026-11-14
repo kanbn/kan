@@ -34,7 +34,6 @@ export default function CommandPallette({
   const {
     data: searchResults,
     isLoading,
-    isFetched,
     isPlaceholderData,
   } = useSearchWorkspace(
     workspace.publicId,

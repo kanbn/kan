@@ -8,7 +8,7 @@ import { DueDateSelector } from "~/views/card/components/DueDateSelector";
 export function CardContextDueDateModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
 
-  const { data: card, isLoading } = useGetCard(cardPublicId ?? "", {
+  const { data: card, isLoading } = useGetCard(cardPublicId, {
     query: {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
       select: (res) => res.data,

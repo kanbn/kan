@@ -16,7 +16,7 @@ export function CardContextMoveListModal() {
   const cardCache = useCardCache();
   const boardCache = useBoardCache();
 
-  const { data: card, isLoading } = useGetCard(cardPublicId ?? "", {
+  const { data: card, isLoading } = useGetCard(cardPublicId, {
     query: {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
       select: (res) => res.data,
@@ -31,7 +31,7 @@ export function CardContextMoveListModal() {
       const previous = cardCache.byId.getData({ cardPublicId });
       cardCache.byId.setData({ cardPublicId }, (old) => {
         if (!old) return old;
-        const list = old.list.board?.lists?.find(
+        const list = old.list.board.lists.find(
           (l) => l.publicId === vars.listPublicId,
         );
         if (!list) return old;
@@ -60,8 +60,8 @@ export function CardContextMoveListModal() {
     },
   });
 
-  const lists = card?.list?.board?.lists ?? [];
-  const currentListPublicId = card?.list?.publicId;
+  const lists = card?.list.board.lists ?? [];
+  const currentListPublicId = card?.list.publicId;
 
   const handleSelectList = (listPublicId: string) => {
     if (listPublicId === currentListPublicId || !cardPublicId) return;

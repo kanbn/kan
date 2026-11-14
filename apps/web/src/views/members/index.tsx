@@ -106,7 +106,8 @@ export default function MembersPage() {
     proSubscription?.seats ??
     (isPaidPlan ? null : 1);
 
-  const TableRow = ({
+  const renderTableRow = ({
+    key,
     memberPublicId,
     memberId,
     memberName,
@@ -118,6 +119,7 @@ export default function MembersPage() {
     showSkeleton,
     showPendingIcon,
   }: {
+    key?: string;
     memberPublicId?: string;
     memberId?: string | null | undefined;
     memberName?: string | null | undefined;
@@ -140,7 +142,7 @@ export default function MembersPage() {
     };
 
     return (
-      <tr className="rounded-b-lg">
+      <tr key={key} className="rounded-b-lg">
         <td
           className={twMerge(
             "w-full sm:w-[65%]",
@@ -285,7 +287,7 @@ export default function MembersPage() {
 
   return (
     <>
-      <PageHead title={t`Members | ${workspace.name ?? t`Workspace`}`} />
+      <PageHead title={t`Members | ${workspace.name}`} />
       <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
           <div className="flex items-center gap-3">
@@ -368,27 +370,28 @@ export default function MembersPage() {
                       data?.members.map((member, index) => {
                         const isPendingInvite = member.status === "invited";
 
-                        return (
-                          <TableRow
-                            key={member.publicId}
-                            memberPublicId={member.publicId}
-                            memberId={member.user?.id}
-                            memberName={member.user?.name}
-                            memberEmail={member.user?.email ?? member.email}
-                            memberImage={member.user?.image}
-                            memberRole={member.role}
-                            memberStatus={member.status}
-                            isLastRow={index === data.members.length - 1}
-                            showPendingIcon={isPendingInvite}
-                          />
-                        );
+                        return renderTableRow({
+                          key: member.publicId,
+                          memberPublicId: member.publicId,
+                          memberId: member.user?.id,
+                          memberName: member.user?.name,
+                          memberEmail: member.user?.email ?? member.email,
+                          memberImage: member.user?.image,
+                          memberRole: member.role,
+                          memberStatus: member.status,
+                          isLastRow: index === data.members.length - 1,
+                          showPendingIcon: isPendingInvite,
+                        });
                       })}
 
                     {isLoading && (
                       <>
-                        <TableRow showSkeleton />
-                        <TableRow showSkeleton />
-                        <TableRow showSkeleton isLastRow />
+                        {renderTableRow({ showSkeleton: true })}
+                        {renderTableRow({ showSkeleton: true })}
+                        {renderTableRow({
+                          showSkeleton: true,
+                          isLastRow: true,
+                        })}
                       </>
                     )}
                   </tbody>

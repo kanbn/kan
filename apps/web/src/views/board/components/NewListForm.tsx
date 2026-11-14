@@ -77,7 +77,6 @@ export function NewListForm({
         return { previousState: currentState, optimisticPublicId };
       },
       onSuccess: (result, _args, context) => {
-        if (!context) return;
         boardCache.setData(queryParams, (oldBoard) => {
           if (!oldBoard) return oldBoard;
           return {

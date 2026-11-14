@@ -36,24 +36,21 @@ export function CardContextDuplicateModal({
   const [position, setPosition] = useState<string>("");
   const [title, setTitle] = useState("");
 
-  const { data: card, isLoading: isCardLoading } = useGetCard(
-    cardPublicId ?? "",
-    {
-      query: {
-        enabled: !!cardPublicId && cardPublicId.length >= 12,
-        select: (res) => res.data,
-      },
+  const { data: card, isLoading: isCardLoading } = useGetCard(cardPublicId, {
+    query: {
+      enabled: !!cardPublicId && cardPublicId.length >= 12,
+      select: (res) => res.data,
     },
-  );
+  });
 
   const listOptions = lists.map((l) => ({
     publicId: l.publicId,
     name: l.name,
   }));
-  const currentListPublicId = card?.list?.publicId;
-  const hasLabels = (card?.labels?.length ?? 0) > 0;
-  const hasMembers = (card?.members?.length ?? 0) > 0;
-  const hasChecklists = (card?.checklists?.length ?? 0) > 0;
+  const currentListPublicId = card?.list.publicId;
+  const hasLabels = (card?.labels.length ?? 0) > 0;
+  const hasMembers = (card?.members.length ?? 0) > 0;
+  const hasChecklists = (card?.checklists.length ?? 0) > 0;
   const hasAnyCopyOption = hasLabels || hasMembers || hasChecklists;
 
   const duplicateCard = useDuplicateCard({

@@ -207,8 +207,7 @@ export function EditMemberPermissionsModal() {
                 </div>
                 <div className="space-y-1.5">
                   {category.permissions.map((permission) => {
-                    const label =
-                      permissionLabels[permission] ?? (permission as string);
+                    const label = permissionLabels[permission];
 
                     return (
                       <div

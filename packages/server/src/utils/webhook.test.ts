@@ -21,8 +21,8 @@ import {
   sendWebhooksForWorkspace,
   createCardWebhookPayload,
   webhookUrlSchema,
-  type WebhookPayload,
 } from "./webhook";
+import type { WebhookPayload } from "./webhook";
 
 const mockGetActiveByWorkspaceId = webhookRepo.getActiveByWorkspaceId as ReturnType<typeof vi.fn>;
 

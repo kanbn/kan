@@ -8,6 +8,8 @@ import { createLogger } from "@kan/logger";
 import { createNextApiContext } from "@kan/server/context";
 import { createStripeClient } from "@kan/stripe";
 
+import { env } from "~/env";
+
 const log = createLogger("api");
 
 async function buffer(readable: Readable) {
@@ -44,7 +46,7 @@ export default async function handler(
     const event = stripe.webhooks.constructEvent(
       rawBody,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET_LEGACY!,
+      env.STRIPE_WEBHOOK_SECRET_LEGACY ?? "",
     );
 
     const { db } = await createNextApiContext(req);
@@ -109,12 +111,12 @@ export default async function handler(
         if (!priceId) break;
 
         const isTeamPrice = [
-          process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID,
-          process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID,
+          env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID,
+          env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID,
         ].includes(priceId);
         const isProPrice = [
-          process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID,
-          process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID,
+          env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID,
+          env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID,
         ].includes(priceId);
 
         if (!isTeamPrice && !isProPrice) break;

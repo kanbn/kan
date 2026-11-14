@@ -53,7 +53,7 @@ export class WebhookService {
     const workspace = await this.assertCanManage(workspacePublicId, userId);
     const webhook = await webhookRepo.getByPublicId(db, webhookPublicId);
 
-    if (!webhook || webhook.workspaceId !== workspace.id)
+    if (webhook?.workspaceId !== workspace.id)
       throw new NotFoundException("Webhook not found");
 
     return webhook;

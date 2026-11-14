@@ -102,7 +102,8 @@ export default function BoardMembersView() {
     });
   };
 
-  const TableRow = ({
+  const renderTableRow = ({
+    key,
     memberPublicId,
     memberId,
     memberName,
@@ -112,6 +113,7 @@ export default function BoardMembersView() {
     isLastRow,
     showSkeleton,
   }: {
+    key?: string;
     memberPublicId?: string;
     memberId?: string | null;
     memberName?: string | null;
@@ -125,7 +127,7 @@ export default function BoardMembersView() {
     const canManageRow = isBoardAdmin && !isSelf;
 
     return (
-      <tr className="rounded-b-lg">
+      <tr key={key} className="rounded-b-lg">
         <td
           className={twMerge(
             "w-full sm:w-[65%]",
@@ -274,26 +276,29 @@ export default function BoardMembersView() {
                     </thead>
                     <tbody className="divide-y divide-light-600 overflow-visible bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
                       {!isLoading &&
-                        boardMembers?.map((member, index) => (
-                          <TableRow
-                            key={member.publicId}
-                            memberPublicId={member.publicId}
-                            memberId={member.user?.id}
-                            memberName={formatMemberDisplayName(
+                        boardMembers?.map((member, index) =>
+                          renderTableRow({
+                            key: member.publicId,
+                            memberPublicId: member.publicId,
+                            memberId: member.user?.id,
+                            memberName: formatMemberDisplayName(
                               member.user?.name ?? null,
                               member.user?.email ?? member.email,
-                            )}
-                            memberEmail={member.user?.email ?? member.email}
-                            memberImage={member.user?.image}
-                            memberRole={member.role}
-                            isLastRow={index === boardMembers.length - 1}
-                          />
-                        ))}
+                            ),
+                            memberEmail: member.user?.email ?? member.email,
+                            memberImage: member.user?.image,
+                            memberRole: member.role,
+                            isLastRow: index === boardMembers.length - 1,
+                          }),
+                        )}
 
                       {isLoading && (
                         <>
-                          <TableRow showSkeleton />
-                          <TableRow showSkeleton isLastRow />
+                          {renderTableRow({ showSkeleton: true })}
+                          {renderTableRow({
+                            showSkeleton: true,
+                            isLastRow: true,
+                          })}
                         </>
                       )}
                     </tbody>

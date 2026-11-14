@@ -89,8 +89,8 @@ export function NewCardForm({
       values: formState,
     });
 
-  const labelPublicIds = watch("labelPublicIds") || [];
-  const memberPublicIds = watch("memberPublicIds") || [];
+  const labelPublicIds = watch("labelPublicIds");
+  const memberPublicIds = watch("memberPublicIds");
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
   const position = watch("position");
   const title = watch("title");
@@ -107,14 +107,14 @@ export function NewCardForm({
   // saving form state whenever form values change
   useEffect(() => {
     const subscription = watch((data) => {
-      saveFormState(data as NewCardFormInput);
+      saveFormState(data);
     });
     return () => subscription.unsubscribe();
   }, [watch, saveFormState]);
 
   // this adds the new created label to selected labels
   useEffect(() => {
-    const newLabelId = modalStates.NEW_LABEL_CREATED;
+    const newLabelId = modalStates.NEW_LABEL_CREATED as string | undefined;
     if (newLabelId !== undefined && !labelPublicIds.includes(newLabelId)) {
       setValue("labelPublicIds", [...labelPublicIds, newLabelId]);
     }
@@ -124,7 +124,7 @@ export function NewCardForm({
   useEffect(() => {
     if (boardData?.labels) {
       const availableLabelIds = boardData.labels.map((label) => label.publicId);
-      const newLabelId = modalStates.NEW_LABEL_CREATED;
+      const newLabelId = modalStates.NEW_LABEL_CREATED as string | undefined;
 
       if (newLabelId && availableLabelIds.includes(newLabelId)) {
         clearModalState("NEW_LABEL_CREATED");
@@ -172,15 +172,14 @@ export function NewCardForm({
               labels: oldBoard.labels.filter((label) =>
                 args.labelPublicIds.includes(label.publicId),
               ),
-              members:
-                oldBoard.workspace.members
-                  .filter((member) =>
-                    args.memberPublicIds.includes(member.publicId),
-                  )
-                  .map((member) => ({
-                    ...member,
-                    deletedAt: null,
-                  })) ?? [],
+              members: oldBoard.workspace.members
+                .filter((member) =>
+                  args.memberPublicIds.includes(member.publicId),
+                )
+                .map((member) => ({
+                  ...member,
+                  deletedAt: null,
+                })),
               _filteredLabels: labelPublicIds.map((id) => ({ publicId: id })),
               _filteredMembers: memberPublicIds.map((id) => ({ publicId: id })),
               index: position === "start" ? 0 : list.cards.length,

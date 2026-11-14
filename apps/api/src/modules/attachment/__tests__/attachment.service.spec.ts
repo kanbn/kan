@@ -37,7 +37,7 @@ beforeEach(() => {
   vi.spyOn(cardRepo, "getWorkspaceAndCardIdByCardPublicId").mockResolvedValue(
     card as never,
   );
-  vi.spyOn(cardActivityRepo, "create").mockResolvedValue(undefined as never);
+  vi.spyOn(cardActivityRepo, "create").mockResolvedValue(undefined);
   service = new AttachmentService();
 });
 
@@ -107,7 +107,7 @@ describe("AttachmentService.confirm", () => {
       s3Key: "ws/card/key-file.png",
       createdBy: "user_1",
       createdAt: new Date("2026-01-01T00:00:00.000Z"),
-    } as never);
+    });
 
     const result = await service.confirm({
       cardPublicId: "card_12345678",
@@ -139,7 +139,7 @@ describe("AttachmentService.delete", () => {
     vi.spyOn(sharedUtils, "deleteObject").mockRejectedValue(new Error("s3"));
     const softDelete = vi
       .spyOn(cardAttachmentRepo, "softDelete")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     const result = await service.delete({
       attachmentPublicId: "attachment_1",

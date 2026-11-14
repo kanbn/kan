@@ -50,7 +50,7 @@ describe("WorkspaceMemberController", () => {
     const result = await workspaceController.invite(
       user as never,
       "workspace_12345",
-      { email: "new@kan.bn" } as never,
+      { email: "new@kan.bn" },
       fakeRequest as never,
     );
 
@@ -187,7 +187,7 @@ describe("AuthenticatedInviteController", () => {
 
     const result = await authenticatedInviteController.acceptInviteLink(
       user as never,
-      { inviteCode: "code123" } as never,
+      { inviteCode: "code123" },
     );
 
     expect(result.workspaceSlug).toBe("acme");

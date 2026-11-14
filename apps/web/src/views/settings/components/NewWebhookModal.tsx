@@ -59,7 +59,9 @@ export function NewWebhookModal({
   const { showPopup } = usePopup();
   const [isTestingWebhook, setIsTestingWebhook] = useState(false);
 
-  const modalState = isEdit ? getModalState("EDIT_WEBHOOK") : null;
+  const modalState = isEdit
+    ? (getModalState("EDIT_WEBHOOK") as Partial<WebhookFormData> | undefined)
+    : undefined;
 
   const queryClient = useQueryClient();
 

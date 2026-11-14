@@ -3,8 +3,8 @@ import React, {
   useContext,
   useEffect,
   useState,
-  type ReactNode,
 } from "react";
+import type { ReactNode } from "react";
 
 export type FontSize = "small" | "medium" | "large";
 

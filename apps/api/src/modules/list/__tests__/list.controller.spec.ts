@@ -32,13 +32,10 @@ describe("ListController", () => {
       name: "To do",
     });
 
-    const result = await controller.create(
-      user as never,
-      {
-        name: "To do",
-        boardPublicId: "board_12345",
-      } as never,
-    );
+    const result = await controller.create(user as never, {
+      name: "To do",
+      boardPublicId: "board_12345",
+    });
 
     expect(result).toEqual({ publicId: "list_1", name: "To do" });
     expect(mockListService.create).toHaveBeenCalledWith({
@@ -69,7 +66,7 @@ describe("ListController", () => {
     const result = await controller.update(user as never, "list_12345", {
       name: "Doing",
       index: 1,
-    } as never);
+    });
 
     expect(result).toEqual({ publicId: "list_12345", name: "Doing" });
     expect(mockListService.update).toHaveBeenCalledWith({

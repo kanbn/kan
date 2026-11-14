@@ -35,7 +35,9 @@ export const createDrizzleClient = (): dbClient => {
     });
     const db = drizzlePgLite(client, { schema });
 
-    migrate(db, { migrationsFolder: MIGRATIONS_FOLDER });
+    migrate(db, { migrationsFolder: MIGRATIONS_FOLDER }).catch((err: unknown) =>
+      log.error({ err }, "PGLite migration failed"),
+    );
 
     return db as unknown as dbClient;
   }
@@ -56,7 +58,7 @@ export const createDrizzleClient = (): dbClient => {
   // The pool drops the dead client and reconnects on the next query.
   pool.on("error", (err) => log.error({ err }, "Postgres pool error"));
 
-  return drizzlePg(pool, { schema }) as dbClient;
+  return drizzlePg(pool, { schema });
 };
 
 export const runMigrations = (db: dbClient) =>

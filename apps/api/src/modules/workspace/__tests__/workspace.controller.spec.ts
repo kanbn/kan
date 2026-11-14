@@ -45,13 +45,10 @@ describe("WorkspaceController", () => {
       isReserved: false,
     });
 
-    await controller.checkSlugAvailability(
-      user as never,
-      {
-        workspaceSlug: "acme",
-        workspacePublicId: "workspace_12345",
-      } as never,
-    );
+    await controller.checkSlugAvailability(user as never, {
+      workspaceSlug: "acme",
+      workspacePublicId: "workspace_12345",
+    });
 
     expect(mockWorkspaceService.checkSlugAvailability).toHaveBeenCalledWith({
       workspaceSlug: "acme",
@@ -87,7 +84,7 @@ describe("WorkspaceController", () => {
     await controller.search(user as never, "workspace_12345", {
       query: "foo",
       limit: 10,
-    } as never);
+    });
 
     expect(mockWorkspaceService.search).toHaveBeenCalledWith({
       workspacePublicId: "workspace_12345",
@@ -98,13 +95,10 @@ describe("WorkspaceController", () => {
   });
 
   it("passes the current user's id and email through to create", async () => {
-    await controller.create(
-      user as never,
-      {
-        name: "Acme",
-        slug: "acme",
-      } as never,
-    );
+    await controller.create(user as never, {
+      name: "Acme",
+      slug: "acme",
+    });
 
     expect(mockWorkspaceService.create).toHaveBeenCalledWith({
       name: "Acme",

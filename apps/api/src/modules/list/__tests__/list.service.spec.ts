@@ -114,7 +114,7 @@ describe("ListService.update", () => {
     vi.spyOn(listRepo, "update").mockResolvedValue({
       publicId: "list_12345",
       name: "Doing",
-    } as never);
+    });
 
     const result = await service.update({
       listPublicId: "list_12345",
@@ -132,7 +132,7 @@ describe("ListService.update", () => {
     vi.spyOn(listRepo, "reorder").mockResolvedValue({
       publicId: "list_12345",
       name: "To do",
-    } as never);
+    });
 
     const result = await service.update({
       listPublicId: "list_12345",

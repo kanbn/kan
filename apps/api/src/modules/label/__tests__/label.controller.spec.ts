@@ -54,14 +54,11 @@ describe("LabelController", () => {
       colourCode: "#ff0000",
     });
 
-    const result = await controller.create(
-      user as never,
-      {
-        name: "Bug",
-        boardPublicId: "board_12345",
-        colourCode: "#ff0000",
-      } as never,
-    );
+    const result = await controller.create(user as never, {
+      name: "Bug",
+      boardPublicId: "board_12345",
+      colourCode: "#ff0000",
+    });
 
     expect(result).toEqual({
       publicId: "label_12345",
@@ -86,7 +83,7 @@ describe("LabelController", () => {
     const result = await controller.update(user as never, "label_12345", {
       name: "Feature",
       colourCode: "#00ff00",
-    } as never);
+    });
 
     expect(result).toEqual({
       publicId: "label_12345",

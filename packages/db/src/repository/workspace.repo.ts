@@ -424,8 +424,9 @@ const parseTicketId = (
   query: string,
 ): { prefix: string; number: number } | null => {
   const match = /^([A-Za-z0-9]{1,10})-(\d+)$/.exec(query);
-  if (!match) return null;
-  return { prefix: match[1]!.toUpperCase(), number: parseInt(match[2]!, 10) };
+  const [, prefix, number] = match ?? [];
+  if (!prefix || !number) return null;
+  return { prefix: prefix.toUpperCase(), number: parseInt(number, 10) };
 };
 
 export const searchBoardsAndCards = async (

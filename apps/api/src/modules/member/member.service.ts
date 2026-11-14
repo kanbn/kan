@@ -188,7 +188,7 @@ export class MemberService {
 
     const member = await memberRepo.getByPublicId(db, input.memberPublicId);
 
-    if (!member || member.workspaceId !== workspace.id)
+    if (member?.workspaceId !== workspace.id)
       throw new NotFoundException(
         `Member with public ID ${input.memberPublicId} not found`,
       );
@@ -364,8 +364,7 @@ export class MemberService {
     const invite = await inviteLinkRepo.getByCode(db, input.inviteCode);
 
     if (
-      !invite ||
-      invite.status !== "active" ||
+      invite?.status !== "active" ||
       (invite.expiresAt && new Date() > invite.expiresAt)
     )
       throw new BadRequestException(`Invalid or expired invite link`);
@@ -381,8 +380,7 @@ export class MemberService {
     const invite = await inviteLinkRepo.getByCode(db, input.inviteCode);
 
     if (
-      !invite ||
-      invite.status !== "active" ||
+      invite?.status !== "active" ||
       (invite.expiresAt && new Date() > invite.expiresAt)
     )
       throw new BadRequestException(`Invalid or expired invite link`);
@@ -512,7 +510,7 @@ export class MemberService {
 
     const member = await memberRepo.getByPublicId(db, input.memberPublicId);
 
-    if (!member || member.workspaceId !== workspace.id)
+    if (member?.workspaceId !== workspace.id)
       throw new NotFoundException(`Member not found`);
 
     await assertCanManageMember(db, input.userId, workspace.id, member.id);

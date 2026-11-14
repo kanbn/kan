@@ -61,10 +61,10 @@ export function CardModal({
   // Redirect to 404 if card doesn't exist
   useEffect(() => {
     if (isOpen && cardPublicId && !isLoading) {
-      if (getApiErrorStatus(error) === 404 || (!data && !isLoading && error)) {
+      if (getApiErrorStatus(error) === 404 || (!data && error)) {
         // Close modal first, then redirect
         closeModal();
-        router.replace("/404");
+        void router.replace("/404");
       }
     }
   }, [isOpen, cardPublicId, isLoading, error, data, closeModal, router]);
@@ -181,9 +181,7 @@ export function CardModal({
                     <Editor
                       content={data.description}
                       readOnly
-                      workspaceMembers={
-                        data?.list.board.workspace.members ?? []
-                      }
+                      workspaceMembers={data.list.board.workspace.members}
                     />
                   </div>
                 </div>
