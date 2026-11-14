@@ -1,3 +1,4 @@
+import type { Editor } from "@tiptap/react";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -47,6 +48,7 @@ export default function PlainTextEditor({
     contentRef.current = content;
   }, [content]);
 
+  // Null on the first render despite the types
   const editor = useEditor(
     {
       extensions: [
@@ -84,10 +86,10 @@ export default function PlainTextEditor({
           if (event.key === "Escape") {
             event.preventDefault();
             // Reset to original content before calling the callback
-            editor.commands.setContent(contentRef.current, {
+            editor?.commands.setContent(contentRef.current, {
               emitUpdate: false,
             });
-            editor.commands.blur();
+            editor?.commands.blur();
             onEscapeRef.current?.();
             return true;
           }
@@ -99,15 +101,17 @@ export default function PlainTextEditor({
       },
     },
     [],
-  );
+  ) as Editor | null;
 
   useEffect(() => {
+    if (!editor) return;
     if (content !== editor.getText()) {
       editor.commands.setContent(content, { emitUpdate: false });
     }
   }, [content, editor]);
 
   useEffect(() => {
+    if (!editor) return;
     editor.setEditable(!readOnly);
   }, [readOnly, editor]);
 

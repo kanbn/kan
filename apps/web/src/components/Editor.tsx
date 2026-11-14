@@ -463,6 +463,7 @@ export default function Editor({
     onSubmitRef.current = onSubmit;
   }, [onSubmit]);
 
+  // Null on the first render despite the types
   const editor = useEditor(
     {
       extensions: [
@@ -594,10 +595,11 @@ export default function Editor({
       shouldRerenderOnTransaction: true,
     },
     [], // creating the editor only once
-  );
+  ) as TiptapEditor | null;
 
   // this will sync external content changes without re-creating the editor instance
   useEffect(() => {
+    if (!editor) return;
     const currentHTML = editor.getHTML();
     const safeContent = content ?? "";
     if (safeContent !== currentHTML) {
@@ -610,6 +612,7 @@ export default function Editor({
   // gets stuck read-only when `readOnly` flips from true to false after mount
   // (e.g. card permissions resolving slower than the card data on first load).
   useEffect(() => {
+    if (!editor) return;
     if (editor.isEditable === !readOnly) return;
     editor.setEditable(!readOnly);
   }, [editor, readOnly]);
@@ -638,7 +641,7 @@ export default function Editor({
           margin: 1rem 0;
         }
       `}</style>
-      {!readOnly && <EditorBubbleMenu editor={editor} />}
+      {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
         className="prose dark:prose-invert prose-sm max-w-none overflow-y-auto [&_blockquote]:!text-xs [&_h1]:!text-lg [&_h2]:!text-base [&_h3]:!text-sm [&_ol]:!text-xs [&_p.is-empty::before]:text-light-900 [&_p.is-empty::before]:dark:text-dark-800 [&_p]:!text-sm [&_p]:text-light-950 [&_p]:dark:text-dark-950 [&_ul]:!text-xs"
