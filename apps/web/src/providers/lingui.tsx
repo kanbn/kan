@@ -33,7 +33,9 @@ function detectBrowserLocale(availableLocales: readonly Locale[]): Locale {
     return defaultLocale;
   }
 
-  const browserLanguages = navigator.languages;
+  // Older webviews leave navigator.languages undefined
+  const browserLanguages = (navigator.languages as
+    readonly string[] | undefined) ?? [navigator.language];
 
   return (
     matchBrowserLocale(browserLanguages, availableLocales) ?? defaultLocale

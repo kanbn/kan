@@ -296,7 +296,7 @@ const renderMentionSuggestions = () => {
       if (!props.clientRect) return;
 
       [popup] = tippy("body", {
-        getReferenceClientRect: props.clientRect as () => DOMRect,
+        getReferenceClientRect: () => props.clientRect?.() ?? new DOMRect(),
         appendTo: () => document.body,
         content: reactRenderer.element,
         showOnCreate: true,
@@ -309,7 +309,7 @@ const renderMentionSuggestions = () => {
       reactRenderer.updateProps(props);
       if (!props.clientRect) return;
       popup?.setProps({
-        getReferenceClientRect: props.clientRect as () => DOMRect,
+        getReferenceClientRect: () => props.clientRect?.() ?? new DOMRect(),
       });
     },
     onKeyDown(props: SuggestionKeyDownProps) {
