@@ -1,4 +1,4 @@
-import { render } from "@react-email/render";
+import { render } from "react-email";
 import nodemailer from "nodemailer";
 import { createLogger } from "@kan/logger";
 

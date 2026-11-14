@@ -36,10 +36,9 @@ vi.mock("@kan.bn/mcp", () => ({
 
 const handleRequest = vi.fn().mockResolvedValue(undefined);
 vi.mock("@modelcontextprotocol/sdk/server/streamableHttp.js", () => ({
-  StreamableHTTPServerTransport: vi.fn(() => ({
-    close: vi.fn().mockResolvedValue(undefined),
-    handleRequest,
-  })),
+  StreamableHTTPServerTransport: vi.fn(function () {
+    return { close: vi.fn().mockResolvedValue(undefined), handleRequest };
+  }),
 }));
 
 const { env } = await import("next-runtime-env");

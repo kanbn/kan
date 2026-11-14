@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { env } from "next-runtime-env";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { middleware } from "./middleware";
+import { proxy } from "./proxy";
 
 vi.mock("next-runtime-env", () => ({
   env: vi.fn(),
@@ -10,7 +10,7 @@ vi.mock("next-runtime-env", () => ({
 
 const mockedEnv = vi.mocked(env);
 
-describe("middleware", () => {
+describe("proxy", () => {
   beforeEach(() => {
     mockedEnv.mockReset();
   });
@@ -21,7 +21,7 @@ describe("middleware", () => {
       if (key === "NEXT_PUBLIC_KAN_ENV") return "self-hosted";
     });
 
-    const response = middleware(new NextRequest("http://localhost:3000/"));
+    const response = proxy(new NextRequest("http://localhost:3000/"));
 
     expect(response.status).toBe(307);
     expect(response.headers.get("location")).toBe(
@@ -37,7 +37,7 @@ describe("middleware", () => {
         if (key === "NEXT_PUBLIC_KAN_ENV") return "self-hosted";
       });
 
-      const response = middleware(new NextRequest("http://localhost:3000/"));
+      const response = proxy(new NextRequest("http://localhost:3000/"));
 
       expect(response.status).toBe(307);
       expect(response.headers.get("location")).toBe(
@@ -52,7 +52,7 @@ describe("middleware", () => {
       if (key === "NEXT_PUBLIC_KAN_ENV") return "self-hosted";
     });
 
-    const response = middleware(new NextRequest("http://localhost:3000/"));
+    const response = proxy(new NextRequest("http://localhost:3000/"));
 
     expect(response.status).toBe(307);
     expect(response.headers.get("location")).toBe(
@@ -66,7 +66,7 @@ describe("middleware", () => {
       if (key === "NEXT_PUBLIC_DISABLE_EMAIL") return "true";
     });
 
-    const response = middleware(
+    const response = proxy(
       new NextRequest("http://localhost:3000/forgot-password"),
     );
 
@@ -84,7 +84,7 @@ describe("middleware", () => {
         if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
       });
 
-      const response = middleware(
+      const response = proxy(
         new NextRequest("http://localhost:3000/forgot-password"),
       );
 
@@ -99,7 +99,7 @@ describe("middleware", () => {
         if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
       });
 
-      const response = middleware(
+      const response = proxy(
         new NextRequest("http://localhost:3000/", { headers: { host } }),
       );
 
@@ -115,7 +115,7 @@ describe("middleware", () => {
       if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
     });
 
-    const response = middleware(
+    const response = proxy(
       new NextRequest("http://localhost:3000/", {
         headers: { host: "kan.bn" },
       }),
@@ -135,7 +135,7 @@ describe("middleware", () => {
         if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
       });
 
-      const response = middleware(
+      const response = proxy(
         new NextRequest(`http://localhost:3000${pathname}`, {
           headers: { host: "mcp.kan.bn" },
         }),
@@ -151,7 +151,7 @@ describe("middleware", () => {
       if (key === "NEXT_PUBLIC_KAN_ENV") return "cloud";
     });
 
-    const response = middleware(
+    const response = proxy(
       new NextRequest(
         "http://localhost:3000/.well-known/oauth-protected-resource",
         { headers: { host: "kan.bn" } },

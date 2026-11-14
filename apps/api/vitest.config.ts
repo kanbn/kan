@@ -18,6 +18,6 @@ export default defineConfig({
     // POSTGRES_URL is unset; concurrent workers race to open/migrate it,
     // crashing the WASM runtime. One fork serializes every spec file.
     pool: "forks",
-    poolOptions: { forks: { singleFork: true } },
+    maxWorkers: 1,
   },
 });
