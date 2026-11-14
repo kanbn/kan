@@ -126,7 +126,7 @@ export default function WorkspaceMenu({
         >
           <Menu.Items
             className={twMerge(
-              "ring-opacity-5 absolute left-0 z-10 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-600 dark:bg-dark-300",
+              "absolute left-0 z-10 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-600 dark:bg-dark-300",
               isCollapsed ? "w-48" : "w-full",
             )}
           >

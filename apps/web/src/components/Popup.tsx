@@ -37,7 +37,7 @@ const Popup: React.FC = () => {
           leaveFrom="opacity-100 translate-y-0 sm:scale-100"
           leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
-          <div className="ring-opacity-5 pointer-events-auto w-full max-w-[350px] overflow-hidden rounded-xl border border-light-400 bg-light-50 shadow-lg transition data-closed:opacity-0 data-enter:transform data-enter:duration-300 data-enter:ease-out data-closed:data-enter:translate-y-2 data-leave:duration-100 data-leave:ease-in sm:data-closed:data-enter:translate-x-2 sm:data-closed:data-enter:translate-y-0 dark:border-dark-300 dark:bg-dark-100">
+          <div className="pointer-events-auto w-full max-w-[350px] overflow-hidden rounded-xl border border-light-400 bg-light-50 shadow-lg transition data-closed:opacity-0 data-enter:transform data-enter:duration-300 data-enter:ease-out data-closed:data-enter:translate-y-2 data-leave:duration-100 data-leave:ease-in sm:data-closed:data-enter:translate-x-2 sm:data-closed:data-enter:translate-y-0 dark:border-dark-300 dark:bg-dark-100">
             <div className="relative p-4">
               <div className="flex items-start">
                 <div className="mt-1 shrink-0">

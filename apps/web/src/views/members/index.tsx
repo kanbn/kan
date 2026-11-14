@@ -347,7 +347,7 @@ export default function MembersPage() {
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full overflow-x-auto px-4 py-2 pb-16 align-middle sm:px-6 lg:px-8">
-              <div className="ring-opacity-5 h-full shadow-sm ring-1 ring-black sm:rounded-lg">
+              <div className="h-full shadow-sm ring-1 ring-black/5 sm:rounded-lg">
                 <table className="min-w-full divide-y divide-light-600 overflow-visible dark:divide-dark-600">
                   <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
                     <tr>

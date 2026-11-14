@@ -138,7 +138,7 @@ const SelectSource = ({
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600 focus:outline-hidden sm:text-sm dark:bg-dark-300 dark:text-dark-1000">
+                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600/5 focus:outline-hidden sm:text-sm dark:bg-dark-300 dark:text-dark-1000">
                         {hasIntegrations ? (
                           availableIntegrations.map((integration, index) => (
                             <Listbox.Option

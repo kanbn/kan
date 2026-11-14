@@ -46,7 +46,7 @@ export default function Dropdown({
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className={`absolute right-0 isolate z-100 ${menuGapClass[menuGap]} ring-opacity-5 w-56 origin-top-right rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-400 dark:bg-dark-300`}
+          className={`absolute right-0 isolate z-100 ${menuGapClass[menuGap]} w-56 origin-top-right rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-400 dark:bg-dark-300`}
         >
           <div className="flex flex-col">
             {items.map((item) => (

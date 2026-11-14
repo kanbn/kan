@@ -121,7 +121,7 @@ export default function UserMenu({
       >
         <Menu.Items
           className={twMerge(
-            "ring-opacity-5 absolute bottom-[40px] z-10 mt-2 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-600 dark:bg-dark-300",
+            "absolute bottom-[40px] z-10 mt-2 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-600 dark:bg-dark-300",
             isCollapsed ? "left-0 w-48" : "left-0 w-full",
           )}
         >

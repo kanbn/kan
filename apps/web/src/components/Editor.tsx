@@ -126,7 +126,7 @@ const CommandsList = forwardRef<
   }));
 
   return (
-    <div className="ring-opacity-5 w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
+    <div className="w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
       <div className="max-h-[350px] overflow-y-auto p-1">
         {items.map((item, index) => (
           <button
@@ -245,7 +245,7 @@ const MentionList = forwardRef<
   }));
 
   return (
-    <div className="ring-opacity-5 w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
+    <div className="w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
       <div className="scrollbar-thin max-h-[350px] scrollbar-thumb-light-200 overflow-y-auto p-1 dark:scrollbar-thumb-dark-300">
         {items.length > 0 ? (
           items.map((item, index) => (

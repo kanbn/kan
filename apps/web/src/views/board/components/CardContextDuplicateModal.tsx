@@ -136,7 +136,7 @@ export function CardContextDuplicateModal({
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <ListboxOptions className="ring-opacity-5 absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-light-200 bg-white shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-400 dark:bg-dark-200">
+                <ListboxOptions className="absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-light-200 bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-400 dark:bg-dark-200">
                   <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] scrollbar max-h-60 scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-y-auto py-1 pr-1 dark:scrollbar-thumb-dark-600 dark:scrollbar-track-dark-100">
                     {listOptions.map((option) => {
                       const isCurrentList =

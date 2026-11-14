@@ -2,6 +2,9 @@
 
 @config "../../tailwind.config.ts";
 
+/* v4 limits hover to devices that can hover; keep v3 so tapping still reveals hover-only controls */
+@custom-variant hover (&:hover);
+
 /* Our text-sm sets only the font size, as it did in v3, so line height still
    comes from the parent or other classes */
 @theme {

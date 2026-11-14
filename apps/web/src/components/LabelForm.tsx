@@ -178,7 +178,7 @@ export function LabelForm({
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-2 text-base shadow-lg ring-1 ring-black focus:outline-hidden sm:text-sm dark:bg-dark-300">
+                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-2 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm dark:bg-dark-300">
                         {colours.map((colour, index) => (
                           <Listbox.Option
                             key={`colours_${index}`}

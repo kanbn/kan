@@ -139,7 +139,7 @@ export default function ApiKeyList() {
     <div className="mt-8 flow-root">
       <div className="overflow-x-auto overflow-y-visible">
         <div className="inline-block min-w-full py-2 pb-12 align-middle">
-          <div className="ring-opacity-5 relative h-full shadow-sm ring-1 ring-black sm:rounded-lg">
+          <div className="relative h-full shadow-sm ring-1 ring-black/5 sm:rounded-lg">
             <table className="min-w-[600px] divide-y divide-light-600 dark:divide-dark-600">
               <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
                 <tr>

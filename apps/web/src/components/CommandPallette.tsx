@@ -66,7 +66,7 @@ export default function CommandPallette({
     >
       <DialogBackdrop
         transition
-        className="bg-opacity-40 dark:bg-opacity-40 fixed inset-0 bg-light-50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-dark-50"
+        className="fixed inset-0 bg-light-50/40 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-dark-50/40"
       />
 
       <div className="fixed inset-0 z-50 w-screen overflow-y-auto">
