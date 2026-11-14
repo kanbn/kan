@@ -1,9 +1,10 @@
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 import { useRef, useState } from "react";
 import { HiOutlinePaperClip } from "react-icons/hi";
 import { HiCheckBadge } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
+
+import { env } from "@kan/shared/env";
 
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";

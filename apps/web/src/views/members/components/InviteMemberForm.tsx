@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { useQueryClient } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -20,6 +19,7 @@ import {
   useGetActiveInviteLink,
   useInviteMember,
 } from "@kan/api-client/hooks";
+import { env } from "@kan/shared/env";
 import { getSubscriptionByPlan } from "@kan/shared/utils";
 
 import Button from "~/components/Button";

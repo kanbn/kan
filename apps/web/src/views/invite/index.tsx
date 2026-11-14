@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 
 import { useAcceptInviteLink, useGetInviteByCode } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
+import { env } from "@kan/shared/env";
 
 import Button from "~/components/Button";
 import LoadingSpinner from "~/components/LoadingSpinner";

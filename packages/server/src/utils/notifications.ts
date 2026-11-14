@@ -1,5 +1,3 @@
-import { env } from "next-runtime-env";
-
 import type { dbClient } from "@kan/db/client";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
@@ -9,6 +7,7 @@ import * as userRepo from "@kan/db/repository/user.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { sendEmail } from "@kan/email";
 import { createLogger } from "@kan/logger";
+import { env } from "@kan/shared/env";
 
 import { getNewMentionPublicIds } from "./mention-notifications";
 import { hasBoardAccess } from "./permissions";

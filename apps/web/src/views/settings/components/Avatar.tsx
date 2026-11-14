@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { t } from "@lingui/core/macro";
 import { useQueryClient } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import { useCallback, useRef, useState } from "react";
 import ReactCrop from "react-image-crop";
+
+import { env } from "@kan/shared/env";
 
 import "react-image-crop/dist/ReactCrop.css";
 

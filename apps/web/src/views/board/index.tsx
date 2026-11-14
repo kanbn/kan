@@ -23,7 +23,6 @@ import {
 } from "@dnd-kit/sortable";
 import { t } from "@lingui/core/macro";
 import { keepPreviousData, useMutation } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -37,6 +36,7 @@ import {
   useUpdateBoard,
   useUpdateList,
 } from "@kan/api-client/hooks";
+import { env } from "@kan/shared/env";
 
 import type { CardContextMenuAction } from "./components/CardContextMenu";
 import type { BoardView } from "./components/ViewToggle";

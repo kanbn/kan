@@ -20,7 +20,7 @@ const mocks = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("next-runtime-env", () => ({
+vi.mock("@kan/shared/env", () => ({
   env: vi.fn(() => "https://kan.example.com"),
 }));
 
@@ -84,7 +84,11 @@ describe("sendMentionEmails", () => {
       },
     });
     mocks.getWorkspace.mockResolvedValue({ id: 7 });
-    mocks.getBoard.mockResolvedValue({ id: 3, workspaceId: 7, type: "regular" });
+    mocks.getBoard.mockResolvedValue({
+      id: 3,
+      workspaceId: 7,
+      type: "regular",
+    });
     mocks.hasBoardAccess.mockResolvedValue(true);
     mocks.getUser.mockResolvedValue({
       id: authorUserId,
@@ -131,11 +135,11 @@ describe("sendMentionEmails", () => {
       commentId: 21,
     });
 
-    expect(mocks.hasBoardAccess).toHaveBeenCalledWith(
-      db,
-      "mentioned-user-id",
-      { id: 3, workspaceId: 7, type: "regular" },
-    );
+    expect(mocks.hasBoardAccess).toHaveBeenCalledWith(db, "mentioned-user-id", {
+      id: 3,
+      workspaceId: 7,
+      type: "regular",
+    });
     expect(mocks.sendEmail).not.toHaveBeenCalled();
     expect(mocks.createNotification).not.toHaveBeenCalled();
   });

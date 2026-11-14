@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { env } from "next-runtime-env";
+
+import { env } from "@kan/shared/env";
 
 const DEFAULT_DESCRIPTION =
   "The open source alternative to Trello. A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.";

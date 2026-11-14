@@ -10,7 +10,8 @@ import {
   Preview,
   Text,
 } from "react-email";
-import { env } from "next-runtime-env";
+
+import { env } from "@kan/shared/env";
 
 export const ResetPasswordTemplate = ({
   resetPasswordUrl,
@@ -81,7 +82,8 @@ export const ResetPasswordTemplate = ({
             color: "#7e7e7e",
           }}
         >
-          If you didn&apos;t try to reset your password, you can safely ignore this email.
+          If you didn&apos;t try to reset your password, you can safely ignore
+          this email.
         </Text>
         <Hr
           style={{

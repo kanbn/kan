@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { createKanMcpServer } from "@kan.bn/mcp";
 import { createKanClient, KanApiError } from "@kan.bn/mcp/client";
 import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
-import { env } from "next-runtime-env";
 
 import type { KanClient } from "@kan.bn/mcp/client";
 import { withApiLogging } from "@kan/server/utils/apiLogging";
@@ -11,6 +10,7 @@ import {
   getCachedPaidWorkspaceEligibility,
   setCachedPaidWorkspaceEligibility,
 } from "@kan/server/utils/paidWorkspaceCache";
+import { env } from "@kan/shared/env";
 import { isPaidWorkspacePlan } from "@kan/shared/utils";
 
 interface WorkspaceMembership {

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { env } from "next-runtime-env";
+
+import { env } from "@kan/shared/env";
 
 import type { CardDragData } from "../dnd/types";
 import type { BoardCard } from "../types";

@@ -1,4 +1,4 @@
-import { env } from "next-runtime-env";
+import { env } from "@kan/shared/env";
 
 export const formatToArray = (
   value: string | string[] | undefined,
@@ -56,7 +56,8 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
   }
 
   // Construct URL from S3 key
-  const useVirtualHosted = env("NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS") === "true";
+  const useVirtualHosted =
+    env("NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS") === "true";
   const storageDomain = env("NEXT_PUBLIC_STORAGE_DOMAIN");
   const storageUrl = env("NEXT_PUBLIC_STORAGE_URL");
   const bucket = env("NEXT_PUBLIC_AVATAR_BUCKET_NAME");

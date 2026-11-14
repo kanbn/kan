@@ -1,23 +1,23 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { env } from "next-runtime-env";
 
 import type { dbClient } from "@kan/db/client";
 import * as schema from "@kan/db/schema";
 import { sendEmail } from "@kan/email";
+import { env } from "@kan/shared/env";
 
 import { createDatabaseHooks, createMiddlewareHooks } from "./hooks";
 import { createPlugins } from "./plugins";
 import { configuredProviders } from "./providers";
 
 export const initAuth = (db: dbClient) => {
-  const baseURL = env("NEXT_PUBLIC_BASE_URL") || env("BETTER_AUTH_URL");
+  const baseURL = env("NEXT_PUBLIC_BASE_URL") || process.env.BETTER_AUTH_URL;
   const trustedOrigins =
-    env("BETTER_AUTH_TRUSTED_ORIGINS")?.split(",").filter(Boolean) ?? [];
-  const ipHeader = env("RATE_LIMIT_IP_HEADER")?.toLowerCase();
+    process.env.BETTER_AUTH_TRUSTED_ORIGINS?.split(",").filter(Boolean) ?? [];
+  const ipHeader = process.env.RATE_LIMIT_IP_HEADER?.toLowerCase();
 
   return betterAuth({
-    secret: env("BETTER_AUTH_SECRET"),
+    secret: process.env.BETTER_AUTH_SECRET,
     baseURL,
     trustedOrigins: [...(baseURL ? [baseURL] : []), ...trustedOrigins],
     database: drizzleAdapter(db, {
@@ -32,7 +32,7 @@ export const initAuth = (db: dbClient) => {
       updateAge: 60 * 60 * 24 * 2, // Update session expiry every 48 hours if user is active
       freshAge: 0,
     },
-    ...(env("DISABLE_RATE_LIMIT") === "true"
+    ...(process.env.DISABLE_RATE_LIMIT === "true"
       ? { rateLimit: { enabled: false } }
       : {}),
     emailAndPassword: {
@@ -68,12 +68,12 @@ export const initAuth = (db: dbClient) => {
     databaseHooks: createDatabaseHooks(db),
     hooks: createMiddlewareHooks(db),
     advanced: {
-      cookiePrefix: env("BETTER_AUTH_COOKIE_PREFIX") ?? "kan",
-      ...(env("BETTER_AUTH_COOKIE_DOMAIN")
+      cookiePrefix: process.env.BETTER_AUTH_COOKIE_PREFIX ?? "kan",
+      ...(process.env.BETTER_AUTH_COOKIE_DOMAIN
         ? {
             crossSubDomainCookies: {
               enabled: true,
-              domain: env("BETTER_AUTH_COOKIE_DOMAIN"),
+              domain: process.env.BETTER_AUTH_COOKIE_DOMAIN,
             },
             defaultCookieAttributes: {
               sameSite: "lax" as const,

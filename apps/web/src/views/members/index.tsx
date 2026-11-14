@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
 import { useQueryClient } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import {
   HiBolt,
   HiChevronDown,
@@ -17,6 +16,7 @@ import {
   useUpdateMemberRole,
 } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
+import { env } from "@kan/shared/env";
 import {
   getSeatLimit,
   getSubscriptionByPlan,

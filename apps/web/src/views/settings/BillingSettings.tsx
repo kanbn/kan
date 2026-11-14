@@ -1,9 +1,9 @@
 import { useRouter } from "next/navigation";
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 
 import { useGetWorkspace } from "@kan/api-client/hooks";
+import { env } from "@kan/shared/env";
 
 import Button from "~/components/Button";
 import FeedbackModal from "~/components/FeedbackModal";

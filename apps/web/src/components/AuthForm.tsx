@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -31,6 +30,7 @@ import { TbBrandKick } from "react-icons/tb";
 import { z } from "zod";
 
 import { authClient } from "@kan/auth/client";
+import { env } from "@kan/shared/env";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";

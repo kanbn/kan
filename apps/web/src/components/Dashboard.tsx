@@ -1,6 +1,5 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -12,6 +11,7 @@ import {
 
 import { useGetUser } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
+import { env } from "@kan/shared/env";
 
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";

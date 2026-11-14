@@ -290,9 +290,6 @@ importers:
       next:
         specifier: 16.4.6
         version: 16.4.6(@babel/core@7.28.3)(@playwright/test@1.65.0)(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
-      next-runtime-env:
-        specifier: ^1.7.2
-        version: 1.8.0
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -402,12 +399,12 @@ importers:
 
   packages/api-client:
     dependencies:
+      '@kan/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@tanstack/react-query':
         specifier: 'catalog:'
         version: 5.107.1(@types/react@19.3.0)(react@19.3.1)
-      next-runtime-env:
-        specifier: ^1.7.2
-        version: 1.8.0
     devDependencies:
       '@kan/eslint-config':
         specifier: workspace:*
@@ -588,6 +585,9 @@ importers:
       '@kan/logger':
         specifier: workspace:^
         version: link:../logger
+      '@kan/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@subscriber.dev/sdk':
         specifier: ^0.1.2
         version: 0.1.2
@@ -751,9 +751,6 @@ importers:
       nanoid:
         specifier: ^6.0.2
         version: 6.0.2
-      next-runtime-env:
-        specifier: ^1.7.2
-        version: 1.8.0
     devDependencies:
       '@kan/eslint-config':
         specifier: workspace:*
@@ -6743,9 +6740,6 @@ packages:
     peerDependenciesMeta:
       '@nestjs/swagger':
         optional: true
-
-  next-runtime-env@1.8.0:
-    resolution: {integrity: sha512-QJVxzmr2gTao/vZKFgcrByFrifl0YOMTvuUVxcI/X7ratlW+9zMvMmA9AGU9cFsumXJtohWkCvwPdBNdkTCYfw==}
 
   next-themes@0.4.6:
     resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
@@ -13792,10 +13786,6 @@ snapshots:
       zod: 4.6.7
     optionalDependencies:
       '@nestjs/swagger': 12.1.2(@nestjs/common@12.5.0(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@12.5.0)(reflect-metadata@0.2.2)(typescript@5.9.2)
-
-  next-runtime-env@1.8.0:
-    dependencies:
-      chalk: 4.1.2
 
   next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:

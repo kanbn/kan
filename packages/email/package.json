@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@kan/logger": "workspace:^",
+    "@kan/shared": "workspace:*",
     "@subscriber.dev/sdk": "^0.1.2",
     "nodemailer": "^10.5.0",
     "react": "catalog:react19",

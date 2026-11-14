@@ -1,10 +1,11 @@
 import { NextRequest } from "next/server";
-import { env } from "next-runtime-env";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { env } from "@kan/shared/env";
 
 import { proxy } from "./proxy";
 
-vi.mock("next-runtime-env", () => ({
+vi.mock("@kan/shared/env", () => ({
   env: vi.fn(),
 }));
 

@@ -2,7 +2,6 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { useMutation } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { env } from "next-runtime-env";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePaperClip } from "react-icons/hi";
@@ -12,6 +11,7 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
+import { env } from "@kan/shared/env";
 import { generateUID } from "@kan/shared/utils";
 
 import type { WorkspaceMember } from "~/components/Editor";

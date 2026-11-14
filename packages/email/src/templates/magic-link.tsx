@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Body,
   Button,
@@ -10,8 +11,8 @@ import {
   Preview,
   Text,
 } from "react-email";
-import { env } from "next-runtime-env";
-import * as React from "react";
+
+import { env } from "@kan/shared/env";
 
 export const MagicLinkTemplate = ({
   magicLoginUrl,

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("next-runtime-env", () => ({
+vi.mock("@kan/shared/env", () => ({
   env: vi.fn(),
 }));
 
@@ -41,13 +41,12 @@ vi.mock("@modelcontextprotocol/node", () => ({
   }),
 }));
 
-const { env } = await import("next-runtime-env");
+const { env } = await import("@kan/shared/env");
 const mockedEnv = vi.mocked(env);
 const { createKanClient } = await import("@kan.bn/mcp/client");
 const mockedCreateKanClient = vi.mocked(createKanClient);
-const { clearPaidWorkspaceCache } = await import(
-  "@kan/server/utils/paidWorkspaceCache"
-);
+const { clearPaidWorkspaceCache } =
+  await import("@kan/server/utils/paidWorkspaceCache");
 const handler = (await import("../pages/api/mcp.js")).default;
 
 function makeReqRes(headers: Record<string, string> = {}) {
