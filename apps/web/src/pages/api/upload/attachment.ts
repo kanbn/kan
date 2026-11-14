@@ -6,7 +6,10 @@ import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
 import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import { createNextApiContext } from "@kan/server/context";
 import { withApiLogging } from "@kan/server/utils/apiLogging";
-import { assertPermission } from "@kan/server/utils/permissions";
+import {
+  assertBoardAccess,
+  assertPermission,
+} from "@kan/server/utils/permissions";
 import { withRateLimit } from "@kan/server/utils/rateLimit";
 import { createS3Client, generateUID } from "@kan/shared/utils";
 
@@ -96,6 +99,16 @@ export default withRateLimit(
         await assertPermission(db, user.id, card.workspaceId, "card:edit");
       } catch {
         return res.status(403).json({ error: "Permission denied" });
+      }
+
+      try {
+        await assertBoardAccess(db, user.id, {
+          id: card.boardId,
+          workspaceId: card.workspaceId,
+          type: card.boardType,
+        });
+      } catch {
+        return res.status(404).json({ error: "Card not found" });
       }
 
       const s3Key = `${card.workspaceId}/${cardPublicId}/${generateUID()}-${sanitizedFilename}`;
