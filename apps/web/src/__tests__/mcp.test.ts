@@ -35,8 +35,8 @@ vi.mock("@kan.bn/mcp", () => ({
 }));
 
 const handleRequest = vi.fn().mockResolvedValue(undefined);
-vi.mock("@modelcontextprotocol/sdk/server/streamableHttp.js", () => ({
-  StreamableHTTPServerTransport: vi.fn(function () {
+vi.mock("@modelcontextprotocol/node", () => ({
+  NodeStreamableHTTPServerTransport: vi.fn(function () {
     return { close: vi.fn().mockResolvedValue(undefined), handleRequest };
   }),
 }));

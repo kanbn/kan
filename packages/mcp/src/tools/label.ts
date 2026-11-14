@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 
 import type { KanClient } from "../client.js";
@@ -33,10 +33,14 @@ function resolveColourCode(
 }
 
 export function registerLabelTools(server: McpServer, client: KanClient): void {
-  server.tool(
+  server.registerTool(
     "get_label",
-    "Get a label by its public ID",
-    { labelPublicId: z.string().describe("The label's public ID") },
+    {
+      description: "Get a label by its public ID",
+      inputSchema: z.object({
+        labelPublicId: z.string().describe("The label's public ID"),
+      }),
+    },
     async ({ labelPublicId }) => {
       const data = await client.request("GET", `/labels/${labelPublicId}`);
       return {
@@ -45,20 +49,22 @@ export function registerLabelTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "create_label",
-    `Create a label for a board. Pick a colour by preset name (${colourNames.join(", ")}) or pass an explicit 7-char hex via colourCode. Defaults to Teal.`,
     {
-      boardPublicId: z.string().describe("The board's public ID"),
-      name: z.string().describe("Label name"),
-      colour: colourNameSchema.optional().describe(presetDescription),
-      colourCode: z
-        .string()
-        .regex(/^#[0-9a-fA-F]{6}$/)
-        .optional()
-        .describe(
-          "Explicit 7-char hex colour (e.g. #0d9488). Overrides `colour` if both are set.",
-        ),
+      description: `Create a label for a board. Pick a colour by preset name (${colourNames.join(", ")}) or pass an explicit 7-char hex via colourCode. Defaults to Teal.`,
+      inputSchema: z.object({
+        boardPublicId: z.string().describe("The board's public ID"),
+        name: z.string().describe("Label name"),
+        colour: colourNameSchema.optional().describe(presetDescription),
+        colourCode: z
+          .string()
+          .regex(/^#[0-9a-fA-F]{6}$/)
+          .optional()
+          .describe(
+            "Explicit 7-char hex colour (e.g. #0d9488). Overrides `colour` if both are set.",
+          ),
+      }),
     },
     async ({ boardPublicId, name, colour, colourCode }) => {
       const resolved =
@@ -74,20 +80,23 @@ export function registerLabelTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "update_label",
-    "Update a label's name or colour. Pick a colour by preset name or pass an explicit 7-char hex.",
     {
-      labelPublicId: z.string().describe("The label's public ID"),
-      name: z.string().optional().describe("New label name"),
-      colour: colourNameSchema.optional().describe(presetDescription),
-      colourCode: z
-        .string()
-        .regex(/^#[0-9a-fA-F]{6}$/)
-        .optional()
-        .describe(
-          "Explicit 7-char hex colour. Overrides `colour` if both are set.",
-        ),
+      description:
+        "Update a label's name or colour. Pick a colour by preset name or pass an explicit 7-char hex.",
+      inputSchema: z.object({
+        labelPublicId: z.string().describe("The label's public ID"),
+        name: z.string().optional().describe("New label name"),
+        colour: colourNameSchema.optional().describe(presetDescription),
+        colourCode: z
+          .string()
+          .regex(/^#[0-9a-fA-F]{6}$/)
+          .optional()
+          .describe(
+            "Explicit 7-char hex colour. Overrides `colour` if both are set.",
+          ),
+      }),
     },
     async ({ labelPublicId, name, colour, colourCode }) => {
       const resolved = resolveColourCode(colour, colourCode);
@@ -105,10 +114,14 @@ export function registerLabelTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "delete_label",
-    "Delete a label",
-    { labelPublicId: z.string().describe("The label's public ID") },
+    {
+      description: "Delete a label",
+      inputSchema: z.object({
+        labelPublicId: z.string().describe("The label's public ID"),
+      }),
+    },
     async ({ labelPublicId }) => {
       const data = await client.request("DELETE", `/labels/${labelPublicId}`);
       return {

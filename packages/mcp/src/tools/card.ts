@@ -1,32 +1,34 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 
 import type { KanClient } from "../client.js";
 
 export function registerCardTools(server: McpServer, client: KanClient): void {
-  server.tool(
+  server.registerTool(
     "create_card",
-    "Create a new card in a list",
     {
-      listPublicId: z.string().describe("The list's public ID"),
-      title: z.string().describe("Card title"),
-      description: z
-        .string()
-        .optional()
-        .describe("Card description (markdown supported)"),
-      dueDate: z.string().optional().describe("Due date in ISO 8601 format"),
-      labelPublicIds: z
-        .array(z.string())
-        .optional()
-        .describe("Public IDs of labels to attach"),
-      memberPublicIds: z
-        .array(z.string())
-        .optional()
-        .describe("Public IDs of workspace members to assign"),
-      position: z
-        .enum(["start", "end"])
-        .optional()
-        .describe("Where to insert the card in the list (default: end)"),
+      description: "Create a new card in a list",
+      inputSchema: z.object({
+        listPublicId: z.string().describe("The list's public ID"),
+        title: z.string().describe("Card title"),
+        description: z
+          .string()
+          .optional()
+          .describe("Card description (markdown supported)"),
+        dueDate: z.string().optional().describe("Due date in ISO 8601 format"),
+        labelPublicIds: z
+          .array(z.string())
+          .optional()
+          .describe("Public IDs of labels to attach"),
+        memberPublicIds: z
+          .array(z.string())
+          .optional()
+          .describe("Public IDs of workspace members to assign"),
+        position: z
+          .enum(["start", "end"])
+          .optional()
+          .describe("Where to insert the card in the list (default: end)"),
+      }),
     },
     async ({
       listPublicId,
@@ -52,10 +54,15 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "get_card",
-    "Get full details of a card including comments, checklists, labels and members",
-    { cardPublicId: z.string().describe("The card's public ID") },
+    {
+      description:
+        "Get full details of a card including comments, checklists, labels and members",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+      }),
+    },
     async ({ cardPublicId }) => {
       const data = await client.request("GET", `/cards/${cardPublicId}`);
       return {
@@ -64,22 +71,25 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "update_card",
-    "Update a card's title, description, due date, or move it to another list",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      title: z.string().optional().describe("New card title"),
-      description: z.string().optional().describe("New description"),
-      dueDate: z
-        .string()
-        .nullable()
-        .optional()
-        .describe("Due date in ISO 8601, or null to clear"),
-      listPublicId: z
-        .string()
-        .optional()
-        .describe("Move card to this list (public ID)"),
+      description:
+        "Update a card's title, description, due date, or move it to another list",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        title: z.string().optional().describe("New card title"),
+        description: z.string().optional().describe("New description"),
+        dueDate: z
+          .string()
+          .nullable()
+          .optional()
+          .describe("Due date in ISO 8601, or null to clear"),
+        listPublicId: z
+          .string()
+          .optional()
+          .describe("Move card to this list (public ID)"),
+      }),
     },
     async ({ cardPublicId, title, description, dueDate, listPublicId }) => {
       const data = await client.request("PUT", `/cards/${cardPublicId}`, {
@@ -94,10 +104,14 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "delete_card",
-    "Delete a card (soft delete)",
-    { cardPublicId: z.string().describe("The card's public ID") },
+    {
+      description: "Delete a card (soft delete)",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+      }),
+    },
     async ({ cardPublicId }) => {
       const data = await client.request("DELETE", `/cards/${cardPublicId}`);
       return {
@@ -106,30 +120,32 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "duplicate_card",
-    "Duplicate a card to the same or a different list",
     {
-      cardPublicId: z.string().describe("The card's public ID to duplicate"),
-      targetListPublicId: z
-        .string()
-        .optional()
-        .describe("Target list public ID (defaults to same list)"),
-      copyLabels: z
-        .boolean()
-        .optional()
-        .default(true)
-        .describe("Copy labels to the duplicate"),
-      copyMembers: z
-        .boolean()
-        .optional()
-        .default(true)
-        .describe("Copy assigned members to the duplicate"),
-      copyChecklists: z
-        .boolean()
-        .optional()
-        .default(true)
-        .describe("Copy checklists to the duplicate"),
+      description: "Duplicate a card to the same or a different list",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID to duplicate"),
+        targetListPublicId: z
+          .string()
+          .optional()
+          .describe("Target list public ID (defaults to same list)"),
+        copyLabels: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Copy labels to the duplicate"),
+        copyMembers: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Copy assigned members to the duplicate"),
+        copyChecklists: z
+          .boolean()
+          .optional()
+          .default(true)
+          .describe("Copy checklists to the duplicate"),
+      }),
     },
     async ({
       cardPublicId,
@@ -163,15 +179,17 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "get_card_activities",
-    "Get the activity history of a card",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      cursor: z
-        .string()
-        .optional()
-        .describe("Pagination cursor from a previous response"),
+      description: "Get the activity history of a card",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        cursor: z
+          .string()
+          .optional()
+          .describe("Pagination cursor from a previous response"),
+      }),
     },
     async ({ cardPublicId, cursor }) => {
       const params = cursor ? `?cursor=${encodeURIComponent(cursor)}` : "";
@@ -185,12 +203,14 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "add_card_comment",
-    "Add a comment to a card",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      content: z.string().describe("Comment text"),
+      description: "Add a comment to a card",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        content: z.string().describe("Comment text"),
+      }),
     },
     async ({ cardPublicId, content }) => {
       const data = await client.request(
@@ -204,13 +224,15 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "update_card_comment",
-    "Update the text of an existing comment",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      commentPublicId: z.string().describe("The comment's public ID"),
-      content: z.string().describe("New comment text"),
+      description: "Update the text of an existing comment",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        commentPublicId: z.string().describe("The comment's public ID"),
+        content: z.string().describe("New comment text"),
+      }),
     },
     async ({ cardPublicId, commentPublicId, content }) => {
       const data = await client.request(
@@ -224,12 +246,14 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "delete_card_comment",
-    "Delete a comment from a card",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      commentPublicId: z.string().describe("The comment's public ID"),
+      description: "Delete a comment from a card",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        commentPublicId: z.string().describe("The comment's public ID"),
+      }),
     },
     async ({ cardPublicId, commentPublicId }) => {
       const data = await client.request(
@@ -242,12 +266,15 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "toggle_card_label",
-    "Add or remove a label on a card (toggles if already present)",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      labelPublicId: z.string().describe("The label's public ID"),
+      description:
+        "Add or remove a label on a card (toggles if already present)",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        labelPublicId: z.string().describe("The label's public ID"),
+      }),
     },
     async ({ cardPublicId, labelPublicId }) => {
       const data = await client.request(
@@ -260,14 +287,15 @@ export function registerCardTools(server: McpServer, client: KanClient): void {
     },
   );
 
-  server.tool(
+  server.registerTool(
     "toggle_card_member",
-    "Add or remove a member assignment on a card (toggles if already assigned)",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      memberPublicId: z
-        .string()
-        .describe("The workspace member's public ID"),
+      description:
+        "Add or remove a member assignment on a card (toggles if already assigned)",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        memberPublicId: z.string().describe("The workspace member's public ID"),
+      }),
     },
     async ({ cardPublicId, memberPublicId }) => {
       const data = await client.request(

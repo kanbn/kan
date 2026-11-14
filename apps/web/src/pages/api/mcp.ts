@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createKanMcpServer } from "@kan.bn/mcp";
 import { createKanClient, KanApiError } from "@kan.bn/mcp/client";
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
 import { env } from "next-runtime-env";
 
 import type { KanClient } from "@kan.bn/mcp/client";
@@ -88,7 +88,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const server = createKanMcpServer(client);
-  const transport = new StreamableHTTPServerTransport({
+  const transport = new NodeStreamableHTTPServerTransport({
     sessionIdGenerator: undefined,
     enableJsonResponse: true,
   });

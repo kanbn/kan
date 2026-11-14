@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 
 import type { KanClient } from "../client.js";
@@ -8,10 +8,13 @@ export function registerWorkspaceTools(
   server: McpServer,
   client: KanClient,
 ): void {
-  server.tool(
+  server.registerTool(
     "list_workspaces",
-    "List all workspaces the authenticated user belongs to. Call this first to resolve a workspace name to its publicId before calling any other workspace-scoped tool.",
-    {},
+    {
+      description:
+        "List all workspaces the authenticated user belongs to. Call this first to resolve a workspace name to its publicId before calling any other workspace-scoped tool.",
+      inputSchema: z.object({}),
+    },
     async () => {
       const memberships = await client.request<
         { workspace: Record<string, unknown> }[]
@@ -23,10 +26,15 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "find_workspace_by_name",
-    "Find a workspace by its name (case-insensitive). Returns the matching workspace including its publicId. Use this whenever you only know the workspace name and need its publicId.",
-    { name: z.string().describe("Workspace name to search for") },
+    {
+      description:
+        "Find a workspace by its name (case-insensitive). Returns the matching workspace including its publicId. Use this whenever you only know the workspace name and need its publicId.",
+      inputSchema: z.object({
+        name: z.string().describe("Workspace name to search for"),
+      }),
+    },
     async ({ name }) => {
       const result = await findWorkspaceByName(client, name);
       if (!result.found) {
@@ -40,10 +48,14 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "get_workspace",
-    "Get a workspace by its public ID, including its members",
-    { workspacePublicId: z.string().describe("The workspace's public ID") },
+    {
+      description: "Get a workspace by its public ID, including its members",
+      inputSchema: z.object({
+        workspacePublicId: z.string().describe("The workspace's public ID"),
+      }),
+    },
     async ({ workspacePublicId }) => {
       const data = await client.request(
         "GET",
@@ -55,10 +67,14 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "get_workspace_by_slug",
-    "Get a workspace by its slug, including its boards",
-    { workspaceSlug: z.string().describe("The workspace slug") },
+    {
+      description: "Get a workspace by its slug, including its boards",
+      inputSchema: z.object({
+        workspaceSlug: z.string().describe("The workspace slug"),
+      }),
+    },
     async ({ workspaceSlug }) => {
       const data = await client.request("GET", `/workspaces/${workspaceSlug}`);
       return {
@@ -67,15 +83,17 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "create_workspace",
-    "Create a new workspace",
     {
-      name: z.string().describe("Workspace name"),
-      slug: z
-        .string()
-        .optional()
-        .describe("URL-friendly slug (auto-generated if omitted)"),
+      description: "Create a new workspace",
+      inputSchema: z.object({
+        name: z.string().describe("Workspace name"),
+        slug: z
+          .string()
+          .optional()
+          .describe("URL-friendly slug (auto-generated if omitted)"),
+      }),
     },
     async ({ name, slug }) => {
       const data = await client.request("POST", "/workspaces", { name, slug });
@@ -85,13 +103,15 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "update_workspace",
-    "Update a workspace's name or slug",
     {
-      workspacePublicId: z.string().describe("The workspace's public ID"),
-      name: z.string().optional().describe("New workspace name"),
-      slug: z.string().optional().describe("New workspace slug"),
+      description: "Update a workspace's name or slug",
+      inputSchema: z.object({
+        workspacePublicId: z.string().describe("The workspace's public ID"),
+        name: z.string().optional().describe("New workspace name"),
+        slug: z.string().optional().describe("New workspace slug"),
+      }),
     },
     async ({ workspacePublicId, name, slug }) => {
       const data = await client.request(
@@ -105,10 +125,14 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "delete_workspace",
-    "Permanently delete a workspace",
-    { workspacePublicId: z.string().describe("The workspace's public ID") },
+    {
+      description: "Permanently delete a workspace",
+      inputSchema: z.object({
+        workspacePublicId: z.string().describe("The workspace's public ID"),
+      }),
+    },
     async ({ workspacePublicId }) => {
       const data = await client.request(
         "DELETE",
@@ -120,12 +144,14 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "search_workspace",
-    "Search for boards and cards by title within a workspace",
     {
-      workspacePublicId: z.string().describe("The workspace's public ID"),
-      query: z.string().describe("Search query string"),
+      description: "Search for boards and cards by title within a workspace",
+      inputSchema: z.object({
+        workspacePublicId: z.string().describe("The workspace's public ID"),
+        query: z.string().describe("Search query string"),
+      }),
     },
     async ({ workspacePublicId, query }) => {
       const params = new URLSearchParams({ query });
@@ -139,10 +165,12 @@ export function registerWorkspaceTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "check_workspace_slug_availability",
-    "Check whether a workspace slug is available",
-    { slug: z.string().describe("Slug to check") },
+    {
+      description: "Check whether a workspace slug is available",
+      inputSchema: z.object({ slug: z.string().describe("Slug to check") }),
+    },
     async ({ slug }) => {
       const params = new URLSearchParams({ workspaceSlug: slug });
       const data = await client.request(

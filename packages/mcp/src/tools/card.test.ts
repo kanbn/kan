@@ -1,4 +1,4 @@
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { describe, expect, it, vi } from "vitest";
 
 import type { KanClient } from "../client.js";
@@ -8,7 +8,7 @@ describe("duplicate_card", () => {
   it("sends the backend's expected `listPublicId` field when a target list is given", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;
@@ -37,7 +37,7 @@ describe("duplicate_card", () => {
   it("looks up the card's current list when no target list is given", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;

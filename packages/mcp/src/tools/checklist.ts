@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { z } from "zod";
 
 import type { KanClient } from "../client.js";
@@ -7,12 +7,14 @@ export function registerChecklistTools(
   server: McpServer,
   client: KanClient,
 ): void {
-  server.tool(
+  server.registerTool(
     "create_checklist",
-    "Add a checklist to a card",
     {
-      cardPublicId: z.string().describe("The card's public ID"),
-      name: z.string().describe("Checklist name"),
+      description: "Add a checklist to a card",
+      inputSchema: z.object({
+        cardPublicId: z.string().describe("The card's public ID"),
+        name: z.string().describe("Checklist name"),
+      }),
     },
     async ({ cardPublicId, name }) => {
       const data = await client.request(
@@ -26,12 +28,14 @@ export function registerChecklistTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "update_checklist",
-    "Rename a checklist",
     {
-      checklistPublicId: z.string().describe("The checklist's public ID"),
-      name: z.string().describe("New checklist name"),
+      description: "Rename a checklist",
+      inputSchema: z.object({
+        checklistPublicId: z.string().describe("The checklist's public ID"),
+        name: z.string().describe("New checklist name"),
+      }),
     },
     async ({ checklistPublicId, name }) => {
       const data = await client.request(
@@ -45,10 +49,14 @@ export function registerChecklistTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "delete_checklist",
-    "Delete a checklist and all its items",
-    { checklistPublicId: z.string().describe("The checklist's public ID") },
+    {
+      description: "Delete a checklist and all its items",
+      inputSchema: z.object({
+        checklistPublicId: z.string().describe("The checklist's public ID"),
+      }),
+    },
     async ({ checklistPublicId }) => {
       const data = await client.request(
         "DELETE",
@@ -60,12 +68,14 @@ export function registerChecklistTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "create_checklist_item",
-    "Add an item to a checklist",
     {
-      checklistPublicId: z.string().describe("The checklist's public ID"),
-      title: z.string().describe("Item title"),
+      description: "Add an item to a checklist",
+      inputSchema: z.object({
+        checklistPublicId: z.string().describe("The checklist's public ID"),
+        title: z.string().describe("Item title"),
+      }),
     },
     async ({ checklistPublicId, title }) => {
       const data = await client.request(
@@ -79,19 +89,22 @@ export function registerChecklistTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "update_checklist_item",
-    "Update a checklist item's title, completion status, or position",
     {
-      checklistItemPublicId: z
-        .string()
-        .describe("The checklist item's public ID"),
-      title: z.string().optional().describe("New item title"),
-      isCompleted: z
-        .boolean()
-        .optional()
-        .describe("Mark item as completed or not"),
-      index: z.number().int().optional().describe("New position index"),
+      description:
+        "Update a checklist item's title, completion status, or position",
+      inputSchema: z.object({
+        checklistItemPublicId: z
+          .string()
+          .describe("The checklist item's public ID"),
+        title: z.string().optional().describe("New item title"),
+        isCompleted: z
+          .boolean()
+          .optional()
+          .describe("Mark item as completed or not"),
+        index: z.number().int().optional().describe("New position index"),
+      }),
     },
     async ({ checklistItemPublicId, title, isCompleted, index }) => {
       const data = await client.request(
@@ -109,13 +122,15 @@ export function registerChecklistTools(
     },
   );
 
-  server.tool(
+  server.registerTool(
     "delete_checklist_item",
-    "Delete a checklist item",
     {
-      checklistItemPublicId: z
-        .string()
-        .describe("The checklist item's public ID"),
+      description: "Delete a checklist item",
+      inputSchema: z.object({
+        checklistItemPublicId: z
+          .string()
+          .describe("The checklist item's public ID"),
+      }),
     },
     async ({ checklistItemPublicId }) => {
       const data = await client.request(
