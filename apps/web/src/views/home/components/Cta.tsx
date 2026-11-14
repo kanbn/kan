@@ -66,7 +66,7 @@ const Cta = ({ theme }: { theme: string }) => {
       <svg
         viewBox="0 0 1024 1024"
         aria-hidden="true"
-        className="absolute left-1/2 top-[65%] -z-10 size-[60rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:size-[64rem]"
+        className="absolute left-1/2 top-[65%] -z-10 size-240 -translate-x-1/2 mask-[radial-gradient(closest-side,white,transparent)] lg:size-256"
       >
         <circle
           r={512}

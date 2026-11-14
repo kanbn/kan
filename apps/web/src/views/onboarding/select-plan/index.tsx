@@ -222,7 +222,7 @@ export default function SelectPlanView() {
                             {plan.description}
                           </p>
                         </div>
-                        <div className="mt-0.5 flex-shrink-0">
+                        <div className="mt-0.5 shrink-0">
                           <div
                             className={`flex h-4 w-4 items-center justify-center rounded-full border-2 ${
                               selected === plan.id

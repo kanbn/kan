@@ -83,7 +83,7 @@ export function CardContextMoveListModal() {
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="h-10 w-full animate-pulse rounded bg-light-200 dark:bg-dark-300"
+              className="h-10 w-full animate-pulse rounded-sm bg-light-200 dark:bg-dark-300"
             />
           ))}
         </div>

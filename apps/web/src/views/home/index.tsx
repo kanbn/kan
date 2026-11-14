@@ -23,11 +23,11 @@ export default function HomeView() {
         title="Kan.bn | The open source alternative to Trello"
         description="A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place. Free, open source, and self-hostable."
       />
-      <div className="flex h-full w-full flex-col lg:pt-[5rem]">
+      <div className="flex h-full w-full flex-col lg:pt-20">
         <div className="w-full pb-10 pt-32 lg:py-32">
           <div className="my-10 flex h-full w-full animate-fade-down flex-col items-center justify-center px-4">
             <div className="flex items-center gap-2">
-              <div className="relative animate-fade-in overflow-hidden rounded-full bg-gradient-to-b from-light-300 to-light-400 p-[2px] dark:from-dark-300 dark:to-dark-400">
+              <div className="relative animate-fade-in overflow-hidden rounded-full bg-linear-to-b from-light-300 to-light-400 p-[2px] dark:from-dark-300 dark:to-dark-400">
                 <div className="gradient-border absolute inset-0 animate-border-spin" />
 
                 <div className="relative z-10 rounded-full bg-light-50 dark:bg-dark-50">
@@ -43,7 +43,7 @@ export default function HomeView() {
                 </div>
               </div>
 
-              {/* <div className="relative overflow-hidden rounded-full bg-gradient-to-b from-light-300 to-light-400 p-[2px] dark:from-dark-300 dark:to-dark-400">
+              {/* <div className="relative overflow-hidden rounded-full bg-linear-to-b from-light-300 to-light-400 p-[2px] dark:from-dark-300 dark:to-dark-400">
                 <div className="relative z-10 rounded-full bg-light-50 dark:bg-dark-50">
                   <Link
                     href="https://news.ycombinator.com/item?id=44157177"
@@ -91,7 +91,7 @@ export default function HomeView() {
         </div>
         <div className="px-4 pb-10">
           <div className="rounded-[16px] border border-light-300 bg-light-50 p-1 shadow-md dark:border-dark-300 dark:bg-dark-100 lg:rounded-[24px] lg:p-2">
-            <div className="relative overflow-hidden rounded-[12px] border border-light-300 shadow-sm dark:border-dark-300 lg:rounded-[16px]">
+            <div className="relative overflow-hidden rounded-[12px] border border-light-300 shadow-xs dark:border-dark-300 lg:rounded-[16px]">
               <Image
                 src={`/hero-light.png`}
                 alt="kanban"

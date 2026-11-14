@@ -885,7 +885,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           {boardData && (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="order-2 focus-visible:outline-none md:order-1"
+              className="order-2 focus-visible:outline-hidden md:order-1"
             >
               <input
                 id="name"
@@ -894,7 +894,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {...register("name")}
                 onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
                 readOnly={!canEditBoard}
-                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none disabled:cursor-not-allowed dark:text-dark-1000 sm:text-[1.2rem]"
+                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden disabled:cursor-not-allowed dark:text-dark-1000 sm:text-[1.2rem]"
               />
             </form>
           )}
@@ -905,7 +905,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           )}
           <div className="order-1 mb-4 flex items-center justify-end space-x-1.5 sm:space-x-2 md:order-2 md:mb-0">
             {isTemplate && (
-              <div className="inline-flex cursor-default items-center justify-center whitespace-nowrap rounded-md border-[1px] border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold text-light-950 shadow-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
+              <div className="inline-flex cursor-default items-center justify-center whitespace-nowrap rounded-md border border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
                 <span className="mr-2">
                   <HiOutlineRectangleStack />
                 </span>
@@ -997,7 +997,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none`}
           >
             {isLoading ? (
-              <div className="ml-[2rem] flex">
+              <div className="ml-8 flex">
                 <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
                 <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
                 <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
@@ -1049,7 +1049,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                       strategy={horizontalListSortingStrategy}
                     >
                       <div className="flex w-max">
-                        <div className="min-w-[10px] md:min-w-[2rem]" />
+                        <div className="min-w-[10px] md:min-w-8" />
                         {lists.map((list) => (
                           <List
                             key={`list.${list.publicId}`}
@@ -1080,7 +1080,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                             />
                           </List>
                         ))}
-                        <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
+                        <div className="min-w-[calc(100vw-18rem)] md:min-w-3" />
                       </div>
                     </SortableContext>
                     <DragOverlay dropAnimation={activeCard ? undefined : null}>

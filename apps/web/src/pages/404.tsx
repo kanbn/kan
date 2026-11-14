@@ -33,13 +33,13 @@ export default function NotFoundPage() {
                 <div className="flex flex-col gap-3">
                   <Link
                     href="/"
-                    className="flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-100 shadow-sm hover:bg-light-900 dark:bg-dark-1000 dark:text-dark-100 dark:hover:bg-dark-900"
+                    className="flex w-full justify-center rounded-md bg-light-1000 px-3 py-2 text-sm font-semibold text-light-100 shadow-xs hover:bg-light-900 dark:bg-dark-1000 dark:text-dark-100 dark:hover:bg-dark-900"
                   >
                     <Trans>Go to homepage</Trans>
                   </Link>
                   <Link
                     href="/boards"
-                    className="flex w-full justify-center rounded-md border border-light-500 bg-light-100 px-3 py-2 text-sm font-semibold text-light-1000 shadow-sm hover:bg-light-200 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 dark:hover:bg-dark-300"
+                    className="flex w-full justify-center rounded-md border border-light-500 bg-light-100 px-3 py-2 text-sm font-semibold text-light-1000 shadow-xs hover:bg-light-200 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 dark:hover:bg-dark-300"
                   >
                     <Trans>Go to boards</Trans>
                   </Link>

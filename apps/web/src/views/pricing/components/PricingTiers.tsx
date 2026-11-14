@@ -109,7 +109,7 @@ const Pricing = ({
                   className={twMerge(
                     "cursor-pointer rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
                     frequency?.value === option.value
-                      ? "bg-white text-light-1000 shadow-sm dark:bg-dark-100 dark:text-dark-1000"
+                      ? "bg-white text-light-1000 shadow-xs dark:bg-dark-100 dark:text-dark-1000"
                       : "text-light-600 dark:text-dark-700",
                   )}
                 >
@@ -184,7 +184,7 @@ const Pricing = ({
                       className={twMerge(
                         "block w-full rounded-md px-4 py-2 text-center text-sm font-medium transition-colors",
                         tier.mostPopular
-                          ? "bg-dark-50 text-light-50 shadow-sm hover:bg-dark-100 dark:bg-dark-1000 dark:text-dark-50 dark:hover:bg-dark-900"
+                          ? "bg-dark-50 text-light-50 shadow-xs hover:bg-dark-100 dark:bg-dark-1000 dark:text-dark-50 dark:hover:bg-dark-900"
                           : "border border-dark-200 bg-transparent text-dark-50 transition-colors hover:bg-dark-50 hover:text-light-50 dark:border-dark-300 dark:text-dark-1000 dark:hover:bg-dark-200",
                       )}
                     >

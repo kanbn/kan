@@ -322,7 +322,7 @@ export function KeyboardShortcutProvider({
               </DialogTitle>
               <button
                 onClick={() => setIsLegendOpen(false)}
-                className="rounded p-1 hover:bg-light-200 dark:hover:bg-dark-200"
+                className="rounded-sm p-1 hover:bg-light-200 dark:hover:bg-dark-200"
               >
                 <HiXMark className="h-5 w-5 text-neutral-700 dark:text-dark-700" />
               </button>
@@ -445,7 +445,7 @@ function ShortcutListItem({ shortcut }: { shortcut: KeyboardShortcut }) {
 
 function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   const kbdClassName =
-    "inline-flex h-5 w-5 items-center justify-center rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
+    "inline-flex h-5 w-5 items-center justify-center rounded-sm border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
 
   const stringifyModifier = (modifier: ModifierKey): string => {
     const isMac =
@@ -501,7 +501,7 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   }
 
   return (
-    <span className="inline-flex flex-shrink-0 items-center gap-1 text-[11px]">
+    <span className="inline-flex shrink-0 items-center gap-1 text-[11px]">
       {formatStroke(shortcut.stroke)}
     </span>
   );

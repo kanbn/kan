@@ -118,18 +118,18 @@ export function CardModal({
                   </>
                 )}
               </div>
-              <div className="flex flex-shrink-0 items-center gap-1">
+              <div className="flex shrink-0 items-center gap-1">
                 <button
                   type="button"
                   onClick={handleCopyCardLink}
-                  className="rounded p-1.5 transition-all hover:bg-light-200 focus:outline-none dark:hover:bg-dark-100"
+                  className="rounded-sm p-1.5 transition-all hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-100"
                   aria-label="Copy card link"
                 >
                   <HiLink className="h-4 w-4 text-light-900 dark:text-dark-900" />
                 </button>
                 <button
                   type="button"
-                  className="rounded p-1.5 transition-all hover:bg-light-200 focus:outline-none dark:hover:bg-dark-100"
+                  className="rounded-sm p-1.5 transition-all hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-100"
                   onClick={(e) => {
                     e.preventDefault();
                     closeModal();
@@ -204,7 +204,7 @@ export function CardModal({
                   viewOnly
                 />
               )}
-              <div className="border-t-[1px] border-light-600 pb-4 pt-12 dark:border-dark-400">
+              <div className="border-t border-light-600 pb-4 pt-12 dark:border-dark-400">
                 <h2 className="text-md pb-4 font-medium text-light-900 dark:text-dark-1000">
                   {t`Activity`}
                 </h2>
@@ -221,10 +221,10 @@ export function CardModal({
               </div>
             </div>
             {showTopFade && (
-              <div className="pointer-events-none absolute left-0 right-0 top-0 h-6 bg-gradient-to-b from-white/80 to-transparent dark:from-dark-100/80" />
+              <div className="pointer-events-none absolute left-0 right-0 top-0 h-6 bg-linear-to-b from-white/80 to-transparent dark:from-dark-100/80" />
             )}
             {showFade && (
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/80 to-transparent dark:from-dark-100/80" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-linear-to-t from-white/80 to-transparent dark:from-dark-100/80" />
             )}
           </div>
         </div>

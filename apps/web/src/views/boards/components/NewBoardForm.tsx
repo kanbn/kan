@@ -119,7 +119,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
           <h2 className="text-sm font-bold">{t`New ${isTemplate ? "template" : "board"}`}</h2>
           <button
             type="button"
-            className="hover:bg-li ght-300 rounded p-1 focus:outline-none dark:hover:bg-dark-300"
+            className="hover:bg-li ght-300 rounded-sm p-1 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();

@@ -296,7 +296,7 @@ const CalendarView = ({
             {format(currentMonth, "MMMM yyyy", { locale: dateLocale })}
           </time>
         </h2>
-        <div className="flex items-center rounded-md border-[1px] border-light-300 bg-light-50 dark:border-dark-300 dark:bg-dark-50">
+        <div className="flex items-center rounded-md border border-light-300 bg-light-50 dark:border-dark-300 dark:bg-dark-50">
           <button
             type="button"
             aria-label={t`Previous month`}
@@ -505,7 +505,7 @@ const CalendarView = ({
                   {t`No cards due`}
                 </p>
               ) : (
-                <ol className="divide-y divide-light-200 overflow-hidden rounded-md border-[1px] border-light-200 bg-light-50 dark:divide-dark-200 dark:border-dark-200 dark:bg-dark-50">
+                <ol className="divide-y divide-light-200 overflow-hidden rounded-md border border-light-200 bg-light-50 dark:divide-dark-200 dark:border-dark-200 dark:bg-dark-50">
                   {selectedCards.map((card) => (
                     <li key={card.publicId}>
                       <Link
@@ -541,7 +541,7 @@ const CalendarView = ({
 
         {isLocked && (
           <div className="absolute inset-0 flex items-center justify-center bg-light-50/25 p-6 dark:bg-dark-50/25">
-            <div className="w-full max-w-[22rem] rounded-xl border-[1px] border-light-600 bg-light-50 p-7 text-center shadow-lg dark:border-dark-600 dark:bg-dark-50">
+            <div className="w-full max-w-88 rounded-xl border border-light-600 bg-light-50 p-7 text-center shadow-lg dark:border-dark-600 dark:bg-dark-50">
               <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-light-300 bg-light-200 text-light-1000 dark:border-dark-600 dark:bg-dark-200 dark:text-dark-1000">
                 <HiCalendarDays className="h-4 w-4" />
               </div>

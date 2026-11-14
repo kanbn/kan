@@ -116,7 +116,7 @@ const SelectSource = ({
               {({ open }) => (
                 <>
                   <div className="relative">
-                    <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-dark-300 bg-white/5 px-4 py-1.5 text-neutral-900 shadow-sm ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:text-sm sm:leading-6">
+                    <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-dark-300 bg-white/5 px-4 py-1.5 text-neutral-900 shadow-xs ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:text-sm sm:leading-6">
                       <span className="flex items-center">
                         {integrationProviders[field.value]?.icon}
                         <span className="ml-2 block truncate text-sm">
@@ -138,7 +138,7 @@ const SelectSource = ({
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600 ring-opacity-5 focus:outline-none dark:bg-dark-300 dark:text-dark-1000 sm:text-sm">
+                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600 ring-opacity-5 focus:outline-hidden dark:bg-dark-300 dark:text-dark-1000 sm:text-sm">
                         {hasIntegrations ? (
                           availableIntegrations.map((integration, index) => (
                             <Listbox.Option
@@ -311,7 +311,7 @@ const ImportGithub: React.FC = () => {
           <input
             id={project.id}
             type="checkbox"
-            className="h-[14px] w-[14px] rounded bg-transparent ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0"
+            className="h-[14px] w-[14px] rounded-sm bg-transparent ring-0 focus:outline-hidden focus:ring-0 focus:ring-offset-0"
             {...registerProjects(project.id)}
           />
           <span className="ml-3 text-sm text-neutral-900 dark:text-dark-1000">
@@ -500,7 +500,7 @@ const ImportTrello: React.FC = () => {
           <input
             id={board.id}
             type="checkbox"
-            className="h-[14px] w-[14px] rounded bg-transparent ring-0 focus:outline-none focus:ring-0 focus:ring-offset-0"
+            className="h-[14px] w-[14px] rounded-sm bg-transparent ring-0 focus:outline-hidden focus:ring-0 focus:ring-offset-0"
             {...registerBoards(board.id)}
           />
           <span className="ml-3 text-sm text-neutral-900 dark:text-dark-1000">
@@ -582,7 +582,7 @@ export function ImportBoardsForm() {
 
         <button
           type="button"
-          className="rounded p-1 hover:bg-light-200 dark:hover:bg-dark-300"
+          className="rounded-sm p-1 hover:bg-light-200 dark:hover:bg-dark-300"
           onClick={() => closeModal()}
         >
           <HiXMark size={18} className="text-dark-900" />

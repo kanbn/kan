@@ -14,7 +14,7 @@
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "prettier": "catalog:",
-    "prettier-plugin-tailwindcss": "^0.6.9"
+    "prettier-plugin-tailwindcss": "^0.8.1"
   },
   "devDependencies": {
     "@kan/tsconfig": "workspace:*",

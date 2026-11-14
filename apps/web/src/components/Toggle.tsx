@@ -27,7 +27,7 @@ const Toggle = ({
       onChange={onChange}
       disabled={disabled}
       className={twMerge(
-        "relative inline-flex h-4 w-6 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-light-800 transition-colors duration-200 ease-in-out focus:outline-none dark:bg-dark-800",
+        "relative inline-flex h-4 w-6 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-light-800 transition-colors duration-200 ease-in-out focus:outline-hidden dark:bg-dark-800",
         isChecked && "bg-indigo-600 dark:bg-indigo-600",
       )}
     >
@@ -35,7 +35,7 @@ const Toggle = ({
       <span
         aria-hidden="true"
         className={twMerge(
-          "pointer-events-none inline-block h-3 w-3 translate-x-0 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out",
+          "pointer-events-none inline-block h-3 w-3 translate-x-0 transform rounded-full bg-white shadow-sm ring-0 transition duration-200 ease-in-out",
           isChecked && "translate-x-2",
         )}
       />

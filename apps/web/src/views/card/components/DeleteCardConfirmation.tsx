@@ -86,7 +86,7 @@ export function DeleteCardConfirmation({
       </div>
       <div className="mt-5 flex justify-end sm:mt-6">
         <button
-          className="mr-4 inline-flex justify-center rounded-md border-[1px] border-light-600 bg-light-50 px-3 py-2 text-sm font-semibold text-neutral-900 shadow-sm focus-visible:outline-none dark:border-dark-600 dark:bg-dark-300 dark:text-dark-1000"
+          className="mr-4 inline-flex justify-center rounded-md border border-light-600 bg-light-50 px-3 py-2 text-sm font-semibold text-neutral-900 shadow-xs focus-visible:outline-hidden dark:border-dark-600 dark:bg-dark-300 dark:text-dark-1000"
           onClick={() => closeModal()}
         >
           {t`Cancel`}

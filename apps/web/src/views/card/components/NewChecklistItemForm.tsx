@@ -145,11 +145,11 @@ const NewChecklistItemForm = ({
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="group relative flex h-9 items-center gap-3 rounded-md pl-4 hover:bg-light-100 dark:hover:bg-dark-100">
-        <label className="relative inline-flex h-[16px] w-[16px] flex-shrink-0 cursor-default items-center justify-center">
+        <label className="relative inline-flex h-[16px] w-[16px] shrink-0 cursor-default items-center justify-center">
           <input
             type="checkbox"
             disabled
-            className="peer h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 hover:border-light-500 hover:bg-transparent focus:outline-none focus:ring-0 focus-visible:outline-none dark:border-dark-500 dark:hover:border-dark-500"
+            className="peer h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-hidden ring-0 hover:border-light-500 hover:bg-transparent focus:outline-hidden focus:ring-0 focus-visible:outline-hidden dark:border-dark-500 dark:hover:border-dark-500"
           />
         </label>
         <div className="flex-1 pr-7">
@@ -160,7 +160,7 @@ const NewChecklistItemForm = ({
             html={title}
             disabled={readOnly}
             onChange={(e) => setValue("title", e.target.value)}
-            className="m-0 min-h-[20px] w-full p-0 text-sm leading-5 text-light-900 outline-none focus-visible:outline-none dark:text-dark-950"
+            className="m-0 min-h-[20px] w-full p-0 text-sm leading-5 text-light-900 outline-hidden focus-visible:outline-hidden dark:text-dark-950"
             onBlur={() => submitIfNotEmpty(false)}
             onKeyDown={(e) => {
               if (readOnly) return;

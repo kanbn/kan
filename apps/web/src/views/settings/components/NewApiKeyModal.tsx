@@ -91,7 +91,7 @@ export default function NewApiKeyModal() {
             <h2 className="text-sm font-bold">{t`API key created`}</h2>
             <button
               type="button"
-              className="rounded p-1 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-300"
+              className="rounded-sm p-1 hover:bg-light-300 focus:outline-hidden dark:hover:bg-dark-300"
               onClick={(e) => {
                 e.preventDefault();
                 closeModal();
@@ -147,7 +147,7 @@ export default function NewApiKeyModal() {
           <h2 className="text-sm font-bold">{t`New API key`}</h2>
           <button
             type="button"
-            className="rounded p-1 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-300"
+            className="rounded-sm p-1 hover:bg-light-300 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();

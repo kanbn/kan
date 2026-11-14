@@ -189,7 +189,7 @@ export default function Dashboard({
           <button
             ref={sideNavButtonRef}
             onClick={toggleSideNav}
-            className="rounded p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
+            className="rounded-sm p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
           >
             {isSideNavOpen ? (
               <TbLayoutSidebarLeftCollapse
@@ -208,7 +208,7 @@ export default function Dashboard({
             <button
               ref={rightPanelButtonRef}
               onClick={toggleRightPanel}
-              className="rounded p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
+              className="rounded-sm p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
             >
               {isRightPanelOpen ? (
                 <TbLayoutSidebarRightCollapse

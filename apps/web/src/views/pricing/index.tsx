@@ -35,7 +35,7 @@ export default function PricingView() {
         description={t`Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.`}
       />
 
-      <div className="flex h-full w-full flex-col lg:pt-[5rem]">
+      <div className="flex h-full w-full flex-col lg:pt-20">
         <div className="w-full pb-10 pt-32">
           <div className="flex flex-col items-center justify-center px-4 pb-10">
             <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">

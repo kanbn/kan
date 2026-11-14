@@ -195,10 +195,10 @@ export default function TemplateBoards({
           ))}
         </div>
         {showTopFade && (
-          <div className="pointer-events-none absolute left-0 right-0 top-0 h-6 bg-gradient-to-b from-white/80 to-transparent dark:from-dark-100/80" />
+          <div className="pointer-events-none absolute left-0 right-0 top-0 h-6 bg-linear-to-b from-white/80 to-transparent dark:from-dark-100/80" />
         )}
         {showFade && (
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/80 to-transparent dark:from-dark-100/80" />
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-linear-to-t from-white/80 to-transparent dark:from-dark-100/80" />
         )}
       </div>
     </div>

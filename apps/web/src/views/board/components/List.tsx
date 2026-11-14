@@ -116,7 +116,7 @@ export default function List({
       <div className="mb-2 flex justify-between">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full focus-visible:outline-none"
+          className="w-full focus-visible:outline-hidden"
         >
           <input
             id="name"
@@ -125,7 +125,7 @@ export default function List({
             {...register("name")}
             onBlur={handleSubmit(onSubmit)}
             readOnly={!canEdit || isOptimistic}
-            className="w-full border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000"
+            className="w-full border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-hidden dark:text-dark-1000"
           />
         </form>
         <div className="flex items-center">

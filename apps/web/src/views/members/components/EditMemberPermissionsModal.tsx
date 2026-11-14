@@ -180,7 +180,7 @@ export function EditMemberPermissionsModal() {
           <button
             type="button"
             onClick={closeModal}
-            className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-md text-light-900 hover:bg-light-200 focus:outline-none dark:text-dark-900 dark:hover:bg-dark-200"
+            className="ml-2 inline-flex h-6 w-6 items-center justify-center rounded-md text-light-900 hover:bg-light-200 focus:outline-hidden dark:text-dark-900 dark:hover:bg-dark-200"
             aria-label={t`Close`}
           >
             <HiXMark className="h-3.5 w-3.5" />

@@ -30,7 +30,7 @@ const TestimonialCard = ({
   return (
     <div
       className={twMerge(
-        "group relative rounded-2xl border border-light-200 bg-light-50 p-6 transition-all duration-200 hover:shadow-sm dark:border-dark-200 dark:bg-dark-50",
+        "group relative rounded-2xl border border-light-200 bg-light-50 p-6 transition-all duration-200 hover:shadow-xs dark:border-dark-200 dark:bg-dark-50",
         rowSpan === 2 ? "md:row-span-2" : "",
       )}
     >
@@ -240,7 +240,7 @@ const Testimonials = () => {
         </p>
 
         <div className="mx-auto mt-16 w-full max-w-7xl">
-          <div className="grid grid-cols-1 gap-4 [mask-image:linear-gradient(to_bottom,black_90%,transparent_98%)] md:auto-rows-fr md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 mask-[linear-gradient(to_bottom,black_90%,transparent_98%)] md:auto-rows-fr md:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <TestimonialCard
                 key={`testimonial-${index}`}

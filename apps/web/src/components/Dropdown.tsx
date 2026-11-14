@@ -30,7 +30,7 @@ export default function Dropdown({
         <Menu.Button
           disabled={disabled}
           aria-label={ariaLabel}
-          className="flex h-7 w-7 items-center justify-center rounded-[5px] hover:bg-light-200 focus:outline-none dark:hover:bg-dark-200"
+          className="flex h-7 w-7 items-center justify-center rounded-[5px] hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-200"
         >
           {children}
         </Menu.Button>
@@ -46,7 +46,7 @@ export default function Dropdown({
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className={`absolute right-0 isolate z-[100] ${menuGapClass[menuGap]} w-56 origin-top-right rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-400 dark:bg-dark-300`}
+          className={`absolute right-0 isolate z-100 ${menuGapClass[menuGap]} w-56 origin-top-right rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:border-dark-400 dark:bg-dark-300`}
         >
           <div className="flex flex-col">
             {items.map((item) => (

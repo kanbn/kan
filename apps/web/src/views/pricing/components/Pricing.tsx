@@ -182,9 +182,9 @@ const Pricing = () => {
               aria-describedby={tier.id}
               className={twMerge(
                 tier.highlighted
-                  ? "bg-light-50 text-dark-50 shadow-sm dark:bg-dark-1000 dark:text-dark-50"
+                  ? "bg-light-50 text-dark-50 shadow-xs dark:bg-dark-1000 dark:text-dark-50"
                   : "bg-dark-50 text-light-50 dark:bg-dark-200 dark:text-dark-1000",
-                "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
+                "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
               )}
             >
               {tier.buttonText}

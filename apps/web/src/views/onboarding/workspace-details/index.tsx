@@ -255,7 +255,7 @@ export default function WorkspaceNameView() {
                             placement="top"
                             delay={0}
                           >
-                            <HiInformationCircle className="h-4 w-4 leading-[0] text-dark-700 dark:text-dark-700" />
+                            <HiInformationCircle className="h-4 w-4 leading-0 text-dark-700 dark:text-dark-700" />
                           </Tooltip>
                         ) : slug.length >= 3 ? (
                           isTyping || slugAvailability.isPending ? (
@@ -276,7 +276,7 @@ export default function WorkspaceNameView() {
                     placeholder={t`Workspace description`}
                     maxLength={280}
                     rows={3}
-                    className="block w-full resize-none rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-sm ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6"
+                    className="block w-full resize-none rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-xs ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6"
                   />
                   <p className="mt-1 text-right text-[10px] text-light-700 dark:text-dark-700">
                     {description.length}/280
@@ -329,7 +329,7 @@ export default function WorkspaceNameView() {
                 <HiArrowPath className="h-3.5 w-3.5" />
               </div>
               <div className="flex flex-1 items-center gap-1.5 rounded-md bg-light-200 px-2.5 py-1 dark:bg-dark-300">
-                <HiLockClosed className="h-3 w-3 flex-shrink-0 text-light-700 dark:text-dark-700" />
+                <HiLockClosed className="h-3 w-3 shrink-0 text-light-700 dark:text-dark-700" />
                 <span className="truncate text-xs text-light-900 dark:text-dark-900">
                   kan.bn/
                   <span className="text-light-1000 dark:text-dark-1000">
@@ -337,7 +337,7 @@ export default function WorkspaceNameView() {
                   </span>
                 </span>
               </div>
-              <HiEllipsisVertical className="h-4 w-4 flex-shrink-0 text-light-700 dark:text-dark-700" />
+              <HiEllipsisVertical className="h-4 w-4 shrink-0 text-light-700 dark:text-dark-700" />
             </div>
 
             {/* Browser content */}
@@ -366,7 +366,7 @@ export default function WorkspaceNameView() {
                         opacity: { duration: 0.2 },
                         y: { duration: 0.25, ease: "easeOut" },
                       }}
-                      className="flex w-full flex-1 items-center justify-center rounded border border-dashed border-light-400 bg-light-50 px-3 text-[10px] font-medium text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900"
+                      className="flex w-full flex-1 items-center justify-center rounded-sm border border-dashed border-light-400 bg-light-50 px-3 text-[10px] font-medium text-light-900 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-900"
                     >
                       {board}
                     </motion.div>

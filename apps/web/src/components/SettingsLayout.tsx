@@ -103,7 +103,7 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
             </h1>
           </div>
 
-          <div className="focus:outline-none">
+          <div className="focus:outline-hidden">
             <div className="sm:hidden">
               {/* Mobile dropdown */}
               <Listbox
@@ -116,7 +116,7 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
                 }}
               >
                 <div className="relative mb-4">
-                  <ListboxButton className="w-full appearance-none rounded-lg border-0 bg-light-50 py-2 pl-3 pr-10 text-left text-sm text-light-1000 shadow-sm ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500">
+                  <ListboxButton className="w-full appearance-none rounded-lg border-0 bg-light-50 py-2 pl-3 pr-10 text-left text-sm text-light-1000 shadow-xs ring-1 ring-inset ring-light-300 focus:ring-2 focus:ring-inset focus:ring-light-400 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500">
                     {availableTabs[selectedTabIndex]?.label ?? "Select a tab"}
                     <HiChevronDown
                       aria-hidden="true"
@@ -141,13 +141,13 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
               <div className="border-b border-gray-200 dark:border-white/10">
                 <nav
                   aria-label="Tabs"
-                  className="-mb-px flex space-x-8 focus:outline-none"
+                  className="-mb-px flex space-x-8 focus:outline-hidden"
                 >
                   {availableTabs.map((tab) => (
                     <Link
                       key={tab.key}
                       href={`/settings/${tab.key}`}
-                      className={`whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium transition-colors focus:outline-none ${
+                      className={`whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium transition-colors focus:outline-hidden ${
                         isTabActive(tab.key)
                           ? "border-light-1000 text-light-1000 dark:border-dark-1000 dark:text-dark-1000"
                           : "border-transparent text-light-900 hover:border-light-950 hover:text-light-950 dark:text-dark-900 dark:hover:border-white/20 dark:hover:text-dark-950"
@@ -159,7 +159,7 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
                 </nav>
               </div>
             </div>
-            <div className="focus:outline-none">{children}</div>
+            <div className="focus:outline-hidden">{children}</div>
           </div>
         </div>
       </div>

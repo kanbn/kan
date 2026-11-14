@@ -139,7 +139,7 @@ const Features = ({ theme }: { theme: "light" | "dark" }) => {
           {t`Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.`}
         </p>
         <div className="mx-auto mt-16 w-full max-w-7xl">
-          <div className="grid w-full grid-cols-1 gap-4 [mask-image:linear-gradient(to_bottom,black_92%,transparent_100%)] sm:grid-cols-2 md:grid-cols-3 md:[mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] lg:grid-cols-4 lg:[mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
+          <div className="grid w-full grid-cols-1 gap-4 mask-[linear-gradient(to_bottom,black_92%,transparent_100%)] sm:grid-cols-2 md:grid-cols-3 md:mask-[linear-gradient(to_bottom,black_85%,transparent_100%)] lg:grid-cols-4 lg:mask-[linear-gradient(to_bottom,black_85%,transparent_100%)]">
             {features.map((feature, index) => (
               <FeatureItem key={`feature-${index}`} feature={feature} />
             ))}

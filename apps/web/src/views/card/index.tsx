@@ -109,7 +109,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
   );
 
   return (
-    <div className="h-full w-[360px] border-l-[1px] border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
+    <div className="h-full w-[360px] border-l border-light-300 bg-light-50 p-8 text-light-900 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
       <div className="mb-4 flex w-full flex-row pt-[18px]">
         <p className="my-2 mb-2 w-[100px] text-sm font-medium">{t`List`}</p>
         <ListSelector
@@ -338,10 +338,10 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       />
       <div className="flex h-full flex-1 flex-col overflow-hidden">
         {/* Full-width top strip with board link and dropdown */}
-        <div className="flex w-full items-center justify-between border-b-[1px] border-light-300 bg-light-50 px-8 py-2 dark:border-dark-300 dark:bg-dark-50">
+        <div className="flex w-full items-center justify-between border-b border-light-300 bg-light-50 px-8 py-2 dark:border-dark-300 dark:bg-dark-50">
           {!card && isLoading && (
             <div className="flex space-x-2">
-              <div className="h-[1.5rem] w-[150px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
+              <div className="h-6 w-[150px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
             </div>
           )}
           {card && (
@@ -355,7 +355,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 </Link>
                 <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
                 <Link
-                  className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-900 dark:text-dark-950"
+                  className="whitespace-nowrap text-sm font-bold leading-6 text-light-900 dark:text-dark-950"
                   href={boardReturnUrl}
                 >
                   {board?.name}
@@ -364,7 +364,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   card.list.board.workspace.cardPrefix && (
                     <>
                       <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
-                      <span className="whitespace-nowrap text-sm font-bold leading-[1.5rem] text-light-700 dark:text-dark-800">
+                      <span className="whitespace-nowrap text-sm font-bold leading-6 text-light-700 dark:text-dark-800">
                         {card.list.board.workspace.cardPrefix}-{card.cardNumber}
                       </span>
                     </>
@@ -396,7 +396,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             </>
           )}
           {!card && !isLoading && (
-            <p className="block p-0 py-0 font-bold leading-[1.5rem] tracking-tight text-light-900 dark:text-dark-900 sm:text-[1rem]">
+            <p className="block p-0 py-0 font-bold leading-6 tracking-tight text-light-900 dark:text-dark-900 sm:text-[1rem]">
               {t`Card not found`}
             </p>
           )}
@@ -490,7 +490,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                       )}
                     </>
                   )}
-                  <div className="border-t-[1px] border-light-300 pt-12 dark:border-dark-300">
+                  <div className="border-t border-light-300 pt-12 dark:border-dark-300">
                     <header className="flex items-center justify-between pb-4">
                       <h2 className="text-md font-medium text-light-1000 dark:text-dark-1000">
                         {t`Activity`}

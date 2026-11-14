@@ -120,7 +120,7 @@ export default function ResetPasswordPage() {
                     {formError && (
                       <p className="mt-2 text-xs text-red-400">{formError}</p>
                     )}
-                    <div className="mt-[1.5rem] flex items-center gap-4">
+                    <div className="mt-6 flex items-center gap-4">
                       <Button
                         isLoading={isSubmitting}
                         fullWidth

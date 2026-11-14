@@ -71,7 +71,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           "fixed z-50 flex w-full transition-all duration-500",
         )}
       >
-        <div className="flex h-[4rem] min-h-[4rem] w-full border-b border-light-300 bg-light-50/80 px-5 py-2 align-middle opacity-100 shadow-sm backdrop-blur-[10px] transition-all duration-500 dark:border-dark-300 dark:bg-dark-50/90">
+        <div className="flex h-16 min-h-16 w-full border-b border-light-300 bg-light-50/80 px-5 py-2 align-middle opacity-100 shadow-xs backdrop-blur-[10px] transition-all duration-500 dark:border-dark-300 dark:bg-dark-50/90">
           <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between lg:px-4">
             <div className="my-auto flex items-center justify-between">
               <Link href="/">
@@ -115,13 +115,13 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
               >
                 <div
                   className={twMerge(
-                    "absolute left-1/2 top-1/2 h-[1px] w-4 -translate-x-1/2 -translate-y-[4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
+                    "absolute left-1/2 top-1/2 h-px w-4 -translate-x-1/2 translate-y-[-4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
                     isMenuOpen ? "translate-y-0 rotate-45" : "",
                   )}
                 />
                 <div
                   className={twMerge(
-                    "absolute left-1/2 top-1/2 h-[1px] w-4 -translate-x-1/2 translate-y-[4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
+                    "absolute left-1/2 top-1/2 h-px w-4 -translate-x-1/2 translate-y-[4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
                     isMenuOpen ? "translate-y-0 -rotate-45" : "",
                   )}
                 />
@@ -139,7 +139,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
         }`}
       >
         <div className="absolute inset-0 bg-light-50/80 bg-white backdrop-blur-[15px] dark:bg-dark-50 dark:bg-dark-50/90">
-          <div className="mt-[6rem] flex h-full flex-col space-y-8 px-5">
+          <div className="mt-24 flex h-full flex-col space-y-8 px-5">
             {Object.entries(groupedMenuItems).map(([group, items]) => (
               <div key={group} className="flex flex-col space-y-4">
                 <div className="text-sm font-bold text-light-900 dark:text-dark-900">

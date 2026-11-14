@@ -150,7 +150,7 @@ export default function MembersPage() {
           )}
         >
           <div className="flex items-center p-2 sm:p-4">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               {showSkeleton ? (
                 <div className="h-8 w-8 animate-pulse rounded-full bg-light-200 dark:bg-dark-200 sm:h-9 sm:w-9" />
               ) : (
@@ -168,7 +168,7 @@ export default function MembersPage() {
                     className={twMerge(
                       "mr-2 truncate text-xs font-medium text-neutral-900 dark:text-dark-1000 sm:text-sm",
                       showSkeleton &&
-                        "md mb-2 h-3 w-[125px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                        "md mb-2 h-3 w-[125px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
                       showPendingIcon &&
                         "italic text-neutral-500 dark:text-dark-900",
                     )}
@@ -183,7 +183,7 @@ export default function MembersPage() {
                     className={twMerge(
                       "truncate text-xs text-dark-900 sm:text-sm",
                       showSkeleton &&
-                        "h-3 w-[175px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                        "h-3 w-[175px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
                     )}
                   >
                     {memberEmail}
@@ -227,7 +227,7 @@ export default function MembersPage() {
                         )
                       }
                       disabled={updateRoleMutation.isPending}
-                      className="absolute inset-0 h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0 text-[10px] leading-none opacity-0 focus:outline-none focus-visible:outline-none sm:text-[11px]"
+                      className="absolute inset-0 h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0 text-[10px] leading-none opacity-0 focus:outline-hidden focus-visible:outline-hidden sm:text-[11px]"
                     >
                       <option value="admin">{t`Admin`}</option>
                       <option value="member">{t`Member`}</option>
@@ -347,7 +347,7 @@ export default function MembersPage() {
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full overflow-x-auto px-4 py-2 pb-16 align-middle sm:px-6 lg:px-8">
-              <div className="h-full shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+              <div className="h-full shadow-sm ring-1 ring-black ring-opacity-5 sm:rounded-lg">
                 <table className="min-w-full divide-y divide-light-600 overflow-visible dark:divide-dark-600">
                   <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
                     <tr>

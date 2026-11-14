@@ -239,7 +239,7 @@ export function NewWebhookModal({
           </h2>
           <button
             type="button"
-            className="rounded p-1 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-300"
+            className="rounded-sm p-1 hover:bg-light-300 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();
@@ -320,7 +320,7 @@ export function NewWebhookModal({
                             );
                           }
                         }}
-                        className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-light-400 dark:border-dark-400"
+                        className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded-sm border-light-400 dark:border-dark-400"
                       />
                       <span className="text-sm text-light-900 dark:text-dark-900">
                         {event}
@@ -343,7 +343,7 @@ export function NewWebhookModal({
                 <input
                   type="checkbox"
                   {...register("active")}
-                  className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-light-400 dark:border-dark-400"
+                  className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded-sm border-light-400 dark:border-dark-400"
                 />
                 <span className="text-sm text-light-900 dark:text-dark-900">
                   {t`Active`}

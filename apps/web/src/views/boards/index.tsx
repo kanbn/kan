@@ -140,14 +140,14 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
 
         {!isTemplate ? (
           <div className="flex h-full w-full flex-col">
-            <div className="focus:outline-none">
+            <div className="focus:outline-hidden">
               <div className="sm:hidden">
                 <Listbox
                   value={activeTab}
                   onChange={(tab) => setActiveTab(tab)}
                 >
                   <div className="relative mb-4">
-                    <ListboxButton className="w-full appearance-none rounded-md border-0 bg-light-50 py-3 pl-3 pr-10 text-left text-sm font-semibold text-light-1000 shadow-sm ring-1 ring-inset ring-light-300 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500">
+                    <ListboxButton className="w-full appearance-none rounded-md border-0 bg-light-50 py-3 pl-3 pr-10 text-left text-sm font-semibold text-light-1000 shadow-xs ring-1 ring-inset ring-light-300 dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500">
                       {boardsTabs.find((tab) => tab.key === activeTab)?.label ??
                         "Select a tab"}
                       <HiChevronDown
@@ -179,14 +179,14 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
                 <div>
                   <nav
                     aria-label="Tabs"
-                    className="-mb-px flex space-x-8 focus:outline-none"
+                    className="-mb-px flex space-x-8 focus:outline-hidden"
                   >
                     {boardsTabs.map((tab) => (
                       <button
                         key={tab.key}
                         type="button"
                         onClick={() => setActiveTab(tab.key)}
-                        className={`mb-8 mt-2 whitespace-nowrap px-1 py-0 text-sm font-semibold transition-colors focus:outline-none ${
+                        className={`mb-8 mt-2 whitespace-nowrap px-1 py-0 text-sm font-semibold transition-colors focus:outline-hidden ${
                           activeTab === tab.key
                             ? "border-light-1000 text-light-1000 dark:border-dark-1000 dark:text-dark-1000"
                             : "border-transparent text-light-900 hover:border-light-950 hover:text-light-950 dark:text-dark-900 dark:hover:border-white/20 dark:hover:text-dark-950"
@@ -199,7 +199,7 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
                 </div>
               </div>
             </div>
-            <div className="flex h-full flex-row focus:outline-none">
+            <div className="flex h-full flex-row focus:outline-hidden">
               {activeTab === "boards" && (
                 <BoardsList isTemplate={false} archived={false} />
               )}

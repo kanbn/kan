@@ -16,7 +16,7 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.11",
     "postcss": "^8.5.32",
-    "tailwind-scrollbar": "^3.0.5",
+    "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "catalog:"
   },
   "devDependencies": {
