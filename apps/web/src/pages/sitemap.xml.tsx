@@ -1,5 +1,6 @@
 import type { GetServerSideProps } from "next";
-import { env } from "next-runtime-env";
+
+import { env } from "@kan/shared/env";
 
 const PUBLIC_PATHS = [
   "/",

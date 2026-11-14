@@ -1,7 +1,7 @@
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 
 import { useGetUser } from "@kan/api-client/hooks";
+import { env } from "@kan/shared/env";
 
 import Button from "~/components/Button";
 import FeedbackModal from "~/components/FeedbackModal";

@@ -2,11 +2,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { keepPreviousData } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import { HiLink, HiOutlineLockClosed } from "react-icons/hi2";
 
 import { useGetPublicBoardBySlug } from "@kan/api-client/hooks";
+import { env } from "@kan/shared/env";
 
 import Button from "~/components/Button";
 import Modal from "~/components/modal";

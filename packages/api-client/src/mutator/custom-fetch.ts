@@ -1,4 +1,4 @@
-import { env } from "next-runtime-env";
+import { env } from "@kan/shared/env";
 
 export const customFetch = async <T>(
   url: string,

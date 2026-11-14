@@ -5,7 +5,8 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { env } from "next-runtime-env";
+
+import { env } from "../env";
 
 export function createS3Client() {
   const region =

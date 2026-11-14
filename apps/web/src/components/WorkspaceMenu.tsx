@@ -1,12 +1,12 @@
 import { useRouter } from "next/navigation";
 import { Button, Menu, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 import { Fragment, useMemo, useState } from "react";
 import { HiCheck, HiMagnifyingGlass } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
 import { useHasAvailablePartnerSlot } from "@kan/api-client/hooks";
+import { env } from "@kan/shared/env";
 
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";

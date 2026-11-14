@@ -1,16 +1,19 @@
+import { writeFileSync } from "node:fs";
 import { createJiti } from "jiti";
-import { env } from "next-runtime-env";
-import { configureRuntimeEnv } from "next-runtime-env/build/configure.js";
 
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
 await createJiti(import.meta.url).import("./src/env");
 
-configureRuntimeEnv();
+// bootstrap.cjs rewrites this at container start in the Docker image
+const publicEnv = Object.fromEntries(
+  Object.entries(process.env).filter(([key]) => key.startsWith("NEXT_PUBLIC_")),
+);
+writeFileSync("public/__ENV.js", `self.__ENV = ${JSON.stringify(publicEnv)};`);
 
 /** @type {import("next").NextConfig} */
 const config = {
   output:
-    env("NEXT_PUBLIC_USE_STANDALONE_OUTPUT") === "true"
+    process.env.NEXT_PUBLIC_USE_STANDALONE_OUTPUT === "true"
       ? "standalone"
       : undefined,
   reactStrictMode: true,
@@ -82,9 +85,9 @@ const config = {
 
 // Only allow external images when OIDC is configured (for OIDC provider avatars)
 if (
-  env("OIDC_CLIENT_ID") &&
-  env("OIDC_CLIENT_SECRET") &&
-  env("OIDC_DISCOVERY_URL")
+  process.env.OIDC_CLIENT_ID &&
+  process.env.OIDC_CLIENT_SECRET &&
+  process.env.OIDC_DISCOVERY_URL
 ) {
   config.images?.remotePatterns?.push({
     protocol: "https",

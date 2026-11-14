@@ -1,11 +1,11 @@
-import { env } from "next-runtime-env";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as memberRepo from "@kan/db/repository/member.repo";
+import { env } from "@kan/shared/env";
 
 import { createDatabaseHooks } from "./hooks";
 
-vi.mock("next-runtime-env", () => ({
+vi.mock("@kan/shared/env", () => ({
   env: vi.fn(),
 }));
 

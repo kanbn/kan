@@ -2,10 +2,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
-import { env } from "next-runtime-env";
 import { useState } from "react";
 
 import { authClient } from "@kan/auth/client";
+import { env } from "@kan/shared/env";
 
 import { Auth } from "~/components/AuthForm";
 import { PageHead } from "~/components/PageHead";

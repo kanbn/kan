@@ -24,8 +24,8 @@
     "generate": "orval"
   },
   "dependencies": {
-    "@tanstack/react-query": "catalog:",
-    "next-runtime-env": "^1.7.2"
+    "@kan/shared": "workspace:*",
+    "@tanstack/react-query": "catalog:"
   },
   "devDependencies": {
     "@kan/eslint-config": "workspace:*",

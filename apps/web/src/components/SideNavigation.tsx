@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { Button } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
-import { env } from "next-runtime-env";
 import { useTheme } from "next-themes";
 import { useEffect, useMemo, useState } from "react";
 import { HiBolt } from "react-icons/hi2";
@@ -15,6 +14,7 @@ import { twMerge } from "tailwind-merge";
 
 import type { Subscription } from "@kan/shared/utils";
 import { useGetWorkspace } from "@kan/api-client/hooks";
+import { env } from "@kan/shared/env";
 import { hasActiveSubscription } from "@kan/shared/utils";
 
 import type { KeyboardShortcut } from "~/providers/keyboard-shortcuts";

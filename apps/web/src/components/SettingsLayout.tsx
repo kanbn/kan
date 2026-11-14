@@ -7,7 +7,6 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import { env } from "next-runtime-env";
 import { useEffect, useState } from "react";
 import {
   HiChevronDown,
@@ -18,6 +17,8 @@ import {
   HiOutlineShieldCheck,
   HiOutlineUser,
 } from "react-icons/hi2";
+
+import { env } from "@kan/shared/env";
 
 import { usePermissions } from "~/hooks/usePermissions";
 import { useWorkspace } from "~/providers/workspace";

@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { env } from "next-runtime-env";
 
 import { createNextApiContext } from "@kan/server/context";
 import { withApiLogging } from "@kan/server/utils/apiLogging";
 import { withRateLimit } from "@kan/server/utils/rateLimit";
+import { env } from "@kan/shared/env";
 import { createStripeClient } from "@kan/stripe";
 
 export default withRateLimit(

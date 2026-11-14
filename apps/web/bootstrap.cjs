@@ -5,9 +5,7 @@
  * that would normally be done in an entrypoint.sh:
  *
  * 1. Regenerate `public/__ENV.js` with the current runtime NEXT_PUBLIC_*
- *    environment variables.  The file was originally created at build time by
- *    next-runtime-env's `configureRuntimeEnv()`, but in a Docker deployment the
- *    env vars are provided at *run* time via docker-compose / docker run.
+XX *    env vars are provided at *run* time via docker-compose / docker run.
  *
  * 2. Start the Next.js standalone server.
  */
@@ -52,7 +50,10 @@ if (process.env.RUN_MIGRATIONS === "true") {
   const { NODE_ENV: _nodeEnv, ...env } = process.env;
   const result = spawnSync(
     process.execPath,
-    [path.join(migrateDir, "node_modules", "drizzle-kit", "bin.cjs"), "migrate"],
+    [
+      path.join(migrateDir, "node_modules", "drizzle-kit", "bin.cjs"),
+      "migrate",
+    ],
     { cwd: migrateDir, env, stdio: "inherit" },
   );
   if (result.status !== 0) process.exit(result.status ?? 1);
@@ -65,6 +66,9 @@ if (process.env.RUN_MIGRATIONS === "true") {
 const drainMs = 10_000;
 const on = process.on.bind(process);
 process.on = (event, listener) =>
-  on(event, event === "SIGTERM" ? () => setTimeout(listener, drainMs, event) : listener);
+  on(
+    event,
+    event === "SIGTERM" ? () => setTimeout(listener, drainMs, event) : listener,
+  );
 
 require("./apps/web/server.js");

@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { env } from "next-runtime-env";
 import { z } from "zod";
 
 import * as subscriptionRepo from "@kan/db/repository/subscription.repo";
@@ -8,6 +7,7 @@ import { createNextApiContext } from "@kan/server/context";
 import { withApiLogging } from "@kan/server/utils/apiLogging";
 import { assertPermission } from "@kan/server/utils/permissions";
 import { withRateLimit } from "@kan/server/utils/rateLimit";
+import { env } from "@kan/shared/env";
 import { generateUID } from "@kan/shared/utils";
 import { createStripeClient, subscriptionBillingMode } from "@kan/stripe";
 

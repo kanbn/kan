@@ -6,11 +6,12 @@ import type { AppProps, AppType } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { env } from "next-runtime-env";
 import { ThemeProvider } from "next-themes";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
+
+import { env } from "@kan/shared/env";
 
 import { env as appEnv } from "~/env";
 import { FontSizeProvider } from "~/providers/font-size";
