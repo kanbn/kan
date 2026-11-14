@@ -44,32 +44,32 @@ const FeatureItem = ({
       onMouseEnter={handleMouseEnter}
       className="group relative flex aspect-square w-full flex-col items-center justify-center overflow-hidden rounded-3xl border border-light-200 bg-light-50 p-2 dark:border-dark-200 dark:bg-dark-50"
     >
-      <div className="absolute left-8 top-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
-      <div className="absolute right-8 top-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
+      <div className="absolute top-8 left-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
+      <div className="absolute top-8 right-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
       <div className="absolute bottom-8 left-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
-      <div className="absolute bottom-8 right-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
+      <div className="absolute right-8 bottom-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
 
       <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-light-300 bg-light-200 dark:border-dark-600 dark:bg-dark-200">
         <LottieIcon index={index} json={feature.icon} isPlaying={isHovered} />
       </div>
 
       <div className="relative mt-2 w-full px-4 text-center">
-        <p className="text-sm font-bold text-light-1000 dark:text-dark-1000 sm:transition-opacity sm:duration-200 sm:group-hover:opacity-0">
+        <p className="text-sm font-bold text-light-1000 sm:transition-opacity sm:duration-200 sm:group-hover:opacity-0 dark:text-dark-1000">
           {feature.title}
         </p>
-        <p className="max mt-2 text-sm text-light-950 dark:text-dark-900 sm:absolute sm:inset-0 sm:mt-0 sm:opacity-0 sm:transition-opacity sm:duration-200 sm:group-hover:opacity-100">
+        <p className="max mt-2 text-sm text-light-950 sm:absolute sm:inset-0 sm:mt-0 sm:opacity-0 sm:transition-opacity sm:duration-200 sm:group-hover:opacity-100 dark:text-dark-900">
           {feature.description}
         </p>
       </div>
 
       {feature.comingSoon && (
-        <div className="absolute right-4 top-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
+        <div className="absolute top-4 right-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
           {t`Coming soon`}
         </div>
       )}
 
       {feature.new && (
-        <div className="absolute right-4 top-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
+        <div className="absolute top-4 right-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
           {t`New`}
         </div>
       )}
@@ -128,11 +128,11 @@ const Features = ({ theme }: { theme: "light" | "dark" }) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center px-4 pb-24">
-        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">
+        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 lg:text-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
           <p>{t`Features`}</p>
         </div>
 
-        <p className="mt-2 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
+        <p className="mt-2 text-center text-3xl font-bold text-light-1000 lg:text-4xl dark:text-dark-1000">
           {t`Kanban reimagined`}
         </p>
         <p className="text-md lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">

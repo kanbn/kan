@@ -149,7 +149,7 @@ export default function SelectPlanView() {
   const handleCancel = () => router.push(returnUrl);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 dark:bg-dark-50 md:px-6">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 md:px-6 dark:bg-dark-50">
       <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-light-400 bg-light-200 shadow-xl dark:border-dark-400 dark:bg-dark-100">
         <div className="flex flex-col md:h-[520px] md:flex-row">
           {/* Left panel */}
@@ -169,7 +169,7 @@ export default function SelectPlanView() {
                 <RadioGroup
                   value={billing}
                   onChange={handleSetBilling}
-                  className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold ring-1 ring-inset ring-light-600 dark:ring-dark-600"
+                  className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold ring-1 ring-light-600 ring-inset dark:ring-dark-600"
                 >
                   {FREQUENCIES.map((f) => (
                     <Radio
@@ -213,7 +213,7 @@ export default function SelectPlanView() {
                               {badge}
                             </span>
                             {plan.trial && billing === "annual" && (
-                              <span className="rounded-full bg-emerald-500/10 px-2 py-px text-[11px] font-medium text-emerald-600 ring-1 ring-inset ring-emerald-500/20 dark:text-emerald-400">
+                              <span className="rounded-full bg-emerald-500/10 px-2 py-px text-[11px] font-medium text-emerald-600 ring-1 ring-emerald-500/20 ring-inset dark:text-emerald-400">
                                 -20%
                               </span>
                             )}
@@ -257,7 +257,7 @@ export default function SelectPlanView() {
           </div>
 
           {/* Right panel */}
-          <div className="hidden items-center justify-center bg-light-200 dark:bg-dark-200 md:flex md:w-[45%]">
+          <div className="hidden items-center justify-center bg-light-200 md:flex md:w-[45%] dark:bg-dark-200">
             <div className="relative h-72 w-72">
               {/* Orbit rings */}
               <div className="absolute inset-0 m-auto h-72 w-72 rounded-full border border-light-400 dark:border-dark-400" />

@@ -239,7 +239,7 @@ export function AttachmentThumbnails({
           <div className="fixed inset-0 z-10 overflow-y-auto">
             {selectedIndex !== null && selectedAttachment && (
               <div
-                className="fixed left-2 top-2 z-20 flex gap-1"
+                className="fixed top-2 left-2 z-20 flex gap-1"
                 onMouseDown={(e) => e.stopPropagation()}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -281,7 +281,7 @@ export function AttachmentThumbnails({
               </div>
             )}
 
-            <div className="fixed right-2 top-2 z-20 flex gap-1">
+            <div className="fixed top-2 right-2 z-20 flex gap-1">
               {imageAttachments.length > 1 && selectedIndex !== null && (
                 <button
                   onClick={(e) => {

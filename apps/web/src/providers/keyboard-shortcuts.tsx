@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import React from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -7,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -308,7 +307,7 @@ export function KeyboardShortcutProvider({
       >
         <DialogBackdrop
           transition
-          className="data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in fixed inset-0 bg-light-50 bg-opacity-40 transition-opacity dark:bg-dark-50 dark:bg-opacity-40"
+          className="bg-opacity-40 dark:bg-opacity-40 fixed inset-0 bg-light-50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-dark-50"
         />
 
         <div className="fixed inset-0 flex min-h-full w-screen items-center justify-center overflow-y-auto p-4">
@@ -341,7 +340,7 @@ export function KeyboardShortcutProvider({
                     const groupInfo = getShortcutGroupInfo();
                     return (
                       <div key={`${group}-${idx}`}>
-                        <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-light-1000 dark:text-dark-1000">
+                        <h3 className="mb-3 text-xs font-semibold tracking-wide text-light-1000 uppercase dark:text-dark-1000">
                           {groupInfo[group].label}
                         </h3>
                         <div className="flex flex-col gap-y-2">

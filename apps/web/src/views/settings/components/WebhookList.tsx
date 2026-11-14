@@ -206,13 +206,13 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
     <div className="mt-8 flow-root">
       <div className="overflow-x-auto overflow-y-visible">
         <div className="inline-block min-w-full py-2 pb-12 align-middle">
-          <div className="relative h-full shadow-sm ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <div className="ring-opacity-5 relative h-full shadow-sm ring-1 ring-black sm:rounded-lg">
             <table className="min-w-[700px] divide-y divide-light-600 dark:divide-dark-600">
               <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
                 <tr>
                   <th
                     scope="col"
-                    className="w-[25%] rounded-tl-lg py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-light-900 dark:text-dark-900 sm:pl-6"
+                    className="w-[25%] rounded-tl-lg py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-light-900 sm:pl-6 dark:text-dark-900"
                   >
                     {t`Name`}
                   </th>

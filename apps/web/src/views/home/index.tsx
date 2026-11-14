@@ -24,7 +24,7 @@ export default function HomeView() {
         description="A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place. Free, open source, and self-hostable."
       />
       <div className="flex h-full w-full flex-col lg:pt-20">
-        <div className="w-full pb-10 pt-32 lg:py-32">
+        <div className="w-full pt-32 pb-10 lg:py-32">
           <div className="my-10 flex h-full w-full animate-fade-down flex-col items-center justify-center px-4">
             <div className="flex items-center gap-2">
               <div className="relative animate-fade-in overflow-hidden rounded-full bg-linear-to-b from-light-300 to-light-400 p-[2px] dark:from-dark-300 dark:to-dark-400">
@@ -35,7 +35,7 @@ export default function HomeView() {
                     href="https://github.com/kanbn/kan"
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="flex items-center gap-2 px-4 py-1 text-center text-xs text-light-1000 dark:text-dark-1000 lg:text-sm"
+                    className="flex items-center gap-2 px-4 py-1 text-center text-xs text-light-1000 lg:text-sm dark:text-dark-1000"
                   >
                     {t`Star on Github`}
                     <IoLogoGithub size={20} />
@@ -64,13 +64,13 @@ export default function HomeView() {
               </div> */}
             </div>
 
-            <p className="mt-2 text-center text-4xl font-bold text-light-1000 dark:text-dark-1000 lg:text-5xl">
+            <p className="mt-2 text-center text-4xl font-bold text-light-1000 lg:text-5xl dark:text-dark-1000">
               <Trans>
                 The open source <br /> alternative to Trello
               </Trans>
             </p>
 
-            <p className="text-md mt-3 max-w-[450px] text-center text-light-950 dark:text-dark-900 lg:max-w-[600px] lg:text-lg">
+            <p className="text-md mt-3 max-w-[450px] text-center text-light-950 lg:max-w-[600px] lg:text-lg dark:text-dark-900">
               {t`A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.`}
             </p>
 
@@ -90,8 +90,8 @@ export default function HomeView() {
           </div>
         </div>
         <div className="px-4 pb-10">
-          <div className="rounded-[16px] border border-light-300 bg-light-50 p-1 shadow-md dark:border-dark-300 dark:bg-dark-100 lg:rounded-[24px] lg:p-2">
-            <div className="relative overflow-hidden rounded-[12px] border border-light-300 shadow-xs dark:border-dark-300 lg:rounded-[16px]">
+          <div className="rounded-[16px] border border-light-300 bg-light-50 p-1 shadow-md lg:rounded-[24px] lg:p-2 dark:border-dark-300 dark:bg-dark-100">
+            <div className="relative overflow-hidden rounded-[12px] border border-light-300 shadow-xs lg:rounded-[16px] dark:border-dark-300">
               <Image
                 src={`/hero-light.png`}
                 alt="kanban"

@@ -36,13 +36,13 @@ export default function PricingView() {
       />
 
       <div className="flex h-full w-full flex-col lg:pt-20">
-        <div className="w-full pb-10 pt-32">
+        <div className="w-full pt-32 pb-10">
           <div className="flex flex-col items-center justify-center px-4 pb-10">
-            <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">
+            <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 lg:text-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
               <p>{t`Pricing`}</p>
             </div>
 
-            <p className="mt-4 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-5xl">
+            <p className="mt-4 text-center text-3xl font-bold text-light-1000 lg:text-5xl dark:text-dark-1000">
               {t`Simple pricing`}
             </p>
             <p className="text:md lg:text-md mt-6 max-w-[300px] text-center text-light-950 dark:text-dark-900">
@@ -60,7 +60,7 @@ export default function PricingView() {
           <Logos />
         </div>
 
-        <div className="pb-22 flex flex-col items-center justify-center px-4">
+        <div className="flex flex-col items-center justify-center px-4 pb-22">
           <div className="mt-10 w-full">
             <FeatureComparisonTable
               frequencyValue={frequency?.value ?? "annually"}

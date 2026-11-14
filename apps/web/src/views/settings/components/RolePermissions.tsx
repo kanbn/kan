@@ -182,7 +182,7 @@ export function RolePermissions() {
                       >
                         <input
                           type="checkbox"
-                          className="h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-hidden ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden disabled:opacity-60 dark:border-dark-500 dark:hover:border-dark-500"
+                          className="h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent ring-0 outline-hidden checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden disabled:opacity-60 dark:border-dark-500 dark:hover:border-dark-500"
                           disabled={
                             isAdminRole ||
                             isBillingOrDeletePermission ||

@@ -26,8 +26,7 @@ export function EditYouTubeModal() {
 
   // Get initial values and callback from modal state
   const modalState = getModalState("EDIT_YOUTUBE") as
-    | EditYouTubeModalState
-    | undefined;
+    EditYouTubeModalState | undefined;
   const initialUrl = modalState?.url ?? "";
   const initialTitle = modalState?.title ?? "";
   const onSave = modalState?.onSave;
@@ -166,7 +165,7 @@ export function EditYouTubeModal() {
         </div>
       </div>
 
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <div className="space-x-2">
           <Button
             type="button"

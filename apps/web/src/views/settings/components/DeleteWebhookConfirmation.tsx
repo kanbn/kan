@@ -81,7 +81,7 @@ export function DeleteWebhookConfirmation({
         </p>
       </div>
 
-      <div className="mt-8 flex items-center justify-end gap-3 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-8 flex items-center justify-end gap-3 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <Button variant="secondary" onClick={() => closeModal()}>
           {t`Cancel`}
         </Button>

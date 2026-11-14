@@ -126,7 +126,7 @@ const CommandsList = forwardRef<
   }));
 
   return (
-    <div className="w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
+    <div className="ring-opacity-5 w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
       <div className="max-h-[350px] overflow-y-auto p-1">
         {items.map((item, index) => (
           <button
@@ -245,8 +245,8 @@ const MentionList = forwardRef<
   }));
 
   return (
-    <div className="w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
-      <div className="max-h-[350px] overflow-y-auto p-1 scrollbar-thin scrollbar-thumb-light-200 dark:scrollbar-thumb-dark-300">
+    <div className="ring-opacity-5 w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
+      <div className="scrollbar-thin max-h-[350px] scrollbar-thumb-light-200 overflow-y-auto p-1 dark:scrollbar-thumb-dark-300">
         {items.length > 0 ? (
           items.map((item, index) => (
             <button
@@ -644,7 +644,7 @@ export default function Editor({
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
-        className="prose dark:prose-invert prose-sm max-w-none overflow-y-auto [&_blockquote]:text-xs! [&_h1]:text-lg! [&_h2]:text-base! [&_h3]:text-sm! [&_ol]:text-xs! [&_p.is-empty::before]:text-light-900 dark:[&_p.is-empty::before]:text-dark-800 [&_p]:text-sm! [&_p]:text-light-950 dark:[&_p]:text-dark-950 [&_ul]:text-xs!"
+        className="prose prose-sm max-w-none overflow-y-auto dark:prose-invert [&_blockquote]:text-xs! [&_h1]:text-lg! [&_h2]:text-base! [&_h3]:text-sm! [&_ol]:text-xs! [&_p]:text-sm! [&_p]:text-light-950 dark:[&_p]:text-dark-950 [&_p.is-empty::before]:text-light-900 dark:[&_p.is-empty::before]:text-dark-800 [&_ul]:text-xs!"
       />
     </div>
   );

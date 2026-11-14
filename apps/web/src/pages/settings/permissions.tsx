@@ -1,7 +1,7 @@
 import type { NextPageWithLayout } from "~/pages/_app";
 import { getDashboardLayout } from "~/components/Dashboard";
-import { SettingsLayout } from "~/components/SettingsLayout";
 import Popup from "~/components/Popup";
+import { SettingsLayout } from "~/components/SettingsLayout";
 import PermissionsSettings from "~/views/settings/PermissionsSettings";
 
 const PermissionsSettingsPage: NextPageWithLayout = () => {
@@ -11,7 +11,6 @@ const PermissionsSettingsPage: NextPageWithLayout = () => {
         <PermissionsSettings />
         <Popup />
       </SettingsLayout>
-      
     </>
   );
 };
@@ -19,5 +18,3 @@ const PermissionsSettingsPage: NextPageWithLayout = () => {
 PermissionsSettingsPage.getLayout = (page) => getDashboardLayout(page);
 
 export default PermissionsSettingsPage;
-
-

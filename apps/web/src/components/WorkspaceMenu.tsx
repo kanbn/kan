@@ -76,7 +76,7 @@ export default function WorkspaceMenu({
                 title={isCollapsed ? workspace.name : undefined}
               >
                 <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-indigo-700">
-                  <span className="text-xs font-bold leading-none text-white">
+                  <span className="text-xs leading-none font-bold text-white">
                     {workspace.name.charAt(0).toUpperCase()}
                   </span>
                 </span>
@@ -126,7 +126,7 @@ export default function WorkspaceMenu({
         >
           <Menu.Items
             className={twMerge(
-              "absolute left-0 z-10 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:border-dark-600 dark:bg-dark-300",
+              "ring-opacity-5 absolute left-0 z-10 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-600 dark:bg-dark-300",
               isCollapsed ? "w-48" : "w-full",
             )}
           >
@@ -140,7 +140,7 @@ export default function WorkspaceMenu({
                     >
                       <div className="flex min-w-0 flex-1 items-center">
                         <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[5px] bg-indigo-700">
-                          <span className="text-xs font-medium leading-none text-white">
+                          <span className="text-xs leading-none font-medium text-white">
                             {availableWorkspace.name.charAt(0).toUpperCase()}
                           </span>
                         </span>

@@ -83,7 +83,7 @@ const NewCommentForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full max-w-[800px] flex-col rounded-xl border border-light-600 bg-light-100 p-4 text-light-900 focus-visible:outline-hidden dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 sm:text-sm sm:leading-6"
+      className="flex w-full max-w-[800px] flex-col rounded-xl border border-light-600 bg-light-100 p-4 text-light-900 focus-visible:outline-hidden sm:text-sm sm:leading-6 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000"
     >
       <Editor
         content={watch("comment")}

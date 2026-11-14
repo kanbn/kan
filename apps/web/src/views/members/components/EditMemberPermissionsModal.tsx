@@ -192,7 +192,7 @@ export function EditMemberPermissionsModal() {
             {t`Loading permissions...`}
           </p>
         ) : (
-          <div className="max-h-80 space-y-3 overflow-y-auto pb-4 pr-1">
+          <div className="max-h-80 space-y-3 overflow-y-auto pr-1 pb-4">
             {Object.values(permissionCategories).map((category, index) => (
               <div
                 key={category.label}
@@ -238,7 +238,7 @@ export function EditMemberPermissionsModal() {
           </div>
         )}
       </div>
-      <div className="flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <div>
           <Button
             variant="secondary"

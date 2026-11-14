@@ -66,20 +66,20 @@ export default function CommandPallette({
     >
       <DialogBackdrop
         transition
-        className="data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in fixed inset-0 bg-light-50 bg-opacity-40 transition-opacity dark:bg-dark-50 dark:bg-opacity-40"
+        className="bg-opacity-40 dark:bg-opacity-40 fixed inset-0 bg-light-50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-dark-50"
       />
 
       <div className="fixed inset-0 z-50 w-screen overflow-y-auto">
         <div className="flex min-h-full items-start justify-center p-4 text-center sm:items-start sm:p-0">
           <DialogPanel
             transition
-            className="data-closed:opacity-0 data-closed:translate-y-4 sm:data-closed:translate-y-0 sm:data-closed:scale-95 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in relative mt-[25vh] w-full max-w-[550px] transform divide-y divide-gray-100 overflow-hidden rounded-lg border border-light-600 bg-white/90 shadow-3xl-light backdrop-blur-[6px] transition-all dark:divide-white/10 dark:border-dark-600 dark:bg-dark-100/90 dark:shadow-3xl-dark"
+            className="relative mt-[25vh] w-full max-w-[550px] transform divide-y divide-gray-100 overflow-hidden rounded-lg border border-light-600 bg-white/90 shadow-3xl-light backdrop-blur-[6px] transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:data-closed:translate-y-0 sm:data-closed:scale-95 dark:divide-white/10 dark:border-dark-600 dark:bg-dark-100/90 dark:shadow-3xl-dark"
           >
             <Combobox>
               <div className="grid grid-cols-1">
                 <ComboboxInput
                   autoFocus
-                  className="col-start-1 row-start-1 h-12 w-full border-0 bg-transparent pl-11 pr-4 text-sm text-light-900 placeholder:text-light-700 focus:outline-hidden focus:ring-0 dark:text-dark-900 dark:placeholder:text-dark-700"
+                  className="col-start-1 row-start-1 h-12 w-full border-0 bg-transparent pr-4 pl-11 text-sm text-light-900 placeholder:text-light-700 focus:ring-0 focus:outline-hidden dark:text-dark-900 dark:placeholder:text-dark-700"
                   placeholder={t`Search boards and cards...`}
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
@@ -122,7 +122,7 @@ export default function CommandPallette({
                       <ComboboxOption
                         key={`${result.type}-${result.publicId}`}
                         value={result}
-                        className="cursor-pointer select-none px-4 py-3 data-focus:bg-light-200 hover:bg-light-200 focus:outline-hidden dark:data-focus:bg-dark-200 dark:hover:bg-dark-200"
+                        className="cursor-pointer px-4 py-3 select-none hover:bg-light-200 focus:outline-hidden data-focus:bg-light-200 dark:hover:bg-dark-200 dark:data-focus:bg-dark-200"
                         onClick={() => {
                           void router.push(url);
                           onClose();

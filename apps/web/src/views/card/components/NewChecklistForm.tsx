@@ -141,7 +141,7 @@ export function NewChecklistForm({ cardPublicId }: { cardPublicId: string }) {
           }}
         />
       </div>
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <div>
           <Button
             type="submit"

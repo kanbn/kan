@@ -109,7 +109,7 @@ export default function List({
       style={style}
       {...attributes}
       {...listeners}
-      className={`dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 dark:border-dark-300 dark:bg-dark-100 md:snap-align-none ${
+      className={`dark-text-dark-1000 mr-5 h-fit max-w-[18rem] min-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pr-1 pl-2 text-neutral-900 md:snap-align-none dark:border-dark-300 dark:bg-dark-100 ${
         canDrag ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""
       }`}
     >

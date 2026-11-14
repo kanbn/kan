@@ -201,7 +201,7 @@ export default function WorkspaceNameView() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 dark:bg-dark-50 md:px-6">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 md:px-6 dark:bg-dark-50">
       <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-light-400 bg-light-200 shadow-xl dark:border-dark-400 dark:bg-dark-100">
         <div className="flex flex-col md:h-[520px] md:flex-row">
           {/* Left panel */}
@@ -276,7 +276,7 @@ export default function WorkspaceNameView() {
                     placeholder={t`Workspace description`}
                     maxLength={280}
                     rows={3}
-                    className="block w-full resize-none rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-xs ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6"
+                    className="block w-full resize-none rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-xs ring-1 ring-light-600 ring-inset placeholder:text-dark-800 focus:ring-2 focus:ring-light-700 focus:ring-inset sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700"
                   />
                   <p className="mt-1 text-right text-[10px] text-light-700 dark:text-dark-700">
                     {description.length}/280
@@ -320,7 +320,7 @@ export default function WorkspaceNameView() {
           </div>
 
           {/* Right panel — browser mockup */}
-          <div className="hidden flex-col bg-light-300 dark:bg-dark-200 md:flex md:w-[45%]">
+          <div className="hidden flex-col bg-light-300 md:flex md:w-[45%] dark:bg-dark-200">
             {/* Browser chrome */}
             <div className="flex items-center gap-2 border-b border-light-400 px-3 py-2.5 dark:border-dark-400">
               <div className="flex items-center gap-1.5 text-light-700 dark:text-dark-700">
@@ -346,7 +346,7 @@ export default function WorkspaceNameView() {
               <p className="text-center text-xs font-bold text-light-1000 dark:text-dark-1000">
                 {name || t`Your workspace`}
               </p>
-              <p className="mt-0.5 line-clamp-2 break-all text-center text-[10px] text-light-800 dark:text-dark-800">
+              <p className="mt-0.5 line-clamp-2 text-center text-[10px] break-all text-light-800 dark:text-dark-800">
                 {description || t`Your workspace description`}
               </p>
 

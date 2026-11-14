@@ -42,7 +42,7 @@ const Cta = ({ theme }: { theme: string }) => {
       <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
         <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
           <div
-            className={`mb-8 flex items-center gap-2 rounded-2xl border bg-light-50 px-4 py-2 text-center text-sm font-bold text-light-1000 transition-all duration-500 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950 lg:text-[16px] ${
+            className={`mb-8 flex items-center gap-2 rounded-2xl border bg-light-50 px-4 py-2 text-center text-sm font-bold text-light-1000 transition-all duration-500 lg:text-[16px] dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950 ${
               isVisible
                 ? "translate-y-0 opacity-100"
                 : "-translate-y-4 opacity-0"
@@ -50,7 +50,7 @@ const Cta = ({ theme }: { theme: string }) => {
           >
             <p>kan.bn/{currentWorkspaceSlug}</p>
           </div>
-          <h2 className="text-balance text-4xl font-bold tracking-tight text-light-1000 dark:text-dark-1000 sm:text-4xl">
+          <h2 className="text-4xl font-bold tracking-tight text-balance text-light-1000 sm:text-4xl dark:text-dark-1000">
             {t`Get started for free today`}
           </h2>
           <p className="text-md/8 mx-auto mt-6 max-w-[375px] text-pretty text-light-950 dark:text-dark-900">
@@ -66,7 +66,7 @@ const Cta = ({ theme }: { theme: string }) => {
       <svg
         viewBox="0 0 1024 1024"
         aria-hidden="true"
-        className="absolute left-1/2 top-[65%] -z-10 size-240 -translate-x-1/2 mask-[radial-gradient(closest-side,white,transparent)] lg:size-256"
+        className="absolute top-[65%] left-1/2 -z-10 size-240 -translate-x-1/2 mask-[radial-gradient(closest-side,white,transparent)] lg:size-256"
       >
         <circle
           r={512}

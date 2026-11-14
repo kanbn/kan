@@ -20,7 +20,7 @@ export default function WebhookSettings() {
       <PageHead title={t`Settings | Webhooks`} />
 
       <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
           {t`Webhooks`}
         </h2>
         <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">

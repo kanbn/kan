@@ -100,7 +100,7 @@ function DraggableCalendarCard({
           {card.title}
         </span>
         {ticketNumber && (
-          <span className="hidden flex-none text-light-800 dark:text-dark-800 xl:block">
+          <span className="hidden flex-none text-light-800 xl:block dark:text-dark-800">
             {ticketNumber}
           </span>
         )}
@@ -290,7 +290,7 @@ const CalendarView = ({
 
   return (
     <div className="z-0 flex min-h-0 flex-1 flex-col">
-      <header className="flex items-center justify-between border-b border-light-300 px-6 pb-4 dark:border-dark-300 md:px-8">
+      <header className="flex items-center justify-between border-b border-light-300 px-6 pb-4 md:px-8 dark:border-dark-300">
         <h2 className="text-sm font-semibold text-light-1000 dark:text-dark-1000">
           <time dateTime={format(currentMonth, "yyyy-MM")}>
             {format(currentMonth, "MMMM yyyy", { locale: dateLocale })}
@@ -330,7 +330,7 @@ const CalendarView = ({
           aria-hidden={isLocked}
           className={twMerge(
             "flex min-h-0 flex-1 flex-col",
-            isLocked && "pointer-events-none select-none blur-[6px]",
+            isLocked && "pointer-events-none blur-[6px] select-none",
           )}
         >
           <div className="flex min-h-0 flex-1 flex-col">
@@ -352,7 +352,7 @@ const CalendarView = ({
               onDragEnd={handleDragEnd}
               onDragCancel={() => setActiveId(null)}
             >
-              <div className="hidden min-h-0 flex-1 overflow-y-auto bg-light-300 dark:bg-dark-300 lg:block">
+              <div className="hidden min-h-0 flex-1 overflow-y-auto bg-light-300 lg:block dark:bg-dark-300">
                 <div className="grid min-h-full auto-rows-[minmax(7.5rem,1fr)] grid-cols-7 gap-px">
                   {days.map((day) => {
                     const overflowCount = day.cards.length - MAX_CARDS_PER_DAY;
@@ -432,7 +432,7 @@ const CalendarView = ({
               </DragOverlay>
             </DndContext>
 
-            <div className="min-h-0 flex-1 overflow-y-auto bg-light-300 dark:bg-dark-300 lg:hidden">
+            <div className="min-h-0 flex-1 overflow-y-auto bg-light-300 lg:hidden dark:bg-dark-300">
               <div className="isolate grid min-h-full auto-rows-[minmax(3.5rem,1fr)] grid-cols-7 gap-px">
                 {days.map((day) => {
                   const isSelected = isSameDay(day.date, selectedDate);
@@ -481,7 +481,7 @@ const CalendarView = ({
               </div>
             </div>
 
-            <div className="border-t border-light-300 px-6 py-4 dark:border-dark-300 lg:hidden">
+            <div className="border-t border-light-300 px-6 py-4 lg:hidden dark:border-dark-300">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-xs font-semibold text-light-900 dark:text-dark-900">
                   {format(selectedDate, "EEEE d MMMM", { locale: dateLocale })}

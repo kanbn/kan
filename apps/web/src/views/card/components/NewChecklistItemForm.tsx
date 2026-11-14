@@ -149,7 +149,7 @@ const NewChecklistItemForm = ({
           <input
             type="checkbox"
             disabled
-            className="peer h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-hidden ring-0 hover:border-light-500 hover:bg-transparent focus:outline-hidden focus:ring-0 focus-visible:outline-hidden dark:border-dark-500 dark:hover:border-dark-500"
+            className="peer h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent ring-0 outline-hidden hover:border-light-500 hover:bg-transparent focus:ring-0 focus:outline-hidden focus-visible:outline-hidden dark:border-dark-500 dark:hover:border-dark-500"
           />
         </label>
         <div className="flex-1 pr-7">

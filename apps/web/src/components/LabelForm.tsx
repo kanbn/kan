@@ -153,7 +153,7 @@ export function LabelForm({
               {({ open }) => (
                 <>
                   <div className="relative mt-4">
-                    <Listbox.Button className="block w-full rounded-md border-0 bg-white/5 px-4 py-1.5 shadow-xs ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset focus:ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:text-sm sm:leading-6">
+                    <Listbox.Button className="block w-full rounded-md border-0 bg-white/5 px-4 py-1.5 shadow-xs ring-1 ring-light-600 ring-inset focus:ring-2 focus:ring-light-600 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700">
                       <span className="flex items-center">
                         <span
                           style={{ backgroundColor: field.value.code }}
@@ -178,11 +178,11 @@ export function LabelForm({
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-2 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:bg-dark-300 sm:text-sm">
+                      <Listbox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-2 text-base shadow-lg ring-1 ring-black focus:outline-hidden sm:text-sm dark:bg-dark-300">
                         {colours.map((colour, index) => (
                           <Listbox.Option
                             key={`colours_${index}`}
-                            className="relative cursor-default select-none px-2 text-neutral-900 dark:text-dark-1000"
+                            className="relative cursor-default px-2 text-neutral-900 select-none dark:text-dark-1000"
                             value={colour}
                           >
                             {() => (
@@ -211,7 +211,7 @@ export function LabelForm({
         />
       </div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         {!isEdit && (
           <Toggle
             label={t`Create another`}

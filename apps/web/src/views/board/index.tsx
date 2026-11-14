@@ -894,18 +894,18 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {...register("name")}
                 onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
                 readOnly={!canEditBoard}
-                className="block border-0 bg-transparent p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden disabled:cursor-not-allowed dark:text-dark-1000 sm:text-[1.2rem]"
+                className="block border-0 bg-transparent p-0 py-0 leading-[2.3rem] font-bold tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden disabled:cursor-not-allowed sm:text-[1.2rem] dark:text-dark-1000"
               />
             </form>
           )}
           {!boardData && !isLoading && (
-            <p className="order-2 block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem] md:order-1">
+            <p className="order-2 block p-0 py-0 leading-[2.3rem] font-bold tracking-tight text-neutral-900 sm:text-[1.2rem] md:order-1 dark:text-dark-1000">
               {t`${isTemplate ? "Template" : "Board"} not found`}
             </p>
           )}
           <div className="order-1 mb-4 flex items-center justify-end space-x-1.5 sm:space-x-2 md:order-2 md:mb-0">
             {isTemplate && (
-              <div className="inline-flex cursor-default items-center justify-center whitespace-nowrap rounded-md border border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
+              <div className="inline-flex cursor-default items-center justify-center rounded-md border border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold whitespace-nowrap text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
                 <span className="mr-2">
                   <HiOutlineRectangleStack />
                 </span>
@@ -994,7 +994,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           <div
             ref={scrollRef}
             onMouseDown={onMouseDown}
-            className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none`}
+            className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 scrollbar flex-1 snap-x snap-mandatory scroll-pl-[10px] scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-x-scroll overflow-y-hidden overscroll-contain md:snap-none dark:scrollbar-thumb-dark-300 dark:scrollbar-track-dark-100`}
           >
             {isLoading ? (
               <div className="ml-8 flex">
@@ -1008,7 +1008,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                   <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                     <div className="flex flex-col items-center">
                       <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
-                      <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
+                      <p className="mt-4 mb-2 text-[14px] font-bold text-light-1000 dark:text-dark-950">
                         {t`No lists`}
                       </p>
                       <p className="text-[14px] text-light-900 dark:text-dark-900">

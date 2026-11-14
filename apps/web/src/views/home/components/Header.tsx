@@ -75,13 +75,13 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between lg:px-4">
             <div className="my-auto flex items-center justify-between">
               <Link href="/">
-                <h1 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-dark-1000 lg:w-[200px]">
+                <h1 className="text-lg font-bold tracking-tight text-neutral-900 lg:w-[200px] dark:text-dark-1000">
                   kan.bn
                 </h1>
               </Link>
             </div>
             {/* Desktop Menu */}
-            <div className="hidden justify-center gap-10 dark:text-dark-1000 lg:flex">
+            <div className="hidden justify-center gap-10 lg:flex dark:text-dark-1000">
               {desktopMenuItems.map((item) => (
                 <Link
                   key={item.label}
@@ -115,13 +115,13 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
               >
                 <div
                   className={twMerge(
-                    "absolute left-1/2 top-1/2 h-px w-4 -translate-x-1/2 translate-y-[-4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
+                    "absolute top-1/2 left-1/2 h-px w-4 -translate-x-1/2 translate-y-[-4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
                     isMenuOpen ? "translate-y-0 rotate-45" : "",
                   )}
                 />
                 <div
                   className={twMerge(
-                    "absolute left-1/2 top-1/2 h-px w-4 -translate-x-1/2 translate-y-[4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
+                    "absolute top-1/2 left-1/2 h-px w-4 -translate-x-1/2 translate-y-[4px] bg-current bg-light-1000 transition-all duration-300 ease-in-out dark:bg-dark-1000",
                     isMenuOpen ? "translate-y-0 -rotate-45" : "",
                   )}
                 />

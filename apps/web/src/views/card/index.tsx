@@ -355,7 +355,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                 </Link>
                 <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
                 <Link
-                  className="whitespace-nowrap text-sm font-bold leading-6 text-light-900 dark:text-dark-950"
+                  className="text-sm leading-6 font-bold whitespace-nowrap text-light-900 dark:text-dark-950"
                   href={boardReturnUrl}
                 >
                   {board?.name}
@@ -364,7 +364,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   card.list.board.workspace.cardPrefix && (
                     <>
                       <IoChevronForwardSharp className="h-[10px] w-[10px] text-light-900 dark:text-dark-900" />
-                      <span className="whitespace-nowrap text-sm font-bold leading-6 text-light-700 dark:text-dark-800">
+                      <span className="text-sm leading-6 font-bold whitespace-nowrap text-light-700 dark:text-dark-800">
                         {card.list.board.workspace.cardPrefix}-{card.cardNumber}
                       </span>
                     </>
@@ -396,12 +396,12 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             </>
           )}
           {!card && !isLoading && (
-            <p className="block p-0 py-0 font-bold leading-6 tracking-tight text-light-900 dark:text-dark-900 sm:text-[1rem]">
+            <p className="block p-0 py-0 leading-6 font-bold tracking-tight text-light-900 sm:text-[1rem] dark:text-dark-900">
               {t`Card not found`}
             </p>
           )}
         </div>
-        <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] w-full flex-1 overflow-y-auto scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 hover:scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 dark:hover:scrollbar-thumb-dark-300">
+        <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] scrollbar w-full flex-1 scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-y-auto hover:scrollbar-thumb-light-400 dark:scrollbar-thumb-dark-300 dark:scrollbar-track-dark-100 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
               <div className="mb-8 md:mt-4">
@@ -422,7 +422,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                         onBlur={canEdit ? handleSubmit(onSubmit) : undefined}
                         rows={1}
                         disabled={!canEdit}
-                        className={`block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 font-bold leading-relaxed text-neutral-900 focus:ring-0 dark:text-dark-1000 sm:text-[1.2rem] ${!canEdit ? "cursor-default" : ""}`}
+                        className={`block w-full resize-none overflow-hidden border-0 bg-transparent p-0 py-0 leading-relaxed font-bold text-neutral-900 focus:ring-0 sm:text-[1.2rem] dark:text-dark-1000 ${!canEdit ? "cursor-default" : ""}`}
                         onInput={(e) => {
                           const target = e.target as HTMLTextAreaElement;
                           target.style.height = "auto";
@@ -433,7 +433,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   </form>
                 )}
                 {!card && !isLoading && (
-                  <p className="block p-0 py-0 font-bold leading-[2.3rem] tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+                  <p className="block p-0 py-0 leading-[2.3rem] font-bold tracking-tight text-neutral-900 sm:text-[1.2rem] dark:text-dark-1000">
                     {t`Card not found`}
                   </p>
                 )}

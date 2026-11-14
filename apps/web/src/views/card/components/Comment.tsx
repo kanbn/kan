@@ -127,7 +127,7 @@ const Comment = ({
   return (
     <div
       key={publicId}
-      className="group relative flex w-full flex-col rounded-xl border border-light-600 bg-light-200 p-4 text-light-900 focus-visible:outline-hidden dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 sm:text-sm sm:leading-6"
+      className="group relative flex w-full flex-col rounded-xl border border-light-600 bg-light-200 p-4 text-light-900 focus-visible:outline-hidden sm:text-sm sm:leading-6 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000"
     >
       <div className="flex justify-between">
         <div className="flex items-center space-x-2">
@@ -162,7 +162,7 @@ const Comment = ({
         </div>
 
         {dropdownItems.length > 0 && !isViewOnly && (
-          <div className="absolute right-4 top-4">
+          <div className="absolute top-4 right-4">
             <Dropdown items={dropdownItems} ariaLabel={t`Comment options`}>
               <HiEllipsisHorizontal className="h-5 w-5 text-light-900 dark:text-dark-800" />
             </Dropdown>

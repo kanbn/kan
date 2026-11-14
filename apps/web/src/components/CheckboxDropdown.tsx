@@ -65,7 +65,7 @@ export default function CheckboxDropdown({
 
   const renderSelectedCount = (count?: number) =>
     count ? (
-      <span className="min-w-5 rounded-full bg-light-300 px-1.5 py-0.5 text-center text-[10px] font-semibold leading-4 dark:bg-dark-400">
+      <span className="min-w-5 rounded-full bg-light-300 px-1.5 py-0.5 text-center text-[10px] leading-4 font-semibold dark:bg-dark-400">
         {count}
       </span>
     ) : null;
@@ -168,7 +168,7 @@ export default function CheckboxDropdown({
         >
           <Menu.Items
             className={twMerge(
-              "absolute top-full z-50 mt-1 w-56 origin-top-left rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200",
+              "ring-opacity-5 absolute top-full z-50 mt-1 w-56 origin-top-left rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black focus:outline-hidden dark:border-dark-500 dark:bg-dark-200",
               position === "left" ? "left-0" : "right-0",
             )}
           >

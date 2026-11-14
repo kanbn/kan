@@ -405,7 +405,7 @@ export function NewCardForm({
       }}
       className={
         isDraggingFiles
-          ? "rounded-lg ring-2 ring-inset ring-light-700 dark:ring-dark-700"
+          ? "rounded-lg ring-2 ring-light-700 ring-inset dark:ring-dark-700"
           : undefined
       }
     >
@@ -450,7 +450,7 @@ export function NewCardForm({
           />
         </div>
         <div className="mt-2">
-          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-xs ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
+          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-xs ring-1 ring-light-600 ring-inset focus-within:ring-2 focus-within:ring-light-700 focus-within:ring-inset sm:leading-6 dark:ring-dark-700 dark:focus-within:ring-dark-700">
             <Editor
               content={description}
               onChange={(value) => {
@@ -508,7 +508,7 @@ export function NewCardForm({
                             key={member?.key}
                             className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gray-400 ring-1 ring-light-200 dark:ring-dark-500"
                           >
-                            <span className="text-[8px] font-medium leading-none text-white">
+                            <span className="text-[8px] leading-none font-medium text-white">
                               {member?.value
                                 .split(" ")
                                 .map((namePart) =>
@@ -598,7 +598,7 @@ export function NewCardForm({
                   onClick={() => setIsDateSelectorOpen(false)}
                 />
                 <div
-                  className="absolute left-0 top-full z-20 mt-2 rounded-md border border-light-200 bg-light-50 shadow-lg dark:border-dark-200 dark:bg-dark-100"
+                  className="absolute top-full left-0 z-20 mt-2 rounded-md border border-light-200 bg-light-50 shadow-lg dark:border-dark-200 dark:bg-dark-100"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
@@ -664,7 +664,7 @@ export function NewCardForm({
         )}
       </div>
 
-      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <Toggle
           label={t`Create another`}
           isChecked={isCreateAnotherEnabled}

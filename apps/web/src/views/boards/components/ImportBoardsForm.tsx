@@ -116,7 +116,7 @@ const SelectSource = ({
               {({ open }) => (
                 <>
                   <div className="relative">
-                    <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-dark-300 bg-white/5 px-4 py-1.5 text-neutral-900 shadow-xs ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:text-sm sm:leading-6">
+                    <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-dark-300 bg-white/5 px-4 py-1.5 text-neutral-900 shadow-xs ring-1 ring-light-600 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700">
                       <span className="flex items-center">
                         {integrationProviders[field.value]?.icon}
                         <span className="ml-2 block truncate text-sm">
@@ -138,12 +138,12 @@ const SelectSource = ({
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600 ring-opacity-5 focus:outline-hidden dark:bg-dark-300 dark:text-dark-1000 sm:text-sm">
+                      <Listbox.Options className="ring-opacity-5 absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-1 text-base text-neutral-900 shadow-lg ring-1 ring-light-600 focus:outline-hidden sm:text-sm dark:bg-dark-300 dark:text-dark-1000">
                         {hasIntegrations ? (
                           availableIntegrations.map((integration, index) => (
                             <Listbox.Option
                               key={`source_${index}`}
-                              className="relative cursor-default select-none px-1"
+                              className="relative cursor-default px-1 select-none"
                               value={integration.provider}
                             >
                               <div className="flex items-center rounded-[5px] p-1 hover:bg-light-200 dark:hover:bg-dark-400">
@@ -164,7 +164,7 @@ const SelectSource = ({
                           <>
                             <Listbox.Option
                               key="trello_placeholder"
-                              className="font-sm relative cursor-default select-none px-1"
+                              className="font-sm relative cursor-default px-1 select-none"
                               value="trello"
                             >
                               <div className="flex items-center rounded-[5px] p-1 text-sm hover:bg-light-200 dark:hover:bg-dark-400">
@@ -176,7 +176,7 @@ const SelectSource = ({
                             </Listbox.Option>
                             <Listbox.Option
                               key="github_placeholder"
-                              className="font-sm relative cursor-default select-none px-1"
+                              className="font-sm relative cursor-default px-1 select-none"
                               value="github"
                             >
                               <div className="flex items-center rounded-[5px] p-1 text-sm hover:bg-light-200 dark:hover:bg-dark-400">
@@ -198,7 +198,7 @@ const SelectSource = ({
         />
       </div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <div>
           <Button
             type="submit"
@@ -311,7 +311,7 @@ const ImportGithub: React.FC = () => {
           <input
             id={project.id}
             type="checkbox"
-            className="h-[14px] w-[14px] rounded-sm bg-transparent ring-0 focus:outline-hidden focus:ring-0 focus:ring-offset-0"
+            className="h-[14px] w-[14px] rounded-sm bg-transparent ring-0 focus:ring-0 focus:ring-offset-0 focus:outline-hidden"
             {...registerProjects(project.id)}
           />
           <span className="ml-3 text-sm text-neutral-900 dark:text-dark-1000">
@@ -326,7 +326,7 @@ const ImportGithub: React.FC = () => {
     <form onSubmit={handleSubmitProjects(onSubmitProjects)}>
       <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <Toggle
           label={t`Select all`}
           isChecked={!!isSelectAllEnabled}
@@ -500,7 +500,7 @@ const ImportTrello: React.FC = () => {
           <input
             id={board.id}
             type="checkbox"
-            className="h-[14px] w-[14px] rounded-sm bg-transparent ring-0 focus:outline-hidden focus:ring-0 focus:ring-offset-0"
+            className="h-[14px] w-[14px] rounded-sm bg-transparent ring-0 focus:ring-0 focus:ring-offset-0 focus:outline-hidden"
             {...registerBoards(board.id)}
           />
           <span className="ml-3 text-sm text-neutral-900 dark:text-dark-1000">
@@ -518,7 +518,7 @@ const ImportTrello: React.FC = () => {
         {t`Archived lists and cards aren't imported.`}
       </p>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <Toggle
           label={t`Select all`}
           isChecked={!!isSelectAllEnabled}
@@ -566,7 +566,7 @@ export function ImportBoardsForm() {
 
   return (
     <div>
-      <div className="flex w-full items-center justify-between px-5 pb-4 pt-5">
+      <div className="flex w-full items-center justify-between px-5 pt-5 pb-4">
         <div className="flex items-center">
           <h2 className="text-sm font-medium text-neutral-900 dark:text-dark-1000">
             {t`New import`}

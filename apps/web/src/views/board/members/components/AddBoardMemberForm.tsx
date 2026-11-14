@@ -84,7 +84,7 @@ export function AddBoardMemberForm({
             id="board-member"
             value={selectedPublicId}
             onChange={(e) => setSelectedPublicId(e.target.value)}
-            className="block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-xs ring-1 ring-inset ring-light-600 placeholder:text-dark-800 focus:ring-2 focus:ring-inset focus:ring-light-700 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:leading-6"
+            className="block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-xs ring-1 ring-light-600 ring-inset placeholder:text-dark-800 focus:ring-2 focus:ring-light-700 focus:ring-inset sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700"
           >
             <option value="">{t`Select a member`}</option>
             {availableMembers.map((member) => (

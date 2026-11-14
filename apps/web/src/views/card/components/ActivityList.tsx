@@ -439,7 +439,7 @@ const ActivityItems = ({
             isLoading={isLoading}
           />
           {index !== activities.length - 1 && (
-            <div className="absolute bottom-[-14px] left-1/2 top-[30px] w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
+            <div className="absolute top-[30px] bottom-[-14px] left-1/2 w-0.5 -translate-x-1/2 bg-light-600 dark:bg-dark-600" />
           )}
         </div>
         <p className="text-sm">

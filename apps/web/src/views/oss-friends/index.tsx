@@ -52,9 +52,9 @@ export default function OSSFriendsView() {
       <PageHead title={`${t`OSS Friends`} | kan.bn`} />
 
       <div className="flex h-full w-full flex-col lg:pt-20">
-        <div className="w-full pb-10 pt-32">
+        <div className="w-full pt-32 pb-10">
           <div className="flex flex-col items-center justify-center px-4 pb-10">
-            <p className="mt-4 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-3xl">
+            <p className="mt-4 text-center text-3xl font-bold text-light-1000 lg:text-3xl dark:text-dark-1000">
               {t`Open Source Friends`}
             </p>
             <p className="text:md lg:text-md mt-4 max-w-[500px] text-center text-light-950 dark:text-dark-900">

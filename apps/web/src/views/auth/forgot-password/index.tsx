@@ -56,7 +56,7 @@ export default function ForgotPasswordPage() {
   return (
     <>
       <PageHead title={t`Forgot password | kan.bn`} />
-      <main className="h-screen bg-light-100 pt-20 dark:bg-dark-50 sm:pt-0">
+      <main className="h-screen bg-light-100 pt-20 sm:pt-0 dark:bg-dark-50">
         <div className="justify-top flex h-full flex-col items-center px-4 sm:justify-center">
           <div className="z-10 flex w-full flex-col items-center">
             <Link href="/">
@@ -76,7 +76,7 @@ export default function ForgotPasswordPage() {
                 </p>
               </div>
             ) : (
-              <div className="w-full rounded-lg border border-light-500 bg-light-300 px-4 py-10 dark:border-dark-400 dark:bg-dark-200 sm:max-w-md lg:px-10">
+              <div className="w-full rounded-lg border border-light-500 bg-light-300 px-4 py-10 sm:max-w-md lg:px-10 dark:border-dark-400 dark:bg-dark-200">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
                     <div>

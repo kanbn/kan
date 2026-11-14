@@ -58,11 +58,13 @@ const Modal: React.FC<Props> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-light-50 bg-opacity-40 transition-opacity dark:bg-dark-50 dark:bg-opacity-40" />
+          <div className="bg-opacity-40 dark:bg-opacity-40 fixed inset-0 bg-light-50 transition-opacity dark:bg-dark-50" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-50 w-screen overflow-y-auto">
-          <div className={`flex min-h-full justify-center p-4 text-center sm:p-0 ${centered ? "items-center" : "items-start sm:items-start"}`}>
+          <div
+            className={`flex min-h-full justify-center p-4 text-center sm:p-0 ${centered ? "items-center" : "items-start sm:items-start"}`}
+          >
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"

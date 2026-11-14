@@ -58,7 +58,7 @@ export function BoardsList({
 
   if (isLoading)
     return (
-      <div className="3xl:grid-cols-4 grid h-fit w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3">
+      <div className="3xl:grid-cols-4 grid h-fit w-full grid-cols-1 gap-4 2xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
         <div className="mr-5 flex h-[150px] w-full animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
         <div className="mr-5 flex h-[150px] w-full animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
         <div className="mr-5 flex h-[150px] w-full animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
@@ -70,7 +70,7 @@ export function BoardsList({
       <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
         <div className="flex flex-col items-center">
           <HiOutlineRectangleStack className="h-10 w-10 text-light-800 dark:text-dark-800" />
-          <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
+          <p className="mt-4 mb-2 text-[14px] font-bold text-light-1000 dark:text-dark-950">
             {archived
               ? t`No archived boards`
               : t`No ${isTemplate ? "templates" : "boards"}`}
@@ -98,7 +98,7 @@ export function BoardsList({
 
   return (
     <motion.div
-      className="3xl:grid-cols-4 grid h-fit w-full grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3"
+      className="3xl:grid-cols-4 grid h-fit w-full grid-cols-1 gap-4 2xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3"
       layout
     >
       {data?.map((board) => (
@@ -127,7 +127,7 @@ export function BoardsList({
                 onClick={(e) =>
                   handleToggleFavorite(e, board.publicId, board.favorite)
                 }
-                className={`absolute right-3 top-3 z-10 rounded p-1 transition-all hover:bg-light-300 dark:hover:bg-dark-200 ${
+                className={`absolute top-3 right-3 z-10 rounded p-1 transition-all hover:bg-light-300 dark:hover:bg-dark-200 ${
                   board.favorite
                     ? ""
                     : "md:opacity-0 md:group-hover:opacity-100"

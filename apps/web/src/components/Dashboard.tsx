@@ -183,9 +183,9 @@ export default function Dashboard({
           background-color: ${!isDarkMode ? "hsl(0deg 0% 97.3%)" : "#1c1c1c"};
         }
       `}</style>
-      <div className="relative flex h-screen flex-col bg-light-50 dark:bg-dark-50 md:bg-light-100 md:p-3 md:dark:bg-dark-100">
+      <div className="relative flex h-screen flex-col bg-light-50 md:bg-light-100 md:p-3 dark:bg-dark-50 md:dark:bg-dark-100">
         {/* Mobile Header */}
-        <div className="flex h-12 items-center justify-between border-b border-light-300 bg-light-50 px-3 dark:border-dark-300 dark:bg-dark-50 md:hidden">
+        <div className="flex h-12 items-center justify-between border-b border-light-300 bg-light-50 px-3 md:hidden dark:border-dark-300 dark:bg-dark-50">
           <button
             ref={sideNavButtonRef}
             onClick={toggleSideNav}
@@ -249,7 +249,7 @@ export default function Dashboard({
               {hasRightPanel && rightPanel && (
                 <div
                   ref={rightPanelRef}
-                  className={`fixed right-0 top-12 z-40 h-[calc(100dvh-3rem)] w-80 transform border-l border-light-300 bg-light-200 transition-transform duration-300 ease-in-out dark:border-dark-300 dark:bg-dark-100 md:hidden ${
+                  className={`fixed top-12 right-0 z-40 h-[calc(100dvh-3rem)] w-80 transform border-l border-light-300 bg-light-200 transition-transform duration-300 ease-in-out md:hidden dark:border-dark-300 dark:bg-dark-100 ${
                     isRightPanelOpen ? "translate-x-0" : "translate-x-full"
                   }`}
                 >
