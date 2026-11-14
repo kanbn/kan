@@ -57,7 +57,8 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
     <>
       <style jsx global>{`
         html {
-          font-family: ${jakarta.style.fontFamily};
+          --font-jakarta: ${jakarta.style.fontFamily};
+          font-family: var(--font-jakarta);
         }
         body {
           position: relative;
