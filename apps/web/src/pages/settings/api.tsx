@@ -1,8 +1,8 @@
 import type { NextPageWithLayout } from "~/pages/_app";
 import { getDashboardLayout } from "~/components/Dashboard";
+import Popup from "~/components/Popup";
 import { SettingsLayout } from "~/components/SettingsLayout";
 import ApiSettings from "~/views/settings/ApiSettings";
-import Popup from "~/components/Popup";
 
 const ApiSettingsPage: NextPageWithLayout = () => {
   return (

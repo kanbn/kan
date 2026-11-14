@@ -96,7 +96,7 @@ export default function PlainTextEditor({
           return false;
         },
         attributes: {
-          class: "outline-none focus:outline-none focus-visible:ring-0",
+          class: "outline-hidden focus:outline-hidden focus-visible:ring-0",
         },
       },
     },

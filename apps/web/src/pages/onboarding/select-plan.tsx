@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { env } from "next-runtime-env";
+import { useEffect } from "react";
 
 import { authClient } from "@kan/auth/client";
 

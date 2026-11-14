@@ -77,7 +77,7 @@ export default function UserMenu({
         ) : (
           <Menu.Button
             className="flex w-full items-center rounded-md p-1.5 text-neutral-900 hover:bg-light-200 dark:text-dark-900 dark:hover:bg-dark-200 dark:hover:text-dark-1000"
-            title={isCollapsed ? (displayName || email) : undefined}
+            title={isCollapsed ? displayName || email : undefined}
           >
             {avatarUrl ? (
               <Image
@@ -121,7 +121,7 @@ export default function UserMenu({
       >
         <Menu.Items
           className={twMerge(
-            "absolute bottom-[40px] z-10 mt-2 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-600 dark:bg-dark-300",
+            "absolute bottom-[40px] z-10 mt-2 origin-top-left rounded-md border border-light-600 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-600 dark:bg-dark-300",
             isCollapsed ? "left-0 w-48" : "left-0 w-full",
           )}
         >
@@ -173,7 +173,7 @@ export default function UserMenu({
                 </button>
               </Menu.Item>
             </div>
-            <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
+            <div className="light-border-600 border-t p-1 dark:border-dark-600">
               <Menu.Item>
                 <button
                   onClick={() => {
@@ -218,7 +218,7 @@ export default function UserMenu({
                 </button>
               </Menu.Item>
             </div>
-            <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
+            <div className="light-border-600 border-t p-1 dark:border-dark-600">
               <Menu.Item>
                 <button
                   onClick={handleLogout}
@@ -229,7 +229,7 @@ export default function UserMenu({
               </Menu.Item>
             </div>
             {env.NEXT_PUBLIC_APP_VERSION && (
-              <div className="light-border-600 border-t-[1px] p-1 dark:border-dark-600">
+              <div className="light-border-600 border-t p-1 dark:border-dark-600">
                 <Menu.Item>
                   <Link
                     href={

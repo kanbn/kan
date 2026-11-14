@@ -60,7 +60,7 @@ const Avatar = ({
           ) : (
             <span
               className={twMerge(
-                "text-sm font-medium leading-none text-white",
+                "text-sm leading-none font-medium text-white",
                 size === "xs" && "text-[8px]",
                 size === "sm" && "text-[10px]",
                 size === "lg" && "text-md",

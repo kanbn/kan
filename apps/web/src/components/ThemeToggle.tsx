@@ -1,5 +1,5 @@
-import { CgDarkMode } from "react-icons/cg";
 import { useTheme } from "next-themes";
+import { CgDarkMode } from "react-icons/cg";
 
 const ThemeToggle = () => {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -11,7 +11,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="rounded p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
+      className="rounded-sm p-1.5 transition-all hover:bg-light-200 dark:hover:bg-dark-100"
       aria-label={`Switch to ${resolvedTheme === "light" ? "dark" : "light"} theme`}
     >
       <CgDarkMode

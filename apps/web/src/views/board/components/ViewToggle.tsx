@@ -18,7 +18,7 @@ const ViewToggle = ({ view, onChange }: ViewToggleProps) => {
     "text-light-900 hover:text-light-1000 dark:text-dark-900 dark:hover:text-dark-1000";
 
   return (
-    <div className="flex items-center gap-0.5 rounded-md border-[1px] border-light-600 bg-light-50 p-0.5 dark:border-dark-600 dark:bg-dark-50">
+    <div className="flex items-center gap-0.5 rounded-md border border-light-600 bg-light-50 p-0.5 dark:border-dark-600 dark:bg-dark-50">
       <button
         type="button"
         onClick={() => onChange("board")}

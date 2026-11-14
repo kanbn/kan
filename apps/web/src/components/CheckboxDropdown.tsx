@@ -65,7 +65,7 @@ export default function CheckboxDropdown({
 
   const renderSelectedCount = (count?: number) =>
     count ? (
-      <span className="min-w-5 rounded-full bg-light-300 px-1.5 py-0.5 text-center text-[10px] font-semibold leading-4 dark:bg-dark-400">
+      <span className="min-w-5 rounded-full bg-light-300 px-1.5 py-0.5 text-center text-[10px] leading-4 font-semibold dark:bg-dark-400">
         {count}
       </span>
     ) : null;
@@ -86,7 +86,7 @@ export default function CheckboxDropdown({
                   id={item.key}
                   name={item.key}
                   type="checkbox"
-                  className="h-[14px] w-[14px] rounded bg-transparent"
+                  className="h-[14px] w-[14px] rounded-sm bg-transparent"
                   onClick={(event) => event.stopPropagation()}
                   onChange={() =>
                     handleSelect(groupKey, { key: item.key, value: item.value })
@@ -151,7 +151,7 @@ export default function CheckboxDropdown({
           as={asChild ? "div" : undefined}
           disabled={disabled}
           aria-label={ariaLabel}
-          className="h-full w-full cursor-pointer focus-visible:outline-none disabled:cursor-not-allowed"
+          className="h-full w-full cursor-pointer focus-visible:outline-hidden disabled:cursor-not-allowed"
         >
           {children}
         </Menu.Button>
@@ -168,7 +168,7 @@ export default function CheckboxDropdown({
         >
           <Menu.Items
             className={twMerge(
-              "absolute top-full z-50 mt-1 w-56 origin-top-left rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200",
+              "absolute top-full z-50 mt-1 w-56 origin-top-left rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200",
               position === "left" ? "left-0" : "right-0",
             )}
           >

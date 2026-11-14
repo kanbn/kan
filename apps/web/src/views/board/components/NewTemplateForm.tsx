@@ -101,7 +101,7 @@ export function NewTemplateForm({
           <h2 className="text-sm font-bold">{t`New template`}</h2>
           <button
             type="button"
-            className="hover:bg-li ght-300 rounded p-1 focus:outline-none dark:hover:bg-dark-300"
+            className="hover:bg-li ght-300 rounded-sm p-1 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();
@@ -123,7 +123,7 @@ export function NewTemplateForm({
           }}
         />
       </div>
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <div>
           <Button type="submit" isLoading={createBoard.isPending}>
             {t`Create template`}

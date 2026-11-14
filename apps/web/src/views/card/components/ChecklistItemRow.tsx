@@ -151,16 +151,16 @@ export default function ChecklistItemRow({
         <div
           {...dragHandleAttributes}
           {...dragHandleListeners}
-          className="absolute left-0 top-1/2 flex h-[20px] w-[20px] -translate-x-full -translate-y-1/2 cursor-grab items-center justify-center pr-1 opacity-0 transition-opacity group-hover:opacity-75 hover:opacity-100 active:cursor-grabbing"
+          className="absolute top-1/2 left-0 flex h-[20px] w-[20px] -translate-x-full -translate-y-1/2 cursor-grab items-center justify-center pr-1 opacity-0 transition-opacity group-hover:opacity-75 hover:opacity-100 active:cursor-grabbing"
         >
           <RiDraggable className="h-4 w-4 text-light-700 dark:text-dark-700" />
         </div>
       )}
 
-      {viewOnly && <div className="w-[20px] flex-shrink-0" />}
+      {viewOnly && <div className="w-[20px] shrink-0" />}
 
       <label
-        className={`relative mt-[2px] inline-flex h-[16px] w-[16px] flex-shrink-0 items-center justify-center`}
+        className={`relative mt-[2px] inline-flex h-[16px] w-[16px] shrink-0 items-center justify-center`}
       >
         <input
           type="checkbox"
@@ -173,7 +173,7 @@ export default function ChecklistItemRow({
             handleToggleCompleted();
           }}
           className={twMerge(
-            "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none dark:border-dark-500 dark:hover:border-dark-500",
+            "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent ring-0 outline-hidden checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden dark:border-dark-500 dark:hover:border-dark-500",
             viewOnly ? "cursor-default" : "cursor-pointer",
           )}
         />
@@ -202,7 +202,7 @@ export default function ChecklistItemRow({
         <button
           type="button"
           onClick={handleDelete}
-          className="absolute right-1 top-1/2 hidden -translate-y-1/2 rounded-md p-1 text-light-900 group-hover:block hover:bg-light-200 dark:text-dark-700 dark:hover:bg-dark-200"
+          className="absolute top-1/2 right-1 hidden -translate-y-1/2 rounded-md p-1 text-light-900 group-hover:block hover:bg-light-200 dark:text-dark-700 dark:hover:bg-dark-200"
         >
           <HiXMark size={16} />
         </button>

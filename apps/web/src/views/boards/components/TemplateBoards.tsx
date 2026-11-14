@@ -32,7 +32,14 @@ export const getTemplates = (): Template[] => [
   {
     id: "roadmap-extended",
     name: t`Extended Roadmap`,
-    lists: [t`Requested`, t`Under Review`, t`Planned`, t`In Progress`, t`Done`, t`Rejected`],
+    lists: [
+      t`Requested`,
+      t`Under Review`,
+      t`Planned`,
+      t`In Progress`,
+      t`Done`,
+      t`Rejected`,
+    ],
     labels: [t`Feature`, t`Enhancement`, t`Critical`, t`Documentation`],
   },
   {
@@ -165,7 +172,7 @@ export default function TemplateBoards({
       <div className="relative">
         <div
           ref={scrollRef}
-          className="scroll-container -mr-2 flex max-h-[200px] flex-col gap-3 overflow-y-auto pr-2 pt-0.5"
+          className="scroll-container -mr-2 flex max-h-[200px] flex-col gap-3 overflow-y-auto pt-0.5 pr-2"
         >
           {templates.map((template) => (
             <label
@@ -174,7 +181,7 @@ export default function TemplateBoards({
               onClick={() => handleBoardSelect(template.id)}
               className={`scroll-container relative flex cursor-pointer rounded-lg border p-3 transition-all hover:bg-light-100 dark:hover:bg-dark-200 ${
                 currentBoard?.id === template.id
-                  ? "border-light-700 bg-light-100 ring-1 ring-inset ring-light-700 dark:border-dark-700 dark:bg-dark-200 dark:ring-dark-700"
+                  ? "border-light-700 bg-light-100 ring-1 ring-light-700 ring-inset dark:border-dark-700 dark:bg-dark-200 dark:ring-dark-700"
                   : "border-light-600 dark:border-dark-600"
               }`}
             >
@@ -187,7 +194,7 @@ export default function TemplateBoards({
                 </p>
               </div>
               {currentBoard?.id === template.id && (
-                <div className="absolute right-3 top-3 text-light-1000 dark:text-dark-1000">
+                <div className="absolute top-3 right-3 text-light-1000 dark:text-dark-1000">
                   <HiCheckCircle className="h-5 w-5" />
                 </div>
               )}
@@ -195,10 +202,10 @@ export default function TemplateBoards({
           ))}
         </div>
         {showTopFade && (
-          <div className="pointer-events-none absolute left-0 right-0 top-0 h-6 bg-gradient-to-b from-white/80 to-transparent dark:from-dark-100/80" />
+          <div className="pointer-events-none absolute top-0 right-0 left-0 h-6 bg-linear-to-b from-white/80 to-transparent dark:from-dark-100/80" />
         )}
         {showFade && (
-          <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white/80 to-transparent dark:from-dark-100/80" />
+          <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-6 bg-linear-to-t from-white/80 to-transparent dark:from-dark-100/80" />
         )}
       </div>
     </div>

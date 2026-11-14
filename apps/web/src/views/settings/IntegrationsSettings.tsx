@@ -153,7 +153,7 @@ export default function IntegrationsSettings() {
       <PageHead title={t`Settings | Integrations`} />
 
       <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
           {t`Trello`}
         </h2>
         {!integrations?.some(
@@ -199,7 +199,7 @@ export default function IntegrationsSettings() {
       </div>
 
       <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mb-4 mt-8 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
+        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
           {t`GitHub`}
         </h2>
         {!githubStatus?.connected ? (

@@ -19,7 +19,7 @@ export default function TermsView() {
     <Layout>
       <PageHead title="Terms of Service | kan.bn" />
       <div className="flex flex-col items-center">
-        <div className="mb-20 flex h-full w-full max-w-[800px] flex-col lg:pt-[5rem]">
+        <div className="mb-20 flex h-full w-full max-w-[800px] flex-col lg:pt-20">
           <div className="flex items-center justify-center py-36 text-4xl font-bold tracking-tight text-light-1000 dark:text-dark-1000">
             <h2>Terms of Service</h2>
           </div>

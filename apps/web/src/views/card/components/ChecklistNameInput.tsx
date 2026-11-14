@@ -89,7 +89,7 @@ export default function ChecklistNameInput({
       }}
       title={name}
       className={twMerge(
-        "text-md block w-full truncate border-0 bg-transparent p-0 py-0 font-medium text-light-1000 outline-none focus:ring-0 dark:text-dark-1000",
+        "text-md block w-full truncate border-0 bg-transparent p-0 py-0 font-medium text-light-1000 outline-hidden focus:ring-0 dark:text-dark-1000",
         viewOnly && "cursor-default",
       )}
     />

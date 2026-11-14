@@ -46,7 +46,7 @@ const Button: React.FC<{
       onMouseEnter={handleMouseEnter}
       onClick={handleClick}
       className={twMerge(
-        "group flex h-[34px] items-center rounded-md p-1.5 text-sm font-normal leading-6 hover:bg-light-200 hover:text-light-1000 dark:hover:bg-dark-200 dark:hover:text-dark-1000",
+        "group flex h-[34px] items-center rounded-md p-1.5 text-sm leading-6 font-normal hover:bg-light-200 hover:text-light-1000 dark:hover:bg-dark-200 dark:hover:text-dark-1000",
         isCollapsed ? "md:justify-center" : "justify-between",
         current
           ? "bg-light-200 text-light-1000 dark:bg-dark-200 dark:text-dark-1000"

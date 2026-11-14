@@ -68,7 +68,7 @@
     "react-image-crop": "^11.1.2",
     "react-lottie-player": "^2.1.0",
     "react-markdown": "^10.1.0",
-    "tailwind-merge": "^2.5.2",
+    "tailwind-merge": "^3.7.0",
     "tippy.js": "^6.3.7",
     "tiptap-markdown": "^0.9.0",
     "zod": "catalog:"
@@ -84,6 +84,7 @@
     "@lingui/loader": "^5.3.2",
     "@lingui/swc-plugin": "^6.7.1",
     "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/postcss": "^4.3.5",
     "@types/node": "^24.19.2",
     "@types/react": "catalog:react19",
     "@types/react-dom": "catalog:react19",

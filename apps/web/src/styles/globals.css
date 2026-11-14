@@ -1,46 +1,78 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-html {
-  font-size: 14px;
+@config "../../tailwind.config.ts";
+
+/* v4 limits hover to devices that can hover; keep v3 so tapping still reveals hover-only controls */
+@custom-variant hover (&:hover);
+
+/* Our text-sm sets only the font size, as it did in v3, so line height still
+   comes from the parent or other classes */
+@theme {
+  --text-sm: initial;
 }
 
-[contenteditable="true"]:empty:before {
-  content: attr(placeholder);
-  display: block;
-  color: #707070;
+@utility text-sm {
   font-size: 0.8rem;
 }
 
-.gradient-border::before {
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 45deg,
-    rgba(244, 114, 182, 0.4) 85deg,
-    rgba(192, 132, 252, 0.4) 95deg,
-    transparent 110deg,
-    transparent 360deg
-  );
-  content: "";
-  position: absolute;
-  inset: -50%;
-  width: 200%;
-  height: 200%;
+/* Keep Tailwind v3 defaults for borders, placeholders and button cursors */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
-@layer utilities {
+@utility break-anywhere {
   @supports not (overflow-wrap: anywhere) {
-    .break-anywhere {
-      word-break: break-word;
-    }
+    word-break: break-word;
   }
 
   @supports (overflow-wrap: anywhere) {
-    .break-anywhere {
-      overflow-wrap: anywhere;
-    }
+    overflow-wrap: anywhere;
+  }
+}
+
+@layer utilities {
+  html {
+    font-size: 14px;
+  }
+
+  [contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    display: block;
+    color: #707070;
+    font-size: 0.8rem;
+  }
+
+  .gradient-border::before {
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent 45deg,
+      rgba(244, 114, 182, 0.4) 85deg,
+      rgba(192, 132, 252, 0.4) 95deg,
+      transparent 110deg,
+      transparent 360deg
+    );
+    content: "";
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
   }
 }
 

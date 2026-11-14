@@ -62,8 +62,7 @@ export default function SideNavigation({
   });
 
   const subscriptions = workspaceData?.subscriptions as
-    | Subscription[]
-    | undefined;
+    Subscription[] | undefined;
 
   useEffect(() => {
     const savedState = localStorage.getItem("kan_sidebar-collapsed");
@@ -160,7 +159,7 @@ export default function SideNavigation({
     <>
       <nav
         className={twMerge(
-          "flex h-full w-64 flex-col justify-between border-r border-light-300 bg-light-100 p-3 dark:border-dark-300 dark:bg-dark-100 md:border-r-0 md:py-0 md:pl-0",
+          "flex h-full w-64 flex-col justify-between border-r border-light-300 bg-light-100 p-3 md:border-r-0 md:py-0 md:pl-0 dark:border-dark-300 dark:bg-dark-100",
           isCollapsed && "md:w-auto",
         )}
       >
@@ -193,7 +192,7 @@ export default function SideNavigation({
               )}
             </Button>
           </div>
-          <div className="mx-1 mb-4 hidden w-auto border-b border-light-300 dark:border-dark-400 md:block" />
+          <div className="mx-1 mb-4 hidden w-auto border-b border-light-300 md:block dark:border-dark-400" />
 
           <WorkspaceMenu isCollapsed={isCollapsed} />
           <ul role="list" className="space-y-1">

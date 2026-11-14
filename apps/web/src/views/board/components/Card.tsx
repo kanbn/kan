@@ -93,7 +93,7 @@ const Card = ({
           {ticketNumber}
         </span>
       )}
-      <span className="break-words">{title}</span>
+      <span className="wrap-break-word">{title}</span>
       {labels.length ||
       members.length ||
       cardSummary.checklistItemCount > 0 ||
@@ -147,11 +147,11 @@ const Card = ({
             </div>
             <div className="flex items-center justify-end gap-1">
               {cardSummary.checklistItemCount > 0 && (
-                <div className="flex items-center gap-1 rounded-full border-[1px] border-light-300 px-2 py-1 dark:border-dark-600">
+                <div className="flex items-center gap-1 rounded-full border border-light-300 px-2 py-1 dark:border-dark-600">
                   <CircularProgress
                     progress={progress || 2}
                     size="sm"
-                    className="flex-shrink-0"
+                    className="shrink-0"
                   />
                   <span className="text-[10px] text-light-900 dark:text-dark-950">
                     {cardSummary.completedChecklistItemCount}/

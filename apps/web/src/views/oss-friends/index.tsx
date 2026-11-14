@@ -51,10 +51,10 @@ export default function OSSFriendsView() {
     <Layout>
       <PageHead title={`${t`OSS Friends`} | kan.bn`} />
 
-      <div className="flex h-full w-full flex-col lg:pt-[5rem]">
-        <div className="w-full pb-10 pt-32">
+      <div className="flex h-full w-full flex-col lg:pt-20">
+        <div className="w-full pt-32 pb-10">
           <div className="flex flex-col items-center justify-center px-4 pb-10">
-            <p className="mt-4 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-3xl">
+            <p className="mt-4 text-center text-3xl font-bold text-light-1000 lg:text-3xl dark:text-dark-1000">
               {t`Open Source Friends`}
             </p>
             <p className="text:md lg:text-md mt-4 max-w-[500px] text-center text-light-950 dark:text-dark-900">
@@ -71,9 +71,9 @@ export default function OSSFriendsView() {
                   className="group relative h-[200px] rounded-2xl border border-light-200 bg-light-50 p-6 dark:border-dark-200 dark:bg-dark-50"
                 >
                   <div className="mb-4 flex flex-col gap-3">
-                    <div className="h-5 w-2/3 animate-pulse rounded-sm bg-light-200 dark:bg-dark-200" />
-                    <div className="h-3 w-full animate-pulse rounded-sm bg-light-200 dark:bg-dark-200" />
-                    <div className="h-3 w-5/6 animate-pulse rounded-sm bg-light-200 dark:bg-dark-200" />
+                    <div className="h-5 w-2/3 animate-pulse rounded-xs bg-light-200 dark:bg-dark-200" />
+                    <div className="h-3 w-full animate-pulse rounded-xs bg-light-200 dark:bg-dark-200" />
+                    <div className="h-3 w-5/6 animate-pulse rounded-xs bg-light-200 dark:bg-dark-200" />
                   </div>
                   <div className="h-8 w-28 animate-pulse rounded-md bg-light-200 dark:bg-dark-200" />
                 </div>
@@ -84,7 +84,7 @@ export default function OSSFriendsView() {
                 return (
                   <div
                     key={`oss-friend-${idx}`}
-                    className="group relative rounded-2xl border border-light-200 bg-light-50 p-6 transition-all duration-200 hover:shadow-sm dark:border-dark-200 dark:bg-dark-50"
+                    className="group relative rounded-2xl border border-light-200 bg-light-50 p-6 transition-all duration-200 hover:shadow-xs dark:border-dark-200 dark:bg-dark-50"
                   >
                     <div className="mb-4 flex flex-col gap-2">
                       <Link

@@ -33,7 +33,7 @@ export function CardContextMembersModal() {
         {t`Manage members`}
       </h2>
       {isLoading ? (
-        <div className="h-10 w-full animate-pulse rounded bg-light-200 dark:bg-dark-300" />
+        <div className="h-10 w-full animate-pulse rounded-sm bg-light-200 dark:bg-dark-300" />
       ) : (
         <MemberSelector
           cardPublicId={cardPublicId}

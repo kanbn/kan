@@ -362,11 +362,11 @@ export function Auth({
         socialProviders?.length === 0 && (
           <div className="space-y-4">
             <div className="flex w-full items-center gap-4">
-              <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
+              <div className="h-px w-1/3 bg-light-600 dark:bg-dark-600" />
               <span className="text-center text-sm text-light-900 dark:text-dark-900">
                 {t`No authentication methods are currently available`}
               </span>
-              <div className="h-[1px] w-1/3 bg-light-600 dark:bg-dark-600" />
+              <div className="h-px w-1/3 bg-light-600 dark:bg-dark-600" />
             </div>
             {!isCloudEnv && (
               <p className="text-center text-xs text-light-900 dark:text-dark-900">
@@ -392,12 +392,12 @@ export function Auth({
       {(isCredentialsEnabled || isMagicLinkAvailable) && (
         <form onSubmit={handleSubmit(onSubmit)}>
           {socialProviders?.length !== 0 && (
-            <div className="mb-[1.5rem] flex w-full items-center gap-4">
-              <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
+            <div className="mb-6 flex w-full items-center gap-4">
+              <div className="h-px w-full bg-light-600 dark:bg-dark-600" />
               <span className="text-sm text-light-900 dark:text-dark-900">
                 {t`or`}
               </span>
-              <div className="h-[1px] w-full bg-light-600 dark:bg-dark-600" />
+              <div className="h-px w-full bg-light-600 dark:bg-dark-600" />
             </div>
           )}
           <div className="space-y-2">
@@ -455,7 +455,7 @@ export function Auth({
               <p className="mt-2 text-xs text-red-400">{loginError}</p>
             )}
           </div>
-          <div className="mt-[1.5rem] flex items-center gap-4">
+          <div className="mt-6 flex items-center gap-4">
             <Button
               isLoading={isLoginWithEmailPending}
               fullWidth

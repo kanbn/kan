@@ -405,7 +405,7 @@ export function NewCardForm({
       }}
       className={
         isDraggingFiles
-          ? "rounded-lg ring-2 ring-inset ring-light-700 dark:ring-dark-700"
+          ? "rounded-lg ring-2 ring-light-700 ring-inset dark:ring-dark-700"
           : undefined
       }
     >
@@ -426,7 +426,7 @@ export function NewCardForm({
           </h2>
           <button
             type="button"
-            className="rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300"
+            className="rounded-sm p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               closeModal();
               e.preventDefault();
@@ -450,7 +450,7 @@ export function NewCardForm({
           />
         </div>
         <div className="mt-2">
-          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-sm ring-1 ring-inset ring-light-600 focus-within:ring-2 focus-within:ring-inset focus-within:ring-light-700 dark:ring-dark-700 dark:focus-within:ring-dark-700 sm:leading-6">
+          <div className="block max-h-48 min-h-24 w-full overflow-y-auto rounded-md border-0 bg-dark-300 bg-white/5 px-3 py-2 text-sm shadow-xs ring-1 ring-light-600 ring-inset focus-within:ring-2 focus-within:ring-light-700 focus-within:ring-inset sm:leading-6 dark:ring-dark-700 dark:focus-within:ring-dark-700">
             <Editor
               content={description}
               onChange={(value) => {
@@ -480,7 +480,7 @@ export function NewCardForm({
               items={formattedLists}
               handleSelect={(_groupKey, item) => handleSelectList(item.key)}
             >
-              <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
+              <div className="flex h-full w-full items-center rounded-[5px] border border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
                 {selectedList?.value}
               </div>
             </CheckboxDropdown>
@@ -493,7 +493,7 @@ export function NewCardForm({
                   handleSelectMembers(item.key)
                 }
               >
-                <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
+                <div className="flex h-full w-full items-center rounded-[5px] border border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
                   {!memberPublicIds.length ? (
                     t`Members`
                   ) : (
@@ -508,7 +508,7 @@ export function NewCardForm({
                             key={member?.key}
                             className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gray-400 ring-1 ring-light-200 dark:ring-dark-500"
                           >
-                            <span className="text-[8px] font-medium leading-none text-white">
+                            <span className="text-[8px] leading-none font-medium text-white">
                               {member?.value
                                 .split(" ")
                                 .map((namePart) =>
@@ -535,7 +535,7 @@ export function NewCardForm({
               handleCreate={() => openModal("NEW_LABEL")}
               createNewItemLabel={t`Create new label`}
             >
-              <div className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
+              <div className="flex h-full w-full items-center rounded-[5px] border border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500">
                 {!labelPublicIds.length ? (
                   t`Labels`
                 ) : (
@@ -543,7 +543,7 @@ export function NewCardForm({
                     <div
                       className={
                         labelPublicIds.length > 1
-                          ? "flex -space-x-[2px] overflow-hidden"
+                          ? "flex space-x-[-2px] overflow-hidden"
                           : "flex items-center"
                       }
                     >
@@ -583,7 +583,7 @@ export function NewCardForm({
             <button
               type="button"
               onClick={() => setIsDateSelectorOpen(!isDateSelectorOpen)}
-              className="flex h-full w-full items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
+              className="flex h-full w-full items-center rounded-[5px] border border-light-600 bg-light-200 px-2 py-1 text-left text-xs text-light-800 hover:bg-light-300 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
             >
               {dueDate ? (
                 <span>{format(dueDate, "MMM d, yyyy")}</span>
@@ -598,7 +598,7 @@ export function NewCardForm({
                   onClick={() => setIsDateSelectorOpen(false)}
                 />
                 <div
-                  className="absolute left-0 top-full z-20 mt-2 rounded-md border border-light-200 bg-light-50 shadow-lg dark:border-dark-200 dark:bg-dark-100"
+                  className="absolute top-full left-0 z-20 mt-2 rounded-md border border-light-200 bg-light-50 shadow-lg dark:border-dark-200 dark:bg-dark-100"
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
@@ -623,7 +623,7 @@ export function NewCardForm({
               e.preventDefault();
               setValue("position", position === "start" ? "end" : "start");
             }}
-            className="flex h-auto items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-1.5 py-1 text-left text-xs text-light-800 hover:bg-light-300 focus-visible:outline-none dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
+            className="flex h-auto items-center rounded-[5px] border border-light-600 bg-light-200 px-1.5 py-1 text-left text-xs text-light-800 hover:bg-light-300 focus-visible:outline-hidden dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
           >
             {position === "start" ? (
               <HiOutlineBarsArrowUp size={14} />
@@ -636,7 +636,7 @@ export function NewCardForm({
             onClick={() => fileInputRef.current?.click()}
             aria-label={t`Attach files`}
             title={t`Attach files`}
-            className="flex h-auto items-center rounded-[5px] border-[1px] border-light-600 bg-light-200 px-1.5 py-1 text-left text-xs text-light-800 hover:bg-light-300 focus-visible:outline-none dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
+            className="flex h-auto items-center rounded-[5px] border border-light-600 bg-light-200 px-1.5 py-1 text-left text-xs text-light-800 hover:bg-light-300 focus-visible:outline-hidden dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000 dark:hover:bg-dark-500"
           >
             <HiOutlinePaperClip size={14} />
           </button>
@@ -646,7 +646,7 @@ export function NewCardForm({
             {pendingFiles.map((file, index) => (
               <span
                 key={`${file.name}-${index}`}
-                className="flex items-center gap-1 rounded-[5px] border-[1px] border-light-600 bg-light-200 px-2 py-1 text-xs text-light-800 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000"
+                className="flex items-center gap-1 rounded-[5px] border border-light-600 bg-light-200 px-2 py-1 text-xs text-light-800 dark:border-dark-600 dark:bg-dark-400 dark:text-dark-1000"
               >
                 <HiOutlinePaperClip size={12} />
                 <span className="max-w-[180px] truncate">{file.name}</span>
@@ -654,7 +654,7 @@ export function NewCardForm({
                   type="button"
                   onClick={() => removeFile(index)}
                   aria-label={t`Remove file`}
-                  className="rounded p-0.5 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-500"
+                  className="rounded-sm p-0.5 hover:bg-light-300 focus:outline-hidden dark:hover:bg-dark-500"
                 >
                   <HiXMark size={12} />
                 </button>
@@ -664,7 +664,7 @@ export function NewCardForm({
         )}
       </div>
 
-      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <Toggle
           label={t`Create another`}
           isChecked={isCreateAnotherEnabled}

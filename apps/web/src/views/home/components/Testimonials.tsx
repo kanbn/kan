@@ -30,7 +30,7 @@ const TestimonialCard = ({
   return (
     <div
       className={twMerge(
-        "group relative rounded-2xl border border-light-200 bg-light-50 p-6 transition-all duration-200 hover:shadow-sm dark:border-dark-200 dark:bg-dark-50",
+        "group relative rounded-2xl border border-light-200 bg-light-50 p-6 transition-all duration-200 hover:shadow-xs dark:border-dark-200 dark:bg-dark-50",
         rowSpan === 2 ? "md:row-span-2" : "",
       )}
     >
@@ -228,11 +228,11 @@ const Testimonials = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center px-4 pb-24">
-        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">
+        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 lg:text-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
           <p>{t`Testimonials`}</p>
         </div>
 
-        <p className="mt-2 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
+        <p className="mt-2 text-center text-3xl font-bold text-light-1000 lg:text-4xl dark:text-dark-1000">
           {t`Loved by teams worldwide`}
         </p>
         <p className="text-md lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">
@@ -240,7 +240,7 @@ const Testimonials = () => {
         </p>
 
         <div className="mx-auto mt-16 w-full max-w-7xl">
-          <div className="grid grid-cols-1 gap-4 [mask-image:linear-gradient(to_bottom,black_90%,transparent_98%)] md:auto-rows-fr md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 mask-[linear-gradient(to_bottom,black_90%,transparent_98%)] md:auto-rows-fr md:grid-cols-3">
             {testimonials.map((testimonial, index) => (
               <TestimonialCard
                 key={`testimonial-${index}`}

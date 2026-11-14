@@ -406,7 +406,7 @@ const FeatureComparisonTable = ({
         >
           {isHeaderFixed && (
             <div
-              className="fixed z-40 hidden border-b border-light-300 bg-light-50/95 dark:border-dark-400 dark:bg-dark-50/95 sm:block"
+              className="fixed z-40 hidden border-b border-light-300 bg-light-50/95 sm:block dark:border-dark-400 dark:bg-dark-50/95"
               style={{
                 top: 64,
                 left: headerRect.left,

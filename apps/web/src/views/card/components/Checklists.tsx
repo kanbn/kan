@@ -177,12 +177,12 @@ export default function Checklists({
                     />
                   </div>
                   {!viewOnly && (
-                    <div className="ml-2 flex flex-shrink-0 items-center gap-2">
-                      <div className="flex items-center gap-1 rounded-full border-[1px] border-light-300 px-2 py-1 dark:border-dark-300">
+                    <div className="ml-2 flex shrink-0 items-center gap-2">
+                      <div className="flex items-center gap-1 rounded-full border border-light-300 px-2 py-1 dark:border-dark-300">
                         <CircularProgress
                           progress={progress}
                           size="sm"
-                          className="flex-shrink-0"
+                          className="shrink-0"
                         />
                         <span className="text-[11px] text-light-900 dark:text-dark-700">
                           {completedItems.length}/{checklist.items.length}
@@ -211,12 +211,12 @@ export default function Checklists({
                     </div>
                   )}
                   {viewOnly && (
-                    <div className="ml-2 flex flex-shrink-0 items-center gap-2">
-                      <div className="flex items-center gap-1 rounded-full border-[1px] border-light-300 px-2 py-1 dark:border-dark-300">
+                    <div className="ml-2 flex shrink-0 items-center gap-2">
+                      <div className="flex items-center gap-1 rounded-full border border-light-300 px-2 py-1 dark:border-dark-300">
                         <CircularProgress
                           progress={progress}
                           size="sm"
-                          className="flex-shrink-0"
+                          className="shrink-0"
                         />
                         <span className="text-[11px] text-light-900 dark:text-dark-700">
                           {completedItems.length}/{checklist.items.length}
