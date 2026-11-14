@@ -132,6 +132,9 @@ export default withRateLimit(
       subscription_data: {
         trial_period_days: 14,
         billing_mode: subscriptionBillingMode,
+        ...(subscriptionId && {
+          metadata: { subscriptionId: String(subscriptionId) },
+        }),
       },
       success_url: `${env("NEXT_PUBLIC_BASE_URL")}${successUrl}?workspacePublicId=${resolvedWorkspacePublicId}`,
       cancel_url: `${env("NEXT_PUBLIC_BASE_URL")}${cancelUrl}`,
