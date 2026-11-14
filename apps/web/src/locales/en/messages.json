@@ -49,7 +49,7 @@
       ],
       "1": [
         "board?.name ?? t`Board`",
-        "workspace.name ?? t`Workspace`"
+        "workspace.name"
       ]
     },
     "comments": [],
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        575
+        574
       ]
     ],
     "translation": "{0} labels"
@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        904
+        903
       ]
     ],
     "translation": "{0} not found"
@@ -277,11 +277,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        193
+        192
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        205
+        204
       ]
     ],
     "translation": "$10/month"
@@ -293,7 +293,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        205
+        204
       ]
     ],
     "translation": "$8/month"
@@ -305,7 +305,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        91
+        166
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -325,7 +325,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        98
+        173
       ]
     ],
     "translation": "10mb file uploads"
@@ -413,7 +413,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        255
+        330
       ]
     ],
     "translation": "Account manager"
@@ -465,11 +465,11 @@
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        347
+        349
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        105
+        103
       ]
     ],
     "translation": "Active"
@@ -485,7 +485,7 @@
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        211
+        209
       ]
     ],
     "translation": "Activity"
@@ -497,7 +497,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        149
+        224
       ]
     ],
     "translation": "Activity log"
@@ -545,7 +545,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        160
+        159
       ]
     ],
     "translation": "Add an item..."
@@ -629,7 +629,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        502
+        492
       ]
     ],
     "translation": "Add description... (type '/' to open commands or '@' to mention)"
@@ -673,7 +673,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        244
+        246
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -681,7 +681,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        270
+        269
       ]
     ],
     "translation": "Add member"
@@ -705,7 +705,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        36
+        32
       ]
     ],
     "translation": "Add webhook"
@@ -879,7 +879,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        347
+        346
       ]
     ],
     "translation": "Adding a new member will cost an additional {price} ({billingType}) per seat."
@@ -903,15 +903,15 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        177
+        179
       ],
       [
         "src/views/board/members/index.tsx",
-        193
+        195
       ],
       [
         "src/views/members/index.tsx",
-        230
+        232
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -927,15 +927,15 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        238
+        313
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        239
+        314
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        240
+        315
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -963,7 +963,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        241
+        316
       ]
     ],
     "translation": "Advanced admin roles"
@@ -1136,7 +1136,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        321
+        320
       ]
     ],
     "translation": "Anyone with this link can join your workspace"
@@ -1152,7 +1152,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        214
+        289
       ]
     ],
     "translation": "API"
@@ -1452,7 +1452,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        180
+        255
       ]
     ],
     "translation": "Assignees"
@@ -1464,11 +1464,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        638
+        637
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        639
+        638
       ]
     ],
     "translation": "Attach files"
@@ -1508,7 +1508,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        307
+        299
       ]
     ],
     "translation": "Back"
@@ -1643,7 +1643,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        206
+        205
       ]
     ],
     "translation": "billed annually"
@@ -1655,7 +1655,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        206
+        205
       ]
     ],
     "translation": "billed monthly"
@@ -1699,7 +1699,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        427
+        416
       ]
     ],
     "translation": "Blockquote"
@@ -1723,11 +1723,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        876
+        875
       ],
       [
         "src/views/board/members/index.tsx",
-        230
+        232
       ],
       [
         "src/views/card/index.tsx",
@@ -1735,7 +1735,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        129
+        118
       ]
     ],
     "translation": "Board"
@@ -1772,7 +1772,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        214
+        216
       ]
     ],
     "translation": "Board member options"
@@ -1788,7 +1788,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        235
+        237
       ]
     ],
     "translation": "Board members"
@@ -1804,7 +1804,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        230
+        232
       ]
     ],
     "translation": "Board members | {0}"
@@ -1828,7 +1828,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        894
+        893
       ]
     ],
     "translation": "Board name"
@@ -1864,7 +1864,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        185
+        174
       ]
     ],
     "translation": "Board not found"
@@ -1888,7 +1888,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        121
+        196
       ]
     ],
     "translation": "Board templates"
@@ -1981,7 +1981,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        135
+        210
       ]
     ],
     "translation": "Board visibility"
@@ -2021,7 +2021,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        83
+        158
       ]
     ],
     "translation": "Boards"
@@ -2081,7 +2081,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        417
+        406
       ]
     ],
     "translation": "Bullet List"
@@ -2497,7 +2497,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        264
+        261
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2585,7 +2585,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        63
+        60
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2653,7 +2653,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        443
+        442
       ]
     ],
     "translation": "Card title"
@@ -2665,7 +2665,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        455
+        454
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2801,7 +2801,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        135
+        134
       ]
     ],
     "translation": "Checklist name"
@@ -2813,7 +2813,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        114
+        189
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -2841,7 +2841,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        382
+        381
       ],
       [
         "src/views/settings/BillingSettings.tsx",
@@ -2953,7 +2953,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        432
+        421
       ]
     ],
     "translation": "Code Block"
@@ -2989,7 +2989,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        279
+        354
       ]
     ],
     "translation": "Collaboration"
@@ -3033,7 +3033,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        156
+        231
       ]
     ],
     "translation": "Comments"
@@ -3122,7 +3122,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        31
+        27
       ]
     ],
     "translation": "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted."
@@ -3319,7 +3319,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        324
+        316
       ]
     ],
     "translation": "Continue"
@@ -3407,7 +3407,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        254
+        251
       ]
     ],
     "translation": "Copy checklists"
@@ -3419,7 +3419,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        218
+        215
       ]
     ],
     "translation": "Copy labels"
@@ -3443,7 +3443,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        236
+        233
       ]
     ],
     "translation": "Copy members"
@@ -3479,7 +3479,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        275
+        350
       ]
     ],
     "translation": "Core features"
@@ -3495,7 +3495,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        173
+        165
       ]
     ],
     "translation": "Create {0}"
@@ -3511,11 +3511,11 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        670
+        669
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        162
+        161
       ]
     ],
     "translation": "Create another"
@@ -3539,7 +3539,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        680
+        679
       ]
     ],
     "translation": "Create card"
@@ -3551,7 +3551,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        151
+        150
       ]
     ],
     "translation": "Create checklist"
@@ -3563,7 +3563,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        370
+        369
       ]
     ],
     "translation": "Create invite link"
@@ -3587,7 +3587,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        174
+        173
       ]
     ],
     "translation": "Create list"
@@ -3631,7 +3631,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        537
+        536
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3647,11 +3647,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        149
+        148
       ],
       [
         "src/views/board/index.tsx",
-        1035
+        1034
       ]
     ],
     "translation": "Create new list"
@@ -3663,7 +3663,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        137
+        129
       ]
     ],
     "translation": "Create template"
@@ -3675,7 +3675,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        370
+        372
       ]
     ],
     "translation": "Create webhook"
@@ -3703,7 +3703,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        243
+        241
       ]
     ],
     "translation": "Created"
@@ -3861,11 +3861,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        106
+        181
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        107
+        182
       ]
     ],
     "translation": "Custom username"
@@ -3890,7 +3890,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        261
+        253
       ]
     ],
     "translation": "Custom usernames require upgrading to a Team plan"
@@ -3951,7 +3951,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        369
+        368
       ]
     ],
     "translation": "Deactivate invite link"
@@ -3975,7 +3975,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        105
+        180
       ]
     ],
     "translation": "Default username"
@@ -4019,7 +4019,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        137
+        135
       ]
     ],
     "translation": "Delete"
@@ -4143,11 +4143,11 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        87
+        86
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        98
+        97
       ]
     ],
     "translation": "Delete workspace"
@@ -4492,7 +4492,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        592
+        591
       ],
       [
         "src/views/card/index.tsx",
@@ -4556,7 +4556,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        276
+        273
       ]
     ],
     "translation": "Duplicate"
@@ -4568,7 +4568,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        109
+        106
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -4588,7 +4588,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        276
+        273
       ]
     ],
     "translation": "Duplicating…"
@@ -4604,7 +4604,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        129
+        127
       ]
     ],
     "translation": "Edit"
@@ -4660,7 +4660,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        253
+        255
       ]
     ],
     "translation": "Edit permissions"
@@ -4672,7 +4672,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        236
+        238
       ]
     ],
     "translation": "Edit webhook"
@@ -4732,7 +4732,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        285
+        284
       ],
       [
         "src/views/settings/AccountSettings.tsx",
@@ -4748,7 +4748,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        173
+        248
       ]
     ],
     "translation": "Email notifications"
@@ -4772,7 +4772,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        75
+        74
       ]
     ],
     "translation": "Email visibility"
@@ -4784,7 +4784,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        197
+        194
       ]
     ],
     "translation": "End of list"
@@ -4796,7 +4796,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        201
+        193
       ]
     ],
     "translation": "Engineering"
@@ -4852,7 +4852,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        284
+        286
       ]
     ],
     "translation": "Enter new secret to update"
@@ -4940,7 +4940,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        303
+        378
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -4956,15 +4956,11 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        81
-      ],
-      [
-        "src/views/boards/components/NewBoardForm.tsx",
-        96
+        88
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        253
+        252
       ]
     ],
     "translation": "Error"
@@ -5202,11 +5198,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        297
+        299
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        231
+        229
       ]
     ],
     "translation": "Events"
@@ -5278,7 +5274,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        57
+        66
       ]
     ],
     "translation": "Failed to accept invitation. Please try again later, or contact customer support."
@@ -5290,7 +5286,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        254
+        253
       ]
     ],
     "translation": "Failed to copy invite link"
@@ -5302,11 +5298,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        82
-      ],
-      [
-        "src/views/boards/components/NewBoardForm.tsx",
-        97
+        89
       ]
     ],
     "translation": "Failed to create board"
@@ -5318,7 +5310,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        130
+        132
       ]
     ],
     "translation": "Failed to create webhook"
@@ -5370,11 +5362,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        185
+        187
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        190
+        188
       ]
     ],
     "translation": "Failed to test webhook"
@@ -5386,7 +5378,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        155
+        157
       ]
     ],
     "translation": "Failed to update webhook"
@@ -5522,7 +5514,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        97
+        172
       ]
     ],
     "translation": "File uploads"
@@ -5626,7 +5618,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        301
+        376
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -5674,11 +5666,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        353
+        352
       ],
       [
         "src/views/members/index.tsx",
-        321
+        323
       ]
     ],
     "translation": "Free Plan"
@@ -5702,11 +5694,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        216
+        291
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        217
+        292
       ]
     ],
     "translation": "Full API access"
@@ -5814,7 +5806,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1017
+        1016
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6018,11 +6010,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        232
+        307
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        233
+        308
       ]
     ],
     "translation": "Google SSO"
@@ -6034,7 +6026,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        234
+        309
       ]
     ],
     "translation": "Google SSO + SAML"
@@ -6046,7 +6038,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        232
+        234
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -6062,7 +6054,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        395
+        384
       ]
     ],
     "translation": "Heading 1"
@@ -6074,7 +6066,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        401
+        390
       ]
     ],
     "translation": "Heading 2"
@@ -6086,7 +6078,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        407
+        396
       ]
     ],
     "translation": "Heading 3"
@@ -6122,7 +6114,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        285
+        287
       ]
     ],
     "translation": "HMAC secret for signature verification"
@@ -6374,7 +6366,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        283
+        358
       ]
     ],
     "translation": "Imports"
@@ -6386,7 +6378,7 @@
     "origin": [
       [
         "src/components/CommandPallette.tsx",
-        156
+        155
       ]
     ],
     "translation": "in"
@@ -6426,7 +6418,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        105
+        103
       ]
     ],
     "translation": "Inactive"
@@ -6466,7 +6458,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        142
+        217
       ]
     ],
     "translation": "Intelligent search"
@@ -6514,7 +6506,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        340
+        342
       ]
     ],
     "translation": "Invite"
@@ -6526,7 +6518,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        247
+        246
       ]
     ],
     "translation": "Invite link copied"
@@ -6538,7 +6530,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        248
+        247
       ]
     ],
     "translation": "Invite link copied to clipboard"
@@ -6550,7 +6542,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        187
+        262
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -6582,7 +6574,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        390
+        389
       ]
     ],
     "translation": "Invite member"
@@ -6607,7 +6599,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        356
+        355
       ]
     ],
     "translation": "Inviting members requires a Team plan. You'll be redirected to upgrade your workspace."
@@ -6632,7 +6624,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        92
+        101
       ],
       [
         "src/views/invite/index.tsx",
@@ -6648,7 +6640,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        104
+        18
       ]
     ],
     "translation": "Join workspace | kan.bn"
@@ -6748,7 +6740,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        541
+        540
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -6768,7 +6760,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        128
+        203
       ]
     ],
     "translation": "Labels & filters"
@@ -6804,7 +6796,7 @@
     "origin": [
       [
         "src/components/FontSizeSelector.tsx",
-        9
+        10
       ]
     ],
     "translation": "Large"
@@ -6938,7 +6930,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        215
+        290
       ]
     ],
     "translation": "Limited API access"
@@ -6954,7 +6946,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        453
+        452
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -6978,7 +6970,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        115
+        112
       ],
       [
         "src/views/card/index.tsx",
@@ -6998,7 +6990,7 @@
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        150
+        149
       ]
     ],
     "translation": "List name"
@@ -7206,7 +7198,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        201
+        193
       ]
     ],
     "translation": "Marketing"
@@ -7218,7 +7210,7 @@
     "origin": [
       [
         "src/components/FontSizeSelector.tsx",
-        8
+        9
       ]
     ],
     "translation": "Medium"
@@ -7254,11 +7246,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        177
+        179
       ],
       [
         "src/views/board/members/index.tsx",
-        194
+        196
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -7270,7 +7262,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        231
+        233
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -7286,7 +7278,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        271
+        273
       ]
     ],
     "translation": "Member options"
@@ -7322,7 +7314,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        499
+        498
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -7334,11 +7326,11 @@
       ],
       [
         "src/views/members/index.tsx",
-        293
+        295
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        90
+        165
       ]
     ],
     "translation": "Members"
@@ -7347,14 +7339,14 @@
     "message": "Members | {0}",
     "placeholders": {
       "0": [
-        "workspace.name ?? t`Workspace`"
+        "workspace.name"
       ]
     },
     "comments": [],
     "origin": [
       [
         "src/views/members/index.tsx",
-        288
+        290
       ]
     ],
     "translation": "Members | {0}"
@@ -7366,7 +7358,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        166
+        241
       ]
     ],
     "translation": "Mentions"
@@ -7398,7 +7390,7 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        20
+        19
       ]
     ],
     "translation": "Monthly"
@@ -7410,7 +7402,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        194
+        193
       ]
     ],
     "translation": "monthly billing"
@@ -7513,7 +7505,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        257
+        259
       ]
     ],
     "translation": "My webhook"
@@ -7529,19 +7521,19 @@
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        123
+        115
       ],
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        141
+        133
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        253
+        255
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        219
+        217
       ]
     ],
     "translation": "Name"
@@ -7609,7 +7601,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        127
+        119
       ]
     ],
     "translation": "New {0}"
@@ -7633,7 +7625,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        426
+        425
       ]
     ],
     "translation": "New card"
@@ -7645,7 +7637,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        119
+        118
       ]
     ],
     "translation": "New checklist"
@@ -7681,11 +7673,11 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        134
+        133
       ],
       [
         "src/views/board/index.tsx",
-        959
+        958
       ]
     ],
     "translation": "New list"
@@ -7721,7 +7713,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        109
+        101
       ]
     ],
     "translation": "New template"
@@ -7745,7 +7737,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        236
+        238
       ]
     ],
     "translation": "New webhook"
@@ -7929,7 +7921,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1013
+        1012
       ]
     ],
     "translation": "No lists"
@@ -7941,7 +7933,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1018
+        1017
       ]
     ],
     "translation": "No lists have been created yet"
@@ -7969,7 +7961,7 @@
     "origin": [
       [
         "src/components/CommandPallette.tsx",
-        172
+        171
       ]
     ],
     "translation": "No results found for \"{debouncedQuery}\"."
@@ -7993,7 +7985,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        201
+        199
       ]
     ],
     "translation": "No webhooks configured. Add a webhook to receive notifications."
@@ -8017,7 +8009,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        221
+        296
       ]
     ],
     "translation": "On-premise"
@@ -8065,7 +8057,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        90
+        89
       ]
     ],
     "translation": "Once you delete your workspace, there is no going back. This action cannot be undone."
@@ -8113,7 +8105,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        207
+        282
       ]
     ],
     "translation": "Open source"
@@ -8149,7 +8141,7 @@
     "origin": [
       [
         "src/components/Editor.tsx",
-        422
+        411
       ]
     ],
     "translation": "Ordered List"
@@ -8361,7 +8353,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        239
+        241
       ]
     ],
     "translation": "Paused"
@@ -8389,7 +8381,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        239
+        241
       ]
     ],
     "translation": "Pending"
@@ -8409,11 +8401,11 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        21
+        20
       ],
       [
         "src/views/pricing/index.tsx",
-        26
+        25
       ]
     ],
     "translation": "per user/month"
@@ -8425,7 +8417,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        92
+        167
       ]
     ],
     "translation": "Per-seat pricing"
@@ -8565,7 +8557,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        287
+        362
       ]
     ],
     "translation": "Platform"
@@ -8689,19 +8681,15 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        209
+        208
       ],
       [
         "src/views/board/components/NewListForm.tsx",
-        97
+        96
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        63
-      ],
-      [
-        "src/views/board/components/NewTemplateForm.tsx",
-        79
+        71
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -8713,15 +8701,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        304
+        303
       ],
       [
         "src/views/board/index.tsx",
-        362
+        361
       ],
       [
         "src/views/board/index.tsx",
-        400
+        399
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8797,11 +8785,11 @@
       ],
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        86
+        85
       ],
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        108
+        107
       ],
       [
         "src/views/card/components/NewCommentForm.tsx",
@@ -8841,11 +8829,11 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        139
+        134
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        190
+        184
       ],
       [
         "src/views/settings/components/Avatar.tsx",
@@ -8909,7 +8897,7 @@
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        72
+        69
       ],
       [
         "src/views/board/components/CardContextMoveListModal.tsx",
@@ -8917,7 +8905,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        462
+        461
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -8949,7 +8937,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        190
+        187
       ]
     ],
     "translation": "Position in list (0 = first, leave empty for end)"
@@ -8989,11 +8977,11 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        35
+        34
       ],
       [
         "src/views/pricing/index.tsx",
-        43
+        42
       ]
     ],
     "translation": "Pricing"
@@ -9005,7 +8993,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        248
+        323
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -9070,11 +9058,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        332
+        331
       ],
       [
         "src/views/members/index.tsx",
-        318
+        320
       ]
     ],
     "translation": "Pro Plan"
@@ -9086,7 +9074,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        344
+        343
       ]
     ],
     "translation": "Pro Plan ∞"
@@ -9262,7 +9250,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        657
+        656
       ]
     ],
     "translation": "Remove file"
@@ -9274,7 +9262,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        204
+        206
       ]
     ],
     "translation": "Remove from board"
@@ -9298,7 +9286,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        262
+        264
       ]
     ],
     "translation": "Remove member"
@@ -9521,7 +9509,7 @@
     "origin": [
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
-        257
+        256
       ]
     ],
     "translation": "Reset to role defaults"
@@ -9581,7 +9569,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        201
+        193
       ]
     ],
     "translation": "Roadmap"
@@ -9593,15 +9581,15 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        190
+        192
       ],
       [
         "src/views/board/members/index.tsx",
-        271
+        273
       ],
       [
         "src/views/members/index.tsx",
-        362
+        364
       ]
     ],
     "translation": "Role"
@@ -9694,7 +9682,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        370
+        372
       ]
     ],
     "translation": "Save changes"
@@ -9742,7 +9730,7 @@
     "origin": [
       [
         "src/components/CommandPallette.tsx",
-        84
+        83
       ]
     ],
     "translation": "Search boards and cards..."
@@ -9766,11 +9754,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        335
+        334
       ],
       [
         "src/views/members/index.tsx",
-        329
+        331
       ]
     ],
     "translation": "seats"
@@ -9782,7 +9770,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        277
+        279
       ]
     ],
     "translation": "Secret (optional)"
@@ -9806,7 +9794,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        291
+        366
       ]
     ],
     "translation": "Security"
@@ -9842,7 +9830,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        128
+        125
       ]
     ],
     "translation": "Select a list"
@@ -9994,7 +9982,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        364
+        366
       ]
     ],
     "translation": "Send test"
@@ -10098,7 +10086,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        219
+        211
       ]
     ],
     "translation": "Set up your workspace"
@@ -10186,7 +10174,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        24
+        20
       ]
     ],
     "translation": "Settings | Webhooks"
@@ -10198,7 +10186,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        34
+        33
       ]
     ],
     "translation": "Settings | Workspace"
@@ -10302,7 +10290,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        395
+        387
       ]
     ],
     "translation": "Sign out"
@@ -10382,7 +10370,7 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        47
+        46
       ]
     ],
     "translation": "Simple pricing"
@@ -10394,7 +10382,7 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        36
+        35
       ]
     ],
     "translation": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts."
@@ -10418,7 +10406,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        262
+        337
       ]
     ],
     "translation": "SLA"
@@ -10430,7 +10418,7 @@
     "origin": [
       [
         "src/components/FontSizeSelector.tsx",
-        7
+        8
       ]
     ],
     "translation": "Small"
@@ -10478,7 +10466,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        346
+        345
       ]
     ],
     "translation": "Some attachments failed"
@@ -10538,7 +10526,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        231
+        306
       ]
     ],
     "translation": "SSO"
@@ -10595,7 +10583,7 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        50
+        49
       ]
     ],
     "translation": "Start free. Upgrade as your team grows. No hidden fees, no contracts."
@@ -10619,7 +10607,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        237
+        235
       ]
     ],
     "translation": "Status"
@@ -10716,7 +10704,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        295
+        370
       ]
     ],
     "translation": "Support"
@@ -10764,15 +10752,15 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        332
+        331
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        344
+        343
       ],
       [
         "src/views/members/index.tsx",
-        320
+        322
       ]
     ],
     "translation": "Team Plan"
@@ -10784,7 +10772,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        302
+        377
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -10804,11 +10792,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        876
+        875
       ],
       [
         "src/views/board/index.tsx",
-        913
+        912
       ]
     ],
     "translation": "Template"
@@ -10820,7 +10808,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        69
+        62
       ]
     ],
     "translation": "Template created"
@@ -10832,7 +10820,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        70
+        63
       ]
     ],
     "translation": "Template created successfully"
@@ -10916,7 +10904,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        133
+        131
       ]
     ],
     "translation": "Test"
@@ -10928,11 +10916,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        173
+        175
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        179
+        177
       ]
     ],
     "translation": "Test failed"
@@ -10944,11 +10932,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        167
+        169
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        173
+        171
       ]
     ],
     "translation": "Test sent"
@@ -10960,11 +10948,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        168
+        170
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        174
+        172
       ]
     ],
     "translation": "Test webhook sent successfully!"
@@ -11052,7 +11040,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        65
+        62
       ]
     ],
     "translation": "The card has been duplicated."
@@ -11071,7 +11059,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        347
+        346
       ]
     ],
     "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
@@ -11251,7 +11239,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        188
+        177
       ]
     ],
     "translation": "This board is private or does not exist"
@@ -11315,7 +11303,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        95
+        94
       ]
     ],
     "translation": "This URL has already been taken"
@@ -11327,7 +11315,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        97
+        96
       ]
     ],
     "translation": "This URL is reserved"
@@ -11375,7 +11363,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        49
+        58
       ]
     ],
     "translation": "This workspace has reached its member limit. The workspace owner will need to upgrade their plan."
@@ -11439,7 +11427,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        208
+        207
       ]
     ],
     "translation": "Title"
@@ -11451,7 +11439,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        177
+        174
       ]
     ],
     "translation": "Title (optional)"
@@ -11527,7 +11515,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        197
+        272
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
@@ -11607,7 +11595,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        107
+        106
       ]
     ],
     "translation": "Unable to add checklist item"
@@ -11683,7 +11671,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        460
+        459
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11707,7 +11695,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        206
+        205
       ]
     ],
     "translation": "Unable to create card"
@@ -11719,7 +11707,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        85
+        84
       ]
     ],
     "translation": "Unable to create checklist"
@@ -11731,7 +11719,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        96
+        95
       ]
     ],
     "translation": "Unable to create list"
@@ -11743,11 +11731,7 @@
     "origin": [
       [
         "src/views/board/components/NewTemplateForm.tsx",
-        62
-      ],
-      [
-        "src/views/board/components/NewTemplateForm.tsx",
-        78
+        70
       ]
     ],
     "translation": "Unable to create template"
@@ -11759,7 +11743,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        127
+        129
       ]
     ],
     "translation": "Unable to create webhook"
@@ -11775,7 +11759,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        138
+        133
       ]
     ],
     "translation": "Unable to create workspace"
@@ -11859,7 +11843,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        71
+        68
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11951,7 +11935,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        189
+        183
       ]
     ],
     "translation": "Unable to start checkout"
@@ -11963,11 +11947,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        182
+        184
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        187
+        185
       ]
     ],
     "translation": "Unable to test webhook"
@@ -12015,7 +11999,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        361
+        360
       ],
       [
         "src/views/card/index.tsx",
@@ -12067,7 +12051,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        399
+        398
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -12095,7 +12079,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        303
+        302
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12155,7 +12139,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        152
+        154
       ]
     ],
     "translation": "Unable to update webhook"
@@ -12231,15 +12215,15 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        84
+        159
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        85
+        160
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        86
+        161
       ],
       [
         "src/views/pricing/components/Pricing.tsx",
@@ -12299,11 +12283,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        99
+        174
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        100
+        175
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -12343,7 +12327,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        93
+        168
       ]
     ],
     "translation": "Unlimited members"
@@ -12368,7 +12352,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        328
+        330
       ]
     ],
     "translation": "Unlimited seats"
@@ -12518,7 +12502,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        305
+        307
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -12600,11 +12584,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        265
+        267
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        225
+        223
       ]
     ],
     "translation": "URL"
@@ -12676,7 +12660,7 @@
     "origin": [
       [
         "src/views/boards/components/NewBoardForm.tsx",
-        161
+        153
       ]
     ],
     "translation": "Use template"
@@ -12688,7 +12672,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        291
+        293
       ]
     ],
     "translation": "Used to sign webhook payloads for verification. Leave blank to keep existing secret."
@@ -12700,11 +12684,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        265
+        267
       ],
       [
         "src/views/members/index.tsx",
-        356
+        358
       ]
     ],
     "translation": "User"
@@ -12776,7 +12760,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        157
+        146
       ]
     ],
     "translation": "View only"
@@ -12800,7 +12784,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        191
+        180
       ]
     ],
     "translation": "View workspace"
@@ -12893,7 +12877,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        119
+        121
       ]
     ],
     "translation": "Webhook created"
@@ -12905,7 +12889,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        120
+        122
       ]
     ],
     "translation": "Webhook created successfully"
@@ -12965,7 +12949,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        126
+        124
       ]
     ],
     "translation": "Webhook options"
@@ -12977,11 +12961,11 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        174
+        176
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        180
+        178
       ]
     ],
     "translation": "Webhook test failed"
@@ -12993,7 +12977,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        144
+        146
       ]
     ],
     "translation": "Webhook updated"
@@ -13005,7 +12989,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        145
+        147
       ]
     ],
     "translation": "Webhook updated successfully"
@@ -13033,7 +13017,7 @@
       ],
       [
         "src/views/settings/WebhookSettings.tsx",
-        28
+        24
       ]
     ],
     "translation": "Webhooks"
@@ -13045,7 +13029,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        66
+        65
       ]
     ],
     "translation": "Week start day"
@@ -13124,20 +13108,8 @@
         10
       ],
       [
-        "src/views/board/index.tsx",
-        876
-      ],
-      [
-        "src/views/boards/index.tsx",
-        58
-      ],
-      [
-        "src/views/members/index.tsx",
-        288
-      ],
-      [
         "src/views/public/board/index.tsx",
-        129
+        118
       ],
       [
         "src/views/public/boards/index.tsx",
@@ -13178,11 +13150,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        284
+        276
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        57
+        56
       ]
     ],
     "translation": "Workspace description"
@@ -13266,7 +13238,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        228
+        220
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
@@ -13274,7 +13246,7 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        38
+        37
       ]
     ],
     "translation": "Workspace name"
@@ -13366,7 +13338,7 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        47
+        46
       ]
     ],
     "translation": "Workspace URL"
@@ -13378,7 +13350,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        104
+        179
       ]
     ],
     "translation": "Workspace username"
@@ -13418,7 +13390,7 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        25
+        24
       ]
     ],
     "translation": "Yearly"
@@ -13454,7 +13426,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        222
+        214
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -13535,11 +13507,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        947
+        946
       ],
       [
         "src/views/board/index.tsx",
-        1024
+        1023
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13637,7 +13609,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        251
+        253
       ]
     ],
     "translation": "You're not a member of this board yet. Ask a board admin to add you."
@@ -13918,7 +13890,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        355
+        347
       ]
     ],
     "translation": "Your workspace"
@@ -13930,7 +13902,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        358
+        350
       ]
     ],
     "translation": "Your workspace description"
@@ -13990,11 +13962,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        238
+        230
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        239
+        231
       ]
     ],
     "translation": "your-workspace"
