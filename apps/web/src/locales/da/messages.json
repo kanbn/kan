@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        337
+        343
       ]
     ],
     "translation": "{0} | {1}"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        574
+        580
       ]
     ],
     "translation": "{0} etiketter"
@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        903
+        906
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -481,7 +481,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        496
+        502
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -545,7 +545,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        159
+        160
       ]
     ],
     "translation": "Tilføj et punkt..."
@@ -1464,11 +1464,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        637
+        643
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        638
+        644
       ]
     ],
     "translation": ""
@@ -1508,7 +1508,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        299
+        301
       ]
     ],
     "translation": "Tilbage"
@@ -1723,7 +1723,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        875
+        878
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1731,7 +1731,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        337
+        343
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1828,7 +1828,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        893
+        896
       ]
     ],
     "translation": ""
@@ -2573,7 +2573,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        337
+        343
       ]
     ],
     "translation": "Kort"
@@ -2625,11 +2625,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        400
+        406
       ],
       [
         "src/views/card/index.tsx",
-        437
+        443
       ]
     ],
     "translation": "Kortet blev ikke fundet"
@@ -2653,7 +2653,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        442
+        448
       ]
     ],
     "translation": "Korttitel"
@@ -2665,7 +2665,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        454
+        457
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2933,7 +2933,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        391
+        397
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3306,7 +3306,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        316
+        318
       ]
     ],
     "translation": "Fortsæt"
@@ -3498,7 +3498,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        669
+        675
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3526,7 +3526,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        679
+        685
       ]
     ],
     "translation": "Opret kort"
@@ -3618,7 +3618,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        536
+        542
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3634,11 +3634,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        148
+        156
       ],
       [
         "src/views/board/index.tsx",
-        1034
+        1037
       ]
     ],
     "translation": "Opret ny liste"
@@ -3864,7 +3864,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        253
+        255
       ]
     ],
     "translation": ""
@@ -4453,7 +4453,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        591
+        597
       ],
       [
         "src/views/card/index.tsx",
@@ -5754,7 +5754,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1016
+        1019
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6675,7 +6675,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        540
+        546
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -6868,7 +6868,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        452
+        455
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7236,7 +7236,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        498
+        504
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -7547,7 +7547,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        425
+        431
       ]
     ],
     "translation": "Nyt kort"
@@ -7599,7 +7599,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        958
+        961
       ]
     ],
     "translation": "Ny liste"
@@ -7843,7 +7843,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1012
+        1015
       ]
     ],
     "translation": "Ingen lister"
@@ -7855,7 +7855,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1017
+        1020
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8603,7 +8603,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        208
+        214
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8623,15 +8623,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        303
+        311
       ],
       [
         "src/views/board/index.tsx",
-        361
+        369
       ],
       [
         "src/views/board/index.tsx",
-        399
+        407
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8827,7 +8827,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        461
+        464
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9172,7 +9172,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        656
+        662
       ]
     ],
     "translation": ""
@@ -10008,7 +10008,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        211
+        213
       ]
     ],
     "translation": "Opsæt dit arbejdsområde"
@@ -10212,7 +10212,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        387
+        389
       ]
     ],
     "translation": "Log ud"
@@ -10388,7 +10388,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        345
+        351
       ]
     ],
     "translation": ""
@@ -10714,11 +10714,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        875
+        878
       ],
       [
         "src/views/board/index.tsx",
-        912
+        915
       ]
     ],
     "translation": "Skabelon"
@@ -10981,7 +10981,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        346
+        352
       ]
     ],
     "translation": ""
@@ -11349,7 +11349,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        207
+        213
       ]
     ],
     "translation": "Titel"
@@ -11593,7 +11593,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        459
+        462
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11617,7 +11617,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        205
+        211
       ]
     ],
     "translation": "Kunne ikke oprette kort"
@@ -11921,7 +11921,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        360
+        368
       ],
       [
         "src/views/card/index.tsx",
@@ -11973,7 +11973,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        398
+        406
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -12001,7 +12001,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        302
+        310
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -13029,7 +13029,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        276
+        278
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -13117,7 +13117,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        220
+        222
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
@@ -13305,7 +13305,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        214
+        216
       ]
     ],
     "translation": "Du kan altid ændre dette senere under indstillinger."
@@ -13386,11 +13386,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        946
+        949
       ],
       [
         "src/views/board/index.tsx",
-        1023
+        1026
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13730,7 +13730,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        347
+        349
       ]
     ],
     "translation": "Dit arbejdsområde"
@@ -13742,7 +13742,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        350
+        352
       ]
     ],
     "translation": "Beskrivelse af dit arbejdsområde"
@@ -13802,11 +13802,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        230
+        232
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        231
+        233
       ]
     ],
     "translation": "dit-arbejdsområde"

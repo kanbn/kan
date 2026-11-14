@@ -60,7 +60,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        337
+        343
       ]
     ],
     "translation": "{0} | {1}"
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        574
+        580
       ]
     ],
     "translation": "{0} labels"
@@ -156,7 +156,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        903
+        906
       ]
     ],
     "translation": "{0} not found"
@@ -481,7 +481,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        496
+        502
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -545,7 +545,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistItemForm.tsx",
-        159
+        160
       ]
     ],
     "translation": "Add an item..."
@@ -1464,11 +1464,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        637
+        643
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        638
+        644
       ]
     ],
     "translation": "Attach files"
@@ -1508,7 +1508,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        299
+        301
       ]
     ],
     "translation": "Back"
@@ -1723,7 +1723,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        875
+        878
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1731,7 +1731,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        337
+        343
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1828,7 +1828,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        893
+        896
       ]
     ],
     "translation": "Board name"
@@ -2573,7 +2573,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        337
+        343
       ]
     ],
     "translation": "Card"
@@ -2625,11 +2625,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        400
+        406
       ],
       [
         "src/views/card/index.tsx",
-        437
+        443
       ]
     ],
     "translation": "Card not found"
@@ -2653,7 +2653,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        442
+        448
       ]
     ],
     "translation": "Card title"
@@ -2665,7 +2665,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        454
+        457
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2933,7 +2933,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        391
+        397
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3319,7 +3319,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        316
+        318
       ]
     ],
     "translation": "Continue"
@@ -3511,7 +3511,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        669
+        675
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3539,7 +3539,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        679
+        685
       ]
     ],
     "translation": "Create card"
@@ -3631,7 +3631,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        536
+        542
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3647,11 +3647,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        148
+        156
       ],
       [
         "src/views/board/index.tsx",
-        1034
+        1037
       ]
     ],
     "translation": "Create new list"
@@ -3890,7 +3890,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        253
+        255
       ]
     ],
     "translation": "Custom usernames require upgrading to a Team plan"
@@ -4492,7 +4492,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        591
+        597
       ],
       [
         "src/views/card/index.tsx",
@@ -5806,7 +5806,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1016
+        1019
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6740,7 +6740,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        540
+        546
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -6946,7 +6946,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        452
+        455
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7314,7 +7314,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        498
+        504
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -7625,7 +7625,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        425
+        431
       ]
     ],
     "translation": "New card"
@@ -7677,7 +7677,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        958
+        961
       ]
     ],
     "translation": "New list"
@@ -7921,7 +7921,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1012
+        1015
       ]
     ],
     "translation": "No lists"
@@ -7933,7 +7933,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1017
+        1020
       ]
     ],
     "translation": "No lists have been created yet"
@@ -8681,7 +8681,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        208
+        214
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -8701,15 +8701,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        303
+        311
       ],
       [
         "src/views/board/index.tsx",
-        361
+        369
       ],
       [
         "src/views/board/index.tsx",
-        399
+        407
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -8905,7 +8905,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        461
+        464
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9250,7 +9250,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        656
+        662
       ]
     ],
     "translation": "Remove file"
@@ -10086,7 +10086,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        211
+        213
       ]
     ],
     "translation": "Set up your workspace"
@@ -10290,7 +10290,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        387
+        389
       ]
     ],
     "translation": "Sign out"
@@ -10466,7 +10466,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        345
+        351
       ]
     ],
     "translation": "Some attachments failed"
@@ -10792,11 +10792,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        875
+        878
       ],
       [
         "src/views/board/index.tsx",
-        912
+        915
       ]
     ],
     "translation": "Template"
@@ -11059,7 +11059,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        346
+        352
       ]
     ],
     "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
@@ -11427,7 +11427,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        207
+        213
       ]
     ],
     "translation": "Title"
@@ -11671,7 +11671,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        459
+        462
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -11695,7 +11695,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        205
+        211
       ]
     ],
     "translation": "Unable to create card"
@@ -11999,7 +11999,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        360
+        368
       ],
       [
         "src/views/card/index.tsx",
@@ -12051,7 +12051,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        398
+        406
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -12079,7 +12079,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        302
+        310
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -13150,7 +13150,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        276
+        278
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -13238,7 +13238,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        220
+        222
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
@@ -13426,7 +13426,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        214
+        216
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -13507,11 +13507,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        946
+        949
       ],
       [
         "src/views/board/index.tsx",
-        1023
+        1026
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -13890,7 +13890,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        347
+        349
       ]
     ],
     "translation": "Your workspace"
@@ -13902,7 +13902,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        350
+        352
       ]
     ],
     "translation": "Your workspace description"
@@ -13962,11 +13962,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        230
+        232
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        231
+        233
       ]
     ],
     "translation": "your-workspace"

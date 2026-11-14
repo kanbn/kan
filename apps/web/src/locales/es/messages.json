@@ -32,7 +32,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/index.tsx", 58],
-      ["src/views/card/index.tsx", 337]
+      ["src/views/card/index.tsx", 343]
     ],
     "translation": "{0} | {1}"
   },
@@ -78,7 +78,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 574]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 580]],
     "translation": "{0} etiquetas"
   },
   "9x4DAL": {
@@ -87,7 +87,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 903]],
+    "origin": [["src/views/board/index.tsx", 906]],
     "translation": "{0} no encontrado"
   },
   "UPYBKg": {
@@ -283,7 +283,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 496],
+      ["src/views/card/index.tsx", 502],
       ["src/views/public/board/CardModal.tsx", 209]
     ],
     "translation": "Actividad"
@@ -322,7 +322,7 @@
     "message": "Add an item...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 159]],
+    "origin": [["src/views/card/components/NewChecklistItemForm.tsx", 160]],
     "translation": "Añadir un elemento..."
   },
   "0Jeh9Q": {
@@ -880,8 +880,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 637],
-      ["src/views/board/components/NewCardForm.tsx", 638]
+      ["src/views/board/components/NewCardForm.tsx", 643],
+      ["src/views/board/components/NewCardForm.tsx", 644]
     ],
     "translation": "Adjuntar archivos"
   },
@@ -905,7 +905,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 233],
-      ["src/views/onboarding/workspace-details/index.tsx", 299]
+      ["src/views/onboarding/workspace-details/index.tsx", 301]
     ],
     "translation": "Atrás"
   },
@@ -1033,9 +1033,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 875],
+      ["src/views/board/index.tsx", 878],
       ["src/views/board/members/index.tsx", 232],
-      ["src/views/card/index.tsx", 337],
+      ["src/views/card/index.tsx", 343],
       ["src/views/public/board/index.tsx", 118]
     ],
     "translation": "Tablero"
@@ -1094,7 +1094,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 893]],
+    "origin": [["src/views/board/index.tsx", 896]],
     "translation": "Nombre del tablero"
   },
   "wewm3j": {
@@ -1529,7 +1529,7 @@
     "message": "Card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/index.tsx", 337]],
+    "origin": [["src/views/card/index.tsx", 343]],
     "translation": "Tarjeta"
   },
   "sU2uWc": {
@@ -1561,8 +1561,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/index.tsx", 400],
-      ["src/views/card/index.tsx", 437]
+      ["src/views/card/index.tsx", 406],
+      ["src/views/card/index.tsx", 443]
     ],
     "translation": "Tarjeta no encontrada"
   },
@@ -1577,7 +1577,7 @@
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 442]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 448]],
     "translation": "Título de la tarjeta"
   },
   "rQXTmd": {
@@ -1585,7 +1585,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 454],
+      ["src/views/board/index.tsx", 457],
       ["src/views/card/components/Dropdown.tsx", 77],
       ["src/views/public/board/CardModal.tsx", 42]
     ],
@@ -1746,7 +1746,7 @@
     "comments": [],
     "origin": [
       ["src/components/Dashboard.tsx", 285],
-      ["src/views/card/index.tsx", 391],
+      ["src/views/card/index.tsx", 397],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
     ],
@@ -1973,7 +1973,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 254],
-      ["src/views/onboarding/workspace-details/index.tsx", 316]
+      ["src/views/onboarding/workspace-details/index.tsx", 318]
     ],
     "translation": "Continuar"
   },
@@ -2093,7 +2093,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 217],
-      ["src/views/board/components/NewCardForm.tsx", 669],
+      ["src/views/board/components/NewCardForm.tsx", 675],
       ["src/views/board/components/NewListForm.tsx", 161]
     ],
     "translation": "Crear otro"
@@ -2109,7 +2109,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 679]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 685]],
     "translation": "Crear tarjeta"
   },
   "d33Usy": {
@@ -2164,7 +2164,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 536],
+      ["src/views/board/components/NewCardForm.tsx", 542],
       ["src/views/card/components/LabelSelector.tsx", 111]
     ],
     "translation": "Crear nueva etiqueta"
@@ -2174,8 +2174,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 148],
-      ["src/views/board/index.tsx", 1034]
+      ["src/views/board/index.tsx", 156],
+      ["src/views/board/index.tsx", 1037]
     ],
     "translation": "Crear nueva lista"
   },
@@ -2320,7 +2320,7 @@
     "message": "Custom usernames require upgrading to a Team plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 253]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 255]],
     "translation": "Los nombres de usuario personalizados requieren actualizar a un plan de Equipo"
   },
   "j9IZZ0": {
@@ -2655,7 +2655,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 191],
-      ["src/views/board/components/NewCardForm.tsx", 591],
+      ["src/views/board/components/NewCardForm.tsx", 597],
       ["src/views/card/index.tsx", 143]
     ],
     "translation": "Fecha de vencimiento"
@@ -3456,7 +3456,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1016]],
+    "origin": [["src/views/board/index.tsx", 1019]],
     "translation": "Comienza creando una nueva lista"
   },
   "oW13KZ": {
@@ -4013,7 +4013,7 @@
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 34],
       ["src/views/board/components/Filters.tsx", 173],
-      ["src/views/board/components/NewCardForm.tsx", 540],
+      ["src/views/board/components/NewCardForm.tsx", 546],
       ["src/views/card/components/LabelSelector.tsx", 112],
       ["src/views/card/index.tsx", 123]
     ],
@@ -4136,7 +4136,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 104],
-      ["src/views/board/index.tsx", 452],
+      ["src/views/board/index.tsx", 455],
       ["src/views/card/components/Dropdown.tsx", 75],
       ["src/views/public/board/CardModal.tsx", 40],
       ["src/views/public/board/index.tsx", 81]
@@ -4343,7 +4343,7 @@
       ["src/components/SideNavigation.tsx", 126],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/Filters.tsx", 164],
-      ["src/views/board/components/NewCardForm.tsx", 498],
+      ["src/views/board/components/NewCardForm.tsx", 504],
       ["src/views/card/components/MemberSelector.tsx", 117],
       ["src/views/card/index.tsx", 133],
       ["src/views/members/index.tsx", 295],
@@ -4519,7 +4519,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 425]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 431]],
     "translation": "Nueva tarjeta"
   },
   "cWcxrL": {
@@ -4549,7 +4549,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 133],
-      ["src/views/board/index.tsx", 958]
+      ["src/views/board/index.tsx", 961]
     ],
     "translation": "Nueva lista"
   },
@@ -4696,14 +4696,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1012]],
+    "origin": [["src/views/board/index.tsx", 1015]],
     "translation": "Sin listas"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1017]],
+    "origin": [["src/views/board/index.tsx", 1020]],
     "translation": "Aún no se han creado listas"
   },
   "i30J2U": {
@@ -5150,14 +5150,14 @@
       ["src/components/FeedbackModal.tsx", 42],
       ["src/components/NewWorkspaceForm.tsx", 119],
       ["src/views/board/components/BoardDropdown.tsx", 83],
-      ["src/views/board/components/NewCardForm.tsx", 208],
+      ["src/views/board/components/NewCardForm.tsx", 214],
       ["src/views/board/components/NewListForm.tsx", 96],
       ["src/views/board/components/NewTemplateForm.tsx", 71],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 79],
       ["src/views/board/components/VisibilityButton.tsx", 60],
-      ["src/views/board/index.tsx", 303],
-      ["src/views/board/index.tsx", 361],
-      ["src/views/board/index.tsx", 399],
+      ["src/views/board/index.tsx", 311],
+      ["src/views/board/index.tsx", 369],
+      ["src/views/board/index.tsx", 407],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 42],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
@@ -5221,7 +5221,7 @@
       ["src/views/board/components/BoardDropdown.tsx", 109],
       ["src/views/board/components/CardContextDuplicateModal.tsx", 69],
       ["src/views/board/components/CardContextMoveListModal.tsx", 51],
-      ["src/views/board/index.tsx", 461],
+      ["src/views/board/index.tsx", 464],
       ["src/views/card/components/Dropdown.tsx", 57],
       ["src/views/card/components/Dropdown.tsx", 84],
       ["src/views/card/components/Dropdown.tsx", 103],
@@ -5418,7 +5418,7 @@
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 656]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 662]],
     "translation": "Eliminar archivo"
   },
   "Tir5Ud": {
@@ -5912,7 +5912,7 @@
     "message": "Set up your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 211]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 213]],
     "translation": "Configura tu espacio de trabajo"
   },
   "Tz0i8g": {
@@ -6031,7 +6031,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 327],
-      ["src/views/onboarding/workspace-details/index.tsx", 387]
+      ["src/views/onboarding/workspace-details/index.tsx", 389]
     ],
     "translation": "Cerrar sesión"
   },
@@ -6138,7 +6138,7 @@
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 345]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 351]],
     "translation": "Error en algunos archivos adjuntos"
   },
   "uKMhOo": {
@@ -6336,8 +6336,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 875],
-      ["src/views/board/index.tsx", 912]
+      ["src/views/board/index.tsx", 878],
+      ["src/views/board/index.tsx", 915]
     ],
     "translation": "Plantilla"
   },
@@ -6492,7 +6492,7 @@
       "failedCount": ["failedCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 346]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 352]],
     "translation": "La tarjeta se creó, pero no se pudieron cargar {failedCount} de {0} archivos adjuntos."
   },
   "jlB2RY": {
@@ -6726,7 +6726,7 @@
     "comments": [],
     "origin": [
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 126],
-      ["src/views/board/components/NewCardForm.tsx", 207]
+      ["src/views/board/components/NewCardForm.tsx", 213]
     ],
     "translation": "Título"
   },
@@ -6874,7 +6874,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 108],
-      ["src/views/board/index.tsx", 459],
+      ["src/views/board/index.tsx", 462],
       ["src/views/card/components/Dropdown.tsx", 82],
       ["src/views/public/board/CardModal.tsx", 47],
       ["src/views/public/board/index.tsx", 88]
@@ -6885,7 +6885,7 @@
     "message": "Unable to create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 205]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 211]],
     "translation": "No se pudo crear la tarjeta"
   },
   "mHhffx": {
@@ -7075,7 +7075,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 360],
+      ["src/views/board/index.tsx", 368],
       ["src/views/card/index.tsx", 232]
     ],
     "translation": "No se pudo actualizar la tarjeta"
@@ -7106,7 +7106,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 398],
+      ["src/views/board/index.tsx", 406],
       ["src/views/card/components/DueDateSelector.tsx", 79]
     ],
     "translation": "No se pudo actualizar la fecha de vencimiento"
@@ -7123,7 +7123,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 302],
+      ["src/views/board/index.tsx", 310],
       ["src/views/card/components/ListSelector.tsx", 59]
     ],
     "translation": "No se pudo actualizar la lista"
@@ -7758,7 +7758,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 276],
+      ["src/views/onboarding/workspace-details/index.tsx", 278],
       ["src/views/settings/WorkspaceSettings.tsx", 56]
     ],
     "translation": "Descripción del espacio de trabajo"
@@ -7816,7 +7816,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 174],
-      ["src/views/onboarding/workspace-details/index.tsx", 220],
+      ["src/views/onboarding/workspace-details/index.tsx", 222],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 85],
       ["src/views/settings/WorkspaceSettings.tsx", 37]
     ],
@@ -7934,7 +7934,7 @@
     "message": "You can always change these later in settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 214]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 216]],
     "translation": "Siempre puedes cambiar esto más tarde en la configuración."
   },
   "aelko+": {
@@ -7980,8 +7980,8 @@
     "origin": [
       ["src/views/board/components/List.tsx", 133],
       ["src/views/board/components/VisibilityButton.tsx", 76],
-      ["src/views/board/index.tsx", 946],
-      ["src/views/board/index.tsx", 1023],
+      ["src/views/board/index.tsx", 949],
+      ["src/views/board/index.tsx", 1026],
       ["src/views/boards/components/BoardsList.tsx", 85],
       ["src/views/boards/index.tsx", 69],
       ["src/views/boards/index.tsx", 90]
@@ -8208,14 +8208,14 @@
     "message": "Your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 347]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 349]],
     "translation": "Tu espacio de trabajo"
   },
   "j0o6ml": {
     "message": "Your workspace description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 350]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 352]],
     "translation": "Descripción de tu espacio de trabajo"
   },
   "GnSSGm": {
@@ -8259,8 +8259,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 230],
-      ["src/views/onboarding/workspace-details/index.tsx", 231]
+      ["src/views/onboarding/workspace-details/index.tsx", 232],
+      ["src/views/onboarding/workspace-details/index.tsx", 233]
     ],
     "translation": "tu-espacio-de-trabajo"
   },
