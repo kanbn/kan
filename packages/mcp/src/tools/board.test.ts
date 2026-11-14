@@ -1,4 +1,4 @@
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { describe, expect, it, vi } from "vitest";
 
 import type { KanClient } from "../client.js";
@@ -8,7 +8,7 @@ describe("create_board", () => {
   it("forwards documented input with the backend-required empty arrays", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;
@@ -41,7 +41,7 @@ describe("find_board_by_name", () => {
   it("resolves the workspace from GET /workspaces' nested membership shape", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;
@@ -77,7 +77,7 @@ describe("update_board", () => {
   it("sends the favorite flag as `favorite` in the update payload", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;

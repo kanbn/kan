@@ -1,4 +1,4 @@
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { describe, expect, it, vi } from "vitest";
 
 import type { KanClient } from "../client.js";
@@ -8,7 +8,7 @@ describe("update_checklist_item", () => {
   it("sends the completion flag as `completed` in the update payload", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;

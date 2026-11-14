@@ -32,11 +32,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@modelcontextprotocol/server": "^2.4.0",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@kan/tsconfig": "workspace:*",
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@modelcontextprotocol/node": "^2.1.2",
     "typescript": "catalog:",
     "vitest": "^5.1.0"
   }

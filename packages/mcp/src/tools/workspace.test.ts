@@ -1,4 +1,4 @@
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import type { McpServer } from "@modelcontextprotocol/server";
 import { describe, expect, it, vi } from "vitest";
 
 import type { KanClient } from "../client.js";
@@ -8,7 +8,7 @@ describe("list_workspaces", () => {
   it("unwraps GET /workspaces' membership shape, matching find_workspace_by_name's output", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;
@@ -41,7 +41,7 @@ describe("find_workspace_by_name", () => {
   it("resolves GET /workspaces' nested membership shape", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;
@@ -72,7 +72,7 @@ describe("find_workspace_by_name", () => {
   it("lists available workspace names when nothing matches", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;
@@ -100,7 +100,7 @@ describe("check_workspace_slug_availability", () => {
   it("queries the backend's `workspaceSlug` param", async () => {
     const tools = new Map<string, (...args: unknown[]) => unknown>();
     const server = {
-      tool: (name: string, ...args: unknown[]) => {
+      registerTool: (name: string, ...args: unknown[]) => {
         tools.set(name, args.at(-1) as (...args: unknown[]) => unknown);
       },
     } as unknown as McpServer;

@@ -1,8 +1,10 @@
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import {
+  Client,
+  StreamableHTTPClientTransport,
+} from "@modelcontextprotocol/client";
+import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { KanClient } from "./client.js";
@@ -19,7 +21,7 @@ describe("createKanMcpServer over Streamable HTTP", () => {
 
     httpServer = createServer((req, res) => {
       const mcpServer = createKanMcpServer(client);
-      const transport = new StreamableHTTPServerTransport({
+      const transport = new NodeStreamableHTTPServerTransport({
         sessionIdGenerator: undefined,
       });
       res.on("close", () => {
@@ -67,5 +69,34 @@ describe("createKanMcpServer over Streamable HTTP", () => {
     expect(content?.text).toContain("Roadmap");
 
     await mcpClient.close();
+  });
+
+  it("still serves clients on the 2025-06-18 protocol", async () => {
+    const post = (body: object) =>
+      fetch(baseUrl, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accept: "application/json, text/event-stream",
+          "mcp-protocol-version": "2025-06-18",
+        },
+        body: JSON.stringify({ jsonrpc: "2.0", ...body }),
+      });
+
+    const init = await post({
+      id: 1,
+      method: "initialize",
+      params: {
+        protocolVersion: "2025-06-18",
+        capabilities: {},
+        clientInfo: { name: "legacy", version: "0.0.0" },
+      },
+    });
+    expect(init.status).toBe(200);
+    expect(await init.text()).toContain('"protocolVersion":"2025-06-18"');
+
+    const list = await post({ id: 2, method: "tools/list" });
+    expect(list.status).toBe(200);
+    expect(await list.text()).toContain("list_boards");
   });
 });
