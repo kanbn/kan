@@ -8,7 +8,7 @@ import {
   DialogBackdrop,
   DialogPanel,
 } from "@headlessui/react";
-import { t } from "@lingui/macro";
+import { t } from "@lingui/core/macro";
 import { useState } from "react";
 import { HiDocumentText, HiFolder, HiMagnifyingGlass } from "react-icons/hi2";
 

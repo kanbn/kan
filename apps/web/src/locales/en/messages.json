@@ -23,7 +23,7 @@
     ],
     "translation": ", or see our"
   },
-  "J/hVSQ": {
+  "J_hVSQ": {
     "message": "{0}",
     "placeholders": {
       "0": [
@@ -97,7 +97,7 @@
     ],
     "translation": "{0} cards due"
   },
-  "mU+M00": {
+  "mU-M00": {
     "message": "{0} has been added to your favorites.",
     "placeholders": {
       "0": [
@@ -209,7 +209,7 @@
     ],
     "translation": "{boardCount, plural, one {Import board (1)} other {Import boards ({boardCount})}}"
   },
-  "yndBF+": {
+  "yndBF-": {
     "message": "{projectCount, plural, one {Import project (1)} other {Import projects ({projectCount})}}",
     "placeholders": {
       "projectCount": [
@@ -238,7 +238,7 @@
     "translation": "/month",
     "obsolete": true
   },
-  "h/eDNV": {
+  "h_eDNV": {
     "message": "+ {overflowCount} more",
     "placeholders": {
       "overflowCount": [
@@ -370,7 +370,7 @@
     ],
     "translation": "404 - Page Not Found | kan.bn"
   },
-  "/rn4RE": {
+  "_rn4RE": {
     "message": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
     "placeholders": {},
     "comments": [],
@@ -562,7 +562,7 @@
     ],
     "translation": "Add board member"
   },
-  "sFY+gw": {
+  "sFY-gw": {
     "message": "Add card",
     "placeholders": {},
     "comments": [],
@@ -622,7 +622,7 @@
     ],
     "translation": "Add comment... (type '/' to open commands or '@' to mention)"
   },
-  "gL/7jw": {
+  "gL_7jw": {
     "message": "Add description... (type '/' to open commands or '@' to mention)",
     "placeholders": {},
     "comments": [],
@@ -698,7 +698,7 @@
     ],
     "translation": "Add to favorites"
   },
-  "cWXW+7": {
+  "cWXW-7": {
     "message": "Add webhook",
     "placeholders": {},
     "comments": [],
@@ -753,7 +753,7 @@
     ],
     "translation": "added a checklist item"
   },
-  "T21jY/": {
+  "T21jY_": {
     "message": "added a label to the card",
     "placeholders": {},
     "comments": [],
@@ -884,7 +884,7 @@
     ],
     "translation": "Adding a new member will cost an additional {price} ({billingType}) per seat."
   },
-  "D7/JvJ": {
+  "D7_JvJ": {
     "message": "Adjust the square crop to fit your avatar.",
     "placeholders": {},
     "comments": [],
@@ -944,7 +944,7 @@
     ],
     "translation": "Admin roles"
   },
-  "Kec+/t": {
+  "Kec-_t": {
     "message": "Advanced admin controls",
     "placeholders": {},
     "comments": [],
@@ -956,7 +956,7 @@
     ],
     "translation": "Advanced admin controls"
   },
-  "/jd3aj": {
+  "_jd3aj": {
     "message": "Advanced admin roles",
     "placeholders": {},
     "comments": [],
@@ -1029,7 +1029,7 @@
     ],
     "translation": "All systems operational"
   },
-  "EII/X8": {
+  "EII_X8": {
     "message": "All Teams features +",
     "placeholders": {},
     "comments": [],
@@ -1069,7 +1069,7 @@
     ],
     "translation": "Already have an account? <0><1>Sign in</1></0>"
   },
-  "j1+HPc": {
+  "j1-HPc": {
     "message": "An error occurred while connecting your GitHub account.",
     "placeholders": {},
     "comments": [],
@@ -1217,7 +1217,7 @@
     ],
     "translation": "API keys"
   },
-  "j2+d/o": {
+  "j2-d_o": {
     "message": "API Reference",
     "placeholders": {},
     "comments": [],
@@ -1241,7 +1241,7 @@
     ],
     "translation": "Applicants"
   },
-  "yb/fjw": {
+  "yb_fjw": {
     "message": "Approval",
     "placeholders": {},
     "comments": [],
@@ -1253,7 +1253,7 @@
     ],
     "translation": "Approval"
   },
-  "aKJHG+": {
+  "aKJHG-": {
     "message": "Archive board",
     "placeholders": {},
     "comments": [],
@@ -1277,7 +1277,7 @@
     ],
     "translation": "Archived"
   },
-  "T5/ohn": {
+  "T5_ohn": {
     "message": "Archived lists and cards aren't imported.",
     "placeholders": {},
     "comments": [],
@@ -1401,7 +1401,7 @@
     ],
     "translation": "Are you sure you want to delete this label?"
   },
-  "74F7N/": {
+  "74F7N_": {
     "message": "Are you sure you want to delete your account?",
     "placeholders": {},
     "comments": [],
@@ -1429,7 +1429,7 @@
     ],
     "translation": "Are you sure you want to remove {entityLabel}?"
   },
-  "PyYD/v": {
+  "PyYD_v": {
     "message": "assigned <0>{0}</0> to the card",
     "placeholders": {
       "0": [
@@ -1457,7 +1457,7 @@
     ],
     "translation": "Assignees"
   },
-  "N7m8E+": {
+  "N7m8E-": {
     "message": "Attach files",
     "placeholders": {},
     "comments": [],
@@ -1549,7 +1549,7 @@
     ],
     "translation": "Basic Roadmap"
   },
-  "/XCg57": {
+  "_XCg57": {
     "message": "Best for growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
@@ -1585,7 +1585,7 @@
     ],
     "translation": "Best for large organizations with advanced needs"
   },
-  "UoSI+i": {
+  "UoSI-i": {
     "message": "Best for small and growing teams that need collaboration",
     "placeholders": {},
     "comments": [],
@@ -1598,7 +1598,7 @@
     "translation": "Best for small and growing teams that need collaboration",
     "obsolete": true
   },
-  "zt/6cS": {
+  "zt_6cS": {
     "message": "Best for small teams who want to collaborate and move faster together.",
     "placeholders": {},
     "comments": [],
@@ -1611,7 +1611,7 @@
     "translation": "Best for small teams who want to collaborate and move faster together.",
     "obsolete": true
   },
-  "qaS+1/": {
+  "qaS-1_": {
     "message": "Best for teams that want to scale without limits",
     "placeholders": {},
     "comments": [],
@@ -1636,7 +1636,7 @@
     ],
     "translation": "Best for teams who want to collaborate and move faster together."
   },
-  "ARvBT/": {
+  "ARvBT_": {
     "message": "billed annually",
     "placeholders": {},
     "comments": [],
@@ -1648,7 +1648,7 @@
     ],
     "translation": "billed annually"
   },
-  "+VoTOr": {
+  "-VoTOr": {
     "message": "billed monthly",
     "placeholders": {},
     "comments": [],
@@ -1660,7 +1660,7 @@
     ],
     "translation": "billed monthly"
   },
-  "R+w/Va": {
+  "R-w_Va": {
     "message": "Billing",
     "placeholders": {},
     "comments": [],
@@ -1869,7 +1869,7 @@
     ],
     "translation": "Board not found"
   },
-  "Mu1Zy/": {
+  "Mu1Zy_": {
     "message": "Board options",
     "placeholders": {},
     "comments": [],
@@ -1929,7 +1929,7 @@
     ],
     "translation": "Board URL cannot exceed 60 characters"
   },
-  "8+BY11": {
+  "8-BY11": {
     "message": "Board URL copied to clipboard",
     "placeholders": {},
     "comments": [],
@@ -1998,7 +1998,7 @@
     ],
     "translation": "Board visibility updated"
   },
-  "8TveY+": {
+  "8TveY-": {
     "message": "Boards",
     "placeholders": {},
     "comments": [],
@@ -2062,7 +2062,7 @@
     ],
     "translation": "Bug"
   },
-  "/asTmx": {
+  "_asTmx": {
     "message": "Bug Report",
     "placeholders": {},
     "comments": [],
@@ -2178,7 +2178,7 @@
     ],
     "translation": "Can delete boards"
   },
-  "jNuzV/": {
+  "jNuzV_": {
     "message": "Can delete cards",
     "placeholders": {},
     "comments": [],
@@ -2258,7 +2258,7 @@
     ],
     "translation": "Can edit boards"
   },
-  "I+AROe": {
+  "I-AROe": {
     "message": "Can edit cards",
     "placeholders": {},
     "comments": [],
@@ -2322,7 +2322,7 @@
     ],
     "translation": "Can edit member roles and permissions"
   },
-  "iLbjv+": {
+  "iLbjv-": {
     "message": "Can edit workspace",
     "placeholders": {},
     "comments": [],
@@ -2566,7 +2566,7 @@
     ],
     "translation": "Cancel"
   },
-  "kryGs+": {
+  "kryGs-": {
     "message": "Card",
     "placeholders": {},
     "comments": [],
@@ -2738,7 +2738,7 @@
     ],
     "translation": "Change your language preferences."
   },
-  "gZxH/p": {
+  "gZxH_p": {
     "message": "changed the due date to <0>{formattedDate}</0>",
     "placeholders": {
       "formattedDate": [
@@ -3074,7 +3074,7 @@
     ],
     "translation": "Complete control and ownership:"
   },
-  "Lt+ZP3": {
+  "Lt-ZP3": {
     "message": "completed a checklist item",
     "placeholders": {},
     "comments": [],
@@ -3127,7 +3127,7 @@
     ],
     "translation": "Configure webhooks to receive notifications when cards are created, updated, moved, or deleted."
   },
-  "/f3t6v": {
+  "_f3t6v": {
     "message": "Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.",
     "placeholders": {},
     "comments": [],
@@ -3248,7 +3248,7 @@
     ],
     "translation": "Connect your Trello account to import boards."
   },
-  "jfC/xh": {
+  "jfC_xh": {
     "message": "Contact",
     "placeholders": {},
     "comments": [],
@@ -3352,7 +3352,7 @@
     ],
     "translation": "Continue with {0}"
   },
-  "va/3u1": {
+  "va_3u1": {
     "message": "Control who can view and edit your boards.",
     "placeholders": {},
     "comments": [],
@@ -3624,7 +3624,7 @@
     ],
     "translation": "Create new key"
   },
-  "0+0/3e": {
+  "0-0_3e": {
     "message": "Create new label",
     "placeholders": {},
     "comments": [],
@@ -3640,7 +3640,7 @@
     ],
     "translation": "Create new label"
   },
-  "aWlSc/": {
+  "aWlSc_": {
     "message": "Create new list",
     "placeholders": {},
     "comments": [],
@@ -3696,7 +3696,7 @@
     ],
     "translation": "Create workspace"
   },
-  "d+F6q9": {
+  "d-F6q9": {
     "message": "Created",
     "placeholders": {},
     "comments": [],
@@ -3841,7 +3841,7 @@
     ],
     "translation": "Custom SLA"
   },
-  "u2+JIh": {
+  "u2-JIh": {
     "message": "Custom URLs require upgrading to a Pro plan",
     "placeholders": {},
     "comments": [],
@@ -3854,7 +3854,7 @@
     "translation": "Custom URLs require upgrading to a Pro plan",
     "obsolete": true
   },
-  "7RpHg/": {
+  "7RpHg_": {
     "message": "Custom username",
     "placeholders": {},
     "comments": [],
@@ -3920,7 +3920,7 @@
     ],
     "translation": "Custom workspace username"
   },
-  "n+xLOH": {
+  "n-xLOH": {
     "message": "Customer Support",
     "placeholders": {},
     "comments": [],
@@ -4044,7 +4044,7 @@
     ],
     "translation": "Delete account"
   },
-  "tmpW+w": {
+  "tmpW-w": {
     "message": "Delete board",
     "placeholders": {},
     "comments": [],
@@ -4152,7 +4152,7 @@
     ],
     "translation": "Delete workspace"
   },
-  "mTGd3+": {
+  "mTGd3-": {
     "message": "deleted a checklist",
     "placeholders": {},
     "comments": [],
@@ -4220,7 +4220,7 @@
     ],
     "translation": "Design"
   },
-  "Uf+1DF": {
+  "Uf-1DF": {
     "message": "Destination workspace",
     "placeholders": {},
     "comments": [],
@@ -4381,7 +4381,7 @@
     ],
     "translation": "Docs"
   },
-  "TvY/XA": {
+  "TvY_XA": {
     "message": "Documentation",
     "placeholders": {},
     "comments": [],
@@ -4537,7 +4537,7 @@
     ],
     "translation": "Due today"
   },
-  "zxKs+y": {
+  "zxKs-y": {
     "message": "Due tomorrow",
     "placeholders": {},
     "comments": [],
@@ -4713,7 +4713,7 @@
     ],
     "translation": "Editing"
   },
-  "b/LfJo": {
+  "b_LfJo": {
     "message": "email",
     "placeholders": {},
     "comments": [],
@@ -4801,7 +4801,7 @@
     ],
     "translation": "Engineering"
   },
-  "0+ewPp": {
+  "0-ewPp": {
     "message": "Enhancement",
     "placeholders": {},
     "comments": [],
@@ -4897,7 +4897,7 @@
     ],
     "translation": "Enter your email address"
   },
-  "n9V+ps": {
+  "n9V-ps": {
     "message": "Enter your name",
     "placeholders": {},
     "comments": [],
@@ -4965,7 +4965,7 @@
     ],
     "translation": "Error"
   },
-  "55xJ/O": {
+  "55xJ_O": {
     "message": "Error Changing Password",
     "placeholders": {},
     "comments": [],
@@ -5025,7 +5025,7 @@
     ],
     "translation": "Error deleting account"
   },
-  "q+lt9D": {
+  "q-lt9D": {
     "message": "Error deleting label",
     "placeholders": {},
     "comments": [],
@@ -5049,7 +5049,7 @@
     ],
     "translation": "Error deleting workspace"
   },
-  "gQ/02p": {
+  "gQ_02p": {
     "message": "Error disconnecting GitHub",
     "placeholders": {},
     "comments": [],
@@ -5073,7 +5073,7 @@
     ],
     "translation": "Error disconnecting Trello"
   },
-  "rarRW/": {
+  "rarRW_": {
     "message": "Error inviting member",
     "placeholders": {},
     "comments": [],
@@ -5137,7 +5137,7 @@
     ],
     "translation": "Error updating workspace name"
   },
-  "x0kMO/": {
+  "x0kMO_": {
     "message": "Error updating workspace URL",
     "placeholders": {},
     "comments": [],
@@ -5175,7 +5175,7 @@
     "translation": "Error upgrading to Pro",
     "obsolete": true
   },
-  "CYWHT+": {
+  "CYWHT-": {
     "message": "Error uploading profile image",
     "placeholders": {},
     "comments": [],
@@ -5207,7 +5207,7 @@
     ],
     "translation": "Events"
   },
-  "6ZIzI/": {
+  "6ZIzI_": {
     "message": "Every active workspace member is already on this board.",
     "placeholders": {},
     "comments": [],
@@ -5243,7 +5243,7 @@
     ],
     "translation": "Everything you need, free forever. Unlimited boards, unlimited lists, unlimited cards. Upgrade any time."
   },
-  "t+R8+P": {
+  "t-R8-P": {
     "message": "Execution",
     "placeholders": {},
     "comments": [],
@@ -5327,7 +5327,7 @@
     ],
     "translation": "Failed to delete webhook"
   },
-  "W8oT+L": {
+  "W8oT-L": {
     "message": "Failed to fetch video information",
     "placeholders": {},
     "comments": [],
@@ -5383,7 +5383,7 @@
     ],
     "translation": "Failed to update webhook"
   },
-  "ZL1A+p": {
+  "ZL1A-p": {
     "message": "Failed to upload attachment. Please try again.",
     "placeholders": {},
     "comments": [],
@@ -5395,7 +5395,7 @@
     ],
     "translation": "Failed to upload attachment. Please try again."
   },
-  "/lDBHm": {
+  "_lDBHm": {
     "message": "FAQ",
     "placeholders": {},
     "comments": [],
@@ -5555,7 +5555,7 @@
     ],
     "translation": "Font size"
   },
-  "+3TYXa": {
+  "-3TYXa": {
     "message": "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.",
     "placeholders": {},
     "comments": [],
@@ -5659,7 +5659,7 @@
     ],
     "translation": "Free for everyone"
   },
-  "W/nQk1": {
+  "W_nQk1": {
     "message": "Free Plan",
     "placeholders": {},
     "comments": [],
@@ -5703,7 +5703,7 @@
     ],
     "translation": "Full API access"
   },
-  "KiVc+q": {
+  "KiVc-q": {
     "message": "Full-time",
     "placeholders": {},
     "comments": [],
@@ -5823,7 +5823,7 @@
     ],
     "translation": "Get started for free today"
   },
-  "+OhFss": {
+  "-OhFss": {
     "message": "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.",
     "placeholders": {},
     "comments": [],
@@ -5887,7 +5887,7 @@
     ],
     "translation": "GitHub connected"
   },
-  "/bBVaD": {
+  "_bBVaD": {
     "message": "GitHub disconnected",
     "placeholders": {},
     "comments": [],
@@ -5899,7 +5899,7 @@
     ],
     "translation": "GitHub disconnected"
   },
-  "7eMo+U": {
+  "7eMo-U": {
     "message": "Go Home",
     "placeholders": {},
     "comments": [],
@@ -5979,7 +5979,7 @@
     ],
     "translation": "Go to settings"
   },
-  "csFbe+": {
+  "csFbe-": {
     "message": "Go to templates",
     "placeholders": {},
     "comments": [],
@@ -6083,7 +6083,7 @@
     ],
     "translation": "Heading 3"
   },
-  "CB/NpV": {
+  "CB_NpV": {
     "message": "High Priority",
     "placeholders": {},
     "comments": [],
@@ -6155,7 +6155,7 @@
     ],
     "translation": "How do I import my Trello boards?"
   },
-  "nol/Fb": {
+  "nol_Fb": {
     "message": "How do I invite team members?",
     "placeholders": {},
     "comments": [],
@@ -6215,7 +6215,7 @@
     ],
     "translation": "I acknowledge that all of my account data will be permanently deleted and want to proceed."
   },
-  "2Py5S/": {
+  "2Py5S_": {
     "message": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed.",
     "placeholders": {},
     "comments": [],
@@ -6251,7 +6251,7 @@
     ],
     "translation": "Ideas"
   },
-  "F/vB2g": {
+  "F_vB2g": {
     "message": "Ideas to improve this page...",
     "placeholders": {},
     "comments": [],
@@ -6323,7 +6323,7 @@
     ],
     "translation": "Import your Trello boards and hit the ground running."
   },
-  "c/IAuR": {
+  "c_IAuR": {
     "message": "Important",
     "placeholders": {},
     "comments": [],
@@ -6335,7 +6335,7 @@
     ],
     "translation": "Important"
   },
-  "xMn+V9": {
+  "xMn-V9": {
     "message": "Importing from Trello",
     "placeholders": {},
     "comments": [],
@@ -6551,7 +6551,7 @@
     ],
     "translation": "Invite links"
   },
-  "25mvI+": {
+  "25mvI-": {
     "message": "Invite links require a Team or Pro subscription. Please upgrade your workspace.",
     "placeholders": {},
     "comments": [],
@@ -6563,7 +6563,7 @@
     ],
     "translation": "Invite links require a Team or Pro subscription. Please upgrade your workspace."
   },
-  "+djOzj": {
+  "-djOzj": {
     "message": "Invite member",
     "placeholders": {},
     "comments": [],
@@ -6685,7 +6685,7 @@
     ],
     "translation": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate."
   },
-  "Xjj/kS": {
+  "Xjj_kS": {
     "message": "Kanban reimagined",
     "placeholders": {},
     "comments": [],
@@ -6753,7 +6753,7 @@
     ],
     "translation": "Labels"
   },
-  "AZI/wb": {
+  "AZI_wb": {
     "message": "Labels & filters",
     "placeholders": {},
     "comments": [],
@@ -6765,7 +6765,7 @@
     ],
     "translation": "Labels & filters"
   },
-  "+nvZ6j": {
+  "-nvZ6j": {
     "message": "Labels & Filters",
     "placeholders": {},
     "comments": [],
@@ -6789,7 +6789,7 @@
     ],
     "translation": "Language"
   },
-  "k7rCa/": {
+  "k7rCa_": {
     "message": "Large",
     "placeholders": {},
     "comments": [],
@@ -6923,7 +6923,7 @@
     ],
     "translation": "Light"
   },
-  "TCt/8K": {
+  "TCt_8K": {
     "message": "Limited API access",
     "placeholders": {},
     "comments": [],
@@ -6995,7 +6995,7 @@
     ],
     "translation": "List name"
   },
-  "jf++dj": {
+  "jf--dj": {
     "message": "List options",
     "placeholders": {},
     "comments": [],
@@ -7063,7 +7063,7 @@
     ],
     "translation": "Loading..."
   },
-  "N/bcWA": {
+  "N_bcWA": {
     "message": "Login | kan.bn",
     "placeholders": {},
     "comments": [],
@@ -7191,7 +7191,7 @@
     ],
     "translation": "marked checklist item <0>{0}</0> as incomplete"
   },
-  "vo2a+a": {
+  "vo2a-a": {
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
@@ -7215,7 +7215,7 @@
     ],
     "translation": "Medium"
   },
-  "W/Elkg": {
+  "W_Elkg": {
     "message": "Medium Priority",
     "placeholders": {},
     "comments": [],
@@ -7351,7 +7351,7 @@
     ],
     "translation": "Members | {0}"
   },
-  "/bZzdR": {
+  "_bZzdR": {
     "message": "Mentions",
     "placeholders": {},
     "comments": [],
@@ -7375,7 +7375,7 @@
     ],
     "translation": "Monday"
   },
-  "+8Nek/": {
+  "-8Nek_": {
     "message": "Monthly",
     "placeholders": {},
     "comments": [],
@@ -7407,7 +7407,7 @@
     ],
     "translation": "monthly billing"
   },
-  "sZ/WDz": {
+  "sZ_WDz": {
     "message": "Move board",
     "placeholders": {},
     "comments": [],
@@ -7443,7 +7443,7 @@
     ],
     "translation": "Move to another list"
   },
-  "J4+OTA": {
+  "J4-OTA": {
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
@@ -7682,7 +7682,7 @@
     ],
     "translation": "New list"
   },
-  "+MdEsf": {
+  "-MdEsf": {
     "message": "New password is required",
     "placeholders": {},
     "comments": [],
@@ -7718,7 +7718,7 @@
     ],
     "translation": "New template"
   },
-  "RJA+sg": {
+  "RJA-sg": {
     "message": "New Ticket",
     "placeholders": {},
     "comments": [],
@@ -7790,7 +7790,7 @@
     ],
     "translation": "Next Steps"
   },
-  "/glL9Q": {
+  "_glL9Q": {
     "message": "No {0}",
     "placeholders": {
       "0": [
@@ -8086,7 +8086,7 @@
     ],
     "translation": "Open command menu"
   },
-  "cFQEU/": {
+  "cFQEU_": {
     "message": "Open keyboard shortcuts",
     "placeholders": {},
     "comments": [],
@@ -8098,7 +8098,7 @@
     ],
     "translation": "Open keyboard shortcuts"
   },
-  "v+Wp++": {
+  "v-Wp--": {
     "message": "Open source",
     "placeholders": {},
     "comments": [],
@@ -8110,7 +8110,7 @@
     ],
     "translation": "Open source"
   },
-  "qfUS/w": {
+  "qfUS_w": {
     "message": "Open Source Friends",
     "placeholders": {},
     "comments": [],
@@ -8134,7 +8134,7 @@
     ],
     "translation": "or"
   },
-  "Uci+Ph": {
+  "Uci-Ph": {
     "message": "Ordered List",
     "placeholders": {},
     "comments": [],
@@ -8498,7 +8498,7 @@
     ],
     "translation": "Personal Project"
   },
-  "Oi+J+N": {
+  "Oi-J-N": {
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
     "comments": [],
@@ -8942,7 +8942,7 @@
     ],
     "translation": "Position in list (0 = first, leave empty for end)"
   },
-  "1xwZj/": {
+  "1xwZj_": {
     "message": "Previous month",
     "placeholders": {},
     "comments": [],
@@ -9051,7 +9051,7 @@
     "translation": "Pro",
     "obsolete": true
   },
-  "oyRjD/": {
+  "oyRjD_": {
     "message": "Pro Plan",
     "placeholders": {},
     "comments": [],
@@ -9139,7 +9139,7 @@
     ],
     "translation": "Publishing"
   },
-  "bfgr/e": {
+  "bfgr_e": {
     "message": "Question",
     "placeholders": {},
     "comments": [],
@@ -9227,7 +9227,7 @@
     ],
     "translation": "Remote"
   },
-  "t/YqKh": {
+  "t_YqKh": {
     "message": "Remove",
     "placeholders": {},
     "comments": [],
@@ -9267,7 +9267,7 @@
     ],
     "translation": "Remove from board"
   },
-  "T/pF0Z": {
+  "T_pF0Z": {
     "message": "Remove from favorites",
     "placeholders": {},
     "comments": [],
@@ -9334,7 +9334,7 @@
     ],
     "translation": "removed a member from the card"
   },
-  "KEim/+": {
+  "KEim_-": {
     "message": "removed an attachment",
     "placeholders": {},
     "comments": [],
@@ -9526,7 +9526,7 @@
     ],
     "translation": "Resolution"
   },
-  "s+MGs7": {
+  "s-MGs7": {
     "message": "Resources",
     "placeholders": {},
     "comments": [],
@@ -9550,7 +9550,7 @@
     ],
     "translation": "Review"
   },
-  "/gaSVU": {
+  "_gaSVU": {
     "message": "Roadmap",
     "placeholders": {},
     "comments": [],
@@ -9619,7 +9619,7 @@
     "translation": "Roles & permissions",
     "obsolete": true
   },
-  "vAR/I8": {
+  "vAR_I8": {
     "message": "Run on your own infrastructure",
     "placeholders": {},
     "comments": [],
@@ -9643,7 +9643,7 @@
     ],
     "translation": "SAML SSO"
   },
-  "+5kO8P": {
+  "-5kO8P": {
     "message": "Saturday",
     "placeholders": {},
     "comments": [],
@@ -9699,7 +9699,7 @@
     ],
     "translation": "Save time with reusable board templates."
   },
-  "cOh+MI": {
+  "cOh-MI": {
     "message": "Screening",
     "placeholders": {},
     "comments": [],
@@ -9763,7 +9763,7 @@
     ],
     "translation": "seats"
   },
-  "e1v+J3": {
+  "e1v-J3": {
     "message": "Secret (optional)",
     "placeholders": {},
     "comments": [],
@@ -9775,7 +9775,7 @@
     ],
     "translation": "Secret (optional)"
   },
-  "OkTY4+": {
+  "OkTY4-": {
     "message": "Secret cannot exceed 512 characters",
     "placeholders": {},
     "comments": [],
@@ -9799,7 +9799,7 @@
     ],
     "translation": "Security"
   },
-  "iL+dpm": {
+  "iL-dpm": {
     "message": "See all your cards across the month, then drag and drop to reschedule. Available on paid plans.",
     "placeholders": {},
     "comments": [],
@@ -9875,7 +9875,7 @@
     ],
     "translation": "Select all"
   },
-  "o4e/70": {
+  "o4e_70": {
     "message": "Select at least one event",
     "placeholders": {},
     "comments": [],
@@ -9935,7 +9935,7 @@
     ],
     "translation": "self-assigned the card"
   },
-  "f2zPy/": {
+  "f2zPy_": {
     "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
     "placeholders": {
       "CREDENTIALS_ENV_HINT": [
@@ -9999,7 +9999,7 @@
     ],
     "translation": "Senior"
   },
-  "+DlsTY": {
+  "-DlsTY": {
     "message": "Set a new password",
     "placeholders": {},
     "comments": [],
@@ -10119,7 +10119,7 @@
     ],
     "translation": "Settings | Account"
   },
-  "iy1wb+": {
+  "iy1wb-": {
     "message": "Settings | API",
     "placeholders": {},
     "comments": [],
@@ -10155,7 +10155,7 @@
     ],
     "translation": "Settings | Integrations"
   },
-  "F/FPk/": {
+  "F_FPk_": {
     "message": "Settings | Permissions",
     "placeholders": {},
     "comments": [],
@@ -10167,7 +10167,7 @@
     ],
     "translation": "Settings | Permissions"
   },
-  "+h2faV": {
+  "-h2faV": {
     "message": "Settings | Webhooks",
     "placeholders": {},
     "comments": [],
@@ -10179,7 +10179,7 @@
     ],
     "translation": "Settings | Webhooks"
   },
-  "Ci/KUX": {
+  "Ci_KUX": {
     "message": "Settings | Workspace",
     "placeholders": {},
     "comments": [],
@@ -10215,7 +10215,7 @@
     ],
     "translation": "Show newest activity first"
   },
-  "EL+7I2": {
+  "EL-7I2": {
     "message": "Show oldest activity first",
     "placeholders": {},
     "comments": [],
@@ -10335,7 +10335,7 @@
     ],
     "translation": "Sign up disabled"
   },
-  "s6iE/c": {
+  "s6iE_c": {
     "message": "Sign up is currently disabled. Please try again later.",
     "placeholders": {},
     "comments": [],
@@ -10375,7 +10375,7 @@
     ],
     "translation": "Simple pricing"
   },
-  "/ty94x": {
+  "_ty94x": {
     "message": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts.",
     "placeholders": {},
     "comments": [],
@@ -10423,7 +10423,7 @@
     ],
     "translation": "Small"
   },
-  "++rVAm": {
+  "--rVAm": {
     "message": "Social Media",
     "placeholders": {},
     "comments": [],
@@ -10483,7 +10483,7 @@
     ],
     "translation": "Some boards weren't imported"
   },
-  "J9+zIR": {
+  "J9-zIR": {
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
     "comments": [],
@@ -10495,7 +10495,7 @@
     ],
     "translation": "Something went wrong during activation. Please try again."
   },
-  "r+dxEH": {
+  "r-dxEH": {
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
@@ -10556,7 +10556,7 @@
     "translation": "Start 14 day free trial",
     "obsolete": true
   },
-  "4+JaWo": {
+  "4-JaWo": {
     "message": "Start free trial",
     "placeholders": {},
     "comments": [],
@@ -10680,7 +10680,7 @@
     ],
     "translation": "Sunday"
   },
-  "uZg2+w": {
+  "uZg2-w": {
     "message": "Supercharge your workspace for just $29/month. Here's what you'll get:",
     "placeholders": {},
     "comments": [],
@@ -10721,7 +10721,7 @@
     ],
     "translation": "Support the development of the project"
   },
-  "D+NlUC": {
+  "D-NlUC": {
     "message": "System",
     "placeholders": {},
     "comments": [],
@@ -10785,7 +10785,7 @@
     ],
     "translation": "Teams"
   },
-  "/K2CvV": {
+  "_K2CvV": {
     "message": "Template",
     "placeholders": {},
     "comments": [],
@@ -10981,7 +10981,7 @@
     ],
     "translation": "Thank you for your feedback!"
   },
-  "ssK7k+": {
+  "ssK7k-": {
     "message": "That license key could not be found. Please contact support.",
     "placeholders": {},
     "comments": [],
@@ -11104,7 +11104,7 @@
     ],
     "translation": "The member's permissions have been updated."
   },
-  "bfZE+Y": {
+  "bfZE-Y": {
     "message": "The member's role has been updated.",
     "placeholders": {},
     "comments": [],
@@ -11116,7 +11116,7 @@
     ],
     "translation": "The member's role has been updated."
   },
-  "gUX7b+": {
+  "gUX7b-": {
     "message": "The open source <0/> alternative to Trello",
     "placeholders": {},
     "comments": [],
@@ -11244,7 +11244,7 @@
     ],
     "translation": "This board is private or does not exist"
   },
-  "wY+6Ye": {
+  "wY-6Ye": {
     "message": "This board URL has already been taken",
     "placeholders": {},
     "comments": [],
@@ -11332,7 +11332,7 @@
     ],
     "translation": "This will remove all custom member permissions in this workspace. Members will inherit permissions only from their roles."
   },
-  "MeO/vH": {
+  "MeO_vH": {
     "message": "This will result in the permanent deletion of all data associated with this workspace.",
     "placeholders": {},
     "comments": [],
@@ -11444,7 +11444,7 @@
     ],
     "translation": "Title (optional)"
   },
-  "Se/UIp": {
+  "Se_UIp": {
     "message": "To Do",
     "placeholders": {},
     "comments": [],
@@ -11496,7 +11496,7 @@
     ],
     "translation": "Token is required"
   },
-  "eEQyz+": {
+  "eEQyz-": {
     "message": "Track all card changes with detailed activity history.",
     "placeholders": {},
     "comments": [],
@@ -11564,7 +11564,7 @@
     ],
     "translation": "Trello is busy right now. Please try importing {board} again in a few minutes."
   },
-  "HO+uOC": {
+  "HO-uOC": {
     "message": "Triaging",
     "placeholders": {},
     "comments": [],
@@ -11576,7 +11576,7 @@
     ],
     "translation": "Triaging"
   },
-  "o+JCfN": {
+  "o-JCfN": {
     "message": "Trusted by fast-moving teams<0/>around the world",
     "placeholders": {},
     "comments": [],
@@ -11852,7 +11852,7 @@
     ],
     "translation": "Unable to duplicate card"
   },
-  "d196/6": {
+  "d196_6": {
     "message": "Unable to move board",
     "placeholders": {},
     "comments": [],
@@ -12144,7 +12144,7 @@
     ],
     "translation": "Unable to update webhook"
   },
-  "It4/FS": {
+  "It4_FS": {
     "message": "Unarchive board",
     "placeholders": {},
     "comments": [],
@@ -12320,7 +12320,7 @@
     ],
     "translation": "unlimited members"
   },
-  "mx8+1u": {
+  "mx8-1u": {
     "message": "Unlimited members",
     "placeholders": {},
     "comments": [],
@@ -12357,7 +12357,7 @@
     ],
     "translation": "Unlimited seats"
   },
-  "Ws+3X+": {
+  "Ws-3X-": {
     "message": "Unlimited seats and advanced features for growing teams.",
     "placeholders": {},
     "comments": [],
@@ -12621,7 +12621,7 @@
     ],
     "translation": "URL cannot exceed 2048 characters"
   },
-  "i5rE2/": {
+  "i5rE2_": {
     "message": "URL cannot exceed 64 characters",
     "placeholders": {},
     "comments": [],
@@ -12789,7 +12789,7 @@
     ],
     "translation": "View workspace"
   },
-  "2q/Q7x": {
+  "2q_Q7x": {
     "message": "Visibility",
     "placeholders": {},
     "comments": [],
@@ -12813,7 +12813,7 @@
     ],
     "translation": "We are using the <0>AGPL-3.0 license</0>."
   },
-  "+EkBs0": {
+  "-EkBs0": {
     "message": "We couldn't update your preferences. Please try again.",
     "placeholders": {},
     "comments": [],
@@ -12854,7 +12854,7 @@
     ],
     "translation": "We're just getting started. "
   },
-  "nB44E/": {
+  "nB44E_": {
     "message": "We've sent a password reset link to {emailSentTo}.",
     "placeholders": {
       "emailSentTo": [
@@ -12882,7 +12882,7 @@
     ],
     "translation": "Webhook created"
   },
-  "GdWB+V": {
+  "GdWB-V": {
     "message": "Webhook created successfully",
     "placeholders": {},
     "comments": [],
@@ -12930,7 +12930,7 @@
     ],
     "translation": "Webhook name cannot exceed 255 characters"
   },
-  "U2+rn0": {
+  "U2-rn0": {
     "message": "Webhook name is required",
     "placeholders": {},
     "comments": [],
@@ -13058,7 +13058,7 @@
     ],
     "translation": "What license are you using?"
   },
-  "H5G+qG": {
+  "H5G-qG": {
     "message": "What's the difference between Kan and Trello?",
     "placeholders": {},
     "comments": [],
@@ -13159,7 +13159,7 @@
     ],
     "translation": "Workspace description"
   },
-  "Ax/hYa": {
+  "Ax_hYa": {
     "message": "Workspace description cannot exceed 280 characters",
     "placeholders": {},
     "comments": [],
@@ -13343,7 +13343,7 @@
     ],
     "translation": "Workspace URL"
   },
-  "DSGzV+": {
+  "DSGzV-": {
     "message": "Workspace username",
     "placeholders": {},
     "comments": [],
@@ -13355,7 +13355,7 @@
     ],
     "translation": "Workspace username"
   },
-  "/8pTF/": {
+  "_8pTF_": {
     "message": "workspace-url",
     "placeholders": {},
     "comments": [],
@@ -13431,7 +13431,7 @@
     ],
     "translation": "You can always change these later in settings."
   },
-  "aelko+": {
+  "aelko-": {
     "message": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and purchasing a pro workspace subscription. All subscriptions help fund the development of the project!",
     "placeholders": {},
     "comments": [],
@@ -13528,7 +13528,7 @@
     ],
     "translation": "You don't have permission"
   },
-  "p/hk9N": {
+  "p_hk9N": {
     "message": "You have been logged in successfully.",
     "placeholders": {},
     "comments": [],
@@ -13690,7 +13690,7 @@
     ],
     "translation": "Your avatar"
   },
-  "evg7+A": {
+  "evg7-A": {
     "message": "Your boards have been imported.",
     "placeholders": {},
     "comments": [],
@@ -13714,7 +13714,7 @@
     ],
     "translation": "Your display name has been updated."
   },
-  "tca56/": {
+  "tca56_": {
     "message": "Your file has been uploaded successfully.",
     "placeholders": {},
     "comments": [],
@@ -13774,7 +13774,7 @@
     ],
     "translation": "Your license has been activated successfully."
   },
-  "+A6Wuq": {
+  "-A6Wuq": {
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
@@ -13822,7 +13822,7 @@
     ],
     "translation": "Your password has been set."
   },
-  "/tOdd2": {
+  "_tOdd2": {
     "message": "Your profile image has been updated.",
     "placeholders": {},
     "comments": [],
@@ -13834,7 +13834,7 @@
     ],
     "translation": "Your profile image has been updated."
   },
-  "+jbXzb": {
+  "-jbXzb": {
     "message": "Your projects have been imported.",
     "placeholders": {},
     "comments": [],
