@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import React from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -7,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -308,7 +307,7 @@ export function KeyboardShortcutProvider({
       >
         <DialogBackdrop
           transition
-          className="data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in fixed inset-0 bg-light-50 bg-opacity-40 transition-opacity dark:bg-dark-50 dark:bg-opacity-40"
+          className="fixed inset-0 bg-light-50/40 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in dark:bg-dark-50/40"
         />
 
         <div className="fixed inset-0 flex min-h-full w-screen items-center justify-center overflow-y-auto p-4">
@@ -322,7 +321,7 @@ export function KeyboardShortcutProvider({
               </DialogTitle>
               <button
                 onClick={() => setIsLegendOpen(false)}
-                className="rounded p-1 hover:bg-light-200 dark:hover:bg-dark-200"
+                className="rounded-sm p-1 hover:bg-light-200 dark:hover:bg-dark-200"
               >
                 <HiXMark className="h-5 w-5 text-neutral-700 dark:text-dark-700" />
               </button>
@@ -341,7 +340,7 @@ export function KeyboardShortcutProvider({
                     const groupInfo = getShortcutGroupInfo();
                     return (
                       <div key={`${group}-${idx}`}>
-                        <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-light-1000 dark:text-dark-1000">
+                        <h3 className="mb-3 text-xs font-semibold tracking-wide text-light-1000 uppercase dark:text-dark-1000">
                           {groupInfo[group].label}
                         </h3>
                         <div className="flex flex-col gap-y-2">
@@ -445,7 +444,7 @@ function ShortcutListItem({ shortcut }: { shortcut: KeyboardShortcut }) {
 
 function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   const kbdClassName =
-    "inline-flex h-5 w-5 items-center justify-center rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
+    "inline-flex h-5 w-5 items-center justify-center rounded-sm border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-center text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950";
 
   const stringifyModifier = (modifier: ModifierKey): string => {
     const isMac =
@@ -501,7 +500,7 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   }
 
   return (
-    <span className="inline-flex flex-shrink-0 items-center gap-1 text-[11px]">
+    <span className="inline-flex shrink-0 items-center gap-1 text-[11px]">
       {formatStroke(shortcut.stroke)}
     </span>
   );

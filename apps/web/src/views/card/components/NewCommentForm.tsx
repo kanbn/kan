@@ -67,10 +67,10 @@ const NewCommentForm = ({
   const submitTooltip = (
     <div className="flex flex-row items-center gap-2 text-[11px]">
       {t`Submit`}
-      <span className="inline-flex items-center justify-center rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950">
+      <span className="inline-flex items-center justify-center rounded-sm border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950">
         {isMac ? "⌘" : "Ctrl"}
       </span>
-      <span className="inline-flex items-center justify-center rounded border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950">
+      <span className="inline-flex items-center justify-center rounded-sm border border-light-400 bg-light-200 px-1.5 py-0.5 font-mono text-[8px] font-semibold text-neutral-900 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-950">
         Enter
       </span>
     </div>
@@ -83,7 +83,7 @@ const NewCommentForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full max-w-[800px] flex-col rounded-xl border border-light-600 bg-light-100 p-4 text-light-900 focus-visible:outline-none dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000 sm:text-sm sm:leading-6"
+      className="flex w-full max-w-[800px] flex-col rounded-xl border border-light-600 bg-light-100 p-4 text-light-900 focus-visible:outline-hidden sm:text-sm sm:leading-6 dark:border-dark-400 dark:bg-dark-100 dark:text-dark-1000"
     >
       <Editor
         content={watch("comment")}

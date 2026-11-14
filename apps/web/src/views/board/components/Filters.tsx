@@ -253,7 +253,7 @@ const Filters = ({
         {numOfFilters > 0 && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -right-2.5 -top-2.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-light-100 bg-light-1000 text-[8px] font-[700] leading-none text-light-600 dark:border-dark-50 dark:bg-dark-1000 dark:text-dark-600"
+            className="pointer-events-none absolute -top-2.5 -right-2.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-light-100 bg-light-1000 text-[8px] leading-none font-bold text-light-600 dark:border-dark-50 dark:bg-dark-1000 dark:text-dark-600"
           >
             {numOfFilters}
           </span>

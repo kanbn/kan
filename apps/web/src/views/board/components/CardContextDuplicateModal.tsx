@@ -115,7 +115,7 @@ export function CardContextDuplicateModal({
             <div className="relative">
               <ListboxButton
                 className={twMerge(
-                  "relative w-full cursor-pointer rounded-md border border-light-300 bg-white py-2 pl-3 pr-10 text-left text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-light-400 focus:ring-offset-0 dark:border-dark-400 dark:bg-dark-200 dark:text-dark-1000 dark:focus:ring-dark-500",
+                  "relative w-full cursor-pointer rounded-md border border-light-300 bg-white py-2 pr-10 pl-3 text-left text-sm shadow-xs focus:ring-2 focus:ring-light-400 focus:ring-offset-0 focus:outline-hidden dark:border-dark-400 dark:bg-dark-200 dark:text-dark-1000 dark:focus:ring-dark-500",
                   !listPublicId && "text-light-600 dark:text-dark-600",
                 )}
               >
@@ -124,7 +124,7 @@ export function CardContextDuplicateModal({
                     ? listOptions.find((o) => o.publicId === listPublicId)?.name
                     : t`Select a list`}
                 </span>
-                <span className="pointer-events-none absolute right-2 top-1/2 flex -translate-y-1/2 items-center">
+                <span className="pointer-events-none absolute top-1/2 right-2 flex -translate-y-1/2 items-center">
                   <HiChevronDown
                     className="h-4 w-4 text-light-600 dark:text-dark-600"
                     aria-hidden
@@ -136,8 +136,8 @@ export function CardContextDuplicateModal({
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <ListboxOptions className="absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-light-200 bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-400 dark:bg-dark-200">
-                  <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] max-h-60 overflow-y-auto py-1 pr-1 scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
+                <ListboxOptions className="absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-light-200 bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-400 dark:bg-dark-200">
+                  <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] scrollbar max-h-60 scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-y-auto py-1 pr-1 dark:scrollbar-thumb-dark-600 dark:scrollbar-track-dark-100">
                     {listOptions.map((option) => {
                       const isCurrentList =
                         option.publicId === currentListPublicId;
@@ -148,7 +148,7 @@ export function CardContextDuplicateModal({
                           disabled={isCurrentList}
                           className={({ focus }) =>
                             twMerge(
-                              "relative select-none py-2 pl-3 pr-9 text-sm",
+                              "relative py-2 pr-9 pl-3 text-sm select-none",
                               isCurrentList
                                 ? "cursor-default opacity-50"
                                 : "cursor-pointer",
@@ -200,13 +200,13 @@ export function CardContextDuplicateModal({
           <div className="flex flex-col gap-2">
             {hasLabels && (
               <div className="flex items-center gap-3">
-                <label className="relative mt-[2px] inline-flex h-[16px] w-[16px] flex-shrink-0 cursor-pointer items-center justify-center">
+                <label className="relative mt-[2px] inline-flex h-[16px] w-[16px] shrink-0 cursor-pointer items-center justify-center">
                   <input
                     type="checkbox"
                     checked={copyLabels}
                     onChange={(e) => setCopyLabels(e.target.checked)}
                     className={twMerge(
-                      "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none dark:border-dark-500 dark:hover:border-dark-500",
+                      "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent ring-0 outline-hidden checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden dark:border-dark-500 dark:hover:border-dark-500",
                       "cursor-pointer",
                     )}
                   />
@@ -218,13 +218,13 @@ export function CardContextDuplicateModal({
             )}
             {hasMembers && (
               <div className="flex items-center gap-3">
-                <label className="relative mt-[2px] inline-flex h-[16px] w-[16px] flex-shrink-0 cursor-pointer items-center justify-center">
+                <label className="relative mt-[2px] inline-flex h-[16px] w-[16px] shrink-0 cursor-pointer items-center justify-center">
                   <input
                     type="checkbox"
                     checked={copyMembers}
                     onChange={(e) => setCopyMembers(e.target.checked)}
                     className={twMerge(
-                      "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none dark:border-dark-500 dark:hover:border-dark-500",
+                      "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent ring-0 outline-hidden checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden dark:border-dark-500 dark:hover:border-dark-500",
                       "cursor-pointer",
                     )}
                   />
@@ -236,13 +236,13 @@ export function CardContextDuplicateModal({
             )}
             {hasChecklists && (
               <div className="flex items-center gap-3">
-                <label className="relative mt-[2px] inline-flex h-[16px] w-[16px] flex-shrink-0 cursor-pointer items-center justify-center">
+                <label className="relative mt-[2px] inline-flex h-[16px] w-[16px] shrink-0 cursor-pointer items-center justify-center">
                   <input
                     type="checkbox"
                     checked={copyChecklists}
                     onChange={(e) => setCopyChecklists(e.target.checked)}
                     className={twMerge(
-                      "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent outline-none ring-0 checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none dark:border-dark-500 dark:hover:border-dark-500",
+                      "h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent ring-0 outline-hidden checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden dark:border-dark-500 dark:hover:border-dark-500",
                       "cursor-pointer",
                     )}
                   />

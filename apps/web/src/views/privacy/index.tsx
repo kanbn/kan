@@ -16,7 +16,7 @@ export default function PrivacyView() {
     <Layout>
       <PageHead title="Privacy Policy | kan.bn" />
       <div className="flex flex-col items-center">
-        <div className="mb-20 flex h-full w-full max-w-[800px] flex-col lg:pt-[5rem]">
+        <div className="mb-20 flex h-full w-full max-w-[800px] flex-col lg:pt-20">
           <div className="flex items-center justify-center py-36 text-4xl font-bold tracking-tight text-light-1000 dark:text-dark-1000">
             <h2>Privacy Policy</h2>
           </div>

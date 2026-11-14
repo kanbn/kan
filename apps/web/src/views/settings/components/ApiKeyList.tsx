@@ -56,7 +56,7 @@ export default function ApiKeyList() {
                     className={twMerge(
                       "mr-2 text-sm font-medium text-light-900 dark:text-dark-900",
                       showSkeleton &&
-                        "md mb-2 h-3 w-[125px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                        "md mb-2 h-3 w-[125px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
                     )}
                   >
                     {keyName}
@@ -71,7 +71,7 @@ export default function ApiKeyList() {
             className={twMerge(
               "text-sm text-light-900 dark:text-dark-900",
               showSkeleton &&
-                "h-3 w-[80px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                "h-3 w-[80px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
             )}
           >
             {formatDate(createdAt)}
@@ -82,7 +82,7 @@ export default function ApiKeyList() {
             className={twMerge(
               "text-sm text-light-900 dark:text-dark-900",
               showSkeleton &&
-                "h-3 w-[80px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                "h-3 w-[80px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
             )}
           >
             {formatDate(lastRequest)}
@@ -92,7 +92,7 @@ export default function ApiKeyList() {
           <div>
             <span
               className={twMerge(
-                "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[11px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20",
+                "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[11px] font-medium text-emerald-400 ring-1 ring-emerald-500/20 ring-inset",
                 showSkeleton &&
                   "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
               )}
@@ -139,13 +139,13 @@ export default function ApiKeyList() {
     <div className="mt-8 flow-root">
       <div className="overflow-x-auto overflow-y-visible">
         <div className="inline-block min-w-full py-2 pb-12 align-middle">
-          <div className="relative h-full shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+          <div className="relative h-full shadow-sm ring-1 ring-black/5 sm:rounded-lg">
             <table className="min-w-[600px] divide-y divide-light-600 dark:divide-dark-600">
               <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
                 <tr>
                   <th
                     scope="col"
-                    className="w-[30%] rounded-tl-lg py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-light-900 dark:text-dark-900 sm:pl-6"
+                    className="w-[30%] rounded-tl-lg py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-light-900 sm:pl-6 dark:text-dark-900"
                   >
                     Name
                   </th>

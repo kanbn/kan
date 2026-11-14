@@ -134,7 +134,7 @@ export function NewListForm({
           </h2>
           <button
             type="button"
-            className="rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300"
+            className="rounded-sm p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();
@@ -156,7 +156,7 @@ export function NewListForm({
           }}
         />
       </div>
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <Toggle
           label={t`Create another`}
           isChecked={isCreateAnotherEnabled}

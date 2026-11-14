@@ -133,13 +133,13 @@ export default function PublicBoardView() {
                 <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
               </div>
             ) : (
-              <h1 className="font-bold leading-[2.3rem] tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-none dark:text-dark-1000 sm:text-[1.2rem]">
+              <h1 className="leading-[2.3rem] font-bold tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden sm:text-[1.2rem] dark:text-dark-1000">
                 {data?.name}
               </h1>
             )}
             {data && (
               <div className="z-10 flex items-center space-x-2">
-                <div className="inline-flex cursor-default items-center justify-center whitespace-nowrap rounded-md border-[1px] border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold text-light-950 shadow-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
+                <div className="inline-flex cursor-default items-center justify-center rounded-md border border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold whitespace-nowrap text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
                   <span className="mr-2">
                     <HiOutlineLockClosed />
                   </span>
@@ -158,10 +158,10 @@ export default function PublicBoardView() {
           <div
             ref={scrollRef}
             onMouseDown={onMouseDown}
-            className="scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] relative h-full flex-1 snap-x snap-mandatory scroll-pl-[10px] overflow-y-hidden overflow-x-scroll overscroll-contain scrollbar scrollbar-track-light-200 scrollbar-thumb-light-400 dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-300 md:snap-none"
+            className="scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] relative scrollbar h-full flex-1 snap-x snap-mandatory scroll-pl-[10px] scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-x-scroll overflow-y-hidden overscroll-contain md:snap-none dark:scrollbar-thumb-dark-300 dark:scrollbar-track-dark-100"
           >
             {isLoading || !router.isReady ? (
-              <div className="ml-[2rem] flex">
+              <div className="ml-8 flex">
                 <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
                 <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
                 <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
@@ -170,7 +170,7 @@ export default function PublicBoardView() {
               <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
                 <div className="flex flex-col items-center">
                   <HiOutlineLockClosed className="h-10 w-10 text-light-800 dark:text-dark-800" />
-                  <p className="mb-2 mt-4 text-[14px] font-bold text-light-1000 dark:text-dark-950">
+                  <p className="mt-4 mb-2 text-[14px] font-bold text-light-1000 dark:text-dark-950">
                     {t`Board not found`}
                   </p>
                   <p className="text-[14px] text-light-900 dark:text-dark-900">
@@ -181,18 +181,18 @@ export default function PublicBoardView() {
               </div>
             ) : (
               <div className="flex">
-                <div className="min-w-[10px] md:min-w-[2rem]" />
+                <div className="min-w-[10px] md:min-w-8" />
                 {data?.lists.map((list) => (
                   <div
                     key={list.publicId}
-                    className="dark-text-dark-1000 mr-5 h-fit min-w-[18rem] max-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pl-2 pr-1 text-neutral-900 dark:border-dark-300 dark:bg-dark-100 md:snap-align-none"
+                    className="dark-text-dark-1000 mr-5 h-fit max-w-[18rem] min-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pr-1 pl-2 text-neutral-900 md:snap-align-none dark:border-dark-300 dark:bg-dark-100"
                   >
                     <div className="flex justify-between">
                       <span className="mb-4 block px-4 pt-1 text-sm font-medium text-neutral-900 dark:text-dark-1000">
                         {list.name}
                       </span>
                     </div>
-                    <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 h-full max-h-[calc(100dvh-265px)] min-h-[2rem] overflow-y-auto pb-[calc(0.75rem+env(safe-area-inset-bottom))] pr-1 scrollbar dark:scrollbar-track-dark-100 dark:scrollbar-thumb-dark-600">
+                    <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 scrollbar h-full max-h-[calc(100dvh-265px)] min-h-8 overflow-y-auto pr-1 pb-[calc(0.75rem+env(safe-area-inset-bottom))] dark:scrollbar-thumb-dark-600 dark:scrollbar-track-dark-100">
                       {list.cards.map((card) => {
                         return (
                           <Link
@@ -205,7 +205,7 @@ export default function PublicBoardView() {
                                 boardSlug: [data.slug, card.publicId],
                               },
                             }}
-                            className={`mb-2 flex !cursor-pointer flex-col`}
+                            className={`mb-2 flex cursor-pointer! flex-col`}
                             shallow={true}
                             onClick={() => {
                               openModal("CARD");
@@ -227,18 +227,18 @@ export default function PublicBoardView() {
                     </div>
                   </div>
                 ))}
-                <div className="min-w-[calc(100vw-18rem)] md:min-w-[0.75rem]" />
+                <div className="min-w-[calc(100vw-18rem)] md:min-w-3" />
               </div>
             )}
           </div>
         </div>
         <div className="flex h-[54px] items-center justify-center">
-          <div className="absolute left-[1rem]">
+          <div className="absolute left-4">
             <ThemeToggle />
             <button
               type="button"
               onClick={handleCopyBoardLink}
-              className="rounded p-1.5 transition-all hover:bg-light-200 focus:outline-none dark:hover:bg-dark-100"
+              className="rounded-sm p-1.5 transition-all hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-100"
               aria-label="Copy board URL"
             >
               <HiLink className="h-4 w-4 text-light-900 dark:text-dark-900" />
@@ -259,7 +259,7 @@ export default function PublicBoardView() {
               href="https://kan.bn"
               target="_blank"
               rel="noreferrer noopener"
-              className="absolute right-[1rem] inline-flex items-center gap-[0.175rem] rounded-full border border-light-300 bg-light-50 px-3 py-1 text-[11px] font-medium text-light-950 shadow-sm transition-colors hover:bg-light-100 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 dark:hover:bg-dark-100"
+              className="absolute right-4 inline-flex items-center gap-[0.175rem] rounded-full border border-light-300 bg-light-50 px-3 py-1 text-[11px] font-medium text-light-950 shadow-xs transition-colors hover:bg-light-100 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 dark:hover:bg-dark-100"
             >
               <span>{`Powered by`}</span>
               <span className="font-semibold">kan.bn</span>

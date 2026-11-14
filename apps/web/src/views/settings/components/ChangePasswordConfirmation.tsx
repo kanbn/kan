@@ -191,7 +191,7 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
           </div>
         </div>
 
-        <div className="mt-[1.5rem] flex items-center gap-4">
+        <div className="mt-6 flex items-center gap-4">
           <Button
             variant="secondary"
             onClick={handleCancel}

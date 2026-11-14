@@ -150,9 +150,9 @@ export default function MembersPage() {
           )}
         >
           <div className="flex items-center p-2 sm:p-4">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               {showSkeleton ? (
-                <div className="h-8 w-8 animate-pulse rounded-full bg-light-200 dark:bg-dark-200 sm:h-9 sm:w-9" />
+                <div className="h-8 w-8 animate-pulse rounded-full bg-light-200 sm:h-9 sm:w-9 dark:bg-dark-200" />
               ) : (
                 <Avatar
                   name={memberName ?? ""}
@@ -166,11 +166,11 @@ export default function MembersPage() {
                 <div className="flex items-center">
                   <p
                     className={twMerge(
-                      "mr-2 truncate text-xs font-medium text-neutral-900 dark:text-dark-1000 sm:text-sm",
+                      "mr-2 truncate text-xs font-medium text-neutral-900 sm:text-sm dark:text-dark-1000",
                       showSkeleton &&
-                        "md mb-2 h-3 w-[125px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                        "md mb-2 h-3 w-[125px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
                       showPendingIcon &&
-                        "italic text-neutral-500 dark:text-dark-900",
+                        "text-neutral-500 italic dark:text-dark-900",
                     )}
                   >
                     {memberName}
@@ -183,7 +183,7 @@ export default function MembersPage() {
                     className={twMerge(
                       "truncate text-xs text-dark-900 sm:text-sm",
                       showSkeleton &&
-                        "h-3 w-[175px] animate-pulse rounded-sm bg-light-200 dark:bg-dark-200",
+                        "h-3 w-[175px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
                     )}
                   >
                     {memberEmail}
@@ -204,13 +204,13 @@ export default function MembersPage() {
               {showSkeleton ? (
                 <span
                   className={twMerge(
-                    "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]",
+                    "inline-flex items-center rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-emerald-500/20 ring-inset sm:text-[11px]",
                     "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
                   )}
                 />
               ) : (
                 <div className="relative inline-flex items-center">
-                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-inset ring-emerald-500/20 sm:text-[11px]">
+                  <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-emerald-500/20 ring-inset sm:text-[11px]">
                     {memberRole &&
                       memberRole.charAt(0).toUpperCase() + memberRole.slice(1)}
                     {canEditMember && session?.user.id !== memberId && (
@@ -227,7 +227,7 @@ export default function MembersPage() {
                         )
                       }
                       disabled={updateRoleMutation.isPending}
-                      className="absolute inset-0 h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0 text-[10px] leading-none opacity-0 focus:outline-none focus-visible:outline-none sm:text-[11px]"
+                      className="absolute inset-0 h-full w-full cursor-pointer appearance-none border-none bg-transparent p-0 text-[10px] leading-none opacity-0 focus:outline-hidden focus-visible:outline-hidden sm:text-[11px]"
                     >
                       <option value="admin">{t`Admin`}</option>
                       <option value="member">{t`Member`}</option>
@@ -237,7 +237,7 @@ export default function MembersPage() {
                 </div>
               )}
               {(memberStatus === "invited" || memberStatus === "paused") && (
-                <span className="inline-flex items-center rounded-md bg-gray-500/10 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 ring-1 ring-inset ring-gray-500/20 sm:text-[11px]">
+                <span className="inline-flex items-center rounded-md bg-gray-500/10 px-1.5 py-0.5 text-[10px] font-medium text-gray-400 ring-1 ring-gray-500/20 ring-inset sm:text-[11px]">
                   {memberStatus === "invited" ? t`Pending` : t`Paused`}
                 </span>
               )}
@@ -274,7 +274,7 @@ export default function MembersPage() {
                 >
                   <HiEllipsisHorizontal
                     size={20}
-                    className="text-light-900 dark:text-dark-900 sm:size-[20px]"
+                    className="text-light-900 sm:size-[20px] dark:text-dark-900"
                   />
                 </Dropdown>
               )}
@@ -291,7 +291,7 @@ export default function MembersPage() {
       <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="font-bold tracking-tight text-neutral-900 dark:text-dark-1000 sm:text-[1.2rem]">
+            <h1 className="font-bold tracking-tight text-neutral-900 sm:text-[1.2rem] dark:text-dark-1000">
               {t`Members`}
             </h1>
           </div>
@@ -301,7 +301,7 @@ export default function MembersPage() {
                 {!isPaidPlan && (
                   <Link
                     href={`/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
-                    className="hidden items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 lg:flex"
+                    className="hidden items-center rounded-full border border-emerald-300 bg-emerald-50 px-3 py-1 text-center text-xs text-emerald-400 lg:flex dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
                   >
                     <HiBolt />
                     <span className="ml-1 font-medium">{t`Upgrade`}</span>
@@ -347,19 +347,19 @@ export default function MembersPage() {
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full overflow-x-auto px-4 py-2 pb-16 align-middle sm:px-6 lg:px-8">
-              <div className="h-full shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+              <div className="h-full shadow-sm ring-1 ring-black/5 sm:rounded-lg">
                 <table className="min-w-full divide-y divide-light-600 overflow-visible dark:divide-dark-600">
                   <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
                     <tr>
                       <th
                         scope="col"
-                        className="w-full rounded-tl-lg py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-light-900 dark:text-dark-900 sm:w-[65%] sm:pl-6"
+                        className="w-full rounded-tl-lg py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-light-900 sm:w-[65%] sm:pl-6 dark:text-dark-900"
                       >
                         {t`User`}
                       </th>
                       <th
                         scope="col"
-                        className="w-auto whitespace-nowrap rounded-tr-lg px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900 sm:w-[35%]"
+                        className="w-auto rounded-tr-lg px-3 py-3.5 text-left text-sm font-semibold whitespace-nowrap text-light-900 sm:w-[35%] dark:text-dark-900"
                       >
                         {t`Role`}
                       </th>

@@ -73,11 +73,11 @@ export default function Logos() {
       </div>
 
       <div className="relative overflow-hidden">
-        <div className="absolute left-0 top-0 z-10 h-full w-8 bg-gradient-to-r from-white/60 to-transparent dark:from-dark-50" />
-        <div className="absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-white/60 to-transparent dark:from-dark-50" />
+        <div className="absolute top-0 left-0 z-10 h-full w-8 bg-linear-to-r from-white/60 to-transparent dark:from-dark-50" />
+        <div className="absolute top-0 right-0 z-10 h-full w-8 bg-linear-to-l from-white/60 to-transparent dark:from-dark-50" />
 
         <div className="flex animate-scroll" style={{ width: "max-content" }}>
-          <div className="flex flex-shrink-0 items-center space-x-12">
+          <div className="flex shrink-0 items-center space-x-12">
             {logos.map((logo) => {
               const LogoComponent: LogoComponent = logo.component;
               return (
@@ -86,7 +86,7 @@ export default function Logos() {
                   className="flex h-12 w-32 items-center justify-center"
                 >
                   <LogoComponent
-                    className="text-light-950 transition-all duration-300 hover:text-light-1000 dark:text-dark-950 hover:dark:text-dark-1000"
+                    className="text-light-950 transition-all duration-300 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
                     aria-label={logo.alt}
                   />
                 </div>
@@ -94,7 +94,7 @@ export default function Logos() {
             })}
           </div>
 
-          <div className="ml-12 flex flex-shrink-0 items-center space-x-12">
+          <div className="ml-12 flex shrink-0 items-center space-x-12">
             {logos.map((logo) => {
               const LogoComponent: LogoComponent = logo.component;
               return (
@@ -103,7 +103,7 @@ export default function Logos() {
                   className="flex h-12 w-32 items-center justify-center"
                 >
                   <LogoComponent
-                    className="text-light-950 transition-all duration-300 hover:text-light-1000 dark:text-dark-950 hover:dark:text-dark-1000"
+                    className="text-light-950 transition-all duration-300 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
                     aria-label={logo.alt}
                   />
                 </div>

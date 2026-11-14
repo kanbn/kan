@@ -126,7 +126,7 @@ const CommandsList = forwardRef<
   }));
 
   return (
-    <div className="w-56 rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200">
+    <div className="w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
       <div className="max-h-[350px] overflow-y-auto p-1">
         {items.map((item, index) => (
           <button
@@ -245,8 +245,8 @@ const MentionList = forwardRef<
   }));
 
   return (
-    <div className="w-56 rounded-md border-[1px] border-light-200 bg-light-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:border-dark-500 dark:bg-dark-200">
-      <div className="max-h-[350px] overflow-y-auto p-1 scrollbar-thin scrollbar-thumb-light-200 dark:scrollbar-thumb-dark-300">
+    <div className="w-56 rounded-md border border-light-200 bg-light-50 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-500 dark:bg-dark-200">
+      <div className="scrollbar-thin max-h-[350px] scrollbar-thumb-light-200 overflow-y-auto p-1 dark:scrollbar-thumb-dark-300">
         {items.length > 0 ? (
           items.map((item, index) => (
             <button
@@ -580,7 +580,7 @@ export default function Editor({
       },
       editorProps: {
         attributes: {
-          class: "outline-none focus:outline-none focus-visible:ring-0",
+          class: "outline-hidden focus:outline-hidden focus-visible:ring-0",
         },
         handleKeyDown: (_view, event) => {
           if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
@@ -644,7 +644,7 @@ export default function Editor({
       {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
-        className="prose dark:prose-invert prose-sm max-w-none overflow-y-auto [&_blockquote]:!text-xs [&_h1]:!text-lg [&_h2]:!text-base [&_h3]:!text-sm [&_ol]:!text-xs [&_p.is-empty::before]:text-light-900 [&_p.is-empty::before]:dark:text-dark-800 [&_p]:!text-sm [&_p]:text-light-950 [&_p]:dark:text-dark-950 [&_ul]:!text-xs"
+        className="prose prose-sm max-w-none overflow-y-auto dark:prose-invert [&_blockquote]:text-xs! [&_h1]:text-lg! [&_h2]:text-base! [&_h3]:text-sm! [&_ol]:text-xs! [&_p]:text-sm! [&_p]:text-light-950 dark:[&_p]:text-dark-950 [&_p.is-empty::before]:text-light-900 dark:[&_p.is-empty::before]:text-dark-800 [&_ul]:text-xs!"
       />
     </div>
   );
@@ -690,7 +690,7 @@ function EditorBubbleMenu({ editor }: { editor: TiptapEditor }) {
           <Button
             key={item.title}
             className={twMerge(
-              "rounded p-1 text-light-900 focus:ring-2 focus:ring-light-600 dark:text-dark-900 dark:focus:ring-dark-600",
+              "rounded-sm p-1 text-light-900 focus:ring-2 focus:ring-light-600 dark:text-dark-900 dark:focus:ring-dark-600",
               item.active && "bg-light-100 dark:bg-dark-400",
             )}
             title={`${item.title} [${item.keys.join(" + ").replace("meta", isMac ? "⌘" : "ctrl")}]`}

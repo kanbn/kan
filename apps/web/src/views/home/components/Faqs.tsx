@@ -139,11 +139,11 @@ const Faqs = () => {
   return (
     <div className="mx-auto max-w-[900px] px-4">
       <div className="flex flex-col items-center justify-center pb-12">
-        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 lg:text-sm">
+        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 lg:text-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
           <p>{t`FAQs`}</p>
         </div>
 
-        <p className="mt-2 text-center text-3xl font-bold text-light-1000 dark:text-dark-1000 lg:text-4xl">
+        <p className="mt-2 text-center text-3xl font-bold text-light-1000 lg:text-4xl dark:text-dark-1000">
           {t`Questions?`}
         </p>
         <p className="text lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">
@@ -175,7 +175,7 @@ const Faqs = () => {
                       <span className="ml-6 flex h-7 items-center text-light-800 dark:text-dark-800">
                         <HiMiniPlusSmall
                           aria-hidden="true"
-                          className="size-6 group-data-[open]:hidden"
+                          className="size-6 group-data-open:hidden"
                         />
                         <HiMiniMinusSmall
                           aria-hidden="true"

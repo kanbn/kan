@@ -100,7 +100,7 @@ function DraggableCalendarCard({
           {card.title}
         </span>
         {ticketNumber && (
-          <span className="hidden flex-none text-light-800 dark:text-dark-800 xl:block">
+          <span className="hidden flex-none text-light-800 xl:block dark:text-dark-800">
             {ticketNumber}
           </span>
         )}
@@ -290,13 +290,13 @@ const CalendarView = ({
 
   return (
     <div className="z-0 flex min-h-0 flex-1 flex-col">
-      <header className="flex items-center justify-between border-b border-light-300 px-6 pb-4 dark:border-dark-300 md:px-8">
+      <header className="flex items-center justify-between border-b border-light-300 px-6 pb-4 md:px-8 dark:border-dark-300">
         <h2 className="text-sm font-semibold text-light-1000 dark:text-dark-1000">
           <time dateTime={format(currentMonth, "yyyy-MM")}>
             {format(currentMonth, "MMMM yyyy", { locale: dateLocale })}
           </time>
         </h2>
-        <div className="flex items-center rounded-md border-[1px] border-light-300 bg-light-50 dark:border-dark-300 dark:bg-dark-50">
+        <div className="flex items-center rounded-md border border-light-300 bg-light-50 dark:border-dark-300 dark:bg-dark-50">
           <button
             type="button"
             aria-label={t`Previous month`}
@@ -330,7 +330,7 @@ const CalendarView = ({
           aria-hidden={isLocked}
           className={twMerge(
             "flex min-h-0 flex-1 flex-col",
-            isLocked && "pointer-events-none select-none blur-[6px]",
+            isLocked && "pointer-events-none blur-[6px] select-none",
           )}
         >
           <div className="flex min-h-0 flex-1 flex-col">
@@ -352,7 +352,7 @@ const CalendarView = ({
               onDragEnd={handleDragEnd}
               onDragCancel={() => setActiveId(null)}
             >
-              <div className="hidden min-h-0 flex-1 overflow-y-auto bg-light-300 dark:bg-dark-300 lg:block">
+              <div className="hidden min-h-0 flex-1 overflow-y-auto bg-light-300 lg:block dark:bg-dark-300">
                 <div className="grid min-h-full auto-rows-[minmax(7.5rem,1fr)] grid-cols-7 gap-px">
                   {days.map((day) => {
                     const overflowCount = day.cards.length - MAX_CARDS_PER_DAY;
@@ -432,7 +432,7 @@ const CalendarView = ({
               </DragOverlay>
             </DndContext>
 
-            <div className="min-h-0 flex-1 overflow-y-auto bg-light-300 dark:bg-dark-300 lg:hidden">
+            <div className="min-h-0 flex-1 overflow-y-auto bg-light-300 lg:hidden dark:bg-dark-300">
               <div className="isolate grid min-h-full auto-rows-[minmax(3.5rem,1fr)] grid-cols-7 gap-px">
                 {days.map((day) => {
                   const isSelected = isSameDay(day.date, selectedDate);
@@ -481,7 +481,7 @@ const CalendarView = ({
               </div>
             </div>
 
-            <div className="border-t border-light-300 px-6 py-4 dark:border-dark-300 lg:hidden">
+            <div className="border-t border-light-300 px-6 py-4 lg:hidden dark:border-dark-300">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-xs font-semibold text-light-900 dark:text-dark-900">
                   {format(selectedDate, "EEEE d MMMM", { locale: dateLocale })}
@@ -505,7 +505,7 @@ const CalendarView = ({
                   {t`No cards due`}
                 </p>
               ) : (
-                <ol className="divide-y divide-light-200 overflow-hidden rounded-md border-[1px] border-light-200 bg-light-50 dark:divide-dark-200 dark:border-dark-200 dark:bg-dark-50">
+                <ol className="divide-y divide-light-200 overflow-hidden rounded-md border border-light-200 bg-light-50 dark:divide-dark-200 dark:border-dark-200 dark:bg-dark-50">
                   {selectedCards.map((card) => (
                     <li key={card.publicId}>
                       <Link
@@ -541,7 +541,7 @@ const CalendarView = ({
 
         {isLocked && (
           <div className="absolute inset-0 flex items-center justify-center bg-light-50/25 p-6 dark:bg-dark-50/25">
-            <div className="w-full max-w-[22rem] rounded-xl border-[1px] border-light-600 bg-light-50 p-7 text-center shadow-lg dark:border-dark-600 dark:bg-dark-50">
+            <div className="w-full max-w-88 rounded-xl border border-light-600 bg-light-50 p-7 text-center shadow-lg dark:border-dark-600 dark:bg-dark-50">
               <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-light-300 bg-light-200 text-light-1000 dark:border-dark-600 dark:bg-dark-200 dark:text-dark-1000">
                 <HiCalendarDays className="h-4 w-4" />
               </div>

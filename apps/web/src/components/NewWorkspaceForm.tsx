@@ -157,7 +157,7 @@ export function NewWorkspaceForm() {
           <button
             type="button"
             className={twMerge(
-              "rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300",
+              "rounded-sm p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300",
               !hasAvailableWorkspaces && "invisible",
             )}
             onClick={(e) => {
@@ -220,7 +220,7 @@ export function NewWorkspaceForm() {
           />
         </div>
       </div>
-      <div className="mt-6 flex items-center justify-end border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-6 flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <div>
           <Button
             type="submit"

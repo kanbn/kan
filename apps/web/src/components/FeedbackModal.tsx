@@ -64,7 +64,7 @@ export default function FeedbackModal() {
           </h2>
           <button
             type="button"
-            className="rounded p-1 hover:bg-light-200 focus:outline-none dark:hover:bg-dark-300"
+            className="rounded-sm p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();
@@ -93,7 +93,7 @@ export default function FeedbackModal() {
           }}
         />
       </div>
-      <div className="mt-6 flex items-center justify-between border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-6 flex items-center justify-between border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         <div className="text-xs text-neutral-600 dark:text-dark-800">
           <p>
             {t`Need help?`}{" "}

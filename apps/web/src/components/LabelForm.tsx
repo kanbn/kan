@@ -124,7 +124,7 @@ export function LabelForm({
           </h2>
           <button
             type="button"
-            className="rounded p-1 hover:bg-light-300 focus:outline-none dark:hover:bg-dark-300"
+            className="rounded-sm p-1 hover:bg-light-300 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();
@@ -153,11 +153,11 @@ export function LabelForm({
               {({ open }) => (
                 <>
                   <div className="relative mt-4">
-                    <Listbox.Button className="block w-full rounded-md border-0 bg-white/5 px-4 py-1.5 shadow-sm ring-1 ring-inset ring-light-600 focus:ring-2 focus:ring-inset focus:ring-light-600 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700 sm:text-sm sm:leading-6">
+                    <Listbox.Button className="block w-full rounded-md border-0 bg-white/5 px-4 py-1.5 shadow-xs ring-1 ring-light-600 ring-inset focus:ring-2 focus:ring-light-600 focus:ring-inset sm:text-sm sm:leading-6 dark:bg-dark-300 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700">
                       <span className="flex items-center">
                         <span
                           style={{ backgroundColor: field.value.code }}
-                          className={`inline-block h-2 w-2 flex-shrink-0 rounded-full`}
+                          className={`inline-block h-2 w-2 shrink-0 rounded-full`}
                         />
                         <span className="ml-3 block truncate">
                           {field.value.name}
@@ -178,11 +178,11 @@ export function LabelForm({
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-2 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-dark-300 sm:text-sm">
+                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-2 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm dark:bg-dark-300">
                         {colours.map((colour, index) => (
                           <Listbox.Option
                             key={`colours_${index}`}
-                            className="relative cursor-default select-none px-2 text-neutral-900 dark:text-dark-1000"
+                            className="relative cursor-default px-2 text-neutral-900 select-none dark:text-dark-1000"
                             value={colour}
                           >
                             {() => (
@@ -190,7 +190,7 @@ export function LabelForm({
                                 <div className="flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-400">
                                   <span
                                     style={{ backgroundColor: colour.code }}
-                                    className="ml-2 inline-block h-2 w-2 flex-shrink-0 rounded-full"
+                                    className="ml-2 inline-block h-2 w-2 shrink-0 rounded-full"
                                     aria-hidden="true"
                                   />
                                   <span className="ml-3 block truncate font-normal">
@@ -211,7 +211,7 @@ export function LabelForm({
         />
       </div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pb-5 pt-5 dark:border-dark-600">
+      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
         {!isEdit && (
           <Toggle
             label={t`Create another`}
