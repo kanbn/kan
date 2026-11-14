@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm with-env mint build",
+    "build": "pnpm with-env mint validate",
     "clean": "git clean -xdf .cache .turbo node_modules",
     "dev": "pnpm with-env mintlify dev --port 3001",
     "format": "prettier --check . --ignore-path ../../.gitignore",
