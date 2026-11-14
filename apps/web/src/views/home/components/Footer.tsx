@@ -75,7 +75,7 @@ const Footer = () => {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm/6 font-semibold text-light-1000 dark:text-dark-1000">
+                <h3 className="text-sm leading-6 font-semibold text-light-1000 dark:text-dark-1000">
                   {t`Documentation`}
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -83,7 +83,7 @@ const Footer = () => {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-sm/6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
+                        className="text-sm leading-6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
                       >
                         {item.name}
                       </a>
@@ -92,7 +92,7 @@ const Footer = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="mt-10 text-sm/6 font-semibold text-light-1000 md:mt-0 dark:text-dark-1000">
+                <h3 className="mt-10 text-sm leading-6 font-semibold text-light-1000 md:mt-0 dark:text-dark-1000">
                   {t`Company`}
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -100,7 +100,7 @@ const Footer = () => {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-sm/6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
+                        className="text-sm leading-6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
                       >
                         {item.name}
                       </a>
@@ -111,7 +111,7 @@ const Footer = () => {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm/6 font-semibold text-light-1000 dark:text-dark-1000">
+                <h3 className="text-sm leading-6 font-semibold text-light-1000 dark:text-dark-1000">
                   {t`Resources`}
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -119,7 +119,7 @@ const Footer = () => {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-sm/6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
+                        className="text-sm leading-6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
                       >
                         {item.name}
                       </a>
@@ -128,7 +128,7 @@ const Footer = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="mt-10 text-sm/6 font-semibold text-light-1000 md:mt-0 dark:text-dark-1000">
+                <h3 className="mt-10 text-sm leading-6 font-semibold text-light-1000 md:mt-0 dark:text-dark-1000">
                   {t`Legal`}
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
@@ -136,7 +136,7 @@ const Footer = () => {
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-sm/6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
+                        className="text-sm leading-6 text-light-900 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
                       >
                         {item.name}
                       </a>

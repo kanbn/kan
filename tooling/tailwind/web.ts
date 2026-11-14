@@ -10,9 +10,6 @@ export default {
       fontFamily: {
         sans: ["var(--font-plus-jakarta-sans), Plus Jakarta Sans"],
       },
-      fontSize: {
-        sm: "0.8rem",
-      },
       boxShadow: {
         "3xl-dark": "0px 16px 70px rgba(0, 0, 0, 0.5)",
         "3xl-light":

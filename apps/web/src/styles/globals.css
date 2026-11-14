@@ -2,6 +2,16 @@
 
 @config "../../tailwind.config.ts";
 
+/* Our text-sm sets only the font size, as it did in v3, so line height still
+   comes from the parent or other classes */
+@theme {
+  --text-sm: initial;
+}
+
+@utility text-sm {
+  font-size: 0.8rem;
+}
+
 /* Keep Tailwind v3 defaults for borders, placeholders and button cursors */
 @layer base {
   *,

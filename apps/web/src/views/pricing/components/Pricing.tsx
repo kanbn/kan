@@ -153,7 +153,7 @@ const Pricing = () => {
             </div>
             <p
               className={twMerge(
-                "mt-4 text-sm/6 text-dark-950 dark:text-dark-900",
+                "mt-4 text-sm leading-6 text-dark-950 dark:text-dark-900",
                 tier.highlighted ? "text-light-100" : "text-dark-50",
               )}
             >
@@ -172,7 +172,7 @@ const Pricing = () => {
                 {tier.price[frequency?.value ?? "monthly"]}
               </span>
               {tier.showPriceSuffix && (
-                <span className="text-sm/6 font-semibold text-light-50 dark:text-dark-900">
+                <span className="text-sm leading-6 font-semibold text-light-50 dark:text-dark-900">
                   {frequency?.priceSuffix}
                 </span>
               )}
@@ -184,14 +184,14 @@ const Pricing = () => {
                 tier.highlighted
                   ? "bg-light-50 text-dark-50 shadow-xs dark:bg-dark-1000 dark:text-dark-50"
                   : "bg-dark-50 text-light-50 dark:bg-dark-200 dark:text-dark-1000",
-                "mt-6 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 focus-visible:outline-solid",
+                "mt-6 block rounded-md px-3 py-2 text-center text-sm leading-6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 focus-visible:outline-solid",
               )}
             >
               {tier.buttonText}
             </Link>
             <p
               className={twMerge(
-                "mt-8 text-sm/6 font-bold",
+                "mt-8 text-sm leading-6 font-bold",
                 tier.highlighted
                   ? "text-light-100 dark:text-dark-1000"
                   : "text-dark-50 dark:text-dark-1000",
@@ -202,7 +202,7 @@ const Pricing = () => {
             <ul
               role="list"
               className={twMerge(
-                "mt-2 space-y-3 text-sm/6 text-light-600",
+                "mt-2 space-y-3 text-sm leading-6 text-light-600",
                 tier.highlighted
                   ? "text-light-100 dark:text-dark-1000"
                   : "text-dark-50 dark:text-dark-1000",
