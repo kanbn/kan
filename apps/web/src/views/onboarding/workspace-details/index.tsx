@@ -193,12 +193,14 @@ export default function WorkspaceNameView() {
   const BOARDS = [t`Roadmap`, t`Engineering`, t`Marketing`];
   const [visibleCount, setVisibleCount] = useState(1);
 
+  const boardCount = BOARDS.length;
+
   useEffect(() => {
-    const timers = BOARDS.slice(1).map((_, i) =>
+    const timers = Array.from({ length: boardCount - 1 }, (_, i) =>
       setTimeout(() => setVisibleCount(i + 2), (i + 1) * 2000),
     );
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [boardCount]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-light-100 px-4 py-8 md:px-6 dark:bg-dark-50">

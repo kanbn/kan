@@ -304,7 +304,13 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
       }
       clearModalState("NEW_LABEL_CREATED");
     }
-  }, [modalStates.NEW_LABEL_CREATED, card, cardId]);
+  }, [
+    modalStates.NEW_LABEL_CREATED,
+    card,
+    cardId,
+    addOrRemoveLabel,
+    clearModalState,
+  ]);
 
   // Open the new item form after creating a new checklist
   useEffect(() => {

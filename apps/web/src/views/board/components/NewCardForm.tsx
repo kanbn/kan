@@ -118,7 +118,7 @@ export function NewCardForm({
     if (newLabelId !== undefined && !labelPublicIds.includes(newLabelId)) {
       setValue("labelPublicIds", [...labelPublicIds, newLabelId]);
     }
-  }, [modalStates, labelPublicIds]);
+  }, [modalStates, labelPublicIds, setValue]);
 
   // this removes the deleted label from selected labels if it is selected
   useEffect(() => {
@@ -138,7 +138,13 @@ export function NewCardForm({
         setValue("labelPublicIds", validLabelIds);
       }
     }
-  }, [boardData?.labels, labelPublicIds, modalStates.NEW_LABEL_CREATED]);
+  }, [
+    boardData?.labels,
+    labelPublicIds,
+    modalStates.NEW_LABEL_CREATED,
+    clearModalState,
+    setValue,
+  ]);
 
   const createCard = useMutation({
     mutationFn: createCardFromInput,
