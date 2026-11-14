@@ -1,12 +1,14 @@
 import { HttpStatus } from "@nestjs/common";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
+import type * as SessionUtil from "../session.util.js";
+
 const getSession = vi.hoisted(() => vi.fn());
 vi.mock("@kan/auth/server", () => ({
   initAuth: () => ({ api: { getSession } }),
 }));
 
-let resolveUserFromHeaders: typeof import("../session.util.js").resolveUserFromHeaders;
+let resolveUserFromHeaders: typeof SessionUtil.resolveUserFromHeaders;
 beforeAll(async () => {
   ({ resolveUserFromHeaders } = await import("../session.util.js"));
 });

@@ -12,6 +12,7 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useEffect } from "react";
 
+import { env as appEnv } from "~/env";
 import { FontSizeProvider } from "~/providers/font-size";
 import { KeyboardShortcutProvider } from "~/providers/keyboard-shortcuts";
 import { LinguiProviderWrapper } from "~/providers/lingui";
@@ -25,7 +26,7 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
@@ -43,7 +44,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
         person_profiles: "identified_only",
         defaults: "2025-05-24",
         loaded: (posthog) => {
-          if (process.env.NODE_ENV === "development") posthog.debug();
+          if (appEnv.NODE_ENV === "development") posthog.debug();
         },
       });
     }
@@ -61,6 +62,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
           position: relative;
         }
       `}</style>
+      {/* eslint-disable-next-line @next/next/no-sync-scripts -- runtime env must load before the app reads it */}
       <script src="/__ENV.js" />
       <main className="font-sans">
         <QueryClientProvider client={queryClient}>

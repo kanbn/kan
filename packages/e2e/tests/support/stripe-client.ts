@@ -49,9 +49,7 @@ export async function advanceTrialToEnd(customerId: string) {
     frozen_time: now,
     customer: customerId,
   };
-  const clock = await stripe.testHelpers.testClocks.create(
-    createParams as Stripe.TestHelpers.TestClockCreateParams,
-  );
+  const clock = await stripe.testHelpers.testClocks.create(createParams);
   await waitForTestClockReady(clock.id);
 
   await stripe.testHelpers.testClocks.advance(clock.id, {

@@ -29,7 +29,7 @@ beforeEach(() => {
 
 describe("UserService.getUser", () => {
   it("returns the profile with a signed avatar URL and never the raw API key", async () => {
-    vi.spyOn(userRepo, "getById").mockResolvedValue(dbUser as never);
+    vi.spyOn(userRepo, "getById").mockResolvedValue(dbUser);
 
     const result = await service.getUser({ userId: "user_1" });
 
@@ -71,7 +71,7 @@ describe("UserService.update", () => {
 
 describe("UserService.setPassword", () => {
   it("sets the password via better-auth with the caller's headers", async () => {
-    vi.spyOn(userRepo, "getById").mockResolvedValue(dbUser as never);
+    vi.spyOn(userRepo, "getById").mockResolvedValue(dbUser);
     const setPassword = vi
       .spyOn(sessionUtil, "setUserPassword")
       .mockResolvedValue(undefined as never);
@@ -91,7 +91,7 @@ describe("UserService.setPassword", () => {
     vi.spyOn(userRepo, "getById").mockResolvedValue({
       ...dbUser,
       hasPassword: true,
-    } as never);
+    });
     const setPassword = vi.spyOn(sessionUtil, "setUserPassword");
 
     await expect(
@@ -105,7 +105,7 @@ describe("UserService.setPassword", () => {
   });
 
   it("throws INTERNAL_SERVER_ERROR when better-auth fails", async () => {
-    vi.spyOn(userRepo, "getById").mockResolvedValue(dbUser as never);
+    vi.spyOn(userRepo, "getById").mockResolvedValue(dbUser);
     vi.spyOn(sessionUtil, "setUserPassword").mockRejectedValue(
       new Error("boom"),
     );

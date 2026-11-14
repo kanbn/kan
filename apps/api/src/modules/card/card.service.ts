@@ -313,7 +313,7 @@ export class CardService {
       input.commentPublicId,
     );
 
-    if (!existingComment || existingComment.cardId !== card.id)
+    if (existingComment?.cardId !== card.id)
       throw new NotFoundException(
         `Comment with public ID ${input.commentPublicId} not found`,
       );
@@ -388,7 +388,7 @@ export class CardService {
       input.commentPublicId,
     );
 
-    if (!existingComment || existingComment.cardId !== card.id)
+    if (existingComment?.cardId !== card.id)
       throw new NotFoundException(
         `Comment with public ID ${input.commentPublicId} not found`,
       );

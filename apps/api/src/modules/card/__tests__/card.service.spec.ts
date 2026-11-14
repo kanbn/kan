@@ -65,13 +65,9 @@ beforeEach(() => {
   vi.spyOn(avatarUrls, "createAvatarUrlResolver").mockReturnValue(
     vi.fn() as never,
   );
-  vi.spyOn(webhook, "sendWebhooksForWorkspace").mockResolvedValue(
-    undefined as never,
-  );
-  vi.spyOn(notifications, "sendMentionEmails").mockResolvedValue(
-    undefined as never,
-  );
-  vi.spyOn(cardActivityRepo, "create").mockResolvedValue(undefined as never);
+  vi.spyOn(webhook, "sendWebhooksForWorkspace").mockResolvedValue(undefined);
+  vi.spyOn(notifications, "sendMentionEmails").mockResolvedValue(undefined);
+  vi.spyOn(cardActivityRepo, "create").mockResolvedValue(undefined);
   vi.spyOn(cardActivityRepo, "bulkCreate").mockResolvedValue(
     undefined as never,
   );
@@ -143,7 +139,7 @@ describe("CardService.getActivities", () => {
           createdAt: new Date("2026-01-02T00:00:00.000Z"),
           publicId: "activity_123",
         },
-      } as never);
+      });
 
     const result = await service.getActivities({
       cardPublicId: "card_1234567",
@@ -246,7 +242,7 @@ describe("CardService.update", () => {
   };
 
   beforeEach(() => {
-    vi.spyOn(cardRepo, "getByPublicId").mockResolvedValue(existing as never);
+    vi.spyOn(cardRepo, "getByPublicId").mockResolvedValue(existing);
   });
 
   it("rejects moving the card to a list in another workspace", async () => {
@@ -266,7 +262,7 @@ describe("CardService.update", () => {
   });
 
   it("logs a due date added activity and returns an ISO due date", async () => {
-    vi.spyOn(cardRepo, "update").mockResolvedValue(updated as never);
+    vi.spyOn(cardRepo, "update").mockResolvedValue(updated);
 
     const result = await service.update({
       cardPublicId: "card_1234567",
@@ -289,7 +285,7 @@ describe("CardService.update", () => {
       publicId: "list_other12",
       boardId: 3,
     } as never);
-    vi.spyOn(cardRepo, "reorder").mockResolvedValue(updated as never);
+    vi.spyOn(cardRepo, "reorder").mockResolvedValue(updated);
     vi.spyOn(cardRepo, "getAssignees").mockResolvedValue([
       { id: 11 },
       { id: 12 },
@@ -299,7 +295,7 @@ describe("CardService.update", () => {
     ] as never);
     const unassign = vi
       .spyOn(cardRepo, "hardDeleteCardMemberRelationship")
-      .mockResolvedValue({ success: true } as never);
+      .mockResolvedValue({ success: true });
 
     await service.update({
       cardPublicId: "card_1234567",
@@ -520,7 +516,7 @@ describe("paused members", () => {
       dueDate: null,
       listId: 7,
       list: { publicId: "list_1234567", name: "To do" },
-    } as never);
+    });
     const update = vi
       .spyOn(cardRepo, "update")
       .mockResolvedValue({ id: 5, publicId: "card_1234567" } as never);
@@ -545,10 +541,10 @@ describe("paused members", () => {
     const getRelationship = vi.spyOn(cardRepo, "getCardMemberRelationship");
     const add = vi
       .spyOn(cardRepo, "createCardMemberRelationship")
-      .mockResolvedValue({ success: true } as never);
+      .mockResolvedValue({ success: true });
     const remove = vi
       .spyOn(cardRepo, "hardDeleteCardMemberRelationship")
-      .mockResolvedValue({ success: true } as never);
+      .mockResolvedValue({ success: true });
     const toggle = () =>
       service.addOrRemoveMember({
         cardPublicId: "card_1234567",
@@ -556,7 +552,7 @@ describe("paused members", () => {
         userId: "user_1",
       });
 
-    getRelationship.mockResolvedValueOnce(undefined as never);
+    getRelationship.mockResolvedValueOnce(undefined);
     await expect(toggle()).rejects.toMatchObject({ status: 400 });
     expect(add).not.toHaveBeenCalled();
 

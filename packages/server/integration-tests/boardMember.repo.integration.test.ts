@@ -3,7 +3,8 @@ import { describe, it, expect, beforeEach } from "vitest";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as schema from "@kan/db/schema";
-import { createTestDb, seedTestData, type TestDbClient } from "./test-db";
+import { createTestDb, seedTestData } from "./test-db";
+import type { TestDbClient } from "./test-db";
 
 describe("board membership integration tests", () => {
   let db: TestDbClient;
@@ -95,7 +96,7 @@ describe("board membership integration tests", () => {
       workspaceId: workspace.id,
       slug: "uninvited-board",
     });
-    const template = await boardRepo.create(db, {
+    await boardRepo.create(db, {
       name: "Shared Template",
       createdBy: adminUser.id,
       workspaceId: workspace.id,
@@ -175,8 +176,8 @@ describe("board membership integration tests", () => {
   });
 
   it("serializes concurrent demotions so two admins can't both drop to zero", async () => {
-    const memberA = await addWorkspaceMember("member", "wm1racea0001");
-    const memberB = await addWorkspaceMember("member", "wm1raceb0001");
+    await addWorkspaceMember("member", "wm1racea0001");
+    await addWorkspaceMember("member", "wm1raceb0001");
 
     const board = await boardRepo.create(db, {
       name: "Race Board",
@@ -239,7 +240,7 @@ describe("board membership integration tests", () => {
     expect(fulfilled).toHaveLength(1);
     expect(rejected).toHaveLength(1);
     expect(
-      (rejected[0] as PromiseRejectedResult).reason,
+      rejected[0]!.reason,
     ).toBeInstanceOf(boardMemberRepo.CannotRemoveLastBoardAdminError);
 
     const finalAdminCount = await boardMemberRepo.countAdmins(db, board!.id);

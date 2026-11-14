@@ -11,10 +11,7 @@ const log = createLogger("api");
 const isCloud = process.env.NEXT_PUBLIC_KAN_ENV === "cloud";
 
 export function withApiLogging(
-  handler: (
-    req: NextApiRequest,
-    res: NextApiResponse,
-  ) => Promise<unknown> | unknown,
+  handler: (req: NextApiRequest, res: NextApiResponse) => unknown,
   options?: { transport?: string },
 ) {
   const transport = options?.transport ?? "rest";
@@ -22,15 +19,18 @@ export function withApiLogging(
     const start = Date.now();
     const requestId = randomUUID();
     const route = req.url?.split("?")[0] ?? "unknown";
+    // Not every caller passes a full Next request
+    const query = req.query as NextApiRequest["query"] | undefined;
+    const body: unknown = req.body;
     const input = {
-      ...(req.query &&
-        Object.keys(req.query).length > 0 && {
-          query: redactSensitive(req.query),
+      ...(query &&
+        Object.keys(query).length > 0 && {
+          query: redactSensitive(query),
         }),
-      ...(req.body &&
-        typeof req.body === "object" &&
-        Object.keys(req.body).length > 0 && {
-          body: redactSensitive(req.body),
+      ...(typeof body === "object" &&
+        body !== null &&
+        Object.keys(body).length > 0 && {
+          body: redactSensitive(body),
         }),
     };
 

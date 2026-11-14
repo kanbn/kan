@@ -25,13 +25,10 @@ describe("FeedbackController", () => {
   it("passes the current user's id and the body through to the service", async () => {
     mockFeedbackService.create.mockResolvedValue({ success: true });
 
-    const result = await controller.create(
-      user as never,
-      {
-        feedback: "more filters please",
-        url: "https://kan.bn/boards/1",
-      } as never,
-    );
+    const result = await controller.create(user as never, {
+      feedback: "more filters please",
+      url: "https://kan.bn/boards/1",
+    });
 
     expect(result).toEqual({ success: true });
     expect(mockFeedbackService.create).toHaveBeenCalledWith({

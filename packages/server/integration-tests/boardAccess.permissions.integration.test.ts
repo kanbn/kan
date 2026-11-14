@@ -6,7 +6,8 @@ import * as memberRepo from "@kan/db/repository/member.repo";
 import * as schema from "@kan/db/schema";
 
 import { assertBoardAccess } from "../src/utils/permissions";
-import { createTestDb, seedTestData, type TestDbClient } from "./test-db";
+import { createTestDb, seedTestData } from "./test-db";
+import type { TestDbClient } from "./test-db";
 
 describe("board access permission helpers", () => {
   let db: TestDbClient;
@@ -125,7 +126,7 @@ describe("board access permission helpers", () => {
   });
 
   it("promotes another board member to admin when the sole admin leaves the workspace", async () => {
-    const soleAdmin = await addWorkspaceMember("member", "wm1soleadmn1");
+    await addWorkspaceMember("member", "wm1soleadmn1");
     const otherMember = await addWorkspaceMember("member", "wm1othermem1");
 
     const board = await boardRepo.create(db, {

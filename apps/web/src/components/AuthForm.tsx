@@ -343,7 +343,7 @@ export function Auth({
             return (
               <Button
                 key={key}
-                onClick={() => handleLoginWithProvider(key as AuthProvider)}
+                onClick={() => handleLoginWithProvider(key)}
                 isLoading={isLoginWithProviderPending === key}
                 iconLeft={<provider.icon />}
                 fullWidth

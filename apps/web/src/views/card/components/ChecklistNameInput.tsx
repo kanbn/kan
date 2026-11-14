@@ -34,13 +34,13 @@ export default function ChecklistNameInput({
         await cardCache.byId.cancel({ cardPublicId });
         const previous = cardCache.byId.getData({ cardPublicId });
         cardCache.byId.setData({ cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const updated = old.checklists.map((cl) =>
             cl.publicId === checklistPublicId
               ? { ...cl, name: vars.data.name }
               : cl,
           );
-          return { ...old, checklists: updated } as typeof old;
+          return { ...old, checklists: updated };
         });
         return { previous };
       },

@@ -28,7 +28,7 @@ const Avatar = ({
   isLoading?: boolean;
   paused?: boolean;
 }) => {
-  const initials = name?.trim()
+  const initials = name.trim()
     ? getInitialsFromName(name)
     : inferInitialsFromEmail(email);
 

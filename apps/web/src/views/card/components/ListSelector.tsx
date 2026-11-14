@@ -45,8 +45,8 @@ export default function ListSelector({
           list: {
             ...oldCard.list,
             publicId: newList.listPublicId ?? "",
-            name: oldCard.list.name ?? "",
-            board: oldCard.list.board ?? null,
+            name: oldCard.list.name,
+            board: oldCard.list.board,
           },
         };
       });

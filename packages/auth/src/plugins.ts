@@ -72,22 +72,22 @@ export function createPlugins(db: dbClient) {
       ? [
           stripe({
             stripeClient: createStripeClient(),
-            stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET!,
+            stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET ?? "",
             createCustomerOnSignUp: true,
             subscription: {
               enabled: true,
               plans: [
                 {
                   name: "team",
-                  priceId: process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID!,
+                  priceId: process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID ?? "",
                   annualDiscountPriceId:
-                    process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID!,
+                    process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID ?? "",
                 },
                 {
                   name: "pro",
-                  priceId: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID!,
+                  priceId: process.env.STRIPE_PRO_PLAN_MONTHLY_PRICE_ID ?? "",
                   annualDiscountPriceId:
-                    process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID!,
+                    process.env.STRIPE_PRO_PLAN_YEARLY_PRICE_ID ?? "",
                 },
               ],
               authorizeReference: async (data) => {
@@ -165,7 +165,8 @@ export function createPlugins(db: dbClient) {
     apiKey({
       schema: { apikey: { fields: { referenceId: "userId" } } },
       enableSessionForAPIKeys: true,
-      customAPIKeyGetter: (ctx) => getApiKeyFromHeaders(ctx.headers),
+      customAPIKeyGetter: (ctx) =>
+        getApiKeyFromHeaders(ctx.headers as Headers | undefined),
       rateLimit: {
         enabled: true,
         timeWindow: 1000 * 60, // 1 minute

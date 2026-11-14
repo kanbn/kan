@@ -16,14 +16,14 @@ export function RevokeApiKeyConfirmation() {
 
   const deleteApiKeyMutation = useMutation({
     mutationFn: () => authClient.apiKey.delete({ keyId: entityId }),
-    onSuccess: async () => {
+    onSuccess: () => {
       closeModal();
       showPopup({
         header: "API key revoked",
         message: `Your API key: ${entityLabel} has been revoked.`,
         icon: "success",
       });
-      qc.invalidateQueries({
+      void qc.invalidateQueries({
         queryKey: ["apiKeys"],
       });
     },

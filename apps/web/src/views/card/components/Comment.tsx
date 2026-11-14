@@ -133,8 +133,8 @@ const Comment = ({
         <div className="flex items-center space-x-2">
           <Avatar
             size="sm"
-            name={name ?? ""}
-            email={email ?? ""}
+            name={name}
+            email={email}
             imageUrl={getAvatarUrl(image) || undefined}
             isLoading={isLoading}
             paused={isPaused}

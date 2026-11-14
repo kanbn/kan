@@ -909,7 +909,7 @@ export const reorder = async (
       await tx.execute(sql`
         UPDATE card
         SET index = index + 1
-        WHERE "listId" = ${newList?.id} AND index >= ${newIndex} AND "deletedAt" IS NULL;
+        WHERE "listId" = ${newList.id} AND index >= ${newIndex} AND "deletedAt" IS NULL;
       `);
 
       await tx.execute(sql`
@@ -920,7 +920,7 @@ export const reorder = async (
 
       await tx.execute(sql`
         UPDATE card
-        SET "listId" = ${newList?.id}, index = ${newIndex}
+        SET "listId" = ${newList.id}, index = ${newIndex}
         WHERE id = ${card.id} AND "deletedAt" IS NULL;
       `);
     }

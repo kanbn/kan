@@ -329,7 +329,7 @@ export class BoardService {
         sourceBoard.workspace.publicId,
       );
 
-      if (!sourceWorkspace || sourceWorkspace.id !== workspace.id)
+      if (sourceWorkspace?.id !== workspace.id)
         throw new ForbiddenException(
           `Source board does not belong to this workspace`,
         );

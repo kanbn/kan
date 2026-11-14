@@ -3,6 +3,7 @@ import type { Editor as TiptapEditor } from "@tiptap/react";
 import type {
   SuggestionKeyDownProps,
   SuggestionOptions,
+  SuggestionProps,
 } from "@tiptap/suggestion";
 import type { Instance as TippyInstance } from "tippy.js";
 import { Button } from "@headlessui/react";
@@ -64,9 +65,8 @@ export interface SlashCommandItem {
 }
 
 export interface SlashCommandsOptions {
-  suggestion?: Partial<SuggestionOptions>;
+  suggestion?: Partial<SuggestionOptions<SlashCommandItem>>;
   commandItems?: SlashCommandItem[];
-  options?: any;
 }
 
 function filterSlashCommandItems(items: SlashCommandItem[], query: string) {
@@ -77,7 +77,7 @@ function filterSlashCommandItems(items: SlashCommandItem[], query: string) {
 
 export interface RenderSuggestionsProps {
   editor: TiptapEditor;
-  clientRect: () => DOMRect;
+  clientRect?: (() => DOMRect) | null;
   items: SlashCommandItem[];
   command: (item: SlashCommandItem) => void;
 }
@@ -154,7 +154,7 @@ CommandsList.displayName = "CommandsList";
 
 const RenderSuggestions = () => {
   let reactRenderer: ReactRenderer;
-  let popup: TippyInstance[];
+  let popup: TippyInstance | undefined;
 
   return {
     onStart: (props: RenderSuggestionsProps) => {
@@ -165,7 +165,7 @@ const RenderSuggestions = () => {
 
       if (!props.clientRect) return;
 
-      popup = tippy("body", {
+      [popup] = tippy("body", {
         getReferenceClientRect: props.clientRect,
         appendTo: () => document.body,
         content: reactRenderer.element,
@@ -180,13 +180,13 @@ const RenderSuggestions = () => {
 
       if (!props.clientRect) return;
 
-      popup?.[0]?.setProps({
+      popup?.setProps({
         getReferenceClientRect: props.clientRect,
       });
     },
     onKeyDown(props: SuggestionKeyDownProps): boolean {
       if (props.event.key === "Escape") {
-        popup?.[0]?.hide();
+        popup?.hide();
         return true;
       }
 
@@ -199,7 +199,7 @@ const RenderSuggestions = () => {
       );
     },
     onExit() {
-      popup?.[0]?.destroy();
+      popup?.destroy();
       reactRenderer.destroy();
     },
   };
@@ -284,10 +284,10 @@ MentionList.displayName = "MentionList";
 
 const renderMentionSuggestions = () => {
   let reactRenderer: ReactRenderer;
-  let popup: TippyInstance[];
+  let popup: TippyInstance | undefined;
 
   return {
-    onStart: (props: any) => {
+    onStart: (props: SuggestionProps) => {
       reactRenderer = new ReactRenderer(MentionList, {
         props,
         editor: props.editor,
@@ -295,8 +295,8 @@ const renderMentionSuggestions = () => {
 
       if (!props.clientRect) return;
 
-      popup = tippy("body", {
-        getReferenceClientRect: props.clientRect,
+      [popup] = tippy("body", {
+        getReferenceClientRect: props.clientRect as () => DOMRect,
         appendTo: () => document.body,
         content: reactRenderer.element,
         showOnCreate: true,
@@ -305,14 +305,16 @@ const renderMentionSuggestions = () => {
         placement: "bottom-start",
       });
     },
-    onUpdate(props: any) {
+    onUpdate(props: SuggestionProps) {
       reactRenderer.updateProps(props);
       if (!props.clientRect) return;
-      popup?.[0]?.setProps({ getReferenceClientRect: props.clientRect });
+      popup?.setProps({
+        getReferenceClientRect: props.clientRect as () => DOMRect,
+      });
     },
     onKeyDown(props: SuggestionKeyDownProps) {
       if (props.event.key === "Escape") {
-        popup?.[0]?.hide();
+        popup?.hide();
         return true;
       }
       return (
@@ -324,7 +326,7 @@ const renderMentionSuggestions = () => {
       );
     },
     onExit() {
-      popup?.[0]?.destroy();
+      popup?.destroy();
       reactRenderer.destroy();
     },
   };
@@ -336,36 +338,23 @@ const SlashCommands = Extension.create<SlashCommandsOptions>({
     return {
       suggestion: {
         char: "/",
-        command: ({ editor, range, props }) => {
+        command: ({
+          editor,
+          range,
+          props,
+        }: {
+          editor: TiptapEditor;
+          range: TiptapRange;
+          props: SlashCommandItem;
+        }) => {
           editor.chain().focus().deleteRange(range).run();
-          props.command({ editor, range });
+          props.command?.({ editor, range });
         },
         items: ({ query }: { query: string }) => {
           return filterSlashCommandItems(
             this.parent?.().commandItems ?? [],
             query,
           );
-        },
-        render: () => {
-          let component: ReturnType<typeof RenderSuggestions>;
-          return {
-            onStart: (props: any) => {
-              component = RenderSuggestions();
-              component.onStart(props);
-            },
-            onUpdate(props: any) {
-              component.onUpdate(props);
-            },
-            onKeyDown(props: any) {
-              if (props.event.key === "Escape") {
-                return true;
-              }
-              return component.onKeyDown(props) ?? false;
-            },
-            onExit: () => {
-              component.onExit();
-            },
-          };
         },
       },
       commandItems: [] as SlashCommandItem[],
@@ -523,8 +512,8 @@ export default function Editor({
 
               const mapped = withEmail.map((member: WorkspaceMember) => ({
                 id: member.publicId,
-                label: member?.user?.name?.trim() || member.email || "",
-                image: member?.user?.image ?? null,
+                label: member.user?.name?.trim() || member.email || "",
+                image: member.user?.image ?? null,
               }));
 
               const all: MentionItem[] = mapped.filter(
@@ -609,7 +598,6 @@ export default function Editor({
 
   // this will sync external content changes without re-creating the editor instance
   useEffect(() => {
-    if (!editor) return;
     const currentHTML = editor.getHTML();
     const safeContent = content ?? "";
     if (safeContent !== currentHTML) {
@@ -622,7 +610,6 @@ export default function Editor({
   // gets stuck read-only when `readOnly` flips from true to false after mount
   // (e.g. card permissions resolving slower than the card data on first load).
   useEffect(() => {
-    if (!editor) return;
     if (editor.isEditable === !readOnly) return;
     editor.setEditable(!readOnly);
   }, [editor, readOnly]);
@@ -651,7 +638,7 @@ export default function Editor({
           margin: 1rem 0;
         }
       `}</style>
-      {!readOnly && editor && <EditorBubbleMenu editor={editor} />}
+      {!readOnly && <EditorBubbleMenu editor={editor} />}
       <EditorContent
         editor={editor}
         className="prose dark:prose-invert prose-sm max-w-none overflow-y-auto [&_blockquote]:!text-xs [&_h1]:!text-lg [&_h2]:!text-base [&_h3]:!text-sm [&_ol]:!text-xs [&_p.is-empty::before]:text-light-900 [&_p.is-empty::before]:dark:text-dark-800 [&_p]:!text-sm [&_p]:text-light-950 [&_p]:dark:text-dark-950 [&_ul]:!text-xs"
@@ -668,29 +655,29 @@ function EditorBubbleMenu({ editor }: { editor: TiptapEditor }) {
       title: "Bold",
       icon: <HiOutlineBold />,
       keys: ["meta", "b"],
-      onClick: () => editor?.chain().focus().toggleBold().run(),
-      active: editor?.isActive("bold"),
+      onClick: () => editor.chain().focus().toggleBold().run(),
+      active: editor.isActive("bold"),
     },
     {
       title: "Italic",
       icon: <HiOutlineItalic />,
       keys: ["meta", "i"],
-      onClick: () => editor?.chain().focus().toggleItalic().run(),
-      active: editor?.isActive("italic"),
+      onClick: () => editor.chain().focus().toggleItalic().run(),
+      active: editor.isActive("italic"),
     },
     {
       title: "Strikethrough",
       icon: <HiOutlineStrikethrough />,
       keys: ["meta", "shift", "s"],
-      onClick: () => editor?.chain().focus().toggleStrike().run(),
-      active: editor?.isActive("strike"),
+      onClick: () => editor.chain().focus().toggleStrike().run(),
+      active: editor.isActive("strike"),
     },
     {
       title: "Code",
       icon: <HiOutlineCodeBracket />,
       keys: ["meta", "e"],
-      onClick: () => editor?.chain().focus().toggleCode().run(),
-      active: editor?.isActive("code"),
+      onClick: () => editor.chain().focus().toggleCode().run(),
+      active: editor.isActive("code"),
     },
   ];
   return (

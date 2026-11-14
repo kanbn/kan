@@ -53,7 +53,7 @@ export async function seedTestData(db: TestDbClient) {
       publicId: "wstest123456",
       name: "Test Workspace",
       slug: "test-workspace",
-      ownerId: user!.id,
+      createdBy: user!.id,
       createdAt: new Date(),
     })
     .returning();

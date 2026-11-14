@@ -12,7 +12,6 @@ import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 
 interface TableRowProps {
-  publicId?: string;
   name?: string;
   url?: string;
   events?: string[];
@@ -36,7 +35,6 @@ function formatDate(date?: string | null, locale?: DateFnsLocale) {
 }
 
 function TableRow({
-  publicId,
   name,
   url,
   events,
@@ -255,7 +253,6 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
                   webhooks?.map((webhook, index) => (
                     <TableRow
                       key={webhook.publicId}
-                      publicId={webhook.publicId}
                       name={webhook.name}
                       url={webhook.url}
                       events={webhook.events}

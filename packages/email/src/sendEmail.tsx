@@ -11,6 +11,7 @@ import ResetPasswordTemplate from "./templates/reset-password";
 
 type Templates = "MAGIC_LINK" | "JOIN_WORKSPACE" | "RESET_PASSWORD" | "MENTION";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- each template takes different props
 const emailTemplates: Record<Templates, React.ComponentType<any>> = {
   MAGIC_LINK: MagicLinkTemplate,
   JOIN_WORKSPACE: JoinWorkspaceTemplate,
@@ -24,13 +25,13 @@ const transporter = nodemailer.createTransport({
   secure:
     process.env.SMTP_SECURE === undefined
       ? true
-      : process.env.SMTP_SECURE?.toLowerCase() === "true",
+      : process.env.SMTP_SECURE.toLowerCase() === "true",
   tls: {
     // do not fail on invalid certs
     rejectUnauthorized:
       process.env.SMTP_REJECT_UNAUTHORIZED === undefined
         ? true
-        : process.env.SMTP_REJECT_UNAUTHORIZED?.toLowerCase() === "true",
+        : process.env.SMTP_REJECT_UNAUTHORIZED.toLowerCase() === "true",
   },
   ...(process.env.SMTP_USER &&
     process.env.SMTP_PASSWORD && {

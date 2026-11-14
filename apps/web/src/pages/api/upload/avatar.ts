@@ -11,10 +11,7 @@ import { createS3Client } from "@kan/shared/utils";
 
 import { env } from "~/env";
 
-const MAX_SIZE_BYTES = parseInt(
-  process.env.S3_AVATAR_UPLOAD_LIMIT || "2097152",
-  10,
-); // Default 2MB
+const MAX_SIZE_BYTES = parseInt(env.S3_AVATAR_UPLOAD_LIMIT || "2097152", 10); // Default 2MB
 const allowedContentTypes = ["image/jpeg", "image/png", "image/webp"];
 
 const log = createLogger("api");

@@ -163,7 +163,6 @@ export class WorkspaceService {
     const workspacePublicId = generateUID();
     // An empty-string slug must also fall back to the generated public id,
     // so `??` (which only catches null/undefined) won't do here.
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     const workspaceSlug = input.slug ? input.slug : workspacePublicId;
 
     if (input.slug) {

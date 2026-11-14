@@ -11,6 +11,8 @@ import { withRateLimit } from "@kan/server/utils/rateLimit";
 import { generateUID } from "@kan/shared/utils";
 import { createStripeClient, subscriptionBillingMode } from "@kan/stripe";
 
+import { env as serverEnv } from "~/env";
+
 const workspaceSlugSchema = z
   .string()
   .min(3)
@@ -18,9 +20,9 @@ const workspaceSlugSchema = z
   .regex(/^(?![-]+$)[a-zA-Z0-9-]+$/);
 
 interface CheckoutSessionRequest {
-  successUrl: string;
-  cancelUrl: string;
-  plan: "team";
+  successUrl?: string;
+  cancelUrl?: string;
+  plan?: string;
   billing?: string;
   workspacePublicId?: string;
   slug?: string;
@@ -82,7 +84,7 @@ export default withRateLimit(
       }
     }
 
-    let resolvedWorkspacePublicId = workspacePublicId;
+    const resolvedWorkspacePublicId = workspacePublicId || generateUID();
     let subscriptionId: number | undefined;
 
     if (workspacePublicId) {
@@ -115,14 +117,12 @@ export default withRateLimit(
       if (!subscriptionId) {
         return res.status(500).json({ error: "Error creating subscription" });
       }
-    } else {
-      resolvedWorkspacePublicId = generateUID();
     }
 
     const annualPriceId =
-      process.env.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID ??
-      process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID;
-    const monthlyPriceId = process.env.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID;
+      serverEnv.STRIPE_TEAM_PLAN_YEARLY_PRICE_ID ??
+      serverEnv.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID;
+    const monthlyPriceId = serverEnv.STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID;
     const priceId = billing === "annual" ? annualPriceId : monthlyPriceId;
 
     const session = await stripe.checkout.sessions.create({
@@ -138,9 +138,9 @@ export default withRateLimit(
       client_reference_id: resolvedWorkspacePublicId,
       customer: user.stripeCustomerId ?? undefined,
       metadata: {
-        workspacePublicId: resolvedWorkspacePublicId!,
+        workspacePublicId: resolvedWorkspacePublicId,
         userId: user.id,
-        userEmail: user.email ?? "",
+        userEmail: user.email,
         ...(resolvedSlug && { workspaceSlug: resolvedSlug }),
         ...(workspaceName && { workspaceName }),
         ...(workspaceDescription && { workspaceDescription }),

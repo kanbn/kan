@@ -1,12 +1,13 @@
 {
   "extends": "@kan/tsconfig/internal-package.json",
-  "include": ["packages/**/*", "src"],
+  "include": ["packages/**/*", "src", "integration-tests"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "declaration": false,
     "declarationMap": false,
     "emitDeclarationOnly": false,
     "noEmit": true,
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]

@@ -313,7 +313,7 @@ const FeatureComparisonTable = ({
       | { text: string; highlight?: boolean; highlightFirstWord?: boolean };
     label: string;
   }) => {
-    if (typeof value === "object" && value !== null) {
+    if (typeof value === "object") {
       const { text, highlight, highlightFirstWord } = value;
 
       if (highlightFirstWord) {

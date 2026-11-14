@@ -43,7 +43,7 @@ describe("CardChecklistController", () => {
     const result = await cardChecklistController.create(
       user as never,
       "card_12345",
-      { name: "Steps" } as never,
+      { name: "Steps" },
     );
 
     expect(result).toEqual({ publicId: "checklist_1", name: "Steps" });
@@ -65,7 +65,7 @@ describe("ChecklistController", () => {
     const result = await checklistController.update(
       user as never,
       "checklist_12345",
-      { name: "Renamed" } as never,
+      { name: "Renamed" },
     );
 
     expect(result).toEqual({ publicId: "checklist_12345", name: "Renamed" });
@@ -101,7 +101,7 @@ describe("ChecklistController", () => {
     const result = await checklistController.createItem(
       user as never,
       "checklist_12345",
-      { title: "Do the thing" } as never,
+      { title: "Do the thing" },
     );
 
     expect(result).toEqual({
@@ -126,7 +126,7 @@ describe("ChecklistController", () => {
     const result = await checklistController.updateItem(
       user as never,
       "item_12345",
-      { completed: true } as never,
+      { completed: true },
     );
 
     expect(result).toEqual({

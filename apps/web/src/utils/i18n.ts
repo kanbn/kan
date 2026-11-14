@@ -32,7 +32,7 @@ const loadMessages = async (locale: Locale) => {
 let isInitialized = false;
 const loadedLocales = new Set<string>();
 
-export function initializeI18n(locale: Locale = defaultLocale) {
+export function initializeI18n() {
   if (!isInitialized) {
     i18n.load(defaultLocale, enMessages);
     i18n.activate(defaultLocale);

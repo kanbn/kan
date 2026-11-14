@@ -15,7 +15,7 @@ export const generateWorkspacePrefix = (name: string): string => {
   const initials = words
     .map((w) => {
       const cleaned = w.replace(/[^a-zA-Z0-9]/g, "");
-      return cleaned.length > 0 ? cleaned[0]! : "";
+      return cleaned.charAt(0);
     })
     .filter((c) => c.length > 0)
     .join("")

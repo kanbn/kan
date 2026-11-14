@@ -1,31 +1,15 @@
 import Link from "next/link";
 
+import {
+  ListItem,
+  SubHeading,
+  Text,
+  UnorderedList,
+} from "~/components/LegalText";
 import { PageHead } from "~/components/PageHead";
 import Layout from "../home/components/Layout";
 
 export default function TermsView() {
-  const SubHeading = ({ children }: { children: React.ReactNode }) => (
-    <h3 className="mb-4 text-2xl font-bold text-light-1000 dark:text-dark-950">
-      {children}
-    </h3>
-  );
-
-  const Text = ({ children }: { children: React.ReactNode }) => (
-    <p className="line-height text-md mb-4 text-light-1000 dark:text-dark-900">
-      {children}
-    </p>
-  );
-
-  const UnorderedList = ({ children }: { children: React.ReactNode }) => (
-    <ul className="list-disc pl-6">{children}</ul>
-  );
-
-  const ListItem = ({ children }: { children: React.ReactNode }) => (
-    <li className="line-height text-md mb-4 text-light-1000 dark:text-dark-900">
-      {children}
-    </li>
-  );
-
   const NAME = "Open Engineering";
   const DOMAIN = "https://kan.bn";
   const PRIVACY_URL = `${DOMAIN}/privacy`;

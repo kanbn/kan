@@ -40,7 +40,7 @@ beforeEach(() => {
   vi.spyOn(permissions, "assertCanManageRole").mockResolvedValue(undefined);
   vi.spyOn(sessionUtil, "sendMagicLinkInvite").mockResolvedValue({
     status: true,
-  } as never);
+  });
   service = new MemberService();
 });
 
@@ -60,7 +60,7 @@ describe("MemberService.invite", () => {
     vi.spyOn(memberRepo, "create").mockResolvedValue({
       id: 10,
       publicId: "member_new",
-    } as never);
+    });
 
     const result = await service.invite({
       workspacePublicId: "workspace_12345",
@@ -150,7 +150,7 @@ describe("MemberService.invite", () => {
     vi.spyOn(memberRepo, "create").mockResolvedValue({
       id: 10,
       publicId: "member_new",
-    } as never);
+    });
 
     await service.invite({
       workspacePublicId: "workspace_12345",
@@ -178,7 +178,7 @@ describe("MemberService.invite", () => {
     vi.spyOn(memberRepo, "create").mockResolvedValue({
       id: 10,
       publicId: "member_new",
-    } as never);
+    });
 
     await service.invite({
       workspacePublicId: "workspace_12345",
@@ -223,13 +223,13 @@ describe("MemberService.invite", () => {
     vi.spyOn(memberRepo, "create").mockResolvedValue({
       id: 10,
       publicId: "member_new",
-    } as never);
+    });
     vi.spyOn(sessionUtil, "sendMagicLinkInvite").mockResolvedValue({
       status: false,
-    } as never);
+    });
     const softDelete = vi
       .spyOn(memberRepo, "softDelete")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     await expect(
       service.invite({
@@ -401,7 +401,7 @@ describe("MemberService.createInviteLink", () => {
     );
     const deactivate = vi
       .spyOn(inviteLinkRepo, "deactivateAllActiveForWorkspace")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
     vi.spyOn(inviteLinkRepo, "createInviteLink").mockResolvedValue({
       publicId: "invite_1",
       code: "code123",
@@ -477,9 +477,7 @@ describe("MemberService.acceptInviteLink", () => {
       activeInvite as never,
     );
     vi.spyOn(workspaceRepo, "getById").mockResolvedValue(workspace as never);
-    vi.spyOn(workspaceRepo, "isUserInWorkspace").mockResolvedValue(
-      true as never,
-    );
+    vi.spyOn(workspaceRepo, "isUserInWorkspace").mockResolvedValue(true);
 
     await expect(
       service.acceptInviteLink({ inviteCode: "code123", userId: "user_1" }),
@@ -491,9 +489,7 @@ describe("MemberService.acceptInviteLink", () => {
       activeInvite as never,
     );
     vi.spyOn(workspaceRepo, "getById").mockResolvedValue(workspace as never);
-    vi.spyOn(workspaceRepo, "isUserInWorkspace").mockResolvedValue(
-      false as never,
-    );
+    vi.spyOn(workspaceRepo, "isUserInWorkspace").mockResolvedValue(false);
     vi.spyOn(userRepo, "getById").mockResolvedValue({
       id: "user_1",
       email: "user@kan.bn",
@@ -503,7 +499,7 @@ describe("MemberService.acceptInviteLink", () => {
     } as never);
     const create = vi
       .spyOn(memberRepo, "create")
-      .mockResolvedValue({ id: 10, publicId: "member_new" } as never);
+      .mockResolvedValue({ id: 10, publicId: "member_new" });
 
     const result = await service.acceptInviteLink({
       inviteCode: "code123",
@@ -527,9 +523,7 @@ describe("MemberService.acceptInviteLink", () => {
       activeInvite as never,
     );
     vi.spyOn(workspaceRepo, "getById").mockResolvedValue(workspace as never);
-    vi.spyOn(workspaceRepo, "isUserInWorkspace").mockResolvedValue(
-      false as never,
-    );
+    vi.spyOn(workspaceRepo, "isUserInWorkspace").mockResolvedValue(false);
     vi.spyOn(userRepo, "getById").mockResolvedValue({
       id: "user_1",
       email: "user@kan.bn",

@@ -39,7 +39,7 @@ describe("WebhookController", () => {
     await controller.create(user as never, "workspace_12345", body as never);
     await controller.update(user as never, "workspace_12345", "webhook_12345", {
       active: false,
-    } as never);
+    });
     await controller.delete(user as never, "workspace_12345", "webhook_12345");
     await controller.test(user as never, "workspace_12345", "webhook_12345");
 

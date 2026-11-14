@@ -40,7 +40,7 @@ describe("IntegrationController", () => {
         provider: "trello",
       } as never,
     );
-    await controller.saveGitHubToken(user as never, { token: "t" } as never);
+    await controller.saveGitHubToken(user as never, { token: "t" });
     await controller.disconnectGitHub(user as never);
     await controller.getGitHubStatus(user as never);
 

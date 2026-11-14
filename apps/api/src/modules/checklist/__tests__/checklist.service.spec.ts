@@ -46,7 +46,7 @@ beforeEach(() => {
   vi.restoreAllMocks();
   vi.spyOn(permissions, "assertPermission").mockResolvedValue(undefined);
   vi.spyOn(permissions, "assertBoardAccess").mockResolvedValue(undefined);
-  vi.spyOn(activityRepo, "create").mockResolvedValue(undefined as never);
+  vi.spyOn(activityRepo, "create").mockResolvedValue(undefined);
   service = new ChecklistService();
 });
 
@@ -59,7 +59,7 @@ describe("ChecklistService.create", () => {
       id: 1,
       publicId: "checklist_12345",
       name: "Steps",
-    } as never);
+    });
 
     const result = await service.create({
       cardPublicId: "card_12345",
@@ -76,7 +76,7 @@ describe("ChecklistService.create", () => {
 
   it("throws NOT_FOUND when the card doesn't exist", async () => {
     vi.spyOn(cardRepo, "getWorkspaceAndCardIdByCardPublicId").mockResolvedValue(
-      null as never,
+      null,
     );
 
     await expect(
@@ -97,7 +97,7 @@ describe("ChecklistService.update", () => {
     vi.spyOn(checklistRepo, "updateChecklistById").mockResolvedValue({
       publicId: "checklist_12345",
       name: "Renamed",
-    } as never);
+    });
 
     const result = await service.update({
       checklistPublicId: "checklist_12345",
@@ -119,7 +119,7 @@ describe("ChecklistService.delete", () => {
       .mockResolvedValue([] as never);
     vi.spyOn(checklistRepo, "softDeleteById").mockResolvedValue({
       id: 1,
-    } as never);
+    });
 
     const result = await service.delete({
       checklistPublicId: "checklist_12345",
@@ -144,7 +144,7 @@ describe("ChecklistService.createItem", () => {
       publicId: "item_12345",
       title: "Do the thing",
       completed: false,
-    } as never);
+    });
 
     const result = await service.createItem({
       checklistPublicId: "checklist_12345",
@@ -180,7 +180,7 @@ describe("ChecklistService.updateItem", () => {
       publicId: "item_12345",
       title: "Do the thing",
       completed: true,
-    } as never);
+    });
     const logActivity = vi.spyOn(activityRepo, "create");
 
     const result = await service.updateItem({
@@ -211,7 +211,7 @@ describe("ChecklistService.updateItem", () => {
       publicId: "item_12345",
       title: "Do the thing",
       completed: false,
-    } as never);
+    });
 
     await service.updateItem({
       checklistItemPublicId: "item_12345",
@@ -234,7 +234,7 @@ describe("ChecklistService.deleteItem", () => {
     ).mockResolvedValue(item as never);
     vi.spyOn(checklistRepo, "softDeleteItemById").mockResolvedValue({
       id: 1,
-    } as never);
+    });
 
     const result = await service.deleteItem({
       checklistItemPublicId: "item_12345",

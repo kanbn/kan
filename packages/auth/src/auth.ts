@@ -47,7 +47,6 @@ export const initAuth = (db: dbClient) => {
             "/api/auth/reset-password/",
             "/reset-password/",
           ),
-          resetPasswordToken: data.token,
         });
       },
     },

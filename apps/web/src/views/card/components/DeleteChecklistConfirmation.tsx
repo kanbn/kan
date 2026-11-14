@@ -25,11 +25,11 @@ export function DeleteChecklistConfirmation({
         await cardCache.byId.cancel({ cardPublicId });
         const previous = cardCache.byId.getData({ cardPublicId });
         cardCache.byId.setData({ cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const updatedChecklists = old.checklists.filter(
             (cl) => cl.publicId !== checklistPublicId,
           );
-          return { ...old, checklists: updatedChecklists } as typeof old;
+          return { ...old, checklists: updatedChecklists };
         });
         return { previous };
       },

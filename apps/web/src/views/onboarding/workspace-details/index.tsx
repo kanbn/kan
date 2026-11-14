@@ -18,7 +18,6 @@ import {
   getHasAvailablePartnerSlotQueryKey,
   useCheckSlugAvailability,
   useCreateWorkspace,
-  useGetUser,
   useGetWorkspaces,
 } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
@@ -85,10 +84,10 @@ export default function WorkspaceNameView() {
   );
 
   const isSlugAvailable =
-    slugAvailability.data?.isAvailable && !slugAvailability.data?.isReserved;
+    slugAvailability.data?.isAvailable && !slugAvailability.data.isReserved;
   const isSlugTaken =
     slugAvailability.data?.isAvailable === false &&
-    !slugAvailability.data?.isReserved;
+    !slugAvailability.data.isReserved;
   const isSlugReserved = slugAvailability.data?.isReserved === true;
 
   const slugError = isSlugTaken
@@ -97,10 +96,6 @@ export default function WorkspaceNameView() {
       ? t`This URL is reserved`
       : undefined;
 
-  const { data: session } = authClient.useSession();
-  const { data: user } = useGetUser({
-    query: { enabled: !!session?.user, select: (res) => res.data },
-  });
   const { data: workspaces } = useGetWorkspaces({
     query: { select: (res) => res.data },
   });
@@ -114,7 +109,7 @@ export default function WorkspaceNameView() {
 
   const createWorkspace = useCreateWorkspace({
     mutation: {
-      onSuccess: async ({ data: workspace }) => {
+      onSuccess: ({ data: workspace }) => {
         if (!workspace.publicId) return;
         localStorage.setItem("workspacePublicId", workspace.publicId);
         void queryClient.invalidateQueries({
@@ -175,8 +170,7 @@ export default function WorkspaceNameView() {
           plan,
         }),
       });
-      const data = await response.json();
-      const url = (data as { url: string }).url;
+      const { url } = (await response.json()) as { url?: string };
       if (url) {
         window.location.href = url;
         return;
@@ -195,8 +189,6 @@ export default function WorkspaceNameView() {
   useEffect(() => {
     document.getElementById("workspace-name-input")?.focus();
   }, []);
-
-  const displayName = user?.name ?? session?.user.name ?? "";
 
   const BOARDS = [t`Roadmap`, t`Engineering`, t`Marketing`];
   const [visibleCount, setVisibleCount] = useState(1);
@@ -265,7 +257,7 @@ export default function WorkspaceNameView() {
                           >
                             <HiInformationCircle className="h-4 w-4 leading-[0] text-dark-700 dark:text-dark-700" />
                           </Tooltip>
-                        ) : isTeamPlan && slug.length >= 3 ? (
+                        ) : slug.length >= 3 ? (
                           isTyping || slugAvailability.isPending ? (
                             <LoadingSpinner />
                           ) : isSlugAvailable ? (

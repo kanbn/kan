@@ -197,8 +197,8 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   // Redirect to 404 if card doesn't exist
   useEffect(() => {
     if (router.isReady && cardId && !isLoading) {
-      if (getApiErrorStatus(error) === 404 || (!card && !isLoading)) {
-        router.replace("/404");
+      if (getApiErrorStatus(error) === 404 || !card) {
+        void router.replace("/404");
       }
     }
   }, [router, cardId, isLoading, error, card]);
@@ -256,16 +256,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  const { register, handleSubmit, setValue, watch, reset } =
-    useForm<FormValues>({
-      values: {
-        cardId: cardId ?? "",
-        title: card?.title ?? "",
-        description: card?.description ?? "",
-      },
-      // keepDirtyValues: a card.byId refetch shouldn't overwrite a field still being edited.
-      resetOptions: { keepDirtyValues: true },
-    });
+  const { register, handleSubmit, setValue, reset } = useForm<FormValues>({
+    values: {
+      cardId: cardId ?? "",
+      title: card?.title ?? "",
+      description: card?.description ?? "",
+    },
+    // keepDirtyValues: a card.byId refetch shouldn't overwrite a field still being edited.
+    resetOptions: { keepDirtyValues: true },
+  });
 
   // Force a clean reset on card switch, since keepDirtyValues would otherwise carry a dirty field over.
   useEffect(() => {
@@ -291,7 +290,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
 
   // this adds the new created label to selected labels
   useEffect(() => {
-    const newLabelId = modalStates.NEW_LABEL_CREATED;
+    const newLabelId = modalStates.NEW_LABEL_CREATED as string | undefined;
     if (newLabelId && cardId) {
       const isAlreadyAdded = card?.labels.some(
         (label) => label.publicId === newLabelId,
@@ -310,8 +309,9 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   // Open the new item form after creating a new checklist
   useEffect(() => {
     if (!card) return;
-    const state = getModalState("ADD_CHECKLIST");
-    const createdId: string | undefined = state?.createdChecklistId;
+    const state = getModalState("ADD_CHECKLIST") as
+      { createdChecklistId?: string } | undefined;
+    const createdId = state?.createdChecklistId;
     if (createdId) {
       setActiveChecklistForm(createdId);
       clearModalState("ADD_CHECKLIST");
@@ -322,7 +322,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   useEffect(() => {
     const titleTextarea = document.getElementById(
       "title",
-    ) as HTMLTextAreaElement;
+    ) as HTMLTextAreaElement | null;
     if (titleTextarea) {
       titleTextarea.style.height = "auto";
       titleTextarea.style.height = `${titleTextarea.scrollHeight}px`;
@@ -375,15 +375,15 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   cardPublicId={cardId}
                   isTemplate={isTemplate}
                   boardPublicId={boardId}
-                  cardCreatedBy={card?.createdBy}
+                  cardCreatedBy={card.createdBy}
                   ticketNumber={
                     card.cardNumber != null &&
                     card.list.board.workspace.cardPrefix
                       ? `${card.list.board.workspace.cardPrefix}-${card.cardNumber}`
                       : null
                   }
-                  listPublicId={card?.list.publicId}
-                  cardIndex={card?.index}
+                  listPublicId={card.list.publicId}
+                  cardIndex={card.index}
                 />
                 <Link
                   href={boardReturnUrl}
@@ -474,11 +474,11 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   />
                   {!isTemplate && (
                     <>
-                      {card?.attachments.length > 0 && (
+                      {card.attachments.length > 0 && (
                         <div className="mt-6">
                           <AttachmentThumbnails
                             attachments={card.attachments}
-                            cardPublicId={cardId ?? ""}
+                            cardPublicId={cardId}
                             isReadOnly={!canEdit}
                           />
                         </div>

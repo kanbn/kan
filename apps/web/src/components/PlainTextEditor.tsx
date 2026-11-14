@@ -84,10 +84,10 @@ export default function PlainTextEditor({
           if (event.key === "Escape") {
             event.preventDefault();
             // Reset to original content before calling the callback
-            editor?.commands.setContent(contentRef.current, {
+            editor.commands.setContent(contentRef.current, {
               emitUpdate: false,
             });
-            editor?.commands.blur();
+            editor.commands.blur();
             onEscapeRef.current?.();
             return true;
           }
@@ -102,14 +102,12 @@ export default function PlainTextEditor({
   );
 
   useEffect(() => {
-    if (!editor) return;
     if (content !== editor.getText()) {
       editor.commands.setContent(content, { emitUpdate: false });
     }
   }, [content, editor]);
 
   useEffect(() => {
-    if (!editor) return;
     editor.setEditable(!readOnly);
   }, [readOnly, editor]);
 

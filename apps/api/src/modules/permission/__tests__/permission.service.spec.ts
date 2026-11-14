@@ -125,7 +125,7 @@ describe("PermissionService.grantPermission / revokePermission", () => {
     );
     const grant = vi
       .spyOn(permissionRepo, "grantPermission")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     const result = await service.grantPermission({
       workspacePublicId: "workspace_12345",
@@ -150,7 +150,7 @@ describe("PermissionService.grantPermission / revokePermission", () => {
     );
     const revoke = vi
       .spyOn(permissionRepo, "revokePermission")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     const result = await service.revokePermission({
       workspacePublicId: "workspace_12345",
@@ -305,7 +305,7 @@ describe("PermissionService.grantRolePermission", () => {
     ).mockResolvedValue(guestRole as never);
     const grant = vi
       .spyOn(permissionRepo, "grantRolePermission")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     const result = await service.grantRolePermission({
       workspacePublicId: "workspace_12345",
@@ -375,7 +375,7 @@ describe("PermissionService.revokeRolePermission", () => {
     ).mockResolvedValue(guestRole as never);
     const revoke = vi
       .spyOn(permissionRepo, "revokeRolePermission")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     const result = await service.revokeRolePermission({
       workspacePublicId: "workspace_12345",

@@ -38,7 +38,7 @@ export async function resolveUserFromHeaders(
 ): Promise<{ user: User | null }> {
   try {
     const session = await auth.api.getSession({ headers });
-    return { user: (session?.user as User | undefined) ?? null };
+    return { user: session?.user ?? null };
   } catch (error) {
     if (isRateLimitedApiKeyError(error)) {
       const tryAgainIn = error.body.details?.tryAgainIn;

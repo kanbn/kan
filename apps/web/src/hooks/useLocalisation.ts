@@ -34,6 +34,6 @@ export function useLocalisation() {
     dateLocale: currentDateLocale,
     setLocale: handleSetLocale,
     availableLocales,
-    formatNumber: i18n.number,
+    formatNumber: i18n.number.bind(i18n),
   };
 }

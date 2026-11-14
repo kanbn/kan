@@ -69,8 +69,8 @@ beforeEach(() => {
   vi.spyOn(trelloToken, "decryptTrelloToken").mockReturnValue("trello-token");
   vi.spyOn(trelloToken, "isEncryptedTrelloToken").mockReturnValue(true);
   vi.spyOn(encryption, "decryptToken").mockReturnValue("github-token");
-  vi.spyOn(importRepo, "create").mockResolvedValue({ id: 50 } as never);
-  vi.spyOn(importRepo, "update").mockResolvedValue(undefined as never);
+  vi.spyOn(importRepo, "create").mockResolvedValue({ id: 50 });
+  vi.spyOn(importRepo, "update").mockResolvedValue(undefined);
   service = new ImportService();
 });
 

@@ -135,7 +135,7 @@ describe("BoardService.create", () => {
       id: 9,
       publicId: "board_new",
       name: "Roadmap",
-    } as never);
+    });
     const lists = vi
       .spyOn(listRepo, "bulkCreate")
       .mockResolvedValue([] as never);
@@ -229,7 +229,7 @@ describe("BoardService.delete", () => {
       ...board,
       lists: [{ id: 5 }],
     } as never);
-    vi.spyOn(boardRepo, "softDelete").mockResolvedValue(undefined as never);
+    vi.spyOn(boardRepo, "softDelete").mockResolvedValue(undefined);
     vi.spyOn(listRepo, "softDeleteAllByBoardId").mockResolvedValue([] as never);
     vi.spyOn(cardRepo, "softDeleteAllByListIds").mockResolvedValue([
       { id: 7 },

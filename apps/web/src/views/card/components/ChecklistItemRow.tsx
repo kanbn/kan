@@ -52,7 +52,7 @@ export default function ChecklistItemRow({
         await cardCache.byId.cancel({ cardPublicId });
         const previous = cardCache.byId.getData({ cardPublicId });
         cardCache.byId.setData({ cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const updatedChecklists = old.checklists.map((cl) => ({
             ...cl,
             items: cl.items.map((ci) =>
@@ -69,7 +69,7 @@ export default function ChecklistItemRow({
                 : ci,
             ),
           }));
-          return { ...old, checklists: updatedChecklists } as typeof old;
+          return { ...old, checklists: updatedChecklists };
         });
         return { previous };
       },
@@ -94,12 +94,12 @@ export default function ChecklistItemRow({
         await cardCache.byId.cancel({ cardPublicId });
         const previous = cardCache.byId.getData({ cardPublicId });
         cardCache.byId.setData({ cardPublicId }, (old) => {
-          if (!old) return old as any;
+          if (!old) return old;
           const updatedChecklists = old.checklists.map((cl) => ({
             ...cl,
             items: cl.items.filter((ci) => ci.publicId !== item.publicId),
           }));
-          return { ...old, checklists: updatedChecklists } as typeof old;
+          return { ...old, checklists: updatedChecklists };
         });
         return { previous };
       },

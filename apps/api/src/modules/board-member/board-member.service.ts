@@ -46,7 +46,7 @@ export class BoardMemberService {
   ) {
     const member = await memberRepo.getByPublicId(db, workspaceMemberPublicId);
 
-    if (!member || member.workspaceId !== workspaceId || member.deletedAt)
+    if (member?.workspaceId !== workspaceId || member.deletedAt)
       throw new NotFoundException(
         `Workspace member with public ID ${workspaceMemberPublicId} not found`,
       );

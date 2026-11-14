@@ -55,7 +55,7 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <>
       <PageHead
-        title={t`${isTemplate ? t`Templates` : t`Boards`} | ${workspace.name ?? t`Workspace`}`}
+        title={t`${isTemplate ? t`Templates` : t`Boards`} | ${workspace.name}`}
       />
       <div className="m-auto h-full max-w-[1100px] p-8 px-5 md:px-28 md:py-12">
         <div className="relative z-10 mb-8 flex w-full items-center justify-between">

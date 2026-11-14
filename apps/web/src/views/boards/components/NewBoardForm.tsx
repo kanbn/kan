@@ -76,17 +76,9 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
   const createBoard = useCreateBoard({
     mutation: {
       onSuccess: async ({ data: board }) => {
-        if (!board) {
-          showPopup({
-            header: t`Error`,
-            message: t`Failed to create board`,
-            icon: "error",
-          });
-        } else {
-          router.push(
-            `${isTemplate ? "/templates" : "/boards"}/${board.publicId}`,
-          );
-        }
+        router.push(
+          `${isTemplate ? "/templates" : "/boards"}/${board.publicId}`,
+        );
         closeModal();
 
         await refetchBoards();
@@ -163,7 +155,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
             onChange={() => {
               setShowTemplates(!showTemplates);
               if (!showTemplates && !currentTemplate) {
-                setValue("template", (templates?.[0] as any) ?? null);
+                setValue("template", formattedTemplates?.[0] ?? null);
               }
             }}
           />

@@ -9,15 +9,15 @@ import MemberSelector from "~/views/card/components/MemberSelector";
 export function CardContextMembersModal() {
   const { entityId: cardPublicId, closeModal } = useModal();
 
-  const { data: card, isLoading } = useGetCard(cardPublicId ?? "", {
+  const { data: card, isLoading } = useGetCard(cardPublicId, {
     query: {
       enabled: !!cardPublicId && cardPublicId.length >= 12,
       select: (res) => res.data,
     },
   });
 
-  const board = card?.list?.board;
-  const workspaceMembers = board?.workspace?.members ?? [];
+  const board = card?.list.board;
+  const workspaceMembers = board?.workspace.members ?? [];
   const selectedMembers = card?.members ?? [];
 
   const formattedMembers = getCardMemberOptions(

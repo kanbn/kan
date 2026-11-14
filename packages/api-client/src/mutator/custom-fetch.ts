@@ -32,7 +32,7 @@ export const customFetch = async <T>(
   if (!response.ok || !isJson) {
     const message =
       typeof data === "object" && data && "message" in data
-        ? String((data as { message: unknown }).message)
+        ? String(data.message)
         : `Request failed with status ${response.status}`;
     throw Object.assign(new Error(message), { status: response.status, data });
   }

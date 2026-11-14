@@ -235,10 +235,10 @@ describe("WorkspaceService.create", () => {
     ).mockResolvedValue({ id: 7, plan: "pro" } as never);
     const updateSub = vi
       .spyOn(subscriptionRepo, "updateById")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
     const updateWorkspace = vi
       .spyOn(workspaceRepo, "update")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
 
     const result = await service.create({
       name: "Acme",
@@ -324,7 +324,7 @@ describe("WorkspaceService.delete", () => {
     ] as never);
     const updateSub = vi
       .spyOn(subscriptionRepo, "updateById")
-      .mockResolvedValue(undefined as never);
+      .mockResolvedValue(undefined);
     const hardDelete = vi
       .spyOn(workspaceRepo, "hardDelete")
       .mockResolvedValue(undefined as never);

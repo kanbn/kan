@@ -26,9 +26,9 @@ interface ModalContextType {
   entityId: string;
   entityLabel: string;
   closeOnClickOutside: boolean;
-  modalStates: Record<string, any>;
-  setModalState: (modalType: string, state: any) => void;
-  getModalState: (modalType: string) => any;
+  modalStates: Record<string, unknown>;
+  setModalState: (modalType: string, state: unknown) => void;
+  getModalState: (modalType: string) => unknown;
   clearModalState: (modalType: string) => void;
   clearAllModalStates: () => void;
 }
@@ -37,7 +37,7 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider: React.FC<Props> = ({ children }) => {
   const [modalStack, setModalStack] = useState<ModalState[]>([]);
-  const [modalStates, setModalStates] = useState<Record<string, any>>({});
+  const [modalStates, setModalStates] = useState<Record<string, unknown>>({});
 
   const isOpen = modalStack.length > 0;
   const currentModal = modalStack[modalStack.length - 1];
@@ -62,8 +62,7 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
       setModalStack((prev) => {
         const last = prev[prev.length - 1];
         if (
-          last &&
-          last.contentType === newModal.contentType &&
+          last?.contentType === newModal.contentType &&
           last.entityId === newModal.entityId &&
           last.entityLabel === newModal.entityLabel
         ) {
@@ -95,7 +94,7 @@ export const ModalProvider: React.FC<Props> = ({ children }) => {
     setModalStack([]);
   }, []);
 
-  const setModalState = useCallback((modalType: string, state: any) => {
+  const setModalState = useCallback((modalType: string, state: unknown) => {
     setModalStates((prev) => ({
       ...prev,
       [modalType]: state,

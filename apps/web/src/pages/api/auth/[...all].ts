@@ -27,7 +27,7 @@ export default withRateLimit(
     const forwardedHost = req.headers["x-forwarded-host"];
     if (forwardedHost) {
       const h = Array.isArray(forwardedHost) ? forwardedHost[0] : forwardedHost;
-      req.headers["host"] = h?.split(",")[0]?.trim();
+      req.headers.host = h?.split(",")[0]?.trim();
     }
 
     return await authHandler(req, res);

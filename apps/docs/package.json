@@ -8,8 +8,6 @@
     "clean": "git clean -xdf .cache .turbo node_modules",
     "dev": "pnpm with-env mintlify dev --port 3001",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint",
-    "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {

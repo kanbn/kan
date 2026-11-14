@@ -72,7 +72,7 @@ export default withRateLimit(
 
       const buffer = await upstream.arrayBuffer();
       return res.send(Buffer.from(buffer));
-    } catch (error) {
+    } catch {
       return res.status(500).json({ message: "Failed to download attachment" });
     }
   }),
