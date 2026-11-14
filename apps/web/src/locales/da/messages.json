@@ -389,7 +389,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        41
+        42
       ]
     ],
     "translation": "Konto"
@@ -425,7 +425,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        56
+        55
       ]
     ],
     "translation": "Handlinger"
@@ -1148,7 +1148,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        65
+        66
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -1236,7 +1236,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        75
+        82
       ]
     ],
     "translation": "Ansøgere"
@@ -1248,7 +1248,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        46
+        53
       ]
     ],
     "translation": "Godkendelse"
@@ -1492,7 +1492,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        59
+        66
       ]
     ],
     "translation": "Afventer kunde"
@@ -1667,11 +1667,11 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        58
+        59
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        68
+        75
       ],
       [
         "src/views/settings/BillingSettings.tsx",
@@ -1711,7 +1711,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        50
+        57
       ]
     ],
     "translation": "Blogindlæg"
@@ -2005,7 +2005,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        103
+        102
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -2045,7 +2045,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        42
+        49
       ]
     ],
     "translation": "Brainstorming"
@@ -2069,7 +2069,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        64
+        71
       ]
     ],
     "translation": "Fejlrapport"
@@ -2493,7 +2493,7 @@
       ],
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        176
+        175
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
@@ -3057,7 +3057,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        94
+        101
       ]
     ],
     "translation": "Fuldført"
@@ -3290,7 +3290,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        40
+        47
       ]
     ],
     "translation": "Indholdsproduktion"
@@ -3722,7 +3722,7 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        36
+        43
       ]
     ],
     "translation": "Kritisk"
@@ -3901,7 +3901,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        54
+        61
       ]
     ],
     "translation": "Kundesupport"
@@ -4189,7 +4189,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        45
+        52
       ]
     ],
     "translation": "Design"
@@ -4361,7 +4361,7 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        36
+        43
       ],
       [
         "src/views/home/components/Footer.tsx",
@@ -4417,15 +4417,15 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        35
+        40
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        48
+        55
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        61
+        68
       ]
     ],
     "translation": "Færdig"
@@ -4657,7 +4657,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        108
+        107
       ]
     ],
     "translation": "Rediger YouTube-video"
@@ -4669,7 +4669,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        44
+        51
       ]
     ],
     "translation": "Redigerer"
@@ -4777,7 +4777,7 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        36
+        43
       ]
     ],
     "translation": "Forbedring"
@@ -4789,7 +4789,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        131
+        130
       ]
     ],
     "translation": "Indtast en brugerdefineret titel"
@@ -5198,7 +5198,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        91
+        98
       ]
     ],
     "translation": "Udførelse"
@@ -5282,7 +5282,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        82
+        81
       ]
     ],
     "translation": "Videooplysningerne kunne ikke hentes"
@@ -5386,7 +5386,7 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        36
+        43
       ]
     ],
     "translation": "Funktion"
@@ -5398,7 +5398,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        65
+        72
       ]
     ],
     "translation": "Funktionsønske"
@@ -5658,7 +5658,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        82
+        89
       ]
     ],
     "translation": "Fuldtid"
@@ -5670,7 +5670,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        96
+        103
       ]
     ],
     "translation": "Sjov"
@@ -5682,7 +5682,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        54
+        53
       ]
     ],
     "translation": "Generelt"
@@ -5882,7 +5882,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        111
+        110
       ],
       [
         "src/pages/404.tsx",
@@ -5910,7 +5910,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        135
+        134
       ]
     ],
     "translation": "Gå til medlemmer"
@@ -5922,7 +5922,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        147
+        146
       ]
     ],
     "translation": "Gå til indstillinger"
@@ -5934,7 +5934,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        123
+        122
       ]
     ],
     "translation": "Gå til skabeloner"
@@ -6050,7 +6050,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        80
+        87
       ]
     ],
     "translation": "Ansat"
@@ -6146,7 +6146,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        151
+        150
       ]
     ],
     "translation": "https://www.youtube.com/watch?v=..."
@@ -6194,7 +6194,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        88
+        95
       ]
     ],
     "translation": "Idéer"
@@ -6278,7 +6278,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        96
+        103
       ]
     ],
     "translation": "Vigtigt"
@@ -6350,11 +6350,11 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        35
+        39
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        58
+        65
       ]
     ],
     "translation": "I gang"
@@ -6390,7 +6390,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        77
+        78
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -6418,7 +6418,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        77
+        84
       ]
     ],
     "translation": "Til samtale"
@@ -6587,7 +6587,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        82
+        89
       ]
     ],
     "translation": "Junior"
@@ -6655,7 +6655,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        321
+        320
       ]
     ],
     "translation": "Tastaturgenveje"
@@ -6780,7 +6780,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        96
+        103
       ]
     ],
     "translation": "Læring"
@@ -7016,7 +7016,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        96
+        103
       ]
     ],
     "translation": "Langsigtet"
@@ -7224,7 +7224,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        127
+        126
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -7467,7 +7467,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        55
+        54
       ]
     ],
     "translation": "Navigation"
@@ -7647,7 +7647,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        56
+        63
       ]
     ],
     "translation": "Ny sag"
@@ -7683,7 +7683,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        50
+        57
       ]
     ],
     "translation": "Nyhedsbrev"
@@ -7707,7 +7707,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        93
+        100
       ]
     ],
     "translation": "Næste trin"
@@ -7819,7 +7819,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        334
+        333
       ]
     ],
     "translation": "Der er ikke registreret nogen tastaturgenveje."
@@ -7919,7 +7919,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        78
+        85
       ]
     ],
     "translation": "Tilbud"
@@ -7955,7 +7955,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        79
+        86
       ]
     ],
     "translation": "Introduktion"
@@ -8015,7 +8015,7 @@
     "origin": [
       [
         "src/providers/keyboard-shortcuts.tsx",
-        172
+        171
       ]
     ],
     "translation": "Åbn tastaturgenveje"
@@ -8151,7 +8151,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        82
+        89
       ]
     ],
     "translation": "Deltid"
@@ -8375,7 +8375,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        53
+        54
       ]
     ],
     "translation": "Rettigheder"
@@ -8415,7 +8415,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        86
+        93
       ]
     ],
     "translation": "Personligt projekt"
@@ -8455,7 +8455,7 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        35
+        38
       ]
     ],
     "translation": "Planlagt"
@@ -8467,7 +8467,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        90
+        97
       ]
     ],
     "translation": "Planlægning"
@@ -8559,11 +8559,11 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        58
+        57
       ],
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        98
+        97
       ]
     ],
     "translation": "Indtast en gyldig YouTube-URL"
@@ -9056,7 +9056,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        47
+        54
       ]
     ],
     "translation": "Publicering"
@@ -9068,7 +9068,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        66
+        73
       ]
     ],
     "translation": "Spørgsmål"
@@ -9092,7 +9092,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        96
+        103
       ]
     ],
     "translation": "Hurtig gevinst"
@@ -9104,7 +9104,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        73
+        80
       ]
     ],
     "translation": "Rekruttering"
@@ -9116,7 +9116,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        35
+        41
       ]
     ],
     "translation": "Afvist"
@@ -9144,7 +9144,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        82
+        89
       ]
     ],
     "translation": "Fjernarbejde"
@@ -9383,7 +9383,7 @@
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        35
+        36
       ]
     ],
     "translation": "Anmodet"
@@ -9395,7 +9395,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        89
+        96
       ]
     ],
     "translation": "Research"
@@ -9443,7 +9443,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        60
+        67
       ]
     ],
     "translation": "Løsning"
@@ -9467,7 +9467,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        92
+        99
       ]
     ],
     "translation": "Gennemgang"
@@ -9584,7 +9584,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        183
+        182
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -9628,7 +9628,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        76
+        83
       ]
     ],
     "translation": "Screening"
@@ -9916,7 +9916,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        82
+        89
       ]
     ],
     "translation": "Senior"
@@ -10020,11 +10020,11 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        102
+        103
       ],
       [
         "src/components/SideNavigation.tsx",
-        139
+        138
       ]
     ],
     "translation": "Indstillinger"
@@ -10352,7 +10352,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        50
+        57
       ]
     ],
     "translation": "Sociale medier"
@@ -10485,15 +10485,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
+        233
+      ],
+      [
+        "src/components/SideNavigation.tsx",
         234
       ],
       [
         "src/components/SideNavigation.tsx",
-        235
-      ],
-      [
-        "src/components/SideNavigation.tsx",
-        245
+        244
       ]
     ],
     "translation": "Start gratis prøveperiode"
@@ -10790,7 +10790,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        115
+        114
       ],
       [
         "src/views/boards/index.tsx",
@@ -11345,7 +11345,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        127
+        126
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -11493,7 +11493,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        57
+        64
       ]
     ],
     "translation": "Triagering"
@@ -12113,7 +12113,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        35
+        37
       ]
     ],
     "translation": "Til gennemgang"
@@ -12473,11 +12473,11 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        50
+        57
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        67
+        74
       ]
     ],
     "translation": "Haster"
@@ -12617,7 +12617,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        50
+        57
       ]
     ],
     "translation": "Video"
@@ -12905,7 +12905,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        71
+        72
       ],
       [
         "src/views/settings/WebhookSettings.tsx",
@@ -12993,7 +12993,7 @@
     "origin": [
       [
         "src/components/SettingsLayout.tsx",
-        47
+        48
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -13253,7 +13253,7 @@
     "origin": [
       [
         "src/views/boards/components/TemplateBoards.tsx",
-        43
+        50
       ]
     ],
     "translation": "Skrivning"
@@ -13818,7 +13818,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        147
+        146
       ]
     ],
     "translation": "YouTube-URL"

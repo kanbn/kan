@@ -225,7 +225,7 @@
     "message": "Account",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SettingsLayout.tsx", 41]],
+    "origin": [["src/components/SettingsLayout.tsx", 42]],
     "translation": "Compte"
   },
   "TKFUnX": {
@@ -250,7 +250,7 @@
     "message": "Actions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 56]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 55]],
     "translation": "Actions"
   },
   "JEt3q7": {
@@ -680,7 +680,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 65],
+      ["src/components/SettingsLayout.tsx", 66],
       ["src/views/pricing/components/FeatureComparisonTable.tsx", 289]
     ],
     "translation": "API"
@@ -731,14 +731,14 @@
     "message": "Applicants",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 75]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
     "translation": "Candidats"
   },
   "yb/fjw": {
     "message": "Approval",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 46]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 53]],
     "translation": "Approbation"
   },
   "aKJHG+": {
@@ -896,7 +896,7 @@
     "message": "Awaiting Customer",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 59]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 66]],
     "translation": "En attente du client"
   },
   "iH8pgl": {
@@ -1001,8 +1001,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 58],
-      ["src/views/boards/components/TemplateBoards.tsx", 68],
+      ["src/components/SettingsLayout.tsx", 59],
+      ["src/views/boards/components/TemplateBoards.tsx", 75],
       ["src/views/settings/BillingSettings.tsx", 91]
     ],
     "translation": "Facturation"
@@ -1025,7 +1025,7 @@
     "message": "Blog Post",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 57]],
     "translation": "Article de blog"
   },
   "QD8opX": {
@@ -1202,7 +1202,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 103],
+      ["src/components/SideNavigation.tsx", 102],
       ["src/utils/permission-category-label.ts", 12],
       ["src/views/boards/index.tsx", 58],
       ["src/views/boards/index.tsx", 63],
@@ -1221,7 +1221,7 @@
     "message": "Brainstorming",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 42]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 49]],
     "translation": "Brainstorming"
   },
   "vXemf6": {
@@ -1235,7 +1235,7 @@
     "message": "Bug Report",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 64]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 71]],
     "translation": "Rapport de bug"
   },
   "s1c0ja": {
@@ -1498,7 +1498,7 @@
     "comments": [],
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 52],
-      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 176],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 175],
       ["src/views/board/components/CardContextDuplicateModal.tsx", 261],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
       ["src/views/board/components/MoveBoardForm.tsx", 95],
@@ -1818,7 +1818,7 @@
     "message": "Complete",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 94]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 101]],
     "translation": "Terminé"
   },
   "cAgBMh": {
@@ -1964,7 +1964,7 @@
     "message": "Content Creation",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 40]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 47]],
     "translation": "Création de contenu"
   },
   "xGVfLh": {
@@ -2224,7 +2224,7 @@
     "origin": [
       ["src/views/boards/components/TemplateBoards.tsx", 24],
       ["src/views/boards/components/TemplateBoards.tsx", 30],
-      ["src/views/boards/components/TemplateBoards.tsx", 36]
+      ["src/views/boards/components/TemplateBoards.tsx", 43]
     ],
     "translation": "Critique"
   },
@@ -2344,7 +2344,7 @@
     "message": "Customer Support",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 54]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 61]],
     "translation": "Support client"
   },
   "pvnfJD": {
@@ -2506,7 +2506,7 @@
     "message": "Design",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 45]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 52]],
     "translation": "Design"
   },
   "Uf+1DF": {
@@ -2612,7 +2612,7 @@
       ["src/components/UserMenu.tsx", 209],
       ["src/views/boards/components/TemplateBoards.tsx", 24],
       ["src/views/boards/components/TemplateBoards.tsx", 30],
-      ["src/views/boards/components/TemplateBoards.tsx", 36],
+      ["src/views/boards/components/TemplateBoards.tsx", 43],
       ["src/views/home/components/Footer.tsx", 79],
       ["src/views/home/components/Header.tsx", 36]
     ],
@@ -2636,9 +2636,9 @@
       ["src/views/boards/components/TemplateBoards.tsx", 17],
       ["src/views/boards/components/TemplateBoards.tsx", 23],
       ["src/views/boards/components/TemplateBoards.tsx", 29],
-      ["src/views/boards/components/TemplateBoards.tsx", 35],
-      ["src/views/boards/components/TemplateBoards.tsx", 48],
-      ["src/views/boards/components/TemplateBoards.tsx", 61]
+      ["src/views/boards/components/TemplateBoards.tsx", 40],
+      ["src/views/boards/components/TemplateBoards.tsx", 55],
+      ["src/views/boards/components/TemplateBoards.tsx", 68]
     ],
     "translation": "Terminé"
   },
@@ -2779,14 +2779,14 @@
     "message": "Edit YouTube Video",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 108]],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 107]],
     "translation": "Modifier la vidéo YouTube"
   },
   "gGx5tM": {
     "message": "Editing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 44]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 51]],
     "translation": "Modification"
   },
   "b/LfJo": {
@@ -2852,7 +2852,7 @@
     "origin": [
       ["src/views/boards/components/TemplateBoards.tsx", 24],
       ["src/views/boards/components/TemplateBoards.tsx", 30],
-      ["src/views/boards/components/TemplateBoards.tsx", 36]
+      ["src/views/boards/components/TemplateBoards.tsx", 43]
     ],
     "translation": "Amélioration"
   },
@@ -2860,7 +2860,7 @@
     "message": "Enter a custom title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 131]],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 130]],
     "translation": "Saisissez un titre personnalisé"
   },
   "dDyAXD": {
@@ -3135,7 +3135,7 @@
     "message": "Execution",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 91]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 98]],
     "translation": "Exécution"
   },
   "GwNIE2": {
@@ -3186,7 +3186,7 @@
     "message": "Failed to fetch video information",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 82]],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 81]],
     "translation": "Échec de la récupération des informations vidéo"
   },
   "YtUfwW": {
@@ -3246,7 +3246,7 @@
     "origin": [
       ["src/views/boards/components/TemplateBoards.tsx", 24],
       ["src/views/boards/components/TemplateBoards.tsx", 30],
-      ["src/views/boards/components/TemplateBoards.tsx", 36]
+      ["src/views/boards/components/TemplateBoards.tsx", 43]
     ],
     "translation": "Fonctionnalité"
   },
@@ -3254,7 +3254,7 @@
     "message": "Feature Request",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 65]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 72]],
     "translation": "Demande de fonctionnalité"
   },
   "PpZkda": {
@@ -3403,21 +3403,21 @@
     "message": "Full-time",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "Temps plein"
   },
   "rmN315": {
     "message": "Fun",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 103]],
     "translation": "Amusant"
   },
   "Weq9zb": {
     "message": "General",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 54]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 53]],
     "translation": "Général"
   },
   "ZDIydz": {
@@ -3533,7 +3533,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 111],
+      ["src/components/SideNavigation.tsx", 110],
       ["src/pages/404.tsx", 44]
     ],
     "translation": "Aller aux tableaux"
@@ -3549,21 +3549,21 @@
     "message": "Go to members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 135]],
+    "origin": [["src/components/SideNavigation.tsx", 134]],
     "translation": "Aller aux membres"
   },
   "1WuwiM": {
     "message": "Go to settings",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 147]],
+    "origin": [["src/components/SideNavigation.tsx", 146]],
     "translation": "Aller aux paramètres"
   },
   "csFbe+": {
     "message": "Go to templates",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 123]],
+    "origin": [["src/components/SideNavigation.tsx", 122]],
     "translation": "Aller aux modèles"
   },
   "SUvm1Y": {
@@ -3634,7 +3634,7 @@
     "message": "Hired",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 80]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 87]],
     "translation": "Embauché"
   },
   "SRvxId": {
@@ -3690,7 +3690,7 @@
     "message": "https://www.youtube.com/watch?v=...",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 151]],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 150]],
     "translation": "https://www.youtube.com/watch?v=..."
   },
   "2liqDZ": {
@@ -3722,7 +3722,7 @@
     "message": "Ideas",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 88]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 95]],
     "translation": "Idées"
   },
   "F/vB2g": {
@@ -3771,7 +3771,7 @@
     "message": "Important",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 103]],
     "translation": "Important"
   },
   "xMn+V9": {
@@ -3812,8 +3812,8 @@
       ["src/views/boards/components/TemplateBoards.tsx", 17],
       ["src/views/boards/components/TemplateBoards.tsx", 23],
       ["src/views/boards/components/TemplateBoards.tsx", 29],
-      ["src/views/boards/components/TemplateBoards.tsx", 35],
-      ["src/views/boards/components/TemplateBoards.tsx", 58]
+      ["src/views/boards/components/TemplateBoards.tsx", 39],
+      ["src/views/boards/components/TemplateBoards.tsx", 65]
     ],
     "translation": "En cours"
   },
@@ -3836,7 +3836,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 77],
+      ["src/components/SettingsLayout.tsx", 78],
       ["src/views/home/components/Features.tsx", 121]
     ],
     "translation": "Intégrations"
@@ -3854,7 +3854,7 @@
     "message": "Interviewing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 77]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 84]],
     "translation": "Entretien"
   },
   "XILg0L": {
@@ -3963,7 +3963,7 @@
     "message": "Junior",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "Junior"
   },
   "JeVSbu": {
@@ -4003,7 +4003,7 @@
     "message": "Keyboard Shortcuts",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 321]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 320]],
     "translation": "Raccourcis clavier"
   },
   "h8DugX": {
@@ -4083,7 +4083,7 @@
     "message": "Learning",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 103]],
     "translation": "Apprentissage"
   },
   "vifyyw": {
@@ -4222,7 +4222,7 @@
     "message": "Long-term",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 103]],
     "translation": "Long terme"
   },
   "RHZu7R": {
@@ -4340,7 +4340,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 127],
+      ["src/components/SideNavigation.tsx", 126],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/Filters.tsx", 164],
       ["src/views/board/components/NewCardForm.tsx", 498],
@@ -4472,7 +4472,7 @@
     "message": "Navigation",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 55]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 54]],
     "translation": "Navigation"
   },
   "HBI6nY": {
@@ -4582,7 +4582,7 @@
     "message": "New Ticket",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 56]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 63]],
     "translation": "Nouveau ticket"
   },
   "sbNNyi": {
@@ -4603,7 +4603,7 @@
     "message": "Newsletter",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 57]],
     "translation": "Newsletter"
   },
   "g8JmSC": {
@@ -4617,7 +4617,7 @@
     "message": "Next Steps",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 93]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 100]],
     "translation": "Prochaines étapes"
   },
   "/glL9Q": {
@@ -4682,7 +4682,7 @@
     "message": "No keyboard shortcuts registered.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 334]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 333]],
     "translation": "Aucun raccourci clavier enregistré."
   },
   "HOMO91": {
@@ -4740,7 +4740,7 @@
     "message": "Offer",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 78]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 85]],
     "translation": "Offre"
   },
   "QnzD50": {
@@ -4763,7 +4763,7 @@
     "message": "Onboarding",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 79]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 86]],
     "translation": "Intégration"
   },
   "usVytm": {
@@ -4798,7 +4798,7 @@
     "message": "Open keyboard shortcuts",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/providers/keyboard-shortcuts.tsx", 172]],
+    "origin": [["src/providers/keyboard-shortcuts.tsx", 171]],
     "translation": "Ouvrir les raccourcis clavier"
   },
   "v+Wp++": {
@@ -4880,7 +4880,7 @@
     "message": "Part-time",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "Temps partiel"
   },
   "nG7mus": {
@@ -5012,7 +5012,7 @@
     "message": "Permissions",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SettingsLayout.tsx", 53]],
+    "origin": [["src/components/SettingsLayout.tsx", 54]],
     "translation": "Permissions"
   },
   "Jgaz7E": {
@@ -5038,7 +5038,7 @@
     "message": "Personal Project",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 86]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 93]],
     "translation": "Projet personnel"
   },
   "Oi+J+N": {
@@ -5061,7 +5061,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/components/TemplateBoards.tsx", 29],
-      ["src/views/boards/components/TemplateBoards.tsx", 35]
+      ["src/views/boards/components/TemplateBoards.tsx", 38]
     ],
     "translation": "Planifié"
   },
@@ -5069,7 +5069,7 @@
     "message": "Planning",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 90]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 97]],
     "translation": "Planification"
   },
   "F3bW6y": {
@@ -5129,8 +5129,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 58],
-      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 98]
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 57],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 97]
     ],
     "translation": "Veuillez saisir une URL YouTube valide"
   },
@@ -5346,14 +5346,14 @@
     "message": "Publishing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 47]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 54]],
     "translation": "Publication"
   },
   "bfgr/e": {
     "message": "Question",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 66]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 73]],
     "translation": "Question"
   },
   "1H5u1m": {
@@ -5367,21 +5367,21 @@
     "message": "Quick Win",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 103]],
     "translation": "Victoire rapide"
   },
   "6EWT6T": {
     "message": "Recruitment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 73]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 80]],
     "translation": "Recrutement"
   },
   "ekCRTP": {
     "message": "Rejected",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 35]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 41]],
     "translation": "Rejeté"
   },
   "OSmrFy": {
@@ -5398,7 +5398,7 @@
     "message": "Remote",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "À distance"
   },
   "t/YqKh": {
@@ -5539,7 +5539,7 @@
     "comments": [],
     "origin": [
       ["src/views/boards/components/TemplateBoards.tsx", 29],
-      ["src/views/boards/components/TemplateBoards.tsx", 35]
+      ["src/views/boards/components/TemplateBoards.tsx", 36]
     ],
     "translation": "Demandé"
   },
@@ -5547,7 +5547,7 @@
     "message": "Research",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 96]],
     "translation": "Recherche"
   },
   "RfwZxd": {
@@ -5577,7 +5577,7 @@
     "message": "Resolution",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 60]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 67]],
     "translation": "Résolution"
   },
   "s+MGs7": {
@@ -5591,7 +5591,7 @@
     "message": "Review",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 92]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 99]],
     "translation": "Révision"
   },
   "/gaSVU": {
@@ -5662,7 +5662,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 183],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 182],
       ["src/views/card/components/Comment.tsx", 207],
       ["src/views/settings/components/Avatar.tsx", 287]
     ],
@@ -5686,7 +5686,7 @@
     "message": "Screening",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 76]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 83]],
     "translation": "Filtrage"
   },
   "A1taO8": {
@@ -5861,7 +5861,7 @@
     "message": "Senior",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 82]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "Senior"
   },
   "+DlsTY": {
@@ -5920,8 +5920,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 102],
-      ["src/components/SideNavigation.tsx", 139]
+      ["src/components/SettingsLayout.tsx", 103],
+      ["src/components/SideNavigation.tsx", 138]
     ],
     "translation": "Paramètres"
   },
@@ -6117,7 +6117,7 @@
     "message": "Social Media",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 57]],
     "translation": "Réseaux sociaux"
   },
   "wIb7Ng": {
@@ -6200,9 +6200,9 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/components/SideNavigation.tsx", 233],
       ["src/components/SideNavigation.tsx", 234],
-      ["src/components/SideNavigation.tsx", 235],
-      ["src/components/SideNavigation.tsx", 245]
+      ["src/components/SideNavigation.tsx", 244]
     ],
     "translation": "Commencer l'essai gratuit"
   },
@@ -6381,7 +6381,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 115],
+      ["src/components/SideNavigation.tsx", 114],
       ["src/views/boards/index.tsx", 58],
       ["src/views/boards/index.tsx", 63],
       ["src/views/home/components/Features.tsx", 115]
@@ -6725,7 +6725,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 127],
+      ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 126],
       ["src/views/board/components/NewCardForm.tsx", 207]
     ],
     "translation": "Titre"
@@ -6814,7 +6814,7 @@
     "message": "Triaging",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 57]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 64]],
     "translation": "Triage"
   },
   "o+JCfN": {
@@ -7189,7 +7189,7 @@
     "message": "Under Review",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 35]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 37]],
     "translation": "En cours de révision"
   },
   "M9p3Vw": {
@@ -7409,8 +7409,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/boards/components/TemplateBoards.tsx", 50],
-      ["src/views/boards/components/TemplateBoards.tsx", 67]
+      ["src/views/boards/components/TemplateBoards.tsx", 57],
+      ["src/views/boards/components/TemplateBoards.tsx", 74]
     ],
     "translation": "Urgent"
   },
@@ -7496,7 +7496,7 @@
     "message": "Video",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 57]],
     "translation": "Vidéo"
   },
   "FmfJjN": {
@@ -7677,7 +7677,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 71],
+      ["src/components/SettingsLayout.tsx", 72],
       ["src/views/settings/WebhookSettings.tsx", 24]
     ],
     "translation": "Webhooks"
@@ -7729,7 +7729,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SettingsLayout.tsx", 47],
+      ["src/components/SettingsLayout.tsx", 48],
       ["src/utils/permission-category-label.ts", 10],
       ["src/views/public/board/index.tsx", 118],
       ["src/views/public/boards/index.tsx", 78]
@@ -7903,7 +7903,7 @@
     "message": "Writing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/TemplateBoards.tsx", 43]],
+    "origin": [["src/views/boards/components/TemplateBoards.tsx", 50]],
     "translation": "Écriture"
   },
   "zkWmBh": {
@@ -8268,7 +8268,7 @@
     "message": "YouTube URL",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 147]],
+    "origin": [["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 146]],
     "translation": "URL YouTube"
   }
 }
