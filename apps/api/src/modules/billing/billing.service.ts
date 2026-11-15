@@ -92,11 +92,10 @@ export class BillingService {
     const existing = (await userRepo.getById(db, user.id))?.stripeCustomerId;
     if (existing) return existing;
 
-    const customer = await createStripeClient().customers.create({
-      email: user.email,
-      name: user.name,
-      metadata: { userId: user.id },
-    });
+    const customer = await createStripeClient().customers.create(
+      { email: user.email, name: user.name, metadata: { userId: user.id } },
+      { idempotencyKey: `customer-${user.id}` },
+    );
     await userRepo.update(db, user.id, { stripeCustomerId: customer.id });
     return customer.id;
   }

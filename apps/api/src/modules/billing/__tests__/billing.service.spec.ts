@@ -84,9 +84,7 @@ beforeEach(() => {
   );
   vi.spyOn(subscriptionRepo, "getById").mockResolvedValue(undefined);
   vi.spyOn(subscriptionRepo, "create").mockResolvedValue({ id: 7 } as never);
-  vi.spyOn(subscriptionRepo, "updateById").mockResolvedValue(
-    undefined,
-  );
+  vi.spyOn(subscriptionRepo, "updateById").mockResolvedValue(undefined);
   stripe.subscriptions.retrieve.mockResolvedValue(stripeSub());
   stripe.checkout.sessions.create.mockResolvedValue({ url: "https://co" });
   service = new BillingService();
@@ -365,15 +363,17 @@ describe("createCheckoutSession", () => {
       stripeCustomerId: null,
     } as never);
     stripe.customers.create.mockResolvedValue({ id: "cus_new" });
-    const update = vi
-      .spyOn(userRepo, "update")
-      .mockResolvedValue(undefined);
+    const update = vi.spyOn(userRepo, "update").mockResolvedValue(undefined);
 
     await service.createCheckoutSession(user, {
       ...input,
       workspaceName: "Acme",
     });
 
+    expect(stripe.customers.create).toHaveBeenCalledWith(
+      expect.objectContaining({ email: "user@example.com" }),
+      { idempotencyKey: "customer-user_1" },
+    );
     expect(update).toHaveBeenCalledWith(expect.anything(), "user_1", {
       stripeCustomerId: "cus_new",
     });
