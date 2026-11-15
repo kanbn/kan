@@ -9,6 +9,7 @@ import { RequestLoggingMiddleware } from "./common/logging/request-logging.middl
 import { createRateLimiter, RATE_LIMITER } from "./common/rate-limiter.js";
 import { HealthController } from "./health.controller.js";
 import { AttachmentModule } from "./modules/attachment/attachment.module.js";
+import { BillingModule } from "./modules/billing/billing.module.js";
 import { BoardMemberModule } from "./modules/board-member/board-member.module.js";
 import { BoardModule } from "./modules/board/board.module.js";
 import { CardModule } from "./modules/card/card.module.js";
@@ -45,6 +46,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     UserModule,
     WebhookModule,
     WorkspaceModule,
+    ...(process.env.NEXT_PUBLIC_KAN_ENV === "cloud" ? [BillingModule] : []),
   ],
   controllers: [HealthController],
   providers: [

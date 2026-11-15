@@ -42,7 +42,7 @@ export function setupStripeWebhookForwarding() {
       `http://localhost:${process.env.CLOUD_PORT ?? "3100"}`;
     [authListener, legacyListener] = await Promise.all([
       startStripeListen(`${baseURL}/api/auth/stripe/webhook`, apiKey),
-      startStripeListen(`${baseURL}/api/stripe/webhook`, apiKey),
+      startStripeListen(`${baseURL}/api/v1/stripe/webhook`, apiKey),
     ]);
   });
 
