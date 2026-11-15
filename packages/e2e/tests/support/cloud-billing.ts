@@ -26,8 +26,7 @@ export const hasRealStripeCredentials =
   isStripeCliAvailable();
 
 export function setupStripeWebhookForwarding() {
-  let authListener: StripeListener | undefined;
-  let legacyListener: StripeListener | undefined;
+  let listener: StripeListener | undefined;
 
   test.beforeAll(async () => {
     if (!hasRealStripeCredentials) return;
@@ -40,15 +39,14 @@ export function setupStripeWebhookForwarding() {
     const baseURL =
       process.env.PLAYWRIGHT_BASE_URL ??
       `http://localhost:${process.env.CLOUD_PORT ?? "3100"}`;
-    [authListener, legacyListener] = await Promise.all([
-      startStripeListen(`${baseURL}/api/auth/stripe/webhook`, apiKey),
-      startStripeListen(`${baseURL}/api/v1/stripe/webhook`, apiKey),
-    ]);
+    listener = await startStripeListen(
+      `${baseURL}/api/v1/stripe/webhook`,
+      apiKey,
+    );
   });
 
   test.afterAll(() => {
-    authListener?.stop();
-    legacyListener?.stop();
+    listener?.stop();
   });
 }
 

@@ -22,6 +22,7 @@ export const cancelWorkspaceAccess = async (
     const isPublicIdAvailable = await workspaceRepo.isWorkspaceSlugAvailable(
       db,
       workspace.publicId,
+      workspace.id,
     );
     if (!isPublicIdAvailable) {
       newSlug = generateUID();

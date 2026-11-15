@@ -65,7 +65,6 @@
   "devDependencies": {
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
-    "@kan/stripe": "workspace:*",
     "@kan/tailwind-config": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "@lingui/cli": "^6.12.0",
