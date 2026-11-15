@@ -45,16 +45,8 @@ export default function WorkspaceNameView() {
   const plan = searchParams.get("plan") ?? "solo";
   const billing = searchParams.get("billing") ?? "annual";
   const returnUrl = searchParams.get("returnUrl") ?? "/boards";
-  const licenseKeyParam = searchParams.get("license_key");
-  const isLicenseFlow =
-    !!licenseKeyParam || searchParams.get("partner") === "1";
+  const isLicenseFlow = searchParams.get("partner") === "1";
   const { showPopup } = usePopup();
-
-  useEffect(() => {
-    if (licenseKeyParam) {
-      localStorage.setItem("partnerLicenseKey", licenseKeyParam);
-    }
-  }, [licenseKeyParam]);
 
   const isTeamPlan = plan === "team";
 
@@ -118,15 +110,7 @@ export default function WorkspaceNameView() {
         void queryClient.invalidateQueries({
           queryKey: getHasAvailablePartnerSlotQueryKey(),
         });
-        const storedLicenseKey = localStorage.getItem("partnerLicenseKey");
-        if (storedLicenseKey) {
-          localStorage.removeItem("partnerLicenseKey");
-          router.push(
-            `/api/partner/link?license_key=${encodeURIComponent(storedLicenseKey)}`,
-          );
-        } else {
-          router.push(`/boards?workspacePublicId=${workspace.publicId}`);
-        }
+        router.push(`/boards?workspacePublicId=${workspace.publicId}`);
       },
       onError: () => {
         showPopup({

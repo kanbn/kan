@@ -85,16 +85,6 @@ export const env = createEnv({
     STRIPE_PRO_PLAN_MONTHLY_PRICE_ID: z.string().optional(),
     STRIPE_PRO_PLAN_YEARLY_PRICE_ID: z.string().optional(),
     S3_AVATAR_UPLOAD_LIMIT: z.string().optional(),
-    PARTNER_TOKEN_URL: z.string().optional(),
-    PARTNER_CLIENT_ID: z.string().optional(),
-    PARTNER_CLIENT_SECRET: z.string().optional(),
-    PARTNER_REDIRECT_URL: z.string().optional(),
-    PARTNER_OAUTH_LICENSE_URL: z.string().optional(),
-    PARTNER_LICENSE_API_URL: z.string().optional(),
-    PARTNER_API_KEY: z.string().optional(),
-    PARTNER_API_KEY_HEADER: z.string().optional(),
-    PARTNER_SIGNATURE_HEADER: z.string().optional(),
-    PARTNER_TIMESTAMP_HEADER: z.string().optional(),
   },
 
   /**
