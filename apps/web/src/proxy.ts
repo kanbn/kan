@@ -3,13 +3,6 @@ import { NextResponse } from "next/server";
 
 import { env } from "@kan/shared/env";
 
-const MCP_HOSTNAMES = new Set(["mcp.kan.bn", "mcp-staging.kan.bn"]);
-
-const OAUTH_DISCOVERY_PATHS = new Set([
-  "/.well-known/oauth-protected-resource",
-  "/.well-known/oauth-authorization-server",
-]);
-
 function resolveLoginUrl(request: NextRequest) {
   const publicBaseUrl = env("NEXT_PUBLIC_BASE_URL");
 
@@ -25,22 +18,6 @@ function resolveLoginUrl(request: NextRequest) {
 }
 
 export function proxy(request: NextRequest) {
-  const host = request.headers.get("host")?.split(":")[0];
-
-  if (
-    host &&
-    MCP_HOSTNAMES.has(host) &&
-    OAUTH_DISCOVERY_PATHS.has(request.nextUrl.pathname)
-  ) {
-    return new NextResponse(null, { status: 404 });
-  }
-
-  if (request.nextUrl.pathname === "/" && host && MCP_HOSTNAMES.has(host)) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/api/mcp";
-    return NextResponse.rewrite(url);
-  }
-
   if (
     request.nextUrl.pathname === "/forgot-password" &&
     env("NEXT_PUBLIC_DISABLE_EMAIL")?.toLowerCase() === "true"
@@ -58,10 +35,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/forgot-password",
-    "/.well-known/oauth-protected-resource",
-    "/.well-known/oauth-authorization-server",
-  ],
+  matcher: ["/", "/forgot-password"],
 };
