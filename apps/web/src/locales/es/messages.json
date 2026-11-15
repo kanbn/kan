@@ -78,7 +78,7 @@
       "0": ["labelPublicIds.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 580]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 573]],
     "translation": "{0} etiquetas"
   },
   "9x4DAL": {
@@ -258,14 +258,16 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/pages/partner/activate.tsx", 46]],
-    "translation": "Activar | kan.bn"
+    "translation": "Activar | kan.bn",
+    "obsolete": true
   },
   "mkehy7": {
     "message": "Activate your account",
     "placeholders": {},
     "comments": [],
     "origin": [["src/pages/partner/activate.tsx", 56]],
-    "translation": "Activa tu cuenta"
+    "translation": "Activa tu cuenta",
+    "obsolete": true
   },
   "F6pfE9": {
     "message": "Active",
@@ -349,7 +351,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/card/components/AttachmentUpload.tsx", 126],
+      ["src/views/card/components/AttachmentUpload.tsx", 118],
       ["src/views/card/components/Dropdown.tsx", 126]
     ],
     "translation": "Añadir lista de verificación"
@@ -523,7 +525,7 @@
     "message": "Adjust the square crop to fit your avatar.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 254]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 245]],
     "translation": "Ajusta el recorte cuadrado para que se adapte a tu avatar."
   },
   "U3pytU": {
@@ -625,10 +627,7 @@
     "message": "Already have an account? <0><1>Sign in</1></0>",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/pages/partner/activate.tsx", 96],
-      ["src/views/auth/signup/index.tsx", 90]
-    ],
+    "origin": [["src/views/auth/signup/index.tsx", 90]],
     "translation": "¿Ya tienes una cuenta? <0><1>Inicia sesión</1></0>"
   },
   "j1-HPc": {
@@ -880,8 +879,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 643],
-      ["src/views/board/components/NewCardForm.tsx", 644]
+      ["src/views/board/components/NewCardForm.tsx", 636],
+      ["src/views/board/components/NewCardForm.tsx", 637]
     ],
     "translation": "Adjuntar archivos"
   },
@@ -889,7 +888,7 @@
     "message": "Attachment uploaded",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 46]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 38]],
     "translation": "Archivo adjunto subido"
   },
   "1rWxEw": {
@@ -905,7 +904,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 233],
-      ["src/views/onboarding/workspace-details/index.tsx", 301]
+      ["src/views/onboarding/workspace-details/index.tsx", 285]
     ],
     "translation": "Atrás"
   },
@@ -1513,7 +1512,7 @@
       ["src/views/card/components/DeleteCommentConfirmation.tsx", 81],
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 64],
       ["src/views/onboarding/select-plan/index.tsx", 248],
-      ["src/views/settings/components/Avatar.tsx", 285],
+      ["src/views/settings/components/Avatar.tsx", 276],
       ["src/views/settings/components/ChangePasswordConfirmation.tsx", 202],
       [
         "src/views/settings/components/ClearCustomPermissionsConfirmation.tsx",
@@ -1577,7 +1576,7 @@
     "message": "Card title",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 448]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 441]],
     "translation": "Título de la tarjeta"
   },
   "rQXTmd": {
@@ -1648,7 +1647,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/pages/partner/activate.tsx", 56],
       ["src/views/auth/forgot-password/index.tsx", 68],
       ["src/views/auth/login/index.tsx", 43],
       ["src/views/auth/signup/index.tsx", 71]
@@ -1745,7 +1743,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/Dashboard.tsx", 285],
+      ["src/components/Dashboard.tsx", 250],
       ["src/views/card/index.tsx", 397],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/settings/components/NewApiKeyModal.tsx", 136]
@@ -1973,7 +1971,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 254],
-      ["src/views/onboarding/workspace-details/index.tsx", 318]
+      ["src/views/onboarding/workspace-details/index.tsx", 302]
     ],
     "translation": "Continuar"
   },
@@ -2093,7 +2091,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 217],
-      ["src/views/board/components/NewCardForm.tsx", 675],
+      ["src/views/board/components/NewCardForm.tsx", 668],
       ["src/views/board/components/NewListForm.tsx", 161]
     ],
     "translation": "Crear otro"
@@ -2109,7 +2107,7 @@
     "message": "Create card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 685]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 678]],
     "translation": "Crear tarjeta"
   },
   "d33Usy": {
@@ -2164,7 +2162,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/NewCardForm.tsx", 542],
+      ["src/views/board/components/NewCardForm.tsx", 535],
       ["src/views/card/components/LabelSelector.tsx", 111]
     ],
     "translation": "Crear nueva etiqueta"
@@ -2232,7 +2230,7 @@
     "message": "Crop your avatar",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 251]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 242]],
     "translation": "Recorta tu avatar"
   },
   "MtNNDo": {
@@ -2320,7 +2318,7 @@
     "message": "Custom usernames require upgrading to a Team plan",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 255]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 239]],
     "translation": "Los nombres de usuario personalizados requieren actualizar a un plan de Equipo"
   },
   "j9IZZ0": {
@@ -2646,7 +2644,7 @@
     "message": "Download failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 146]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 147]],
     "translation": "Error en la descarga"
   },
   "XicmhT": {
@@ -2655,7 +2653,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 191],
-      ["src/views/board/components/NewCardForm.tsx", 597],
+      ["src/views/board/components/NewCardForm.tsx", 590],
       ["src/views/card/index.tsx", 143]
     ],
     "translation": "Fecha de vencimiento"
@@ -2842,7 +2840,7 @@
     "message": "Engineering",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 193]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 177]],
     "translation": "Ingeniería"
   },
   "0-ewPp": {
@@ -3093,8 +3091,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/settings/components/Avatar.tsx", 70],
-      ["src/views/settings/components/Avatar.tsx", 197]
+      ["src/views/settings/components/Avatar.tsx", 69],
+      ["src/views/settings/components/Avatar.tsx", 188]
     ],
     "translation": "Error al subir la imagen de perfil"
   },
@@ -3219,7 +3217,7 @@
     "message": "Failed to upload attachment. Please try again.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 53]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 45]],
     "translation": "No se pudo subir el archivo adjunto. Por favor, inténtalo de nuevo."
   },
   "_lDBHm": {
@@ -4013,7 +4011,7 @@
     "origin": [
       ["src/views/board/components/CardContextLabelsModal.tsx", 34],
       ["src/views/board/components/Filters.tsx", 173],
-      ["src/views/board/components/NewCardForm.tsx", 546],
+      ["src/views/board/components/NewCardForm.tsx", 539],
       ["src/views/card/components/LabelSelector.tsx", 112],
       ["src/views/card/index.tsx", 123]
     ],
@@ -4105,14 +4103,16 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/Dashboard.tsx", 112]],
-    "translation": "Licencia activada"
+    "translation": "Licencia activada",
+    "obsolete": true
   },
   "K3LUJr": {
     "message": "License activation failed",
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/Dashboard.tsx", 126]],
-    "translation": "Error al activar la licencia"
+    "translation": "Error al activar la licencia",
+    "obsolete": true
   },
   "1njn7W": {
     "message": "Light",
@@ -4283,7 +4283,7 @@
     "message": "Marketing",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 193]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 177]],
     "translation": "Marketing"
   },
   "agPptk": {
@@ -4343,7 +4343,7 @@
       ["src/components/SideNavigation.tsx", 126],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/Filters.tsx", 164],
-      ["src/views/board/components/NewCardForm.tsx", 504],
+      ["src/views/board/components/NewCardForm.tsx", 497],
       ["src/views/card/components/MemberSelector.tsx", 117],
       ["src/views/card/index.tsx", 133],
       ["src/views/members/index.tsx", 295],
@@ -4519,7 +4519,7 @@
     "message": "New card",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 431]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 424]],
     "translation": "Nueva tarjeta"
   },
   "cWcxrL": {
@@ -4675,7 +4675,7 @@
     "message": "No download URL available for this attachment.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 147]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 148]],
     "translation": "No hay URL de descarga disponible para este adjunto."
   },
   "TXO5TM": {
@@ -4690,7 +4690,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/Dashboard.tsx", 123]],
-    "translation": "No se proporcionó ninguna clave de licencia. Por favor, intente activarla nuevamente."
+    "translation": "No se proporcionó ninguna clave de licencia. Por favor, intente activarla nuevamente.",
+    "obsolete": true
   },
   "hXMFoN": {
     "message": "No lists",
@@ -4887,7 +4888,7 @@
     "message": "Password already set",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 275]],
+    "origin": [["src/components/Dashboard.tsx", 240]],
     "translation": "Contraseña ya establecida"
   },
   "IrZaAn": {
@@ -5138,7 +5139,7 @@
     "message": "Please select a file to upload.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 71]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 70]],
     "translation": "Por favor, selecciona un archivo para subir."
   },
   "tyHiOa": {
@@ -5166,7 +5167,7 @@
       ["src/views/board/members/index.tsx", 87],
       ["src/views/boards/components/ImportBoardsForm.tsx", 259],
       ["src/views/boards/components/ImportBoardsForm.tsx", 451],
-      ["src/views/card/components/AttachmentThumbnails.tsx", 77],
+      ["src/views/card/components/AttachmentThumbnails.tsx", 78],
       ["src/views/card/components/ChecklistItemRow.tsx", 81],
       ["src/views/card/components/ChecklistItemRow.tsx", 111],
       ["src/views/card/components/ChecklistNameInput.tsx", 52],
@@ -5190,9 +5191,9 @@
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 104],
       ["src/views/members/components/InviteMemberForm.tsx", 131],
       ["src/views/members/index.tsx", 78],
-      ["src/views/onboarding/workspace-details/index.tsx", 134],
-      ["src/views/onboarding/workspace-details/index.tsx", 184],
-      ["src/views/settings/components/Avatar.tsx", 198],
+      ["src/views/onboarding/workspace-details/index.tsx", 118],
+      ["src/views/onboarding/workspace-details/index.tsx", 168],
+      ["src/views/settings/components/Avatar.tsx", 189],
       ["src/views/settings/components/DeleteAccountConfirmation.tsx", 39],
       ["src/views/settings/components/DeleteWorkspaceConfirmation.tsx", 54],
       ["src/views/settings/components/UpdateDisplayNameForm.tsx", 58],
@@ -5318,7 +5319,7 @@
     "message": "Profile image updated",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 187]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 178]],
     "translation": "Imagen de perfil actualizada"
   },
   "4XF0BB": {
@@ -5418,7 +5419,7 @@
     "message": "Remove file",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 662]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 655]],
     "translation": "Eliminar archivo"
   },
   "Tir5Ud": {
@@ -5602,7 +5603,7 @@
       ["src/views/home/components/Footer.tsx", 36],
       ["src/views/home/components/Header.tsx", 13],
       ["src/views/home/components/Header.tsx", 28],
-      ["src/views/onboarding/workspace-details/index.tsx", 193]
+      ["src/views/onboarding/workspace-details/index.tsx", 177]
     ],
     "translation": "Hoja de ruta"
   },
@@ -5664,7 +5665,7 @@
     "origin": [
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 182],
       ["src/views/card/components/Comment.tsx", 207],
-      ["src/views/settings/components/Avatar.tsx", 288]
+      ["src/views/settings/components/Avatar.tsx", 279]
     ],
     "translation": "Guardar"
   },
@@ -5912,7 +5913,7 @@
     "message": "Set up your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 213]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 197]],
     "translation": "Configura tu espacio de trabajo"
   },
   "Tz0i8g": {
@@ -6016,14 +6017,16 @@
     },
     "comments": [],
     "origin": [["src/pages/partner/activate.tsx", 62]],
-    "translation": "Inicia sesión o crea una cuenta para activar tu licencia de {partnerName}"
+    "translation": "Inicia sesión o crea una cuenta para activar tu licencia de {partnerName}",
+    "obsolete": true
   },
   "4dGN6E": {
     "message": "Sign in or create an account to activate your license",
     "placeholders": {},
     "comments": [],
     "origin": [["src/pages/partner/activate.tsx", 67]],
-    "translation": "Inicia sesión o crea una cuenta para activar tu licencia"
+    "translation": "Inicia sesión o crea una cuenta para activar tu licencia",
+    "obsolete": true
   },
   "fcWrnU": {
     "message": "Sign out",
@@ -6031,7 +6034,7 @@
     "comments": [],
     "origin": [
       ["src/views/onboarding/select-plan/index.tsx", 327],
-      ["src/views/onboarding/workspace-details/index.tsx", 389]
+      ["src/views/onboarding/workspace-details/index.tsx", 373]
     ],
     "translation": "Cerrar sesión"
   },
@@ -6138,7 +6141,7 @@
     "message": "Some attachments failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 351]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 344]],
     "translation": "Error en algunos archivos adjuntos"
   },
   "uKMhOo": {
@@ -6153,14 +6156,16 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/pages/partner/activate.tsx", 73]],
-    "translation": "Algo salió mal durante la activación. Por favor, inténtalo de nuevo."
+    "translation": "Algo salió mal durante la activación. Por favor, inténtalo de nuevo.",
+    "obsolete": true
   },
   "r-dxEH": {
     "message": "Something went wrong during license activation.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/Dashboard.tsx", 129]],
-    "translation": "Algo salió mal durante la activación de la licencia."
+    "translation": "Algo salió mal durante la activación de la licencia.",
+    "obsolete": true
   },
   "kf83Ld": {
     "message": "Something went wrong.",
@@ -6451,7 +6456,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/Dashboard.tsx", 121]],
-    "translation": "No se pudo encontrar esa clave de licencia. Por favor, contacte con soporte."
+    "translation": "No se pudo encontrar esa clave de licencia. Por favor, contacte con soporte.",
+    "obsolete": true
   },
   "NcFrgC": {
     "message": "The board has been archived.",
@@ -6492,7 +6498,7 @@
       "failedCount": ["failedCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/NewCardForm.tsx", 352]],
+    "origin": [["src/views/board/components/NewCardForm.tsx", 345]],
     "translation": "La tarjeta se creó, pero no se pudieron cargar {failedCount} de {0} archivos adjuntos."
   },
   "jlB2RY": {
@@ -6643,14 +6649,14 @@
     "message": "This URL has already been taken",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 94]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 86]],
     "translation": "Esta URL ya está en uso"
   },
   "gKmoow": {
     "message": "This URL is reserved",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 96]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 88]],
     "translation": "Esta URL está reservada"
   },
   "OAYToL": {
@@ -6922,7 +6928,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 118],
-      ["src/views/onboarding/workspace-details/index.tsx", 133]
+      ["src/views/onboarding/workspace-details/index.tsx", 117]
     ],
     "translation": "No se pudo crear el espacio de trabajo"
   },
@@ -6930,7 +6936,7 @@
     "message": "Unable to delete attachment",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 76]],
+    "origin": [["src/views/card/components/AttachmentThumbnails.tsx", 77]],
     "translation": "No se pudo eliminar el archivo adjunto"
   },
   "Z6r9z1": {
@@ -7036,7 +7042,7 @@
     "message": "Unable to start checkout",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 183]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 167]],
     "translation": "No se pudo iniciar el proceso de pago"
   },
   "KNK33q": {
@@ -7401,7 +7407,7 @@
     "message": "Upload failed",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 52]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 44]],
     "translation": "Error al subir"
   },
   "BBUDfW": {
@@ -7570,7 +7576,8 @@
     },
     "comments": [],
     "origin": [["src/pages/partner/activate.tsx", 60]],
-    "translation": "Enviamos un enlace a {magicLinkRecipient}"
+    "translation": "Enviamos un enlace a {magicLinkRecipient}",
+    "obsolete": true
   },
   "9y1RcT": {
     "message": "We're just getting started. ",
@@ -7758,7 +7765,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 278],
+      ["src/views/onboarding/workspace-details/index.tsx", 262],
       ["src/views/settings/WorkspaceSettings.tsx", 56]
     ],
     "translation": "Descripción del espacio de trabajo"
@@ -7816,7 +7823,7 @@
     "comments": [],
     "origin": [
       ["src/components/NewWorkspaceForm.tsx", 174],
-      ["src/views/onboarding/workspace-details/index.tsx", 222],
+      ["src/views/onboarding/workspace-details/index.tsx", 206],
       ["src/views/settings/components/UpdateWorkspaceNameForm.tsx", 85],
       ["src/views/settings/WorkspaceSettings.tsx", 37]
     ],
@@ -7934,7 +7941,7 @@
     "message": "You can always change these later in settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 216]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 200]],
     "translation": "Siempre puedes cambiar esto más tarde en la configuración."
   },
   "aelko-": {
@@ -8068,7 +8075,7 @@
     "message": "Your account already has a password. You can change it from your account settings.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/Dashboard.tsx", 277]],
+    "origin": [["src/components/Dashboard.tsx", 242]],
     "translation": "Tu cuenta ya tiene una contraseña. Puedes cambiarla desde la configuración de tu cuenta."
   },
   "GoDLB9": {
@@ -8105,7 +8112,7 @@
     "message": "Your file has been uploaded successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/AttachmentUpload.tsx", 47]],
+    "origin": [["src/views/card/components/AttachmentUpload.tsx", 39]],
     "translation": "Tu archivo se ha subido correctamente."
   },
   "HcT8J4": {
@@ -8134,14 +8141,16 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/Dashboard.tsx", 113]],
-    "translation": "Su licencia ha sido activada exitosamente."
+    "translation": "Su licencia ha sido activada exitosamente.",
+    "obsolete": true
   },
   "-A6Wuq": {
     "message": "Your license is not active. Please check your account.",
     "placeholders": {},
     "comments": [],
     "origin": [["src/components/Dashboard.tsx", 122]],
-    "translation": "Su licencia no está activa. Por favor, revise su cuenta."
+    "translation": "Su licencia no está activa. Por favor, revise su cuenta.",
+    "obsolete": true
   },
   "Ozt2vv": {
     "message": "Your password has been changed.",
@@ -8172,7 +8181,7 @@
     "message": "Your profile image has been updated.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/settings/components/Avatar.tsx", 188]],
+    "origin": [["src/views/settings/components/Avatar.tsx", 179]],
     "translation": "Tu imagen de perfil ha sido actualizada."
   },
   "-jbXzb": {
@@ -8208,14 +8217,14 @@
     "message": "Your workspace",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 349]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 333]],
     "translation": "Tu espacio de trabajo"
   },
   "j0o6ml": {
     "message": "Your workspace description",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/onboarding/workspace-details/index.tsx", 352]],
+    "origin": [["src/views/onboarding/workspace-details/index.tsx", 336]],
     "translation": "Descripción de tu espacio de trabajo"
   },
   "GnSSGm": {
@@ -8259,8 +8268,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/onboarding/workspace-details/index.tsx", 232],
-      ["src/views/onboarding/workspace-details/index.tsx", 233]
+      ["src/views/onboarding/workspace-details/index.tsx", 216],
+      ["src/views/onboarding/workspace-details/index.tsx", 217]
     ],
     "translation": "tu-espacio-de-trabajo"
   },

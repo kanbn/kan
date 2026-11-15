@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        580
+        573
       ]
     ],
     "translation": "{0} labels"
@@ -440,7 +440,8 @@
         46
       ]
     ],
-    "translation": "Activate | kan.bn"
+    "translation": "Activate | kan.bn",
+    "obsolete": true
   },
   "mkehy7": {
     "message": "Activate your account",
@@ -452,7 +453,8 @@
         56
       ]
     ],
-    "translation": "Activate your account"
+    "translation": "Activate your account",
+    "obsolete": true
   },
   "F6pfE9": {
     "message": "Active",
@@ -585,7 +587,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        126
+        118
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -891,7 +893,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        254
+        245
       ]
     ],
     "translation": "Adjust the square crop to fit your avatar."
@@ -1058,10 +1060,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      [
-        "src/pages/partner/activate.tsx",
-        96
-      ],
       [
         "src/views/auth/signup/index.tsx",
         90
@@ -1464,11 +1462,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        643
+        636
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        644
+        637
       ]
     ],
     "translation": "Attach files"
@@ -1480,7 +1478,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        46
+        38
       ]
     ],
     "translation": "Attachment uploaded"
@@ -1508,7 +1506,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        301
+        285
       ]
     ],
     "translation": "Back"
@@ -2541,7 +2539,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        285
+        276
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2653,7 +2651,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        448
+        441
       ]
     ],
     "translation": "Card title"
@@ -2775,10 +2773,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      [
-        "src/pages/partner/activate.tsx",
-        56
-      ],
       [
         "src/views/auth/forgot-password/index.tsx",
         68
@@ -2929,7 +2923,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        285
+        250
       ],
       [
         "src/views/card/index.tsx",
@@ -3319,7 +3313,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        318
+        302
       ]
     ],
     "translation": "Continue"
@@ -3511,7 +3505,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        675
+        668
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3539,7 +3533,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        685
+        678
       ]
     ],
     "translation": "Create card"
@@ -3631,7 +3625,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        542
+        535
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3747,7 +3741,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        251
+        242
       ]
     ],
     "translation": "Crop your avatar"
@@ -3890,7 +3884,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        255
+        239
       ]
     ],
     "translation": "Custom usernames require upgrading to a Team plan"
@@ -4476,7 +4470,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        146
+        147
       ]
     ],
     "translation": "Download failed"
@@ -4492,7 +4486,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        597
+        590
       ],
       [
         "src/views/card/index.tsx",
@@ -4796,7 +4790,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        193
+        177
       ]
     ],
     "translation": "Engineering"
@@ -5182,11 +5176,11 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        70
+        69
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        197
+        188
       ]
     ],
     "translation": "Error uploading profile image"
@@ -5390,7 +5384,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        53
+        45
       ]
     ],
     "translation": "Failed to upload attachment. Please try again."
@@ -6740,7 +6734,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        546
+        539
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -6897,7 +6891,8 @@
         112
       ]
     ],
-    "translation": "License activated"
+    "translation": "License activated",
+    "obsolete": true
   },
   "K3LUJr": {
     "message": "License activation failed",
@@ -6909,7 +6904,8 @@
         126
       ]
     ],
-    "translation": "License activation failed"
+    "translation": "License activation failed",
+    "obsolete": true
   },
   "1njn7W": {
     "message": "Light",
@@ -7198,7 +7194,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        193
+        177
       ]
     ],
     "translation": "Marketing"
@@ -7314,7 +7310,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        504
+        497
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -7625,7 +7621,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        431
+        424
       ]
     ],
     "translation": "New card"
@@ -7885,7 +7881,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        147
+        148
       ]
     ],
     "translation": "No download URL available for this attachment."
@@ -7912,7 +7908,8 @@
         123
       ]
     ],
-    "translation": "No license key was provided. Please try activating again."
+    "translation": "No license key was provided. Please try activating again.",
+    "obsolete": true
   },
   "hXMFoN": {
     "message": "No lists",
@@ -8241,7 +8238,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        275
+        240
       ]
     ],
     "translation": "Password already set"
@@ -8653,7 +8650,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        71
+        70
       ]
     ],
     "translation": "Please select a file to upload."
@@ -8733,7 +8730,7 @@
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        77
+        78
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
@@ -8829,15 +8826,15 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        134
+        118
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        184
+        168
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        198
+        189
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
@@ -9086,7 +9083,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        187
+        178
       ]
     ],
     "translation": "Profile image updated"
@@ -9250,7 +9247,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        662
+        655
       ]
     ],
     "translation": "Remove file"
@@ -9569,7 +9566,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        193
+        177
       ]
     ],
     "translation": "Roadmap"
@@ -9670,7 +9667,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        288
+        279
       ]
     ],
     "translation": "Save"
@@ -10086,7 +10083,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        213
+        197
       ]
     ],
     "translation": "Set up your workspace"
@@ -10265,7 +10262,8 @@
         62
       ]
     ],
-    "translation": "Sign in or create an account to activate your {partnerName} license"
+    "translation": "Sign in or create an account to activate your {partnerName} license",
+    "obsolete": true
   },
   "4dGN6E": {
     "message": "Sign in or create an account to activate your license",
@@ -10277,7 +10275,8 @@
         67
       ]
     ],
-    "translation": "Sign in or create an account to activate your license"
+    "translation": "Sign in or create an account to activate your license",
+    "obsolete": true
   },
   "fcWrnU": {
     "message": "Sign out",
@@ -10290,7 +10289,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        389
+        373
       ]
     ],
     "translation": "Sign out"
@@ -10466,7 +10465,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        351
+        344
       ]
     ],
     "translation": "Some attachments failed"
@@ -10493,7 +10492,8 @@
         73
       ]
     ],
-    "translation": "Something went wrong during activation. Please try again."
+    "translation": "Something went wrong during activation. Please try again.",
+    "obsolete": true
   },
   "r-dxEH": {
     "message": "Something went wrong during license activation.",
@@ -10505,7 +10505,8 @@
         129
       ]
     ],
-    "translation": "Something went wrong during license activation."
+    "translation": "Something went wrong during license activation.",
+    "obsolete": true
   },
   "kf83Ld": {
     "message": "Something went wrong.",
@@ -10991,7 +10992,8 @@
         121
       ]
     ],
-    "translation": "That license key could not be found. Please contact support."
+    "translation": "That license key could not be found. Please contact support.",
+    "obsolete": true
   },
   "NcFrgC": {
     "message": "The board has been archived.",
@@ -11059,7 +11061,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        352
+        345
       ]
     ],
     "translation": "The card was created, but {failedCount} of {0} attachments could not be uploaded."
@@ -11303,7 +11305,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        94
+        86
       ]
     ],
     "translation": "This URL has already been taken"
@@ -11315,7 +11317,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        96
+        88
       ]
     ],
     "translation": "This URL is reserved"
@@ -11759,7 +11761,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        133
+        117
       ]
     ],
     "translation": "Unable to create workspace"
@@ -11771,7 +11773,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
-        76
+        77
       ]
     ],
     "translation": "Unable to delete attachment"
@@ -11935,7 +11937,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        183
+        167
       ]
     ],
     "translation": "Unable to start checkout"
@@ -12556,7 +12558,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        52
+        44
       ]
     ],
     "translation": "Upload failed"
@@ -12840,7 +12842,8 @@
         60
       ]
     ],
-    "translation": "We sent a link to {magicLinkRecipient}"
+    "translation": "We sent a link to {magicLinkRecipient}",
+    "obsolete": true
   },
   "9y1RcT": {
     "message": "We're just getting started. ",
@@ -13150,7 +13153,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        278
+        262
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -13238,7 +13241,7 @@
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        222
+        206
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
@@ -13426,7 +13429,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        216
+        200
       ]
     ],
     "translation": "You can always change these later in settings."
@@ -13661,7 +13664,7 @@
     "origin": [
       [
         "src/components/Dashboard.tsx",
-        277
+        242
       ]
     ],
     "translation": "Your account already has a password. You can change it from your account settings."
@@ -13721,7 +13724,7 @@
     "origin": [
       [
         "src/views/card/components/AttachmentUpload.tsx",
-        47
+        39
       ]
     ],
     "translation": "Your file has been uploaded successfully."
@@ -13772,7 +13775,8 @@
         113
       ]
     ],
-    "translation": "Your license has been activated successfully."
+    "translation": "Your license has been activated successfully.",
+    "obsolete": true
   },
   "-A6Wuq": {
     "message": "Your license is not active. Please check your account.",
@@ -13784,7 +13788,8 @@
         122
       ]
     ],
-    "translation": "Your license is not active. Please check your account."
+    "translation": "Your license is not active. Please check your account.",
+    "obsolete": true
   },
   "Ozt2vv": {
     "message": "Your password has been changed.",
@@ -13829,7 +13834,7 @@
     "origin": [
       [
         "src/views/settings/components/Avatar.tsx",
-        188
+        179
       ]
     ],
     "translation": "Your profile image has been updated."
@@ -13890,7 +13895,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        349
+        333
       ]
     ],
     "translation": "Your workspace"
@@ -13902,7 +13907,7 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        352
+        336
       ]
     ],
     "translation": "Your workspace description"
@@ -13962,11 +13967,11 @@
     "origin": [
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        232
+        216
       ],
       [
         "src/views/onboarding/workspace-details/index.tsx",
-        233
+        217
       ]
     ],
     "translation": "your-workspace"
