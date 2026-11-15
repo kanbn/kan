@@ -19,6 +19,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule, {
     logger: new NestPinoLogger(),
+    rawBody: true,
   });
   app.enableShutdownHooks(["SIGINT"]);
 

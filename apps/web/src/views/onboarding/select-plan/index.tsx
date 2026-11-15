@@ -126,7 +126,7 @@ export default function SelectPlanView() {
 
   const handleContinue = async () => {
     if (isUpgradingExistingWorkspace && selected !== "solo") {
-      const response = await fetch("/api/stripe/create_checkout_session", {
+      const response = await fetch("/api/v1/billing/checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

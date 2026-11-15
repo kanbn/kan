@@ -49,7 +49,7 @@ export default function BillingSettings() {
 
   const handleOpenBillingPortal = async () => {
     try {
-      const response = await fetch("/api/stripe/create_billing_session", {
+      const response = await fetch("/api/v1/billing/portal-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });

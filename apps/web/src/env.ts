@@ -79,7 +79,6 @@ export const env = createEnv({
     S3_FORCE_PATH_STYLE: z.string().optional(),
     EMAIL_FROM: z.string().optional(),
     REDIS_URL: z.string().url().optional().or(z.literal("")),
-    STRIPE_WEBHOOK_SECRET_LEGACY: z.string().optional(),
     STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID: z.string().optional(),
     STRIPE_TEAM_PLAN_YEARLY_PRICE_ID: z.string().optional(),
     STRIPE_PRO_PLAN_MONTHLY_PRICE_ID: z.string().optional(),

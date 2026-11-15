@@ -139,7 +139,7 @@ export default function WorkspaceNameView() {
 
     setIsRedirectingToCheckout(true);
     try {
-      const response = await fetch("/api/stripe/create_checkout_session", {
+      const response = await fetch("/api/v1/billing/checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -16,6 +16,7 @@ const FORWARDED_HEADERS = [
   "authorization",
   "content-type",
   "cookie",
+  "stripe-signature",
   "x-api-key",
   "x-file-content-type",
   "x-original-filename",
