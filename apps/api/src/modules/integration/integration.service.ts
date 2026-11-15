@@ -7,6 +7,7 @@ import {
 
 import * as integrationsRepo from "@kan/db/repository/integration.repo";
 import { encryptToken } from "@kan/server/utils/encryption";
+import { encryptTrelloToken } from "@kan/server/utils/trello-token";
 
 import { db } from "../../common/session.util.js";
 
@@ -78,6 +79,25 @@ export class IntegrationService {
       provider: "github",
       userId: input.userId,
       accessToken: encryptToken(input.token),
+      expiresAt,
+    });
+
+    return { success: true };
+  }
+
+  async saveTrelloToken(input: { userId: string; token: string }) {
+    if (!process.env.TRELLO_APP_API_KEY)
+      throw new InternalServerErrorException(
+        "Trello API key not set in environment variables",
+      );
+
+    const expiresAt = new Date();
+    expiresAt.setFullYear(expiresAt.getFullYear() + 1);
+
+    await integrationsRepo.createOrUpdateProvider(db, {
+      provider: "trello",
+      userId: input.userId,
+      accessToken: encryptTrelloToken(input.token),
       expiresAt,
     });
 

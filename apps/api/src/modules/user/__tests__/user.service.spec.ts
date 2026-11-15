@@ -1,4 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { Readable } from "node:stream";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as userRepo from "@kan/db/repository/user.repo";
 import * as sharedUtils from "@kan/shared/utils";
@@ -117,5 +118,51 @@ describe("UserService.setPassword", () => {
         headers: new Headers(),
       }),
     ).rejects.toMatchObject({ status: 500 });
+  });
+});
+
+describe("UserService.uploadAvatar", () => {
+  const upload = (contentType: string, data: Buffer, maxBytes = 10) =>
+    service.uploadAvatar({
+      userId: "user_1",
+      body: Readable.from([data]),
+      filename: "me pic.png",
+      contentType,
+      maxBytes,
+    });
+
+  beforeEach(() => vi.stubEnv("NEXT_PUBLIC_AVATAR_BUCKET_NAME", "avatars"));
+  afterEach(() => vi.unstubAllEnvs());
+
+  it("stores the image under the user's prefix and saves the key", async () => {
+    const put = vi.spyOn(sharedUtils, "uploadObject").mockResolvedValue();
+    const update = vi
+      .spyOn(userRepo, "update")
+      .mockResolvedValue(undefined);
+
+    await upload("image/png", Buffer.from("abc"));
+
+    expect(put).toHaveBeenCalledWith(
+      "avatars",
+      "user_1/me_pic.png",
+      Buffer.from("abc"),
+      "image/png",
+      3,
+    );
+    expect(update).toHaveBeenCalledWith(expect.anything(), "user_1", {
+      image: "user_1/me_pic.png",
+    });
+  });
+
+  it("rejects non-image types and oversized bodies", async () => {
+    const put = vi.spyOn(sharedUtils, "uploadObject").mockResolvedValue();
+
+    await expect(upload("text/html", Buffer.from("a"))).rejects.toMatchObject({
+      status: 400,
+    });
+    await expect(upload("image/png", Buffer.alloc(11))).rejects.toMatchObject({
+      status: 413,
+    });
+    expect(put).not.toHaveBeenCalled();
   });
 });

@@ -1,9 +1,11 @@
+import type { Readable } from "node:stream";
 import {
   DeleteObjectCommand,
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 import { env } from "../env";
@@ -57,10 +59,14 @@ export async function generateUploadUrl(
   );
 }
 
+const contentDisposition = (filename: string) =>
+  `attachment; filename="${filename.replace(/[^\x20-\x7e]|["\\]/g, "_")}"; filename*=UTF-8''${encodeURIComponent(filename)}`;
+
 export async function generateDownloadUrl(
   bucket: string,
   key: string,
   expiresIn = 3600,
+  downloadFilename?: string,
 ) {
   const client = createS3Client();
   return getSignedUrl(
@@ -68,9 +74,32 @@ export async function generateDownloadUrl(
     new GetObjectCommand({
       Bucket: bucket,
       Key: key,
+      ...(downloadFilename !== undefined && {
+        ResponseContentDisposition: contentDisposition(downloadFilename),
+      }),
     }),
     { expiresIn },
   );
+}
+
+export async function uploadObject(
+  bucket: string,
+  key: string,
+  body: Buffer | Readable,
+  contentType: string,
+  contentLength: number,
+) {
+  await new Upload({
+    client: createS3Client(),
+    params: {
+      Bucket: bucket,
+      Key: key,
+      Body: body,
+      ContentType: contentType,
+      ContentLength: contentLength,
+    },
+    leavePartsOnError: false,
+  }).done();
 }
 
 export async function deleteObject(bucket: string, key: string) {
@@ -121,6 +150,7 @@ export async function generateAvatarUrl(
 export async function generateAttachmentUrl(
   attachmentKey: string | null | undefined,
   expiresIn = 86400, // 24 hours
+  downloadFilename?: string,
 ): Promise<string | null> {
   if (!attachmentKey) {
     return null;
@@ -132,7 +162,12 @@ export async function generateAttachmentUrl(
   }
 
   try {
-    return await generateDownloadUrl(bucket, attachmentKey, expiresIn);
+    return await generateDownloadUrl(
+      bucket,
+      attachmentKey,
+      expiresIn,
+      downloadFilename,
+    );
   } catch {
     // If URL generation fails, return null
     return null;

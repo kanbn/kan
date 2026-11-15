@@ -17,6 +17,8 @@ const FORWARDED_HEADERS = [
   "content-type",
   "cookie",
   "x-api-key",
+  "x-file-content-type",
+  "x-original-filename",
 ];
 
 const readBody = async (req: NextApiRequest) => {

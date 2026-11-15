@@ -21,6 +21,7 @@ interface Attachment {
   publicId: string;
   contentType: string;
   url: string | null;
+  downloadUrl?: string | null;
   originalFilename: string | null;
   s3Key: string;
   size?: number | null;
@@ -150,10 +151,8 @@ export function AttachmentThumbnails({
       return;
     }
 
-    const downloadUrl = `/api/download/attatchment?url=${encodeURIComponent(attachment.url)}&filename=${encodeURIComponent(attachment.originalFilename ?? "attachment")}`;
-
     const link = document.createElement("a");
-    link.href = downloadUrl;
+    link.href = attachment.downloadUrl ?? attachment.url;
     link.style.display = "none";
     document.body.appendChild(link);
     link.click();

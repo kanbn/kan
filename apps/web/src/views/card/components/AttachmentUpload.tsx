@@ -4,13 +4,12 @@ import { HiOutlinePaperClip } from "react-icons/hi";
 import { HiCheckBadge } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
-import { env } from "@kan/shared/env";
-
 import Button from "~/components/Button";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
 import { useCardCache } from "~/utils/cardCache";
 import { invalidateCard } from "~/utils/cardInvalidation";
+import { uploadFile as postFile } from "~/utils/uploadFile";
 
 export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
   const { openModal } = useModal();
@@ -24,17 +23,10 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
     setUploading(true);
 
     try {
-      const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
-      const response = await fetch(
-        `${baseUrl}/api/upload/attachment?cardPublicId=${encodeURIComponent(cardPublicId)}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": file.type,
-            "x-original-filename": encodeURIComponent(file.name),
-          },
-          body: file,
-        },
+      const response = await postFile(
+        `/cards/${encodeURIComponent(cardPublicId)}/attachments`,
+        file,
+        file.name,
       );
 
       if (!response.ok) {

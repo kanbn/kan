@@ -13,6 +13,7 @@ import {
   GitHubStatusResponseDto,
   IntegrationProviderDto,
   SaveGitHubTokenDto,
+  SaveTrelloTokenDto,
   SuccessResponseDto,
 } from "./dto/integration.dto.js";
 import { IntegrationService } from "./integration.service.js";
@@ -74,6 +75,22 @@ export class IntegrationController {
     @Body() input: SaveGitHubTokenDto,
   ) {
     return this.integrationService.saveGitHubToken({
+      userId: user.id,
+      token: input.token,
+    });
+  }
+
+  @Post("trello/token")
+  @ApiOperation({
+    operationId: "saveTrelloToken",
+    summary: "Save a Trello access token for the current user",
+  })
+  @ZodResponse({ status: 201, type: SuccessResponseDto })
+  async saveTrelloToken(
+    @CurrentUser() user: User,
+    @Body() input: SaveTrelloTokenDto,
+  ) {
+    return this.integrationService.saveTrelloToken({
       userId: user.id,
       token: input.token,
     });

@@ -95,4 +95,19 @@ describe("IntegrationService", () => {
     expect(stored.accessToken).not.toContain("ghp_secret");
     expect(stored.accessToken.length).toBeGreaterThan(0);
   });
+
+  it("stores the Trello token encrypted", async () => {
+    vi.stubEnv("BETTER_AUTH_SECRET", "test-secret-test-secret-test-secret");
+    const save = vi
+      .spyOn(integrationsRepo, "createOrUpdateProvider")
+      .mockResolvedValue(undefined);
+
+    expect(
+      await service.saveTrelloToken({ userId: "user_1", token: "tok" }),
+    ).toEqual({ success: true });
+
+    const saved = save.mock.calls[0]?.[1];
+    expect(saved).toMatchObject({ provider: "trello", userId: "user_1" });
+    expect(saved?.accessToken).not.toBe("tok");
+  });
 });

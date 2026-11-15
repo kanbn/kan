@@ -24,9 +24,12 @@ test(
     await onboarding.createFirstWorkspace("E2E Test Workspace");
     await dashboard.expectSignedInAs(user);
 
-    const authResponse = await page.request.post("/api/trello/authenticate", {
-      data: { token: "mock-trello-token" },
-    });
+    const authResponse = await page.request.post(
+      "/api/v1/integration/trello/token",
+      {
+        data: { token: "mock-trello-token" },
+      },
+    );
     expect(authResponse.ok()).toBe(true);
 
     await page.getByRole("button", { name: "Import" }).click();
@@ -81,9 +84,12 @@ test(
     await onboarding.createFirstWorkspace("E2E Test Workspace");
     await dashboard.expectSignedInAs(user);
 
-    const authResponse = await page.request.post("/api/trello/authenticate", {
-      data: { token: "mock-trello-token" },
-    });
+    const authResponse = await page.request.post(
+      "/api/v1/integration/trello/token",
+      {
+        data: { token: "mock-trello-token" },
+      },
+    );
     expect(authResponse.ok()).toBe(true);
 
     const workspacePublicId = await page.evaluate(() =>
