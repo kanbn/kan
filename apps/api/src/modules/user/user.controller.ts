@@ -1,3 +1,4 @@
+import type { Request } from "express";
 import { Body, Get, Post, Put, Req } from "@nestjs/common";
 import { ApiOperation } from "@nestjs/swagger";
 import { ZodResponse } from "nestjs-zod";
@@ -6,6 +7,10 @@ import type { AuthenticatedRequest } from "../../common/interfaces/request.inter
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
 import { CurrentUser } from "../../common/decorators/current-user.decorator.js";
+import {
+  ApiRawUpload,
+  readUploadHeaders,
+} from "../../common/raw-upload.util.js";
 import { headersFromRaw } from "../../common/session.util.js";
 import {
   SetPasswordDto,
@@ -15,6 +20,9 @@ import {
   UserResponseDto,
 } from "./dto/user.dto.js";
 import { UserService } from "./user.service.js";
+
+const maxAvatarBytes = () =>
+  Number.parseInt(process.env.S3_AVATAR_UPLOAD_LIMIT ?? "2097152", 10);
 
 @AuthenticatedController("Users", "users")
 export class UserController {
@@ -59,6 +67,28 @@ export class UserController {
       userId: user.id,
       newPassword: input.newPassword,
       headers: headersFromRaw(req.headers),
+    });
+  }
+
+  @Post("me/avatar")
+  @ApiOperation({
+    operationId: "uploadAvatar",
+    summary: "Upload a new profile image for the current user",
+  })
+  @ApiRawUpload()
+  @ZodResponse({ status: 201, type: SuccessResponseDto })
+  async uploadAvatar(
+    @CurrentUser() user: User,
+    @Req() req: Request,
+  ): Promise<SuccessResponseDto> {
+    const maxBytes = maxAvatarBytes();
+    const { filename, contentType } = readUploadHeaders(req, maxBytes);
+    return this.userService.uploadAvatar({
+      userId: user.id,
+      body: req,
+      filename,
+      contentType,
+      maxBytes,
     });
   }
 }

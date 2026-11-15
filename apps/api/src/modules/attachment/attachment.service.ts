@@ -1,4 +1,6 @@
+import type { Readable } from "node:stream";
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -17,6 +19,7 @@ import {
   deleteObject,
   generateUID,
   generateUploadUrl,
+  uploadObject,
 } from "@kan/shared/utils";
 
 import { assertFound } from "../../common/assert-found.util.js";
@@ -25,6 +28,9 @@ import { db } from "../../common/session.util.js";
 const log = createLogger("attachment");
 
 const getBucket = () => process.env.NEXT_PUBLIC_ATTACHMENTS_BUCKET_NAME;
+
+const sanitizeFilename = (filename: string) =>
+  filename.replace(/[^a-zA-Z0-9._-]/g, "_").substring(0, 200);
 
 @Injectable()
 export class AttachmentService {
@@ -44,6 +50,23 @@ export class AttachmentService {
     return card;
   }
 
+  private async keyPrefix(card: { workspaceId: number }, cardPublicId: string) {
+    const workspace = await assertFound(
+      workspaceRepo.getById(db, card.workspaceId),
+      `Workspace not found`,
+    );
+    return `${workspace.publicId}/${cardPublicId}/`;
+  }
+
+  private bucket() {
+    const bucket = getBucket();
+    if (!bucket)
+      throw new InternalServerErrorException(
+        `Attachments bucket not configured`,
+      );
+    return bucket;
+  }
+
   async generateUploadUrl(input: {
     cardPublicId: string;
     filename: string;
@@ -51,25 +74,43 @@ export class AttachmentService {
     userId: string;
   }) {
     const card = await this.assertCanEditCard(input.cardPublicId, input.userId);
-    const workspace = await assertFound(
-      workspaceRepo.getById(db, card.workspaceId),
-      `Workspace not found`,
-    );
-
-    const bucket = getBucket();
-    if (!bucket)
-      throw new InternalServerErrorException(
-        `Attachments bucket not configured`,
-      );
-
-    const sanitizedFilename = input.filename
-      .replace(/[^a-zA-Z0-9._-]/g, "_")
-      .substring(0, 200);
-    const key = `${workspace.publicId}/${input.cardPublicId}/${generateUID()}-${sanitizedFilename}`;
+    const bucket = this.bucket();
+    const key = `${await this.keyPrefix(card, input.cardPublicId)}${generateUID()}-${sanitizeFilename(input.filename)}`;
 
     const url = await generateUploadUrl(bucket, key, input.contentType, 3600);
 
     return { url, key };
+  }
+
+  async upload(input: {
+    cardPublicId: string;
+    body: Readable;
+    filename: string;
+    contentType: string;
+    size: number;
+    userId: string;
+  }) {
+    const card = await this.assertCanEditCard(input.cardPublicId, input.userId);
+    const bucket = this.bucket();
+    const filename = sanitizeFilename(input.filename);
+    const s3Key = `${await this.keyPrefix(card, input.cardPublicId)}${generateUID()}-${filename}`;
+
+    await uploadObject(
+      bucket,
+      s3Key,
+      input.body,
+      input.contentType,
+      input.size,
+    );
+
+    return this.saveAttachment(card, {
+      s3Key,
+      filename,
+      originalFilename: input.filename,
+      contentType: input.contentType,
+      size: input.size,
+      userId: input.userId,
+    });
   }
 
   async confirm(input: {
@@ -83,6 +124,23 @@ export class AttachmentService {
   }) {
     const card = await this.assertCanEditCard(input.cardPublicId, input.userId);
 
+    if (!input.s3Key.startsWith(await this.keyPrefix(card, input.cardPublicId)))
+      throw new BadRequestException("Invalid attachment key");
+
+    return this.saveAttachment(card, input);
+  }
+
+  private async saveAttachment(
+    card: { id: number },
+    input: {
+      s3Key: string;
+      filename: string;
+      originalFilename: string;
+      contentType: string;
+      size: number;
+      userId: string;
+    },
+  ) {
     const attachment = await cardAttachmentRepo.create(db, {
       cardId: card.id,
       filename: input.filename,

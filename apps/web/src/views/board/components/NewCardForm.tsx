@@ -11,7 +11,6 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 
-import { env } from "@kan/shared/env";
 import { generateUID } from "@kan/shared/utils";
 
 import type { WorkspaceMember } from "~/components/Editor";
@@ -33,6 +32,7 @@ import { getApiFieldError } from "~/utils/apiError";
 import { useBoardCache } from "~/utils/boardCache";
 import { createCardFromInput } from "~/utils/cardMutations";
 import { formatMemberDisplayName, getAvatarUrl } from "~/utils/helpers";
+import { uploadFile } from "~/utils/uploadFile";
 
 type NewCardFormInput = CreateCardInput & {
   isCreateAnotherEnabled: boolean;
@@ -295,21 +295,14 @@ export function NewCardForm({
   };
 
   const uploadAttachments = async (cardPublicId: string, files: File[]) => {
-    const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
     let failedCount = 0;
 
     for (const file of files) {
       try {
-        const response = await fetch(
-          `${baseUrl}/api/upload/attachment?cardPublicId=${encodeURIComponent(cardPublicId)}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": file.type || "application/octet-stream",
-              "x-original-filename": encodeURIComponent(file.name),
-            },
-            body: file,
-          },
+        const response = await uploadFile(
+          `/cards/${encodeURIComponent(cardPublicId)}/attachments`,
+          file,
+          file.name,
         );
         if (!response.ok) failedCount++;
       } catch {

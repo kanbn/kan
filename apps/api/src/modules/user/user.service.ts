@@ -1,14 +1,18 @@
+import type { Readable } from "node:stream";
 import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  PayloadTooLargeException,
 } from "@nestjs/common";
 
 import * as userRepo from "@kan/db/repository/user.repo";
-import { generateAvatarUrl } from "@kan/shared/utils";
+import { generateAvatarUrl, uploadObject } from "@kan/shared/utils";
 
 import { assertFound } from "../../common/assert-found.util.js";
 import { db, setUserPassword } from "../../common/session.util.js";
+
+const AVATAR_CONTENT_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 @Injectable()
 export class UserService {
@@ -66,6 +70,46 @@ export class UserService {
     } catch {
       throw new InternalServerErrorException("Failed to set password");
     }
+
+    return { success: true };
+  }
+
+  async uploadAvatar(input: {
+    userId: string;
+    body: Readable;
+    filename: string;
+    contentType: string;
+    maxBytes: number;
+  }) {
+    if (!AVATAR_CONTENT_TYPES.includes(input.contentType))
+      throw new BadRequestException("Invalid content type");
+
+    const bucket = process.env.NEXT_PUBLIC_AVATAR_BUCKET_NAME;
+    if (!bucket)
+      throw new InternalServerErrorException("Avatar bucket not configured");
+
+    const chunks: Buffer[] = [];
+    let size = 0;
+    for await (const chunk of input.body as AsyncIterable<Buffer>) {
+      size += chunk.length;
+      if (size > input.maxBytes)
+        throw new PayloadTooLargeException("File too large");
+      chunks.push(chunk);
+    }
+
+    const filename = input.filename
+      .replace(/[^a-zA-Z0-9._-]/g, "_")
+      .substring(0, 200);
+    const key = `${input.userId}/${filename}`;
+
+    await uploadObject(
+      bucket,
+      key,
+      Buffer.concat(chunks),
+      input.contentType,
+      size,
+    );
+    await userRepo.update(db, input.userId, { image: key });
 
     return { success: true };
   }

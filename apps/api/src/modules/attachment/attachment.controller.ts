@@ -1,10 +1,15 @@
-import { Body, Delete, Param, Post } from "@nestjs/common";
+import type { Request } from "express";
+import { Body, Delete, Param, Post, Req } from "@nestjs/common";
 import { ApiOperation, ApiParam } from "@nestjs/swagger";
 import { ZodResponse } from "nestjs-zod";
 
 import type { User } from "../../common/interfaces/user.interface.js";
 import { AuthenticatedController } from "../../common/decorators/authenticated-controller.decorator.js";
 import { CurrentUser } from "../../common/decorators/current-user.decorator.js";
+import {
+  ApiRawUpload,
+  readUploadHeaders,
+} from "../../common/raw-upload.util.js";
 import { AttachmentService } from "./attachment.service.js";
 import {
   AttachmentResponseDto,
@@ -14,9 +19,33 @@ import {
   UploadUrlResponseDto,
 } from "./dto/attachment.dto.js";
 
+const MAX_ATTACHMENT_BYTES = 50 * 1024 * 1024;
+
 @AuthenticatedController("Attachments", "cards/:cardPublicId/attachments")
 export class CardAttachmentController {
   constructor(private readonly attachmentService: AttachmentService) {}
+
+  @Post()
+  @ApiOperation({
+    operationId: "uploadAttachment",
+    summary: "Upload a file and attach it to a card",
+  })
+  @ApiParam({ name: "cardPublicId" })
+  @ApiRawUpload()
+  @ZodResponse({ status: 201, type: AttachmentResponseDto })
+  async upload(
+    @CurrentUser() user: User,
+    @Param("cardPublicId") cardPublicId: string,
+    @Req() req: Request,
+  ): Promise<AttachmentResponseDto> {
+    const file = readUploadHeaders(req, MAX_ATTACHMENT_BYTES);
+    return this.attachmentService.upload({
+      cardPublicId,
+      body: req,
+      ...file,
+      userId: user.id,
+    });
+  }
 
   @Post("upload-url")
   @ApiOperation({

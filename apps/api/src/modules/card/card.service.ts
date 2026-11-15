@@ -637,7 +637,14 @@ export class CardService {
     // Generate URLs for all attachments
     const attachmentsWithUrls = await Promise.all(
       result.attachments.map(async (attachment) => {
-        const url = await generateAttachmentUrl(attachment.s3Key);
+        const [url, downloadUrl] = await Promise.all([
+          generateAttachmentUrl(attachment.s3Key),
+          generateAttachmentUrl(
+            attachment.s3Key,
+            undefined,
+            attachment.originalFilename,
+          ),
+        ]);
         return {
           publicId: attachment.publicId,
           contentType: attachment.contentType,
@@ -645,6 +652,7 @@ export class CardService {
           originalFilename: attachment.originalFilename,
           size: attachment.size,
           url,
+          downloadUrl,
         };
       }),
     );

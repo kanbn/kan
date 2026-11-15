@@ -1,3 +1,4 @@
+import { Readable } from "node:stream";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
@@ -38,6 +39,9 @@ beforeEach(() => {
     card as never,
   );
   vi.spyOn(cardActivityRepo, "create").mockResolvedValue(undefined);
+  vi.spyOn(workspaceRepo, "getById").mockResolvedValue({
+    publicId: "workspace_1",
+  } as never);
   service = new AttachmentService();
 });
 
@@ -47,9 +51,6 @@ afterEach(() => {
 
 describe("AttachmentService.generateUploadUrl", () => {
   it("builds a sanitized key scoped to the workspace and card", async () => {
-    vi.spyOn(workspaceRepo, "getById").mockResolvedValue({
-      publicId: "workspace_1",
-    } as never);
     const upload = vi
       .spyOn(sharedUtils, "generateUploadUrl")
       .mockResolvedValue("https://signed/upload");
@@ -95,23 +96,67 @@ describe("AttachmentService.generateUploadUrl", () => {
   });
 });
 
-describe("AttachmentService.confirm", () => {
-  it("creates the attachment, logs activity and does not expose the internal id", async () => {
-    vi.spyOn(cardAttachmentRepo, "create").mockResolvedValue({
-      id: 9,
-      publicId: "attachment_1",
-      filename: "key-file.png",
-      originalFilename: "file.png",
+const createdAttachment = {
+  id: 9,
+  publicId: "attachment_1",
+  filename: "key-file.png",
+  originalFilename: "file.png",
+  contentType: "image/png",
+  size: 10,
+  s3Key: "workspace_1/card_12345678/key-file.png",
+  createdBy: "user_1",
+  createdAt: new Date("2026-01-01T00:00:00.000Z"),
+};
+
+describe("AttachmentService.upload", () => {
+  it("stores the file under the card's key prefix and saves the attachment", async () => {
+    const put = vi.spyOn(sharedUtils, "uploadObject").mockResolvedValue();
+    const create = vi
+      .spyOn(cardAttachmentRepo, "create")
+      .mockResolvedValue(createdAttachment);
+
+    await service.upload({
+      cardPublicId: "card_12345678",
+      body: Readable.from([]),
+      filename: "my file.png",
       contentType: "image/png",
       size: 10,
-      s3Key: "ws/card/key-file.png",
-      createdBy: "user_1",
-      createdAt: new Date("2026-01-01T00:00:00.000Z"),
+      userId: "user_1",
     });
+
+    const key = put.mock.calls[0]?.[1];
+    expect(key).toMatch(/^workspace_1\/card_12345678\/[^/]+-my_file\.png$/);
+    expect(create).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ s3Key: key, originalFilename: "my file.png" }),
+    );
+  });
+});
+
+describe("AttachmentService.confirm", () => {
+  it("rejects a key outside the card's prefix", async () => {
+    const create = vi.spyOn(cardAttachmentRepo, "create");
+
+    await expect(
+      service.confirm({
+        cardPublicId: "card_12345678",
+        s3Key: "workspace_2/card_other/key-file.png",
+        filename: "key-file.png",
+        originalFilename: "file.png",
+        contentType: "image/png",
+        size: 10,
+        userId: "user_1",
+      }),
+    ).rejects.toMatchObject({ status: 400 });
+    expect(create).not.toHaveBeenCalled();
+  });
+
+  it("creates the attachment, logs activity and does not expose the internal id", async () => {
+    vi.spyOn(cardAttachmentRepo, "create").mockResolvedValue(createdAttachment);
 
     const result = await service.confirm({
       cardPublicId: "card_12345678",
-      s3Key: "ws/card/key-file.png",
+      s3Key: "workspace_1/card_12345678/key-file.png",
       filename: "key-file.png",
       originalFilename: "file.png",
       contentType: "image/png",

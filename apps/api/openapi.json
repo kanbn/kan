@@ -1,6 +1,69 @@
 {
   "openapi": "3.0.0",
   "paths": {
+    "/cards/{cardPublicId}/attachments": {
+      "post": {
+        "operationId": "uploadAttachment",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-file-content-type",
+            "in": "header",
+            "description": "The file's MIME type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-original-filename",
+            "in": "header",
+            "description": "The URI-encoded original filename",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Upload a file and attach it to a card",
+        "tags": ["Attachments"]
+      }
+    },
     "/cards/{cardPublicId}/attachments/upload-url": {
       "post": {
         "operationId": "generateAttachmentUploadUrl",
@@ -42,9 +105,7 @@
           }
         ],
         "summary": "Generate a presigned URL for uploading an attachment",
-        "tags": [
-          "Attachments"
-        ]
+        "tags": ["Attachments"]
       }
     },
     "/cards/{cardPublicId}/attachments/confirm": {
@@ -88,9 +149,7 @@
           }
         ],
         "summary": "Confirm an attachment upload and save it to the card",
-        "tags": [
-          "Attachments"
-        ]
+        "tags": ["Attachments"]
       }
     },
     "/attachments/{attachmentPublicId}": {
@@ -124,9 +183,7 @@
           }
         ],
         "summary": "Delete an attachment",
-        "tags": [
-          "Attachments"
-        ]
+        "tags": ["Attachments"]
       }
     },
     "/workspaces/{workspacePublicId}/boards": {
@@ -147,10 +204,7 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": [
-                "regular",
-                "template"
-              ]
+              "enum": ["regular", "template"]
             }
           },
           {
@@ -159,10 +213,7 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": [
-                "true",
-                "false"
-              ]
+              "enum": ["true", "false"]
             }
           }
         ],
@@ -187,9 +238,7 @@
           }
         ],
         "summary": "List a workspace's boards",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       },
       "post": {
         "operationId": "createBoard",
@@ -231,9 +280,7 @@
           }
         ],
         "summary": "Create a board",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       }
     },
     "/boards/{boardPublicId}": {
@@ -309,10 +356,7 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": [
-                "regular",
-                "template"
-              ]
+              "enum": ["regular", "template"]
             }
           },
           {
@@ -322,10 +366,7 @@
             "schema": {
               "default": "full",
               "type": "string",
-              "enum": [
-                "full",
-                "summary"
-              ]
+              "enum": ["full", "summary"]
             }
           }
         ],
@@ -347,9 +388,7 @@
           }
         ],
         "summary": "Get a board by public ID",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       },
       "put": {
         "operationId": "updateBoard",
@@ -391,9 +430,7 @@
           }
         ],
         "summary": "Update a board",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       },
       "delete": {
         "operationId": "deleteBoard",
@@ -425,9 +462,7 @@
           }
         ],
         "summary": "Delete a board",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       }
     },
     "/boards/{boardPublicId}/move": {
@@ -471,9 +506,7 @@
           }
         ],
         "summary": "Move a board to another workspace",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       }
     },
     "/boards/{boardPublicId}/check-slug-availability": {
@@ -518,9 +551,7 @@
           }
         ],
         "summary": "Check if a board slug is available",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       }
     },
     "/workspaces/{workspaceSlug}/boards/{boardSlug}": {
@@ -612,9 +643,7 @@
           }
         },
         "summary": "Get a public board by workspace and board slug",
-        "tags": [
-          "Boards"
-        ]
+        "tags": ["Boards"]
       }
     },
     "/boards/{boardPublicId}/members": {
@@ -651,9 +680,7 @@
           }
         ],
         "summary": "List a board's members",
-        "tags": [
-          "Board Members"
-        ]
+        "tags": ["Board Members"]
       },
       "post": {
         "operationId": "addBoardMember",
@@ -695,9 +722,7 @@
           }
         ],
         "summary": "Add a workspace member to a board",
-        "tags": [
-          "Board Members"
-        ]
+        "tags": ["Board Members"]
       }
     },
     "/boards/{boardPublicId}/members/{workspaceMemberPublicId}": {
@@ -749,9 +774,7 @@
           }
         ],
         "summary": "Update a board member's role",
-        "tags": [
-          "Board Members"
-        ]
+        "tags": ["Board Members"]
       },
       "delete": {
         "operationId": "removeBoardMember",
@@ -791,9 +814,7 @@
           }
         ],
         "summary": "Remove a member from a board",
-        "tags": [
-          "Board Members"
-        ]
+        "tags": ["Board Members"]
       }
     },
     "/cards": {
@@ -828,9 +849,7 @@
           }
         ],
         "summary": "Create a card",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}": {
@@ -874,9 +893,7 @@
           }
         ],
         "summary": "Update a card",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       },
       "delete": {
         "operationId": "deleteCard",
@@ -908,9 +925,7 @@
           }
         ],
         "summary": "Delete a card",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       },
       "get": {
         "operationId": "getCard",
@@ -937,9 +952,7 @@
           }
         },
         "summary": "Get a card by public ID",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}/duplicate": {
@@ -983,9 +996,7 @@
           }
         ],
         "summary": "Duplicate a card",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}/comments": {
@@ -1029,9 +1040,7 @@
           }
         ],
         "summary": "Add a comment",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}/comments/{commentPublicId}": {
@@ -1083,9 +1092,7 @@
           }
         ],
         "summary": "Update a comment",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       },
       "delete": {
         "operationId": "deleteCardComment",
@@ -1125,9 +1132,7 @@
           }
         ],
         "summary": "Delete a comment",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}/labels/{labelPublicId}": {
@@ -1169,9 +1174,7 @@
           }
         ],
         "summary": "Add or remove a label on a card",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}/members/{workspaceMemberPublicId}": {
@@ -1213,9 +1216,7 @@
           }
         ],
         "summary": "Add or remove a member on a card",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}/activities": {
@@ -1272,10 +1273,7 @@
             "schema": {
               "default": "oldest",
               "type": "string",
-              "enum": [
-                "oldest",
-                "newest"
-              ]
+              "enum": ["oldest", "newest"]
             }
           }
         ],
@@ -1292,9 +1290,7 @@
           }
         },
         "summary": "Get a card's activities, paginated",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/checklists/{checklistPublicId}": {
@@ -1338,9 +1334,7 @@
           }
         ],
         "summary": "Update a checklist",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       },
       "delete": {
         "operationId": "deleteChecklist",
@@ -1372,9 +1366,7 @@
           }
         ],
         "summary": "Delete a checklist",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/checklists/{checklistPublicId}/items": {
@@ -1418,9 +1410,7 @@
           }
         ],
         "summary": "Add an item to a checklist",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/checklists/items/{checklistItemPublicId}": {
@@ -1464,9 +1454,7 @@
           }
         ],
         "summary": "Update a checklist item",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       },
       "delete": {
         "operationId": "deleteChecklistItem",
@@ -1498,9 +1486,7 @@
           }
         ],
         "summary": "Delete a checklist item",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/cards/{cardPublicId}/checklists": {
@@ -1544,9 +1530,7 @@
           }
         ],
         "summary": "Add a checklist to a card",
-        "tags": [
-          "Cards"
-        ]
+        "tags": ["Cards"]
       }
     },
     "/feedback": {
@@ -1581,9 +1565,7 @@
           }
         ],
         "summary": "Submit feedback",
-        "tags": [
-          "Feedback"
-        ]
+        "tags": ["Feedback"]
       }
     },
     "/integrations/trello/boards": {
@@ -1611,9 +1593,7 @@
           }
         ],
         "summary": "List the current user's Trello boards",
-        "tags": [
-          "Integrations"
-        ]
+        "tags": ["Integrations"]
       }
     },
     "/integrations/github/projects": {
@@ -1641,9 +1621,7 @@
           }
         ],
         "summary": "List the current user's GitHub projects",
-        "tags": [
-          "Integrations"
-        ]
+        "tags": ["Integrations"]
       }
     },
     "/imports/trello/boards": {
@@ -1678,9 +1656,7 @@
           }
         ],
         "summary": "Import boards from Trello into a workspace",
-        "tags": [
-          "Imports"
-        ]
+        "tags": ["Imports"]
       }
     },
     "/imports/github/projects": {
@@ -1715,9 +1691,7 @@
           }
         ],
         "summary": "Import projects from GitHub into a workspace",
-        "tags": [
-          "Imports"
-        ]
+        "tags": ["Imports"]
       }
     },
     "/integration/providers": {
@@ -1745,9 +1719,7 @@
           }
         ],
         "summary": "Get the current user's integration providers",
-        "tags": [
-          "Integration"
-        ]
+        "tags": ["Integration"]
       }
     },
     "/integration/disconnect": {
@@ -1782,9 +1754,7 @@
           }
         ],
         "summary": "Disconnect an integration",
-        "tags": [
-          "Integration"
-        ]
+        "tags": ["Integration"]
       }
     },
     "/integration/authorize": {
@@ -1797,9 +1767,7 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "enum": [
-                "trello"
-              ]
+              "enum": ["trello"]
             }
           }
         ],
@@ -1821,9 +1789,7 @@
           }
         ],
         "summary": "Get the authorization URL for an integration",
-        "tags": [
-          "Integration"
-        ]
+        "tags": ["Integration"]
       }
     },
     "/integration/github/token": {
@@ -1858,9 +1824,42 @@
           }
         ],
         "summary": "Save a GitHub access token for the current user",
-        "tags": [
-          "Integration"
-        ]
+        "tags": ["Integration"]
+      }
+    },
+    "/integration/trello/token": {
+      "post": {
+        "operationId": "saveTrelloToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveTrelloTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Save a Trello access token for the current user",
+        "tags": ["Integration"]
       }
     },
     "/integration/github": {
@@ -1885,9 +1884,7 @@
           }
         ],
         "summary": "Disconnect the current user's GitHub integration",
-        "tags": [
-          "Integration"
-        ]
+        "tags": ["Integration"]
       }
     },
     "/integration/github/status": {
@@ -1912,9 +1909,7 @@
           }
         ],
         "summary": "Check whether the current user has connected GitHub",
-        "tags": [
-          "Integration"
-        ]
+        "tags": ["Integration"]
       }
     },
     "/labels/{labelPublicId}": {
@@ -1948,9 +1943,7 @@
           }
         ],
         "summary": "Get a label by public ID",
-        "tags": [
-          "Labels"
-        ]
+        "tags": ["Labels"]
       },
       "put": {
         "operationId": "updateLabel",
@@ -1992,9 +1985,7 @@
           }
         ],
         "summary": "Update a label",
-        "tags": [
-          "Labels"
-        ]
+        "tags": ["Labels"]
       },
       "delete": {
         "operationId": "deleteLabel",
@@ -2026,9 +2017,7 @@
           }
         ],
         "summary": "Delete a label",
-        "tags": [
-          "Labels"
-        ]
+        "tags": ["Labels"]
       }
     },
     "/labels": {
@@ -2063,9 +2052,7 @@
           }
         ],
         "summary": "Create a label",
-        "tags": [
-          "Labels"
-        ]
+        "tags": ["Labels"]
       }
     },
     "/lists": {
@@ -2100,9 +2087,7 @@
           }
         ],
         "summary": "Create a list",
-        "tags": [
-          "Lists"
-        ]
+        "tags": ["Lists"]
       }
     },
     "/lists/{listPublicId}": {
@@ -2136,9 +2121,7 @@
           }
         ],
         "summary": "Delete a list",
-        "tags": [
-          "Lists"
-        ]
+        "tags": ["Lists"]
       },
       "put": {
         "operationId": "updateList",
@@ -2180,9 +2163,7 @@
           }
         ],
         "summary": "Update a list",
-        "tags": [
-          "Lists"
-        ]
+        "tags": ["Lists"]
       }
     },
     "/workspaces/{workspacePublicId}/members/invite": {
@@ -2226,9 +2207,7 @@
           }
         ],
         "summary": "Invite a member to a workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/{workspacePublicId}/members/{memberPublicId}": {
@@ -2270,9 +2249,7 @@
           }
         ],
         "summary": "Delete a member from a workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/{workspacePublicId}/members/{memberPublicId}/role": {
@@ -2324,9 +2301,7 @@
           }
         ],
         "summary": "Update member role",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/{workspacePublicId}/invite": {
@@ -2360,9 +2335,7 @@
           }
         ],
         "summary": "Get active invite link for workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/{workspacePublicId}/invites": {
@@ -2396,9 +2369,7 @@
           }
         ],
         "summary": "Create invite link for workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       },
       "delete": {
         "operationId": "deactivateInviteLink",
@@ -2430,9 +2401,7 @@
           }
         ],
         "summary": "Deactivate invite link for workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/invites/{inviteCode}": {
@@ -2461,9 +2430,7 @@
           }
         },
         "summary": "Get invite information by code",
-        "tags": [
-          "Invite"
-        ]
+        "tags": ["Invite"]
       }
     },
     "/invites/accept": {
@@ -2498,9 +2465,7 @@
           }
         ],
         "summary": "Accept an invite link",
-        "tags": [
-          "Invites"
-        ]
+        "tags": ["Invites"]
       }
     },
     "/workspaces/{workspacePublicId}/permissions/me": {
@@ -2534,9 +2499,7 @@
           }
         ],
         "summary": "Get my permissions",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions": {
@@ -2578,9 +2541,7 @@
           }
         ],
         "summary": "Get member permissions",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions/grant": {
@@ -2632,9 +2593,7 @@
           }
         ],
         "summary": "Grant permission to member",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions/revoke": {
@@ -2686,9 +2645,7 @@
           }
         ],
         "summary": "Revoke permission from member",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/members/{memberPublicId}/permissions/reset": {
@@ -2730,9 +2687,7 @@
           }
         ],
         "summary": "Reset member permissions to role defaults",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/members/permissions/reset": {
@@ -2766,9 +2721,7 @@
           }
         ],
         "summary": "Reset all member permission overrides in a workspace",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/roles": {
@@ -2802,9 +2755,7 @@
           }
         ],
         "summary": "Get workspace roles",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/roles/permissions": {
@@ -2838,9 +2789,7 @@
           }
         ],
         "summary": "Get workspace role permissions",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions": {
@@ -2882,9 +2831,7 @@
           }
         ],
         "summary": "Get role permissions",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions/grant": {
@@ -2936,9 +2883,7 @@
           }
         ],
         "summary": "Grant permission to role",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/workspaces/{workspacePublicId}/roles/{rolePublicId}/permissions/revoke": {
@@ -2990,9 +2935,7 @@
           }
         ],
         "summary": "Revoke permission from role",
-        "tags": [
-          "Permissions"
-        ]
+        "tags": ["Permissions"]
       }
     },
     "/users/me": {
@@ -3017,9 +2960,7 @@
           }
         ],
         "summary": "Get the current user",
-        "tags": [
-          "Users"
-        ]
+        "tags": ["Users"]
       }
     },
     "/users": {
@@ -3054,9 +2995,7 @@
           }
         ],
         "summary": "Update the current user",
-        "tags": [
-          "Users"
-        ]
+        "tags": ["Users"]
       }
     },
     "/users/me/password": {
@@ -3091,9 +3030,62 @@
           }
         ],
         "summary": "Set a password for a user who has none yet",
-        "tags": [
-          "Users"
-        ]
+        "tags": ["Users"]
+      }
+    },
+    "/users/me/avatar": {
+      "post": {
+        "operationId": "uploadAvatar",
+        "parameters": [
+          {
+            "name": "x-file-content-type",
+            "in": "header",
+            "description": "The file's MIME type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-original-filename",
+            "in": "header",
+            "description": "The URI-encoded original filename",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Upload a new profile image for the current user",
+        "tags": ["Users"]
       }
     },
     "/workspaces/{workspacePublicId}/webhooks": {
@@ -3130,9 +3122,7 @@
           }
         ],
         "summary": "List a workspace's webhooks",
-        "tags": [
-          "Webhooks"
-        ]
+        "tags": ["Webhooks"]
       },
       "post": {
         "operationId": "createWebhook",
@@ -3174,9 +3164,7 @@
           }
         ],
         "summary": "Create a webhook",
-        "tags": [
-          "Webhooks"
-        ]
+        "tags": ["Webhooks"]
       }
     },
     "/workspaces/{workspacePublicId}/webhooks/{webhookPublicId}": {
@@ -3228,9 +3216,7 @@
           }
         ],
         "summary": "Update a webhook",
-        "tags": [
-          "Webhooks"
-        ]
+        "tags": ["Webhooks"]
       },
       "delete": {
         "operationId": "deleteWebhook",
@@ -3270,9 +3256,7 @@
           }
         ],
         "summary": "Delete a webhook",
-        "tags": [
-          "Webhooks"
-        ]
+        "tags": ["Webhooks"]
       }
     },
     "/workspaces/{workspacePublicId}/webhooks/{webhookPublicId}/test": {
@@ -3314,9 +3298,7 @@
           }
         ],
         "summary": "Send a test payload to a webhook",
-        "tags": [
-          "Webhooks"
-        ]
+        "tags": ["Webhooks"]
       }
     },
     "/workspaces": {
@@ -3344,9 +3326,7 @@
           }
         ],
         "summary": "Get all workspaces",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       },
       "post": {
         "operationId": "createWorkspace",
@@ -3379,9 +3359,7 @@
           }
         ],
         "summary": "Create a workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/check-slug-availability": {
@@ -3429,9 +3407,7 @@
           }
         ],
         "summary": "Check if a workspace slug is available",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/has-available-partner-slot": {
@@ -3456,9 +3432,7 @@
           }
         ],
         "summary": "Check if the user has an available partner license slot",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/slug/{workspaceSlug}": {
@@ -3492,9 +3466,7 @@
           }
         ],
         "summary": "Get a workspace by slug",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/{workspacePublicId}": {
@@ -3528,9 +3500,7 @@
           }
         ],
         "summary": "Get a workspace by public ID",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       },
       "put": {
         "operationId": "updateWorkspace",
@@ -3572,9 +3542,7 @@
           }
         ],
         "summary": "Update a workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       },
       "delete": {
         "operationId": "deleteWorkspace",
@@ -3606,9 +3574,7 @@
           }
         ],
         "summary": "Delete a workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/workspaces/{workspacePublicId}/search": {
@@ -3675,9 +3641,7 @@
           }
         ],
         "summary": "Search boards and cards in a workspace",
-        "tags": [
-          "Workspaces"
-        ]
+        "tags": ["Workspaces"]
       }
     },
     "/stats": {
@@ -3706,9 +3670,7 @@
           }
         },
         "summary": "Instance-wide counts of users, workspaces, boards, cards, etc.",
-        "tags": [
-          "Health"
-        ]
+        "tags": ["Health"]
       }
     }
   },
@@ -3729,75 +3691,6 @@
       }
     },
     "schemas": {
-      "GenerateUploadUrlDto": {
-        "type": "object",
-        "properties": {
-          "filename": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "contentType": {
-            "type": "string"
-          },
-          "size": {
-            "type": "number",
-            "exclusiveMinimum": true,
-            "maximum": 52428800,
-            "minimum": 0
-          }
-        },
-        "required": [
-          "filename",
-          "contentType",
-          "size"
-        ]
-      },
-      "UploadUrlResponseDto_Output": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string"
-          },
-          "key": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "url",
-          "key"
-        ],
-        "additionalProperties": false
-      },
-      "ConfirmAttachmentDto": {
-        "type": "object",
-        "properties": {
-          "s3Key": {
-            "type": "string"
-          },
-          "filename": {
-            "type": "string"
-          },
-          "originalFilename": {
-            "type": "string"
-          },
-          "contentType": {
-            "type": "string"
-          },
-          "size": {
-            "type": "number",
-            "exclusiveMinimum": true,
-            "minimum": 0
-          }
-        },
-        "required": [
-          "s3Key",
-          "filename",
-          "originalFilename",
-          "contentType",
-          "size"
-        ]
-      },
       "AttachmentResponseDto_Output": {
         "type": "object",
         "properties": {
@@ -3836,6 +3729,68 @@
         ],
         "additionalProperties": false
       },
+      "GenerateUploadUrlDto": {
+        "type": "object",
+        "properties": {
+          "filename": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number",
+            "exclusiveMinimum": true,
+            "maximum": 52428800,
+            "minimum": 0
+          }
+        },
+        "required": ["filename", "contentType", "size"]
+      },
+      "UploadUrlResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          }
+        },
+        "required": ["url", "key"],
+        "additionalProperties": false
+      },
+      "ConfirmAttachmentDto": {
+        "type": "object",
+        "properties": {
+          "s3Key": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          },
+          "originalFilename": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number",
+            "exclusiveMinimum": true,
+            "minimum": 0
+          }
+        },
+        "required": [
+          "s3Key",
+          "filename",
+          "originalFilename",
+          "contentType",
+          "size"
+        ]
+      },
       "DeleteAttachmentResponseDto_Output": {
         "type": "object",
         "properties": {
@@ -3843,9 +3798,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "BoardListItemDto_Output": {
@@ -3875,11 +3828,7 @@
                   "type": "number"
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "index"
-              ],
+              "required": ["publicId", "name", "index"],
               "additionalProperties": false
             }
           },
@@ -3899,22 +3848,12 @@
                   "nullable": true
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "colourCode"
-              ],
+              "required": ["publicId", "name", "colourCode"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "publicId",
-          "name",
-          "favorite",
-          "lists",
-          "labels"
-        ],
+        "required": ["publicId", "name", "favorite", "lists", "labels"],
         "additionalProperties": false
       },
       "CreateBoardDto": {
@@ -3945,10 +3884,7 @@
           "type": {
             "description": "'regular' for a board (default), 'template' for a board template.",
             "type": "string",
-            "enum": [
-              "regular",
-              "template"
-            ]
+            "enum": ["regular", "template"]
           },
           "sourceBoardPublicId": {
             "description": "Public ID of a board or template to copy lists and labels from.",
@@ -3956,11 +3892,7 @@
             "minLength": 12
           }
         },
-        "required": [
-          "name",
-          "lists",
-          "labels"
-        ]
+        "required": ["name", "lists", "labels"]
       },
       "BoardCreateResponseDto_Output": {
         "type": "object",
@@ -3972,10 +3904,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicId",
-          "name"
-        ],
+        "required": ["publicId", "name"],
         "additionalProperties": false
       },
       "BoardDetailDto_Output": {
@@ -3992,10 +3921,7 @@
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "private",
-              "public"
-            ]
+            "enum": ["private", "public"]
           },
           "isArchived": {
             "type": "boolean"
@@ -4032,12 +3958,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "enum": [
-                        "invited",
-                        "active",
-                        "removed",
-                        "paused"
-                      ]
+                      "enum": ["invited", "active", "removed", "paused"]
                     },
                     "user": {
                       "type": "object",
@@ -4058,31 +3979,17 @@
                           "nullable": true
                         }
                       },
-                      "required": [
-                        "id",
-                        "name",
-                        "email",
-                        "image"
-                      ],
+                      "required": ["id", "name", "email", "image"],
                       "additionalProperties": false,
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "email",
-                    "status",
-                    "user"
-                  ],
+                  "required": ["publicId", "email", "status", "user"],
                   "additionalProperties": false
                 }
               }
             },
-            "required": [
-              "publicId",
-              "cardPrefix",
-              "members"
-            ],
+            "required": ["publicId", "cardPrefix", "members"],
             "additionalProperties": false
           },
           "labels": {
@@ -4101,11 +4008,7 @@
                   "nullable": true
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "colourCode"
-              ],
+              "required": ["publicId", "name", "colourCode"],
               "additionalProperties": false
             }
           },
@@ -4167,11 +4070,7 @@
                               "nullable": true
                             }
                           },
-                          "required": [
-                            "publicId",
-                            "name",
-                            "colourCode"
-                          ],
+                          "required": ["publicId", "name", "colourCode"],
                           "additionalProperties": false
                         }
                       },
@@ -4188,12 +4087,7 @@
                             },
                             "status": {
                               "type": "string",
-                              "enum": [
-                                "invited",
-                                "active",
-                                "removed",
-                                "paused"
-                              ]
+                              "enum": ["invited", "active", "removed", "paused"]
                             },
                             "user": {
                               "type": "object",
@@ -4210,21 +4104,12 @@
                                   "nullable": true
                                 }
                               },
-                              "required": [
-                                "name",
-                                "email",
-                                "image"
-                              ],
+                              "required": ["name", "email", "image"],
                               "additionalProperties": false,
                               "nullable": true
                             }
                           },
-                          "required": [
-                            "publicId",
-                            "email",
-                            "status",
-                            "user"
-                          ],
+                          "required": ["publicId", "email", "status", "user"],
                           "additionalProperties": false
                         }
                       },
@@ -4237,9 +4122,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "publicId"
-                          ],
+                          "required": ["publicId"],
                           "additionalProperties": false
                         }
                       },
@@ -4285,12 +4168,7 @@
                               }
                             }
                           },
-                          "required": [
-                            "publicId",
-                            "name",
-                            "index",
-                            "items"
-                          ],
+                          "required": ["publicId", "name", "index", "items"],
                           "additionalProperties": false
                         }
                       },
@@ -4303,9 +4181,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "publicId"
-                          ],
+                          "required": ["publicId"],
                           "additionalProperties": false
                         }
                       },
@@ -4361,12 +4237,7 @@
                   }
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "index",
-                "cards"
-              ],
+              "required": ["publicId", "name", "index", "cards"],
               "additionalProperties": false
             }
           },
@@ -4382,10 +4253,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "publicId",
-                "name"
-              ],
+              "required": ["publicId", "name"],
               "additionalProperties": false
             }
           }
@@ -4423,10 +4291,7 @@
           "visibility": {
             "description": "'public' boards can be viewed by anyone with the link, 'private' only by members.",
             "type": "string",
-            "enum": [
-              "public",
-              "private"
-            ]
+            "enum": ["public", "private"]
           },
           "favorite": {
             "description": "Whether the board is in the current user's favourites.",
@@ -4460,9 +4325,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "MoveBoardDto": {
@@ -4474,9 +4337,7 @@
             "description": "Public ID of the workspace to move the board to."
           }
         },
-        "required": [
-          "targetWorkspacePublicId"
-        ]
+        "required": ["targetWorkspacePublicId"]
       },
       "BoardSlugAvailabilityDto_Output": {
         "type": "object",
@@ -4485,9 +4346,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "isReserved"
-        ],
+        "required": ["isReserved"],
         "additionalProperties": false
       },
       "BoardBySlugDto_Output": {
@@ -4504,10 +4363,7 @@
           },
           "visibility": {
             "type": "string",
-            "enum": [
-              "private",
-              "public"
-            ]
+            "enum": ["private", "public"]
           },
           "workspace": {
             "type": "object",
@@ -4522,11 +4378,7 @@
                 "type": "string"
               }
             },
-            "required": [
-              "publicId",
-              "name",
-              "slug"
-            ],
+            "required": ["publicId", "name", "slug"],
             "additionalProperties": false
           },
           "labels": {
@@ -4545,11 +4397,7 @@
                   "nullable": true
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "colourCode"
-              ],
+              "required": ["publicId", "name", "colourCode"],
               "additionalProperties": false
             }
           },
@@ -4607,11 +4455,7 @@
                               "nullable": true
                             }
                           },
-                          "required": [
-                            "publicId",
-                            "name",
-                            "colourCode"
-                          ],
+                          "required": ["publicId", "name", "colourCode"],
                           "additionalProperties": false
                         }
                       },
@@ -4624,9 +4468,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "publicId"
-                          ],
+                          "required": ["publicId"],
                           "additionalProperties": false
                         }
                       },
@@ -4672,12 +4514,7 @@
                               }
                             }
                           },
-                          "required": [
-                            "publicId",
-                            "name",
-                            "index",
-                            "items"
-                          ],
+                          "required": ["publicId", "name", "index", "items"],
                           "additionalProperties": false
                         }
                       },
@@ -4690,9 +4527,7 @@
                               "type": "string"
                             }
                           },
-                          "required": [
-                            "publicId"
-                          ],
+                          "required": ["publicId"],
                           "additionalProperties": false
                         }
                       }
@@ -4712,12 +4547,7 @@
                   }
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "index",
-                "cards"
-              ],
+              "required": ["publicId", "name", "index", "cards"],
               "additionalProperties": false
             }
           },
@@ -4733,10 +4563,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "publicId",
-                "name"
-              ],
+              "required": ["publicId", "name"],
               "additionalProperties": false
             }
           }
@@ -4767,10 +4594,7 @@
           },
           "role": {
             "type": "string",
-            "enum": [
-              "admin",
-              "member"
-            ]
+            "enum": ["admin", "member"]
           },
           "workspaceRole": {
             "type": "string"
@@ -4799,12 +4623,7 @@
                 "nullable": true
               }
             },
-            "required": [
-              "id",
-              "name",
-              "email",
-              "image"
-            ],
+            "required": ["id", "name", "email", "image"],
             "additionalProperties": false,
             "nullable": true
           }
@@ -4832,15 +4651,10 @@
             "default": "member",
             "description": "Board role: 'admin' or 'member' (default).",
             "type": "string",
-            "enum": [
-              "admin",
-              "member"
-            ]
+            "enum": ["admin", "member"]
           }
         },
-        "required": [
-          "workspaceMemberPublicId"
-        ]
+        "required": ["workspaceMemberPublicId"]
       },
       "BoardMemberRoleResultDto_Output": {
         "type": "object",
@@ -4850,16 +4664,10 @@
           },
           "role": {
             "type": "string",
-            "enum": [
-              "admin",
-              "member"
-            ]
+            "enum": ["admin", "member"]
           }
         },
-        "required": [
-          "publicId",
-          "role"
-        ],
+        "required": ["publicId", "role"],
         "additionalProperties": false
       },
       "UpdateBoardMemberRoleDto": {
@@ -4867,16 +4675,11 @@
         "properties": {
           "role": {
             "type": "string",
-            "enum": [
-              "admin",
-              "member"
-            ],
+            "enum": ["admin", "member"],
             "description": "New board role: 'admin' or 'member'."
           }
         },
-        "required": [
-          "role"
-        ]
+        "required": ["role"]
       },
       "BoardMemberRemoveResponseDto_Output": {
         "type": "object",
@@ -4885,9 +4688,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicId"
-        ],
+        "required": ["publicId"],
         "additionalProperties": false
       },
       "CreateCardDto": {
@@ -4927,10 +4728,7 @@
           },
           "position": {
             "type": "string",
-            "enum": [
-              "start",
-              "end"
-            ],
+            "enum": ["start", "end"],
             "description": "Add the card at the start or end of the list."
           },
           "dueDate": {
@@ -4957,9 +4755,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicId"
-        ],
+        "required": ["publicId"],
         "additionalProperties": false
       },
       "UpdateCardDto": {
@@ -5013,12 +4809,7 @@
             "nullable": true
           }
         },
-        "required": [
-          "publicId",
-          "title",
-          "description",
-          "dueDate"
-        ],
+        "required": ["publicId", "title", "description", "dueDate"],
         "additionalProperties": false
       },
       "DuplicateCardDto": {
@@ -5070,9 +4861,7 @@
             "description": "Comment text. Plain text, or markdown or HTML for formatting."
           }
         },
-        "required": [
-          "comment"
-        ]
+        "required": ["comment"]
       },
       "CommentResponseDto_Output": {
         "type": "object",
@@ -5084,10 +4873,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicId",
-          "comment"
-        ],
+        "required": ["publicId", "comment"],
         "additionalProperties": false
       },
       "ToggleLabelResponseDto_Output": {
@@ -5097,9 +4883,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "newLabel"
-        ],
+        "required": ["newLabel"],
         "additionalProperties": false
       },
       "ToggleMemberResponseDto_Output": {
@@ -5109,9 +4893,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "newMember"
-        ],
+        "required": ["newMember"],
         "additionalProperties": false
       },
       "CardDetailDto_Output": {
@@ -5160,11 +4942,7 @@
                   "nullable": true
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "colourCode"
-              ],
+              "required": ["publicId", "name", "colourCode"],
               "additionalProperties": false
             }
           },
@@ -5193,6 +4971,10 @@
                 "url": {
                   "type": "string",
                   "nullable": true
+                },
+                "downloadUrl": {
+                  "type": "string",
+                  "nullable": true
                 }
               },
               "required": [
@@ -5201,7 +4983,8 @@
                 "s3Key",
                 "originalFilename",
                 "size",
-                "url"
+                "url",
+                "downloadUrl"
               ],
               "additionalProperties": false
             }
@@ -5238,22 +5021,12 @@
                         "type": "number"
                       }
                     },
-                    "required": [
-                      "publicId",
-                      "title",
-                      "completed",
-                      "index"
-                    ],
+                    "required": ["publicId", "title", "completed", "index"],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "index",
-                "items"
-              ],
+              "required": ["publicId", "name", "index", "items"],
               "additionalProperties": false
             }
           },
@@ -5291,11 +5064,7 @@
                           "nullable": true
                         }
                       },
-                      "required": [
-                        "publicId",
-                        "name",
-                        "colourCode"
-                      ],
+                      "required": ["publicId", "name", "colourCode"],
                       "additionalProperties": false
                     }
                   },
@@ -5311,10 +5080,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "publicId",
-                        "name"
-                      ],
+                      "required": ["publicId", "name"],
                       "additionalProperties": false
                     }
                   },
@@ -5340,12 +5106,7 @@
                             },
                             "status": {
                               "type": "string",
-                              "enum": [
-                                "invited",
-                                "active",
-                                "removed",
-                                "paused"
-                              ]
+                              "enum": ["invited", "active", "removed", "paused"]
                             },
                             "user": {
                               "type": "object",
@@ -5366,31 +5127,17 @@
                                   "nullable": true
                                 }
                               },
-                              "required": [
-                                "id",
-                                "name",
-                                "email",
-                                "image"
-                              ],
+                              "required": ["id", "name", "email", "image"],
                               "additionalProperties": false,
                               "nullable": true
                             }
                           },
-                          "required": [
-                            "publicId",
-                            "email",
-                            "status",
-                            "user"
-                          ],
+                          "required": ["publicId", "email", "status", "user"],
                           "additionalProperties": false
                         }
                       }
                     },
-                    "required": [
-                      "publicId",
-                      "cardPrefix",
-                      "members"
-                    ],
+                    "required": ["publicId", "cardPrefix", "members"],
                     "additionalProperties": false
                   }
                 },
@@ -5404,11 +5151,7 @@
                 "additionalProperties": false
               }
             },
-            "required": [
-              "publicId",
-              "name",
-              "board"
-            ],
+            "required": ["publicId", "name", "board"],
             "additionalProperties": false
           },
           "members": {
@@ -5424,12 +5167,7 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": [
-                    "invited",
-                    "active",
-                    "removed",
-                    "paused"
-                  ]
+                  "enum": ["invited", "active", "removed", "paused"]
                 },
                 "user": {
                   "type": "object",
@@ -5443,20 +5181,12 @@
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
+                  "required": ["id", "name"],
                   "additionalProperties": false,
                   "nullable": true
                 }
               },
-              "required": [
-                "publicId",
-                "email",
-                "status",
-                "user"
-              ],
+              "required": ["publicId", "email", "status", "user"],
               "additionalProperties": false
             }
           },
@@ -5525,11 +5255,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "name",
-                    "index"
-                  ],
+                  "required": ["publicId", "name", "index"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5546,11 +5272,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "name",
-                    "index"
-                  ],
+                  "required": ["publicId", "name", "index"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5564,10 +5286,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "name"
-                  ],
+                  "required": ["publicId", "name"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5624,18 +5343,12 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "name",
-                        "email"
-                      ],
+                      "required": ["name", "email"],
                       "additionalProperties": false,
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "user"
-                  ],
+                  "required": ["publicId", "user"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5650,10 +5363,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "email"
-                  ],
+                  "required": ["name", "email"],
                   "additionalProperties": false,
                   "nullable": true
                 }
@@ -5766,11 +5476,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "name",
-                    "index"
-                  ],
+                  "required": ["publicId", "name", "index"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5787,11 +5493,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "name",
-                    "index"
-                  ],
+                  "required": ["publicId", "name", "index"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5805,10 +5507,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "name"
-                  ],
+                  "required": ["publicId", "name"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5873,20 +5572,12 @@
                           "nullable": true
                         }
                       },
-                      "required": [
-                        "id",
-                        "name",
-                        "email",
-                        "image"
-                      ],
+                      "required": ["id", "name", "email", "image"],
                       "additionalProperties": false,
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "user"
-                  ],
+                  "required": ["publicId", "user"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5909,12 +5600,7 @@
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "email",
-                    "image"
-                  ],
+                  "required": ["id", "name", "email", "image"],
                   "additionalProperties": false,
                   "nullable": true
                 },
@@ -5932,11 +5618,7 @@
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "publicId",
-                    "filename",
-                    "originalFilename"
-                  ],
+                  "required": ["publicId", "filename", "originalFilename"],
                   "additionalProperties": false,
                   "nullable": true
                 }
@@ -5998,9 +5680,7 @@
             "description": "New checklist name."
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "ChecklistResponseDto_Output": {
         "type": "object",
@@ -6012,10 +5692,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicId",
-          "name"
-        ],
+        "required": ["publicId", "name"],
         "additionalProperties": false
       },
       "DeleteChecklistResponseDto_Output": {
@@ -6025,9 +5702,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "CreateChecklistItemDto": {
@@ -6040,9 +5715,7 @@
             "maxLength": 500
           }
         },
-        "required": [
-          "title"
-        ]
+        "required": ["title"]
       },
       "ChecklistItemResponseDto_Output": {
         "type": "object",
@@ -6057,11 +5730,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "publicId",
-          "title",
-          "completed"
-        ],
+        "required": ["publicId", "title", "completed"],
         "additionalProperties": false
       },
       "UpdateChecklistItemDto": {
@@ -6095,9 +5764,7 @@
             "description": "Checklist name."
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "CreateFeedbackDto": {
         "type": "object",
@@ -6113,10 +5780,7 @@
             "description": "The page the feedback is about."
           }
         },
-        "required": [
-          "feedback",
-          "url"
-        ]
+        "required": ["feedback", "url"]
       },
       "CreateFeedbackResponseDto_Output": {
         "type": "object",
@@ -6125,9 +5789,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "ExternalSourceItemDto_Output": {
@@ -6140,10 +5802,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "additionalProperties": false
       },
       "ImportTrelloBoardsDto": {
@@ -6160,10 +5819,7 @@
             "minLength": 12
           }
         },
-        "required": [
-          "boardIds",
-          "workspacePublicId"
-        ]
+        "required": ["boardIds", "workspacePublicId"]
       },
       "ImportTrelloBoardsResponseDto_Output": {
         "type": "object",
@@ -6194,19 +5850,12 @@
                   ]
                 }
               },
-              "required": [
-                "boardId",
-                "boardName",
-                "code"
-              ],
+              "required": ["boardId", "boardName", "code"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "boardsCreated",
-          "failures"
-        ],
+        "required": ["boardsCreated", "failures"],
         "additionalProperties": false
       },
       "ImportGitHubProjectsDto": {
@@ -6223,10 +5872,7 @@
             "minLength": 12
           }
         },
-        "required": [
-          "projectIds",
-          "workspacePublicId"
-        ]
+        "required": ["projectIds", "workspacePublicId"]
       },
       "ImportGitHubProjectsResponseDto_Output": {
         "type": "object",
@@ -6235,9 +5881,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "projectsImported"
-        ],
+        "required": ["projectsImported"],
         "additionalProperties": false
       },
       "IntegrationProviderDto_Output": {
@@ -6280,15 +5924,10 @@
         "properties": {
           "provider": {
             "type": "string",
-            "enum": [
-              "trello",
-              "github"
-            ]
+            "enum": ["trello", "github"]
           }
         },
-        "required": [
-          "provider"
-        ]
+        "required": ["provider"]
       },
       "EmptyResponseDto_Output": {
         "type": "object",
@@ -6302,9 +5941,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "url"
-        ],
+        "required": ["url"],
         "additionalProperties": false
       },
       "SaveGitHubTokenDto": {
@@ -6314,9 +5951,17 @@
             "type": "string"
           }
         },
-        "required": [
-          "token"
-        ]
+        "required": ["token"]
+      },
+      "SaveTrelloTokenDto": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": ["token"]
       },
       "GitHubStatusResponseDto_Output": {
         "type": "object",
@@ -6325,9 +5970,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "connected"
-        ],
+        "required": ["connected"],
         "additionalProperties": false
       },
       "LabelResponseDto_Output": {
@@ -6344,11 +5987,7 @@
             "nullable": true
           }
         },
-        "required": [
-          "publicId",
-          "name",
-          "colourCode"
-        ],
+        "required": ["publicId", "name", "colourCode"],
         "additionalProperties": false
       },
       "CreateLabelDto": {
@@ -6372,11 +6011,7 @@
             "description": "Label colour as a hex code, e.g. #0d9488."
           }
         },
-        "required": [
-          "name",
-          "boardPublicId",
-          "colourCode"
-        ]
+        "required": ["name", "boardPublicId", "colourCode"]
       },
       "UpdateLabelDto": {
         "type": "object",
@@ -6394,10 +6029,7 @@
             "description": "Label colour as a hex code, e.g. #0d9488."
           }
         },
-        "required": [
-          "name",
-          "colourCode"
-        ]
+        "required": ["name", "colourCode"]
       },
       "DeleteLabelResponseDto_Output": {
         "type": "object",
@@ -6406,9 +6038,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "CreateListDto": {
@@ -6425,10 +6055,7 @@
             "description": "Public ID of the board to add the list to."
           }
         },
-        "required": [
-          "name",
-          "boardPublicId"
-        ]
+        "required": ["name", "boardPublicId"]
       },
       "ListResponseDto_Output": {
         "type": "object",
@@ -6440,10 +6067,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicId",
-          "name"
-        ],
+        "required": ["publicId", "name"],
         "additionalProperties": false
       },
       "DeleteListResponseDto_Output": {
@@ -6453,9 +6077,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "UpdateListDto": {
@@ -6482,9 +6104,7 @@
             "description": "Email address to invite."
           }
         },
-        "required": [
-          "email"
-        ]
+        "required": ["email"]
       },
       "MemberInviteResponseDto_Output": {
         "type": "object",
@@ -6493,9 +6113,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "publicId"
-        ],
+        "required": ["publicId"],
         "additionalProperties": false
       },
       "DeleteMemberResponseDto_Output": {
@@ -6505,9 +6123,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "UpdateMemberRoleDto": {
@@ -6515,17 +6131,11 @@
         "properties": {
           "role": {
             "type": "string",
-            "enum": [
-              "admin",
-              "member",
-              "guest"
-            ],
+            "enum": ["admin", "member", "guest"],
             "description": "New workspace role: 'admin', 'member' or 'guest'."
           }
         },
-        "required": [
-          "role"
-        ]
+        "required": ["role"]
       },
       "UpdateMemberRoleResponseDto_Output": {
         "type": "object",
@@ -6537,10 +6147,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "success",
-          "role"
-        ],
+        "required": ["success", "role"],
         "additionalProperties": false
       },
       "ActiveInviteLinkResponseDto_Output": {
@@ -6564,9 +6171,7 @@
             "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
           }
         },
-        "required": [
-          "isActive"
-        ],
+        "required": ["isActive"],
         "additionalProperties": false
       },
       "CreateInviteLinkResponseDto_Output": {
@@ -6588,12 +6193,7 @@
             "nullable": true
           }
         },
-        "required": [
-          "publicId",
-          "inviteCode",
-          "inviteLink",
-          "expiresAt"
-        ],
+        "required": ["publicId", "inviteCode", "inviteLink", "expiresAt"],
         "additionalProperties": false
       },
       "DeactivateInviteLinkResponseDto_Output": {
@@ -6603,9 +6203,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "InviteByCodeResponseDto_Output": {
@@ -6624,11 +6222,7 @@
             "nullable": true
           }
         },
-        "required": [
-          "publicId",
-          "status",
-          "expiresAt"
-        ],
+        "required": ["publicId", "status", "expiresAt"],
         "additionalProperties": false
       },
       "AcceptInviteLinkDto": {
@@ -6639,9 +6233,7 @@
             "minLength": 12
           }
         },
-        "required": [
-          "inviteCode"
-        ]
+        "required": ["inviteCode"]
       },
       "AcceptInviteLinkResponseDto_Output": {
         "type": "object",
@@ -6656,9 +6248,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "GetMyPermissionsResponseDto_Output": {
@@ -6674,10 +6264,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "permissions",
-          "role"
-        ],
+        "required": ["permissions", "role"],
         "additionalProperties": false
       },
       "GetMemberPermissionsResponseDto_Output": {
@@ -6707,20 +6294,12 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "permission",
-                "granted"
-              ],
+              "required": ["permission", "granted"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "memberPublicId",
-          "role",
-          "permissions",
-          "overrides"
-        ],
+        "required": ["memberPublicId", "role", "permissions", "overrides"],
         "additionalProperties": false
       },
       "PermissionActionDto": {
@@ -6757,9 +6336,7 @@
             "description": "The permission, as resource:action, e.g. board:edit."
           }
         },
-        "required": [
-          "permission"
-        ]
+        "required": ["permission"]
       },
       "GetWorkspaceRolesResponseDto_Output": {
         "type": "object",
@@ -6798,9 +6375,7 @@
             }
           }
         },
-        "required": [
-          "roles"
-        ],
+        "required": ["roles"],
         "additionalProperties": false
       },
       "GetWorkspaceRolePermissionsResponseDto_Output": {
@@ -6825,18 +6400,12 @@
                   }
                 }
               },
-              "required": [
-                "publicId",
-                "name",
-                "permissions"
-              ],
+              "required": ["publicId", "name", "permissions"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "roles"
-        ],
+        "required": ["roles"],
         "additionalProperties": false
       },
       "GetRolePermissionsResponseDto_Output": {
@@ -6855,11 +6424,7 @@
             }
           }
         },
-        "required": [
-          "rolePublicId",
-          "name",
-          "permissions"
-        ],
+        "required": ["rolePublicId", "name", "permissions"],
         "additionalProperties": false
       },
       "UserResponseDto_Output": {
@@ -6900,10 +6465,7 @@
                 "nullable": true
               }
             },
-            "required": [
-              "id",
-              "prefix"
-            ],
+            "required": ["id", "prefix"],
             "additionalProperties": false,
             "nullable": true
           }
@@ -6945,10 +6507,7 @@
             "nullable": true
           }
         },
-        "required": [
-          "name",
-          "image"
-        ],
+        "required": ["name", "image"],
         "additionalProperties": false
       },
       "SetPasswordDto": {
@@ -6959,9 +6518,7 @@
             "minLength": 8
           }
         },
-        "required": [
-          "newPassword"
-        ]
+        "required": ["newPassword"]
       },
       "WebhookResponseDto_Output": {
         "type": "object",
@@ -7046,11 +6603,7 @@
             "description": "Card events to send, e.g. ['card.created', 'card.moved']."
           }
         },
-        "required": [
-          "name",
-          "url",
-          "events"
-        ]
+        "required": ["name", "url", "events"]
       },
       "UpdateWebhookDto": {
         "type": "object",
@@ -7097,9 +6650,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "TestWebhookResponseDto_Output": {
@@ -7115,9 +6666,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "SearchBoardResultDto": {
@@ -7149,9 +6698,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "board"
-            ]
+            "enum": ["board"]
           }
         },
         "required": [
@@ -7203,9 +6750,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "card"
-            ]
+            "enum": ["card"]
           }
         },
         "required": [
@@ -7245,12 +6790,7 @@
               },
               "plan": {
                 "type": "string",
-                "enum": [
-                  "free",
-                  "team",
-                  "pro",
-                  "enterprise"
-                ]
+                "enum": ["free", "team", "pro", "enterprise"]
               },
               "weekStartDay": {
                 "type": "number",
@@ -7279,10 +6819,7 @@
             "additionalProperties": false
           }
         },
-        "required": [
-          "role",
-          "workspace"
-        ],
+        "required": ["role", "workspace"],
         "additionalProperties": false
       },
       "CheckSlugAvailabilityResponseDto_Output": {
@@ -7295,10 +6832,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "isAvailable",
-          "isReserved"
-        ],
+        "required": ["isAvailable", "isReserved"],
         "additionalProperties": false
       },
       "WorkspaceWithBoardsResponseDto_Output": {
@@ -7332,22 +6866,12 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "publicId",
-                "slug",
-                "name"
-              ],
+              "required": ["publicId", "slug", "name"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "publicId",
-          "name",
-          "description",
-          "slug",
-          "boards"
-        ],
+        "required": ["publicId", "name", "description", "slug", "boards"],
         "additionalProperties": false
       },
       "WorkspaceDetailResponseDto_Output": {
@@ -7411,22 +6935,12 @@
                       "nullable": true
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "image"
-                  ],
+                  "required": ["id", "name", "image"],
                   "additionalProperties": false,
                   "nullable": true
                 }
               },
-              "required": [
-                "publicId",
-                "role",
-                "status",
-                "createdAt",
-                "user"
-              ],
+              "required": ["publicId", "role", "status", "createdAt", "user"],
               "additionalProperties": false
             }
           },
@@ -7520,9 +7034,7 @@
             "description": "URL slug of letters, numbers and hyphens. Generated if omitted or empty."
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "WorkspaceCreateResponseDto_Output": {
         "type": "object",
@@ -7542,12 +7054,7 @@
           },
           "plan": {
             "type": "string",
-            "enum": [
-              "free",
-              "team",
-              "pro",
-              "enterprise"
-            ]
+            "enum": ["free", "team", "pro", "enterprise"]
           },
           "cardPrefix": {
             "type": "string"
@@ -7594,21 +7101,15 @@
             "anyOf": [
               {
                 "type": "number",
-                "enum": [
-                  0
-                ]
+                "enum": [0]
               },
               {
                 "type": "number",
-                "enum": [
-                  1
-                ]
+                "enum": [1]
               },
               {
                 "type": "number",
-                "enum": [
-                  6
-                ]
+                "enum": [6]
               }
             ]
           }
@@ -7632,12 +7133,7 @@
           },
           "plan": {
             "type": "string",
-            "enum": [
-              "free",
-              "team",
-              "pro",
-              "enterprise"
-            ]
+            "enum": ["free", "team", "pro", "enterprise"]
           },
           "showEmailsToMembers": {
             "type": "boolean",
@@ -7666,9 +7162,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "additionalProperties": false
       },
       "StatsDto_Output": {

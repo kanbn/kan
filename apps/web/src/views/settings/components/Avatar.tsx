@@ -4,8 +4,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useRef, useState } from "react";
 import ReactCrop from "react-image-crop";
 
-import { env } from "@kan/shared/env";
-
 import "react-image-crop/dist/ReactCrop.css";
 
 import { getGetUserQueryKey } from "@kan/api-client/hooks";
@@ -15,6 +13,7 @@ import Button from "~/components/Button";
 import Modal from "~/components/modal";
 import { usePopup } from "~/providers/popup";
 import { getAvatarUrl } from "~/utils/helpers";
+import { uploadFile } from "~/utils/uploadFile";
 
 interface PercentCrop {
   unit: "%";
@@ -166,15 +165,7 @@ export default function Avatar({
       const originalExt = selectedFile.name.split(".").pop() ?? "jpg";
       const fileName = `${userId}/avatar-${generateUID()}.${originalExt}`;
 
-      const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
-      const response = await fetch(`${baseUrl}/api/upload/avatar`, {
-        method: "POST",
-        headers: {
-          "Content-Type": blob.type,
-          "x-original-filename": encodeURIComponent(fileName),
-        },
-        body: blob,
-      });
+      const response = await uploadFile("/users/me/avatar", blob, fileName);
 
       if (!response.ok) {
         throw new Error("Failed to upload profile image");

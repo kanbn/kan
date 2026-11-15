@@ -41,6 +41,10 @@ export class AuthorizationUrlResponseDto extends createZodDto(
 
 export const SaveGitHubTokenSchema = z.object({ token: z.string() });
 
+export const SaveTrelloTokenSchema = z.object({ token: z.string().min(1) });
+
+export class SaveTrelloTokenDto extends createZodDto(SaveTrelloTokenSchema) {}
+
 export class SaveGitHubTokenDto extends createZodDto(SaveGitHubTokenSchema) {}
 
 export const SuccessResponseSchema = z.object({ success: z.boolean() });

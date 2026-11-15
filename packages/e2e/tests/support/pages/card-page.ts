@@ -90,7 +90,7 @@ export class CardPage {
   }
 
   async uploadAttachment(filePath: string) {
-    const uploaded = waitForResponsePath(this.page, "/api/upload/attachment");
+    const uploaded = waitForResponsePath(this.page, "/attachments");
     await this.page.setInputFiles("#attachment-upload", filePath);
     await uploaded;
   }
