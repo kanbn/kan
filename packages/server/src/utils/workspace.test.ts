@@ -16,9 +16,7 @@ const workspace = {
 beforeEach(() => {
   vi.restoreAllMocks();
   vi.spyOn(memberRepo, "getPreservableMemberId").mockResolvedValue("user_1");
-  vi.spyOn(memberRepo, "pauseMembersExcept").mockResolvedValue(
-    undefined,
-  );
+  vi.spyOn(memberRepo, "pauseMembersExcept").mockResolvedValue(undefined);
   vi.spyOn(workspaceRepo, "update").mockResolvedValue(undefined);
 });
 
