@@ -202,9 +202,6 @@ importers:
       "@hookform/resolvers":
         specifier: ^7.0.6
         version: 7.0.6(@standard-schema/spec@1.1.0)(ajv-errors@3.0.0(ajv@8.20.0))(ajv-formats@3.0.1(ajv@8.20.0))(ajv@8.20.0)(arktype@2.2.9)(react-hook-form@7.92.0(@types/react@19.3.0)(react@19.3.1))(valibot@1.5.0(typescript@5.9.2))(zod@4.6.7)
-      "@kan.bn/mcp":
-        specifier: workspace:*
-        version: link:../../packages/mcp
       "@kan/api-client":
         specifier: workspace:*
         version: link:../../packages/api-client
@@ -226,9 +223,6 @@ importers:
       "@lingui/react":
         specifier: ^6.12.0
         version: 6.12.0(@babel/core@7.28.3)(react@19.3.1)
-      "@modelcontextprotocol/node":
-        specifier: ^2.1.2
-        version: 2.1.2(@modelcontextprotocol/server@2.4.0)
       "@t3-oss/env-nextjs":
         specifier: ^0.13.11
         version: 0.13.11(arktype@2.2.9)(typescript@5.9.2)(valibot@1.5.0(typescript@5.9.2))(zod@4.6.7)
