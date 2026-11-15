@@ -1,4 +1,4 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { t } from "@lingui/core/macro";
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
@@ -15,7 +15,6 @@ import { env } from "@kan/shared/env";
 
 import { useClickOutside } from "~/hooks/useClickOutside";
 import { useModal } from "~/providers/modal";
-import { usePopup } from "~/providers/popup";
 import { useWorkspace, WorkspaceProvider } from "~/providers/workspace";
 import { ChangePasswordFormConfirmation } from "~/views/settings/components/ChangePasswordConfirmation";
 import Button from "./Button";
@@ -50,9 +49,7 @@ export default function Dashboard({
   const { resolvedTheme } = useTheme();
   const { openModal, closeModal, modalContentType } = useModal();
   const { availableWorkspaces, hasLoaded } = useWorkspace();
-  const { showPopup } = usePopup();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
   const { data: user, isLoading: userLoading } = useGetUser({
@@ -102,38 +99,6 @@ export default function Dashboard({
       setIsRightPanelOpen(false);
     }
   });
-
-  useEffect(() => {
-    const partnerActivated = searchParams.get("partner_activated");
-    const partnerError = searchParams.get("partner_error");
-
-    if (partnerActivated) {
-      showPopup({
-        header: t`License activated`,
-        message: t`Your license has been activated successfully.`,
-        icon: "success",
-      });
-      const params = new URLSearchParams(searchParams.toString());
-      params.delete("partner_activated");
-      router.replace(`?${params.toString()}`);
-    } else if (partnerError) {
-      const messages: Record<string, string> = {
-        invalid_license: t`That license key could not be found. Please contact support.`,
-        license_inactive: t`Your license is not active. Please check your account.`,
-        missing_license: t`No license key was provided. Please try activating again.`,
-      };
-      showPopup({
-        header: t`License activation failed`,
-        message:
-          messages[partnerError] ??
-          t`Something went wrong during license activation.`,
-        icon: "error",
-      });
-      const params = new URLSearchParams(searchParams.toString());
-      params.delete("partner_error");
-      router.replace(`?${params.toString()}`);
-    }
-  }, [searchParams, showPopup, router]);
 
   // Router changes re-run this before a newly created workspace is in the list, so only prompt once.
   const hasPromptedForWorkspace = useRef(false);
