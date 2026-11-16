@@ -56,6 +56,10 @@ vi.mock("@kan/shared/utils", () => ({
 vi.mock("../utils/notifications", () => ({
   sendMentionEmails: vi.fn(),
 }));
+vi.mock("../utils/slack-notifications", () => ({
+  notifyAssigned: vi.fn(),
+  notifyMentioned: vi.fn(),
+}));
 vi.mock("../utils/permissions", () => ({
   filterBoardAssignable: vi.fn(
     (_db: unknown, _board: unknown, members: unknown) =>

@@ -22,6 +22,10 @@ vi.mock("@kan/db/repository/cardActivity.repo", () => ({
 vi.mock("../utils/notifications", () => ({
   sendMentionEmails: vi.fn(),
 }));
+vi.mock("../utils/slack-notifications", () => ({
+  notifyAssigned: vi.fn(),
+  notifyMentioned: vi.fn(),
+}));
 vi.mock("../utils/permissions", () => ({
   assertCanDelete: vi.fn(),
   assertCanEdit: vi.fn(),

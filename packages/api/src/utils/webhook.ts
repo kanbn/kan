@@ -249,8 +249,15 @@ const CHANGE_LABELS: Record<string, string> = {
 };
 
 // Slack mrkdwn needs &, < and > escaped in user text.
-const escapeSlack = (value: string) =>
+export const escapeSlack = (value: string) =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+export const buildCardLink = (publicId: string, title: string) => {
+  const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
+  return baseUrl
+    ? `<${baseUrl}/cards/${publicId}|${escapeSlack(title)}>`
+    : `*${escapeSlack(title)}*`;
+};
 
 export function buildWebhookText(
   event: WebhookEventType,
@@ -282,6 +289,10 @@ export function buildWebhookText(
       return `:arrow_right: ${who} moveu ${cardRef} para *${escapeSlack(context.listName ?? "outra coluna")}*${context.boardName ? ` (${escapeSlack(context.boardName)})` : ""}`;
     case "card.deleted":
       return `:wastebasket: ${who} excluiu o card ${cardRef}${inWhere}`;
+    case "card.assigned":
+      return `:bust_in_silhouette: ${who} definiu responsáveis em ${cardRef}${inWhere}`;
+    case "card.mentioned":
+      return `:speech_balloon: ${who} mencionou alguém em ${cardRef}${inWhere}`;
     default: {
       const fields = Object.keys(context.changes ?? {})
         .map((key) => CHANGE_LABELS[key] ?? key)
