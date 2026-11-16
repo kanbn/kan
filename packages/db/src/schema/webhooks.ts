@@ -19,6 +19,9 @@ export const webhookEvents = [
   "card.updated",
   "card.moved",
   "card.deleted",
+  // Someone became responsible for a card / was @mentioned on it.
+  "card.assigned",
+  "card.mentioned",
 ] as const;
 export type WebhookEvent = (typeof webhookEvents)[number];
 

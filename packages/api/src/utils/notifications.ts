@@ -12,6 +12,7 @@ import { createLogger } from "@kan/logger";
 
 import { getNewMentionPublicIds } from "./mention-notifications";
 import { hasBoardAccess } from "./permissions";
+import { notifyMentioned } from "./slack-notifications";
 
 const log = createLogger("notifications");
 
@@ -95,6 +96,14 @@ export async function sendMentionEmails({
     ).filter((member) => member !== null);
 
     if (membersToNotify.length === 0) return;
+
+    // Tag them in the workspace Slack too (no-op without a Slack webhook).
+    void notifyMentioned({
+      db,
+      cardPublicId,
+      members: membersToNotify,
+      commenterName,
+    });
 
     const baseUrl = env("NEXT_PUBLIC_BASE_URL");
     const cardUrl = `${baseUrl}/cards/${cardPublicId}`;

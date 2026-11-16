@@ -10,10 +10,7 @@ import * as checklistRepo from "@kan/db/repository/checklist.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
-import {
-  generateAttachmentUrl,
-  normalizeDescription,
-} from "@kan/shared/utils";
+import { generateAttachmentUrl, normalizeDescription } from "@kan/shared/utils";
 
 import {
   activityItemSchema,
@@ -41,6 +38,7 @@ import {
   assertPermission,
   filterBoardAssignable,
 } from "../utils/permissions";
+import { notifyAssigned } from "../utils/slack-notifications";
 import {
   createCardWebhookPayload,
   sendWebhooksForWorkspace,
@@ -246,6 +244,16 @@ export const cardRouter = createTRPCRouter({
           commenterUserId: userId,
         });
       }
+
+      // Tag the people made responsible at creation in the workspace Slack.
+      void notifyAssigned({
+        db: ctx.db,
+        cardPublicId: newCard.publicId,
+        workspaceId: list.workspaceId,
+        memberPublicIds: input.memberPublicIds,
+        assignerUserId: userId,
+        assignerName: ctx.user?.name ?? null,
+      });
 
       // Fire webhooks (non-blocking)
       sendWebhooksForWorkspace(
@@ -760,6 +768,15 @@ export const cardRouter = createTRPCRouter({
         cardId: card.id,
         workspaceMemberId: member.id,
         createdBy: userId,
+      });
+
+      void notifyAssigned({
+        db: ctx.db,
+        cardPublicId: input.cardPublicId,
+        workspaceId: card.workspaceId,
+        memberPublicIds: [input.workspaceMemberPublicId],
+        assignerUserId: userId,
+        assignerName: ctx.user?.name ?? null,
       });
 
       return { newMember: true };
@@ -1583,17 +1600,16 @@ export const cardRouter = createTRPCRouter({
       // point leaves a duplicate behind, and the caller retrying as the error
       // message suggests would make a second one.
       const sourceLabels = sourceCard.labels ?? [];
-      const sourceLabelRecords = input.copyLabels && sourceLabels.length
-        ? await labelRepo.getAllByPublicIds(
-            ctx.db,
-            sourceLabels.map((label) => label.publicId),
-          )
-        : [];
+      const sourceLabelRecords =
+        input.copyLabels && sourceLabels.length
+          ? await labelRepo.getAllByPublicIds(
+              ctx.db,
+              sourceLabels.map((label) => label.publicId),
+            )
+          : [];
 
       if (
-        sourceLabelRecords.some(
-          (label) => label.boardId !== targetList.boardId,
-        )
+        sourceLabelRecords.some((label) => label.boardId !== targetList.boardId)
       )
         throw new TRPCError({
           message: `Cannot copy labels to a list on a different board. Labels belong to a board, so duplicate with copyLabels: false when the target list is on another board.`,
