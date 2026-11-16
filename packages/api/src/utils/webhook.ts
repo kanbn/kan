@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { env } from "next-runtime-env";
 import { z } from "zod";
 
 import type { dbClient } from "@kan/db/client";
@@ -13,6 +14,10 @@ export type WebhookEventType = WebhookEvent;
 export interface WebhookPayload {
   event: WebhookEventType;
   timestamp: string;
+  // Human-readable summary. Slack-compatible incoming webhooks (Slack,
+  // Mattermost, Rocket.Chat) post it as the message; other consumers can
+  // ignore it.
+  text: string;
   data: {
     card: {
       id: string;
@@ -203,9 +208,24 @@ export async function sendWebhooksForWorkspace(
       sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
         (result) => {
           if (!result.success) {
-            log.error({ url: webhook.url, event: payload.event, error: result.error, statusCode: result.statusCode }, "Webhook delivery failed");
+            log.error(
+              {
+                url: webhook.url,
+                event: payload.event,
+                error: result.error,
+                statusCode: result.statusCode,
+              },
+              "Webhook delivery failed",
+            );
           } else {
-            log.info({ url: webhook.url, event: payload.event, statusCode: result.statusCode }, "Webhook delivered");
+            log.info(
+              {
+                url: webhook.url,
+                event: payload.event,
+                statusCode: result.statusCode,
+              },
+              "Webhook delivered",
+            );
           }
         },
       ),
@@ -214,7 +234,60 @@ export async function sendWebhooksForWorkspace(
     // Wait for all to complete but don't block on failures
     await Promise.allSettled(promises);
   } catch (error) {
-    log.error({ err: error, workspaceId }, "Failed to send webhooks for workspace");
+    log.error(
+      { err: error, workspaceId },
+      "Failed to send webhooks for workspace",
+    );
+  }
+}
+
+const CHANGE_LABELS: Record<string, string> = {
+  title: "título",
+  description: "descrição",
+  dueDate: "data de vencimento",
+  listId: "coluna",
+};
+
+// Slack mrkdwn needs &, < and > escaped in user text.
+const escapeSlack = (value: string) =>
+  value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+export function buildWebhookText(
+  event: WebhookEventType,
+  card: { publicId: string; title: string },
+  context: {
+    boardName?: string;
+    listName?: string;
+    user?: { name: string | null };
+    changes?: Record<string, unknown>;
+  },
+): string {
+  const who = escapeSlack(context.user?.name ?? "Alguém");
+  const baseUrl = env("NEXT_PUBLIC_BASE_URL") ?? "";
+  const title = escapeSlack(card.title);
+  const cardRef =
+    baseUrl && event !== "card.deleted"
+      ? `<${baseUrl}/cards/${card.publicId}|${title}>`
+      : `*${title}*`;
+  const where = [context.boardName, context.listName]
+    .filter(Boolean)
+    .map((part) => escapeSlack(part!))
+    .join(" › ");
+  const inWhere = where ? ` em *${where}*` : "";
+
+  switch (event) {
+    case "card.created":
+      return `:new: ${who} criou o card ${cardRef}${inWhere}`;
+    case "card.moved":
+      return `:arrow_right: ${who} moveu ${cardRef} para *${escapeSlack(context.listName ?? "outra coluna")}*${context.boardName ? ` (${escapeSlack(context.boardName)})` : ""}`;
+    case "card.deleted":
+      return `:wastebasket: ${who} excluiu o card ${cardRef}${inWhere}`;
+    default: {
+      const fields = Object.keys(context.changes ?? {})
+        .map((key) => CHANGE_LABELS[key] ?? key)
+        .join(", ");
+      return `:pencil2: ${who} atualizou ${cardRef}${inWhere}${fields ? ` (${fields})` : ""}`;
+    }
   }
 }
 
@@ -242,6 +315,7 @@ export function createCardWebhookPayload(
   return {
     event,
     timestamp: new Date().toISOString(),
+    text: buildWebhookText(event, card, context),
     data: {
       card: {
         id: card.id,
