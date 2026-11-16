@@ -1,0 +1,28 @@
+name: Due date digest
+
+# Posts cards due tomorrow and overdue cards to the Slack "kanban" group.
+on:
+  schedule:
+    - cron: "0 12 * * *" # 09:00 America/Sao_Paulo
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/slack
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Send digest
+        run: node .github/slack/due-date-digest.mjs
+        env:
+          KAN_API_KEY: ${{ secrets.KAN_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
