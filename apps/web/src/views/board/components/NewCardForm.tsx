@@ -8,8 +8,10 @@ import { HiOutlinePaperClip } from "react-icons/hi";
 import {
   HiOutlineBarsArrowDown,
   HiOutlineBarsArrowUp,
+  HiOutlinePhoto,
   HiXMark,
 } from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
 
 import { generateUID } from "@kan/shared/utils";
 
@@ -290,6 +292,28 @@ export function NewCardForm({
     setPendingFiles((prev) => [...prev, ...files]);
   };
 
+  const handlePaste = (e: React.ClipboardEvent) => {
+    const files = Array.from(e.clipboardData.files);
+    // Let plain text pastes through to the inputs untouched.
+    if (files.length === 0 || e.clipboardData.types.includes("text/plain")) {
+      return;
+    }
+    e.preventDefault();
+
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    addFiles(
+      files.map((file, index) => {
+        // Screenshots from the clipboard all arrive as "image.png".
+        if (file.name && file.name !== "image.png") return file;
+        const extension = file.type.split("/")[1] ?? "png";
+        const suffix = files.length > 1 ? `-${index + 1}` : "";
+        return new File([file], `screenshot-${stamp}${suffix}.${extension}`, {
+          type: file.type,
+        });
+      }),
+    );
+  };
+
   const removeFile = (index: number) => {
     setPendingFiles((prev) => prev.filter((_, i) => i !== index));
   };
@@ -385,6 +409,7 @@ export function NewCardForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
+      onPaste={handlePaste}
       onDragOver={(e) => {
         if (e.dataTransfer.types.includes("Files")) {
           e.preventDefault();
@@ -640,6 +665,19 @@ export function NewCardForm({
             <HiOutlinePaperClip size={14} />
           </button>
         </div>
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className={twMerge(
+            "mt-2 flex w-full items-center justify-center gap-2 rounded-md border-2 border-dashed px-3 py-3 text-xs transition-colors focus-visible:outline-hidden",
+            isDraggingFiles
+              ? "border-light-800 bg-light-200 text-light-900 dark:border-dark-800 dark:bg-dark-300 dark:text-dark-1000"
+              : "border-light-600 text-light-800 hover:bg-light-200 dark:border-dark-600 dark:text-dark-800 dark:hover:bg-dark-300",
+          )}
+        >
+          <HiOutlinePhoto size={16} />
+          {t`Drop files here, paste a screenshot (Ctrl+V) or click to choose`}
+        </button>
         {pendingFiles.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
             {pendingFiles.map((file, index) => (
