@@ -31,7 +31,7 @@ export async function proxyToApi(
   res: NextApiResponse,
   path: string,
 ) {
-  const apiBaseUrl = env("NEXT_PUBLIC_API_BASE_URL");
+  const apiBaseUrl = serverEnv.KAN_API_URL || env("NEXT_PUBLIC_API_BASE_URL");
   if (!apiBaseUrl)
     return res.status(503).json({ message: "API service not configured" });
 
