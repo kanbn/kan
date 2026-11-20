@@ -1,49 +1,40 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { Request, Response } from "express";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { repairSessionCookies } from "@kan/auth/server";
-import { createNextApiContext } from "@kan/server/context";
 
-import handler from "../pages/api/session/reset";
+import { SessionController } from "../session.controller.js";
 
-vi.mock("@kan/server/context", () => ({
+vi.mock("../../../common/session.util.js", () => ({
   auth: { options: {} },
-  createNextApiContext: vi.fn(),
+  headersFromRaw: () => new Headers(),
+  resolveUserFromHeaders: () => Promise.resolve({ user: { id: "user_1" } }),
 }));
 vi.mock("@kan/auth/server", () => ({ repairSessionCookies: vi.fn() }));
-vi.mock("@kan/server/utils/rateLimit", () => ({
-  withRateLimit: (_options: unknown, handler: unknown) => handler,
-}));
 vi.mock("@kan/logger", () => ({
   createLogger: () => ({ info: vi.fn() }),
 }));
 
-const call = async (query: Record<string, string>, cookies = {}) => {
-  const res = {
-    setHeader: vi.fn(),
-    redirect: vi.fn(),
-  };
-  await handler(
-    { query, cookies, headers: { cookie: "a=b" } } as unknown as NextApiRequest,
-    res as unknown as NextApiResponse,
+const call = async (next: string, cookie = "a=b") => {
+  const res = { setHeader: vi.fn(), redirect: vi.fn() };
+  await new SessionController().reset(
+    { headers: { cookie } } as unknown as Request,
+    res as unknown as Response,
+    next,
   );
   return res;
 };
 
-beforeEach(() => {
-  vi.mocked(createNextApiContext).mockResolvedValue({
-    user: { id: "user_1" },
-  } as never);
-});
+beforeEach(() => vi.clearAllMocks());
 
-describe("GET /api/session/reset", () => {
+describe("GET /session/reset", () => {
   it("returns to the page after repairing the session", async () => {
     vi.mocked(repairSessionCookies).mockReturnValue({
       healed: true,
       headers: ["kan.session_token=x"],
     });
 
-    const res = await call({ next: "/boards/abc?view=list" });
+    const res = await call("/boards/abc?view=list");
 
     expect(res.setHeader).toHaveBeenCalledWith("Set-Cookie", [
       "kan.session_token=x",
@@ -58,7 +49,7 @@ describe("GET /api/session/reset", () => {
       headers: [],
     });
 
-    const res = await call({ next: "/boards" }, { kan_session_repair: "1" });
+    const res = await call("/boards", "a=b; kan_session_repair=1");
 
     expect(repairSessionCookies).toHaveBeenLastCalledWith(
       expect.objectContaining({ alreadyRepaired: true }),
@@ -79,7 +70,7 @@ describe("GET /api/session/reset", () => {
       "/\t/evil.example",
       "/\n/evil.example",
     ]) {
-      const res = await call({ next });
+      const res = await call(next);
       expect(res.redirect).toHaveBeenCalledWith(302, "/boards");
     }
   });

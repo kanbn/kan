@@ -4,10 +4,6 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./context": {
-      "types": "./src/context.ts",
-      "default": "./src/context.ts"
-    },
     "./utils/rateLimit": {
       "types": "./src/utils/rateLimit.ts",
       "default": "./src/utils/rateLimit.ts"
@@ -15,10 +11,6 @@
     "./utils/activities": {
       "types": "./src/utils/activities.ts",
       "default": "./src/utils/activities.ts"
-    },
-    "./utils/apiLogging": {
-      "types": "./src/utils/apiLogging.ts",
-      "default": "./src/utils/apiLogging.ts"
     },
     "./utils/redact": {
       "types": "./src/utils/redact.ts",
@@ -77,7 +69,6 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@kan/auth": "workspace:*",
     "@kan/db": "workspace:*",
     "@kan/email": "workspace:^",
     "@kan/logger": "workspace:^",
