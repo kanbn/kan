@@ -642,9 +642,6 @@ importers:
 
   packages/server:
     dependencies:
-      '@kan/auth':
-        specifier: workspace:*
-        version: link:../auth
       '@kan/db':
         specifier: workspace:*
         version: link:../db

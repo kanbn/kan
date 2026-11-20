@@ -23,6 +23,7 @@ import { ListModule } from "./modules/list/list.module.js";
 import { McpModule } from "./modules/mcp/mcp.module.js";
 import { MemberModule } from "./modules/member/member.module.js";
 import { PermissionModule } from "./modules/permission/permission.module.js";
+import { SessionModule } from "./modules/session/session.module.js";
 import { StatsModule } from "./modules/stats/stats.module.js";
 import { UserModule } from "./modules/user/user.module.js";
 import { WebhookModule } from "./modules/webhook/webhook.module.js";
@@ -44,6 +45,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     McpModule,
     MemberModule,
     PermissionModule,
+    SessionModule,
     StatsModule,
     UserModule,
     WebhookModule,
