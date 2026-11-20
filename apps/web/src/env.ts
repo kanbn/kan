@@ -26,6 +26,7 @@ export const env = createEnv({
       )
       .optional(),
     POSTGRES_URL: z.string().url().optional().or(z.literal("")),
+    RATE_LIMIT_IP_HEADER: z.string().optional(),
     TRELLO_APP_API_KEY: z.string().optional(),
     TRELLO_APP_SECRET: z.string().optional(),
     GOOGLE_CLIENT_ID: z.string().optional(),

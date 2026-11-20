@@ -3,6 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getClientIp } from "@kan/server/utils/rateLimit";
 import { env } from "@kan/shared/env";
 
+import { env as serverEnv } from "~/env";
+
 const FORWARDED_HEADERS = [
   "accept",
   "authorization",
@@ -40,7 +42,7 @@ export async function proxyToApi(
   }
   // Otherwise the API rate-limits every user under this server's IP.
   headers.set(
-    process.env.RATE_LIMIT_IP_HEADER?.toLowerCase() || "x-forwarded-for",
+    serverEnv.RATE_LIMIT_IP_HEADER?.toLowerCase() || "x-forwarded-for",
     getClientIp(req.headers, req.socket.remoteAddress),
   );
 
