@@ -20,7 +20,6 @@ const TestimonialCard = ({
   testimonial: Testimonial;
   rowSpan?: number;
 }) => {
-  // Generate initials for avatar
   const initials = testimonial.name
     .split(" ")
     .map((n) => n[0])

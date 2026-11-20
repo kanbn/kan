@@ -27,7 +27,6 @@ const transporter = nodemailer.createTransport({
       ? true
       : process.env.SMTP_SECURE.toLowerCase() === "true",
   tls: {
-    // do not fail on invalid certs
     rejectUnauthorized:
       process.env.SMTP_REJECT_UNAUTHORIZED === undefined
         ? true

@@ -69,13 +69,10 @@ export function NewWorkspaceForm() {
   const [debouncedSlug] = useDebounce(slug, 500);
   const isTyping = slug !== debouncedSlug;
 
-  // Validate slug only after debounce
   useEffect(() => {
     if (isTyping) {
-      // Clear errors while typing
       clearErrors("slug");
     } else if (debouncedSlug) {
-      // Validate after debounce
       void trigger("slug");
     }
   }, [isTyping, debouncedSlug, trigger, clearErrors]);
@@ -132,7 +129,6 @@ export function NewWorkspaceForm() {
   const isValidSlug = slug && slug.length >= 3 && !errors.slug;
 
   const onSubmit = (values: FormValues) => {
-    // Don't submit if slug is provided but not available
     if (values.slug && isWorkspaceSlugAvailable?.isAvailable === false) {
       return;
     }

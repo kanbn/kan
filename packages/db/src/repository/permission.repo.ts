@@ -10,9 +10,6 @@ import {
 import type { Permission, Role } from "@kan/shared";
 import { generateUID, getDefaultPermissions } from "@kan/shared";
 
-/**
- * Get permissions by role ID
- */
 export const getPermissionsByRoleId = async (
   db: dbClient,
   roleId: number,
@@ -30,9 +27,6 @@ export const getPermissionsByRoleId = async (
   return permissions.map((p) => p.permission as Permission);
 };
 
-/**
- * Get role by workspace ID and name
- */
 export const getRoleByWorkspaceIdAndName = async (
   db: dbClient,
   workspaceId: number,
@@ -52,9 +46,6 @@ export const getRoleByWorkspaceIdAndName = async (
   return role;
 };
 
-/**
- * Get role by workspace ID and publicId
- */
 export const getRoleByWorkspaceIdAndPublicId = async (
   db: dbClient,
   workspaceId: number,
@@ -74,9 +65,6 @@ export const getRoleByWorkspaceIdAndPublicId = async (
   return role;
 };
 
-/**
- * Get all custom permission overrides for a workspace member
- */
 export const getMemberPermissionOverrides = async (
   db: dbClient,
   workspaceMemberId: number,
@@ -87,9 +75,6 @@ export const getMemberPermissionOverrides = async (
     .where(eq(workspaceMemberPermissions.workspaceMemberId, workspaceMemberId));
 };
 
-/**
- * Get a single permission override for a member
- */
 export const getMemberPermissionOverride = async (
   db: dbClient,
   workspaceMemberId: number,
@@ -109,10 +94,6 @@ export const getMemberPermissionOverride = async (
   return override;
 };
 
-/**
- * Get effective permissions for a workspace member
- * Combines role template (from DB) with custom overrides
- */
 export const getMemberEffectivePermissions = async (
   db: dbClient,
   workspaceMemberId: number,
@@ -121,20 +102,16 @@ export const getMemberEffectivePermissions = async (
 ): Promise<Permission[]> => {
   let roleDefaults: Set<Permission>;
 
-  // Try to get role permissions from database first
   if (roleId) {
     const dbPermissions = await getPermissionsByRoleId(db, roleId);
     roleDefaults = new Set<Permission>(dbPermissions);
   } else {
-    // Fallback to code-based defaults if roleId not set
     const codeDefaults = getDefaultPermissions(roleName as Role);
     roleDefaults = new Set<Permission>([...codeDefaults]);
   }
 
-  // Get custom overrides
   const overrides = await getMemberPermissionOverrides(db, workspaceMemberId);
 
-  // Apply overrides
   for (const override of overrides) {
     if (override.granted) {
       roleDefaults.add(override.permission as Permission);
@@ -146,9 +123,6 @@ export const getMemberEffectivePermissions = async (
   return Array.from(roleDefaults);
 };
 
-/**
- * Check if a member has a specific permission
- */
 export const memberHasPermission = async (
   db: dbClient,
   workspaceMemberId: number,
@@ -158,17 +132,14 @@ export const memberHasPermission = async (
 ): Promise<boolean> => {
   let hasRoleDefault: boolean;
 
-  // Check role permission from database first
   if (roleId) {
     const dbPermissions = await getPermissionsByRoleId(db, roleId);
     hasRoleDefault = dbPermissions.includes(permission);
   } else {
-    // Fallback to code-based defaults
     const codeDefaults = getDefaultPermissions(roleName as Role);
     hasRoleDefault = codeDefaults.includes(permission);
   }
 
-  // Check for override
   const [override] = await db
     .select()
     .from(workspaceMemberPermissions)
@@ -180,7 +151,6 @@ export const memberHasPermission = async (
     )
     .limit(1);
 
-  // Override takes precedence
   if (override) {
     return override.granted;
   }
@@ -188,9 +158,6 @@ export const memberHasPermission = async (
   return hasRoleDefault;
 };
 
-/**
- * Grant a permission to a member
- */
 export const grantPermission = async (
   db: dbClient,
   workspaceMemberId: number,
@@ -218,9 +185,6 @@ export const grantPermission = async (
   return result;
 };
 
-/**
- * Revoke a permission from a member
- */
 export const revokePermission = async (
   db: dbClient,
   workspaceMemberId: number,
@@ -248,9 +212,6 @@ export const revokePermission = async (
   return result;
 };
 
-/**
- * Clear all permission overrides for a workspace member
- */
 export const clearMemberPermissionOverrides = async (
   db: dbClient,
   workspaceMemberId: number,
@@ -260,9 +221,6 @@ export const clearMemberPermissionOverrides = async (
     .where(eq(workspaceMemberPermissions.workspaceMemberId, workspaceMemberId));
 };
 
-/**
- * Clear all permission overrides for all members in a workspace
- */
 export const clearAllMemberPermissionOverridesForWorkspace = async (
   db: dbClient,
   workspaceId: number,
@@ -286,9 +244,6 @@ export const clearAllMemberPermissionOverridesForWorkspace = async (
     .where(inArray(workspaceMemberPermissions.workspaceMemberId, ids));
 };
 
-/**
- * Get member with their role by userId and workspaceId
- */
 export const getMemberWithRole = async (
   db: dbClient,
   userId: string,
@@ -315,9 +270,6 @@ export const getMemberWithRole = async (
   return member;
 };
 
-/**
- * Check if user has permission in workspace
- */
 export const userHasPermissionInWorkspace = async (
   db: dbClient,
   userId: string,
@@ -339,9 +291,6 @@ export const userHasPermissionInWorkspace = async (
   );
 };
 
-/**
- * Get all permissions for a user in a workspace
- */
 export const getUserPermissionsInWorkspace = async (
   db: dbClient,
   userId: string,
@@ -371,9 +320,6 @@ export const getUserPermissionsInWorkspace = async (
   };
 };
 
-/**
- * Create a role for a workspace
- */
 export const createRole = async (
   db: dbClient,
   args: {
@@ -414,9 +360,6 @@ export const createRole = async (
   return role;
 };
 
-/**
- * Grant a permission to a role
- */
 export const grantRolePermission = async (
   db: dbClient,
   roleId: number,
@@ -443,9 +386,6 @@ export const grantRolePermission = async (
   return result;
 };
 
-/**
- * Revoke a permission from a role
- */
 export const revokeRolePermission = async (
   db: dbClient,
   roleId: number,
@@ -472,9 +412,6 @@ export const revokeRolePermission = async (
   return result;
 };
 
-/**
- * Get all roles for a workspace
- */
 export const getRolesByWorkspaceId = async (
   db: dbClient,
   workspaceId: number,

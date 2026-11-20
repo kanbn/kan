@@ -536,7 +536,6 @@ export class ImportService {
     let projectsImported = 0;
 
     for (const projectId of input.projectIds) {
-      // GraphQL query to fetch Project V2 details, status options, area options, and items
       const query = `
         query($id: ID!) {
           node(id: $id) {
@@ -622,12 +621,10 @@ export class ImportService {
 
       if (!board) continue;
 
-      // Prepare Labels
       const labelsInsert = areaOptions.map((option) => {
-        let colourCode = "#0d9488"; // Default Teal
+        let colourCode = "#0d9488";
         const ghColor = option.color;
 
-        // Map GitHub colors to Kan colors
         if (ghColor === "BLUE") colourCode = "#0284c7";
         else if (ghColor === "GREEN") colourCode = "#65a30d";
         else if (ghColor === "YELLOW") colourCode = "#ca8a04";
@@ -657,7 +654,6 @@ export class ImportService {
         }
       });
 
-      // Prepare Lists
       const listsInsert: {
         publicId: string;
         name: string;
@@ -699,7 +695,6 @@ export class ImportService {
         }
       });
 
-      // Prepare Cards
       const itemsToInsert: {
         item: NonNullable<
           NonNullable<
@@ -719,7 +714,6 @@ export class ImportService {
 
         let listId = statusName ? listIdMap.get(statusName) : undefined;
 
-        // Fallback to first list
         if (!listId && createdLists.length > 0) {
           listId = createdLists[0]?.id;
         }
@@ -747,7 +741,6 @@ export class ImportService {
 
       const createdCards = await cardRepo.bulkCreate(db, cardsInput);
 
-      // Create Activities
       const activities = createdCards.map((card) => ({
         type: "card.created" as const,
         cardId: card.id,
@@ -758,7 +751,6 @@ export class ImportService {
         await cardActivityRepo.bulkCreate(db, activities);
       }
 
-      // Link Labels
       const cardLabelRelations: { cardId: number; labelId: number }[] = [];
       createdCards.forEach((card, index) => {
         const originalItem = itemsToInsert[index]?.item;

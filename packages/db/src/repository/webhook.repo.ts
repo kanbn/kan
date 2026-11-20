@@ -6,7 +6,6 @@ import { generateUID } from "@kan/shared/utils";
 
 import type { WebhookEvent } from "../schema/webhooks";
 
-/** Parse JSON-encoded events column into typed array */
 function parseEvents(raw: string): WebhookEvent[] {
   return JSON.parse(raw) as WebhookEvent[];
 }

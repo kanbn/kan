@@ -26,7 +26,6 @@ export const updateSubscriptionSeats = async (
 ): Promise<Stripe.Subscription> => {
   const stripe = createStripeClient();
 
-  // First, retrieve the current subscription to get the subscription items
   const subscription = await stripe.subscriptions.retrieve(
     stripeSubscriptionId,
     {
@@ -40,7 +39,6 @@ export const updateSubscriptionSeats = async (
     );
   }
 
-  // Get the first subscription item
   const subscriptionItem = subscription.items.data[0];
   if (!subscriptionItem) {
     throw new Error(
@@ -51,14 +49,12 @@ export const updateSubscriptionSeats = async (
   const currentQuantity = subscriptionItem.quantity ?? 1;
   const newQuantity = currentQuantity + seatIncrement;
 
-  // Ensure we don't go below 1 seat
   if (newQuantity < 1) {
     throw new Error(
       `Cannot reduce seats below 1. Current: ${currentQuantity}, Requested change: ${seatIncrement}`,
     );
   }
 
-  // Update the subscription with the new quantity and immediate invoicing
   const updatedSubscription = await stripe.subscriptions.update(
     stripeSubscriptionId,
     {

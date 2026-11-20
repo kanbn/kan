@@ -29,7 +29,6 @@ import {
 
 import * as permissionRepo from "./permission.repo";
 
-// System role definitions
 const SYSTEM_ROLES: {
   name: Role;
   description: string;
@@ -98,7 +97,6 @@ export const create = async (
     });
 
   if (workspace) {
-    // Create system roles for the workspace
     let adminRoleId: number | null = null;
     for (const roleData of SYSTEM_ROLES) {
       const role = await permissionRepo.createRole(db, {
@@ -443,7 +441,6 @@ export const searchBoardsAndCards = async (
 
   const ticketId = parseTicketId(query.trim());
 
-  // Search for boards
   const boardResults = await db
     .select({
       publicId: boards.publicId,
@@ -457,10 +454,9 @@ export const searchBoardsAndCards = async (
     .where(
       and(
         eq(boards.workspaceId, workspaceId),
-        // Combine exact and fuzzy matching
         or(
-          ilike(boards.name, `%${query}%`), // Exact substring match
-          sql`similarity(${boards.name}, ${query}) > 0.2`, // Fuzzy match
+          ilike(boards.name, `%${query}%`),
+          sql`similarity(${boards.name}, ${query}) > 0.2`,
         ),
         isNull(boards.deletedAt),
         boardAccess,
@@ -473,7 +469,6 @@ export const searchBoardsAndCards = async (
     )
     .limit(ticketId ? 0 : Math.ceil(limit * 0.4));
 
-  // Search for cards by ticket ID or by title
   const cardWhereConditions = ticketId
     ? and(
         eq(boards.workspaceId, workspaceId),
@@ -524,7 +519,6 @@ export const searchBoardsAndCards = async (
     )
     .limit(ticketId ? limit : Math.floor(limit * 0.6));
 
-  // Combine results
   const allResults = [
     ...boardResults.map((board) => ({
       ...board,
@@ -536,6 +530,5 @@ export const searchBoardsAndCards = async (
     })),
   ];
 
-  // Ensure we don't exceed the total limit
   return allResults.slice(0, limit);
 };

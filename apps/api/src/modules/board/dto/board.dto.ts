@@ -57,8 +57,6 @@ const allListsSchema = z.array(
   z.object({ publicId: z.string(), name: z.string() }),
 );
 
-// ─── list ────────────────────────────────────────────────────
-
 export const BoardListQuerySchema = z.object({
   type: z.enum(["regular", "template"]).optional(),
   archived: z
@@ -80,8 +78,6 @@ export const BoardListItemSchema = z.object({
 });
 
 export class BoardListItemDto extends createZodDto(BoardListItemSchema) {}
-
-// ─── byId ────────────────────────────────────────────────────
 
 export const BoardDetailQuerySchema = z.object({
   ...boardFilterQuery,
@@ -170,8 +166,6 @@ export const BoardDetailSchema = z.object({
 
 export class BoardDetailDto extends createZodDto(BoardDetailSchema) {}
 
-// ─── bySlug (public) ─────────────────────────────────────────
-
 export const BoardBySlugQuerySchema = z.object(boardFilterQuery);
 
 export class BoardBySlugQueryDto extends createZodDto(BoardBySlugQuerySchema) {}
@@ -212,8 +206,6 @@ export const BoardBySlugSchema = z.object({
 
 export class BoardBySlugDto extends createZodDto(BoardBySlugSchema) {}
 
-// ─── create ──────────────────────────────────────────────────
-
 export const CreateBoardSchema = z.object({
   name: z.string().min(1).max(100).describe("Board name."),
   lists: z
@@ -250,8 +242,6 @@ export class BoardCreateResponseDto extends createZodDto(
   BoardCreateResponseSchema,
 ) {}
 
-// ─── update ──────────────────────────────────────────────────
-
 export const UpdateBoardSchema = z.object({
   name: z.string().min(1).optional().describe("New board name."),
   slug: slugSchema
@@ -285,8 +275,6 @@ export const BoardUpdateResponseSchema = z.object({
 export class BoardUpdateResponseDto extends createZodDto(
   BoardUpdateResponseSchema,
 ) {}
-
-// ─── delete / move / slug ────────────────────────────────────
 
 export const SuccessResponseSchema = z.object({ success: z.boolean() });
 

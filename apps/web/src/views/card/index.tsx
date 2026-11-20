@@ -194,7 +194,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  // Redirect to 404 if card doesn't exist
   useEffect(() => {
     if (router.isReady && cardId && !isLoading) {
       if (getApiErrorStatus(error) === 404 || !card) {
@@ -288,7 +287,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     setRecentCommentPublicIds((current) => [...current, commentPublicId]);
   };
 
-  // this adds the new created label to selected labels
   useEffect(() => {
     const newLabelId = modalStates.NEW_LABEL_CREATED as string | undefined;
     if (newLabelId && cardId) {
@@ -312,7 +310,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     clearModalState,
   ]);
 
-  // Open the new item form after creating a new checklist
   useEffect(() => {
     if (!card) return;
     const state = getModalState("ADD_CHECKLIST") as
@@ -324,7 +321,6 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     }
   }, [card, getModalState, clearModalState]);
 
-  // Auto-resize title textarea
   useEffect(() => {
     const titleTextarea = document.getElementById(
       "title",

@@ -83,7 +83,6 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
 
   const availableTabs = settingsTabs.filter((tab) => tab.condition);
 
-  // Update selected tab when currentTab prop changes
   useEffect(() => {
     const tabIndex = availableTabs.findIndex((tab) => tab.key === currentTab);
     if (tabIndex !== -1) {

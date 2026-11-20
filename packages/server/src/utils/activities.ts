@@ -4,22 +4,20 @@ import type { ActivityType } from "@kan/db/schema";
 type ActivityBase = PaginatedActivitiesResult["activities"][number];
 
 interface Activity extends ActivityBase {
-  mergeCount?: number; // number of activities merged into this one
-  mergedLabels?: string[]; // list of label names when merging label activities
+  mergeCount?: number;
+  mergedLabels?: string[];
 }
 
-// types that can be merged with simple count
 const MERGEABLE_COUNT_TYPES: readonly ActivityType[] = [
   "card.updated.description",
 ];
 
-// types that merge with a list of items
 const MERGEABLE_LIST_TYPES: readonly ActivityType[] = [
   "card.updated.label.added",
   "card.updated.label.removed",
 ];
 
-const MERGE_TIME_WINDOW_MS = 5 * 60 * 1000; // 5 minutes window for merging activities
+const MERGE_TIME_WINDOW_MS = 5 * 60 * 1000;
 
 export function mergeActivities(activities: Activity[]): Activity[] {
   if (activities.length === 0) return [];

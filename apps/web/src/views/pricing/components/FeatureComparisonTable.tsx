@@ -123,7 +123,6 @@ const FeatureComparisonTable = ({
     const handleScroll = () => {
       if (!containerRef.current) return;
 
-      // Hide fixed header on mobile (screens smaller than 620px)
       if (window.innerWidth < 620) {
         setIsHeaderFixed(false);
         return;

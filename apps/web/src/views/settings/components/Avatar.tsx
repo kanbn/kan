@@ -71,7 +71,6 @@ export default function Avatar({
         icon: "error",
       });
     }
-    // Open crop dialog with preview
     setSelectedFile(file);
     const objUrl = URL.createObjectURL(file);
     setSelectedPreviewUrl(objUrl);
@@ -171,7 +170,6 @@ export default function Avatar({
         throw new Error("Failed to upload profile image");
       }
 
-      // User image is updated in the backend, refresh user data
       await queryClient.refetchQueries({ queryKey: getGetUserQueryKey() });
 
       showPopup({

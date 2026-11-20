@@ -83,7 +83,6 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
 
     setWorkspace(_workspace);
 
-    // Refetch workspace data to ensure availableWorkspaces is up to date
     void queryClient.refetchQueries({ queryKey: getGetWorkspacesQueryKey() });
 
     router.push(`/boards`);
@@ -152,7 +151,6 @@ export const WorkspaceProvider: React.FC<{ children: ReactNode }> = ({
             return;
           }
         } else {
-          // Clear stale workspacePublicId from localStorage
           localStorage.removeItem("workspacePublicId");
         }
       } else {

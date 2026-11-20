@@ -64,7 +64,6 @@ export default function PublicBoardsView() {
     },
   );
 
-  // Redirect to 404 if workspace doesn't exist
   useEffect(() => {
     if (router.isReady && workspaceSlug && !isLoading) {
       if (getApiErrorStatus(error) === 404 || !data) {

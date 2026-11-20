@@ -106,7 +106,6 @@ export const getAllByWorkspaceId = async (
     ),
   });
 
-  // Transform and sort: favorites first, then alphabetically
   return boardsData
     .map((board) => ({
       ...board,
@@ -114,10 +113,8 @@ export const getAllByWorkspaceId = async (
       userFavorites: undefined,
     }))
     .sort((a, b) => {
-      // Sort favorites first
       if (a.favorite && !b.favorite) return -1;
       if (!a.favorite && b.favorite) return 1;
-      // Then alphabetically by name
       return a.name.localeCompare(b.name);
     });
 };
@@ -915,12 +912,6 @@ export const getWorkspaceAndBoardIdByBoardPublicId = async (
   return result;
 };
 
-/**
- * Fetches the board fields needed by the move mutation:
- * identity, naming, type guards, and workspace ownership.
- * Soft-deleted boards are excluded — moving a tombstoned board has
- * no defensible semantics.
- */
 export const getBoardForMove = async (db: dbClient, boardPublicId: string) => {
   return db.query.boards.findFirst({
     columns: {
@@ -955,7 +946,6 @@ export const isBoardSlugAvailable = async (
   return result === undefined;
 };
 
-// Create a new board (regular/template) from a full board snapshot
 export const createFromSnapshot = async (
   db: dbClient,
   args: {
@@ -1024,7 +1014,6 @@ export const createFromSnapshot = async (
       });
     }
 
-    // Labels
     const srcLabels = args.source.labels;
     const labelMap = new Map<string, number>();
 
@@ -1052,7 +1041,6 @@ export const createFromSnapshot = async (
       }
     }
 
-    // Lists
     const listIndexToId = new Map<number, number>();
     const srcLists = [...args.source.lists].sort((a, b) => a.index - b.index);
     if (srcLists.length) {
@@ -1072,7 +1060,6 @@ export const createFromSnapshot = async (
       for (const list of insertedLists) listIndexToId.set(list.index, list.id);
     }
 
-    // Cards, card-labels, checklists
     for (const list of srcLists) {
       const newListId = listIndexToId.get(list.index);
       if (!newListId) continue;
@@ -1093,7 +1080,6 @@ export const createFromSnapshot = async (
 
         if (!createdCard) throw new Error("Failed to create card");
 
-        // Create card.created activity
         await tx.insert(cardActivities).values({
           publicId: generateUID(),
           type: "card.created",
@@ -1112,7 +1098,6 @@ export const createFromSnapshot = async (
           if (cardLabels.length) {
             await tx.insert(cardsToLabels).values(cardLabels);
 
-            // Create card.updated.label.added activities for each label
             const labelActivities = cardLabels.map((cardLabel) => ({
               publicId: generateUID(),
               type: "card.updated.label.added" as const,
@@ -1143,7 +1128,6 @@ export const createFromSnapshot = async (
 
             if (!createdChecklist) continue;
 
-            // Create card.updated.checklist.added activity
             await tx.insert(cardActivities).values({
               publicId: generateUID(),
               type: "card.updated.checklist.added",
@@ -1168,7 +1152,6 @@ export const createFromSnapshot = async (
               if (itemValues.length) {
                 await tx.insert(checklistItems).values(itemValues);
 
-                // Create card.updated.checklist.item.added activities for each item
                 const itemActivities = itemValues.map((item) => ({
                   publicId: generateUID(),
                   type: "card.updated.checklist.item.added" as const,
@@ -1197,7 +1180,6 @@ export const moveToWorkspace = async (
   newSlug?: string,
 ) => {
   return db.transaction(async (tx) => {
-    // Update the board's workspace (and slug if provided)
     const [updatedBoard] = await tx
       .update(boards)
       .set({
@@ -1213,11 +1195,8 @@ export const moveToWorkspace = async (
 
     if (!updatedBoard) throw new Error("Failed to move board");
 
-    // Get every card ID ever belonging to this board, including
-    // soft-deleted cards under soft-deleted lists. Member assignments
-    // point at workspace-scoped members that no longer exist after
-    // the move; if we leave assignments on soft-deleted cards, a later
-    // restore would resurrect rogue references to the old workspace.
+    // Includes soft-deleted cards: their assignments point at members of the old
+    // workspace and would come back on restore.
     const boardLists = await tx
       .select({ id: lists.id })
       .from(lists)
@@ -1234,7 +1213,6 @@ export const moveToWorkspace = async (
       if (boardCards.length > 0) {
         const cardIds = boardCards.map((c) => c.id);
 
-        // Clear all card member assignments (they reference workspace-scoped members)
         await tx
           .delete(cardToWorkspaceMembers)
           .where(inArray(cardToWorkspaceMembers.cardId, cardIds));

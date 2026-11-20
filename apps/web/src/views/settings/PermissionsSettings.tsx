@@ -32,7 +32,6 @@ export default function PermissionsSettings() {
           icon: "success",
         });
 
-        // Refresh any relevant workspace data
         if (workspace.publicId && workspace.publicId.length >= 12) {
           await queryClient.invalidateQueries({
             queryKey: getGetWorkspaceQueryKey(workspace.publicId),

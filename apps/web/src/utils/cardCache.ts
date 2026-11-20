@@ -35,9 +35,6 @@ const cardDetail = (input?: CardInput) =>
 const cardActivities = (input: CardInput) =>
   matchUrl((url) => url === `/cards/${input.cardPublicId}/activities`);
 
-/**
- * Card cache helpers that read and write the unwrapped card data.
- */
 export function useCardCache() {
   const queryClient = useQueryClient();
 

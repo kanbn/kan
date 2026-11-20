@@ -247,7 +247,6 @@ export function Auth({
         );
       }
     } else {
-      // Only allow magic link if email sending is enabled and not in sign up mode
       if (isCloudEnv || (isEmailSendingEnabled && !isSignUp)) {
         await authClient.signIn.magicLink(
           {
@@ -260,7 +259,6 @@ export function Auth({
           },
         );
       } else {
-        // Provide a clear error feedback when password omitted but magic link unavailable
         setLoginError(
           isSignUp
             ? t`Password is required to sign up.`
@@ -304,20 +302,15 @@ export function Auth({
     return isCloudEnv || (isEmailSendingEnabled && !isSignUp);
   }, [isCloudEnv, isEmailSendingEnabled, isSignUp]);
 
-  // Determine if we should operate in magic link mode for current form state (login only)
   const isMagicLinkMode = useMemo(() => {
-    // Magic link only viable when email sending enabled AND not sign up.
     if (!isEmailSendingEnabled || isSignUp) return false;
-    // If credentials disabled we always default to magic link.
     if (!isCredentialsEnabled) return true;
     // Credentials enabled: user chooses magic link by leaving password blank.
     return !password;
   }, [isEmailSendingEnabled, isSignUp, isCredentialsEnabled, password]);
 
-  // Auto-focus password field when an error indicates it's required
   useEffect(() => {
     if (!isCredentialsEnabled) return;
-    // Focus when: sign up and missing password; login error requiring password; validation error on password.
     const pwdEmpty = (password ?? "").length === 0;
     let needsPassword = false;
     if (isSignUp && pwdEmpty) {

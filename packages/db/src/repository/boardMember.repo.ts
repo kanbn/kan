@@ -4,7 +4,6 @@ import type { dbClient } from "@kan/db/client";
 import type { BoardMemberRole } from "@kan/db/schema";
 import { boardMembers, workspaceMembers } from "@kan/db/schema";
 
-// Accepts either the db client or a transaction
 type DbOrTx = Pick<dbClient, "select" | "insert" | "update" | "delete">;
 
 export class CannotRemoveLastBoardAdminError extends Error {
