@@ -28,7 +28,6 @@ export default function CommandPallette({
   const { workspace } = useWorkspace();
   const router = useRouter();
 
-  // Debounce to avoid too many reqs
   const [debouncedQuery] = useDebounce(query, 300);
 
   const {
@@ -49,7 +48,6 @@ export default function CommandPallette({
     },
   );
 
-  // Clear results when query is empty, otherwise show search results
   const results =
     debouncedQuery.trim().length === 0 ? [] : (searchResults ?? []);
 
@@ -87,7 +85,6 @@ export default function CommandPallette({
                     if (event.key === "Enter" && results.length > 0) {
                       event.preventDefault();
 
-                      // Find the active option or fallback to first option
                       const targetOption =
                         document.querySelector(
                           '[data-headlessui-state*="active"][role="option"]',

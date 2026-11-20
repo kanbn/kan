@@ -81,7 +81,6 @@ export function AttachmentThumbnails({
       },
       onSuccess: () => {
         if (isReadOnly) return;
-        // Close viewer if the deleted image was being viewed
         setSelectedIndex(null);
       },
       onSettled: async () => {
@@ -91,7 +90,6 @@ export function AttachmentThumbnails({
     },
   });
 
-  // Keyboard navigation
   useEffect(() => {
     if (selectedIndex === null) return;
 
@@ -227,7 +225,6 @@ export function AttachmentThumbnails({
             <div
               className="fixed inset-0 bg-light-50 transition-opacity dark:bg-dark-50"
               onClick={(e) => {
-                // Only close if clicking directly on the background, not on buttons
                 if (e.target === e.currentTarget) {
                   closeViewer();
                 }

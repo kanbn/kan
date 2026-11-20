@@ -212,9 +212,6 @@ importers:
       '@kan/db':
         specifier: workspace:^
         version: link:../../packages/db
-      '@kan/logger':
-        specifier: workspace:^
-        version: link:../../packages/logger
       '@kan/server':
         specifier: workspace:*
         version: link:../../packages/server

@@ -34,12 +34,12 @@ export function createPlugins(db: dbClient) {
         getApiKeyFromHeaders(ctx.headers as Headers | undefined),
       rateLimit: {
         enabled: true,
-        timeWindow: 1000 * 60, // 1 minute
+        timeWindow: 1000 * 60,
         maxRequests: 600,
       },
     }),
     magicLink({
-      expiresIn: 60 * 60 * 24 * 7, // 7 days
+      expiresIn: 60 * 60 * 24 * 7,
       sendMagicLink: async ({ email, url }) => {
         try {
           const decodedUrl = decodeURIComponent(url);
@@ -110,7 +110,6 @@ export function createPlugins(db: dbClient) {
         }
       },
     }),
-    // Generic OIDC provider
     ...(process.env.OIDC_CLIENT_ID &&
     process.env.OIDC_CLIENT_SECRET &&
     process.env.OIDC_DISCOVERY_URL

@@ -61,9 +61,6 @@ export default function NewApiKeyModal() {
         });
       }
     },
-    onError: () => {
-      // Handle error if needed
-    },
   });
 
   const onSubmit = (data: z.infer<typeof newApiKeySchema>) => {
@@ -71,7 +68,6 @@ export default function NewApiKeyModal() {
   };
 
   useEffect(() => {
-    // Reset state and form when modal opens
     setCreatedApiKey(null);
     reset();
   }, [reset]);

@@ -237,7 +237,6 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  // Redirect to 404 if board doesn't exist
   useEffect(() => {
     if (router.isReady && boardId && !isQueryLoading) {
       if (getApiErrorStatus(error) === 404 || !boardData) {

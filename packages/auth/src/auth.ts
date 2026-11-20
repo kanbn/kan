@@ -28,8 +28,8 @@ export const initAuth = (db: dbClient) => {
       },
     }),
     session: {
-      expiresIn: 60 * 60 * 24 * 30, // 30 days
-      updateAge: 60 * 60 * 24 * 2, // Update session expiry every 48 hours if user is active
+      expiresIn: 60 * 60 * 24 * 30,
+      updateAge: 60 * 60 * 24 * 2,
       freshAge: 0,
     },
     ...(process.env.DISABLE_RATE_LIMIT === "true"

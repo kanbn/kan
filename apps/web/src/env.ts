@@ -9,33 +9,13 @@ export const env = createEnv({
       .enum(["development", "production", "test"])
       .default("development"),
   },
-  /**
-   * Specify your server-side environment variables schema here.
-   * This way you can ensure the app isn't built with invalid env vars.
-   */
   server: {
-    KAN_ADMIN_API_KEY: z.string().optional(),
     POSTGRES_URL: z.string().url().optional().or(z.literal("")),
     KAN_API_URL: z.string().url().optional().or(z.literal("")),
     RATE_LIMIT_IP_HEADER: z.string().optional(),
-    TRELLO_APP_API_KEY: z.string().optional(),
-    TRELLO_APP_SECRET: z.string().optional(),
-    SUBSCRIBER_API_URL: z.string().url().optional(),
-    SUBSCRIBER_API_KEY: z.string().optional(),
-    S3_ACCESS_KEY_ID: z.string().optional(),
-    S3_SECRET_ACCESS_KEY: z.string().optional(),
-    S3_REGION: z.string().optional(),
-    S3_ENDPOINT: z.string().optional(),
-    S3_FORCE_PATH_STYLE: z.string().optional(),
-    EMAIL_FROM: z.string().optional(),
     REDIS_URL: z.string().url().optional().or(z.literal("")),
-    S3_AVATAR_UPLOAD_LIMIT: z.string().optional(),
   },
 
-  /**
-   * Specify your client-side environment variables schema here.
-   * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
-   */
   client: {
     NEXT_PUBLIC_KAN_ENV: z.string().optional(),
     NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
@@ -77,9 +57,6 @@ export const env = createEnv({
       )
       .optional(),
   },
-  /**
-   * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
-   */
   experimental__runtimeEnv: {
     NEXT_PUBLIC_KAN_ENV: process.env.NEXT_PUBLIC_KAN_ENV,
     NODE_ENV: process.env.NODE_ENV,

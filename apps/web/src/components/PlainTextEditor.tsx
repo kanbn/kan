@@ -85,7 +85,6 @@ export default function PlainTextEditor({
           }
           if (event.key === "Escape") {
             event.preventDefault();
-            // Reset to original content before calling the callback
             editor?.commands.setContent(contentRef.current, {
               emitUpdate: false,
             });

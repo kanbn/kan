@@ -42,7 +42,6 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     { label: t`Contact`, href: "mailto:support@kan.bn", group: "Resources" },
   ];
 
-  // Group mobile menu items by their group property
   const groupedMenuItems = mobileMenuItems.reduce(
     (acc, item) => {
       (acc[item.group] ??= []).push(item);

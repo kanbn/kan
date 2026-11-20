@@ -32,9 +32,6 @@ const boardLists = {
     /^\/workspaces\/[^/]+\/boards$/.test(query.queryKey[0]),
 };
 
-/**
- * Board detail cache helpers that read and write the unwrapped board data.
- */
 export function useBoardCache() {
   const queryClient = useQueryClient();
 

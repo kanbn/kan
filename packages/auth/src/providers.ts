@@ -12,7 +12,6 @@ export const configuredProviders = socialProviderList.reduce<
       requireSelectAccount?: boolean;
       clientKey?: string;
       issuer?: string;
-      // Google-specific optional hints
       hostedDomain?: string;
       hd?: string;
     }
@@ -52,7 +51,6 @@ export const configuredProviders = socialProviderList.reduce<
     acc[provider].tenantId = "common";
     acc[provider].requireSelectAccount = true;
   }
-  // Add Google domain hint if allowed domains is configured
   if (
     provider === "google" &&
     Object.keys(acc).includes("google") &&
@@ -62,7 +60,6 @@ export const configuredProviders = socialProviderList.reduce<
       .map((d) => d.trim().toLowerCase())
       .filter(Boolean);
     if (allowed && allowed.length > 0) {
-      // Use the first domain as an authorization hint
       acc[provider].hostedDomain = allowed[0];
       acc[provider].hd = allowed[0];
     }

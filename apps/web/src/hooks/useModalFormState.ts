@@ -24,7 +24,6 @@ export function useModalFormState<T extends object>({
   const isCurrentModal = modalContentType === modalType;
   const savedState = getModalState(modalType) as T | undefined;
 
-  // get current form state (using the saved values if available, otherwise the initial values)
   const formState = savedState ?? initialValues;
 
   // Keep refs so the callbacks below stay stable across re-renders.

@@ -56,7 +56,6 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // Reset input
     event.target.value = "";
 
     await uploadFile(file);
@@ -86,7 +85,6 @@ export function AttachmentUpload({ cardPublicId }: { cardPublicId: string }) {
     const files = Array.from(e.dataTransfer.files);
     if (files.length === 0) return;
 
-    // Upload the first file (or could upload all files)
     await uploadFile(files[0] ?? new File([], ""));
   };
 

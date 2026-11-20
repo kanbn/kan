@@ -119,7 +119,6 @@ export class BoardService {
     await assertPermission(db, userId, board.workspaceId, "board:view");
     await assertBoardAccess(db, userId, board);
 
-    // Convert semantic string filters to date ranges expected by the repo
     const dueDateFilters = input.dueDateFilters
       ? convertDueDateFiltersToRanges(input.dueDateFilters)
       : [];
@@ -146,7 +145,6 @@ export class BoardService {
 
     const resolveAvatarUrl = createAvatarUrlResolver();
 
-    // Generate presigned URLs for workspace member avatars
     const workspaceWithAvatarUrls = {
       ...result.workspace,
       // Only offer people who belong on this board as assignees/filters.
@@ -170,7 +168,6 @@ export class BoardService {
       ),
     };
 
-    // Generate presigned URLs for card member avatars
     const listsWithAvatarUrls = await Promise.all(
       result.lists.map(async (list) => ({
         ...list,
@@ -239,7 +236,6 @@ export class BoardService {
         `Workspace with slug ${input.workspaceSlug} not found`,
       );
 
-    // Convert semantic string filters to date ranges expected by the repo
     const dueDateFilters = input.dueDateFilters
       ? convertDueDateFiltersToRanges(input.dueDateFilters)
       : [];
@@ -286,9 +282,7 @@ export class BoardService {
 
     await assertPermission(db, userId, workspace.id, "board:create");
 
-    // If sourceBoardPublicId is provided, clone the source board
     if (input.sourceBoardPublicId) {
-      // First get the source board info (ID and type)
       const sourceBoardInfo =
         await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
           db,
@@ -304,7 +298,6 @@ export class BoardService {
       // able to see the source board.
       await assertBoardAccess(db, userId, sourceBoardInfo);
 
-      // Get the full board data with the correct type
       const sourceBoard = await boardRepo.getByPublicId(
         db,
         input.sourceBoardPublicId,
@@ -323,7 +316,6 @@ export class BoardService {
           `Source board with public ID ${input.sourceBoardPublicId} not found`,
         );
 
-      // Verify the source board belongs to the same workspace
       const sourceWorkspace = await workspaceRepo.getByPublicId(
         db,
         sourceBoard.workspace.publicId,
@@ -357,7 +349,6 @@ export class BoardService {
       return result;
     }
 
-    // Otherwise, create a new board with provided lists and labels
     let slug = generateSlug(input.name);
 
     const isSlugUnique = await boardRepo.isSlugUnique(db, {
@@ -436,7 +427,6 @@ export class BoardService {
     );
     await assertBoardAccess(db, userId, board);
 
-    // Handle favorite toggle separately
     if (input.favorite !== undefined) {
       if (input.favorite) {
         await boardRepo.addUserFavorite(db, userId, board.id);
@@ -445,7 +435,6 @@ export class BoardService {
       }
     }
 
-    // Handle other updates (name, slug, visibility)
     const hasOtherUpdates =
       input.name !== undefined ||
       input.slug !== undefined ||
@@ -453,7 +442,6 @@ export class BoardService {
       input.isArchived !== undefined;
 
     if (!hasOtherUpdates) {
-      // Only favorite was updated, return success
       return { success: true };
     }
 
@@ -557,7 +545,6 @@ export class BoardService {
     userId: string;
   }) {
     const { userId } = input;
-    // Get source board
     const board = await boardRepo.getBoardForMove(db, input.boardPublicId);
 
     if (!board)
@@ -575,7 +562,6 @@ export class BoardService {
         `Archived boards cannot be moved. Unarchive the board first.`,
       );
 
-    // Check permission to edit board in source workspace
     await assertCanEdit(
       db,
       userId,
@@ -585,11 +571,7 @@ export class BoardService {
     );
     await assertBoardAccess(db, userId, board);
 
-    // Get target workspace. workspaceRepo.getByPublicId does not yet
-    // filter soft-deleted workspaces (legacy: same is true for several
-    // peer callers); guard at this call site so we never move a board
-    // into a tombstoned workspace. A wider fix to make the repo treat
-    // deleted-as-not-found is a separate concern.
+    // getByPublicId doesn't filter soft-deleted workspaces, so check deletedAt here.
     const targetWorkspace = await workspaceRepo.getByPublicId(
       db,
       input.targetWorkspacePublicId,
@@ -601,7 +583,6 @@ export class BoardService {
     if (targetWorkspace.id === board.workspaceId)
       throw new BadRequestException(`Board is already in this workspace`);
 
-    // Check permission to create boards in target workspace
     await assertPermission(db, userId, targetWorkspace.id, "board:create");
 
     let slug = board.slug;
@@ -616,7 +597,6 @@ export class BoardService {
       slug = `${slug}-${generateUID()}`;
     }
 
-    // Move the board
     await boardRepo.moveToWorkspace(
       db,
       board.id,

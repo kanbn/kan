@@ -80,13 +80,11 @@ export function InviteMemberForm({
 
   const refetchBoards = () => boardCache.refetchLists();
 
-  // Fetch active invite link on component mount
   const { data: activeInviteLink, refetch: _refetchInviteLink } =
     useGetActiveInviteLink(workspace.publicId || "", {
       query: { enabled: !!workspace.publicId },
     });
 
-  // Set initial state based on active invite link
   useEffect(() => {
     if (activeInviteLink) {
       setIsShareInviteLinkEnabled(activeInviteLink.data.isActive);
@@ -223,13 +221,11 @@ export function InviteMemberForm({
     setIsLoadingInviteLink(true);
 
     if (isShareInviteLinkEnabled && workspace.publicId) {
-      // Deactivate invite link
       await deactivateInviteLink.mutateAsync({
         workspacePublicId: workspace.publicId,
       });
       setIsShareInviteLinkEnabled(false);
     } else {
-      // Create new invite link
       await createInviteLink.mutateAsync({
         workspacePublicId: workspace.publicId,
       });

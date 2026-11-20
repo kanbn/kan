@@ -179,17 +179,13 @@ export async function sendWebhookToUrl(
   }
 }
 
-/**
- * Send webhook to all active webhooks for a workspace that are subscribed to the event.
- * Wrapped in try/catch so callers using fire-and-forget don't risk unhandled rejections.
- */
+// Never throws, so callers can fire and forget.
 export async function sendWebhooksForWorkspace(
   db: dbClient,
   workspaceId: number,
   payload: WebhookPayload,
 ): Promise<void> {
   try {
-    // Get active webhooks for this workspace and filter by event client-side
     const allWebhooks = await webhookRepo.getActiveByWorkspaceId(
       db,
       workspaceId,
@@ -198,7 +194,6 @@ export async function sendWebhooksForWorkspace(
       w.events.includes(payload.event),
     );
 
-    // Send to all subscribed webhooks in parallel (fire and forget)
     const promises = webhooksForEvent.map((webhook) =>
       sendWebhookToUrl(webhook.url, webhook.secret ?? undefined, payload).then(
         (result) => {
@@ -211,7 +206,6 @@ export async function sendWebhooksForWorkspace(
       ),
     );
 
-    // Wait for all to complete but don't block on failures
     await Promise.allSettled(promises);
   } catch (error) {
     log.error({ err: error, workspaceId }, "Failed to send webhooks for workspace");

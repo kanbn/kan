@@ -388,7 +388,6 @@ describe("webhook utilities", () => {
         mockPayload,
       );
 
-      // Advance timers to trigger the abort
       vi.advanceTimersByTime(15000);
 
       const result = await resultPromise;
@@ -470,7 +469,6 @@ describe("webhook utilities", () => {
     });
 
     it("does not send when no webhooks match the event (client-side filtering)", async () => {
-      // Returns webhooks that don't match the event — client-side filter excludes them
       mockGetActiveByWorkspaceId.mockResolvedValueOnce([]);
 
       await sendWebhooksForWorkspace(mockDb, 1, mockPayload);

@@ -21,12 +21,7 @@ export function createS3Client() {
         }
       : undefined;
 
-  // The AWS SDK throws "Region is missing" if region is undefined or
-  // empty string at S3Client construction. Default to "us-east-1" so
-  // S3-compatible providers (MinIO, Backblaze B2, R2, Spaces, Wasabi)
-  // that don't care about region work without forcing operators to
-  // set a meaningless value. Real AWS S3 users should still set
-  // S3_REGION explicitly to their bucket's actual region.
+  // The SDK throws on an empty region; S3-compatible providers don't need a real one.
   return new S3Client({
     region: region ?? "us-east-1",
     endpoint: process.env.S3_ENDPOINT ?? "",
@@ -53,7 +48,6 @@ export async function generateUploadUrl(
       Bucket: bucket,
       Key: key,
       ContentType: contentType,
-      // Don't set ACL for private files
     }),
     { expiresIn },
   );
@@ -112,15 +106,10 @@ export async function deleteObject(bucket: string, key: string) {
   );
 }
 
-/**
- * Generate presigned URL for an avatar image
- * Returns the URL as-is if it's already a full URL (external provider)
- * Returns presigned URL if it's an S3 key
- * Returns null if image key is missing, bucket is not configured, or URL generation fails
- */
+// Full URLs (external providers) pass through; S3 keys get a presigned URL.
 export async function generateAvatarUrl(
   imageKey: string | null | undefined,
-  expiresIn = 86400, // 24 hours
+  expiresIn = 86400,
 ): Promise<string | null> {
   if (!imageKey) {
     return null;
@@ -138,18 +127,13 @@ export async function generateAvatarUrl(
   try {
     return await generateDownloadUrl(bucket, imageKey, expiresIn);
   } catch {
-    // If URL generation fails, return null
     return null;
   }
 }
 
-/**
- * Generate presigned URL for an attachment
- * Returns null if attachment key is missing, bucket is not configured, or URL generation fails
- */
 export async function generateAttachmentUrl(
   attachmentKey: string | null | undefined,
-  expiresIn = 86400, // 24 hours
+  expiresIn = 86400,
   downloadFilename?: string,
 ): Promise<string | null> {
   if (!attachmentKey) {
@@ -169,7 +153,6 @@ export async function generateAttachmentUrl(
       downloadFilename,
     );
   } catch {
-    // If URL generation fails, return null
     return null;
   }
 }

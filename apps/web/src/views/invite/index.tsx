@@ -78,7 +78,6 @@ export default function InvitePage() {
     query: { enabled: !!inviteCode, retry: false },
   });
 
-  // Auto accept invite if user is logged in
   useEffect(() => {
     if (session?.user.id && inviteCode && inviteInfo && !error) {
       setIsProcessing(true);

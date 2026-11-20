@@ -7,9 +7,6 @@ import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissionRepo from "@kan/db/repository/permission.repo";
 import { canManageRole, getDefaultPermissions } from "@kan/shared";
 
-/**
- * Get effective permissions for a member by combining role permissions with overrides
- */
 export async function getMemberEffectivePermissions(
   db: dbClient,
   workspaceMemberId: number,
@@ -18,7 +15,6 @@ export async function getMemberEffectivePermissions(
 ): Promise<Permission[]> {
   let roleDefaults: Set<Permission>;
 
-  // Get role permissions from database or fallback to code defaults
   if (roleId) {
     const dbPermissions = await permissionRepo.getPermissionsByRoleId(
       db,
@@ -30,7 +26,6 @@ export async function getMemberEffectivePermissions(
     roleDefaults = new Set<Permission>([...codeDefaults]);
   }
 
-  // Get and apply custom overrides
   const overrides = await permissionRepo.getMemberPermissionOverrides(
     db,
     workspaceMemberId,
@@ -47,9 +42,6 @@ export async function getMemberEffectivePermissions(
   return Array.from(roleDefaults);
 }
 
-/**
- * Check if a member has a specific permission
- */
 export async function memberHasPermission(
   db: dbClient,
   workspaceMemberId: number,
@@ -59,7 +51,6 @@ export async function memberHasPermission(
 ): Promise<boolean> {
   let hasRoleDefault: boolean;
 
-  // Check role permission from database or fallback to code defaults
   if (roleId) {
     const dbPermissions = await permissionRepo.getPermissionsByRoleId(
       db,
@@ -71,14 +62,12 @@ export async function memberHasPermission(
     hasRoleDefault = codeDefaults.includes(permission);
   }
 
-  // Check for override
   const override = await permissionRepo.getMemberPermissionOverride(
     db,
     workspaceMemberId,
     permission,
   );
 
-  // Override takes precedence
   if (override) {
     return override.granted;
   }
@@ -86,9 +75,6 @@ export async function memberHasPermission(
   return hasRoleDefault;
 }
 
-/**
- * Check if user has a specific permission in a workspace
- */
 export async function hasPermission(
   db: dbClient,
   userId: string,
@@ -114,9 +100,6 @@ export async function hasPermission(
   );
 }
 
-/**
- * Get all permissions for a user in a workspace
- */
 export async function getUserPermissions(
   db: dbClient,
   userId: string,
@@ -150,9 +133,6 @@ export async function getUserPermissions(
   };
 }
 
-/**
- * Assert user has permission - throws FORBIDDEN if not
- */
 export async function assertPermission(
   db: dbClient,
   userId: string,
@@ -168,9 +148,6 @@ export async function assertPermission(
   }
 }
 
-/**
- * Assert user can assign a specific role (based on hierarchy)
- */
 export async function assertCanManageRole(
   db: dbClient,
   managerUserId: string,
@@ -196,9 +173,6 @@ export async function assertCanManageRole(
   }
 }
 
-/**
- * Assert user can manage another member based on role hierarchy
- */
 export async function assertCanManageMember(
   db: dbClient,
   managerUserId: string,
@@ -231,9 +205,6 @@ export async function assertCanManageMember(
   }
 }
 
-/**
- * Assert user can delete an entity - either has the delete permission OR is the creator
- */
 export async function assertCanDelete(
   db: dbClient,
   userId: string,
@@ -241,7 +212,6 @@ export async function assertCanDelete(
   permission: Permission,
   createdBy: string | null,
 ): Promise<void> {
-  // Check if user has the general delete permission
   const hasDeletePermission = await hasPermission(
     db,
     userId,
@@ -249,25 +219,19 @@ export async function assertCanDelete(
     permission,
   );
 
-  // If user has permission, allow deletion
   if (hasDeletePermission) {
     return;
   }
 
-  // If user doesn't have permission, check if they are the creator
   if (createdBy && createdBy === userId) {
     return;
   }
 
-  // Neither condition met - deny deletion
   throw new ForbiddenException(
     `You do not have permission to delete this entity (${permission})`,
   );
 }
 
-/**
- * Assert user can edit an entity - either has the edit permission OR is the creator
- */
 export async function assertCanEdit(
   db: dbClient,
   userId: string,
@@ -275,7 +239,6 @@ export async function assertCanEdit(
   permission: Permission,
   createdBy: string | null,
 ): Promise<void> {
-  // Check if user has the general edit permission
   const hasEditPermission = await hasPermission(
     db,
     userId,
@@ -283,17 +246,14 @@ export async function assertCanEdit(
     permission,
   );
 
-  // If user has permission, allow editing
   if (hasEditPermission) {
     return;
   }
 
-  // If user doesn't have permission, check if they are the creator
   if (createdBy && createdBy === userId) {
     return;
   }
 
-  // Neither condition met - deny editing
   throw new ForbiddenException(
     `You do not have permission to edit this entity (${permission})`,
   );
@@ -389,10 +349,6 @@ export async function assertBoardAccess(
   }
 }
 
-/**
- * Assert a user can manage a board's membership: workspace admins always
- * can, otherwise the user must be a board admin themselves.
- */
 export async function assertCanManageBoardMembers(
   db: dbClient,
   userId: string,
