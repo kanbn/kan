@@ -28,7 +28,6 @@ export const env = createEnv({
     POSTGRES_URL: z.string().url().optional().or(z.literal("")),
     TRELLO_APP_API_KEY: z.string().optional(),
     TRELLO_APP_SECRET: z.string().optional(),
-    STRIPE_SECRET_KEY: z.string().optional(),
     GOOGLE_CLIENT_ID: z.string().optional(),
     GOOGLE_CLIENT_SECRET: z.string().optional(),
     DISCORD_CLIENT_ID: z.string().optional(),
@@ -79,10 +78,6 @@ export const env = createEnv({
     S3_FORCE_PATH_STYLE: z.string().optional(),
     EMAIL_FROM: z.string().optional(),
     REDIS_URL: z.string().url().optional().or(z.literal("")),
-    STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID: z.string().optional(),
-    STRIPE_TEAM_PLAN_YEARLY_PRICE_ID: z.string().optional(),
-    STRIPE_PRO_PLAN_MONTHLY_PRICE_ID: z.string().optional(),
-    STRIPE_PRO_PLAN_YEARLY_PRICE_ID: z.string().optional(),
     S3_AVATAR_UPLOAD_LIMIT: z.string().optional(),
   },
 

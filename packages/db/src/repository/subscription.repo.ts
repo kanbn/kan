@@ -3,22 +3,14 @@ import { and, asc, eq, inArray, isNotNull, isNull } from "drizzle-orm";
 import type { dbClient } from "@kan/db/client";
 import { subscription } from "@kan/db/schema";
 
+type SubscriptionUpdate = Partial<
+  Omit<typeof subscription.$inferInsert, "id" | "createdAt">
+>;
+
 export const updateById = async (
   db: dbClient,
   subscriptionId: number,
-  updates: {
-    plan?: string;
-    unlimitedSeats?: boolean;
-    status?: string;
-    seats?: number | null;
-    periodStart?: Date | null;
-    periodEnd?: Date | null;
-    cancelAtPeriodEnd?: boolean | null;
-    stripeSubscriptionId?: string | null;
-    referenceId?: string | null;
-    partnerLicenseKey?: string;
-    partnerTier?: number;
-  },
+  updates: SubscriptionUpdate,
 ) => {
   const [result] = await db
     .update(subscription)
@@ -36,6 +28,12 @@ export const updateById = async (
     });
 
   return result;
+};
+
+export const getById = async (db: dbClient, subscriptionId: number) => {
+  return await db.query.subscription.findFirst({
+    where: eq(subscription.id, subscriptionId),
+  });
 };
 
 export const updateByStripeSubscriptionId = async (
@@ -84,14 +82,7 @@ export const getByReferenceId = async (db: dbClient, referenceId: string) => {
 
 export const create = async (
   db: dbClient,
-  data: {
-    plan: string;
-    referenceId: string;
-    userId: string;
-    stripeCustomerId: string;
-    status: string;
-    stripeSubscriptionId?: string;
-  },
+  data: SubscriptionUpdate & { plan: string; status: string },
 ) => {
   const [result] = await db.insert(subscription).values(data).returning();
   return result;

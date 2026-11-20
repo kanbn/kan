@@ -78,12 +78,6 @@ const modeConfig: Record<Mode, { port: string; env: Record<string, string> }> =
         STRIPE_WEBHOOK_SECRET:
           stripeListenSecret ??
           stripeEnv("STRIPE_WEBHOOK_SECRET", "whsec_e2e_placeholder"),
-        STRIPE_WEBHOOK_SECRET_LEGACY:
-          stripeListenSecret ??
-          stripeEnv(
-            "STRIPE_WEBHOOK_SECRET_LEGACY",
-            "whsec_e2e_legacy_placeholder",
-          ),
         STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID: stripeEnv(
           "STRIPE_TEAM_PLAN_MONTHLY_PRICE_ID",
           "price_e2e_placeholder",

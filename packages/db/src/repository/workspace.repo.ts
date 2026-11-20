@@ -382,15 +382,12 @@ export const isWorkspaceSlugAvailable = async (
     },
     where: and(
       isNull(workspaces.deletedAt),
+      excludeWorkspaceId ? ne(workspaces.id, excludeWorkspaceId) : undefined,
+      // A workspace's publicId is reserved as its fallback slug, so no other
+      // workspace may claim it as a custom slug.
       or(
         eq(workspaces.slug, workspaceSlug),
-        // A workspace's own publicId is always reserved for itself as a
-        // slug (that's what it falls back to when it has no custom slug),
-        // so no other workspace may claim it as a custom slug either.
-        and(
-          eq(workspaces.publicId, workspaceSlug),
-          excludeWorkspaceId ? ne(workspaces.id, excludeWorkspaceId) : undefined,
-        ),
+        eq(workspaces.publicId, workspaceSlug),
       ),
     ),
   });
@@ -441,10 +438,7 @@ export const searchBoardsAndCards = async (
   const searchQuery = `%${query}%`;
 
   const boardAccess = memberBoardIds
-    ? or(
-        eq(boards.type, "template"),
-        inArray(boards.id, memberBoardIds),
-      )
+    ? or(eq(boards.type, "template"), inArray(boards.id, memberBoardIds))
     : undefined;
 
   const ticketId = parseTicketId(query.trim());

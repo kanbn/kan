@@ -85,3 +85,4 @@ export const getCancellationDetails = async (
 };
 
 export { createStripeClient };
+export type { Stripe };
