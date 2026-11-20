@@ -1639,7 +1639,7 @@
     "message": "Check out some of our favorite open source projects.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/oss-friends/index.tsx", 61]],
+    "origin": [["src/views/oss-friends/index.tsx", 30]],
     "translation": "Sprawdź niektóre z naszych ulubionych projektów open source."
   },
   "5IXWmO": {
@@ -4074,7 +4074,7 @@
     "message": "Learn more",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/oss-friends/index.tsx", 110]],
+    "origin": [["src/views/oss-friends/index.tsx", 63]],
     "translation": "Dowiedz się więcej"
   },
   "wqxglO": {
@@ -4815,7 +4815,7 @@
     "message": "Open Source Friends",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/oss-friends/index.tsx", 58]],
+    "origin": [["src/views/oss-friends/index.tsx", 27]],
     "translation": "Przyjaciele Open Source"
   },
   "BzEFor": {
@@ -4845,7 +4845,7 @@
     "comments": [],
     "origin": [
       ["src/views/home/components/Footer.tsx", 43],
-      ["src/views/oss-friends/index.tsx", 52]
+      ["src/views/oss-friends/index.tsx", 21]
     ],
     "translation": "OSS Friends"
   },
