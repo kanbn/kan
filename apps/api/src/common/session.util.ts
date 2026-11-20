@@ -10,7 +10,7 @@ import type { User } from "./interfaces/user.interface.js";
 const log = createLogger("auth");
 
 export const db = createDrizzleClient();
-const auth = initAuth(db);
+export const auth = initAuth(db);
 
 export function headersFromRaw(raw: IncomingHttpHeaders): Headers {
   const headers = new Headers();

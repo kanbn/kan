@@ -9,6 +9,7 @@ import { RequestLoggingMiddleware } from "./common/logging/request-logging.middl
 import { createRateLimiter, RATE_LIMITER } from "./common/rate-limiter.js";
 import { HealthController } from "./health.controller.js";
 import { AttachmentModule } from "./modules/attachment/attachment.module.js";
+import { AuthModule } from "./modules/auth/auth.module.js";
 import { BillingModule } from "./modules/billing/billing.module.js";
 import { BoardMemberModule } from "./modules/board-member/board-member.module.js";
 import { BoardModule } from "./modules/board/board.module.js";
@@ -30,6 +31,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
 @Module({
   imports: [
     AttachmentModule,
+    AuthModule,
     BoardModule,
     BoardMemberModule,
     CardModule,
