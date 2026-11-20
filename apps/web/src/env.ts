@@ -16,6 +16,7 @@ export const env = createEnv({
   server: {
     KAN_ADMIN_API_KEY: z.string().optional(),
     POSTGRES_URL: z.string().url().optional().or(z.literal("")),
+    KAN_API_URL: z.string().url().optional().or(z.literal("")),
     RATE_LIMIT_IP_HEADER: z.string().optional(),
     TRELLO_APP_API_KEY: z.string().optional(),
     TRELLO_APP_SECRET: z.string().optional(),
