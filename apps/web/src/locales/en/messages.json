@@ -324,7 +324,20 @@
         172
       ]
     ],
-    "translation": "10mb file uploads"
+    "translation": "10mb file uploads",
+    "obsolete": true
+  },
+  "zeHgZY": {
+    "message": "10MB file uploads",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/pricing/components/FeatureComparisonTable.tsx",
+        172
+      ]
+    ],
+    "translation": "10MB file uploads"
   },
   "gkxGkF": {
     "message": "14 day free trial · Switch plans or cancel anytime",
@@ -340,7 +353,8 @@
         214
       ]
     ],
-    "translation": "14 day free trial · Switch plans or cancel anytime"
+    "translation": "14 day free trial · Switch plans or cancel anytime",
+    "obsolete": true
   },
   "31OyXI": {
     "message": "14-day free trial · cancel anytime",
@@ -354,6 +368,26 @@
     ],
     "translation": "14-day free trial · cancel anytime"
   },
+  "M5sSHj": {
+    "message": "14-day free trial, cancel anytime",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Cta.tsx",
+        14
+      ],
+      [
+        "src/views/home/index.tsx",
+        107
+      ],
+      [
+        "src/views/pricing/components/PricingTiers.tsx",
+        68
+      ]
+    ],
+    "translation": "14-day free trial, cancel anytime"
+  },
   "4obmDr": {
     "message": "404 - Page Not Found | kan.bn",
     "placeholders": {},
@@ -361,7 +395,7 @@
     "origin": [
       [
         "src/pages/404.tsx",
-        11
+        12
       ]
     ],
     "translation": "404 - Page Not Found | kan.bn"
@@ -376,7 +410,20 @@
         74
       ]
     ],
-    "translation": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place."
+    "translation": "A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.",
+    "obsolete": true
+  },
+  "CK1KoJ": {
+    "message": "A simpler, faster alternative to Trello.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/index.tsx",
+        91
+      ]
+    ],
+    "translation": "A simpler, faster alternative to Trello."
   },
   "AeXO77": {
     "message": "Account",
@@ -409,7 +456,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        329
+        339
       ]
     ],
     "translation": "Account manager"
@@ -507,7 +554,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        110
+        96
       ]
     ],
     "translation": "Activity logs"
@@ -727,6 +774,18 @@
     ],
     "translation": "added {0} labels: <0>{labelList}</0>"
   },
+  "o_Okt2": {
+    "message": "Added 3 cards to Planned on the Roadmap board.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        35
+      ]
+    ],
+    "translation": "Added 3 cards to Planned on the Roadmap board."
+  },
   "h4VV67": {
     "message": "added a checklist",
     "placeholders": {},
@@ -925,15 +984,15 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        312
+        322
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        313
+        323
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        314
+        324
       ]
     ],
     "translation": "Admin roles"
@@ -945,7 +1004,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        82
+        83
       ]
     ],
     "translation": "Advanced admin controls"
@@ -957,7 +1016,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        315
+        325
       ]
     ],
     "translation": "Advanced admin roles"
@@ -969,10 +1028,38 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        76
+        77
       ]
     ],
     "translation": "Advanced security, compliance, and dedicated support for large organizations."
+  },
+  "HbXHSp": {
+    "message": "AI agents",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        86
+      ],
+      [
+        "src/views/pricing/components/FeatureComparisonTable.tsx",
+        367
+      ]
+    ],
+    "translation": "AI agents"
+  },
+  "c78QDU": {
+    "message": "AI agents via MCP",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/pricing/components/PricingTiers.tsx",
+        57
+      ]
+    ],
+    "translation": "AI agents via MCP"
   },
   "h2ztFt": {
     "message": "All Free features +",
@@ -998,6 +1085,18 @@
     ],
     "translation": "All member permission overrides have been reset to their role defaults."
   },
+  "p9qpdm": {
+    "message": "All of the essentials, none of the bloat.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Features.tsx",
+        117
+      ]
+    ],
+    "translation": "All of the essentials, none of the bloat."
+  },
   "ZAs2NN": {
     "message": "All Pro features +",
     "placeholders": {},
@@ -1018,7 +1117,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        18
+        49
       ]
     ],
     "translation": "All systems operational"
@@ -1030,7 +1129,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        80
+        81
       ]
     ],
     "translation": "All Teams features +"
@@ -1142,7 +1241,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        288
+        298
       ]
     ],
     "translation": "API"
@@ -1214,7 +1313,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        31
+        62
       ]
     ],
     "translation": "API Reference"
@@ -1419,6 +1518,18 @@
     ],
     "translation": "Are you sure you want to remove {entityLabel}?"
   },
+  "MK5ttw": {
+    "message": "Ask your agent…",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        163
+      ]
+    ],
+    "translation": "Ask your agent…"
+  },
   "PyYD_v": {
     "message": "assigned <0>{0}</0> to the card",
     "placeholders": {
@@ -1570,7 +1681,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        77
+        78
       ]
     ],
     "translation": "Best for large organizations with advanced needs"
@@ -1967,7 +2078,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        85
+        71
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2758,7 +2869,8 @@
         30
       ]
     ],
-    "translation": "Check out some of our favorite open source projects."
+    "translation": "Check out some of our favorite open source projects.",
+    "obsolete": true
   },
   "5IXWmO": {
     "message": "Check your inbox",
@@ -2963,7 +3075,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        91
+        77
       ]
     ],
     "translation": "Collaborate seamlessly with your team."
@@ -2975,7 +3087,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        353
+        363
       ]
     ],
     "translation": "Collaboration"
@@ -2990,7 +3102,8 @@
         67
       ]
     ],
-    "translation": "Coming soon"
+    "translation": "Coming soon",
+    "obsolete": true
   },
   "dYbQ1T": {
     "message": "Comment options",
@@ -3015,7 +3128,7 @@
       ],
       [
         "src/views/home/components/Features.tsx",
-        105
+        91
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -3031,7 +3144,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        96
+        99
       ]
     ],
     "translation": "Company"
@@ -3175,6 +3288,18 @@
     ],
     "translation": "Connect"
   },
+  "bYkn5m": {
+    "message": "Connect Claude, Cursor and other agents to your boards with the Kan MCP server.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Features.tsx",
+        107
+      ]
+    ],
+    "translation": "Connect Claude, Cursor and other agents to your boards with the Kan MCP server."
+  },
   "3jod3l": {
     "message": "Connect GitHub",
     "placeholders": {},
@@ -3209,7 +3334,8 @@
         122
       ]
     ],
-    "translation": "Connect your favorite tools to streamline your workflow."
+    "translation": "Connect your favorite tools to streamline your workflow.",
+    "obsolete": true
   },
   "MCIXdZ": {
     "message": "Connect your GitHub account to import projects.",
@@ -3242,7 +3368,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        42
+        78
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -3258,7 +3384,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        74
+        75
       ]
     ],
     "translation": "Contact Sales"
@@ -3274,11 +3400,11 @@
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        75
+        76
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        75
+        76
       ]
     ],
     "translation": "Contact us"
@@ -3346,7 +3472,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        86
+        72
       ]
     ],
     "translation": "Control who can view and edit your boards."
@@ -3466,7 +3592,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        349
+        359
       ]
     ],
     "translation": "Core features"
@@ -3824,7 +3950,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        84
+        85
       ]
     ],
     "translation": "Custom SLA"
@@ -3856,7 +3982,8 @@
         181
       ]
     ],
-    "translation": "Custom username"
+    "translation": "Custom username",
+    "obsolete": true
   },
   "ZDPJBc": {
     "message": "Custom usernames require upgrading to a Pro plan",
@@ -3889,12 +4016,15 @@
     "comments": [],
     "origin": [
       [
-        "src/views/settings/components/UpgradeToProConfirmation.tsx",
-        78
+        "src/views/pricing/components/FeatureComparisonTable.tsx",
+        178
+      ],
+      [
+        "src/views/pricing/components/PricingTiers.tsx",
+        59
       ]
     ],
-    "translation": "Custom workspace URL",
-    "obsolete": true
+    "translation": "Custom workspace URL"
   },
   "OwneeH": {
     "message": "Custom workspace username",
@@ -3906,7 +4036,8 @@
         58
       ]
     ],
-    "translation": "Custom workspace username"
+    "translation": "Custom workspace username",
+    "obsolete": true
   },
   "n-xLOH": {
     "message": "Customer Support",
@@ -3928,6 +4059,10 @@
       [
         "src/components/UserMenu.tsx",
         158
+      ],
+      [
+        "src/views/home/components/Footer.tsx",
+        18
       ]
     ],
     "translation": "Dark"
@@ -3951,7 +4086,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        83
+        84
       ]
     ],
     "translation": "Dedicated account manager"
@@ -3966,7 +4101,8 @@
         179
       ]
     ],
-    "translation": "Default username"
+    "translation": "Default username",
+    "obsolete": true
   },
   "cnGeoo": {
     "message": "Delete",
@@ -4251,7 +4387,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        106
+        92
       ]
     ],
     "translation": "Discuss and collaborate on cards."
@@ -4263,7 +4399,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        39
+        75
       ]
     ],
     "translation": "Discussions"
@@ -4327,7 +4463,7 @@
     "origin": [
       [
         "src/views/home/components/Faqs.tsx",
-        83
+        46
       ]
     ],
     "translation": "Do you offer a free plan?"
@@ -4392,7 +4528,7 @@
       ],
       [
         "src/views/home/components/Footer.tsx",
-        79
+        97
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -4748,7 +4884,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        61
+        62
       ]
     ],
     "translation": "Email notifications for mentions"
@@ -4928,11 +5064,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        377
+        391
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        71
+        72
       ]
     ],
     "translation": "Enterprise"
@@ -5404,11 +5540,11 @@
     "origin": [
       [
         "src/views/home/components/Faqs.tsx",
-        143
+        94
       ],
       [
         "src/views/home/components/Footer.tsx",
-        56
+        92
       ]
     ],
     "translation": "FAQs"
@@ -5452,11 +5588,11 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        132
+        116
       ],
       [
         "src/views/home/components/Footer.tsx",
-        54
+        90
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -5531,7 +5667,20 @@
         150
       ]
     ],
-    "translation": "Find answers to common questions about Kan. Can't find what you're looking for? Feel free to <0>contact us</0>."
+    "translation": "Find answers to common questions about Kan. Can't find what you're looking for? Feel free to <0>contact us</0>.",
+    "obsolete": true
+  },
+  "o1n7hQ": {
+    "message": "Follow our <0>step-by-step guide</0> to bring your Trello boards across in a few clicks.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        53
+      ]
+    ],
+    "translation": "Follow our <0>step-by-step guide</0> to bring your Trello boards across in a few clicks."
   },
   "q3il6U": {
     "message": "Font size",
@@ -5555,7 +5704,8 @@
         41
       ]
     ],
-    "translation": "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge."
+    "translation": "For long-term sustainability, we recognise all good open source projects need a source of revenue. Ours comes from the paid cloud offering for workspaces with multiple users and for custom workspace slugs. There's no obligation to use it, and you can self-host the software on your own infrastructure free of charge.",
+    "obsolete": true
   },
   "GbjlZL": {
     "message": "Forgot password | kan.bn",
@@ -5608,7 +5758,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        375
+        389
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -5677,11 +5827,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        290
+        300
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        291
+        301
       ]
     ],
     "translation": "Full API access"
@@ -5732,12 +5882,8 @@
         71
       ],
       [
-        "src/views/home/components/Cta.tsx",
-        61
-      ],
-      [
         "src/views/home/components/Header.tsx",
-        105
+        114
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -5795,6 +5941,18 @@
     ],
     "translation": "Get started by creating a new list"
   },
+  "pBLnuq": {
+    "message": "Get started for free",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Cta.tsx",
+        11
+      ]
+    ],
+    "translation": "Get started for free"
+  },
   "oW13KZ": {
     "message": "Get started for free today",
     "placeholders": {},
@@ -5805,7 +5963,8 @@
         54
       ]
     ],
-    "translation": "Get started for free today"
+    "translation": "Get started for free today",
+    "obsolete": true
   },
   "-OhFss": {
     "message": "Get started for free, with no usage limits. For collaboration, upgrade to a plan that fits the size of your team.",
@@ -5830,7 +5989,8 @@
         78
       ]
     ],
-    "translation": "Get started on Cloud"
+    "translation": "Get started on Cloud",
+    "obsolete": true
   },
   "7hktsm": {
     "message": "Getting started",
@@ -5839,7 +5999,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        25
+        56
       ]
     ],
     "translation": "Getting started"
@@ -5851,7 +6011,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        37
+        73
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
@@ -5903,7 +6063,7 @@
     "origin": [
       [
         "src/views/home/components/Header.tsx",
-        99
+        103
       ],
       [
         "src/views/invite/index.tsx",
@@ -5923,7 +6083,7 @@
       ],
       [
         "src/pages/404.tsx",
-        44
+        30
       ]
     ],
     "translation": "Go to boards"
@@ -5935,7 +6095,7 @@
     "origin": [
       [
         "src/pages/404.tsx",
-        38
+        27
       ]
     ],
     "translation": "Go to homepage"
@@ -5976,6 +6136,18 @@
     ],
     "translation": "Go to templates"
   },
+  "mXjzXT": {
+    "message": "Go to the members page in your workspace, click \"Invite\" and enter their email address. They'll get a link to join.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        70
+      ]
+    ],
+    "translation": "Go to the members page in your workspace, click \"Invite\" and enter their email address. They'll get a link to join."
+  },
   "SUvm1Y": {
     "message": "Good for individuals starting out who just need the essentials.",
     "placeholders": {},
@@ -5995,11 +6167,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        306
+        316
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        307
+        317
       ]
     ],
     "translation": "Google SSO"
@@ -6011,7 +6183,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        308
+        318
       ]
     ],
     "translation": "Google SSO + SAML"
@@ -6031,6 +6203,18 @@
       ]
     ],
     "translation": "Guest"
+  },
+  "yaJmBV": {
+    "message": "Hand off work to your agents.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        87
+      ]
+    ],
+    "translation": "Hand off work to your agents."
   },
   "lXKZGw": {
     "message": "Heading 1",
@@ -6117,6 +6301,18 @@
     "translation": "Host Kan on your own infrastructure. Ideal for organisations that need complete control over their data.",
     "obsolete": true
   },
+  "_-JB0E": {
+    "message": "How do AI agents work with Kan?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        30
+      ]
+    ],
+    "translation": "How do AI agents work with Kan?"
+  },
   "WI4eGo": {
     "message": "How do I get a custom URL?",
     "placeholders": {},
@@ -6127,7 +6323,8 @@
         64
       ]
     ],
-    "translation": "How do I get a custom URL?"
+    "translation": "How do I get a custom URL?",
+    "obsolete": true
   },
   "yV7o5I": {
     "message": "How do I import my Trello boards?",
@@ -6136,7 +6333,7 @@
     "origin": [
       [
         "src/views/home/components/Faqs.tsx",
-        46
+        50
       ]
     ],
     "translation": "How do I import my Trello boards?"
@@ -6148,7 +6345,7 @@
     "origin": [
       [
         "src/views/home/components/Faqs.tsx",
-        108
+        67
       ]
     ],
     "translation": "How do I invite team members?"
@@ -6163,7 +6360,20 @@
         124
       ]
     ],
-    "translation": "How do I self-host?"
+    "translation": "How do I self-host?",
+    "obsolete": true
+  },
+  "jyxL4H": {
+    "message": "How does the free trial work?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        38
+      ]
+    ],
+    "translation": "How does the free trial work?"
   },
   "UeDFpo": {
     "message": "How is the project funded?",
@@ -6175,7 +6385,8 @@
         38
       ]
     ],
-    "translation": "How is the project funded?"
+    "translation": "How is the project funded?",
+    "obsolete": true
   },
   "6S8zjx": {
     "message": "https://www.youtube.com/watch?v=...",
@@ -6212,6 +6423,18 @@
       ]
     ],
     "translation": "I acknowledge that all of the workspace data will be permanently deleted and want to proceed."
+  },
+  "8t3k11": {
+    "message": "I've fixed the duplicate emails bug. Update the card and let the team know.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        46
+      ]
+    ],
+    "translation": "I've fixed the duplicate emails bug. Update the card and let the team know."
   },
   "VOwhhz": {
     "message": "ID copied",
@@ -6304,7 +6527,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        96
+        82
       ]
     ],
     "translation": "Import your Trello boards and hit the ground running."
@@ -6328,7 +6551,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        27
+        58
       ]
     ],
     "translation": "Importing from Trello"
@@ -6343,7 +6566,8 @@
         49
       ]
     ],
-    "translation": "Importing your Trello boards into Kan is easy. You can follow our step-by-step guide <0>here</0>."
+    "translation": "Importing your Trello boards into Kan is easy. You can follow our step-by-step guide <0>here</0>.",
+    "obsolete": true
   },
   "02i3WU": {
     "message": "Imports",
@@ -6352,7 +6576,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        357
+        371
       ]
     ],
     "translation": "Imports"
@@ -6430,10 +6654,6 @@
       [
         "src/components/SettingsLayout.tsx",
         79
-      ],
-      [
-        "src/views/home/components/Features.tsx",
-        121
       ]
     ],
     "translation": "Integrations"
@@ -6533,7 +6753,7 @@
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        59
+        60
       ]
     ],
     "translation": "Invite links"
@@ -6604,6 +6824,18 @@
     "translation": "Inviting members requires a Team Plan. You'll be redirected to upgrade your workspace.",
     "obsolete": true
   },
+  "WozTuy": {
+    "message": "Is Kan open source?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        75
+      ]
+    ],
+    "translation": "Is Kan open source?"
+  },
   "c9AJhn": {
     "message": "Join workspace",
     "placeholders": {},
@@ -6660,6 +6892,54 @@
     ],
     "translation": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again."
   },
+  "l5voKL": {
+    "message": "Kan has a built-in MCP server. Connect Claude, Cursor or any MCP client to your workspace and agents can read boards, create cards and move work forward alongside your team. Available on Teams and Enterprise plans, and on every self-hosted install.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        33
+      ]
+    ],
+    "translation": "Kan has a built-in MCP server. Connect Claude, Cursor or any MCP client to your workspace and agents can read boards, create cards and move work forward alongside your team. Available on Teams and Enterprise plans, and on every self-hosted install."
+  },
+  "wYWg7S": {
+    "message": "Kan keeps the simplicity that made Trello great, without the bloat. It's open source, has a built-in MCP server for AI agents, and doesn't lock basic features like the number of boards behind a paywall.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        25
+      ]
+    ],
+    "translation": "Kan keeps the simplicity that made Trello great, without the bloat. It's open source, has a built-in MCP server for AI agents, and doesn't lock basic features like the number of boards behind a paywall."
+  },
+  "HfhsLQ": {
+    "message": "Kan's built-in MCP server lets agents work on your boards alongside your team.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        90
+      ]
+    ],
+    "translation": "Kan's built-in MCP server lets agents work on your boards alongside your team."
+  },
+  "rrj6MT": {
+    "message": "Kanban for teams and agents",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/index.tsx",
+        85
+      ]
+    ],
+    "translation": "Kanban for teams and agents"
+  },
   "aWDhU5": {
     "message": "Kanban is better with a team. Perfect for small and growing teams looking to collaborate.",
     "placeholders": {},
@@ -6683,7 +6963,8 @@
         136
       ]
     ],
-    "translation": "Kanban reimagined"
+    "translation": "Kanban reimagined",
+    "obsolete": true
   },
   "JbXXUW": {
     "message": "Keep in mind that this action is irreversible.",
@@ -6760,7 +7041,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        100
+        86
       ]
     ],
     "translation": "Labels & Filters"
@@ -6838,7 +7119,8 @@
         63
       ]
     ],
-    "translation": "Learn more"
+    "translation": "Learn more",
+    "obsolete": true
   },
   "wqxglO": {
     "message": "Learning",
@@ -6859,10 +7141,22 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        132
+        100
       ]
     ],
     "translation": "Legal"
+  },
+  "LE52XV": {
+    "message": "Less clutter, more love.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Testimonials.tsx",
+        38
+      ]
+    ],
+    "translation": "Less clutter, more love."
   },
   "iQmbPb": {
     "message": "License",
@@ -6871,7 +7165,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        49
+        85
       ]
     ],
     "translation": "License"
@@ -6910,6 +7204,10 @@
       [
         "src/components/UserMenu.tsx",
         172
+      ],
+      [
+        "src/views/home/components/Footer.tsx",
+        17
       ]
     ],
     "translation": "Light"
@@ -6921,7 +7219,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        289
+        299
       ]
     ],
     "translation": "Limited API access"
@@ -7100,7 +7398,8 @@
         235
       ]
     ],
-    "translation": "Loved by teams worldwide"
+    "translation": "Loved by teams worldwide",
+    "obsolete": true
   },
   "O9jVbx": {
     "message": "Low Priority",
@@ -7193,6 +7492,26 @@
       ]
     ],
     "translation": "Marketing"
+  },
+  "Zw-Zv-": {
+    "message": "MCP server",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Features.tsx",
+        106
+      ],
+      [
+        "src/views/home/components/Footer.tsx",
+        65
+      ],
+      [
+        "src/views/pricing/components/FeatureComparisonTable.tsx",
+        271
+      ]
+    ],
+    "translation": "MCP server"
   },
   "agPptk": {
     "message": "Medium",
@@ -7377,7 +7696,7 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        19
+        21
       ]
     ],
     "translation": "Monthly"
@@ -7453,6 +7772,18 @@
       ]
     ],
     "translation": "Move to workspace"
+  },
+  "gyj4E6": {
+    "message": "Moved “Duplicate notification emails” to Done and left a comment for the team.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        52
+      ]
+    ],
+    "translation": "Moved “Duplicate notification emails” to Done and left a comment for the team."
   },
   "BOqTi5": {
     "message": "moved the card from <0>{0}</0> to<1>{1}</1>",
@@ -7572,7 +7903,7 @@
       ],
       [
         "src/views/home/components/Features.tsx",
-        73
+        49
       ]
     ],
     "translation": "New"
@@ -7628,6 +7959,18 @@
       ]
     ],
     "translation": "New checklist"
+  },
+  "B5KnvC": {
+    "message": "New features ship weekly.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Features.tsx",
+        131
+      ]
+    ],
+    "translation": "New features ship weekly."
   },
   "WYwN1G": {
     "message": "New import",
@@ -7851,7 +8194,8 @@
         88
       ]
     ],
-    "translation": "No credit card required"
+    "translation": "No credit card required",
+    "obsolete": true
   },
   "MK16u2": {
     "message": "No dates",
@@ -7997,7 +8341,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        295
+        305
       ]
     ],
     "translation": "On-premise"
@@ -8009,7 +8353,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        85
+        86
       ]
     ],
     "translation": "On-premise deployment option"
@@ -8092,11 +8436,35 @@
     "comments": [],
     "origin": [
       [
+        "src/views/home/index.tsx",
+        75
+      ],
+      [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        281
+        291
       ]
     ],
     "translation": "Open source"
+  },
+  "Hmb_NG": {
+    "message": "Open source friends",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Footer.tsx",
+        79
+      ],
+      [
+        "src/views/oss-friends/index.tsx",
+        21
+      ],
+      [
+        "src/views/oss-friends/index.tsx",
+        25
+      ]
+    ],
+    "translation": "Open source friends"
   },
   "qfUS_w": {
     "message": "Open Source Friends",
@@ -8108,7 +8476,8 @@
         27
       ]
     ],
-    "translation": "Open Source Friends"
+    "translation": "Open Source Friends",
+    "obsolete": true
   },
   "BzEFor": {
     "message": "or",
@@ -8141,7 +8510,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        101
+        87
       ]
     ],
     "translation": "Organize and find cards quickly with powerful filtering tools."
@@ -8160,7 +8529,8 @@
         21
       ]
     ],
-    "translation": "OSS Friends"
+    "translation": "OSS Friends",
+    "obsolete": true
   },
   "ddrz1m": {
     "message": "Overdue",
@@ -8206,7 +8576,7 @@
     "origin": [
       [
         "src/pages/404.tsx",
-        24
+        18
       ]
     ],
     "translation": "Page not found"
@@ -8354,7 +8724,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        99
+        100
       ]
     ],
     "translation": "Payment frequency"
@@ -8378,11 +8748,11 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        20
+        22
       ],
       [
         "src/views/pricing/index.tsx",
-        25
+        27
       ]
     ],
     "translation": "per user/month"
@@ -8534,7 +8904,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        361
+        375
       ]
     ],
     "translation": "Platform"
@@ -8938,7 +9308,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        55
+        91
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -8950,11 +9320,7 @@
       ],
       [
         "src/views/pricing/index.tsx",
-        34
-      ],
-      [
-        "src/views/pricing/index.tsx",
-        42
+        36
       ]
     ],
     "translation": "Pricing"
@@ -8966,11 +9332,11 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        322
+        332
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        62
+        63
       ]
     ],
     "translation": "Priority email support"
@@ -8982,7 +9348,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        47
+        83
       ]
     ],
     "translation": "Privacy policy"
@@ -9130,7 +9496,8 @@
         147
       ]
     ],
-    "translation": "Questions?"
+    "translation": "Questions?",
+    "obsolete": true
   },
   "kfOGMr": {
     "message": "Quick Win",
@@ -9143,6 +9510,18 @@
       ]
     ],
     "translation": "Quick Win"
+  },
+  "vtWnZd": {
+    "message": "Read the docs →",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        97
+      ]
+    ],
+    "translation": "Read the docs →"
   },
   "6EWT6T": {
     "message": "Recruitment",
@@ -9502,7 +9881,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        115
+        98
       ]
     ],
     "translation": "Resources"
@@ -9526,7 +9905,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        36
+        72
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -9608,7 +9987,7 @@
     "origin": [
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        81
+        82
       ]
     ],
     "translation": "SAML SSO"
@@ -9645,6 +10024,18 @@
     ],
     "translation": "Save"
   },
+  "wKurl0": {
+    "message": "Save 20%",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/pricing/components/PricingTiers.tsx",
+        120
+      ]
+    ],
+    "translation": "Save 20%"
+  },
   "y3aU20": {
     "message": "Save changes",
     "placeholders": {},
@@ -9664,7 +10055,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        116
+        102
       ]
     ],
     "translation": "Save time with reusable board templates."
@@ -9764,7 +10155,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        365
+        379
       ]
     ],
     "translation": "Security"
@@ -9781,6 +10172,22 @@
     ],
     "translation": "See all your cards across the month, then drag and drop to reschedule. Available on paid plans."
   },
+  "jzBFWO": {
+    "message": "See pricing",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Cta.tsx",
+        27
+      ],
+      [
+        "src/views/home/index.tsx",
+        103
+      ]
+    ],
+    "translation": "See pricing"
+  },
   "K3iLeO": {
     "message": "See what our users are saying about Kan",
     "placeholders": {},
@@ -9791,7 +10198,20 @@
         238
       ]
     ],
-    "translation": "See what our users are saying about Kan"
+    "translation": "See what our users are saying about Kan",
+    "obsolete": true
+  },
+  "Tt8CkH": {
+    "message": "See what's next →",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Features.tsx",
+        136
+      ]
+    ],
+    "translation": "See what's next →"
   },
   "zYRVNp": {
     "message": "Select a list",
@@ -9892,7 +10312,8 @@
         84
       ]
     ],
-    "translation": "Self host with Github"
+    "translation": "Self host with Github",
+    "obsolete": true
   },
   "VXk54Y": {
     "message": "self-assigned the card",
@@ -9905,6 +10326,18 @@
       ]
     ],
     "translation": "self-assigned the card"
+  },
+  "GrBvv_": {
+    "message": "Self-hosting",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Footer.tsx",
+        67
+      ]
+    ],
+    "translation": "Self-hosting"
   },
   "f2zPy_": {
     "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",
@@ -10205,7 +10638,7 @@
     "origin": [
       [
         "src/views/home/components/Header.tsx",
-        103
+        111
       ]
     ],
     "translation": "Sign in"
@@ -10339,7 +10772,7 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        46
+        44
       ]
     ],
     "translation": "Simple pricing"
@@ -10351,7 +10784,7 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        35
+        37
       ]
     ],
     "translation": "Simple, transparent pricing. Start free with unlimited boards and cards, upgrade as your team grows. No hidden fees, no contracts."
@@ -10366,7 +10799,8 @@
         139
       ]
     ],
-    "translation": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done."
+    "translation": "Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.",
+    "obsolete": true
   },
   "zEcnBA": {
     "message": "SLA",
@@ -10375,7 +10809,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        336
+        346
       ]
     ],
     "translation": "SLA"
@@ -10452,6 +10886,18 @@
     ],
     "translation": "Some boards weren't imported"
   },
+  "CmesPg": {
+    "message": "Some of our favourite open source projects.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/oss-friends/index.tsx",
+        28
+      ]
+    ],
+    "translation": "Some of our favourite open source projects."
+  },
   "J9-zIR": {
     "message": "Something went wrong during activation. Please try again.",
     "placeholders": {},
@@ -10497,7 +10943,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        305
+        315
       ]
     ],
     "translation": "SSO"
@@ -10512,7 +10958,20 @@
         40
       ]
     ],
-    "translation": "Star on Github"
+    "translation": "Star on Github",
+    "obsolete": true
+  },
+  "zyKa-I": {
+    "message": "Star us on GitHub",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/index.tsx",
+        77
+      ]
+    ],
+    "translation": "Star us on GitHub"
   },
   "veIDCY": {
     "message": "Start 14 day free trial",
@@ -10554,7 +11013,7 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        49
+        47
       ]
     ],
     "translation": "Start free. Upgrade as your team grows. No hidden fees, no contracts."
@@ -10675,7 +11134,7 @@
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        369
+        383
       ]
     ],
     "translation": "Support"
@@ -10701,6 +11160,10 @@
       [
         "src/components/UserMenu.tsx",
         144
+      ],
+      [
+        "src/views/home/components/Footer.tsx",
+        16
       ]
     ],
     "translation": "System"
@@ -10737,6 +11200,18 @@
     ],
     "translation": "Team Plan"
   },
+  "4fCSox": {
+    "message": "Team plans start with a 14-day free trial. You can switch plans or cancel anytime.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        41
+      ]
+    ],
+    "translation": "Team plans start with a 14-day free trial. You can switch plans or cancel anytime."
+  },
   "CAL6E9": {
     "message": "Teams",
     "placeholders": {},
@@ -10744,7 +11219,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        376
+        390
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
@@ -10848,7 +11323,7 @@
       ],
       [
         "src/views/home/components/Features.tsx",
-        115
+        101
       ]
     ],
     "translation": "Templates"
@@ -10860,7 +11335,7 @@
     "origin": [
       [
         "src/views/home/components/Footer.tsx",
-        46
+        82
       ]
     ],
     "translation": "Terms of service"
@@ -10932,7 +11407,7 @@
     "origin": [
       [
         "src/views/home/components/Testimonials.tsx",
-        231
+        37
       ]
     ],
     "translation": "Testimonials"
@@ -11055,7 +11530,8 @@
         33
       ]
     ],
-    "translation": "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall."
+    "translation": "The main difference between Kan and Trello is that Kan is open source, allowing anyone to view, modify, and contribute to our code. Our cloud offering also offers no restrictions on features for individual use, whereas Trello locks basic features such as the number of boards you can create behind a paywall.",
+    "obsolete": true
   },
   "6tDFBe": {
     "message": "The member's permissions have been updated.",
@@ -11095,7 +11571,8 @@
         68
       ]
     ],
-    "translation": "The open source <0/> alternative to Trello"
+    "translation": "The open source <0/> alternative to Trello",
+    "obsolete": true
   },
   "0xD8Of": {
     "message": "The page you're looking for doesn't exist or has been moved.",
@@ -11104,7 +11581,7 @@
     "origin": [
       [
         "src/pages/404.tsx",
-        29
+        21
       ]
     ],
     "translation": "The page you're looking for doesn't exist or has been moved."
@@ -11448,7 +11925,7 @@
     "origin": [
       [
         "src/views/home/components/Header.tsx",
-        113
+        123
       ]
     ],
     "translation": "Toggle menu"
@@ -11472,7 +11949,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        111
+        97
       ]
     ],
     "translation": "Track all card changes with detailed activity history."
@@ -11484,7 +11961,7 @@
     "origin": [
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
-        271
+        281
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
@@ -11512,7 +11989,7 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        95
+        81
       ]
     ],
     "translation": "Trello imports"
@@ -11545,6 +12022,18 @@
     ],
     "translation": "Triaging"
   },
+  "gCo_Xd": {
+    "message": "Trusted by fast-moving teams around the world",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Logos.tsx",
+        67
+      ]
+    ],
+    "translation": "Trusted by fast-moving teams around the world"
+  },
   "o-JCfN": {
     "message": "Trusted by fast-moving teams<0/>around the world",
     "placeholders": {},
@@ -11555,7 +12044,48 @@
         67
       ]
     ],
-    "translation": "Trusted by fast-moving teams<0/>around the world"
+    "translation": "Trusted by fast-moving teams<0/>around the world",
+    "obsolete": true
+  },
+  "cga9uy": {
+    "message": "Try Kan free",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Cta.tsx",
+        23
+      ],
+      [
+        "src/views/home/index.tsx",
+        100
+      ]
+    ],
+    "translation": "Try Kan free"
+  },
+  "MeNxi1": {
+    "message": "Turn the notes from today's planning call into cards on the Roadmap board.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        28
+      ]
+    ],
+    "translation": "Turn the notes from today's planning call into cards on the Roadmap board."
+  },
+  "2w3k9n": {
+    "message": "Two cards are stuck in review: Billing page and Invite links. Neither has been updated in 3 days.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        43
+      ]
+    ],
+    "translation": "Two cards are stuck in review: Billing page and Invite links. Neither has been updated in 3 days."
   },
   "bZSICm": {
     "message": "Unable to add checklist item",
@@ -12212,7 +12742,8 @@
         57
       ]
     ],
-    "translation": "Unlimited boards, unlimited lists, unlimited cards. No credit card required."
+    "translation": "Unlimited boards, unlimited lists, unlimited cards. No credit card required.",
+    "obsolete": true
   },
   "Zz1qkk": {
     "message": "Unlimited cards",
@@ -12239,6 +12770,18 @@
     "translation": "Unlimited comments",
     "obsolete": true
   },
+  "FUGIff": {
+    "message": "Unlimited features are subject to our <0>fair use policy</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/pricing/index.tsx",
+        67
+      ]
+    ],
+    "translation": "Unlimited features are subject to our <0>fair use policy</0>."
+  },
   "86FLn5": {
     "message": "Unlimited file uploads",
     "placeholders": {},
@@ -12254,7 +12797,7 @@
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        60
+        61
       ]
     ],
     "translation": "Unlimited file uploads"
@@ -12740,7 +13283,8 @@
         154
       ]
     ],
-    "translation": "View our roadmap."
+    "translation": "View our roadmap.",
+    "obsolete": true
   },
   "U5dMR6": {
     "message": "View workspace",
@@ -12776,7 +13320,8 @@
         94
       ]
     ],
-    "translation": "We are using the <0>AGPL-3.0 license</0>."
+    "translation": "We are using the <0>AGPL-3.0 license</0>.",
+    "obsolete": true
   },
   "-EkBs0": {
     "message": "We couldn't update your preferences. Please try again.",
@@ -12818,7 +13363,8 @@
         152
       ]
     ],
-    "translation": "We're just getting started. "
+    "translation": "We're just getting started. ",
+    "obsolete": true
   },
   "nB44E_": {
     "message": "We've sent a password reset link to {emailSentTo}.",
@@ -13022,7 +13568,20 @@
         91
       ]
     ],
-    "translation": "What license are you using?"
+    "translation": "What license are you using?",
+    "obsolete": true
+  },
+  "1p_Gki": {
+    "message": "What's holding up the launch?",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        38
+      ]
+    ],
+    "translation": "What's holding up the launch?"
   },
   "H5G-qG": {
     "message": "What's the difference between Kan and Trello?",
@@ -13031,7 +13590,7 @@
     "origin": [
       [
         "src/views/home/components/Faqs.tsx",
-        30
+        22
       ]
     ],
     "translation": "What's the difference between Kan and Trello?"
@@ -13046,7 +13605,8 @@
         25
       ]
     ],
-    "translation": "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over the years it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source."
+    "translation": "When Trello launched in 2011, it blew everyone away with its carefully designed simplicity, but over the years it lost its magic and grew into something closer to \"Jira Lite\". This project is our attempt to recapture the original magic of Trello's simplicity, in open source.",
+    "obsolete": true
   },
   "SFnH1j": {
     "message": "Why make an open source Trello?",
@@ -13058,7 +13618,20 @@
         22
       ]
     ],
-    "translation": "Why make an open source Trello?"
+    "translation": "Why make an open source Trello?",
+    "obsolete": true
+  },
+  "msdGrv": {
+    "message": "Works with any MCP client",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Agents.tsx",
+        102
+      ]
+    ],
+    "translation": "Works with any MCP client"
   },
   "pmUArF": {
     "message": "Workspace",
@@ -13180,11 +13753,11 @@
     "origin": [
       [
         "src/views/home/components/Features.tsx",
-        90
+        76
       ],
       [
         "src/views/pricing/components/PricingTiers.tsx",
-        57
+        58
       ]
     ],
     "translation": "Workspace members"
@@ -13315,7 +13888,8 @@
         178
       ]
     ],
-    "translation": "Workspace username"
+    "translation": "Workspace username",
+    "obsolete": true
   },
   "_8pTF_": {
     "message": "workspace-url",
@@ -13348,10 +13922,34 @@
     "origin": [
       [
         "src/views/pricing/index.tsx",
-        24
+        26
       ]
     ],
     "translation": "Yearly"
+  },
+  "ZMup0e": {
+    "message": "Yes, Kan is free forever for individual use.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        47
+      ]
+    ],
+    "translation": "Yes, Kan is free forever for individual use."
+  },
+  "QzTuwK": {
+    "message": "Yes, Kan is licensed under AGPL-3.0. You can browse the code or self-host it by following the instructions in our <0>GitHub repo</0>.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/Faqs.tsx",
+        78
+      ]
+    ],
+    "translation": "Yes, Kan is licensed under AGPL-3.0. You can browse the code or self-host it by following the instructions in our <0>GitHub repo</0>."
   },
   "eZCGbT": {
     "message": "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits.",
@@ -13363,7 +13961,8 @@
         86
       ]
     ],
-    "translation": "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits."
+    "translation": "Yes, we offer an forever free plan for individual use. No restrictions, no paywalls, no limits.",
+    "obsolete": true
   },
   "RtlIYB": {
     "message": "You are about to change your password.",
@@ -13412,7 +14011,8 @@
         67
       ]
     ],
-    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!"
+    "translation": "You can get a custom workspace URL, like <0>kan.bn/kan</0>, by going into your <1>workspace settings</1> and upgrading to a Team workspace subscription. All subscriptions help fund the development of the project!",
+    "obsolete": true
   },
   "kSxwQL": {
     "message": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
@@ -13424,7 +14024,8 @@
         111
       ]
     ],
-    "translation": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace."
+    "translation": "You can invite team members by clicking the \"Invite\" button in the top right corner of the <0>members page</0> and entering their email address. They will receive an email with a link to join the workspace.",
+    "obsolete": true
   },
   "vAj6xG": {
     "message": "You can self-host by following the instructions in our <0>repo</0>.",
@@ -13436,7 +14037,8 @@
         127
       ]
     ],
-    "translation": "You can self-host by following the instructions in our <0>repo</0>."
+    "translation": "You can self-host by following the instructions in our <0>repo</0>.",
+    "obsolete": true
   },
   "tUL16u": {
     "message": "You don't have any other workspaces to move this board to.",
@@ -13805,6 +14407,18 @@
       ]
     ],
     "translation": "Your projects have been imported."
+  },
+  "FeQ1yY": {
+    "message": "Your team plans the work, your agents help get it done.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/index.tsx",
+        89
+      ]
+    ],
+    "translation": "Your team plans the work, your agents help get it done."
   },
   "CJWDTP": {
     "message": "Your Trello account has been disconnected.",
