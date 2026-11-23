@@ -1,10 +1,20 @@
 import type { z } from "zod";
-import { Body, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from "@nestjs/common";
 import {
   ApiExtraModels,
   ApiOperation,
   ApiParam,
   ApiResponse,
+  ApiTags,
   getSchemaPath,
 } from "@nestjs/swagger";
 import { ZodResponse } from "nestjs-zod";
@@ -25,6 +35,7 @@ import {
   WorkspaceDeleteResponseDto,
   WorkspaceDetailResponseDto,
   WorkspaceListItemDto,
+  WorkspaceSlugExistsResponseDto,
   WorkspaceUpdateResponseDto,
   WorkspaceWithBoardsResponseDto,
 } from "./dto/workspace.dto.js";
@@ -188,5 +199,23 @@ export class WorkspaceController {
       workspacePublicId,
       userId: user.id,
     });
+  }
+}
+
+// Public: lets the web app return a real 404 for unknown workspace URLs.
+@ApiTags("Workspaces")
+@Controller("workspaces/:workspaceSlug/exists")
+export class PublicWorkspaceController {
+  constructor(private readonly workspaceService: WorkspaceService) {}
+
+  @Get()
+  @ApiOperation({
+    operationId: "checkWorkspaceSlugExists",
+    summary: "Check whether a workspace slug exists",
+  })
+  @ApiParam({ name: "workspaceSlug" })
+  @ZodResponse({ status: 200, type: WorkspaceSlugExistsResponseDto })
+  async exists(@Param("workspaceSlug") workspaceSlug: string) {
+    return this.workspaceService.slugExists(workspaceSlug);
   }
 }

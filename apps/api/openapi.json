@@ -3644,6 +3644,35 @@
         "tags": ["Workspaces"]
       }
     },
+    "/workspaces/{workspaceSlug}/exists": {
+      "get": {
+        "operationId": "checkWorkspaceSlugExists",
+        "parameters": [
+          {
+            "name": "workspaceSlug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceSlugExistsResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Check whether a workspace slug exists",
+        "tags": ["Workspaces"]
+      }
+    },
     "/stats": {
       "get": {
         "operationId": "getStats",
@@ -7163,6 +7192,16 @@
           }
         },
         "required": ["success"],
+        "additionalProperties": false
+      },
+      "WorkspaceSlugExistsResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "exists": {
+            "type": "boolean"
+          }
+        },
+        "required": ["exists"],
         "additionalProperties": false
       },
       "StatsDto_Output": {

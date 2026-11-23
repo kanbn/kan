@@ -1895,6 +1895,10 @@ export interface WorkspaceDeleteResponseDtoOutput {
   success: boolean;
 }
 
+export interface WorkspaceSlugExistsResponseDtoOutput {
+  exists: boolean;
+}
+
 export interface StatsDtoOutput {
   users: number;
   workspaces: number;
@@ -14647,6 +14651,196 @@ export function useSearchWorkspace<
   const queryOptions = getSearchWorkspaceQueryOptions(
     workspacePublicId,
     params,
+    options,
+  );
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+export type checkWorkspaceSlugExistsResponse200 = {
+  data: WorkspaceSlugExistsResponseDtoOutput;
+  status: 200;
+};
+
+export type checkWorkspaceSlugExistsResponseSuccess =
+  checkWorkspaceSlugExistsResponse200 & {
+    headers: Headers;
+  };
+export type checkWorkspaceSlugExistsResponse =
+  checkWorkspaceSlugExistsResponseSuccess;
+
+export const getCheckWorkspaceSlugExistsUrl = (workspaceSlug: string) => {
+  return `/workspaces/${workspaceSlug}/exists`;
+};
+
+/**
+ * @summary Check whether a workspace slug exists
+ */
+export const checkWorkspaceSlugExists = async (
+  workspaceSlug: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<checkWorkspaceSlugExistsResponse> => {
+  return customFetch<checkWorkspaceSlugExistsResponse>(
+    getCheckWorkspaceSlugExistsUrl(workspaceSlug),
+    {
+      credentials: "include",
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getCheckWorkspaceSlugExistsQueryKey = (workspaceSlug: string) => {
+  return [`/workspaces/${workspaceSlug}/exists`] as const;
+};
+
+export const getCheckWorkspaceSlugExistsQueryOptions = <
+  TData = Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+  TError = unknown,
+>(
+  workspaceSlug: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getCheckWorkspaceSlugExistsQueryKey(workspaceSlug);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof checkWorkspaceSlugExists>>
+  > = ({ signal }) =>
+    checkWorkspaceSlugExists(workspaceSlug, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: workspaceSlug !== null && workspaceSlug !== undefined,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type CheckWorkspaceSlugExistsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof checkWorkspaceSlugExists>>
+>;
+export type CheckWorkspaceSlugExistsQueryError = unknown;
+
+/** @summary Check whether a workspace slug exists */
+export function useCheckWorkspaceSlugExists<
+  TData = Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+  TError = unknown,
+>(
+  workspaceSlug: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+          TError,
+          Awaited<ReturnType<typeof checkWorkspaceSlugExists>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary Check whether a workspace slug exists */
+export function useCheckWorkspaceSlugExists<
+  TData = Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+  TError = unknown,
+>(
+  workspaceSlug: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+          TError,
+          Awaited<ReturnType<typeof checkWorkspaceSlugExists>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary Check whether a workspace slug exists */
+export function useCheckWorkspaceSlugExists<
+  TData = Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+  TError = unknown,
+>(
+  workspaceSlug: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary Check whether a workspace slug exists */
+export function useCheckWorkspaceSlugExists<
+  TData = Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+  TError = unknown,
+>(
+  workspaceSlug: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof checkWorkspaceSlugExists>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getCheckWorkspaceSlugExistsQueryOptions(
+    workspaceSlug,
     options,
   );
 

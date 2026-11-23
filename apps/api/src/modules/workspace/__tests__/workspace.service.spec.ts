@@ -40,6 +40,23 @@ afterEach(() => {
   process.env.NEXT_PUBLIC_KAN_ENV = originalEnv;
 });
 
+describe("WorkspaceService.slugExists", () => {
+  it("reports a taken slug as existing, matching case-insensitively", async () => {
+    const isAvailable = vi
+      .spyOn(workspaceRepo, "isWorkspaceSlugAvailable")
+      .mockResolvedValue(false);
+
+    expect(await service.slugExists("Acme")).toEqual({ exists: true });
+    expect(isAvailable).toHaveBeenCalledWith(expect.anything(), "acme");
+  });
+
+  it("reports an unused slug as missing", async () => {
+    vi.spyOn(workspaceRepo, "isWorkspaceSlugAvailable").mockResolvedValue(true);
+
+    expect(await service.slugExists("nope")).toEqual({ exists: false });
+  });
+});
+
 describe("WorkspaceService.checkSlugAvailability", () => {
   it("reports a reserved slug as unavailable and logs the check in cloud", async () => {
     process.env.NEXT_PUBLIC_KAN_ENV = "cloud";
