@@ -37,8 +37,8 @@ services:
       - REDIS_URL=${REDIS_URL}
       - RATE_LIMIT_IP_HEADER=${RATE_LIMIT_IP_HEADER}
 
-      # Internal URL for reaching the API (optional - defaults to NEXT_PUBLIC_API_BASE_URL)
-      - KAN_API_URL=${KAN_API_URL}
+      # Internal URL for reaching the API container
+      - KAN_API_URL=${KAN_API_URL:-http://api:4000}
 
       # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)
       - LOG_LEVEL=${LOG_LEVEL}
@@ -81,7 +81,6 @@ services:
       - NEXT_PUBLIC_DISABLE_SIGN_UP=${NEXT_PUBLIC_DISABLE_SIGN_UP}
 
       # API configuration (optional)
-      - KAN_API_URL=${KAN_API_URL:-http://api:4000}
       - NEXT_API_BODY_SIZE_LIMIT=${NEXT_API_BODY_SIZE_LIMIT}
 
       # Integration providers (optional)
