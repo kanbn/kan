@@ -22,17 +22,8 @@ const clients = [
   { name: "Gemini", Icon: SiGooglegemini },
 ];
 
-interface Scenario {
-  prompt: string;
-  calls: { name: string; arg: string }[];
-  reply: string;
-}
-
-// Extra ticks after the reply before moving to the next example
-const HOLD_TICKS = 3;
-
 const Agents = () => {
-  const scenarios: Scenario[] = [
+  const scenarios = [
     {
       prompt: t`Turn the notes from today's planning call into cards on the Roadmap board.`,
       calls: [
@@ -63,7 +54,7 @@ const Agents = () => {
   ];
 
   const [{ scenario, stage }, setState] = useState({ scenario: 0, stage: 0 });
-  const current = scenarios[scenario] ?? scenarios[0]!;
+  const current = scenarios[scenario]!;
   const replyStage = current.calls.length + 2;
 
   useEffect(() => {
@@ -74,8 +65,8 @@ const Agents = () => {
     const interval = setInterval(() => {
       setState((prev) => {
         const end = (scenarios[prev.scenario]?.calls.length ?? 0) + 2;
-        if (prev.stage < end + HOLD_TICKS)
-          return { ...prev, stage: prev.stage + 1 };
+        // Hold the finished reply for 3 ticks before the next example
+        if (prev.stage < end + 3) return { ...prev, stage: prev.stage + 1 };
         return {
           scenario: (prev.scenario + 1) % scenarios.length,
           stage: 0,
@@ -85,8 +76,6 @@ const Agents = () => {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const muted = "text-light-900 dark:text-dark-800";
 
   return (
     <div className="grid gap-10 px-4 pb-24 lg:grid-cols-[2fr_3fr] lg:items-center lg:gap-16">
@@ -107,7 +96,7 @@ const Agents = () => {
           </Link>
         </p>
 
-        <p className={`mt-10 text-xs ${muted}`}>
+        <p className="mt-10 text-xs text-light-900 dark:text-dark-800">
           {t`Works with any MCP client`}
         </p>
         <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3">
