@@ -23,7 +23,7 @@ export default function WorkspaceMenu({
     useWorkspace();
   const { openModal } = useModal();
   const { data: hasPartnerSlot } = useHasAvailablePartnerSlot({
-    query: { select: (res) => res.data },
+    query: { staleTime: 5 * 60_000, select: (res) => res.data },
   });
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
