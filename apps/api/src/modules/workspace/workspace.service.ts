@@ -37,6 +37,15 @@ export class WorkspaceService {
     }));
   }
 
+  async slugExists(workspaceSlug: string) {
+    return {
+      exists: !(await workspaceRepo.isWorkspaceSlugAvailable(
+        db,
+        workspaceSlug.toLowerCase(),
+      )),
+    };
+  }
+
   async checkSlugAvailability(input: {
     workspaceSlug: string;
     workspacePublicId?: string;

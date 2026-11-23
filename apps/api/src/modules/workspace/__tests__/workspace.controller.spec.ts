@@ -2,12 +2,16 @@ import type { TestingModule } from "@nestjs/testing";
 import { Test } from "@nestjs/testing";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { WorkspaceController } from "../workspace.controller.js";
+import {
+  PublicWorkspaceController,
+  WorkspaceController,
+} from "../workspace.controller.js";
 import { WorkspaceService } from "../workspace.service.js";
 
 const mockWorkspaceService = {
   all: vi.fn(),
   checkSlugAvailability: vi.fn(),
+  slugExists: vi.fn(),
   hasAvailablePartnerSlot: vi.fn(),
   bySlug: vi.fn(),
   byId: vi.fn(),
@@ -136,5 +140,22 @@ describe("WorkspaceController", () => {
       workspacePublicId: "workspace_12345",
       userId: "user_1",
     });
+  });
+});
+
+describe("PublicWorkspaceController", () => {
+  it("passes the slug through to slugExists without needing a user", async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [PublicWorkspaceController],
+      providers: [
+        { provide: WorkspaceService, useValue: mockWorkspaceService },
+      ],
+    }).compile();
+    mockWorkspaceService.slugExists.mockResolvedValue({ exists: true });
+
+    expect(await module.get(PublicWorkspaceController).exists("acme")).toEqual({
+      exists: true,
+    });
+    expect(mockWorkspaceService.slugExists).toHaveBeenCalledWith("acme");
   });
 });

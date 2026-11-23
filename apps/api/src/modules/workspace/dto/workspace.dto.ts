@@ -50,6 +50,14 @@ export class CheckSlugAvailabilityResponseDto extends createZodDto(
   CheckSlugAvailabilityResponseSchema,
 ) {}
 
+export const WorkspaceSlugExistsResponseSchema = z.object({
+  exists: z.boolean(),
+});
+
+export class WorkspaceSlugExistsResponseDto extends createZodDto(
+  WorkspaceSlugExistsResponseSchema,
+) {}
+
 const WorkspaceMemberDetailSchema = z.object({
   publicId: z.string(),
   email: z.string().optional(),
