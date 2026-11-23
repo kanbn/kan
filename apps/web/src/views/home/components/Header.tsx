@@ -74,35 +74,45 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
           <div className="mx-auto flex w-full max-w-[1100px] items-center justify-between lg:px-4">
             <div className="my-auto flex items-center justify-between">
               <Link href="/">
-                <h1 className="text-lg font-bold tracking-tight text-neutral-900 lg:w-[200px] dark:text-dark-1000">
+                <h1 className="text-base font-bold tracking-tight text-neutral-900 dark:text-dark-1000">
                   kan.bn
                 </h1>
               </Link>
             </div>
-            {/* Desktop Menu */}
-            <div className="hidden justify-center gap-10 lg:flex dark:text-dark-1000">
-              {desktopMenuItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  target={item.openInNewTab ? "_blank" : undefined}
-                  rel={item.openInNewTab ? "noopener noreferrer" : undefined}
-                  className="text-sm font-bold"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <div className="flex items-center justify-end gap-4 lg:w-[200px]">
+            <div className="flex items-center justify-end gap-4">
+              <nav className="hidden items-center gap-6 lg:flex">
+                {desktopMenuItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    target={item.openInNewTab ? "_blank" : undefined}
+                    rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                    className="text-xs font-medium text-light-900 transition-colors hover:text-light-1000 dark:text-dark-800 dark:hover:text-dark-1000"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+              <span
+                aria-hidden="true"
+                className="hidden h-4 w-px bg-light-400 lg:block dark:bg-dark-300"
+              />
               <div className="justify-end gap-2">
                 {isLoggedIn ? (
-                  <Button href="/boards">{t`Go to app`}</Button>
+                  <Button href="/boards" size="sm">
+                    {t`Go to app`}
+                  </Button>
                 ) : (
                   <div className="flex items-center justify-end gap-2">
-                    <Button href="/login" variant="ghost">
+                    <Link
+                      href="/login"
+                      className="px-2 text-xs font-medium text-light-900 transition-colors hover:text-light-1000 dark:text-dark-800 dark:hover:text-dark-1000"
+                    >
                       {t`Sign in`}
+                    </Link>
+                    <Button href="/signup" size="sm">
+                      {t`Get started`}
                     </Button>
-                    <Button href="/signup">{t`Get started`}</Button>
                   </div>
                 )}
               </div>

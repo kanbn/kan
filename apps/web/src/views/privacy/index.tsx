@@ -11,318 +11,202 @@ import Layout from "../home/components/Layout";
 
 export default function PrivacyView() {
   const NAME = "Open Engineering";
+  const CONTACT_EMAIL = "support@kan.bn";
 
   return (
     <Layout>
       <PageHead title="Privacy Policy | kan.bn" />
       <div className="flex flex-col items-center">
-        <div className="mb-20 flex h-full w-full max-w-[800px] flex-col lg:pt-20">
-          <div className="flex items-center justify-center py-36 text-4xl font-bold tracking-tight text-light-1000 dark:text-dark-1000">
-            <h2>Privacy Policy</h2>
-          </div>
-          <p className="mb-6 text-sm text-light-1000 dark:text-dark-900">
-            Last updated: 23rd Feb 2025
+        <div className="mb-20 flex h-full w-full max-w-[720px] flex-col px-4">
+          <h1 className="pt-36 text-2xl font-semibold tracking-[-0.03em] text-light-1000 lg:text-3xl dark:text-dark-1000">
+            Privacy Policy
+          </h1>
+          <p className="mt-3 mb-12 text-sm text-light-900 dark:text-dark-800">
+            Last updated: 23rd Nov 2026
           </p>
-          <div className="mb-6">
+
+          <div className="mb-8">
             <SubHeading>Introduction</SubHeading>
             <Text>
-              Your privacy is important to us. It is our policy to respect your
-              privacy and comply with any applicable law and regulation
-              regarding any personal information we may collect about you,
-              including across our website, {NAME}, and other sites we own and
-              operate.
+              This policy explains how {NAME} (“we”, “us”) collects and uses
+              personal data when you use Kan at kan.bn and its related websites,
+              apps and APIs (the “Service”). We are the data controller for
+              account and billing data. For the content you add to a workspace,
+              we process it on behalf of that workspace.
+            </Text>
+            <Text>
+              If you run Kan on your own infrastructure, we do not receive any
+              of your data, and this policy does not apply.
             </Text>
           </div>
 
-          <div className="mb-6">
-            <SubHeading>Information We Collect</SubHeading>
-            <Text>
-              Information we collect includes both information you knowingly and
-              actively provide us when using or participating in any of our
-              services and promotions, and any information automatically sent by
-              your devices in the course of accessing our products and services.
-            </Text>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>Log Data</SubHeading>
-            <Text>
-              When you visit our website, our servers may automatically log the
-              standard data provided by your web browser. It may include your
-              device’s Internet Protocol (IP) address, your browser type and
-              version, the pages you visit, the time and date of your visit, the
-              time spent on each page, other details about your visit, and
-              technical details that occur in conjunction with any errors you
-              may encounter.
-            </Text>
-            <Text>
-              Please be aware that while this information may not be personally
-              identifying by itself, it may be possible to combine it with other
-              data to personally identify individual persons.
-            </Text>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>Personal Information</SubHeading>
-            <Text>
-              We may ask for personal information which may include one or more
-              of the following:
-            </Text>
-            <UnorderedList>
-              <ListItem>Name</ListItem>
-              <ListItem>Email</ListItem>
-            </UnorderedList>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>
-              Legitimate Reasons for Processing Your Personal Information
-            </SubHeading>
-            <Text>
-              We only collect and use your personal information when we have a
-              legitimate reason for doing so. In which instance, we only collect
-              personal information that is reasonably necessary to provide our
-              services to you.
-            </Text>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>Collection and Use of Information</SubHeading>
-            <Text>
-              We may collect personal information from you when you do any of
-              the following on our website:
-            </Text>
+          <div className="mb-8">
+            <SubHeading>What we collect</SubHeading>
             <UnorderedList>
               <ListItem>
-                Sign up to receive updates from us via email or social media
-                channels
+                Account data: your name, email address, avatar and login
+                details, including details from Google, GitHub or other sign-in
+                providers you choose to use.
               </ListItem>
               <ListItem>
-                Use a mobile device or web browser to access our content
+                Workspace content: boards, lists, cards, comments, checklists,
+                attachments and activity history that you and your teammates
+                add.
               </ListItem>
               <ListItem>
-                Contact us via email, social media, or on any similar
-                technologies
-              </ListItem>
-              <ListItem>When you mention us on social media</ListItem>
-            </UnorderedList>
-            <Text>
-              We may collect, hold, use, and disclose information for the
-              following purposes, and personal information will not be further
-              processed in a manner that is incompatible with these purposes:
-            </Text>
-            <UnorderedList>
-              <ListItem>to contact and communicate with you</ListItem>
-              <ListItem>
-                for analytics, market research, and business development,
-                including to operate and improve our website, associated
-                applications, and associated social media platforms
+                Billing data: your plan, billing history and billing contact.
+                Card details are collected and stored by Stripe, not by us.
               </ListItem>
               <ListItem>
-                to enable you to access and use our website, associated
-                applications, and associated social media platforms
-              </ListItem>
-            </UnorderedList>
-            <Text>
-              Please be aware that we may combine information we collect about
-              you with general information or research data we receive from
-              other trusted sources.
-            </Text>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>Security of Your Personal Information</SubHeading>
-            <Text>
-              When we collect and process personal information, and while we
-              retain this information, we will protect it within commercially
-              acceptable means to prevent loss and theft, as well as
-              unauthorized access, disclosure, copying, use, or modification.
-            </Text>
-
-            <Text>
-              Although we will do our best to protect the personal information
-              you provide to us, we advise that no method of electronic
-              transmission or storage is 100% secure, and no one can guarantee
-              absolute data security. We will comply with laws applicable to us
-              in respect of any data breach.
-            </Text>
-            <Text>
-              You are responsible for selecting any password and its overall
-              security strength, ensuring the security of your own information
-              within the bounds of our services.
-            </Text>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>How Long We Keep Your Personal Information</SubHeading>
-            <Text>
-              We keep your personal information only for as long as we need to.
-              This time period may depend on what we are using your information
-              for, in accordance with this privacy policy. If your personal
-              information is no longer required, we will delete it or make it
-              anonymous by removing all details that identify you.
-            </Text>
-
-            <Text>
-              However, if necessary, we may retain your personal information for
-              our compliance with a legal, accounting, or reporting obligation
-              or for archiving purposes in the public interest, scientific, or
-              historical research purposes or statistical purposes.
-            </Text>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>Children’s Privacy</SubHeading>
-            <Text>
-              We do not aim any of our products or services directly at children
-              under the age of 13, and we do not knowingly collect personal
-              information about children under 13.
-            </Text>
-          </div>
-
-          <div className="mb-6">
-            <SubHeading>
-              Disclosure of Personal Information to Third Parties
-            </SubHeading>
-            <Text>We may disclose personal information to</Text>
-            <UnorderedList>
-              <ListItem>
-                a parent, subsidiary, or affiliate of our company
+                Usage and technical data: IP address, browser and device type,
+                pages visited, actions taken in the app, and error and server
+                logs.
               </ListItem>
               <ListItem>
-                third party service providers for the purpose of enabling them
-                to provide their services, for example, IT service providers,
-                data storage, hosting and server providers, advertisers, or
-                analytics platforms
-              </ListItem>
-              <ListItem>
-                our employees, contractors, and/or related entities
-              </ListItem>
-              <ListItem>
-                our existing or potential agents or business partners
-              </ListItem>
-              <ListItem>
-                sponsors or promoters of any competition, sweepstakes, or
-                promotion we run
-              </ListItem>
-              <ListItem>
-                courts, tribunals, regulatory authorities, and law enforcement
-                officers, as required by law, in connection with any actual or
-                prospective legal proceedings, or in order to establish,
-                exercise, or defend our legal rights
-              </ListItem>
-              <ListItem>
-                third parties, including agents or sub-contractors, who assist
-                us in providing information, products, services, or direct
-                marketing to you third parties to collect and process data
+                Communications: messages you send us, for example support
+                emails.
               </ListItem>
             </UnorderedList>
           </div>
 
-          <div className="mb-6">
-            <SubHeading>
-              International Transfers of Personal Information
-            </SubHeading>
+          <div className="mb-8">
+            <SubHeading>How we use it</SubHeading>
+            <UnorderedList>
+              <ListItem>
+                to provide the Service, including sign-in, collaboration,
+                notifications and file storage (contract)
+              </ListItem>
+              <ListItem>to take payments and manage plans (contract)</ListItem>
+              <ListItem>
+                to keep the Service secure, prevent abuse and fix problems
+                (legitimate interests)
+              </ListItem>
+              <ListItem>
+                to understand how the Service is used and improve it (legitimate
+                interests)
+              </ListItem>
+              <ListItem>
+                to send product updates and marketing emails, only where you
+                have agreed or where the law allows, with an unsubscribe link in
+                every email (consent or legitimate interests)
+              </ListItem>
+              <ListItem>
+                to meet legal and tax obligations (legal obligation)
+              </ListItem>
+            </UnorderedList>
             <Text>
-              The personal information we collect is stored and/or processed
-              where we or our partners, affiliates, and third-party providers
-              maintain facilities. Please be aware that the locations to which
-              we store, process, or transfer your personal information may not
-              have the same data protection laws as the country in which you
-              initially provided the information. If we transfer your personal
-              information to third parties in other countries: (i) we will
-              perform those transfers in accordance with the requirements of
-              applicable law; and (ii) we will protect the transferred personal
-              information in accordance with this privacy policy.
+              We do not sell your personal data, and we do not use your
+              workspace content to train AI models.
             </Text>
           </div>
 
-          <div className="mb-6">
-            <SubHeading>
-              Your Rights and Controlling Your Personal Information
-            </SubHeading>
+          <div className="mb-8">
+            <SubHeading>AI agents and integrations</SubHeading>
             <Text>
-              You always retain the right to withhold personal information from
-              us, with the understanding that your experience of our website may
-              be affected. We will not discriminate against you for exercising
-              any of your rights over your personal information. If you do
-              provide us with personal information you understand that we will
-              collect, hold, use and disclose it in accordance with this privacy
-              policy. You retain the right to request details of any personal
-              information we hold about you.
-            </Text>
-            <Text>
-              If we receive personal information about you from a third party,
-              we will protect it as set out in this privacy policy. If you are a
-              third party providing personal information about somebody else,
-              you represent and warrant that you have such person’s consent to
-              provide the personal information to us.
-            </Text>
-            <Text>
-              If you have previously agreed to us using your personal
-              information for direct marketing purposes, you may change your
-              mind at any time. We will provide you with the ability to
-              unsubscribe from our email-database or opt out of communications.
-              Please be aware we may need to request specific information from
-              you to help us confirm your identity.
-            </Text>
-            <Text>
-              If you believe that any information we hold about you is
-              inaccurate, out of date, incomplete, irrelevant, or misleading,
-              please contact us using the details provided in this privacy
-              policy. We will take reasonable steps to correct any information
-              found to be inaccurate, incomplete, misleading, or out of date.
-            </Text>
-            <Text>
-              If you believe that we have breached a relevant data protection
-              law and wish to make a complaint, please contact us using the
-              details below and provide us with full details of the alleged
-              breach. We will promptly investigate your complaint and respond to
-              you, in writing, setting out the outcome of our investigation and
-              the steps we will take to deal with your complaint. You also have
-              the right to contact a regulatory body or data protection
-              authority in relation to your complaint.
+              If you connect an AI agent or other tool to Kan, for example
+              through our MCP server or API, that tool can read and change the
+              content you give it access to. Content it reads is sent to the
+              tool’s provider and is handled under their privacy policy, not
+              ours. Agents connect using an API key, which you can revoke at any
+              time from your API settings.
             </Text>
           </div>
 
-          <div className="mb-6">
-            <SubHeading>Limits of Our Policy</SubHeading>
+          <div className="mb-8">
+            <SubHeading>Who we share it with</SubHeading>
             <Text>
-              Our website may link to external sites that are not operated by
-              us. Please be aware that we have no control over the content and
-              policies of those sites, and cannot accept responsibility or
-              liability for their respective privacy practices.
+              We share personal data only with service providers who help us run
+              the Service, under contracts that require them to protect it:
+            </Text>
+            <UnorderedList>
+              <ListItem>Stripe, for payments and billing</ListItem>
+              <ListItem>PostHog, for product analytics</ListItem>
+              <ListItem>
+                our hosting, database, file storage, email delivery and logging
+                providers
+              </ListItem>
+            </UnorderedList>
+            <Text>
+              We may also disclose data if required by law, to protect our
+              rights or users’ safety, or as part of a merger or sale of our
+              business, in which case this policy will continue to apply.
             </Text>
           </div>
 
-          <div className="mb-6">
-            <SubHeading>Changes to This Policy</SubHeading>
+          <div className="mb-8">
+            <SubHeading>Where your data is stored</SubHeading>
             <Text>
-              At our discretion, we may change our privacy policy to reflect
-              updates to our business processes, current acceptable practices,
-              or legislative or regulatory changes. If we decide to change this
-              privacy policy, we will post the changes here at the same link by
-              which you are accessing this privacy policy.
-            </Text>
-            <Text>
-              If required by law, we will get your permission or give you the
-              opportunity to opt in to or opt out of, as applicable, any new
-              uses of your personal information.
+              Your data is hosted in the European Union. Some service providers,
+              such as Stripe for payments, may process limited data outside the
+              UK and EU. Where they do, we rely on safeguards approved under UK
+              and EU data protection law, such as adequacy decisions or standard
+              contractual clauses.
             </Text>
           </div>
 
-          <div className="mb-6">
-            <SubHeading>Contact Us</SubHeading>
+          <div className="mb-8">
+            <SubHeading>How long we keep it</SubHeading>
             <Text>
-              For any questions or concerns regarding your privacy, you may
-              contact us using the following details:
+              We keep your data while your account is active. When you delete
+              your account or a workspace, we delete the related data within 30
+              days, except where we must keep it longer for legal, tax or
+              security reasons. Backups are overwritten on a rolling basis.
             </Text>
-            <Link
-              className="line-height text-md mb-4 text-light-1000 dark:text-dark-900"
-              href="mailto:support@kan.bn"
-            >
-              support@kan.bn
-            </Link>
+          </div>
+
+          <div className="mb-8">
+            <SubHeading>Security</SubHeading>
+            <Text>
+              We use encryption in transit, access controls and regular backups
+              to protect your data. No system is completely secure, so please
+              use a strong password and tell us straight away if you suspect
+              unauthorised access.
+            </Text>
+          </div>
+
+          <div className="mb-8">
+            <SubHeading>Cookies</SubHeading>
+            <Text>
+              We use essential cookies to keep you signed in and remember your
+              preferences, such as theme and language. We also use analytics to
+              understand how the Service is used.
+            </Text>
+          </div>
+
+          <div className="mb-8">
+            <SubHeading>Your rights</SubHeading>
+            <Text>
+              Under UK and EU data protection law you can ask to access,
+              correct, delete or export your personal data, object to or
+              restrict how we use it, and withdraw consent at any time. Email us
+              at <Link href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</Link>{" "}
+              and we will respond within one month. You can also complain to the
+              Information Commissioner’s Office (ico.org.uk).
+            </Text>
+          </div>
+
+          <div className="mb-8">
+            <SubHeading>Children</SubHeading>
+            <Text>
+              The Service is not intended for anyone under 16, and we do not
+              knowingly collect data from children.
+            </Text>
+          </div>
+
+          <div className="mb-8">
+            <SubHeading>Changes to this policy</SubHeading>
+            <Text>
+              We may update this policy. If a change is material, we will tell
+              you by email or in the app before it takes effect.
+            </Text>
+          </div>
+
+          <div className="mb-8">
+            <SubHeading>Contact</SubHeading>
+            <Text>
+              Questions about your privacy? Email us at{" "}
+              <Link href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</Link>.
+            </Text>
           </div>
         </div>
       </div>

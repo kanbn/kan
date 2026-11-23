@@ -6,6 +6,7 @@ const PUBLIC_PATHS = [
   "/",
   "/pricing",
   "/templates",
+  "/kan/roadmap",
   "/oss-friends",
   "/terms",
   "/privacy",

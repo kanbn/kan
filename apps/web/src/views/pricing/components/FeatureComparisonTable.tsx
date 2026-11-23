@@ -169,16 +169,16 @@ const FeatureComparisonTable = ({
     {
       key: "file-uploads",
       label: t`File uploads`,
-      free: { text: t`10mb file uploads`, highlightFirstWord: true },
+      free: { text: t`10MB file uploads`, highlightFirstWord: true },
       teams: { text: t`Unlimited file uploads`, highlightFirstWord: true },
       enterprise: { text: t`Unlimited file uploads`, highlightFirstWord: true },
     },
     {
       key: "workspace-username",
-      label: t`Workspace username`,
-      free: { text: t`Default username`, highlightFirstWord: true },
-      teams: { text: t`Custom username`, highlightFirstWord: true },
-      enterprise: { text: t`Custom username`, highlightFirstWord: true },
+      label: t`Custom workspace URL`,
+      free: false,
+      teams: true,
+      enterprise: true,
     },
   ];
 
@@ -259,6 +259,16 @@ const FeatureComparisonTable = ({
     {
       key: "invite-links",
       label: t`Invite links`,
+      free: false,
+      teams: true,
+      enterprise: true,
+    },
+  ];
+
+  const agentFeatures: PlanFeature[] = [
+    {
+      key: "mcp",
+      label: t`MCP server`,
       free: false,
       teams: true,
       enterprise: true,
@@ -354,6 +364,10 @@ const FeatureComparisonTable = ({
       features: collaborationFeatures,
     },
     {
+      name: t`AI agents`,
+      features: agentFeatures,
+    },
+    {
       name: t`Imports`,
       features: importsFeatures,
     },
@@ -432,7 +446,7 @@ const FeatureComparisonTable = ({
               </div>
             </div>
           )}
-          <table className="w-full border-separate border-spacing-0">
+          <table className="w-full min-w-[640px] border-separate border-spacing-0">
             <thead>
               <tr>
                 {plans.map((plan) => {

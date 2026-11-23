@@ -1,0 +1,28 @@
+# Kan
+
+> Kan is a simple, fast kanban board for teams and AI agents. Your team plans the work, your agents help get it done. It is a simpler alternative to Trello, open source under AGPL-3.0, and available as a hosted service at https://kan.bn or self-hosted.
+
+Kan has a built-in MCP (Model Context Protocol) server. Claude, Cursor, GitHub Copilot, Windsurf, Zed, Gemini and other MCP clients can connect with an API key to read boards, create and update cards, add checklists and comments, and search a workspace.
+
+## Product
+
+- [Home](https://kan.bn/): overview of Kan, features, AI agents and FAQs
+- [Pricing](https://kan.bn/pricing): Free plan for individuals; Teams plan at $8 per user/month billed yearly or $10 monthly, with a 14-day free trial; Enterprise on request
+- [Public roadmap](https://kan.bn/kan/roadmap): what we are building next, managed in Kan
+
+## Docs
+
+- [Getting started](https://docs.kan.bn/introduction)
+- [MCP server](https://docs.kan.bn/mcp): connect AI agents to Kan
+- [API reference](https://docs.kan.bn/api-reference/introduction)
+- [Importing from Trello](https://docs.kan.bn/imports/trello)
+- [Self-hosting](https://docs.kan.bn/guides/self-hosting/introduction)
+
+## Open source
+
+- [GitHub repository](https://github.com/kanbn/kan): source code, issues and discussions
+
+## Legal
+
+- [Terms of Service](https://kan.bn/terms)
+- [Privacy Policy](https://kan.bn/privacy)

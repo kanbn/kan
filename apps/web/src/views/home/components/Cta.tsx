@@ -1,92 +1,33 @@
-import Link from "next/link";
 import { t } from "@lingui/core/macro";
-import { useEffect, useState } from "react";
+import { HiArrowRight } from "react-icons/hi2";
 
 import Button from "~/components/Button";
 
-const Cta = ({ theme }: { theme: string }) => {
-  const [currentWorkspaceSlug, setCurrentWorkspaceSlug] = useState("acme");
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const workspaceSlugs = [
-      "acme",
-      "henry",
-      "cal",
-      "documenso",
-      "jack",
-      "openstatus",
-      "florrie",
-      "supabase",
-    ];
-
-    const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentWorkspaceSlug((prev) => {
-          const currentIndex = workspaceSlugs.indexOf(prev);
-          const nextIndex = (currentIndex + 1) % workspaceSlugs.length;
-          const nextSlug = workspaceSlugs[nextIndex];
-          if (!nextSlug) return prev;
-          return nextSlug;
-        });
-        setIsVisible(true);
-      }, 500);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
+const Cta = ({ showPricing = true }: { showPricing?: boolean }) => {
   return (
-    <div className="relative isolate overflow-hidden">
-      <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
-        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-          <div
-            className={`mb-8 flex items-center gap-2 rounded-2xl border bg-light-50 px-4 py-2 text-center text-sm font-bold text-light-1000 transition-all duration-500 lg:text-[16px] dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950 ${
-              isVisible
-                ? "translate-y-0 opacity-100"
-                : "-translate-y-4 opacity-0"
-            }`}
-          >
-            <p>kan.bn/{currentWorkspaceSlug}</p>
-          </div>
-          <h2 className="text-4xl font-bold tracking-tight text-balance text-light-1000 sm:text-4xl dark:text-dark-1000">
-            {t`Get started for free today`}
-          </h2>
-          <p className="text-md/8 mx-auto mt-6 max-w-[375px] text-pretty text-light-950 dark:text-dark-900">
-            {t`Unlimited boards, unlimited lists, unlimited cards. No credit card required.`}
-          </p>
-          <Link href="/signup">
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button size="lg">{t`Get started`}</Button>
-            </div>
-          </Link>
-        </div>
+    <div className="flex flex-col items-center gap-8 px-4 py-24 text-center lg:py-32">
+      <div>
+        <h2 className="text-xl font-semibold tracking-[-0.03em] text-light-1000 sm:text-2xl lg:text-4xl dark:text-dark-1000">
+          {t`Get started for free`}
+        </h2>
+        <p className="mt-3 text-sm text-light-900 dark:text-dark-800">
+          {t`14-day free trial, cancel anytime`}
+        </p>
       </div>
-      <svg
-        viewBox="0 0 1024 1024"
-        aria-hidden="true"
-        className="absolute top-[65%] left-1/2 -z-10 size-240 -translate-x-1/2 mask-[radial-gradient(closest-side,white,transparent)] lg:size-256"
-      >
-        <circle
-          r={512}
-          cx={512}
-          cy={512}
-          fill="url(#8d958450-c69f-4251-94bc-4e091a323369)"
-          fillOpacity="0.7"
-        />
-        <defs>
-          <radialGradient id="8d958450-c69f-4251-94bc-4e091a323369">
-            <stop
-              stopColor={theme === "light" ? "hsl(0deg 0% 52.2%)" : "#505050"}
-            />
-            <stop
-              offset={1}
-              stopColor={theme === "light" ? "hsl(0deg 0% 43.5%)" : "#707070"}
-            />
-          </radialGradient>
-        </defs>
-      </svg>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button
+          href="/signup"
+
+          iconRight={<HiArrowRight className="h-4 w-4" />}
+        >
+          {t`Try Kan free`}
+        </Button>
+        {showPricing && (
+          <Button variant="secondary" href="/pricing">
+            {t`See pricing`}
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
