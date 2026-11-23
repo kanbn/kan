@@ -17,9 +17,10 @@ export const notFoundForUnknownWorkspace: GetServerSideProps = async ({
     const res = await fetch(
       `${apiBaseUrl}${getCheckWorkspaceSlugExistsUrl(encodeURIComponent(slug))}`,
     );
-    if (!res.ok) return { props: {} };
-    const { exists } = (await res.json()) as { exists: boolean };
-    return exists ? { props: {} } : { notFound: true };
+    const body = res.ok
+      ? ((await res.json()) as { exists: boolean })
+      : undefined;
+    return body?.exists === false ? { notFound: true } : { props: {} };
   } catch {
     return { props: {} };
   }

@@ -11,23 +11,14 @@ const run = (workspaceSlug: string) =>
     params: { workspaceSlug },
   } as unknown as GetServerSidePropsContext);
 
-const mockFetch = (response: Partial<Response> | Error) =>
-  vi
-    .spyOn(globalThis, "fetch")
-    .mockImplementation(() =>
-      response instanceof Error
-        ? Promise.reject(response)
-        : Promise.resolve(response as Response),
-    );
+const mockFetch = (body: { exists: boolean }) =>
+  vi.spyOn(globalThis, "fetch").mockResolvedValue(Response.json(body));
 
 afterEach(() => vi.restoreAllMocks());
 
 describe("notFoundForUnknownWorkspace", () => {
   it("returns a 404 when the workspace slug does not exist", async () => {
-    const fetchSpy = mockFetch({
-      ok: true,
-      json: () => Promise.resolve({ exists: false }),
-    });
+    const fetchSpy = mockFetch({ exists: false });
 
     expect(await run("asdf")).toEqual({ notFound: true });
     expect(fetchSpy).toHaveBeenCalledWith(
@@ -36,13 +27,13 @@ describe("notFoundForUnknownWorkspace", () => {
   });
 
   it("renders the page when the workspace exists", async () => {
-    mockFetch({ ok: true, json: () => Promise.resolve({ exists: true }) });
+    mockFetch({ exists: true });
 
     expect(await run("kan")).toEqual({ props: {} });
   });
 
   it("renders the page when the API is unreachable", async () => {
-    mockFetch(new Error("ECONNREFUSED"));
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("ECONNREFUSED"));
 
     expect(await run("kan")).toEqual({ props: {} });
   });
