@@ -63,12 +63,8 @@ export default function Logos() {
   return (
     <div className="w-full px-4 py-16">
       <div className="mb-8 text-center">
-        <p className="text-sm font-medium text-light-800 dark:text-dark-800">
-          <Trans>
-            Trusted by fast-moving teams
-            <br />
-            around the world
-          </Trans>
+        <p className="text-sm text-light-900 dark:text-dark-800">
+          <Trans>Trusted by fast-moving teams around the world</Trans>
         </p>
       </div>
 
@@ -86,7 +82,7 @@ export default function Logos() {
                   className="flex h-12 w-32 items-center justify-center"
                 >
                   <LogoComponent
-                    className="text-light-950 transition-all duration-300 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
+                    className="text-light-900 opacity-80 transition-all duration-300 hover:text-light-1000 hover:opacity-100 dark:text-dark-800 dark:hover:text-dark-1000"
                     aria-label={logo.alt}
                   />
                 </div>
@@ -103,7 +99,7 @@ export default function Logos() {
                   className="flex h-12 w-32 items-center justify-center"
                 >
                   <LogoComponent
-                    className="text-light-950 transition-all duration-300 hover:text-light-1000 dark:text-dark-950 dark:hover:text-dark-1000"
+                    className="text-light-900 opacity-80 transition-all duration-300 hover:text-light-1000 hover:opacity-100 dark:text-dark-800 dark:hover:text-dark-1000"
                     aria-label={logo.alt}
                   />
                 </div>

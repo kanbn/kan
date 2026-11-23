@@ -19,60 +19,46 @@ import membersIconLight from "~/assets/members-light.json";
 import templatesIconDark from "~/assets/templates-dark.json";
 import templatesIconLight from "~/assets/templates-light.json";
 import LottieIcon from "~/components/LottieIcon";
+import SectionHeading from "./SectionHeading";
 
 const FeatureItem = ({
   feature,
+  className,
 }: {
   feature: {
     title: string;
     description: string;
     icon: Record<string, unknown>;
-    comingSoon?: boolean;
     new?: boolean;
   };
+  className?: string;
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const [index, setIndex] = useState(0);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    setIndex((index) => index + 1);
-  };
 
   return (
     <div
-      onMouseEnter={handleMouseEnter}
-      className="group relative flex aspect-square w-full flex-col items-center justify-center overflow-hidden rounded-3xl border border-light-200 bg-light-50 p-2 dark:border-dark-200 dark:bg-dark-50"
+      onMouseEnter={() => setIndex((index) => index + 1)}
+      className={`group relative flex flex-col justify-between gap-6 overflow-hidden bg-light-50 p-6 transition-colors hover:bg-light-100 lg:gap-10 lg:p-8 dark:bg-dark-50 dark:hover:bg-dark-100 ${className ?? ""}`}
     >
-      <div className="absolute top-8 left-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
-      <div className="absolute top-8 right-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
-      <div className="absolute bottom-8 left-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
-      <div className="absolute right-8 bottom-8 h-2 w-2 rounded-full bg-light-200 dark:bg-dark-200" />
-
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-light-300 bg-light-200 dark:border-dark-600 dark:bg-dark-200">
-        <LottieIcon index={index} json={feature.icon} isPlaying={isHovered} />
+      <div className="flex items-start justify-between">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-light-300 bg-light-200 dark:border-dark-300 dark:bg-dark-200">
+          <LottieIcon index={index} json={feature.icon} isPlaying={index > 0} />
+        </div>
+        {feature.new && (
+          <span className="rounded-full border border-light-300 px-2 py-0.5 text-[11px] text-light-900 dark:border-dark-300 dark:text-dark-900">
+            {t`New`}
+          </span>
+        )}
       </div>
 
-      <div className="relative mt-2 w-full px-4 text-center">
-        <p className="text-sm font-bold text-light-1000 sm:transition-opacity sm:duration-200 sm:group-hover:opacity-0 dark:text-dark-1000">
+      <div>
+        <p className="font-medium tracking-tight text-light-1000 dark:text-dark-1000">
           {feature.title}
         </p>
-        <p className="max mt-2 text-sm text-light-950 sm:absolute sm:inset-0 sm:mt-0 sm:opacity-0 sm:transition-opacity sm:duration-200 sm:group-hover:opacity-100 dark:text-dark-900">
+        <p className="mt-1.5 text-sm text-pretty text-light-900 dark:text-dark-800">
           {feature.description}
         </p>
       </div>
-
-      {feature.comingSoon && (
-        <div className="absolute top-4 right-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
-          {t`Coming soon`}
-        </div>
-      )}
-
-      {feature.new && (
-        <div className="absolute top-4 right-4 rounded-full border border-light-300 px-2 py-1 text-[10px] text-light-1000 dark:border-dark-600 dark:bg-dark-50 dark:text-dark-900">
-          {t`New`}
-        </div>
-      )}
     </div>
   );
 };
@@ -115,49 +101,42 @@ const Features = ({ theme }: { theme: "light" | "dark" }) => {
       title: t`Templates`,
       description: t`Save time with reusable board templates.`,
       icon: isDark ? templatesIconDark : templatesIconLight,
-      new: true,
     },
     {
-      title: t`Integrations`,
-      description: t`Connect your favorite tools to streamline your workflow.`,
+      title: t`MCP server`,
+      description: t`Connect Claude, Cursor and other agents to your boards with the Kan MCP server.`,
       icon: isDark ? integrationsIconDark : integrationsIconLight,
-      comingSoon: true,
+      new: true,
     },
   ];
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center px-4 pb-24">
-        <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 lg:text-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
-          <p>{t`Features`}</p>
-        </div>
+    <div className="px-4 pb-24">
+      <SectionHeading
+        eyebrow={t`Features`}
+        title={t`All of the essentials, none of the bloat.`}
+      />
 
-        <p className="mt-2 text-center text-3xl font-bold text-light-1000 lg:text-4xl dark:text-dark-1000">
-          {t`Kanban reimagined`}
-        </p>
-        <p className="text-md lg:text-md mt-3 max-w-[500px] text-center text-light-950 dark:text-dark-900">
-          {t`Simple, visual task management that just works. Drag and drop cards, collaborate with your team, and get more done.`}
-        </p>
-        <div className="mx-auto mt-16 w-full max-w-7xl">
-          <div className="grid w-full grid-cols-1 gap-4 mask-[linear-gradient(to_bottom,black_92%,transparent_100%)] sm:grid-cols-2 md:grid-cols-3 md:mask-[linear-gradient(to_bottom,black_85%,transparent_100%)] lg:grid-cols-4 lg:mask-[linear-gradient(to_bottom,black_85%,transparent_100%)]">
-            {features.map((feature, index) => (
-              <FeatureItem key={`feature-${index}`} feature={feature} />
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <div className="mt-8 flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-sm text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
-            <p className="text-xs lg:text-sm">
-              {t`We're just getting started. `}
-              <Link href="/kan/roadmap" className="underline">
-                {t`View our roadmap.`}
-              </Link>
-            </p>
-          </div>
-        </div>
+      <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-light-300 bg-light-300 sm:grid-cols-2 lg:grid-cols-4 dark:border-dark-200 dark:bg-dark-200">
+        {features.map((feature, index) => (
+          <FeatureItem
+            key={`feature-${index}`}
+            feature={feature}
+            className={[0, 1, 6, 7].includes(index) ? "lg:col-span-2" : ""}
+          />
+        ))}
       </div>
-    </>
+
+      <p className="mt-6 text-sm text-light-900 dark:text-dark-800">
+        {t`New features ship weekly.`}{" "}
+        <Link
+          href="/kan/roadmap"
+          className="text-light-1000 underline-offset-4 hover:underline dark:text-dark-1000"
+        >
+          {t`See what's next →`}
+        </Link>
+      </p>
+    </div>
   );
 };
 

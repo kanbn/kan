@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { env } from "@kan/shared/env";
 
 const DEFAULT_DESCRIPTION =
-  "The open source alternative to Trello. A powerful, flexible kanban app that helps you organise work, track progress, and deliver results—all in one place.";
+  "Kanban for teams and agents. A simpler, faster alternative to Trello with a built-in MCP server.";
 const DEFAULT_IMAGE = "/hero-light.png";
 
 export const PageHead = ({

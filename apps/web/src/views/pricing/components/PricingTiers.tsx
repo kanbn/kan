@@ -54,8 +54,9 @@ const Pricing = ({
       featureHeader: undefined,
       features: [
         { text: t`All Free features +` },
+        { text: t`AI agents via MCP` },
         { text: t`Workspace members` },
-        { text: t`Custom workspace username` },
+        { text: t`Custom workspace URL` },
         { text: t`Invite links` },
         { text: t`Unlimited file uploads` },
         { text: t`Email notifications for mentions` },
@@ -64,7 +65,7 @@ const Pricing = ({
       highlighted: true,
       showPrice: true,
       showPriceSuffix: true,
-      ctaSubtext: t`14 day free trial · Switch plans or cancel anytime`,
+      ctaSubtext: t`14-day free trial, cancel anytime`,
       mostPopular: true,
     },
     {
@@ -110,10 +111,15 @@ const Pricing = ({
                     "cursor-pointer rounded-md px-4 py-1.5 text-sm font-medium transition-colors",
                     frequency?.value === option.value
                       ? "bg-white text-light-1000 shadow-xs dark:bg-dark-100 dark:text-dark-1000"
-                      : "text-light-600 dark:text-dark-700",
+                      : "text-light-900 dark:text-dark-800",
                   )}
                 >
                   {option.label}
+                  {option.value === "annually" && (
+                    <span className="ml-1.5 text-xs text-light-900 dark:text-dark-800">
+                      {t`Save 20%`}
+                    </span>
+                  )}
                 </Radio>
               ))}
             </RadioGroup>
@@ -156,14 +162,14 @@ const Pricing = ({
                     {tier.price[frequency?.value ?? "monthly"]}
                   </span>
                   {tier.showPriceSuffix && (
-                    <span className="text-sm font-normal text-dark-400 dark:text-dark-700">
+                    <span className="text-sm font-normal text-light-900 dark:text-dark-800">
                       {frequency?.priceSuffix}
                     </span>
                   )}
                 </p>
               </div>
               {tier.bestFor && (
-                <p className="mb-6 text-sm text-dark-400 dark:text-dark-700">
+                <p className="mb-6 text-sm text-light-900 dark:text-dark-800">
                   {tier.bestFor}
                 </p>
               )}
@@ -190,6 +196,11 @@ const Pricing = ({
                     >
                       {tier.buttonText}
                     </Link>
+                    {tier.ctaSubtext && (
+                      <p className="mt-2 text-center text-xs text-light-900 dark:text-dark-800">
+                        {tier.ctaSubtext}
+                      </p>
+                    )}
                   </>
                 )}
               </div>
@@ -200,7 +211,7 @@ const Pricing = ({
                     className="flex items-start gap-x-2.5"
                   >
                     <HiCheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-light-1000 dark:text-dark-1000" />
-                    <span className="text-sm text-dark-600 dark:text-dark-800">
+                    <span className="text-sm text-light-950 dark:text-dark-900">
                       {feature.text}
                     </span>
                   </li>
@@ -208,11 +219,6 @@ const Pricing = ({
               </ul>
             </div>
           ))}
-        </div>
-        <div className="mx-auto mt-8 max-w-3xl px-4 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
-            <p>{t`14 day free trial · Switch plans or cancel anytime`}</p>
-          </div>
         </div>
       </div>
     </>

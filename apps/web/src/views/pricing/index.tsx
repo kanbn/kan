@@ -1,9 +1,12 @@
+import Link from "next/link";
 import { t } from "@lingui/core/macro";
-import { useTheme } from "next-themes";
+import { Trans } from "@lingui/react/macro";
 import { useState } from "react";
 
 import { PageHead } from "~/components/PageHead";
 import Cta from "../home/components/Cta";
+import Divider from "../home/components/Divider";
+import Faqs from "../home/components/Faqs";
 import Layout from "../home/components/Layout";
 import Logos from "../home/components/Logos";
 import FeatureComparisonTable from "./components/FeatureComparisonTable";
@@ -12,7 +15,6 @@ import PricingTiers from "./components/PricingTiers";
 type FrequencyValue = "monthly" | "annually";
 
 export default function PricingView() {
-  const { resolvedTheme } = useTheme();
   const frequencies = [
     {
       value: "monthly" as FrequencyValue,
@@ -36,16 +38,12 @@ export default function PricingView() {
       />
 
       <div className="flex h-full w-full flex-col lg:pt-20">
-        <div className="w-full pt-32 pb-10">
+        <div className="w-full pt-32 pb-16">
           <div className="flex flex-col items-center justify-center px-4 pb-10">
-            <div className="flex items-center gap-2 rounded-full border bg-light-50 px-4 py-1 text-center text-xs text-light-1000 lg:text-sm dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900">
-              <p>{t`Pricing`}</p>
-            </div>
-
-            <p className="mt-4 text-center text-3xl font-bold text-light-1000 lg:text-5xl dark:text-dark-1000">
+            <h1 className="text-center text-[28px] font-semibold tracking-[-0.035em] text-light-1000 lg:text-[40px] dark:text-dark-1000">
               {t`Simple pricing`}
-            </p>
-            <p className="text:md lg:text-md mt-6 max-w-[300px] text-center text-light-950 dark:text-dark-900">
+            </h1>
+            <p className="mt-4 max-w-[340px] text-center text-sm text-pretty text-light-950 sm:text-base dark:text-dark-900">
               {t`Start free. Upgrade as your team grows. No hidden fees, no contracts.`}
             </p>
           </div>
@@ -56,19 +54,36 @@ export default function PricingView() {
           />
         </div>
 
-        <div className="pb-20">
-          <Logos />
-        </div>
+        <Divider />
+        <Logos />
+        <Divider />
 
-        <div className="flex flex-col items-center justify-center px-4 pb-22">
-          <div className="mt-10 w-full">
+        <div className="flex flex-col items-center justify-center px-4 py-16">
+          <div className="w-full">
             <FeatureComparisonTable
               frequencyValue={frequency?.value ?? "annually"}
             />
+            <p className="mt-4 text-xs text-light-900 dark:text-dark-800">
+              <Trans>
+                Unlimited features are subject to our{" "}
+                <Link
+                  href="/terms#fair-use"
+                  className="underline underline-offset-4"
+                >
+                  fair use policy
+                </Link>
+                .
+              </Trans>
+            </p>
           </div>
         </div>
+        <Divider />
+        <div className="pt-16">
+          <Faqs />
+        </div>
+        <Divider />
         <div className="relative">
-          <Cta theme={resolvedTheme ?? "light"} />
+          <Cta showPricing={false} />
         </div>
       </div>
     </Layout>
