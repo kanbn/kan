@@ -80,6 +80,7 @@ export const getAllByWorkspaceId = async (
           name: true,
           index: true,
         },
+        where: isNull(lists.deletedAt),
         orderBy: [asc(lists.index)],
       },
       labels: {
@@ -88,6 +89,7 @@ export const getAllByWorkspaceId = async (
           name: true,
           colourCode: true,
         },
+        where: isNull(labels.deletedAt),
       },
     },
     where: and(
