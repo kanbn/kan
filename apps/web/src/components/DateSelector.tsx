@@ -70,7 +70,6 @@ const DateSelector = ({
 
   const handleDateClick = (date: Date, e: React.MouseEvent) => {
     e.stopPropagation();
-    // If clicking the same date that's already selected, unselect it
     if (selectedDate && isSameDay(date, selectedDate)) {
       onDateSelect?.(undefined);
     } else {

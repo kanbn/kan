@@ -68,7 +68,6 @@ export function NewCardForm({
 
   const boardCache = useBoardCache();
 
-  // persists the form values
   const { formState, saveFormState } = useModalFormState<NewCardFormInput>({
     modalType: "NEW_CARD",
     initialValues: {
@@ -104,7 +103,6 @@ export function NewCardForm({
   const [isDraggingFiles, setIsDraggingFiles] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // saving form state whenever form values change
   useEffect(() => {
     const subscription = watch((data) => {
       saveFormState(data);
@@ -112,7 +110,6 @@ export function NewCardForm({
     return () => subscription.unsubscribe();
   }, [watch, saveFormState]);
 
-  // this adds the new created label to selected labels
   useEffect(() => {
     const newLabelId = modalStates.NEW_LABEL_CREATED as string | undefined;
     if (newLabelId !== undefined && !labelPublicIds.includes(newLabelId)) {
@@ -120,7 +117,6 @@ export function NewCardForm({
     }
   }, [modalStates, labelPublicIds, setValue]);
 
-  // this removes the deleted label from selected labels if it is selected
   useEffect(() => {
     if (boardData?.labels) {
       const availableLabelIds = boardData.labels.map((label) => label.publicId);
@@ -218,10 +214,8 @@ export function NewCardForm({
     onSuccess: async () => {
       const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
       if (!isCreateAnotherEnabled) {
-        // close modal (state will auto-clear due to resetOnClose: true)
         closeModal();
       } else {
-        // reset form for creating another card
         const newFormState = {
           title: "",
           description: "",

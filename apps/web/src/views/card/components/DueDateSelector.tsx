@@ -45,7 +45,6 @@ export function DueDateSelector({
     dueDate,
   );
 
-  // Sync pendingDate with dueDate when it changes externally
   useEffect(() => {
     if (!isOpen) {
       setPendingDate(dueDate);
@@ -88,12 +87,10 @@ export function DueDateSelector({
   });
 
   const handleDateSelect = (date: Date | undefined) => {
-    // Only update local state, don't fire mutation
     setPendingDate(date ?? null);
   };
 
   const handleBackdropClick = () => {
-    // Only fire mutation if date actually changed
     const pendingIsNull = pendingDate === null || pendingDate === undefined;
     const dueIsNull = dueDate === null || dueDate === undefined;
 
@@ -103,16 +100,13 @@ export function DueDateSelector({
     } else if (!pendingIsNull && dueIsNull) {
       dateChanged = true;
     } else if (!pendingIsNull && !dueIsNull) {
-      // Both are non-null at this point
       if (pendingDate instanceof Date && dueDate instanceof Date) {
         dateChanged = pendingDate.getTime() !== dueDate.getTime();
       }
     }
 
-    // Close popover immediately
     setIsOpen(false);
 
-    // Fire mutation if date changed (optimistic update will handle UI)
     if (dateChanged) {
       updateDueDate.mutate({
         cardPublicId,

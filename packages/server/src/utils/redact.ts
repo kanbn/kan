@@ -26,10 +26,6 @@ const isSensitiveKey = (key: string) => {
   );
 };
 
-/**
- * Returns a copy of a value with secret-looking keys masked, for logging
- * request input. The original value is never mutated.
- */
 export function redactSensitive(value: unknown, depth = 0): unknown {
   if (value === null || typeof value !== "object") return value;
   if (depth >= MAX_DEPTH) return REDACTED;
@@ -38,7 +34,6 @@ export function redactSensitive(value: unknown, depth = 0): unknown {
     return value.map((item) => redactSensitive(item, depth + 1));
   }
 
-  // Leave Dates and other class instances as they are.
   const proto: unknown = Object.getPrototypeOf(value);
   if (proto !== Object.prototype && proto !== null) return value;
 

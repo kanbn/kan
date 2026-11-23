@@ -51,7 +51,6 @@ const toDate = (seconds: number | null | undefined) =>
 const idOf = (value: string | { id: string } | null | undefined) =>
   typeof value === "string" ? value : value?.id;
 
-/** The subscription row fields that mirror Stripe's copy. */
 const syncedFields = (sub: Stripe.Subscription) => {
   const item = sub.items.data[0];
   const plan = planForPrice(item?.price.id);

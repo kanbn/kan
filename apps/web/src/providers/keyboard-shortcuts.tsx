@@ -259,13 +259,11 @@ export function KeyboardShortcutProvider({
 
   useEventListener("keydown", handleKeyDown);
 
-  // Register built-in shortcut to open legend
   useEffect(() => {
     const cleanup = registerShortcut(openLegendShortcut);
     return cleanup;
   }, [registerShortcut, openLegendShortcut]);
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (sequenceTimeoutRef.current) {
@@ -364,32 +362,6 @@ export function KeyboardShortcutProvider({
   );
 }
 
-/**
- * Hook to register a keyboard shortcut. Cleanup is handled automatically.
- * Returns both formatted keys and pre-built tooltip content.
- *
- * IMPORTANT: The shortcut object reference must be stable. If it changes
- * on every render, the shortcut will be continuously registered and unregistered.
- *
- * @example
- * ```tsx
- * const { keys, tooltipContent } = useKeyboardShortcut({
- *   type: "PRESS",
- *   stroke: { key: "k", modifiers: ["META"] },
- *   action: () => openCommandPalette(),
- *   description: "Open command palette",
- *   group: "GENERAL"
- * });
- *
- * // Use tooltip for Tooltip component
- * <Tooltip content={tooltipContent}>
- *   <button>Search</button>
- * </Tooltip>
- *
- * // Or use keys directly for custom formatting
- * <span>Press {keys} to search</span>
- * ```
- */
 export function useKeyboardShortcuts(): KeyboardShortcutContextType {
   const context = useContext(KeyboardShortcutContext);
 
@@ -402,6 +374,7 @@ export function useKeyboardShortcuts(): KeyboardShortcutContextType {
   return context;
 }
 
+// The shortcut object must be a stable reference, or it re-registers on every render.
 export function useKeyboardShortcut(shortcut: KeyboardShortcut): {
   keys: ReactNode;
   tooltipContent: ReactNode;
@@ -485,7 +458,6 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
     const parts: ReactNode[] = [];
     shortcut.strokes.forEach((stroke, strokeIndex) => {
       const strokeParts = formatStroke(stroke);
-      // Add stroke index to keys to ensure uniqueness across multiple strokes
       const keyedParts = strokeParts.map((part, partIndex) => {
         if (React.isValidElement(part)) {
           return React.cloneElement(part, {
@@ -506,10 +478,6 @@ function FormattedShortcut({ shortcut }: { shortcut: KeyboardShortcut }) {
   );
 }
 
-/** Checks for conflicts given existing nodes and current path
- * Throws an error if conflict is found
- *
- */
 function validateNoConflict(
   existingNode: ShortcutTreeNode,
   isLastKey: boolean,
@@ -541,9 +509,6 @@ function validateNoConflict(
   }
 }
 
-/**
- * Checks if the user is currently typing in an input field
- */
 function isTypingInInput(event: KeyboardEvent): boolean {
   if (!event.target) return false;
 
@@ -555,10 +520,6 @@ function isTypingInInput(event: KeyboardEvent): boolean {
   return isInput || isContentEditable;
 }
 
-/**
- * Serializes a KeyStroke to a consistent string format
- * Returns lowercase string like "ctrl+shift+k" with alphabetically sorted modifiers
- */
 function serializeKeyStroke(stroke: KeyStroke): string {
   const key = stroke.key.toLowerCase();
   if (!stroke.modifiers || stroke.modifiers.length === 0) return key;
@@ -566,9 +527,6 @@ function serializeKeyStroke(stroke: KeyStroke): string {
   return `${sorted.join("+")}+${key}`;
 }
 
-/**
- * Converts a keyboard event to a KeyStroke
- */
 function eventToKeyStroke(event: KeyboardEvent): KeyStroke {
   const modifiers: ModifierKey[] = [];
   if (event.altKey) modifiers.push(ModifierKey.ALT);
@@ -580,16 +538,10 @@ function eventToKeyStroke(event: KeyboardEvent): KeyStroke {
   return { key: event.key, modifiers };
 }
 
-/**
- * Serializes a keyboard event to a consistent string format
- */
 function serializeEvent(event: KeyboardEvent): string {
   return serializeKeyStroke(eventToKeyStroke(event));
 }
 
-/**
- * Removes a path from the tree and prunes empty branches
- */
 function removePathAndPrune(tree: ShortcutTreeLevel, path: string[]): void {
   const [first, ...rest] = path;
   if (!first) return;

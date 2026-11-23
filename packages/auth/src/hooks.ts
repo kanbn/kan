@@ -39,10 +39,7 @@ export function createDatabaseHooks(db: dbClient) {
             if (!pendingInvitation) {
               return Promise.resolve(false);
             }
-
-            // Fall through to any additional checks below
           }
-          // Enforce allowed domains (OIDC/social) if configured
           const allowed = process.env.BETTER_AUTH_ALLOWED_DOMAINS?.split(",")
             .map((d) => d.trim().toLowerCase())
             .filter(Boolean);

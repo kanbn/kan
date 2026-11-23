@@ -22,7 +22,6 @@ const BOOTSTRAP_CONTEXTS = new Set([
   "RouterExplorer",
 ]);
 
-/** Routes Nest's own logs (startup, unhandled exceptions) through pino. */
 export class NestPinoLogger implements LoggerService {
   log(message: unknown, ...params: unknown[]) {
     const { context } = split(params);

@@ -14,9 +14,6 @@ import { hasBoardAccess } from "./permissions";
 
 const log = createLogger("notifications");
 
-/**
- * Sends mention notification emails to members newly mentioned in the content.
- */
 export async function sendMentionEmails({
   db,
   cardPublicId,
@@ -36,7 +33,6 @@ export async function sendMentionEmails({
     const mentionPublicIds = getNewMentionPublicIds(previousHtml, nextHtml);
     if (mentionPublicIds.length === 0) return;
 
-    // Get card with board information
     const card = await cardRepo.getWithListAndMembersByPublicId(
       db,
       cardPublicId,
@@ -48,7 +44,6 @@ export async function sendMentionEmails({
     const cardTitle = card.title;
     const cardId = card.id;
 
-    // Get workspace ID from workspace publicId
     const workspace = await workspaceRepo.getByPublicId(
       db,
       board.workspace.publicId,
@@ -57,7 +52,6 @@ export async function sendMentionEmails({
 
     const workspaceId = workspace.id;
 
-    // Get commenter information
     const commenter = await userRepo.getById(db, commenterUserId);
     if (!commenter) return;
 
@@ -66,7 +60,6 @@ export async function sendMentionEmails({
       ? trimmedCommenterName
       : commenter.email;
 
-    // Get mentioned members with full details (filtered by workspace)
     const membersWithDetails = await memberRepo.getByPublicIdsWithUsers(
       db,
       mentionPublicIds,

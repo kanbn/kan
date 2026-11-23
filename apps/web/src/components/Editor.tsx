@@ -371,11 +371,6 @@ const SlashCommands = Extension.create<SlashCommandsOptions>({
   },
 });
 
-export interface SlashNodeAttrs {
-  id: string | null;
-  label?: string | null;
-}
-
 const getCommandItems = (disableHeadings: boolean): SlashCommandItem[] => {
   const headingCommands: SlashCommandItem[] = disableHeadings
     ? []
@@ -573,7 +568,6 @@ export default function Editor({
           )
         )
           return;
-        // Only trigger onBlur if the click was outside both the editor and menu
         if (!containerRef.current?.contains(event.relatedTarget as Node)) {
           onBlurRef.current?.();
         }
@@ -594,10 +588,9 @@ export default function Editor({
       injectCSS: false,
       shouldRerenderOnTransaction: true,
     },
-    [], // creating the editor only once
+    [],
   ) as TiptapEditor | null;
 
-  // this will sync external content changes without re-creating the editor instance
   useEffect(() => {
     if (!editor) return;
     const currentHTML = editor.getHTML();
@@ -607,10 +600,8 @@ export default function Editor({
     }
   }, [content, editor]);
 
-  // useEditor captures `readOnly` once at creation time (empty deps above), so
-  // explicitly sync `editable` when the prop changes. Without this the editor
-  // gets stuck read-only when `readOnly` flips from true to false after mount
-  // (e.g. card permissions resolving slower than the card data on first load).
+  // useEditor captures `readOnly` once, so a card whose permissions load after
+  // its data would otherwise stay read-only.
   useEffect(() => {
     if (!editor) return;
     if (editor.isEditable === !readOnly) return;

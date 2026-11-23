@@ -136,7 +136,6 @@ export const create = async (
       .having(gt(countExpr, 1));
 
     if (duplicateIndices.length > 0) {
-      // Compact indices for this list to sequential values (0..n-1) preserving order
       await tx.execute(sql`
         WITH ordered AS (
           SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
@@ -149,7 +148,6 @@ export const create = async (
         WHERE c.id = o.id;
       `);
 
-      // Last resort: verify fix; rollback if duplicates persist
       const postFixDupes = await tx
         .select({ index: cards.index, count: countExpr })
         .from(cards)
@@ -420,7 +418,6 @@ export const bulkCreate = async (
   if (cardInput.length === 0) return [];
 
   return db.transaction(async (tx) => {
-    // Group incoming cards by list to compute safe, sequential indices per list
     const byList = new Map<number, typeof cardInput>();
     for (const item of cardInput) {
       const arr = byList.get(item.listId) ?? [];
@@ -467,7 +464,6 @@ export const bulkCreate = async (
       dueDate: Date | null;
     }[] = [];
 
-    // For each list, append incoming cards after current max index, preserving incoming order
     for (const [listId, items] of byList.entries()) {
       const last = await tx.query.cards.findFirst({
         columns: { index: true },
@@ -503,7 +499,6 @@ export const bulkCreate = async (
       .values(allValuesToInsert)
       .returning({ id: cards.id, publicId: cards.publicId });
 
-    // Post-insert: compact per list if duplicates exist; then verify
     const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
     for (const listId of byList.keys()) {
       const duplicateIndices = await tx
@@ -946,7 +941,6 @@ export const reorder = async (
       .having(gt(countExpr, 1));
 
     if (duplicateIndices.length > 0) {
-      // Auto-heal by compacting indices for the affected list(s)
       const affectedListIds = [currentList.id, newList?.id].filter(
         (id): id is number => id !== undefined,
       );
@@ -978,7 +972,6 @@ export const reorder = async (
         `);
       }
 
-      // Verify fix and rollback if necessary
       const postFixDupes = await tx
         .select({ index: cards.index, count: countExpr })
         .from(cards)

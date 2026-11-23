@@ -112,7 +112,6 @@ export const YouTubeNode = Node.create<YouTubeOptions>({
             const text = event.clipboardData?.getData("text/plain");
             if (!text) return false;
 
-            // Check if the pasted text is a YouTube URL
             const youtubeRegex =
               /(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]+)/;
             const match = youtubeRegex.exec(text);
@@ -135,7 +134,6 @@ export const YouTubeNode = Node.create<YouTubeOptions>({
             tr.replaceSelectionWith(node);
             dispatch(tr);
 
-            // Fetch metadata asynchronously and update the node
             void fetchYouTubeMetadata(text).then((metadata) => {
               const { state: newState, dispatch: newDispatch } = view;
               const { tr: newTr } = newState;
@@ -168,7 +166,6 @@ export const YouTubeNode = Node.create<YouTubeOptions>({
     ];
   },
 
-  // commands for the YouTube embed node
   addCommands() {
     return {
       setYouTubeEmbed:

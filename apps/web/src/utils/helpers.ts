@@ -55,7 +55,6 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
     return imageOrKey;
   }
 
-  // Construct URL from S3 key
   const useVirtualHosted =
     env("NEXT_PUBLIC_USE_VIRTUAL_HOSTED_URLS") === "true";
   const storageDomain = env("NEXT_PUBLIC_STORAGE_DOMAIN");
@@ -63,12 +62,10 @@ export const getAvatarUrl = (imageOrKey: string | null) => {
   const bucket = env("NEXT_PUBLIC_AVATAR_BUCKET_NAME");
 
   if (useVirtualHosted && storageDomain && bucket) {
-    // Virtual-hosted style: https://{bucket}.{domain}/{key}
     return `https://${bucket}.${storageDomain}/${imageOrKey}`;
   }
 
   if (storageUrl && bucket) {
-    // Path-style: {storageUrl}/{bucket}/{key}
     return `${storageUrl}/${bucket}/${imageOrKey}`;
   }
 

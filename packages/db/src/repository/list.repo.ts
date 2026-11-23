@@ -68,7 +68,6 @@ export const create = async (
       .having(gt(countExpr, 1));
 
     if (duplicateIndices.length > 0) {
-      // Compact indices to sequential values (0..n-1) to resolve duplicates while preserving order
       await tx.execute(sql`
         WITH ordered AS (
           SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
@@ -81,7 +80,6 @@ export const create = async (
         WHERE l.id = o.id;
       `);
 
-      // Last resort: verify fix; if duplicates persist (e.g., due to race conditions), rollback
       const postFixDupes = await tx
         .select({ index: lists.index, count: countExpr })
         .from(lists)
@@ -114,7 +112,6 @@ export const bulkCreate = async (
   if (listInput.length === 0) return [];
 
   return db.transaction(async (tx) => {
-    // Group incoming rows by board to compute safe, sequential indices per board
     const byBoard = new Map<number, typeof listInput>();
     for (const item of listInput) {
       const arr = byBoard.get(item.boardId) ?? [];
@@ -131,9 +128,7 @@ export const bulkCreate = async (
       importId?: number;
     }[] = [];
 
-    // For each board, append incoming lists after the current max index, preserving their relative order
     for (const [boardId, items] of byBoard.entries()) {
-      // Find current max index for non-deleted lists in this board
       const last = await tx.query.lists.findFirst({
         columns: { index: true },
         where: and(eq(lists.boardId, boardId), isNull(lists.deletedAt)),
@@ -156,13 +151,11 @@ export const bulkCreate = async (
       }
     }
 
-    // Insert all rows in one go
     const inserted = await tx
       .insert(lists)
       .values(allValuesToInsert)
       .returning();
 
-    // Post-insert check: if duplicates exist, compact indices per board instead of failing
     const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
     for (const boardId of byBoard.keys()) {
       const duplicateIndices = await tx
@@ -185,7 +178,6 @@ export const bulkCreate = async (
           WHERE l.id = o.id;
         `);
 
-        // Last resort: verify fix; if duplicates persist (e.g., due to race conditions), rollback
         const postFixDupes = await tx
           .select({ index: lists.index, count: countExpr })
           .from(lists)
@@ -320,7 +312,6 @@ export const reorder = async (
       .having(gt(countExpr, 1));
 
     if (duplicateIndices.length > 0) {
-      // Attempt to auto-heal by compacting indices to sequential values (0..n-1) while preserving order
       await tx.execute(sql`
         WITH ordered AS (
           SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
@@ -333,7 +324,6 @@ export const reorder = async (
         WHERE l.id = o.id;
       `);
 
-      // Last resort verification: if duplicates persist, rollback
       const postFixDupes = await tx
         .select({ index: lists.index, count: countExpr })
         .from(lists)

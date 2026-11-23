@@ -58,11 +58,9 @@ export function CardModal({
     },
   });
 
-  // Redirect to 404 if card doesn't exist
   useEffect(() => {
     if (isOpen && cardPublicId && !isLoading) {
       if (getApiErrorStatus(error) === 404 || (!data && error)) {
-        // Close modal first, then redirect
         closeModal();
         void router.replace("/404");
       }

@@ -1,21 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 interface UseDragToScrollOptions {
-  /**
-   * Whether drag-to-scroll is enabled
-   */
   enabled?: boolean;
-  /**
-   * The direction to scroll
-   */
   direction?: "horizontal" | "vertical" | "both";
 }
 
-/**
- * Hook to enable drag-to-scroll functionality on a scrollable element
- * @param options Configuration options
- * @returns Ref to attach to the scrollable element and mouse event handlers
- */
 export function useDragToScroll({
   enabled = true,
   direction = "horizontal",
@@ -65,8 +54,7 @@ export function useDragToScroll({
     const target = e.target as HTMLElement;
     const container = scrollRef.current;
 
-    // Check if the click is on an interactive or draggable element
-    // We need to be careful not to interfere with dnd-kit dragging
+    // Leave clicks on controls and dnd-kit draggables alone.
     const isInteractiveElement =
       target.closest("a") ??
       target.closest("button") ??
@@ -76,10 +64,8 @@ export function useDragToScroll({
       target.closest("[draggable='true']") ??
       target.closest("[data-board-draggable]");
 
-    // Don't start dragging if clicking on interactive elements
     if (isInteractiveElement) return;
 
-    // Enable drag-to-scroll for any non-interactive element within the container
     if (container.contains(target)) {
       e.preventDefault();
       setIsDragging(true);

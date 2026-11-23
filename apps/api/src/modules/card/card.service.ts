@@ -481,11 +481,7 @@ export class CardService {
       return { newLabel: false };
     }
 
-    // The public add-label path reaches the writer without pre-validating, so
-    // it maps the domain error rather than surfacing a 500 for what is a
-    // client-correctable input. A middleware could do this once for every
-    // transport, but that changes the error path for every procedure and
-    // belongs with the wider decision, not in a bug fix.
+    // This path isn't pre-validated, so map the domain error to a 4xx, not a 500.
     const newCardLabelRelationship = await cardRepo
       .createCardLabelRelationship(db, cardLabelIds)
       .catch((error: unknown) => {
@@ -569,7 +565,6 @@ export class CardService {
       return { newMember: false };
     }
 
-    // Only assign people who can see the board.
     const [assignable] = await filterBoardAssignable(
       db,
       { id: card.boardId, type: card.boardType },
@@ -634,7 +629,6 @@ export class CardService {
         `Card with public ID ${input.cardPublicId} not found`,
       );
 
-    // Generate URLs for all attachments
     const attachmentsWithUrls = await Promise.all(
       result.attachments.map(async (attachment) => {
         const [url, downloadUrl] = await Promise.all([
@@ -657,7 +651,6 @@ export class CardService {
       }),
     );
 
-    // Generate presigned URLs for workspace member avatars
     const resolveAvatarUrl = createAvatarUrlResolver();
     const workspaceWithAvatarUrls = {
       ...result.list.board.workspace,
@@ -742,13 +735,11 @@ export class CardService {
       order: input.order,
     });
 
-    // Generate presigned URLs for user avatars in activities
     const resolveAvatarUrl = createAvatarUrlResolver();
     const activitiesWithAvatarUrls = await Promise.all(
       result.activities.map(async (activity) => {
         const updatedActivity = { ...activity };
 
-        // Generate presigned URL for activity user avatar
         if (activity.user?.image) {
           const userAvatarUrl = await resolveAvatarUrl(activity.user.image);
           updatedActivity.user = {
@@ -757,7 +748,6 @@ export class CardService {
           };
         }
 
-        // Generate presigned URL for member user avatar (if exists)
         if (activity.member?.user?.image) {
           const memberAvatarUrl = await resolveAvatarUrl(
             activity.member.user.image,
@@ -1025,7 +1015,6 @@ export class CardService {
       await cardActivityRepo.bulkCreate(db, activities);
     }
 
-    // Build changes object for webhook
     const webhookChanges: Record<string, { from: unknown; to: unknown }> = {};
     if (input.title && existingCard.title !== input.title) {
       webhookChanges.title = { from: existingCard.title, to: input.title };

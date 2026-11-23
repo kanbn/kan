@@ -34,7 +34,6 @@ export const activityTypes = [
   "card.updated.comment.added",
   "card.updated.comment.updated",
   "card.updated.comment.deleted",
-  // Checklist activities
   "card.updated.checklist.added",
   "card.updated.checklist.renamed",
   "card.updated.checklist.deleted",

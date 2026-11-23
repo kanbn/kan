@@ -43,7 +43,6 @@ export function usePermissions(): UsePermissionsResult {
     query: { enabled: !!workspaceContext && !!workspacePublicId },
   });
 
-  // If WorkspaceProvider is not available, return safe defaults
   if (!workspaceContext) {
     const emptyPermissions: UsePermissionsResult = {
       permissions: [],

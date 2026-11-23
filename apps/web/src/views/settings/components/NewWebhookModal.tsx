@@ -102,7 +102,6 @@ export function NewWebhookModal({
     }
   }, [isEdit, webhookPublicId, modalState, reset]);
 
-  // Clear modal state when closing
   useEffect(() => {
     return () => {
       if (isEdit) {

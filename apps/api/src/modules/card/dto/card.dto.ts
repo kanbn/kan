@@ -48,8 +48,6 @@ const activityBase = {
   comment: commentRefSchema,
 };
 
-// ─── create ──────────────────────────────────────────────────
-
 export const CreateCardSchema = z.object({
   title: z.string().min(1).max(2000).describe("Card title."),
   description: z
@@ -81,8 +79,6 @@ export class CreateCardDto extends createZodDto(CreateCardSchema) {}
 export const PublicIdResponseSchema = z.object({ publicId: z.string() });
 
 export class PublicIdResponseDto extends createZodDto(PublicIdResponseSchema) {}
-
-// ─── update ──────────────────────────────────────────────────
 
 export const UpdateCardSchema = z.object({
   title: z.string().min(1).max(2000).optional().describe("New card title."),
@@ -125,8 +121,6 @@ export const SuccessResponseSchema = z.object({ success: z.boolean() });
 
 export class SuccessResponseDto extends createZodDto(SuccessResponseSchema) {}
 
-// ─── comments ────────────────────────────────────────────────
-
 export const CommentSchema = z.object({
   comment: z
     .string()
@@ -143,8 +137,6 @@ export const CommentResponseSchema = z.object({
 
 export class CommentResponseDto extends createZodDto(CommentResponseSchema) {}
 
-// ─── labels / members ────────────────────────────────────────
-
 export const ToggleLabelResponseSchema = z.object({ newLabel: z.boolean() });
 
 export class ToggleLabelResponseDto extends createZodDto(
@@ -156,8 +148,6 @@ export const ToggleMemberResponseSchema = z.object({ newMember: z.boolean() });
 export class ToggleMemberResponseDto extends createZodDto(
   ToggleMemberResponseSchema,
 ) {}
-
-// ─── duplicate ───────────────────────────────────────────────
 
 export const DuplicateCardSchema = z.object({
   listPublicId: z
@@ -182,8 +172,6 @@ export const DuplicateCardSchema = z.object({
 });
 
 export class DuplicateCardDto extends createZodDto(DuplicateCardSchema) {}
-
-// ─── byId ────────────────────────────────────────────────────
 
 export const CardDetailSchema = z.object({
   publicId: z.string(),
@@ -278,8 +266,6 @@ export const CardDetailSchema = z.object({
 });
 
 export class CardDetailDto extends createZodDto(CardDetailSchema) {}
-
-// ─── activities ──────────────────────────────────────────────
 
 export const ActivitiesQuerySchema = z.object({
   limit: z.coerce
