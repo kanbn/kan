@@ -54,8 +54,7 @@ const Agents = () => {
   ];
 
   const [{ scenario, stage }, setState] = useState({ scenario: 0, stage: 0 });
-  const current = scenarios[scenario]!;
-  const replyStage = current.calls.length + 2;
+  const current = scenarios[scenario];
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -76,6 +75,9 @@ const Agents = () => {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (!current) return null;
+  const replyStage = current.calls.length + 2;
 
   return (
     <div className="grid gap-10 px-4 pb-24 lg:grid-cols-[2fr_3fr] lg:items-center lg:gap-16">
