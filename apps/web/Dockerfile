@@ -60,12 +60,8 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store,sharing=locked \
     pnpm install --frozen-lockfile
 
 # ============================================
-# Stage 3b: Install dependencies for the api image
+# Stage 3b: Install dependencies for the api build
 # ============================================
-# --prod: apps/api has no dist build (see Stage 7) and runs its TS source
-# directly via @swc-node/register at container boot, so that loader,
-# @swc/core and @kan/tsconfig (for the tsconfig.json it reads at startup)
-# are real `dependencies`, not devDependencies — they survive --prod.
 FROM alpine AS deps-api
 WORKDIR /app
 
@@ -75,22 +71,19 @@ COPY --from=pruner-api /app/out/json/ .
 
 ENV CI=true
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store,sharing=locked \
-    pnpm install --frozen-lockfile --prod && \
-    # --prod doesn't exclude workspace-linked devDependencies, so
-    # @kan/eslint-config/@kan/prettier-config still install, pulling in
-    # eslint/typescript-eslint/babel/playwright-core as real deps — none
-    # imported by apps/api (plain `prettier` stays: @react-email/render, a
-    # real dep via @kan/email, needs it at runtime). better-auth's Next.js
-    # integration is an unused optional peer that still pulls in next, its
-    # per-platform @next/swc binaries, and sharp.
-    rm -rf node_modules/next node_modules/@next node_modules/sharp node_modules/@img \
-           node_modules/eslint node_modules/@eslint-community \
-           node_modules/typescript-eslint node_modules/@typescript-eslint \
-           node_modules/@kan/eslint-config node_modules/@kan/prettier-config \
-           node_modules/prettier-plugin-tailwindcss \
-           node_modules/@ianvs node_modules/@babel \
-           node_modules/playwright-core node_modules/es-abstract \
-           node_modules/turbo-linux-64 node_modules/turbo-linux-arm64
+    pnpm install --frozen-lockfile
+
+# ============================================
+# Stage 3c: Bundle the api into one file
+# ============================================
+# Plain JS, so it's built once on the build platform and runs on any arch.
+FROM alpine AS builder-api
+WORKDIR /app
+
+COPY --from=deps-api /app/ ./
+COPY --from=pruner-api /app/out/full/ .
+
+RUN cd apps/api && node build.mjs
 
 # ============================================
 # Stage 4: Build the web application
@@ -175,47 +168,28 @@ EXPOSE 3000
 CMD ["bootstrap.cjs"]
 
 # ============================================
-# Stage 7: Production api image
+# Stage 7: Production api image (distroless)
 # ============================================
-# ponytail: runs TS source through the same swc-node loader as `pnpm dev`/`pnpm
-# start` instead of a precompiled dist/ — apps/api's own tsc build is a
-# type-check-only no-op (see apps/api/package.json), since the workspace's
-# other packages aren't written for strict Node16 module resolution. A real
-# bundled build is a later optimization, not a correctness requirement.
-FROM alpine AS api
+FROM ${DISTROLESS_NODE_IMAGE} AS api
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV API_PORT=4000
 
-COPY --chown=node:node --from=deps-api /app/ ./
-COPY --chown=node:node --from=pruner-api /app/out/full/ .
+COPY --chown=1000:1000 --from=builder-api /app/apps/api/dist/ ./
 
-USER node
-WORKDIR /app/apps/api
+USER 1000:1000
 
 EXPOSE 4000
-CMD ["node", "--import", "@swc-node/register/esm-register", "src/main.ts"]
+CMD ["--enable-source-maps", "main.mjs"]
 
 # ============================================
 # Stage 8: All-in-one image (web and api in one container)
 # ============================================
 # Published as ghcr.io/kanbn/kan so single-container installs keep working:
-# bootstrap.cjs starts the API itself when KAN_API_URL is unset. Alpine, not
-# distroless, because deps-api installs musl builds of @swc/core.
-FROM node:${NODE_VERSION}-alpine AS aio
-WORKDIR /app
+# bootstrap.cjs starts the API itself when KAN_API_URL is unset.
+FROM web AS aio
 
-ENV NODE_ENV=production
-ENV PORT=3000
-ENV HOSTNAME=0.0.0.0
-ENV KAN_EMBEDDED_API=/api/apps/api
+ENV KAN_EMBEDDED_API=/app/api/main.mjs
 
-COPY --chown=node:node --from=web /app/ ./
-COPY --chown=node:node --from=deps-api /app/ /api/
-COPY --chown=node:node --from=pruner-api /app/out/full/ /api/
-
-USER node
-
-EXPOSE 3000
-CMD ["node", "bootstrap.cjs"]
+COPY --chown=1000:1000 --from=builder-api /app/apps/api/dist/ ./api/

@@ -47,6 +47,7 @@
     "@nestjs/testing": "^12.5.0",
     "@types/express": "^5.0.6",
     "dotenv-cli": "^11.1.0",
+    "esbuild": "0.28.2",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",

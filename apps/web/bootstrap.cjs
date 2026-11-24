@@ -68,15 +68,10 @@ if (embeddedApi && !process.env.KAN_API_URL) {
   const { spawn } = require("child_process");
   const port = process.env.API_PORT || "4000";
   const url = `http://127.0.0.1:${port}`;
-  const api = spawn(
-    process.execPath,
-    ["--import", "@swc-node/register/esm-register", "src/main.ts"],
-    {
-      cwd: embeddedApi,
-      env: { ...process.env, API_PORT: port },
-      stdio: "inherit",
-    },
-  );
+  const api = spawn(process.execPath, ["--enable-source-maps", embeddedApi], {
+    env: { ...process.env, API_PORT: port },
+    stdio: "inherit",
+  });
   // Exit with it so Docker restarts the container instead of serving a dead API.
   api.on("exit", (code) => process.exit(code || 1));
   process.env.KAN_API_URL = url;
