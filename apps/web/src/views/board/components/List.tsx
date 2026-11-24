@@ -5,6 +5,8 @@ import { t } from "@lingui/core/macro";
 import { useForm } from "react-hook-form";
 import {
   HiEllipsisHorizontal,
+  HiOutlineArrowsPointingIn,
+  HiOutlineArrowsPointingOut,
   HiOutlinePlusSmall,
   HiOutlineSquaresPlus,
   HiOutlineTrash,
@@ -23,6 +25,9 @@ import { isPlaceholderPublicId } from "~/utils/helpers";
 interface ListProps {
   children: ReactNode;
   list: List;
+  cardCount: number;
+  isCollapsed: boolean;
+  onToggleCollapsed: () => void;
   setSelectedPublicListId: (publicListId: PublicListId) => void;
 }
 
@@ -42,6 +47,9 @@ type PublicListId = string;
 export default function List({
   children,
   list,
+  cardCount,
+  isCollapsed,
+  onToggleCollapsed,
   setSelectedPublicListId,
 }: ListProps) {
   const { openModal } = useModal();
@@ -102,6 +110,39 @@ export default function List({
     transition,
   };
 
+  if (isCollapsed) {
+    return (
+      <div
+        data-board-draggable
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
+        className={`dark-text-dark-1000 mr-5 flex h-fit min-h-[12rem] w-12 min-w-12 snap-start flex-col items-center rounded-md border border-light-400 bg-light-300 py-2 text-neutral-900 dark:border-dark-300 dark:bg-dark-100 md:snap-align-none ${
+          canDrag ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""
+        }`}
+      >
+        <button
+          type="button"
+          onClick={onToggleCollapsed}
+          aria-label={t`Expand list`}
+          className="flex h-7 w-7 items-center justify-center rounded-[5px] text-dark-900 hover:bg-light-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-light-700 dark:hover:bg-dark-200"
+        >
+          <HiOutlineArrowsPointingOut className="h-4 w-4" aria-hidden="true" />
+        </button>
+        <div className="mt-2 flex flex-1 items-start gap-2 [writing-mode:vertical-rl]">
+          <span className="text-sm font-medium">{list.name}</span>
+          <span
+            className="text-xs text-light-900 dark:text-dark-800"
+            aria-label={t`${cardCount} cards`}
+          >
+            {cardCount}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       data-board-draggable
@@ -144,6 +185,21 @@ export default function List({
               />
             </button>
           </Tooltip>
+          {!isOptimistic && (
+            <Tooltip content={t`Collapse list`}>
+              <button
+                type="button"
+                onClick={onToggleCollapsed}
+                aria-label={t`Collapse list`}
+                className="inline-flex h-7 w-7 items-center justify-center rounded-[5px] text-dark-900 hover:bg-light-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-light-700 dark:hover:bg-dark-200"
+              >
+                <HiOutlineArrowsPointingIn
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                />
+              </button>
+            </Tooltip>
+          )}
           {(() => {
             const dropdownItems = [
               ...(canCreateCard && !isOptimistic
