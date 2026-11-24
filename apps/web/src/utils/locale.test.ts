@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { locales as appLocales } from "../locales";
 import { matchBrowserLocale } from "./locale";
 
 const locales = [
@@ -28,6 +29,11 @@ describe("matchBrowserLocale", () => {
   it("matches the base language of a regional browser language", () => {
     expect(matchBrowserLocale(["fr-CA"], locales)).toBe("fr");
     expect(matchBrowserLocale(["en-US"], locales)).toBe("en");
+  });
+
+  it("matches Turkish browser languages to the tr locale", () => {
+    expect(matchBrowserLocale(["tr-TR"], appLocales)).toBe("tr");
+    expect(matchBrowserLocale(["tr"], appLocales)).toBe("tr");
   });
 
   it("respects the browser language order", () => {
