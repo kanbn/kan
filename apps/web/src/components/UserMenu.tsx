@@ -65,11 +65,11 @@ export default function UserMenu({
     <Menu as="div" className="relative inline-block w-full text-left">
       <div>
         {isLoading ? (
-          <div className={twMerge(!isCollapsed && "flex")}>
-            <div className="h-[30px] w-[30px] animate-pulse rounded-full bg-light-200 dark:bg-dark-200" />
+          <div className="flex items-center p-1.5">
+            <div className="h-6 w-6 shrink-0 animate-pulse rounded-full bg-light-300 dark:bg-dark-300" />
             <div
               className={twMerge(
-                "mx-2 h-[30px] w-[175px] animate-pulse rounded-md bg-light-200 dark:bg-dark-200",
+                "mx-2 h-3 w-24 animate-pulse rounded bg-light-300 dark:bg-dark-300",
                 isCollapsed && "md:hidden",
               )}
             />

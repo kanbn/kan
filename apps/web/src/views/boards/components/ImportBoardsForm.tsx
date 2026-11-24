@@ -116,7 +116,7 @@ const SelectSource = ({
               {({ open }) => (
                 <>
                   <div className="relative">
-                    <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-dark-300 bg-white/5 px-4 py-1.5 text-neutral-900 shadow-xs ring-1 ring-light-600 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700">
+                    <Listbox.Button className="focus-ring-light-700 block w-full rounded-md border-0 bg-transparent px-4 py-1.5 text-neutral-900 shadow-xs ring-1 ring-light-600 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700">
                       <span className="flex items-center">
                         {integrationProviders[field.value]?.icon}
                         <span className="ml-2 block truncate text-sm">
@@ -198,9 +198,10 @@ const SelectSource = ({
         />
       </div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-400 px-5 py-4 dark:border-dark-400">
         <div>
           <Button
+            size="sm"
             type="submit"
             iconRight={
               !hasIntegrations ? <HiMiniArrowTopRightOnSquare /> : undefined
@@ -326,7 +327,7 @@ const ImportGithub: React.FC = () => {
     <form onSubmit={handleSubmitProjects(onSubmitProjects)}>
       <div className="h-[105px] overflow-auto px-5">{renderContent()}</div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-400 px-5 py-4 dark:border-dark-400">
         <Toggle
           label={t`Select all`}
           isChecked={!!isSelectAllEnabled}
@@ -341,6 +342,7 @@ const ImportGithub: React.FC = () => {
         />
         <div className="space-x-2">
           <Button
+            size="sm"
             type="submit"
             isLoading={importProjects.isPending}
             disabled={
@@ -518,7 +520,7 @@ const ImportTrello: React.FC = () => {
         {t`Archived lists and cards aren't imported.`}
       </p>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-400 px-5 py-4 dark:border-dark-400">
         <Toggle
           label={t`Select all`}
           isChecked={!!isSelectAllEnabled}
@@ -533,6 +535,7 @@ const ImportTrello: React.FC = () => {
         />
         <div className="space-x-2">
           <Button
+            size="sm"
             type="submit"
             isLoading={importBoards.isPending}
             disabled={
@@ -568,7 +571,7 @@ export function ImportBoardsForm() {
     <div>
       <div className="flex w-full items-center justify-between px-5 pt-5 pb-4">
         <div className="flex items-center">
-          <h2 className="text-sm font-medium text-neutral-900 dark:text-dark-1000">
+          <h2 className="text-sm font-semibold text-neutral-900 dark:text-dark-1000">
             {t`New import`}
           </h2>
           <Link
@@ -585,7 +588,7 @@ export function ImportBoardsForm() {
           className="rounded-sm p-1 hover:bg-light-200 dark:hover:bg-dark-300"
           onClick={() => closeModal()}
         >
-          <HiXMark size={18} className="text-dark-900" />
+          <HiXMark size={16} className="text-dark-900" />
         </button>
       </div>
 

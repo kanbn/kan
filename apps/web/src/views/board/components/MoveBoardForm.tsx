@@ -55,12 +55,12 @@ export function MoveBoardForm({ boardPublicId }: { boardPublicId: string }) {
 
   return (
     <div className="p-5">
-      <div className="flex w-full flex-col justify-between pb-4">
-        <h2 className="text-md pb-4 font-medium text-neutral-900 dark:text-dark-1000">
+      <div className="flex w-full flex-col justify-between">
+        <h2 className="pb-2 text-sm font-semibold text-neutral-900 dark:text-dark-1000">
           {t`Move board to another workspace`}
         </h2>
         {otherWorkspaces.length === 0 ? (
-          <p className="text-sm font-medium text-light-900 dark:text-dark-900">
+          <p className="text-sm text-light-900 dark:text-dark-900">
             {t`You don't have any other workspaces to move this board to.`}
           </p>
         ) : (
@@ -75,7 +75,7 @@ export function MoveBoardForm({ boardPublicId }: { boardPublicId: string }) {
               id="target-workspace"
               value={targetWorkspacePublicId}
               onChange={(e) => setTargetWorkspacePublicId(e.target.value)}
-              className="block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-xs ring-1 ring-light-600 ring-inset placeholder:text-dark-800 focus:ring-2 focus:ring-light-700 focus:ring-inset sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700"
+              className="block w-full rounded-md border-0 bg-transparent py-1.5 text-sm shadow-xs ring-1 ring-light-600 ring-inset placeholder:text-dark-800 focus:ring-2 focus:ring-light-700 focus:ring-inset sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700"
             >
               <option value="">{t`Select a workspace`}</option>
               {otherWorkspaces.map((ws) => (
@@ -90,12 +90,13 @@ export function MoveBoardForm({ boardPublicId }: { boardPublicId: string }) {
           </>
         )}
       </div>
-      <div className="mt-5 flex justify-end space-x-2 sm:mt-6">
-        <Button onClick={() => closeModal()} variant="secondary">
+      <div className="mt-5 flex justify-end space-x-2">
+        <Button size="sm" onClick={() => closeModal()} variant="secondary">
           {t`Cancel`}
         </Button>
         {otherWorkspaces.length > 0 && (
           <Button
+            size="sm"
             onClick={handleMoveBoard}
             isLoading={moveBoard.isPending}
             disabled={!targetWorkspacePublicId}

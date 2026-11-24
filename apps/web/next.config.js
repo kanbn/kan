@@ -12,6 +12,7 @@ writeFileSync("public/__ENV.js", `self.__ENV = ${JSON.stringify(publicEnv)};`);
 
 /** @type {import("next").NextConfig} */
 const config = {
+  devIndicators: false,
   output:
     process.env.NEXT_PUBLIC_USE_STANDALONE_OUTPUT === "true"
       ? "standalone"

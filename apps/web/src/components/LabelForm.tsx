@@ -119,18 +119,18 @@ export function LabelForm({
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="px-5 pt-5">
         <div className="flex w-full items-center justify-between pb-4 text-neutral-900 dark:text-dark-1000">
-          <h2 className="text-sm font-medium">
+          <h2 className="text-sm font-semibold text-neutral-900 dark:text-dark-1000">
             {isEdit ? t`Edit label` : t`New label`}
           </h2>
           <button
             type="button"
-            className="rounded-sm p-1 hover:bg-light-300 focus:outline-hidden dark:hover:bg-dark-300"
+            className="rounded-md p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();
             }}
           >
-            <HiXMark size={18} className="text-light-900 dark:text-dark-900" />
+            <HiXMark size={16} className="text-light-900 dark:text-dark-900" />
           </button>
         </div>
 
@@ -211,7 +211,7 @@ export function LabelForm({
         />
       </div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-400 px-5 py-4 dark:border-dark-400">
         {!isEdit && (
           <Toggle
             label={t`Create another`}
@@ -225,6 +225,7 @@ export function LabelForm({
         <div className="space-x-2">
           {isEdit && (
             <Button
+              size="sm"
               type="button"
               variant="secondary"
               onClick={() => openModal("DELETE_LABEL", entityId)}
@@ -233,6 +234,7 @@ export function LabelForm({
             </Button>
           )}
           <Button
+            size="sm"
             type="submit"
             isLoading={updateLabel.isPending || createLabel.isPending}
             disabled={!watch("name")}

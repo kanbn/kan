@@ -133,8 +133,8 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
 
   return (
     <div className="p-5">
-      <div className="flex w-full flex-col justify-between pb-4">
-        <h2 className="pb-4 text-base font-medium dark:text-white">
+      <div className="flex w-full flex-col justify-between">
+        <h2 className="pb-2 text-sm font-semibold text-neutral-900 dark:text-dark-1000">
           {hasPassword ? t`Change Password` : t`Set Password`}
         </h2>
         <p className="mb-4 text-sm text-light-900">
@@ -193,21 +193,21 @@ export function ChangePasswordFormConfirmation({ hasPassword }: Props) {
 
         <div className="mt-6 flex items-center gap-4">
           <Button
+            size="sm"
             variant="secondary"
             onClick={handleCancel}
             type="button"
             fullWidth
-            size="lg"
           >
             {t`Cancel`}
           </Button>
           <Button
+            size="sm"
             variant="primary"
             type="submit"
             disabled={!isValid || changePasswordMutation.isPending}
             isLoading={changePasswordMutation.isPending}
             fullWidth
-            size="lg"
           >
             {hasPassword ? t`Change Password` : t`Set Password`}
           </Button>
