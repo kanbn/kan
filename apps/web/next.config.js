@@ -77,6 +77,11 @@ const config = {
         source: "/settings",
         destination: "/settings/account",
       },
+      // The MCP server's address before it moved under /api/v1.
+      {
+        source: "/api/mcp",
+        destination: "/api/v1/mcp",
+      },
     ];
   },
 };
