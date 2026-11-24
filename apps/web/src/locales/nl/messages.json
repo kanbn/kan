@@ -4113,6 +4113,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 89]],
     "translation": "Junior"
   },
+  "R4bmcI": {
+    "message": "Kan can't reach its API service.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/ApiUnavailableBanner.tsx", 31]],
+    "translation": "Kan kan zijn API-service niet bereiken."
+  },
   "JeVSbu": {
     "message": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again.",
     "placeholders": {
@@ -6094,6 +6101,13 @@
     "comments": [],
     "origin": [["src/views/home/components/Footer.tsx", 67]],
     "translation": "Zelf hosten"
+  },
+  "2gkp_u": {
+    "message": "Self-hosting help",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/ApiUnavailableBanner.tsx", 39]],
+    "translation": "Hulp bij zelf hosten"
   },
   "f2zPy_": {
     "message": "Self-hosting? Set <0>{CREDENTIALS_ENV_HINT}</0> to enable email and password sign in, or configure an OAuth provider. See the <1>self-hosting guide</1>.",

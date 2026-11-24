@@ -6811,6 +6811,18 @@
     ],
     "translation": "Junior"
   },
+  "R4bmcI": {
+    "message": "Kan can't reach its API service.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/ApiUnavailableBanner.tsx",
+        31
+      ]
+    ],
+    "translation": ""
+  },
   "JeVSbu": {
     "message": "Kan couldn't open {board} in Trello. Try reconnecting Trello and importing again.",
     "placeholders": {
@@ -10257,6 +10269,18 @@
       [
         "src/views/home/components/Footer.tsx",
         67
+      ]
+    ],
+    "translation": ""
+  },
+  "2gkp_u": {
+    "message": "Self-hosting help",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/ApiUnavailableBanner.tsx",
+        39
       ]
     ],
     "translation": ""
