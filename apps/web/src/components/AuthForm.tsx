@@ -49,6 +49,7 @@ interface FormValues {
 
 interface AuthProps {
   setIsMagicLinkSent: (value: boolean, recipient: string) => void;
+  socialProviders: string[] | null;
   isSignUp?: boolean;
   callbackURL?: string;
 }
@@ -159,14 +160,12 @@ const availableSocialProviders = {
 
 export function Auth({
   setIsMagicLinkSent,
+  socialProviders: initialSocialProviders,
   isSignUp,
   callbackURL: callbackURLProp,
 }: AuthProps) {
-  const [isCloudEnv, setIsCloudEnv] = useState(false);
   const [isLoginWithProviderPending, setIsLoginWithProviderPending] =
     useState<null | AuthProvider>(null);
-  const [isCredentialsEnabled, setIsCredentialsEnabled] = useState(false);
-  const [isEmailSendingEnabled, setIsEmailSendingEnabled] = useState(false);
   const [isLoginWithEmailPending, setIsLoginWithEmailPending] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
   const { showPopup } = usePopup();
@@ -176,17 +175,11 @@ export function Auth({
   const redirect = useSearchParams().get("next");
   const callbackURL = callbackURLProp ?? redirect ?? "/boards";
 
-  // Safely get environment variables on client side to avoid hydration mismatch
-  useEffect(() => {
-    const credentialsAllowed =
-      env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
-    const emailSendingEnabled =
-      env("NEXT_PUBLIC_DISABLE_EMAIL")?.toLowerCase() !== "true";
-    const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
-    setIsCloudEnv(isCloudEnv);
-    setIsEmailSendingEnabled(emailSendingEnabled);
-    setIsCredentialsEnabled(credentialsAllowed);
-  }, []);
+  const isCredentialsEnabled =
+    env("NEXT_PUBLIC_ALLOW_CREDENTIALS")?.toLowerCase() === "true";
+  const isEmailSendingEnabled =
+    env("NEXT_PUBLIC_DISABLE_EMAIL")?.toLowerCase() !== "true";
+  const isCloudEnv = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
 
   const {
     register,
@@ -200,6 +193,8 @@ export function Auth({
   const { data: socialProviders } = useQuery({
     queryKey: ["social_providers"],
     queryFn: () => authClient.getSocialProviders(),
+    initialData: initialSocialProviders ?? undefined,
+    staleTime: Infinity,
   });
 
   const handleLoginWithEmail = async (
@@ -326,11 +321,11 @@ export function Auth({
   }, [isSignUp, password, loginError, errors.password, isCredentialsEnabled]);
 
   return (
-    <div className="space-y-6">
-      {socialProviders?.length !== 0 && (
+    <div className="space-y-5">
+      {!!socialProviders?.length && (
         <div className="space-y-2">
           {Object.entries(availableSocialProviders).map(([key, provider]) => {
-            if (!socialProviders?.includes(key)) {
+            if (!socialProviders.includes(key)) {
               return null;
             }
             return (
@@ -340,7 +335,6 @@ export function Auth({
                 isLoading={isLoginWithProviderPending === key}
                 iconLeft={<provider.icon />}
                 fullWidth
-                size="lg"
               >
                 <Trans>
                   Continue with{" "}
@@ -384,13 +378,13 @@ export function Auth({
         )}
       {(isCredentialsEnabled || isMagicLinkAvailable) && (
         <form onSubmit={handleSubmit(onSubmit)}>
-          {socialProviders?.length !== 0 && (
-            <div className="mb-6 flex w-full items-center gap-4">
-              <div className="h-px w-full bg-light-600 dark:bg-dark-600" />
-              <span className="text-sm text-light-900 dark:text-dark-900">
+          {!!socialProviders?.length && (
+            <div className="mb-5 flex w-full items-center gap-3">
+              <div className="h-px w-full bg-light-400 dark:bg-dark-300" />
+              <span className="text-xs text-light-900 dark:text-dark-900">
                 {t`or`}
               </span>
-              <div className="h-px w-full bg-light-600 dark:bg-dark-600" />
+              <div className="h-px w-full bg-light-400 dark:bg-dark-300" />
             </div>
           )}
           <div className="space-y-2">
@@ -401,7 +395,7 @@ export function Auth({
                   placeholder={t`Enter your name`}
                 />
                 {errors.name && (
-                  <p className="mt-2 text-xs text-red-400">
+                  <p className="mt-2 text-xs text-red-600 dark:text-red-400">
                     {t`Please enter a valid name`}
                   </p>
                 )}
@@ -413,7 +407,7 @@ export function Auth({
                 placeholder={t`Enter your email address`}
               />
               {errors.email && (
-                <p className="mt-2 text-xs text-red-400">
+                <p className="mt-2 text-xs text-red-600 dark:text-red-400">
                   {t`Please enter a valid email address`}
                 </p>
               )}
@@ -427,16 +421,16 @@ export function Auth({
                   placeholder={t`Enter your password`}
                 />
                 {errors.password && (
-                  <p className="mt-2 text-xs text-red-400">
+                  <p className="mt-2 text-xs text-red-600 dark:text-red-400">
                     {errors.password.message ??
                       t`Please enter a valid password`}
                   </p>
                 )}
                 {!isSignUp && isEmailSendingEnabled && (
-                  <div className="mt-1 flex justify-end">
+                  <div className="mt-2 flex justify-end">
                     <Link
                       href="/forgot-password"
-                      className="text-xs text-light-900 underline dark:text-dark-900"
+                      className="text-xs text-light-900 hover:text-light-1000 dark:text-dark-900 dark:hover:text-dark-1000"
                     >
                       {t`Forgot password?`}
                     </Link>
@@ -445,14 +439,15 @@ export function Auth({
               </div>
             )}
             {loginError && (
-              <p className="mt-2 text-xs text-red-400">{loginError}</p>
+              <p className="mt-2 text-xs text-red-600 dark:text-red-400">
+                {loginError}
+              </p>
             )}
           </div>
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-4 flex items-center gap-4">
             <Button
               isLoading={isLoginWithEmailPending}
               fullWidth
-              size="lg"
               variant="secondary"
             >
               {isSignUp ? t`Sign up with ` : t`Continue with `}
@@ -462,7 +457,9 @@ export function Auth({
         </form>
       )}
       {!(isCredentialsEnabled || isMagicLinkAvailable) && loginError && (
-        <p className="mt-2 text-xs text-red-400">{loginError}</p>
+        <p className="mt-2 text-xs text-red-600 dark:text-red-400">
+          {loginError}
+        </p>
       )}
     </div>
   );

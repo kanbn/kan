@@ -1,3 +1,4 @@
+import type { IncomingMessage } from "http";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { createLogger } from "@kan/logger";
@@ -32,6 +33,12 @@ export const getApiBaseUrl = () =>
   env("NEXT_PUBLIC_API_BASE_URL") ||
   "http://localhost:4000";
 
+// Otherwise the API rate-limits every user under this server's IP.
+export const getClientIpHeader = (req: IncomingMessage) => ({
+  [serverEnv.RATE_LIMIT_IP_HEADER?.toLowerCase() || "x-forwarded-for"]:
+    getClientIp(req.headers, req.socket.remoteAddress),
+});
+
 const unavailable = (res: NextApiResponse, status: number, message: string) =>
   res.status(status).json({ code: API_UNAVAILABLE, message });
 
@@ -54,11 +61,9 @@ export async function proxyToApi(
     const value = req.headers[name];
     if (typeof value === "string") headers.set(name, value);
   }
-  // Otherwise the API rate-limits every user under this server's IP.
-  headers.set(
-    serverEnv.RATE_LIMIT_IP_HEADER?.toLowerCase() || "x-forwarded-for",
-    getClientIp(req.headers, req.socket.remoteAddress),
-  );
+  for (const [name, value] of Object.entries(getClientIpHeader(req))) {
+    headers.set(name, value);
+  }
 
   const hasBody = req.method !== "GET" && req.method !== "HEAD";
   let upstream: Response;
