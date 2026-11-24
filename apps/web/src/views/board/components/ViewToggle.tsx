@@ -11,7 +11,7 @@ interface ViewToggleProps {
 
 const ViewToggle = ({ view, onChange }: ViewToggleProps) => {
   const baseButtonClasses =
-    "flex items-center gap-1.5 rounded-[5px] px-2.5 py-1.5 text-sm font-semibold transition-colors sm:px-3";
+    "flex items-center gap-1.5 rounded-[5px] px-2.5 py-1.5 text-xs font-semibold transition-colors sm:px-3";
   const activeClasses =
     "bg-light-200 text-light-1000 dark:bg-dark-300 dark:text-dark-1000";
   const inactiveClasses =

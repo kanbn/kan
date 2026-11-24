@@ -87,9 +87,9 @@ const Card = ({
   const hasDueDate = !!dueDate;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-md border border-light-200 bg-light-50 px-3 py-2 text-sm text-neutral-900 dark:border-dark-200 dark:bg-dark-200 dark:text-dark-1000 dark:hover:bg-dark-300">
+    <div className="flex flex-col overflow-hidden rounded-lg bg-light-50 px-3 py-2 text-sm text-neutral-900 shadow-[0_1px_2px_rgba(0,0,0,0.06)] ring-1 ring-black/5 transition-colors hover:bg-white dark:bg-dark-200 dark:text-dark-1000 dark:shadow-none dark:ring-white/5 dark:hover:bg-dark-300">
       {ticketNumber && (
-        <span className="mb-1 text-xs text-light-700 dark:text-dark-800">
+        <span className="mb-1 text-xs text-light-800 dark:text-dark-800">
           {ticketNumber}
         </span>
       )}
@@ -113,7 +113,7 @@ const Card = ({
           <div className="mt-2 flex items-center justify-between gap-1">
             <div className="flex items-center gap-2">
               {cardSummary.hasDescription && (
-                <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
+                <div className="flex items-center gap-1 text-light-800 dark:text-dark-800">
                   <HiBars3BottomLeft className="h-4 w-4" />
                 </div>
               )}
@@ -135,12 +135,12 @@ const Card = ({
                 </div>
               )}
               {cardSummary.hasComments && (
-                <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
+                <div className="flex items-center gap-1 text-light-800 dark:text-dark-800">
                   <HiChatBubbleLeft className="h-4 w-4" />
                 </div>
               )}
               {cardSummary.attachmentCount > 0 && (
-                <div className="flex items-center gap-1 text-light-700 dark:text-dark-800">
+                <div className="flex items-center gap-1 text-light-800 dark:text-dark-800">
                   <HiOutlinePaperClip className="h-4 w-4" />
                 </div>
               )}

@@ -1,5 +1,6 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { twMerge } from "tailwind-merge";
 
 const menuGapClass = {
   sm: "mt-1",
@@ -12,6 +13,7 @@ export default function Dropdown({
   disabled,
   ariaLabel,
   menuGap = "sm",
+  buttonClassName,
 }: {
   items: {
     label: string;
@@ -23,6 +25,7 @@ export default function Dropdown({
   disabled?: boolean;
   ariaLabel?: string;
   menuGap?: "sm" | "md";
+  buttonClassName?: string;
 }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -30,7 +33,10 @@ export default function Dropdown({
         <Menu.Button
           disabled={disabled}
           aria-label={ariaLabel}
-          className="flex h-7 w-7 items-center justify-center rounded-[5px] hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-200"
+          className={twMerge(
+            "flex h-7 w-7 items-center justify-center rounded-[5px] hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-200",
+            buttonClassName,
+          )}
         >
           {children}
         </Menu.Button>

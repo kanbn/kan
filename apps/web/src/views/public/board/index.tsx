@@ -22,7 +22,6 @@ import Card from "~/views/board/components/Card";
 import Filters from "~/views/board/components/Filters";
 import { CardModal } from "./CardModal";
 
-const IS_CLOUD = env("NEXT_PUBLIC_KAN_ENV") === "cloud";
 const HIDE_POWERED_BY =
   env("NEXT_PUBLIC_WHITE_LABEL_HIDE_POWERED_BY") === "true";
 
@@ -129,17 +128,17 @@ export default function PublicBoardView() {
           <PatternedBackground />
           <div className="z-10 flex w-full justify-between p-8">
             {isLoading || !router.isReady ? (
-              <div className="flex space-x-2">
-                <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
+              <div className="flex h-[2.3rem] items-center">
+                <div className="h-4 w-32 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
               </div>
             ) : (
-              <h1 className="leading-[2.3rem] font-bold tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden sm:text-[1.2rem] dark:text-dark-1000">
+              <h1 className="leading-[2.3rem] font-bold tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden sm:text-base dark:text-dark-1000">
                 {data?.name}
               </h1>
             )}
             {data && (
               <div className="z-10 flex items-center space-x-2">
-                <div className="inline-flex cursor-default items-center justify-center rounded-md border border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold whitespace-nowrap text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
+                <div className="inline-flex cursor-default items-center justify-center rounded-md border border-light-300 bg-light-50 px-3 py-2 text-xs font-semibold whitespace-nowrap text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
                   <span className="mr-2">
                     <HiOutlineLockClosed />
                   </span>
@@ -185,14 +184,17 @@ export default function PublicBoardView() {
                 {data?.lists.map((list) => (
                   <div
                     key={list.publicId}
-                    className="dark-text-dark-1000 mr-5 h-fit max-w-[18rem] min-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pr-1 pl-2 text-neutral-900 md:snap-align-none dark:border-dark-300 dark:bg-dark-100"
+                    className="mr-5 h-fit max-w-[18rem] min-w-[18rem] snap-start rounded-lg bg-light-200 py-2 pr-1 pl-2 text-neutral-900 md:snap-align-none dark:bg-dark-100 dark:text-dark-1000"
                   >
                     <div className="flex justify-between">
-                      <span className="mb-4 block px-4 pt-1 text-sm font-medium text-neutral-900 dark:text-dark-1000">
+                      <span className="mb-1 block px-3 py-1 text-sm font-medium text-neutral-900 dark:text-dark-1000">
                         {list.name}
                       </span>
+                      <span className="px-2 py-1 text-[11px] text-light-800 tabular-nums dark:text-dark-800">
+                        {list.cards.length}
+                      </span>
                     </div>
-                    <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 scrollbar h-full max-h-[calc(100dvh-265px)] min-h-8 overflow-y-auto pr-1 pb-[calc(0.75rem+env(safe-area-inset-bottom))] dark:scrollbar-thumb-dark-600 dark:scrollbar-track-dark-100">
+                    <div className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 -mt-0.5 -ml-1 scrollbar h-full max-h-[calc(100dvh-265px)] min-h-8 overflow-y-auto pt-0.5 pr-1 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pl-1 dark:scrollbar-thumb-dark-600 dark:scrollbar-track-dark-100">
                       {list.cards.map((card) => {
                         return (
                           <Link
@@ -245,24 +247,14 @@ export default function PublicBoardView() {
             </button>
           </div>
 
-          {IS_CLOUD && (
-            <Link
-              className="text-lg font-bold tracking-tight text-neutral-900 dark:text-dark-1000"
-              href="/"
-            >
-              kan.bn
-            </Link>
-          )}
-
-          {!IS_CLOUD && !HIDE_POWERED_BY && (
+          {!HIDE_POWERED_BY && (
             <a
               href="https://kan.bn"
               target="_blank"
               rel="noreferrer noopener"
-              className="absolute right-4 inline-flex items-center gap-[0.175rem] rounded-full border border-light-300 bg-light-50 px-3 py-1 text-[11px] font-medium text-light-950 shadow-xs transition-colors hover:bg-light-100 dark:border-dark-300 dark:bg-dark-50 dark:text-dark-900 dark:hover:bg-dark-100"
+              className="mr-1.5 ml-auto text-xs text-light-900 transition-colors hover:text-light-1000 dark:text-dark-900 dark:hover:text-dark-1000"
             >
-              <span>{`Powered by`}</span>
-              <span className="font-semibold">kan.bn</span>
+              Powered by <span className="font-semibold">Kan</span>
             </a>
           )}
         </div>

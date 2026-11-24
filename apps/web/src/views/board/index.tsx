@@ -880,8 +880,8 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
         <PatternedBackground />
         <div className="z-10 flex w-full flex-col justify-between p-6 md:flex-row md:p-8">
           {isLoading && !boardData && (
-            <div className="flex space-x-2">
-              <div className="h-[2.3rem] w-[150px] animate-pulse rounded-[5px] bg-light-200 dark:bg-dark-100" />
+            <div className="flex h-[2.3rem] items-center">
+              <div className="h-4 w-32 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
             </div>
           )}
           {boardData && (
@@ -896,18 +896,18 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                 {...register("name")}
                 onBlur={canEditBoard ? handleSubmit(onSubmit) : undefined}
                 readOnly={!canEditBoard}
-                className="block border-0 bg-transparent p-0 py-0 leading-[2.3rem] font-bold tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden disabled:cursor-not-allowed sm:text-[1.2rem] dark:text-dark-1000"
+                className="block border-0 bg-transparent p-0 py-0 leading-[2.3rem] font-bold tracking-tight text-neutral-900 focus:ring-0 focus-visible:outline-hidden disabled:cursor-not-allowed sm:text-base dark:text-dark-1000"
               />
             </form>
           )}
           {!boardData && !isLoading && (
-            <p className="order-2 block p-0 py-0 leading-[2.3rem] font-bold tracking-tight text-neutral-900 sm:text-[1.2rem] md:order-1 dark:text-dark-1000">
+            <p className="order-2 block p-0 py-0 leading-[2.3rem] font-bold tracking-tight text-neutral-900 sm:text-base md:order-1 dark:text-dark-1000">
               {t`${isTemplate ? "Template" : "Board"} not found`}
             </p>
           )}
           <div className="order-1 mb-4 flex items-center justify-end space-x-1.5 sm:space-x-2 md:order-2 md:mb-0">
             {isTemplate && (
-              <div className="inline-flex cursor-default items-center justify-center rounded-md border border-light-300 bg-light-50 px-3 py-2 text-sm font-semibold whitespace-nowrap text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
+              <div className="inline-flex cursor-default items-center justify-center rounded-md border border-light-300 bg-light-50 px-3 py-2 text-xs font-semibold whitespace-nowrap text-light-950 shadow-xs dark:border-dark-300 dark:bg-dark-50 dark:text-dark-950">
                 <span className="mr-2">
                   <HiOutlineRectangleStack />
                 </span>
@@ -950,13 +950,14 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
               }
             >
               <Button
+                size="sm"
                 onClick={() => {
                   if (boardId && canCreateList) openNewListForm(boardId);
                 }}
                 disabled={!boardData || !canCreateList}
               >
                 <span className="flex items-center gap-2">
-                  <HiOutlinePlusSmall className="h-5 w-5" aria-hidden="true" />
+                  <HiOutlinePlusSmall className="h-4 w-4" aria-hidden="true" />
                   <span className="hidden sm:inline">{t`New list`}</span>
                 </span>
               </Button>
@@ -1056,6 +1057,9 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                           <List
                             key={`list.${list.publicId}`}
                             list={list}
+                            cardCount={
+                              (cardsByList[list.publicId] ?? list.cards).length
+                            }
                             setSelectedPublicListId={(publicListId) => {
                               setNewCardInitialDueDate(null);
                               setSelectedPublicListId(publicListId);

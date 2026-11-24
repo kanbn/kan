@@ -100,8 +100,8 @@ export default function MemberSelector({
   return (
     <>
       {isLoading ? (
-        <div className="flex w-full">
-          <div className="h-full w-[125px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
+        <div className="flex w-full items-center pl-2.5">
+          <div className="h-3 w-20 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
         </div>
       ) : (
         <CheckboxDropdown

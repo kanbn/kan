@@ -123,7 +123,9 @@ export function DueDateSelector({
         disabled={isLoading || disabled}
         className={`flex h-full w-full items-center rounded-[5px] border border-light-50 py-1 pl-2 text-left text-xs text-neutral-900 dark:border-dark-50 dark:text-dark-1000 ${disabled ? "cursor-not-allowed opacity-60" : "hover:border-light-300 hover:bg-light-200 dark:hover:border-dark-200 dark:hover:bg-dark-100"}`}
       >
-        {dueDate ? (
+        {isLoading ? (
+          <div className="h-3 w-20 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+        ) : dueDate ? (
           <span>{format(dueDate, "MMM d, yyyy")}</span>
         ) : (
           <>

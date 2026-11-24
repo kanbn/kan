@@ -98,9 +98,14 @@ export function CardModal({
             <div className="flex w-full items-start justify-between gap-4">
               <div className="flex-1">
                 {isLoading ? (
-                  <div className="flex space-x-2">
-                    <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
-                  </div>
+                  <>
+                    <div className="mb-1 flex h-4 items-center">
+                      <div className="h-2.5 w-10 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+                    </div>
+                    <div className="flex h-[2.3rem] items-center">
+                      <div className="h-4 w-56 max-w-full animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+                    </div>
+                  </>
                 ) : (
                   <>
                     {data?.cardNumber != null &&
@@ -116,18 +121,19 @@ export function CardModal({
                   </>
                 )}
               </div>
-              <div className="flex shrink-0 items-center gap-1">
+              <div className="-mr-1 flex shrink-0 items-center gap-0.5">
                 <button
                   type="button"
                   onClick={handleCopyCardLink}
-                  className="rounded-sm p-1.5 transition-all hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-100"
+                  className="flex h-6 w-6 items-center justify-center rounded-md hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300"
                   aria-label="Copy card link"
                 >
-                  <HiLink className="h-4 w-4 text-light-900 dark:text-dark-900" />
+                  <HiLink className="h-3.5 w-3.5 text-light-900 dark:text-dark-900" />
                 </button>
                 <button
                   type="button"
-                  className="rounded-sm p-1.5 transition-all hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-100"
+                  aria-label={t`Close`}
+                  className="flex h-6 w-6 items-center justify-center rounded-md hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300"
                   onClick={(e) => {
                     e.preventDefault();
                     closeModal();
@@ -149,7 +155,7 @@ export function CardModal({
                   }}
                 >
                   <HiXMark
-                    size={18}
+                    size={16}
                     className="text-light-900 dark:text-dark-900"
                   />
                 </button>
@@ -173,6 +179,16 @@ export function CardModal({
               ref={scrollRef}
               className="h-full max-h-[425px] overflow-y-auto"
             >
+              {isLoading && (
+                <div className="mt-2 mb-10">
+                  <div className="flex h-6 items-center">
+                    <div className="h-3 w-4/5 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+                  </div>
+                  <div className="flex h-6 items-center">
+                    <div className="h-3 w-1/2 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+                  </div>
+                </div>
+              )}
               {data?.description && (
                 <div className="mb-10 flex w-full max-w-2xl justify-between">
                   <div className="mt-2">

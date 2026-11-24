@@ -342,8 +342,8 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
         {/* Full-width top strip with board link and dropdown */}
         <div className="flex w-full items-center justify-between border-b border-light-300 bg-light-50 px-8 py-2 dark:border-dark-300 dark:bg-dark-50">
           {!card && isLoading && (
-            <div className="flex space-x-2">
-              <div className="h-6 w-[150px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
+            <div className="flex h-7 items-center">
+              <div className="h-3 w-40 animate-pulse rounded bg-light-300 dark:bg-dark-300" />
             </div>
           )}
           {card && (
@@ -408,9 +408,19 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             <div className="p-6 md:p-8">
               <div className="mb-8 md:mt-4">
                 {!card && isLoading && (
-                  <div className="flex space-x-2">
-                    <div className="h-[2.3rem] w-[300px] animate-pulse rounded-[5px] bg-light-300 dark:bg-dark-300" />
-                  </div>
+                  <>
+                    <div className="flex h-[1.95rem] items-center">
+                      <div className="h-4 w-56 max-w-full animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+                    </div>
+                    <div className="mt-10">
+                      <div className="flex h-6 items-center">
+                        <div className="h-3 w-4/5 max-w-lg animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+                      </div>
+                      <div className="flex h-6 items-center">
+                        <div className="h-3 w-1/2 max-w-xs animate-pulse rounded bg-light-300 dark:bg-dark-300" />
+                      </div>
+                    </div>
+                  </>
                 )}
                 {card && (
                   <form
