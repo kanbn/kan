@@ -177,6 +177,9 @@ ENV NODE_ENV=production
 ENV API_PORT=4000
 
 COPY --chown=1000:1000 --from=builder-api /app/apps/api/dist/ ./
+# For RUN_MIGRATIONS=true, which the API runs at startup.
+COPY --chown=1000:1000 packages/db/migrations/ ./migrations/
+ENV KAN_MIGRATIONS_FOLDER=/app/migrations
 
 USER 1000:1000
 
@@ -192,5 +195,7 @@ CMD ["main.mjs"]
 FROM web AS aio
 
 ENV KAN_EMBEDDED_API=/app/api/main.mjs
+# Copied in by the web stage for RUN_MIGRATIONS=true.
+ENV KAN_MIGRATIONS_FOLDER=/app/migrate/migrations
 
 COPY --chown=1000:1000 --from=builder-api /app/apps/api/dist/ ./api/

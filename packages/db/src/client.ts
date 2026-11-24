@@ -18,7 +18,9 @@ import * as schema from "./schema";
 
 const log = createLogger("db");
 
-const MIGRATIONS_FOLDER = "../../packages/db/migrations";
+// The bundled API images set this; from source it's relative to apps/<app>.
+const MIGRATIONS_FOLDER =
+  process.env.KAN_MIGRATIONS_FOLDER ?? "../../packages/db/migrations";
 
 export const pgliteExtensions = { pg_trgm, uuid_ossp };
 
