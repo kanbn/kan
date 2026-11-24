@@ -21,6 +21,6 @@ export default withRateLimit(
   },
   async (req: NextApiRequest, res: NextApiResponse) => {
     await cors(req, res);
-    return proxyToApi(req, res, (req.url ?? "").replace(/^\/api\/v1/, ""));
+    return proxyToApi(req, res, (req.url ?? "").replace(/^\/api(\/v1)?/, ""));
   },
 );
