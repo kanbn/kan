@@ -28,6 +28,7 @@
     "@kan/api-client": "workspace:*",
     "@kan/auth": "workspace:*",
     "@kan/db": "workspace:^",
+    "@kan/logger": "workspace:*",
     "@kan/server": "workspace:*",
     "@kan/shared": "workspace:^",
     "@lingui/react": "^6.12.0",

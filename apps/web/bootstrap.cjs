@@ -1,13 +1,11 @@
 /**
- * Bootstrap script for the distroless production image.
+ * Entrypoint for the production web images. Distroless has no shell, so this
+ * does what an entrypoint.sh normally would:
  *
- * Distroless images have no shell, so this Node.js script handles two tasks
- * that would normally be done in an entrypoint.sh:
- *
- * 1. Regenerate `public/__ENV.js` with the current runtime NEXT_PUBLIC_*
-XX *    env vars are provided at *run* time via docker-compose / docker run.
- *
- * 2. Start the Next.js standalone server.
+ * 1. Regenerate `public/__ENV.js` with the runtime NEXT_PUBLIC_* env vars.
+ * 2. Run migrations when RUN_MIGRATIONS=true.
+ * 3. Start the bundled API in the all-in-one image.
+ * 4. Start the Next.js standalone server.
  */
 
 const { writeFileSync, existsSync, mkdirSync } = require("fs");
@@ -60,7 +58,37 @@ if (process.env.RUN_MIGRATIONS === "true") {
 }
 
 // ---------------------------------------------------------------------------
-// 3. Start the Next.js standalone server
+// 3. Start the bundled API (all-in-one image) unless an external one is set
+// ---------------------------------------------------------------------------
+
+let apiReady = Promise.resolve();
+const embeddedApi = process.env.KAN_EMBEDDED_API;
+
+if (embeddedApi && !process.env.KAN_API_URL) {
+  const { spawn } = require("child_process");
+  const port = process.env.API_PORT || "4000";
+  const url = `http://127.0.0.1:${port}`;
+  const api = spawn(process.execPath, [embeddedApi], {
+    env: { ...process.env, API_PORT: port },
+    stdio: "inherit",
+  });
+  // Exit with it so Docker restarts the container instead of serving a dead API.
+  api.on("exit", (code) => process.exit(code || 1));
+  process.env.KAN_API_URL = url;
+  apiReady = (async () => {
+    for (let i = 0; i < 120; i++) {
+      const ok = await fetch(`${url}/health`).then(
+        (r) => r.ok,
+        () => false,
+      );
+      if (ok) return;
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  })();
+}
+
+// ---------------------------------------------------------------------------
+// 4. Start the Next.js standalone server
 // ---------------------------------------------------------------------------
 
 const drainMs = 10_000;
@@ -71,4 +99,4 @@ process.on = (event, listener) =>
     event === "SIGTERM" ? () => setTimeout(listener, drainMs, event) : listener,
   );
 
-require("./apps/web/server.js");
+void apiReady.then(() => require("./apps/web/server.js"));

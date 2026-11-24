@@ -15,6 +15,6 @@ export function waitForApi(page: Page, method: string, pathname: RegExp) {
   return page.waitForResponse(
     (res) =>
       res.request().method() === method &&
-      pathname.test(new URL(res.url()).pathname),
+      pathname.test(new URL(res.url()).pathname.replace(/^\/api\/v1/, "")),
   );
 }

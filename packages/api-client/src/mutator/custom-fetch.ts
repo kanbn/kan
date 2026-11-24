@@ -4,7 +4,7 @@ export const customFetch = async <T>(
   url: string,
   options: RequestInit,
 ): Promise<T> => {
-  const baseUrl = env("NEXT_PUBLIC_API_BASE_URL") ?? "";
+  const baseUrl = env("NEXT_PUBLIC_API_BASE_URL") ?? "/api/v1";
   const response = await fetch(`${baseUrl}${url}`, {
     ...options,
     credentials: "include",

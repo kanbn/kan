@@ -7,7 +7,10 @@ import { migrate as migratePg } from "drizzle-orm/node-postgres/migrator";
 import { drizzle as drizzlePgLite } from "drizzle-orm/pglite";
 import { migrate } from "drizzle-orm/pglite/migrator";
 import { Pool } from "pg";
-import { parse as parseConnectionString, toClientConfig } from "pg-connection-string";
+import {
+  parse as parseConnectionString,
+  toClientConfig,
+} from "pg-connection-string";
 
 import { createLogger } from "@kan/logger";
 
@@ -30,7 +33,9 @@ export const createDrizzleClient = (): dbClient => {
     log.warn("POSTGRES_URL not set, falling back to PGLite");
 
     const client = new PGlite({
-      dataDir: "./pgdata",
+      // Resolves to apps/web/pgdata from both apps, where releases before the
+      // API split kept it.
+      dataDir: "../web/pgdata",
       extensions: pgliteExtensions,
     });
     const db = drizzlePgLite(client, { schema });
@@ -50,8 +55,14 @@ export const createDrizzleClient = (): dbClient => {
   });
   // no-verify is a pg-only extension, not a real libpq sslmode, so
   // useLibpqCompat doesn't recognize it and would silently start verifying.
-  if (parsedConnection.sslmode === "no-verify" && typeof parsedConnection.ssl === "object") {
-    parsedConnection.ssl = { ...parsedConnection.ssl, rejectUnauthorized: false };
+  if (
+    parsedConnection.sslmode === "no-verify" &&
+    typeof parsedConnection.ssl === "object"
+  ) {
+    parsedConnection.ssl = {
+      ...parsedConnection.ssl,
+      rejectUnauthorized: false,
+    };
   }
   const pool = new Pool(toClientConfig(parsedConnection));
   // Idle connections error when Postgres restarts; without a listener that crashes the process.

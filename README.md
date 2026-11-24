@@ -78,6 +78,8 @@ The application will be available at http://localhost:3000 (or the port specifie
 - To restart the containers: `docker compose restart`
 - To rebuild after code changes: `docker compose up -d --build`
 
+To run the web app and API as separate containers, see [Separate containers](https://docs.kan.bn/self-hosting/introduction#separate-containers).
+
 ## Local Development
 
 1. Clone the repository (or fork)

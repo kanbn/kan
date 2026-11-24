@@ -161,6 +161,9 @@ importers:
       dotenv-cli:
         specifier: ^11.1.0
         version: 11.1.0
+      esbuild:
+        specifier: 0.28.2
+        version: 0.28.2
       eslint:
         specifier: 'catalog:'
         version: 10.15.0(jiti@2.7.0)
@@ -212,6 +215,9 @@ importers:
       '@kan/db':
         specifier: workspace:^
         version: link:../../packages/db
+      '@kan/logger':
+        specifier: workspace:*
+        version: link:../../packages/logger
       '@kan/server':
         specifier: workspace:*
         version: link:../../packages/server
