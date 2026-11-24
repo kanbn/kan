@@ -14,6 +14,7 @@ import { usePopup } from "~/providers/popup";
 import { useWorkspace } from "~/providers/workspace";
 import { ClearCustomPermissionsConfirmation } from "./components/ClearCustomPermissionsConfirmation";
 import { RolePermissions } from "./components/RolePermissions";
+import { SettingsRow } from "./components/SettingsRow";
 
 export default function PermissionsSettings() {
   const { workspace } = useWorkspace();
@@ -52,24 +53,22 @@ export default function PermissionsSettings() {
     <>
       <PageHead title={t`Settings | Permissions`} />
 
-      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Workspace permissions`}
-        </h2>
-        <p className="mb-6 text-sm text-neutral-500 dark:text-dark-900">
-          {t`Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.`}
-        </p>
-
-        {isAdmin ? (
+      <div className="mb-8 py-3">
+        <SettingsRow
+          title={t`Workspace permissions`}
+          description={
+            isAdmin
+              ? t`Configure which actions are allowed for each workspace role. These permissions apply to all members with that role.`
+              : t`You need to be an admin to manage workspace permissions.`
+          }
+        />
+        {isAdmin && (
           <>
             <RolePermissions />
-            <div className="mt-8">
-              <h2 className="mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-                {t`Custom permissions`}
-              </h2>
-              <p className="mb-6 text-sm text-neutral-500 dark:text-dark-900">
-                {t`Clear any custom member permissions so that all members only inherit permissions from their role defaults.`}
-              </p>
+            <SettingsRow
+              title={t`Custom permissions`}
+              description={t`Clear any custom member permissions so that all members only inherit permissions from their role defaults.`}
+            >
               <Button
                 variant="secondary"
                 size="sm"
@@ -83,12 +82,8 @@ export default function PermissionsSettings() {
               >
                 {t`Clear custom permissions`}
               </Button>
-            </div>
+            </SettingsRow>
           </>
-        ) : (
-          <p className="mt-4 text-sm text-neutral-500 dark:text-dark-900">
-            {t`You need to be an admin to manage workspace permissions.`}
-          </p>
         )}
       </div>
 

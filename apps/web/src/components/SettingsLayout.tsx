@@ -98,8 +98,8 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
     <div className="flex h-full w-full flex-col overflow-hidden">
       <div className="h-full overflow-y-auto">
         <div className="m-auto max-w-[1100px] px-5 py-6 md:px-28 md:py-12">
-          <div className="mb-8 flex w-full justify-between">
-            <h1 className="font-bold tracking-tight text-neutral-900 sm:text-[1.2rem] dark:text-dark-1000">
+          <div className="mb-6 flex w-full justify-between">
+            <h1 className="font-bold tracking-tight text-neutral-900 sm:text-base dark:text-dark-1000">
               {t`Settings`}
             </h1>
           </div>
@@ -139,16 +139,16 @@ export function SettingsLayout({ children, currentTab }: SettingsLayoutProps) {
               </Listbox>
             </div>
             <div className="hidden sm:block">
-              <div className="border-b border-gray-200 dark:border-white/10">
+              <div className="border-b border-light-300 dark:border-dark-200">
                 <nav
                   aria-label="Tabs"
-                  className="-mb-px flex space-x-8 focus:outline-hidden"
+                  className="-mb-px flex space-x-6 focus:outline-hidden"
                 >
                   {availableTabs.map((tab) => (
                     <Link
                       key={tab.key}
                       href={`/settings/${tab.key}`}
-                      className={`border-b-2 px-1 py-4 text-sm font-medium whitespace-nowrap transition-colors focus:outline-hidden ${
+                      className={`border-b px-0 pt-2 pb-3 text-xs font-medium whitespace-nowrap transition-colors focus:outline-hidden ${
                         isTabActive(tab.key)
                           ? "border-light-1000 text-light-1000 dark:border-dark-1000 dark:text-dark-1000"
                           : "border-transparent text-light-900 hover:border-light-950 hover:text-light-950 dark:text-dark-900 dark:hover:border-white/20 dark:hover:text-dark-950"

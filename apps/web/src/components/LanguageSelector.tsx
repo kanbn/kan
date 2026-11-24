@@ -21,9 +21,9 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
         value={locale}
         onChange={(e) => setLocale(e.target.value as Locale)}
         className={twMerge(
-          "mt-8 block w-full max-w-[180px] rounded-lg border-0 bg-light-50 pl-10 text-sm shadow-xs ring-1 ring-light-300 ring-inset focus:ring-2 focus:ring-light-400 focus:ring-inset dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-300 dark:focus:ring-dark-500",
+          "block w-full rounded-md border-0 bg-light-50 py-1.5 pl-9 text-sm ring-1 ring-light-600 ring-inset focus:ring-2 focus:ring-light-700 focus:ring-inset sm:w-[180px] dark:bg-dark-50 dark:text-dark-1000 dark:ring-dark-600 dark:focus:ring-dark-700",
           compact &&
-            "mt-0 max-w-[160px] py-1.5 pl-9 text-xs text-light-950 shadow-none dark:text-dark-900",
+            "max-w-[160px] rounded-lg text-xs text-light-950 ring-light-300 sm:w-full dark:text-dark-900 dark:ring-dark-300",
         )}
       >
         {availableLocales.map((loc) => (

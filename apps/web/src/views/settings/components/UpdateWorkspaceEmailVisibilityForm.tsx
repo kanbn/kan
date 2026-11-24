@@ -48,18 +48,12 @@ export default function UpdateWorkspaceEmailVisibilityForm({
   };
 
   return (
-    <div className="mb-8 flex items-center justify-between">
-      <div className="flex-1">
-        <p className="text-sm text-neutral-500 dark:text-dark-900">
-          {t`Allow workspace members to see each other's email addresses`}
-        </p>
-      </div>
-      <Toggle
-        isChecked={isChecked}
-        onChange={handleToggle}
-        label=""
-        disabled={disabled || updateWorkspace.isPending}
-      />
-    </div>
+    <Toggle
+      isChecked={isChecked}
+      onChange={handleToggle}
+      label={t`Email visibility`}
+      showLabel={false}
+      disabled={disabled || updateWorkspace.isPending}
+    />
   );
 }

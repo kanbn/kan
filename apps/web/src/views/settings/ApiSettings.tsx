@@ -9,6 +9,7 @@ import { useModal } from "~/providers/modal";
 import ApiKeyList from "./components/ApiKeyList";
 import NewApiKeyModal from "./components/NewApiKeyModal";
 import { RevokeApiKeyConfirmation } from "./components/RevokeApiKeyConfirmation";
+import { SettingsRow } from "./components/SettingsRow";
 
 export default function ApiSettings() {
   const { modalContentType, openModal, isOpen } = useModal();
@@ -17,20 +18,16 @@ export default function ApiSettings() {
     <>
       <PageHead title={t`Settings | API`} />
 
-      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`API keys`}
-        </h2>
-        <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-          {t`View and manage your API keys.`}
-        </p>
-
-        <div className="mb-4 flex items-center justify-between">
-          <Button variant="primary" onClick={() => openModal("NEW_API_KEY")}>
-            {t`Create new key`}
-          </Button>
-        </div>
-
+      <div className="mb-8 py-3">
+        <SettingsRow
+          title={t`API keys`}
+          description={t`View and manage your API keys.`}
+        >
+          <Button
+            size="sm"
+            onClick={() => openModal("NEW_API_KEY")}
+          >{t`Create new key`}</Button>
+        </SettingsRow>
         <ApiKeyList />
       </div>
 

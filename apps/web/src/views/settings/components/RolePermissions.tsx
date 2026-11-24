@@ -132,17 +132,17 @@ export function RolePermissions() {
         </p>
       ) : null}
 
-      <div className="overflow-x-auto rounded-md border border-light-300 bg-light-50 dark:border-dark-300 dark:bg-dark-100">
-        <table className="min-w-full table-fixed divide-y divide-light-600 overflow-visible text-left text-sm dark:divide-dark-600">
-          <thead className="rounded-t-lg bg-light-300 dark:bg-dark-300">
+      <div className="-mx-2 overflow-x-auto">
+        <table className="min-w-full table-fixed text-left text-sm">
+          <thead className="border-b border-light-400 dark:border-dark-300">
             <tr>
-              <th className="w-1/2 rounded-tl-lg px-4 py-3 text-left text-xs font-semibold tracking-wide text-light-900 dark:text-dark-900">
+              <th className="w-1/2 px-2 pb-2 text-left text-xs font-medium text-light-900 dark:text-dark-900">
                 {t`Permission`}
               </th>
               {orderedRoleNames.map((role) => (
                 <th
                   key={role}
-                  className="w-1/6 px-4 py-3 text-center text-xs font-semibold tracking-wide text-light-900 dark:text-dark-900"
+                  className="w-1/6 px-2 pb-2 text-center text-xs font-medium text-light-900 dark:text-dark-900"
                 >
                   {formatRoleLabel(role)}
                 </th>
@@ -152,19 +152,22 @@ export function RolePermissions() {
           {Object.values(permissionCategories).map((category) => (
             <tbody
               key={category.label}
-              className="divide-y divide-light-600 overflow-visible bg-light-50 dark:divide-dark-600 dark:bg-dark-100"
+              className="divide-y divide-light-300 border-b border-light-300 last:border-b-0 dark:divide-dark-200 dark:border-dark-200"
             >
-              <tr className="bg-light-100 dark:bg-dark-200">
+              <tr>
                 <td
                   colSpan={1 + orderedRoleNames.length}
-                  className="px-4 py-2 text-xs font-semibold tracking-wide text-light-900 dark:text-dark-900"
+                  className="px-2 pt-6 pb-2 text-xs font-semibold text-neutral-900 dark:text-dark-1000"
                 >
                   {permissionCategoryLabel(category.label)}
                 </td>
               </tr>
               {category.permissions.map((permission) => (
-                <tr key={permission}>
-                  <td className="w-1/2 px-4 py-2 text-sm text-light-900 dark:text-dark-900">
+                <tr
+                  key={permission}
+                  className="transition-colors hover:bg-light-200 dark:hover:bg-dark-100"
+                >
+                  <td className="w-1/2 px-2 py-2 text-xs text-light-950 dark:text-dark-950">
                     {permissionLabels[permission]()}
                   </td>
                   {orderedRoleNames.map((roleName) => {
@@ -178,11 +181,11 @@ export function RolePermissions() {
                     return (
                       <td
                         key={roleName}
-                        className="w-1/6 px-4 py-2 text-center align-middle"
+                        className="w-1/6 px-2 py-2 text-center align-middle"
                       >
                         <input
                           type="checkbox"
-                          className="h-[16px] w-[16px] appearance-none rounded-md border border-light-500 bg-transparent ring-0 outline-hidden checked:bg-blue-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden disabled:opacity-60 dark:border-dark-500 dark:hover:border-dark-500"
+                          className="h-[14px] w-[14px] appearance-none rounded-[4px] border border-light-500 bg-transparent ring-0 outline-hidden checked:bg-indigo-600 focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-hidden disabled:opacity-60 dark:border-dark-500 dark:hover:border-dark-500"
                           disabled={
                             isAdminRole ||
                             isBillingOrDeletePermission ||

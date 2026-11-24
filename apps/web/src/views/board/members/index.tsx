@@ -110,7 +110,6 @@ export default function BoardMembersView() {
     memberEmail,
     memberImage,
     memberRole,
-    isLastRow,
     showSkeleton,
   }: {
     key?: string;
@@ -120,36 +119,34 @@ export default function BoardMembersView() {
     memberEmail?: string | null;
     memberImage?: string | null;
     memberRole?: string;
-    isLastRow?: boolean;
     showSkeleton?: boolean;
   }) => {
     const isSelf = memberId === session?.user.id;
     const canManageRow = isBoardAdmin && !isSelf;
 
     return (
-      <tr key={key} className="rounded-b-lg">
-        <td
-          className={twMerge(
-            "w-full sm:w-[65%]",
-            isLastRow ? "rounded-bl-lg" : "",
-          )}
-        >
-          <div className="flex items-center p-2 sm:p-4">
-            <div className="shrink-0">
+      <tr
+        key={key}
+        className="group/row h-14 transition-colors hover:bg-light-200 dark:hover:bg-dark-100"
+      >
+        <td className="w-full max-w-0">
+          <div className="flex items-center px-2">
+            <div className="flex shrink-0">
               {showSkeleton ? (
-                <div className="h-8 w-8 animate-pulse rounded-full bg-light-200 sm:h-9 sm:w-9 dark:bg-dark-200" />
+                <div className="h-6 w-6 animate-pulse rounded-full bg-light-200 dark:bg-dark-200" />
               ) : (
                 <Avatar
+                  size="sm"
                   name={memberName ?? ""}
                   email={memberEmail ?? ""}
                   imageUrl={memberImage ? getAvatarUrl(memberImage) : undefined}
                 />
               )}
             </div>
-            <div className="ml-2 min-w-0 flex-1">
+            <div className="ml-3 min-w-0 flex-1">
               <p
                 className={twMerge(
-                  "truncate text-xs font-medium text-neutral-900 sm:text-sm dark:text-dark-1000",
+                  "truncate text-sm font-medium text-neutral-900 dark:text-dark-1000",
                   showSkeleton &&
                     "h-3 w-[125px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
                 )}
@@ -157,25 +154,20 @@ export default function BoardMembersView() {
                 {memberName}
               </p>
               {!showSkeleton && (
-                <p className="truncate text-xs text-dark-900 sm:text-sm">
+                <p className="truncate text-xs text-light-900 dark:text-dark-900">
                   {memberEmail}
                 </p>
               )}
             </div>
           </div>
         </td>
-        <td
-          className={twMerge(
-            "w-auto min-w-[120px] overflow-visible sm:w-[35%] sm:min-w-[150px]",
-            isLastRow && "rounded-br-lg",
-          )}
-        >
-          <div className="flex w-full items-center justify-between px-2 sm:px-3">
+        <td className="min-w-[130px] overflow-visible sm:min-w-[220px]">
+          <div className="flex w-full items-center justify-between px-2">
             {showSkeleton ? (
               <span className="h-5 w-[50px] animate-pulse rounded-md bg-light-200 ring-0 dark:bg-dark-200" />
             ) : (
-              <div className="relative inline-flex items-center">
-                <span className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-400 ring-1 ring-emerald-500/20 ring-inset sm:text-[11px]">
+              <div className="relative inline-flex items-center rounded-md hover:text-light-1000 has-focus-visible:ring-2 has-focus-visible:ring-light-600 dark:has-focus-visible:ring-dark-600">
+                <span className="-ml-1.5 inline-flex items-center gap-1 rounded-md px-1.5 py-1 text-xs text-light-950 dark:text-dark-950">
                   {memberRole === "admin" ? t`Admin` : t`Member`}
                 </span>
                 {canManageRow && (
@@ -199,7 +191,12 @@ export default function BoardMembersView() {
               </div>
             )}
 
-            <div className={twMerge("relative", !canManageRow && "hidden")}>
+            <div
+              className={twMerge(
+                "relative transition-opacity md:opacity-0 md:group-focus-within/row:opacity-100 md:group-hover/row:opacity-100",
+                !canManageRow && "hidden",
+              )}
+            >
               <Dropdown
                 items={[
                   {
@@ -214,10 +211,11 @@ export default function BoardMembersView() {
                   },
                 ]}
                 ariaLabel={t`Board member options`}
+                buttonClassName="h-6 w-6 hover:bg-light-400 dark:hover:bg-dark-300"
               >
                 <HiEllipsisHorizontal
-                  size={20}
-                  className="text-light-900 sm:size-[20px] dark:text-dark-900"
+                  size={16}
+                  className="text-light-900 dark:text-dark-900"
                 />
               </Dropdown>
             </div>
@@ -233,12 +231,13 @@ export default function BoardMembersView() {
       <div className="m-auto h-full max-w-[1100px] p-6 px-5 md:px-28 md:py-12">
         <div className="mb-8 flex w-full justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="font-bold tracking-tight text-neutral-900 sm:text-[1.2rem] dark:text-dark-1000">
+            <h1 className="font-bold tracking-tight text-neutral-900 sm:text-base dark:text-dark-1000">
               {t`Board members`}
             </h1>
           </div>
           {!boardMembersError && (
             <Button
+              size="sm"
               onClick={() => openModal("ADD_BOARD_MEMBER")}
               iconLeft={<HiOutlinePlusSmall className="h-4 w-4" />}
               disabled={!isBoardAdmin}
@@ -256,27 +255,27 @@ export default function BoardMembersView() {
           <div className="mt-8 flow-root">
             <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full overflow-x-auto px-4 py-2 pb-16 align-middle sm:px-6 lg:px-8">
-                <div className="h-full shadow-sm ring-1 ring-black/5 sm:rounded-lg">
-                  <table className="min-w-full divide-y divide-light-600 overflow-visible dark:divide-dark-600">
-                    <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
+                <div className="-mx-2 h-full">
+                  <table className="min-w-full overflow-visible">
+                    <thead className="border-b border-light-400 dark:border-dark-300">
                       <tr>
                         <th
                           scope="col"
-                          className="w-full rounded-tl-lg py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-light-900 sm:w-[65%] sm:pl-6 dark:text-dark-900"
+                          className="w-full px-2 pb-2 text-left text-xs font-medium text-light-900 dark:text-dark-900"
                         >
                           {t`User`}
                         </th>
                         <th
                           scope="col"
-                          className="w-auto rounded-tr-lg px-3 py-3.5 text-left text-sm font-semibold whitespace-nowrap text-light-900 sm:w-[35%] dark:text-dark-900"
+                          className="px-2 pb-2 text-left text-xs font-medium whitespace-nowrap text-light-900 dark:text-dark-900"
                         >
                           {t`Role`}
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-light-600 overflow-visible bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
+                    <tbody className="divide-y divide-light-300 overflow-visible dark:divide-dark-200">
                       {!isLoading &&
-                        boardMembers?.map((member, index) =>
+                        boardMembers?.map((member) =>
                           renderTableRow({
                             key: member.publicId,
                             memberPublicId: member.publicId,
@@ -288,17 +287,13 @@ export default function BoardMembersView() {
                             memberEmail: member.user?.email ?? member.email,
                             memberImage: member.user?.image,
                             memberRole: member.role,
-                            isLastRow: index === boardMembers.length - 1,
                           }),
                         )}
 
                       {isLoading && (
                         <>
                           {renderTableRow({ showSkeleton: true })}
-                          {renderTableRow({
-                            showSkeleton: true,
-                            isLastRow: true,
-                          })}
+                          {renderTableRow({ showSkeleton: true })}
                         </>
                       )}
                     </tbody>
