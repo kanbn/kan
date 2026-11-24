@@ -68,7 +68,7 @@ if (embeddedApi && !process.env.KAN_API_URL) {
   const { spawn } = require("child_process");
   const port = process.env.API_PORT || "4000";
   const url = `http://127.0.0.1:${port}`;
-  const api = spawn(process.execPath, ["--enable-source-maps", embeddedApi], {
+  const api = spawn(process.execPath, [embeddedApi], {
     env: { ...process.env, API_PORT: port },
     stdio: "inherit",
   });

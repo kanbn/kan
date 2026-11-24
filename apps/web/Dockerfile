@@ -181,7 +181,8 @@ COPY --chown=1000:1000 --from=builder-api /app/apps/api/dist/ ./
 USER 1000:1000
 
 EXPOSE 4000
-CMD ["--enable-source-maps", "main.mjs"]
+# Source maps double the API's memory; set NODE_OPTIONS=--enable-source-maps to debug.
+CMD ["main.mjs"]
 
 # ============================================
 # Stage 8: All-in-one image (web and api in one container)
