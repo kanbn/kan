@@ -2,7 +2,7 @@
 # networks and deploy are written out on the service so the proxy labels and network can be added to them.
 services:
   web:
-    image: ghcr.io/kanbn/kan:main
+    image: ghcr.io/kanbn/kan-web:main
     env_file:
       - .env
     stop_grace_period: 30s

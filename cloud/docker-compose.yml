@@ -13,7 +13,7 @@ services:
     restart: "no"
 
   web:
-    image: ghcr.io/kanbn/kan:latest
+    image: ghcr.io/kanbn/kan-web:latest
     container_name: ${CONTAINER_NAME:-kan-web}
     ports:
       - "${WEB_PORT:-3000}:3000"

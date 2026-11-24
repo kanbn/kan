@@ -28,7 +28,8 @@ services:
       target: web
     env_file:
       - .env
-    environment: &kan-env # Required environment variables
+    environment:
+      # Required environment variables
       - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - POSTGRES_URL=${POSTGRES_URL}
@@ -37,8 +38,8 @@ services:
       - REDIS_URL=${REDIS_URL}
       - RATE_LIMIT_IP_HEADER=${RATE_LIMIT_IP_HEADER}
 
-      # Internal URL for reaching the API container
-      - KAN_API_URL=${KAN_API_URL:-http://api:4000}
+      # Internal URL for reaching the API (optional - defaults to NEXT_PUBLIC_API_BASE_URL)
+      - KAN_API_URL=${KAN_API_URL}
 
       # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)
       - LOG_LEVEL=${LOG_LEVEL}
@@ -136,37 +137,6 @@ services:
       - APPLE_CLIENT_ID=${APPLE_CLIENT_ID}
       - APPLE_CLIENT_SECRET=${APPLE_CLIENT_SECRET}
       - APPLE_APP_BUNDLE_IDENTIFIER=${APPLE_APP_BUNDLE_IDENTIFIER}
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
-      api:
-        condition: service_started
-    restart: unless-stopped
-
-  api:
-    image: ghcr.io/kanbn/kan-api:latest
-    container_name: kan-api
-    networks:
-      - kan-network
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-      target: api
-    env_file:
-      - .env
-    environment: *kan-env
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "node",
-          "-e",
-          "fetch('http://127.0.0.1:4000/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
-        ]
-      interval: 5s
-      timeout: 10s
-      retries: 6
-      start_period: 30s
     depends_on:
       migrate:
         condition: service_completed_successfully

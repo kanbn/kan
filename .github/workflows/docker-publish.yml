@@ -32,6 +32,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   MIGRATE_IMAGE_NAME: ${{ github.repository }}-migrate
   API_IMAGE_NAME: ${{ github.repository }}-api
+  WEB_IMAGE_NAME: ${{ github.repository }}-web
 
 jobs:
   # Each architecture builds on its own native runner, so arm64 no longer runs
@@ -40,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [web, migrate, api]
+        target: [aio, web, migrate, api]
         platform: [linux/amd64, linux/arm64]
     runs-on: ${{ matrix.platform == 'linux/arm64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     permissions:
@@ -59,7 +60,8 @@ jobs:
       - name: Name the image and platform
         run: |
           case "$TARGET" in
-            web) IMAGE="$REGISTRY/$IMAGE_NAME" ;;
+            aio) IMAGE="$REGISTRY/$IMAGE_NAME" ;;
+            web) IMAGE="$REGISTRY/$WEB_IMAGE_NAME" ;;
             migrate) IMAGE="$REGISTRY/$MIGRATE_IMAGE_NAME" ;;
             api) IMAGE="$REGISTRY/$API_IMAGE_NAME" ;;
           esac
@@ -144,7 +146,11 @@ jobs:
             APP_VERSION=${{ steps.version.outputs.version }}
           # Scoped per target and architecture: a shared scope means each
           # export overwrites the other's manifest and neither ever hits.
-          cache-from: type=gha,scope=${{ matrix.target }}-${{ env.ARCH }}
+          # aio reuses the web and api layers it is built from.
+          cache-from: |
+            type=gha,scope=${{ matrix.target }}-${{ env.ARCH }}
+            type=gha,scope=web-${{ env.ARCH }}
+            type=gha,scope=api-${{ env.ARCH }}
           cache-to: type=gha,mode=max,scope=${{ matrix.target }}-${{ env.ARCH }}
 
       - name: Save the digest
@@ -169,7 +175,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        target: [web, migrate, api]
+        target: [aio, web, migrate, api]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -182,7 +188,8 @@ jobs:
       - name: Name the image
         run: |
           case "$TARGET" in
-            web) IMAGE="$REGISTRY/$IMAGE_NAME" ;;
+            aio) IMAGE="$REGISTRY/$IMAGE_NAME" ;;
+            web) IMAGE="$REGISTRY/$WEB_IMAGE_NAME" ;;
             migrate) IMAGE="$REGISTRY/$MIGRATE_IMAGE_NAME" ;;
             api) IMAGE="$REGISTRY/$API_IMAGE_NAME" ;;
           esac
@@ -226,7 +233,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
+            type=raw,value=latest,enable=${{ github.ref_type == 'tag' && !contains(github.ref_name, '-') }}
             type=raw,value=edge,enable={{is_default_branch}}
 
       # Join the amd64 and arm64 halves into one multi-arch tag

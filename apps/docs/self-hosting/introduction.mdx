@@ -60,6 +60,49 @@ docker compose up -d
 
 Migrations run before the new version starts.
 
+## Separate containers
+
+The `ghcr.io/kanbn/kan` image runs the web app and the API together. To scale or restart them independently, use `ghcr.io/kanbn/kan-web` and `ghcr.io/kanbn/kan-api` instead. In `docker-compose.yml`, replace the `web` service with these two:
+
+```yaml
+services:
+  web:
+    image: ghcr.io/kanbn/kan-web:latest
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    env_file: .env
+    environment:
+      - KAN_API_URL=http://api:4000
+    networks:
+      - kan-network
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  api:
+    image: ghcr.io/kanbn/kan-api:latest
+    env_file: .env
+    networks:
+      - kan-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:4000/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+        ]
+      interval: 5s
+      start_period: 30s
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+```
+
+Both read the same `.env`. The API stays internal, so it needs no published port.
+
 ## Back up
 
 Everything except uploaded files lives in Postgres:

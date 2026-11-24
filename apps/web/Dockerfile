@@ -196,3 +196,26 @@ WORKDIR /app/apps/api
 
 EXPOSE 4000
 CMD ["node", "--import", "@swc-node/register/esm-register", "src/main.ts"]
+
+# ============================================
+# Stage 8: All-in-one image (web and api in one container)
+# ============================================
+# Published as ghcr.io/kanbn/kan so single-container installs keep working:
+# bootstrap.cjs starts the API itself when KAN_API_URL is unset. Alpine, not
+# distroless, because deps-api installs musl builds of @swc/core.
+FROM node:${NODE_VERSION}-alpine AS aio
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
+ENV KAN_EMBEDDED_API=/api/apps/api
+
+COPY --chown=node:node --from=web /app/ ./
+COPY --chown=node:node --from=deps-api /app/ /api/
+COPY --chown=node:node --from=pruner-api /app/out/full/ /api/
+
+USER node
+
+EXPOSE 3000
+CMD ["node", "bootstrap.cjs"]
