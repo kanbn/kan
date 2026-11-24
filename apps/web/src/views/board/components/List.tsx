@@ -88,6 +88,7 @@ export default function List({
     attributes,
     listeners,
     setNodeRef,
+    setActivatorNodeRef,
     transform,
     transition,
     isDragging,
@@ -105,7 +106,11 @@ export default function List({
   return (
     <div
       data-board-draggable
-      ref={setNodeRef}
+      ref={(node) => {
+        setNodeRef(node);
+        // Stops Space and Enter in the name input from starting a drag.
+        setActivatorNodeRef(node);
+      }}
       style={style}
       {...attributes}
       {...listeners}
