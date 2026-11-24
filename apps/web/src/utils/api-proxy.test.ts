@@ -43,13 +43,13 @@ describe("proxyToApi", () => {
     appEnv.KAN_API_URL = "http://api:4000";
   });
 
-  it("returns API_UNAVAILABLE 503 when no API URL is configured", async () => {
+  it("falls back to the API on localhost when no URL is configured", async () => {
     appEnv.KAN_API_URL = undefined;
-    const { req, res, mocks } = makeReqRes();
+    fetchMock.mockResolvedValue(new Response("{}"));
+    const { req, res } = makeReqRes();
     await handler(req, res);
-    expect(mocks.status).toHaveBeenCalledWith(503);
-    expect(mocks.json).toHaveBeenCalledWith(
-      expect.objectContaining({ code: "API_UNAVAILABLE" }),
+    expect(String(fetchMock.mock.calls[0]?.[0])).toMatch(
+      /^http:\/\/localhost:4000\//,
     );
   });
 

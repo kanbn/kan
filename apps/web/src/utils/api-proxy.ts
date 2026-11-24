@@ -23,7 +23,14 @@ const FORWARDED_HEADERS = [
 const log = createLogger("api-proxy");
 
 const API_UNAVAILABLE = "API_UNAVAILABLE";
-const UPGRADE_DOCS = "See https://github.com/kanbn/kan#upgrading";
+const UPGRADE_DOCS =
+  "See https://docs.kan.bn/self-hosting/introduction#separate-containers";
+
+// localhost covers running from source, where `pnpm start` runs both apps.
+export const getApiBaseUrl = () =>
+  serverEnv.KAN_API_URL ||
+  env("NEXT_PUBLIC_API_BASE_URL") ||
+  "http://localhost:4000";
 
 const unavailable = (res: NextApiResponse, status: number, message: string) =>
   res.status(status).json({ code: API_UNAVAILABLE, message });
@@ -40,16 +47,7 @@ export async function proxyToApi(
   res: NextApiResponse,
   path: string,
 ) {
-  const apiBaseUrl =
-    serverEnv.KAN_API_URL ||
-    env("NEXT_PUBLIC_API_BASE_URL") ||
-    (serverEnv.NODE_ENV === "development" ? "http://localhost:4000" : "");
-  if (!apiBaseUrl) {
-    log.error(
-      `KAN_API_URL is not set: the web app can't reach the Kan API. ${UPGRADE_DOCS}`,
-    );
-    return unavailable(res, 503, "API service not configured");
-  }
+  const apiBaseUrl = getApiBaseUrl();
 
   const headers = new Headers();
   for (const name of FORWARDED_HEADERS) {
