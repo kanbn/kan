@@ -23,6 +23,22 @@
     ],
     "translation": ", eller se vores"
   },
+  "8prZNK": {
+    "message": "{0, plural, one {# list} other {# lists}}",
+    "placeholders": {
+      "0": [
+        "board.lists.length"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/BoardsList.tsx",
+        130
+      ]
+    ],
+    "translation": ""
+  },
   "J_hVSQ": {
     "message": "{0}",
     "placeholders": {
@@ -56,7 +72,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        58
+        48
       ],
       [
         "src/views/card/index.tsx",
@@ -76,7 +92,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        434
+        436
       ]
     ],
     "translation": ""
@@ -140,7 +156,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        567
+        564
       ]
     ],
     "translation": "{0} etiketter"
@@ -156,7 +172,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        905
+        906
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -172,7 +188,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        382
+        384
       ]
     ],
     "translation": ""
@@ -188,7 +204,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        387
+        389
       ]
     ],
     "translation": ""
@@ -204,7 +220,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        548
+        551
       ]
     ],
     "translation": "{boardCount, plural, one {Importér tavle (1)} other {Importér tavler ({boardCount})}}"
@@ -220,7 +236,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        357
+        359
       ]
     ],
     "translation": "{projectCount, plural, one {Importér projekt (1)} other {Importér projekter ({projectCount})}}"
@@ -277,11 +293,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        190
+        175
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        202
+        187
       ]
     ],
     "translation": "$10/måned"
@@ -293,7 +309,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        202
+        187
       ]
     ],
     "translation": "$8/måned"
@@ -506,7 +522,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        33
+        23
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -514,7 +530,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        103
+        101
       ]
     ],
     "translation": "Aktiv"
@@ -526,11 +542,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        498
+        508
       ],
       [
         "src/views/public/board/CardModal.tsx",
-        207
+        223
       ]
     ],
     "translation": "Aktivitet"
@@ -578,7 +594,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        152
+        176
       ]
     ],
     "translation": "Tilføj et kort"
@@ -618,7 +634,27 @@
       ],
       [
         "src/views/board/components/List.tsx",
-        139
+        163
+      ],
+      [
+        "src/views/board/components/List.tsx",
+        224
+      ]
+    ],
+    "translation": ""
+  },
+  "n973gb": {
+    "message": "Add card to {0}",
+    "placeholders": {
+      "0": [
+        "list.name"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/List.tsx",
+        219
       ]
     ],
     "translation": ""
@@ -651,6 +687,22 @@
     ],
     "translation": ""
   },
+  "Uc1bn2": {
+    "message": "Add comment...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/Comment.tsx",
+        190
+      ],
+      [
+        "src/views/card/components/NewCommentForm.tsx",
+        94
+      ]
+    ],
+    "translation": ""
+  },
   "ngBZOd": {
     "message": "Add comment... (type '/' to open commands or '@' to mention)",
     "placeholders": {},
@@ -665,7 +717,20 @@
         94
       ]
     ],
-    "translation": "Tilføj kommentar... (skriv '/' for at åbne kommandoer eller '@' for at nævne)"
+    "translation": "Tilføj kommentar... (skriv '/' for at åbne kommandoer eller '@' for at nævne)",
+    "obsolete": true
+  },
+  "tsqtLt": {
+    "message": "Add description...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        488
+      ]
+    ],
+    "translation": ""
   },
   "gL_7jw": {
     "message": "Add description... (type '/' to open commands or '@' to mention)",
@@ -677,7 +742,8 @@
         487
       ]
     ],
-    "translation": "Tilføj beskrivelse... (skriv '/' for at åbne kommandoer eller '@' for at nævne)"
+    "translation": "Tilføj beskrivelse... (skriv '/' for at åbne kommandoer eller '@' for at nævne)",
+    "obsolete": true
   },
   "abUZlY": {
     "message": "Add details...",
@@ -714,11 +780,11 @@
     "origin": [
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
-        109
+        110
       ],
       [
         "src/views/board/members/index.tsx",
-        246
+        245
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -726,7 +792,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        265
+        239
       ]
     ],
     "translation": "Tilføj medlem"
@@ -750,7 +816,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        32
+        31
       ]
     ],
     "translation": "Tilføj webhook"
@@ -936,7 +1002,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        342
+        311
       ]
     ],
     "translation": "Tilføjelse af et nyt medlem koster yderligere {price} ({billingType}) pr. plads."
@@ -960,15 +1026,15 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        179
+        171
       ],
       [
         "src/views/board/members/index.tsx",
-        195
+        187
       ],
       [
         "src/views/members/index.tsx",
-        232
+        224
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -1080,7 +1146,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        31
+        32
       ]
     ],
     "translation": "Alle brugerdefinerede medlemsrettigheder er nulstillet til standardindstillingerne for deres roller."
@@ -1140,8 +1206,8 @@
     "comments": [],
     "origin": [
       [
-        "src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx",
-        54
+        "src/views/settings/WorkspaceSettings.tsx",
+        69
       ]
     ],
     "translation": "Tillad medlemmer af arbejdsområdet at se hinandens e-mailadresser"
@@ -1153,7 +1219,7 @@
     "origin": [
       [
         "src/views/auth/signup/index.tsx",
-        90
+        53
       ]
     ],
     "translation": "Har du allerede en konto? <0><1>Log ind</1></0>"
@@ -1165,7 +1231,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        120
+        121
       ]
     ],
     "translation": "Der opstod en fejl under tilslutning af din GitHub-konto."
@@ -1177,7 +1243,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        144
+        145
       ]
     ],
     "translation": "Der opstod en fejl under afbrydelse af din GitHub-konto."
@@ -1189,10 +1255,22 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        98
+        99
       ]
     ],
     "translation": "Der opstod en fejl under afbrydelse af din Trello-konto."
+  },
+  "qSwJX_": {
+    "message": "An example Kan board",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/home/components/HeroBoard.tsx",
+        147
+      ]
+    ],
+    "translation": ""
   },
   "ZXSPJt": {
     "message": "An unexpected error occurred. Please try again later.",
@@ -1225,7 +1303,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        316
+        286
       ]
     ],
     "translation": "Alle med dette link kan deltage i dit arbejdsområde"
@@ -1301,7 +1379,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        22
+        23
       ]
     ],
     "translation": "API-nøgler"
@@ -1361,7 +1439,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        34
+        24
       ]
     ],
     "translation": "Arkiveret"
@@ -1373,7 +1451,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        518
+        520
       ]
     ],
     "translation": ""
@@ -1565,11 +1643,11 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        630
+        627
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        631
+        628
       ]
     ],
     "translation": ""
@@ -1744,7 +1822,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        203
+        188
       ]
     ],
     "translation": "faktureres årligt"
@@ -1756,7 +1834,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        203
+        188
       ]
     ],
     "translation": "faktureres månedligt"
@@ -1776,7 +1854,7 @@
       ],
       [
         "src/views/settings/BillingSettings.tsx",
-        91
+        87
       ]
     ],
     "translation": "Fakturering"
@@ -1788,7 +1866,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        101
+        96
       ]
     ],
     "translation": "Faktureringsportal"
@@ -1824,11 +1902,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        877
+        878
       ],
       [
         "src/views/board/members/index.tsx",
-        232
+        230
       ],
       [
         "src/views/card/index.tsx",
@@ -1836,7 +1914,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        118
+        117
       ]
     ],
     "translation": "Tavle"
@@ -1873,7 +1951,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        216
+        213
       ]
     ],
     "translation": ""
@@ -1889,7 +1967,7 @@
       ],
       [
         "src/views/board/members/index.tsx",
-        237
+        235
       ]
     ],
     "translation": ""
@@ -1905,7 +1983,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        232
+        230
       ]
     ],
     "translation": ""
@@ -1929,7 +2007,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        895
+        896
       ]
     ],
     "translation": ""
@@ -1965,7 +2043,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        174
+        173
       ]
     ],
     "translation": "Tavlen blev ikke fundet"
@@ -2041,7 +2119,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        83
+        82
       ]
     ],
     "translation": "Tavlens URL er kopieret til udklipsholderen"
@@ -2106,7 +2184,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        102
+        81
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -2114,11 +2192,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        58
+        48
       ],
       [
         "src/views/boards/index.tsx",
-        63
+        53
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2134,7 +2212,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        80
+        79
       ]
     ],
     "translation": "Tavler, du arkiverer, vises her."
@@ -2594,11 +2672,11 @@
       ],
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        168
+        169
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        261
+        266
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -2642,7 +2720,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        274
+        275
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2730,7 +2808,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        439
+        449
       ]
     ],
     "translation": "Kortet blev ikke fundet"
@@ -2754,7 +2832,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        435
+        421
       ]
     ],
     "translation": "Korttitel"
@@ -2766,7 +2844,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        456
+        457
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2798,11 +2876,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        65
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        105
+        77
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -2822,7 +2900,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        68
+        57
       ]
     ],
     "translation": "Skift appens skriftstørrelse."
@@ -2834,7 +2912,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        58
+        50
       ]
     ],
     "translation": "Skift dine sprogindstillinger."
@@ -2879,15 +2957,15 @@
     "origin": [
       [
         "src/views/auth/forgot-password/index.tsx",
-        68
+        60
       ],
       [
         "src/views/auth/login/index.tsx",
-        43
+        36
       ],
       [
         "src/views/auth/signup/index.tsx",
-        71
+        51
       ]
     ],
     "translation": "Tjek din indbakke"
@@ -2939,11 +3017,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        377
+        348
       ],
       [
         "src/views/settings/BillingSettings.tsx",
-        83
+        80
       ]
     ],
     "translation": "Vælg abonnement"
@@ -2967,7 +3045,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        71
+        70
       ]
     ],
     "translation": "Ryd alle brugerdefinerede medlemsrettigheder, så alle medlemmer kun arver rettigheder fra deres standardrolle."
@@ -2983,7 +3061,7 @@
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        84
+        83
       ]
     ],
     "translation": "Ryd brugerdefinerede rettigheder"
@@ -3011,11 +3089,11 @@
     "origin": [
       [
         "src/views/auth/login/index.tsx",
-        48
+        52
       ],
       [
         "src/views/auth/signup/index.tsx",
-        76
+        65
       ]
     ],
     "translation": "Klik på linket, vi har sendt til {magicLinkRecipient}, for at logge ind."
@@ -3030,12 +3108,20 @@
         250
       ],
       [
+        "src/views/board/components/NewCardForm.tsx",
+        432
+      ],
+      [
         "src/views/card/index.tsx",
         393
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
         184
+      ],
+      [
+        "src/views/public/board/CardModal.tsx",
+        135
       ],
       [
         "src/views/settings/components/NewApiKeyModal.tsx",
@@ -3222,7 +3308,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        27
+        26
       ]
     ],
     "translation": "Konfigurer webhooks til at modtage notifikationer, når kort oprettes, opdateres, flyttes eller slettes."
@@ -3234,7 +3320,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        60
+        61
       ]
     ],
     "translation": "Konfigurer, hvilke handlinger der er tilladt for hver rolle i arbejdsområdet. Disse rettigheder gælder for alle medlemmer med den pågældende rolle."
@@ -3258,7 +3344,7 @@
     "origin": [
       [
         "src/views/auth/reset-password/index.tsx",
-        112
+        109
       ]
     ],
     "translation": ""
@@ -3270,7 +3356,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        209
+        210
       ]
     ],
     "translation": "Forbind"
@@ -3294,7 +3380,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        229
+        236
       ]
     ],
     "translation": "Forbind GitHub"
@@ -3306,7 +3392,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        177
+        195
       ]
     ],
     "translation": "Forbind Trello"
@@ -3331,7 +3417,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        208
+        207
       ]
     ],
     "translation": "Forbind din GitHub-konto for at importere projekter."
@@ -3343,7 +3429,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        164
+        168
       ]
     ],
     "translation": "Forbind din Trello-konto for at importere tavler."
@@ -3431,7 +3517,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        458
+        453
       ]
     ],
     "translation": "Fortsæt med "
@@ -3447,7 +3533,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        345
+        339
       ]
     ],
     "translation": "Fortsæt med {0}"
@@ -3475,6 +3561,30 @@
       ]
     ],
     "translation": "Konvertér til link"
+  },
+  "6V3Ea3": {
+    "message": "Copied",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        282
+      ]
+    ],
+    "translation": ""
+  },
+  "he3ygx": {
+    "message": "Copy",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        282
+      ]
+    ],
+    "translation": ""
   },
   "5RkSzq": {
     "message": "Copy board link",
@@ -3611,7 +3721,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        662
+        659
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -3627,7 +3737,7 @@
     "origin": [
       [
         "src/views/settings/components/NewApiKeyModal.tsx",
-        171
+        175
       ]
     ],
     "translation": "Opret API-nøgle"
@@ -3639,7 +3749,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        672
+        670
       ]
     ],
     "translation": "Opret kort"
@@ -3651,7 +3761,7 @@
     "origin": [
       [
         "src/views/card/components/NewChecklistForm.tsx",
-        150
+        151
       ]
     ],
     "translation": "Opret tjekliste"
@@ -3663,7 +3773,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        365
+        332
       ]
     ],
     "translation": "Opret invitationslink"
@@ -3675,7 +3785,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        240
+        242
       ]
     ],
     "translation": "Opret etiket"
@@ -3687,7 +3797,7 @@
     "origin": [
       [
         "src/views/board/components/NewListForm.tsx",
-        173
+        174
       ]
     ],
     "translation": "Opret liste"
@@ -3707,7 +3817,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        46
+        36
       ]
     ],
     "translation": "Opret ny {0}"
@@ -3719,7 +3829,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        30
+        29
       ]
     ],
     "translation": "Opret ny nøgle"
@@ -3731,7 +3841,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        529
+        526
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -3747,11 +3857,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        156
+        157
       ],
       [
         "src/views/board/index.tsx",
-        1036
+        1038
       ]
     ],
     "translation": "Opret ny liste"
@@ -3775,7 +3885,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        371
+        372
       ]
     ],
     "translation": "Opret webhook"
@@ -3787,11 +3897,11 @@
     "origin": [
       [
         "src/components/NewWorkspaceForm.tsx",
-        232
+        233
       ],
       [
         "src/components/WorkspaceMenu.tsx",
-        179
+        185
       ]
     ],
     "translation": "Opret arbejdsområde"
@@ -3803,7 +3913,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        241
+        238
       ]
     ],
     "translation": "Oprettet"
@@ -3925,7 +4035,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        68
+        69
       ]
     ],
     "translation": "Brugerdefinerede rettigheder"
@@ -4048,7 +4158,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        364
+        332
       ]
     ],
     "translation": "Deaktivér invitationslink"
@@ -4085,11 +4195,11 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        54
+        58
       ],
       [
         "src/components/LabelForm.tsx",
-        232
+        233
       ],
       [
         "src/components/YouTubeEmbed/YouTubeDropdown.tsx",
@@ -4097,27 +4207,27 @@
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
-        47
+        52
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        98
+        100
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        71
+        76
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        87
+        89
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        93
+        94
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        135
+        132
       ]
     ],
     "translation": "Slet"
@@ -4129,15 +4239,15 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        75
+        84
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        85
+        92
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        95
+        96
       ]
     ],
     "translation": "Slet konto"
@@ -4201,7 +4311,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        163
+        187
       ]
     ],
     "translation": "Slet liste"
@@ -4237,15 +4347,15 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        115
+        116
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        86
+        82
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        97
+        91
       ]
     ],
     "translation": "Slet arbejdsområde"
@@ -4337,7 +4447,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        240
+        216
       ]
     ],
     "translation": "Afbryd GitHub"
@@ -4349,7 +4459,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        194
+        180
       ]
     ],
     "translation": "Afbryd Trello"
@@ -4385,7 +4495,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        39
+        37
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -4505,7 +4615,7 @@
     "origin": [
       [
         "src/views/auth/login/index.tsx",
-        63
+        39
       ]
     ],
     "translation": "Har du ikke en konto? <0><1>Opret konto</1></0>"
@@ -4577,7 +4687,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        584
+        581
       ],
       [
         "src/views/card/index.tsx",
@@ -4641,7 +4751,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        273
+        279
       ]
     ],
     "translation": "Duplikér"
@@ -4673,7 +4783,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
-        273
+        279
       ]
     ],
     "translation": "Duplikerer…"
@@ -4689,7 +4799,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        127
+        124
       ]
     ],
     "translation": "Rediger"
@@ -4745,7 +4855,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        255
+        247
       ]
     ],
     "translation": "Rediger rettigheder"
@@ -4769,7 +4879,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        167
+        168
       ]
     ],
     "translation": "Rediger URL til arbejdsområde"
@@ -4805,7 +4915,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        459
+        454
       ]
     ],
     "translation": "e-mail"
@@ -4817,11 +4927,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        280
+        254
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        46
+        40
       ]
     ],
     "translation": "E-mail"
@@ -4856,8 +4966,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/settings/components/UpdateWorkspaceEmailVisibilityForm.tsx",
+        54
+      ],
+      [
         "src/views/settings/WorkspaceSettings.tsx",
-        74
+        68
       ]
     ],
     "translation": "E-mailsynlighed"
@@ -4925,7 +5039,7 @@
     "origin": [
       [
         "src/views/auth/reset-password/index.tsx",
-        99
+        97
       ]
     ],
     "translation": ""
@@ -4973,11 +5087,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        413
+        407
       ],
       [
         "src/views/auth/forgot-password/index.tsx",
-        85
+        79
       ]
     ],
     "translation": "Indtast din e-mailadresse"
@@ -4989,7 +5103,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        401
+        395
       ]
     ],
     "translation": "Indtast dit navn"
@@ -5013,7 +5127,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        427
+        421
       ]
     ],
     "translation": "Indtast din adgangskode"
@@ -5045,7 +5159,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        248
+        222
       ]
     ],
     "translation": "Fejl"
@@ -5069,7 +5183,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        119
+        120
       ]
     ],
     "translation": "Fejl ved forbindelse til GitHub"
@@ -5081,7 +5195,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        155
+        142
       ]
     ],
     "translation": "Fejl ved oprettelse af invitationslink"
@@ -5093,7 +5207,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        173
+        158
       ]
     ],
     "translation": "Fejl ved deaktivering af invitationslink"
@@ -5141,7 +5255,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        143
+        144
       ]
     ],
     "translation": "Fejl ved afbrydelse af GitHub"
@@ -5153,7 +5267,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        97
+        98
       ]
     ],
     "translation": "Fejl ved afbrydelse af Trello"
@@ -5165,11 +5279,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        112
+        103
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        128
+        119
       ]
     ],
     "translation": "Fejl ved invitation af medlem"
@@ -5274,7 +5388,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        229
+        226
       ]
     ],
     "translation": "Hændelser"
@@ -5360,7 +5474,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        249
+        223
       ]
     ],
     "translation": "Invitationslinket kunne ikke kopieres"
@@ -5424,7 +5538,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        286
+        281
       ]
     ],
     "translation": "Login med {0} mislykkedes. Prøv igen."
@@ -5440,7 +5554,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        188
+        185
       ]
     ],
     "translation": "Test af webhook mislykkedes"
@@ -5637,7 +5751,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        65
+        56
       ]
     ],
     "translation": "Skriftstørrelse"
@@ -5674,7 +5788,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        441
+        435
       ]
     ],
     "translation": ""
@@ -5686,7 +5800,7 @@
     "origin": [
       [
         "src/views/auth/forgot-password/index.tsx",
-        68
+        60
       ]
     ],
     "translation": ""
@@ -5722,7 +5836,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        34
+        35
       ]
     ],
     "translation": "Gratis (1 medlem)"
@@ -5746,11 +5860,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        348
+        317
       ],
       [
         "src/views/members/index.tsx",
-        323
+        316
       ]
     ],
     "translation": "Gratis abonnement"
@@ -5827,7 +5941,7 @@
     "origin": [
       [
         "src/views/auth/signup/index.tsx",
-        71
+        51
       ],
       [
         "src/views/home/components/Header.tsx",
@@ -5872,7 +5986,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        81
+        80
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny {0}"
@@ -5884,7 +5998,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1018
+        1020
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -5975,7 +6089,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        112
+        113
       ]
     ],
     "translation": "GitHub forbundet"
@@ -5987,7 +6101,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        136
+        137
       ]
     ],
     "translation": "GitHub afbrudt"
@@ -5999,7 +6113,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        125
+        117
       ]
     ],
     "translation": "Gå til forsiden"
@@ -6015,7 +6129,7 @@
       ],
       [
         "src/views/invite/index.tsx",
-        156
+        141
       ]
     ],
     "translation": "Gå til appen"
@@ -6027,7 +6141,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        110
+        89
       ],
       [
         "src/pages/404.tsx",
@@ -6055,7 +6169,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        134
+        113
       ]
     ],
     "translation": "Gå til medlemmer"
@@ -6067,7 +6181,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        146
+        125
       ]
     ],
     "translation": "Gå til indstillinger"
@@ -6079,7 +6193,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        122
+        101
       ]
     ],
     "translation": "Gå til skabeloner"
@@ -6143,7 +6257,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        234
+        226
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -6427,7 +6541,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        83
+        74
       ]
     ],
     "translation": "Importér"
@@ -6439,11 +6553,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        245
+        246
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        423
+        425
       ]
     ],
     "translation": "Import fuldført"
@@ -6455,15 +6569,15 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        258
+        259
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        431
+        433
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        450
+        452
       ]
     ],
     "translation": "Import mislykkedes"
@@ -6576,7 +6690,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        103
+        101
       ]
     ],
     "translation": "Inaktiv"
@@ -6637,7 +6751,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        64
+        56
       ]
     ],
     "translation": "Ugyldig e-mailadresse"
@@ -6649,7 +6763,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        117
+        111
       ]
     ],
     "translation": "Ugyldig invitation"
@@ -6661,10 +6775,22 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        342
+        336
       ]
     ],
     "translation": "Invitér"
+  },
+  "qsqt0w": {
+    "message": "Invite link",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/members/components/InviteMemberForm.tsx",
+        272
+      ]
+    ],
+    "translation": ""
   },
   "KLJ4eD": {
     "message": "Invite link copied",
@@ -6673,7 +6799,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        242
+        216
       ]
     ],
     "translation": "Invitationslink kopieret"
@@ -6685,7 +6811,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        243
+        217
       ]
     ],
     "translation": "Invitationslink kopieret til udklipsholderen"
@@ -6713,7 +6839,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        150
+        137
       ]
     ],
     "translation": "Invitationslinks kræver et Team- eller Pro-abonnement. Opgrader dit arbejdsområde."
@@ -6729,7 +6855,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        385
+        357
       ]
     ],
     "translation": "Invitér medlem"
@@ -6754,7 +6880,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        351
+        320
       ]
     ],
     "translation": ""
@@ -6782,7 +6908,7 @@
       ],
       [
         "src/views/invite/index.tsx",
-        141
+        127
       ]
     ],
     "translation": "Deltag i arbejdsområde"
@@ -6834,7 +6960,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        380
+        382
       ]
     ],
     "translation": ""
@@ -6956,7 +7082,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        533
+        530
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -7000,7 +7126,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        55
+        49
       ]
     ],
     "translation": "Sprog"
@@ -7169,7 +7295,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        454
+        455
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7181,7 +7307,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        81
+        80
       ]
     ],
     "translation": "Link kopieret"
@@ -7209,7 +7335,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        124
+        142
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -7225,7 +7351,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        179
+        205
       ]
     ],
     "translation": ""
@@ -7293,7 +7419,7 @@
     "origin": [
       [
         "src/views/auth/login/index.tsx",
-        33
+        34
       ]
     ],
     "translation": "Login | kan.bn"
@@ -7354,7 +7480,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        459
+        454
       ]
     ],
     "translation": "magisk link"
@@ -7478,7 +7604,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        43
+        44
       ]
     ],
     "translation": "medlem"
@@ -7490,11 +7616,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        179
+        171
       ],
       [
         "src/views/board/members/index.tsx",
-        196
+        188
       ],
       [
         "src/views/card/components/ActivityList.tsx",
@@ -7506,7 +7632,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        233
+        225
       ],
       [
         "src/views/settings/components/RolePermissions.tsx",
@@ -7522,7 +7648,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        273
+        265
       ]
     ],
     "translation": ""
@@ -7534,7 +7660,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        43
+        44
       ]
     ],
     "translation": "medlemmer"
@@ -7546,7 +7672,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        126
+        105
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -7558,7 +7684,7 @@
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
-        491
+        488
       ],
       [
         "src/views/card/components/MemberSelector.tsx",
@@ -7570,7 +7696,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        295
+        288
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -7590,7 +7716,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        290
+        283
       ]
     ],
     "translation": "Medlemmer | {0}"
@@ -7614,7 +7740,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWeekStartDayForm.tsx",
-        62
+        61
       ]
     ],
     "translation": "Mandag"
@@ -7642,7 +7768,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        191
+        176
       ]
     ],
     "translation": "månedlig fakturering"
@@ -7654,7 +7780,7 @@
     "origin": [
       [
         "src/views/board/components/MoveBoardForm.tsx",
-        103
+        104
       ]
     ],
     "translation": "Flyt tavle"
@@ -7785,7 +7911,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        217
+        214
       ]
     ],
     "translation": "Navn"
@@ -7833,7 +7959,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        105
+        97
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -7877,7 +8003,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        418
+        416
       ]
     ],
     "translation": "Nyt kort"
@@ -7913,7 +8039,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        572
+        575
       ]
     ],
     "translation": "Ny import"
@@ -7941,7 +8067,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        960
+        962
       ]
     ],
     "translation": "Ny liste"
@@ -8065,7 +8191,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        76
+        75
       ]
     ],
     "translation": "Ingen {0}"
@@ -8077,7 +8203,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        75
+        74
       ]
     ],
     "translation": "Ingen arkiverede tavler"
@@ -8089,7 +8215,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        360
+        354
       ]
     ],
     "translation": "Ingen godkendelsesmetoder er tilgængelige i øjeblikket"
@@ -8101,7 +8227,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        488
+        490
       ]
     ],
     "translation": "Ingen tavler fundet"
@@ -8187,7 +8313,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1014
+        1016
       ]
     ],
     "translation": "Ingen lister"
@@ -8199,7 +8325,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1019
+        1021
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8211,7 +8337,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        299
+        300
       ]
     ],
     "translation": "Ingen projekter fundet"
@@ -8251,7 +8377,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        199
+        196
       ]
     ],
     "translation": "Ingen webhooks konfigureret. Tilføj en webhook for at modtage notifikationer."
@@ -8311,7 +8437,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        78
+        85
       ]
     ],
     "translation": "Når du sletter din konto, kan du ikke gå tilbage. Denne handling kan ikke fortrydes."
@@ -8323,7 +8449,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        89
+        83
       ]
     ],
     "translation": "Når du sletter dit arbejdsområde, kan du ikke gå tilbage. Denne handling kan ikke fortrydes."
@@ -8335,7 +8461,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        377
+        379
       ]
     ],
     "translation": ""
@@ -8420,7 +8546,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        391
+        385
       ]
     ],
     "translation": "eller"
@@ -8485,7 +8611,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        30
+        31
       ]
     ],
     "translation": "Tilsidesættelser ryddet"
@@ -8558,7 +8684,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        265
+        260
       ]
     ],
     "translation": "Adgangskode er påkrævet for at logge ind."
@@ -8570,7 +8696,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        264
+        259
       ]
     ],
     "translation": "Adgangskode er påkrævet for at oprette en konto."
@@ -8646,7 +8772,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        241
+        233
       ]
     ],
     "translation": "Sat på pause"
@@ -8670,7 +8796,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        241
+        233
       ]
     ],
     "translation": "Afventer"
@@ -8798,7 +8924,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        69
+        70
       ]
     ],
     "translation": "Abonnement"
@@ -8862,11 +8988,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        417
+        411
       ],
       [
         "src/views/auth/forgot-password/index.tsx",
-        89
+        83
       ]
     ],
     "translation": "Indtast en gyldig e-mailadresse"
@@ -8878,7 +9004,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        405
+        399
       ]
     ],
     "translation": "Indtast et gyldigt navn"
@@ -8890,11 +9016,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        432
+        426
       ],
       [
         "src/views/auth/reset-password/index.tsx",
-        104
+        101
       ]
     ],
     "translation": "Indtast en gyldig adgangskode"
@@ -8982,15 +9108,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        310
+        311
       ],
       [
         "src/views/board/index.tsx",
-        368
+        369
       ],
       [
         "src/views/board/index.tsx",
-        406
+        407
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -9006,11 +9132,11 @@
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        259
+        260
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        451
+        453
       ],
       [
         "src/views/card/components/AttachmentThumbnails.tsx",
@@ -9102,7 +9228,7 @@
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        129
+        120
       ],
       [
         "src/views/members/index.tsx",
@@ -9146,7 +9272,7 @@
       ],
       [
         "src/views/settings/PermissionsSettings.tsx",
-        44
+        45
       ]
     ],
     "translation": "Prøv igen senere, eller kontakt kundesupport."
@@ -9158,11 +9284,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        156
+        143
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        174
+        159
       ]
     ],
     "translation": "Prøv igen senere."
@@ -9186,7 +9312,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        463
+        464
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9206,7 +9332,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        90
+        89
       ]
     ],
     "translation": "Prøv igen."
@@ -9327,11 +9453,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        327
+        296
       ],
       [
         "src/views/members/index.tsx",
-        320
+        313
       ]
     ],
     "translation": "Pro-abonnement"
@@ -9343,7 +9469,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        339
+        308
       ]
     ],
     "translation": "Pro-abonnement ∞"
@@ -9367,7 +9493,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        33
+        34
       ]
     ],
     "translation": "Profilbillede"
@@ -9488,11 +9614,11 @@
     "origin": [
       [
         "src/views/auth/forgot-password/index.tsx",
-        111
+        62
       ],
       [
         "src/views/auth/reset-password/index.tsx",
-        146
+        83
       ]
     ],
     "translation": ""
@@ -9516,11 +9642,11 @@
     "origin": [
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
-        69
+        74
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        67
+        72
       ]
     ],
     "translation": "Fjern"
@@ -9532,7 +9658,7 @@
     "origin": [
       [
         "src/views/board/components/NewCardForm.tsx",
-        649
+        646
       ]
     ],
     "translation": ""
@@ -9544,7 +9670,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        206
+        203
       ]
     ],
     "translation": ""
@@ -9568,7 +9694,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        264
+        256
       ]
     ],
     "translation": "Fjern medlem"
@@ -9767,7 +9893,7 @@
     "origin": [
       [
         "src/views/auth/reset-password/index.tsx",
-        130
+        124
       ]
     ],
     "translation": ""
@@ -9863,15 +9989,15 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        192
+        184
       ],
       [
         "src/views/board/members/index.tsx",
-        273
+        272
       ],
       [
         "src/views/members/index.tsx",
-        364
+        358
       ]
     ],
     "translation": "Rolle"
@@ -9933,7 +10059,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWeekStartDayForm.tsx",
-        63
+        62
       ]
     ],
     "translation": "Lørdag"
@@ -9945,7 +10071,7 @@
     "origin": [
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
-        175
+        177
       ],
       [
         "src/views/card/components/Comment.tsx",
@@ -9953,7 +10079,7 @@
       ],
       [
         "src/views/settings/components/Avatar.tsx",
-        277
+        278
       ]
     ],
     "translation": "Gem"
@@ -9977,7 +10103,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        371
+        372
       ]
     ],
     "translation": "Gem ændringer"
@@ -10013,7 +10139,7 @@
     "origin": [
       [
         "src/components/WorkspaceMenu.tsx",
-        104
+        110
       ]
     ],
     "translation": ""
@@ -10037,7 +10163,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        122
+        113
       ]
     ],
     "translation": "Grænsen for pladser er nået"
@@ -10049,11 +10175,11 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        330
+        299
       ],
       [
         "src/views/members/index.tsx",
-        331
+        324
       ]
     ],
     "translation": "pladser"
@@ -10190,11 +10316,11 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        331
+        332
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        523
+        525
       ]
     ],
     "translation": "Vælg alle"
@@ -10218,7 +10344,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        209
+        210
       ]
     ],
     "translation": "Vælg kilde"
@@ -10296,7 +10422,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        366
+        360
       ]
     ],
     "translation": ""
@@ -10320,7 +10446,7 @@
     "origin": [
       [
         "src/views/auth/forgot-password/index.tsx",
-        103
+        94
       ]
     ],
     "translation": ""
@@ -10332,7 +10458,7 @@
     "origin": [
       [
         "src/views/settings/components/NewWebhookModal.tsx",
-        365
+        366
       ]
     ],
     "translation": "Send test"
@@ -10356,7 +10482,7 @@
     "origin": [
       [
         "src/views/auth/reset-password/index.tsx",
-        89
+        81
       ]
     ],
     "translation": ""
@@ -10368,7 +10494,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        98
+        69
       ]
     ],
     "translation": "Indstil en adgangskode for at aktivere login med adgangskode."
@@ -10388,7 +10514,7 @@
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
-        131
+        133
       ]
     ],
     "translation": "Angiv forfaldsdato"
@@ -10400,11 +10526,11 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        93
+        65
       ],
       [
         "src/views/settings/AccountSettings.tsx",
-        105
+        77
       ],
       [
         "src/views/settings/components/ChangePasswordConfirmation.tsx",
@@ -10452,7 +10578,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        138
+        117
       ]
     ],
     "translation": "Indstillinger"
@@ -10464,7 +10590,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        29
+        30
       ]
     ],
     "translation": "Indstillinger | Konto"
@@ -10476,7 +10602,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        18
+        19
       ]
     ],
     "translation": "Indstillinger | API"
@@ -10488,7 +10614,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        65
+        66
       ]
     ],
     "translation": "Indstillinger | Fakturering"
@@ -10500,7 +10626,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        153
+        158
       ]
     ],
     "translation": "Indstillinger | Integrationer"
@@ -10512,7 +10638,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        53
+        54
       ]
     ],
     "translation": "Indstillinger | Rettigheder"
@@ -10524,7 +10650,7 @@
     "origin": [
       [
         "src/views/settings/WebhookSettings.tsx",
-        20
+        21
       ]
     ],
     "translation": "Indstillinger | Webhooks"
@@ -10536,7 +10662,7 @@
     "origin": [
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        33
+        34
       ]
     ],
     "translation": "Indstillinger | Arbejdsområde"
@@ -10596,7 +10722,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        166
+        158
       ]
     ],
     "translation": "Log ind"
@@ -10654,7 +10780,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        174
+        150
       ]
     ],
     "translation": "Opret konto"
@@ -10666,11 +10792,11 @@
     "origin": [
       [
         "src/views/auth/signup/index.tsx",
-        36
+        37
       ],
       [
         "src/views/auth/signup/index.tsx",
-        61
+        49
       ]
     ],
     "translation": "Opret konto | kan.bn"
@@ -10682,7 +10808,7 @@
     "origin": [
       [
         "src/views/auth/signup/index.tsx",
-        46
+        38
       ]
     ],
     "translation": "Oprettelse af konto deaktiveret"
@@ -10694,7 +10820,7 @@
     "origin": [
       [
         "src/views/auth/signup/index.tsx",
-        49
+        40
       ]
     ],
     "translation": "Oprettelse af konto er midlertidigt deaktiveret. Prøv igen senere."
@@ -10706,7 +10832,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        458
+        453
       ]
     ],
     "translation": "Opret konto med "
@@ -10827,7 +10953,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        430
+        432
       ]
     ],
     "translation": ""
@@ -10950,7 +11076,8 @@
         244
       ]
     ],
-    "translation": "Start gratis prøveperiode"
+    "translation": "Start gratis prøveperiode",
+    "obsolete": true
   },
   "Y8yzGg": {
     "message": "Start free. Upgrade as your team grows. No hidden fees, no contracts.",
@@ -10983,7 +11110,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        235
+        232
       ]
     ],
     "translation": "Status"
@@ -11019,7 +11146,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        149
+        136
       ]
     ],
     "translation": "Abonnement påkrævet"
@@ -11031,11 +11158,11 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        224
+        219
       ],
       [
         "src/components/AuthForm.tsx",
-        241
+        236
       ],
       [
         "src/views/auth/reset-password/index.tsx",
@@ -11051,7 +11178,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWeekStartDayForm.tsx",
-        61
+        60
       ]
     ],
     "translation": "Søndag"
@@ -11133,15 +11260,15 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        327
+        296
       ],
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        339
+        308
       ],
       [
         "src/views/members/index.tsx",
-        322
+        315
       ]
     ],
     "translation": "Team-abonnement"
@@ -11181,11 +11308,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        877
+        878
       ],
       [
         "src/views/board/index.tsx",
-        914
+        915
       ]
     ],
     "translation": "Skabelon"
@@ -11257,15 +11384,15 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        114
+        93
       ],
       [
         "src/views/boards/index.tsx",
-        58
+        48
       ],
       [
         "src/views/boards/index.tsx",
-        63
+        53
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -11293,7 +11420,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        131
+        128
       ]
     ],
     "translation": "Test"
@@ -11309,7 +11436,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        177
+        174
       ]
     ],
     "translation": "Test mislykkedes"
@@ -11325,7 +11452,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        171
+        168
       ]
     ],
     "translation": "Test sendt"
@@ -11341,7 +11468,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        172
+        169
       ]
     ],
     "translation": "Testwebhook sendt!"
@@ -11631,7 +11758,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        177
+        176
       ]
     ],
     "translation": "Denne tavle er privat eller findes ikke"
@@ -11655,7 +11782,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        120
+        113
       ]
     ],
     "translation": "Dette invitationslink er ugyldigt eller udløbet."
@@ -11683,7 +11810,7 @@
       ],
       [
         "src/views/auth/reset-password/index.tsx",
-        139
+        130
       ]
     ],
     "translation": ""
@@ -11791,7 +11918,7 @@
     "origin": [
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        138
+        132
       ]
     ],
     "translation": "Dette brugernavn til arbejdsområdet er allerede taget"
@@ -11883,7 +12010,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        27
+        28
       ]
     ],
     "translation": "Token er påkrævet"
@@ -11911,7 +12038,7 @@
       ],
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        157
+        163
       ]
     ],
     "translation": "Trello"
@@ -11923,7 +12050,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        90
+        91
       ]
     ],
     "translation": "Trello afbrudt"
@@ -11951,7 +12078,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        385
+        387
       ]
     ],
     "translation": ""
@@ -12033,6 +12160,18 @@
     ],
     "translation": ""
   },
+  "ghqAiU": {
+    "message": "Type / for commands, @ to mention",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/Editor.tsx",
+        487
+      ]
+    ],
+    "translation": ""
+  },
   "bZSICm": {
     "message": "Unable to add checklist item",
     "placeholders": {},
@@ -12088,7 +12227,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        43
+        44
       ]
     ],
     "translation": "Kunne ikke rydde tilsidesættelser"
@@ -12116,7 +12255,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        461
+        462
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -12128,7 +12267,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        88
+        87
       ]
     ],
     "translation": "Kunne ikke kopiere link"
@@ -12396,7 +12535,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        185
+        182
       ]
     ],
     "translation": "Kunne ikke teste webhook"
@@ -12444,7 +12583,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        367
+        368
       ],
       [
         "src/views/card/index.tsx",
@@ -12496,7 +12635,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        405
+        406
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -12524,7 +12663,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        309
+        310
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12768,7 +12907,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        38
+        39
       ]
     ],
     "translation": "ubegrænset antal medlemmer"
@@ -12805,7 +12944,7 @@
     "origin": [
       [
         "src/views/members/index.tsx",
-        330
+        323
       ]
     ],
     "translation": "Ubegrænset antal pladser"
@@ -12830,7 +12969,7 @@
     "origin": [
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
-        180
+        182
       ],
       [
         "src/views/settings/components/UpdateDisplayNameForm.tsx",
@@ -12838,7 +12977,7 @@
       ],
       [
         "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
-        103
+        104
       ],
       [
         "src/views/settings/components/UpdateWorkspaceNameForm.tsx",
@@ -12846,7 +12985,7 @@
       ],
       [
         "src/views/settings/components/UpdateWorkspaceUrlForm.tsx",
-        170
+        161
       ]
     ],
     "translation": "Opdater"
@@ -12858,7 +12997,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        240
+        242
       ]
     ],
     "translation": "Opdater etiket"
@@ -12938,7 +13077,7 @@
       ],
       [
         "src/views/members/index.tsx",
-        307
+        300
       ],
       [
         "src/views/onboarding/select-plan/index.tsx",
@@ -13024,7 +13163,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        223
+        220
       ]
     ],
     "translation": "URL"
@@ -13120,11 +13259,11 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        267
+        266
       ],
       [
         "src/views/members/index.tsx",
-        358
+        352
       ]
     ],
     "translation": "Bruger"
@@ -13136,7 +13275,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        113
+        104
       ]
     ],
     "translation": "Brugeren er allerede medlem af dette arbejdsområde"
@@ -13160,7 +13299,7 @@
     "origin": [
       [
         "src/views/settings/ApiSettings.tsx",
-        25
+        24
       ]
     ],
     "translation": "Se og administrer dine API-nøgler."
@@ -13172,7 +13311,7 @@
     "origin": [
       [
         "src/views/settings/BillingSettings.tsx",
-        94
+        88
       ]
     ],
     "translation": "Se og administrer din fakturering og dit abonnement."
@@ -13197,7 +13336,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        146
+        145
       ]
     ],
     "translation": "Kun visning"
@@ -13222,7 +13361,7 @@
     "origin": [
       [
         "src/views/public/board/index.tsx",
-        180
+        179
       ]
     ],
     "translation": "Se arbejdsområde"
@@ -13234,7 +13373,7 @@
     "origin": [
       [
         "src/views/board/components/VisibilityButton.tsx",
-        104
+        108
       ]
     ],
     "translation": "Synlighed"
@@ -13293,7 +13432,7 @@
     "origin": [
       [
         "src/views/auth/forgot-password/index.tsx",
-        73
+        72
       ]
     ],
     "translation": ""
@@ -13377,7 +13516,7 @@
     "origin": [
       [
         "src/views/settings/components/WebhookList.tsx",
-        124
+        120
       ]
     ],
     "translation": ""
@@ -13393,7 +13532,7 @@
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
-        178
+        175
       ]
     ],
     "translation": "Webhook-test mislykkedes"
@@ -13445,7 +13584,7 @@
       ],
       [
         "src/views/settings/WebhookSettings.tsx",
-        24
+        25
       ]
     ],
     "translation": "Webhooks"
@@ -13456,8 +13595,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/settings/components/UpdateWeekStartDayForm.tsx",
+        57
+      ],
+      [
         "src/views/settings/WorkspaceSettings.tsx",
-        65
+        60
       ]
     ],
     "translation": "Ugens startdag"
@@ -13469,7 +13612,7 @@
     "origin": [
       [
         "src/views/auth/login/index.tsx",
-        43
+        36
       ]
     ],
     "translation": "Velkommen tilbage"
@@ -13564,7 +13707,7 @@
       ],
       [
         "src/views/public/board/index.tsx",
-        118
+        117
       ],
       [
         "src/views/public/boards/index.tsx",
@@ -13595,8 +13738,12 @@
         262
       ],
       [
+        "src/views/settings/components/UpdateWorkspaceDescriptionForm.tsx",
+        90
+      ],
+      [
         "src/views/settings/WorkspaceSettings.tsx",
-        56
+        53
       ]
     ],
     "translation": "Beskrivelse af arbejdsområde"
@@ -13684,7 +13831,7 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        37
+        38
       ]
     ],
     "translation": "Navn på arbejdsområde"
@@ -13748,7 +13895,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        57
+        58
       ]
     ],
     "translation": "Rettigheder for arbejdsområdet"
@@ -13776,7 +13923,7 @@
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
-        46
+        45
       ]
     ],
     "translation": "URL til arbejdsområde"
@@ -13874,7 +14021,7 @@
     "origin": [
       [
         "src/views/settings/AccountSettings.tsx",
-        97
+        68
       ]
     ],
     "translation": "Du er ved at ændre din adgangskode."
@@ -13962,7 +14109,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        133
+        157
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
@@ -13970,23 +14117,23 @@
       ],
       [
         "src/views/board/index.tsx",
-        948
+        949
       ],
       [
         "src/views/board/index.tsx",
-        1025
+        1027
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
-        85
+        84
       ],
       [
         "src/views/boards/index.tsx",
-        69
+        59
       ],
       [
         "src/views/boards/index.tsx",
-        90
+        81
       ]
     ],
     "translation": "Du har ikke tilladelse"
@@ -13998,7 +14145,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        242
+        237
       ]
     ],
     "translation": "Du er logget ind."
@@ -14010,7 +14157,7 @@
     "origin": [
       [
         "src/components/AuthForm.tsx",
-        225
+        220
       ]
     ],
     "translation": "Din konto er oprettet."
@@ -14022,7 +14169,7 @@
     "origin": [
       [
         "src/views/settings/PermissionsSettings.tsx",
-        90
+        62
       ]
     ],
     "translation": "Du skal være administrator for at administrere rettigheder for arbejdsområdet."
@@ -14046,7 +14193,7 @@
     "origin": [
       [
         "src/views/board/members/index.tsx",
-        253
+        252
       ]
     ],
     "translation": ""
@@ -14058,7 +14205,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        146
+        131
       ]
     ],
     "translation": "Du er blevet inviteret til at deltage i et arbejdsområde på kan.bn."
@@ -14070,7 +14217,7 @@
     "origin": [
       [
         "src/views/invite/index.tsx",
-        147
+        132
       ]
     ],
     "translation": "Du er blevet inviteret til at deltage i et arbejdsområde."
@@ -14086,7 +14233,7 @@
     "origin": [
       [
         "src/views/members/components/InviteMemberForm.tsx",
-        123
+        114
       ]
     ],
     "translation": "Du har nået grænsen på {0} pladser. Opgrader dit abonnement for at tilføje flere medlemmer."
@@ -14134,7 +14281,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        424
+        426
       ]
     ],
     "translation": "Dine tavler er blevet importeret."
@@ -14170,7 +14317,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        113
+        114
       ]
     ],
     "translation": "Din GitHub-konto er blevet forbundet."
@@ -14182,7 +14329,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        137
+        138
       ]
     ],
     "translation": "Din GitHub-konto er blevet afbrudt."
@@ -14194,7 +14341,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        237
+        206
       ]
     ],
     "translation": "Din GitHub-konto er forbundet."
@@ -14280,7 +14427,7 @@
     "origin": [
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
-        246
+        247
       ]
     ],
     "translation": "Dine projekter er blevet importeret."
@@ -14304,7 +14451,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        91
+        92
       ]
     ],
     "translation": "Din Trello-konto er blevet afbrudt."
@@ -14316,7 +14463,7 @@
     "origin": [
       [
         "src/views/settings/IntegrationsSettings.tsx",
-        186
+        166
       ]
     ],
     "translation": "Din Trello-konto er forbundet."
