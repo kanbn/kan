@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
@@ -14,6 +13,7 @@ import Cta from "./components/Cta";
 import Divider from "./components/Divider";
 import FAQs from "./components/Faqs";
 import Features from "./components/Features";
+import HeroBoard from "./components/HeroBoard";
 import Layout from "./components/Layout";
 import Logos from "./components/Logos";
 import Testimonials from "./components/Testimonials";
@@ -112,22 +112,7 @@ export default function HomeView() {
         <section className="px-4 pb-10">
           <div className="rounded-[16px] border border-light-300 bg-light-50 p-1 lg:rounded-[20px] lg:p-1.5 dark:border-white/10 dark:bg-dark-100">
             <div className="relative overflow-hidden rounded-[12px] border border-light-300 lg:rounded-[14px] dark:border-white/10">
-              <Image
-                src={`/hero-light.png`}
-                alt="kanban"
-                width={1100}
-                height={1000}
-                priority
-                className="block dark:hidden"
-              />
-              <Image
-                src={`/hero-dark.png`}
-                alt="kanban"
-                width={1100}
-                height={1000}
-                priority
-                className="hidden dark:block"
-              />
+              <HeroBoard />
             </div>
           </div>
         </section>

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { format, isBefore, isSameYear, startOfDay } from "date-fns";
 import { HiOutlinePaperClip } from "react-icons/hi";
 import {
@@ -34,6 +35,7 @@ const Card = ({
     email: string;
     status: string;
     user: { name: string | null; email: string; image: string | null } | null;
+    icon?: ReactNode;
   }[];
   summary?: {
     hasDescription: boolean;
@@ -103,8 +105,9 @@ const Card = ({
       cardSummary.attachmentCount > 0 ? (
         <div className="mt-2 flex flex-col justify-end">
           <div className="space-x-0.5">
-            {labels.map((label) => (
+            {labels.map((label, index) => (
               <Badge
+                key={index}
                 value={label.name}
                 iconLeft={<LabelIcon colourCode={label.colourCode} />}
               />
@@ -161,7 +164,7 @@ const Card = ({
               )}
               {members.length > 0 && (
                 <div className="isolate flex justify-end -space-x-1 overflow-hidden">
-                  {members.map(({ publicId, user, email, status }) => {
+                  {members.map(({ publicId, user, email, status, icon }) => {
                     const avatarUrl = user?.image
                       ? getAvatarUrl(user.image)
                       : undefined;
@@ -172,6 +175,7 @@ const Card = ({
                         name={user?.name ?? ""}
                         email={user?.email ?? email}
                         imageUrl={avatarUrl}
+                        icon={icon}
                         size="sm"
                         paused={status === "paused"}
                       />
