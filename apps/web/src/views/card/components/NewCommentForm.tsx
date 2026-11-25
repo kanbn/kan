@@ -91,7 +91,7 @@ const NewCommentForm = ({
         onSubmit={handleSubmit(onSubmit)}
         workspaceMembers={workspaceMembers}
         enableYouTubeEmbed={false}
-        placeholder={t`Add comment... (type '/' to open commands or '@' to mention)`}
+        placeholder={t`Add comment...`}
         disableHeadings={true}
       />
       <div className="flex justify-end">

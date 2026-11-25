@@ -78,7 +78,7 @@ export default function CardList({
           setMinHeightPx(0);
         }
       }}
-      className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 scrollbar max-h-[calc(100dvh-225px)] min-h-8 overflow-x-hidden overflow-y-auto pr-1 pb-[calc(0.75rem+env(safe-area-inset-bottom))] dark:scrollbar-thumb-dark-600 dark:scrollbar-track-dark-100"
+      className="scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-w-[8px] z-10 -mt-0.5 -ml-1 scrollbar max-h-[calc(100dvh-225px)] min-h-8 overflow-x-hidden overflow-y-auto pt-0.5 pr-1 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pl-1 dark:scrollbar-thumb-dark-600 dark:scrollbar-track-dark-100"
     >
       <div ref={contentRef}>
         <SortableContext items={cardIds} strategy={verticalListSortingStrategy}>

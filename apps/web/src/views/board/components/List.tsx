@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { t } from "@lingui/core/macro";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import {
   HiEllipsisHorizontal,
   HiOutlinePlusSmall,
@@ -23,6 +23,7 @@ import { isPlaceholderPublicId } from "~/utils/helpers";
 interface ListProps {
   children: ReactNode;
   list: List;
+  cardCount?: number;
   setSelectedPublicListId: (publicListId: PublicListId) => void;
 }
 
@@ -42,6 +43,7 @@ type PublicListId = string;
 export default function List({
   children,
   list,
+  cardCount,
   setSelectedPublicListId,
 }: ListProps) {
   const { openModal } = useModal();
@@ -60,7 +62,7 @@ export default function List({
 
   const updateList = useUpdateList();
 
-  const { register, handleSubmit } = useForm<FormValues>({
+  const { register, handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
       listPublicId: list.publicId,
       name: list.name,
@@ -70,6 +72,8 @@ export default function List({
       name: list.name,
     },
   });
+
+  const listName = useWatch({ control, name: "name" });
 
   const onSubmit = (values: FormValues) => {
     if (!canEdit || isOptimistic) return;
@@ -109,37 +113,52 @@ export default function List({
       style={style}
       {...attributes}
       {...listeners}
-      className={`dark-text-dark-1000 mr-5 h-fit max-w-[18rem] min-w-[18rem] snap-start rounded-md border border-light-400 bg-light-300 py-2 pr-1 pl-2 text-neutral-900 md:snap-align-none dark:border-dark-300 dark:bg-dark-100 ${
+      className={`group/list mr-5 h-fit max-w-[18rem] min-w-[18rem] snap-start rounded-lg bg-light-200 py-2 pr-1 pl-2 text-neutral-900 md:snap-align-none dark:bg-dark-100 dark:text-dark-1000 ${
         canDrag ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""
       }`}
     >
-      <div className="mb-2 flex justify-between">
+      <div className="mb-1 flex items-center justify-between">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full focus-visible:outline-hidden"
+          className="flex min-w-0 flex-1 items-center focus-visible:outline-hidden"
         >
-          <input
-            id="name"
-            type="text"
-            aria-label={t`List name`}
-            {...register("name")}
-            onBlur={handleSubmit(onSubmit)}
-            readOnly={!canEdit || isOptimistic}
-            className="w-full border-0 bg-transparent px-4 pt-1 text-sm font-medium text-neutral-900 focus:ring-0 focus-visible:outline-hidden dark:text-dark-1000"
-          />
+          {/* The hidden copy sizes the input to its text, so the count sits right after the name. */}
+          <span className="inline-grid min-w-0 grid-cols-[minmax(0,auto)]">
+            <span
+              aria-hidden
+              className="invisible col-start-1 row-start-1 overflow-hidden px-3 py-1 text-sm font-medium whitespace-pre"
+            >
+              {listName || " "}
+            </span>
+            <input
+              id="name"
+              type="text"
+              size={1}
+              aria-label={t`List name`}
+              {...register("name")}
+              onBlur={handleSubmit(onSubmit)}
+              readOnly={!canEdit || isOptimistic}
+              className="col-start-1 row-start-1 w-full min-w-0 border-0 bg-transparent px-3 py-1 text-sm font-medium text-ellipsis text-neutral-900 focus:ring-0 focus-visible:outline-hidden dark:text-dark-1000"
+            />
+          </span>
+          {cardCount !== undefined && (
+            <span className="shrink-0 text-[11px] text-light-800 tabular-nums dark:text-dark-800">
+              {cardCount}
+            </span>
+          )}
         </form>
-        <div className="flex items-center">
+        <div className="flex items-center gap-0.5 transition-opacity md:opacity-0 md:group-hover/list:opacity-100 md:focus-within:opacity-100">
           <Tooltip
             content={!canCreateCard ? t`You don't have permission` : undefined}
           >
             <button
-              className="mx-1 inline-flex h-fit items-center rounded-md p-1 px-1 text-sm font-semibold text-dark-50 hover:bg-light-400 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:bg-dark-200"
+              className="inline-flex h-6 w-6 items-center justify-center rounded-[5px] hover:bg-light-300 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:bg-dark-200"
               onClick={() => openNewCardForm(list.publicId)}
               disabled={!canCreateCard || isOptimistic}
               aria-label={t`Add card`}
             >
               <HiOutlinePlusSmall
-                className="h-5 w-5 text-dark-900"
+                className="h-4 w-4 text-light-800 dark:text-dark-900"
                 aria-hidden="true"
               />
             </button>
@@ -152,7 +171,7 @@ export default function List({
                       label: t`Add a card`,
                       action: () => openNewCardForm(list.publicId),
                       icon: (
-                        <HiOutlineSquaresPlus className="h-[18px] w-[18px] text-dark-900" />
+                        <HiOutlineSquaresPlus className="h-[18px] w-[18px] text-light-800 dark:text-dark-900" />
                       ),
                     },
                   ]
@@ -163,7 +182,7 @@ export default function List({
                       label: t`Delete list`,
                       action: handleOpenDeleteListConfirmation,
                       icon: (
-                        <HiOutlineTrash className="h-[18px] w-[18px] text-dark-900" />
+                        <HiOutlineTrash className="h-[18px] w-[18px] text-light-800 dark:text-dark-900" />
                       ),
                     },
                   ]
@@ -176,8 +195,12 @@ export default function List({
 
             return (
               <div className="relative mr-1 inline-block">
-                <Dropdown items={dropdownItems} ariaLabel={t`List options`}>
-                  <HiEllipsisHorizontal className="h-5 w-5 text-dark-900" />
+                <Dropdown
+                  items={dropdownItems}
+                  ariaLabel={t`List options`}
+                  buttonClassName="h-6 w-6 hover:bg-light-300"
+                >
+                  <HiEllipsisHorizontal className="h-4 w-4 text-light-800 dark:text-dark-900" />
                 </Dropdown>
               </div>
             );
@@ -185,6 +208,17 @@ export default function List({
         </div>
       </div>
       {children}
+      {canCreateCard && !isOptimistic && (
+        <button
+          type="button"
+          aria-label={t`Add card to ${list.name}`}
+          onClick={() => openNewCardForm(list.publicId)}
+          className="mr-1 flex w-[calc(100%-0.25rem)] items-center gap-1 rounded-md px-2.5 py-1 text-xs text-light-800 transition-colors hover:bg-light-300 hover:text-light-1000 dark:text-dark-800 dark:hover:bg-dark-200 dark:hover:text-dark-1000"
+        >
+          <HiOutlinePlusSmall className="h-3.5 w-3.5" aria-hidden="true" />
+          {t`Add card`}
+        </button>
+      )}
     </div>
   );
 }
