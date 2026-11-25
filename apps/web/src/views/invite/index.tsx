@@ -9,8 +9,8 @@ import { env } from "@kan/shared/env";
 import Button from "~/components/Button";
 import LoadingSpinner from "~/components/LoadingSpinner";
 import { PageHead } from "~/components/PageHead";
-import PatternedBackground from "~/components/PatternedBackground";
 import { getApiErrorStatus } from "~/utils/apiError";
+import { AuthLayout } from "../auth/components/AuthLayout";
 
 const PageWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -98,7 +98,6 @@ export default function InvitePage() {
     return (
       <>
         <PageHead title={t`Join workspace`} />
-        <PatternedBackground />
         <div className="flex min-h-screen items-center justify-center">
           <LoadingSpinner size="lg" />
         </div>
@@ -109,75 +108,58 @@ export default function InvitePage() {
   if (isInviteInfoError || (!isInviteInfoLoading && !inviteInfo)) {
     return (
       <PageWrapper>
-        <div className="relative flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-          <PatternedBackground />
-          <div className="z-10 w-full max-w-md space-y-8">
-            <div>
-              <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-light-1000 dark:text-dark-1000">
-                {t`Invalid invitation`}
-              </h2>
-              <p className="mt-4 text-center text-sm text-light-900 dark:text-dark-800">
-                {t`This invitation link is invalid or has expired.`}
-              </p>
-            </div>
-            <div className="text-center">
-              <Button href="/" variant="primary">
-                {t`Go Home`}
-              </Button>
-            </div>
+        <AuthLayout title={t`Invalid invitation`}>
+          <p className="mb-6 text-center text-sm text-light-900 dark:text-dark-900">
+            {t`This invitation link is invalid or has expired.`}
+          </p>
+          <div className="text-center">
+            <Button href="/" size="sm">
+              {t`Go Home`}
+            </Button>
           </div>
-        </div>
+        </AuthLayout>
       </PageWrapper>
     );
   }
 
   return (
     <PageWrapper>
-      <div className="relative flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <PatternedBackground />
-        <div className="z-10 w-full max-w-[400px] space-y-8">
-          <div>
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-light-1000 dark:text-dark-1000">
-              {t`Join workspace`}
-            </h2>
-            {!error ? (
-              <p className="mt-4 text-center text-sm text-light-900 dark:text-dark-800">
-                {isCloudEnv
-                  ? t`You've been invited to join a workspace on kan.bn.`
-                  : t`You've been invited to join a workspace.`}
-              </p>
-            ) : (
-              <p className="mt-4 text-center text-sm text-red-500">{error}</p>
-            )}
+      <AuthLayout title={t`Join workspace`}>
+        {!error ? (
+          <p className="mb-6 text-center text-sm text-light-900 dark:text-dark-900">
+            {isCloudEnv
+              ? t`You've been invited to join a workspace on kan.bn.`
+              : t`You've been invited to join a workspace.`}
+          </p>
+        ) : (
+          <p className="mb-6 text-center text-sm text-red-600 dark:text-red-400">
+            {error}
+          </p>
+        )}
+        {session?.user.id ? (
+          <Button href={`/boards`} fullWidth>
+            {t`Go to app`}
+          </Button>
+        ) : (
+          <div className="space-y-2">
+            <Button
+              href={`/signup?next=/invite/${inviteCode}`}
+              disabled={isProcessing}
+              fullWidth
+            >
+              {t`Sign Up`}
+            </Button>
+            <Button
+              href={`/login?next=/invite/${inviteCode}`}
+              disabled={isProcessing}
+              variant="secondary"
+              fullWidth
+            >
+              {t`Sign In`}
+            </Button>
           </div>
-          <div className="flex justify-center gap-2">
-            {session?.user.id ? (
-              <Button href={`/boards`} variant="primary" size="md">
-                {t`Go to app`}
-              </Button>
-            ) : (
-              <>
-                <Button
-                  href={`/login?next=/invite/${inviteCode}`}
-                  disabled={isProcessing}
-                  variant="primary"
-                  size="md"
-                >
-                  {t`Sign In`}
-                </Button>
-                <Button
-                  href={`/signup?next=/invite/${inviteCode}`}
-                  disabled={isProcessing}
-                  variant="primary"
-                  size="md"
-                >
-                  {t`Sign Up`}
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
+        )}
+      </AuthLayout>
     </PageWrapper>
   );
 }

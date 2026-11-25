@@ -108,6 +108,23 @@
   }
 }
 
+/* A gradient this faint shows banding, so the grain itself is faded out instead */
+.auth-gradient {
+  position: relative;
+  isolation: isolate;
+}
+
+.dark .auth-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 2 0 0 0 -.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-image: linear-gradient(to bottom right, #000, transparent);
+  opacity: 0.04;
+}
+
 /* Tippy.js tooltip theme */
 .tippy-box[data-theme~="tooltip"] {
   @apply rounded-md border border-light-600 bg-white px-2 py-1 text-sm text-neutral-900 shadow-lg dark:border-dark-600 dark:bg-dark-100 dark:text-dark-1000;

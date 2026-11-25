@@ -1,5 +1,8 @@
+import type { SocialProvidersProps } from "~/utils/social-providers";
 import LoginView from "~/views/auth/login";
 
-export default function LoginPage() {
-  return <LoginView />;
+export { getSocialProvidersProps as getServerSideProps } from "~/utils/social-providers";
+
+export default function LoginPage(props: SocialProvidersProps) {
+  return <LoginView {...props} />;
 }
