@@ -108,7 +108,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        468
+        469
       ]
     ],
     "translation": ""
@@ -172,7 +172,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        912
+        830
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -265,7 +265,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        403
+        404
       ]
     ],
     "translation": ""
@@ -379,7 +379,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        558
+        560
       ]
     ],
     "translation": ""
@@ -585,7 +585,8 @@
         54
       ]
     ],
-    "translation": "Tilføj / rediger etiket"
+    "translation": "Tilføj / rediger etiket",
+    "obsolete": true
   },
   "B3xxao": {
     "message": "Add a card",
@@ -630,7 +631,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        499
+        500
       ],
       [
         "src/views/board/components/List.tsx",
@@ -1439,7 +1440,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        78
+        443
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -1970,7 +1971,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        884
+        802
       ],
       [
         "src/views/board/members/index.tsx",
@@ -2075,7 +2076,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        902
+        820
       ]
     ],
     "translation": ""
@@ -2759,10 +2760,6 @@
         169
       ],
       [
-        "src/views/board/components/CardContextDuplicateModal.tsx",
-        266
-      ],
-      [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
         44
       ],
@@ -2863,8 +2860,8 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/CardContextDuplicateModal.tsx",
-        60
+        "src/views/board/useCardQuickActions.ts",
+        142
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -2878,6 +2875,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/useCardQuickActions.ts",
+        143
+      ],
       [
         "src/views/card/components/Dropdown.tsx",
         55
@@ -2896,6 +2897,18 @@
       ]
     ],
     "translation": "Tildelinger af medlemmer til kortet fjernes, når kortet flyttes til et andet arbejdsområde."
+  },
+  "wmwvU1": {
+    "message": "Card moved",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        918
+      ]
+    ],
+    "translation": ""
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -2963,8 +2976,8 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/index.tsx",
-        459
+        "src/views/board/components/CardContextMenu.tsx",
+        395
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -3736,6 +3749,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextMenu.tsx",
+        402
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         115
       ]
@@ -3752,7 +3769,8 @@
         251
       ]
     ],
-    "translation": "Kopiér tjeklister"
+    "translation": "Kopiér tjeklister",
+    "obsolete": true
   },
   "fDQ7hA": {
     "message": "Copy labels",
@@ -3764,7 +3782,8 @@
         215
       ]
     ],
-    "translation": "Kopiér etiketter"
+    "translation": "Kopiér etiketter",
+    "obsolete": true
   },
   "1bJKhj": {
     "message": "Copy link to card",
@@ -3776,7 +3795,8 @@
         66
       ]
     ],
-    "translation": "Kopiér link til kort"
+    "translation": "Kopiér link til kort",
+    "obsolete": true
   },
   "uvH2xS": {
     "message": "Copy members",
@@ -3788,7 +3808,8 @@
         233
       ]
     ],
-    "translation": "Kopiér medlemmer"
+    "translation": "Kopiér medlemmer",
+    "obsolete": true
   },
   "FO91Ip": {
     "message": "Copy public link",
@@ -3807,6 +3828,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        419
+      ],
       [
         "src/views/card/components/Dropdown.tsx",
         122
@@ -3972,6 +3997,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextMenu.tsx",
+        269
+      ],
+      [
         "src/views/board/components/NewCardForm.tsx",
         526
       ],
@@ -3989,11 +4018,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        159
+        155
       ],
       [
         "src/views/board/index.tsx",
-        1044
+        983
       ]
     ],
     "translation": "Opret ny liste"
@@ -4407,7 +4436,7 @@
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
-        84
+        452
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -4762,18 +4791,6 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/CardContextDueDateModal.tsx",
-        39
-      ],
-      [
-        "src/views/board/components/CardContextLabelsModal.tsx",
-        51
-      ],
-      [
-        "src/views/board/components/CardContextMembersModal.tsx",
-        50
-      ],
-      [
         "src/views/boards/components/TemplateBoards.tsx",
         17
       ],
@@ -4817,6 +4834,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        303
+      ],
       [
         "src/views/board/components/Filters.tsx",
         191
@@ -4890,7 +4911,8 @@
         279
       ]
     ],
-    "translation": "Duplikér"
+    "translation": "Duplikér",
+    "obsolete": true
   },
   "BTDPLo": {
     "message": "Duplicate card",
@@ -4898,12 +4920,8 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/CardContextDuplicateModal.tsx",
-        106
-      ],
-      [
         "src/views/board/components/CardContextMenu.tsx",
-        72
+        434
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -4922,7 +4940,8 @@
         279
       ]
     ],
-    "translation": "Duplikerer…"
+    "translation": "Duplikerer…",
+    "obsolete": true
   },
   "ePK91l": {
     "message": "Edit",
@@ -5122,7 +5141,8 @@
         194
       ]
     ],
-    "translation": "Slutningen af listen"
+    "translation": "Slutningen af listen",
+    "obsolete": true
   },
   "SUXBxp": {
     "message": "Engineering",
@@ -6146,7 +6166,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1026
+        965
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6651,6 +6671,10 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        411
+      ],
       [
         "src/views/card/components/Dropdown.tsx",
         99
@@ -7221,8 +7245,8 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/CardContextLabelsModal.tsx",
-        34
+        "src/views/board/components/CardContextMenu.tsx",
+        245
       ],
       [
         "src/views/board/components/Filters.tsx",
@@ -7442,8 +7466,8 @@
         105
       ],
       [
-        "src/views/board/index.tsx",
-        457
+        "src/views/board/components/CardContextMenu.tsx",
+        394
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -7468,10 +7492,6 @@
       [
         "src/views/board/archived/index.tsx",
         232
-      ],
-      [
-        "src/views/board/components/CardContextDuplicateModal.tsx",
-        112
       ],
       [
         "src/views/card/index.tsx",
@@ -7675,7 +7695,8 @@
         42
       ]
     ],
-    "translation": "Administrer medlemmer"
+    "translation": "Administrer medlemmer",
+    "obsolete": true
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -7843,6 +7864,10 @@
         20
       ],
       [
+        "src/views/board/components/CardContextMenu.tsx",
+        276
+      ],
+      [
         "src/views/board/components/Filters.tsx",
         164
       ],
@@ -7961,6 +7986,18 @@
     ],
     "translation": "Flyt tavle til et andet arbejdsområde"
   },
+  "mcfB2A": {
+    "message": "Move to",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        351
+      ]
+    ],
+    "translation": ""
+  },
   "51UCsN": {
     "message": "Move to another list",
     "placeholders": {},
@@ -7971,7 +8008,8 @@
         48
       ]
     ],
-    "translation": "Flyt til en anden liste"
+    "translation": "Flyt til en anden liste",
+    "obsolete": true
   },
   "J4-OTA": {
     "message": "Move to list",
@@ -7983,7 +8021,8 @@
         79
       ]
     ],
-    "translation": "Flyt til liste"
+    "translation": "Flyt til liste",
+    "obsolete": true
   },
   "S3wq2O": {
     "message": "Move to workspace",
@@ -8111,7 +8150,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        549
+        551
       ]
     ],
     "translation": ""
@@ -8231,7 +8270,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        968
+        886
       ]
     ],
     "translation": "Ny liste"
@@ -8327,7 +8366,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        319
+        320
       ]
     ],
     "translation": ""
@@ -8343,6 +8382,18 @@
       ]
     ],
     "translation": "Næste trin"
+  },
+  "IT903p": {
+    "message": "Next week",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        196
+      ]
+    ],
+    "translation": ""
   },
   "_glL9Q": {
     "message": "No {0}",
@@ -8415,7 +8466,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        505
+        506
       ]
     ],
     "translation": ""
@@ -8489,7 +8540,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1022
+        961
       ]
     ],
     "translation": "Ingen lister"
@@ -8501,7 +8552,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1027
+        966
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
@@ -8665,6 +8716,18 @@
       ]
     ],
     "translation": "Åbn kommandomenu"
+  },
+  "Alx2_L": {
+    "message": "Open in new tab",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        237
+      ]
+    ],
+    "translation": ""
   },
   "cFQEU_": {
     "message": "Open keyboard shortcuts",
@@ -9093,6 +9156,18 @@
     ],
     "translation": "Personligt projekt"
   },
+  "mFuPvv": {
+    "message": "Pick a date...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        330
+      ]
+    ],
+    "translation": ""
+  },
   "Oi-J-N": {
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
@@ -9300,15 +9375,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        313
+        309
       ],
       [
         "src/views/board/index.tsx",
-        371
-      ],
-      [
-        "src/views/board/index.tsx",
-        409
+        367
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -9321,6 +9392,10 @@
       [
         "src/views/board/members/index.tsx",
         87
+      ],
+      [
+        "src/views/board/useCardQuickActions.ts",
+        52
       ],
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
@@ -9495,16 +9570,8 @@
         110
       ],
       [
-        "src/views/board/components/CardContextDuplicateModal.tsx",
-        69
-      ],
-      [
-        "src/views/board/components/CardContextMoveListModal.tsx",
-        51
-      ],
-      [
-        "src/views/board/index.tsx",
-        466
+        "src/views/board/components/CardContextMenu.tsx",
+        185
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -9539,7 +9606,8 @@
         187
       ]
     ],
-    "translation": "Placering på listen (0 = først, lad feltet være tomt for sidst)"
+    "translation": "Placering på listen (0 = først, lad feltet være tomt for sidst)",
+    "obsolete": true
   },
   "1xwZj_": {
     "message": "Previous month",
@@ -9548,7 +9616,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        302
+        303
       ]
     ],
     "translation": ""
@@ -9842,6 +9910,18 @@
       ]
     ],
     "translation": "Fjern"
+  },
+  "WliI9l": {
+    "message": "Remove due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        344
+      ]
+    ],
+    "translation": ""
   },
   "cILfnJ": {
     "message": "Remove file",
@@ -10443,7 +10523,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        552
+        554
       ]
     ],
     "translation": ""
@@ -10499,7 +10579,8 @@
         125
       ]
     ],
-    "translation": "Vælg en liste"
+    "translation": "Vælg en liste",
+    "obsolete": true
   },
   "E5eC82": {
     "message": "Select a member",
@@ -10721,12 +10802,8 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/CardContextDueDateModal.tsx",
-        23
-      ],
-      [
-        "src/views/board/components/CardContextMenu.tsx",
-        60
+        "src/views/board/components/CardDueDateModal.tsx",
+        20
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -11524,11 +11601,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        884
+        802
       ],
       [
         "src/views/board/index.tsx",
-        921
+        839
       ]
     ],
     "translation": "Skabelon"
@@ -11776,7 +11853,8 @@
         62
       ]
     ],
-    "translation": "Kortet er blevet duplikeret."
+    "translation": "Kortet er blevet duplikeret.",
+    "obsolete": true
   },
   "CQLyFX": {
     "message": "The card is back in {listName}.",
@@ -11790,6 +11868,22 @@
       [
         "src/hooks/useCardArchive.ts",
         54
+      ]
+    ],
+    "translation": ""
+  },
+  "h94-9K": {
+    "message": "The card is now in {listName}.",
+    "placeholders": {
+      "listName": [
+        "listName"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/index.tsx",
+        919
       ]
     ],
     "translation": ""
@@ -12173,6 +12267,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextMenu.tsx",
+        412
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         101
       ]
@@ -12205,7 +12303,8 @@
         174
       ]
     ],
-    "translation": "Titel (valgfrit)"
+    "translation": "Titel (valgfrit)",
+    "obsolete": true
   },
   "Se_UIp": {
     "message": "To Do",
@@ -12230,7 +12329,11 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        314
+        315
+      ],
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        193
       ]
     ],
     "translation": ""
@@ -12258,6 +12361,18 @@
       ]
     ],
     "translation": "Token er påkrævet"
+  },
+  "BRMXj0": {
+    "message": "Tomorrow",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        194
+      ]
+    ],
+    "translation": ""
   },
   "eEQyz-": {
     "message": "Track all card changes with detailed activity history.",
@@ -12482,6 +12597,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/CardContextMenu.tsx",
+        414
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
         106
       ]
@@ -12498,8 +12617,8 @@
         109
       ],
       [
-        "src/views/board/index.tsx",
-        464
+        "src/views/board/components/CardContextMenu.tsx",
+        397
       ],
       [
         "src/views/card/components/Dropdown.tsx",
@@ -12670,10 +12789,6 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/components/CardContextDuplicateModal.tsx",
-        68
-      ],
-      [
         "src/views/card/components/Dropdown.tsx",
         60
       ]
@@ -12714,7 +12829,8 @@
         50
       ]
     ],
-    "translation": "Kunne ikke flytte kort"
+    "translation": "Kunne ikke flytte kort",
+    "obsolete": true
   },
   "8yFGGF": {
     "message": "Unable to remove member",
@@ -12843,7 +12959,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        370
+        366
+      ],
+      [
+        "src/views/board/useCardQuickActions.ts",
+        51
       ],
       [
         "src/views/card/index.tsx",
@@ -12894,10 +13014,6 @@
     "comments": [],
     "origin": [
       [
-        "src/views/board/index.tsx",
-        408
-      ],
-      [
         "src/views/card/components/DueDateSelector.tsx",
         78
       ]
@@ -12923,7 +13039,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        312
+        308
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -13373,7 +13489,7 @@
     "origin": [
       [
         "src/views/board/components/CalendarView.tsx",
-        555
+        557
       ],
       [
         "src/views/members/index.tsx",
@@ -14417,11 +14533,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        955
+        873
       ],
       [
         "src/views/board/index.tsx",
-        1033
+        972
       ],
       [
         "src/views/boards/components/BoardsList.tsx",

@@ -60,7 +60,7 @@
       "0": ["day.cards.length"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 468]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 469]],
     "translation": "{0} cartes à échéance"
   },
   "mU-M00": {
@@ -96,7 +96,7 @@
       "0": ["isTemplate ? \"Template\" : \"Board\""]
     },
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 912]],
+    "origin": [["src/views/board/index.tsx", 830]],
     "translation": "{0} introuvable"
   },
   "UPYBKg": {
@@ -149,7 +149,7 @@
       "overflowCount": ["overflowCount"]
     },
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 403]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 404]],
     "translation": "+ {overflowCount} de plus"
   },
   "be30i9": {
@@ -223,7 +223,7 @@
     "message": "14-day free trial · cancel anytime",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 558]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 560]],
     "translation": "Essai gratuit de 14 jours · annulation à tout moment"
   },
   "M5sSHj": {
@@ -349,7 +349,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/board/components/CardContextMenu.tsx", 54]],
-    "translation": "Ajouter / modifier l'étiquette"
+    "translation": "Ajouter / modifier l'étiquette",
+    "obsolete": true
   },
   "B3xxao": {
     "message": "Add a card",
@@ -379,7 +380,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CalendarView.tsx", 499],
+      ["src/views/board/components/CalendarView.tsx", 500],
       ["src/views/board/components/List.tsx", 163],
       ["src/views/board/components/List.tsx", 224]
     ],
@@ -851,7 +852,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextMenu.tsx", 78],
+      ["src/views/board/components/CardContextMenu.tsx", 443],
       ["src/views/card/components/Dropdown.tsx", 166]
     ],
     "translation": "Archiver la carte"
@@ -1178,7 +1179,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/archived/index.tsx", 181],
-      ["src/views/board/index.tsx", 884],
+      ["src/views/board/index.tsx", 802],
       ["src/views/board/members/index.tsx", 230],
       ["src/views/card/index.tsx", 342],
       ["src/views/public/board/index.tsx", 117]
@@ -1239,7 +1240,7 @@
     "message": "Board name",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 902]],
+    "origin": [["src/views/board/index.tsx", 820]],
     "translation": "Nom du tableau"
   },
   "wewm3j": {
@@ -1653,7 +1654,6 @@
     "origin": [
       ["src/components/DeleteLabelConfirmation.tsx", 52],
       ["src/components/YouTubeEmbed/EditYouTubeModal.tsx", 169],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 266],
       ["src/views/board/components/DeleteBoardConfirmation.tsx", 44],
       ["src/views/board/components/MoveBoardForm.tsx", 95],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 101],
@@ -1701,7 +1701,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 60],
+      ["src/views/board/useCardQuickActions.ts", 142],
       ["src/views/card/components/Dropdown.tsx", 53]
     ],
     "translation": "Carte dupliquée"
@@ -1710,7 +1710,10 @@
     "message": "Card duplicated successfully.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 55]],
+    "origin": [
+      ["src/views/board/useCardQuickActions.ts", 143],
+      ["src/views/card/components/Dropdown.tsx", 55]
+    ],
     "translation": "Carte dupliquée avec succès."
   },
   "AgE2vR": {
@@ -1719,6 +1722,13 @@
     "comments": [],
     "origin": [["src/views/board/components/MoveBoardForm.tsx", 88]],
     "translation": "Les membres affectés aux cartes seront supprimés lors du déplacement vers un autre espace de travail."
+  },
+  "wmwvU1": {
+    "message": "Card moved",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 918]],
+    "translation": "Carte déplacée"
   },
   "fEY2vP": {
     "message": "Card not found",
@@ -1760,7 +1770,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 459],
+      ["src/views/board/components/CardContextMenu.tsx", 395],
       ["src/views/card/components/Dropdown.tsx", 82],
       ["src/views/public/board/CardModal.tsx", 42]
     ],
@@ -2226,7 +2236,10 @@
     "message": "Copy card link",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 115]],
+    "origin": [
+      ["src/views/board/components/CardContextMenu.tsx", 402],
+      ["src/views/card/components/Dropdown.tsx", 115]
+    ],
     "translation": "Copier le lien de la carte"
   },
   "0utuU6": {
@@ -2236,7 +2249,8 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 251]
     ],
-    "translation": "Copier les listes de contrôle"
+    "translation": "Copier les listes de contrôle",
+    "obsolete": true
   },
   "fDQ7hA": {
     "message": "Copy labels",
@@ -2245,14 +2259,16 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 215]
     ],
-    "translation": "Copier les étiquettes"
+    "translation": "Copier les étiquettes",
+    "obsolete": true
   },
   "1bJKhj": {
     "message": "Copy link to card",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/board/components/CardContextMenu.tsx", 66]],
-    "translation": "Copier le lien vers la carte"
+    "translation": "Copier le lien vers la carte",
+    "obsolete": true
   },
   "uvH2xS": {
     "message": "Copy members",
@@ -2261,7 +2277,8 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 233]
     ],
-    "translation": "Copier les membres"
+    "translation": "Copier les membres",
+    "obsolete": true
   },
   "FO91Ip": {
     "message": "Copy public link",
@@ -2274,7 +2291,10 @@
     "message": "Copy ticket ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 122]],
+    "origin": [
+      ["src/views/board/components/CardContextMenu.tsx", 419],
+      ["src/views/card/components/Dropdown.tsx", 122]
+    ],
     "translation": "Copier l'ID du ticket"
   },
   "9PaIxv": {
@@ -2372,6 +2392,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/views/board/components/CardContextMenu.tsx", 269],
       ["src/views/board/components/NewCardForm.tsx", 526],
       ["src/views/card/components/LabelSelector.tsx", 111]
     ],
@@ -2382,8 +2403,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 159],
-      ["src/views/board/index.tsx", 1044]
+      ["src/views/board/index.tsx", 155],
+      ["src/views/board/index.tsx", 983]
     ],
     "translation": "Créer une nouvelle liste"
   },
@@ -2633,7 +2654,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/archived/index.tsx", 104],
-      ["src/views/board/components/CardContextMenu.tsx", 84],
+      ["src/views/board/components/CardContextMenu.tsx", 452],
       ["src/views/card/components/Dropdown.tsx", 179]
     ],
     "translation": "Supprimer la carte"
@@ -2846,9 +2867,6 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDueDateModal.tsx", 39],
-      ["src/views/board/components/CardContextLabelsModal.tsx", 51],
-      ["src/views/board/components/CardContextMembersModal.tsx", 50],
       ["src/views/boards/components/TemplateBoards.tsx", 17],
       ["src/views/boards/components/TemplateBoards.tsx", 23],
       ["src/views/boards/components/TemplateBoards.tsx", 29],
@@ -2870,6 +2888,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
+      ["src/views/board/components/CardContextMenu.tsx", 303],
       ["src/views/board/components/Filters.tsx", 191],
       ["src/views/board/components/NewCardForm.tsx", 581],
       ["src/views/card/index.tsx", 145]
@@ -2911,15 +2930,15 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 279]
     ],
-    "translation": "Dupliquer"
+    "translation": "Dupliquer",
+    "obsolete": true
   },
   "BTDPLo": {
     "message": "Duplicate card",
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 106],
-      ["src/views/board/components/CardContextMenu.tsx", 72],
+      ["src/views/board/components/CardContextMenu.tsx", 434],
       ["src/views/card/components/Dropdown.tsx", 142]
     ],
     "translation": "Dupliquer la carte"
@@ -2931,7 +2950,8 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 279]
     ],
-    "translation": "Duplication en cours…"
+    "translation": "Duplication en cours…",
+    "obsolete": true
   },
   "ePK91l": {
     "message": "Edit",
@@ -3058,7 +3078,8 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 194]
     ],
-    "translation": "Fin de la liste"
+    "translation": "Fin de la liste",
+    "obsolete": true
   },
   "SUXBxp": {
     "message": "Engineering",
@@ -3695,7 +3716,7 @@
     "message": "Get started by creating a new list",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1026]],
+    "origin": [["src/views/board/index.tsx", 965]],
     "translation": "Commencez en créant une nouvelle liste"
   },
   "pBLnuq": {
@@ -4003,7 +4024,10 @@
     "message": "ID copied",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 99]],
+    "origin": [
+      ["src/views/board/components/CardContextMenu.tsx", 411],
+      ["src/views/card/components/Dropdown.tsx", 99]
+    ],
     "translation": "ID copié"
   },
   "iwr7AP": {
@@ -4349,7 +4373,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextLabelsModal.tsx", 34],
+      ["src/views/board/components/CardContextMenu.tsx", 245],
       ["src/views/board/components/Filters.tsx", 173],
       ["src/views/board/components/NewCardForm.tsx", 530],
       ["src/views/card/components/LabelSelector.tsx", 112],
@@ -4488,7 +4512,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 105],
-      ["src/views/board/index.tsx", 457],
+      ["src/views/board/components/CardContextMenu.tsx", 394],
       ["src/views/card/components/Dropdown.tsx", 80],
       ["src/views/public/board/CardModal.tsx", 40],
       ["src/views/public/board/index.tsx", 80]
@@ -4501,7 +4525,6 @@
     "comments": [],
     "origin": [
       ["src/views/board/archived/index.tsx", 232],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 112],
       ["src/views/card/index.tsx", 116]
     ],
     "translation": "Liste"
@@ -4622,7 +4645,8 @@
       ["src/views/board/components/CardContextMembersModal.tsx", 33],
       ["src/views/board/components/CardContextMenu.tsx", 42]
     ],
-    "translation": "Gérer les membres"
+    "translation": "Gérer les membres",
+    "obsolete": true
   },
   "IDvohQ": {
     "message": "marked a checklist item as incomplete",
@@ -4714,6 +4738,7 @@
     "origin": [
       ["src/components/SideNavigation.tsx", 105],
       ["src/utils/permission-category-label.ts", 20],
+      ["src/views/board/components/CardContextMenu.tsx", 276],
       ["src/views/board/components/Filters.tsx", 164],
       ["src/views/board/components/NewCardForm.tsx", 488],
       ["src/views/card/components/MemberSelector.tsx", 117],
@@ -4781,19 +4806,28 @@
     "origin": [["src/views/board/components/MoveBoardForm.tsx", 60]],
     "translation": "Déplacer le tableau vers un autre espace de travail"
   },
+  "mcfB2A": {
+    "message": "Move to",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextMenu.tsx", 351]],
+    "translation": "Déplacer vers"
+  },
   "51UCsN": {
     "message": "Move to another list",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/board/components/CardContextMenu.tsx", 48]],
-    "translation": "Déplacer vers une autre liste"
+    "translation": "Déplacer vers une autre liste",
+    "obsolete": true
   },
   "J4-OTA": {
     "message": "Move to list",
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 79]],
-    "translation": "Déplacer vers la liste"
+    "translation": "Déplacer vers la liste",
+    "obsolete": true
   },
   "S3wq2O": {
     "message": "Move to workspace",
@@ -4864,7 +4898,7 @@
     "message": "Never lose track of what's due",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 549]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 551]],
     "translation": "Ne perdez jamais de vue ce qui est dû"
   },
   "isRobC": {
@@ -4934,7 +4968,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/NewListForm.tsx", 133],
-      ["src/views/board/index.tsx", 968]
+      ["src/views/board/index.tsx", 886]
     ],
     "translation": "Nouvelle liste"
   },
@@ -4995,7 +5029,7 @@
     "message": "Next month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 319]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 320]],
     "translation": "Mois prochain"
   },
   "HeFWjW": {
@@ -5004,6 +5038,13 @@
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 100]],
     "translation": "Prochaines étapes"
+  },
+  "IT903p": {
+    "message": "Next week",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextMenu.tsx", 196]],
+    "translation": "Semaine prochaine"
   },
   "_glL9Q": {
     "message": "No {0}",
@@ -5046,7 +5087,7 @@
     "message": "No cards due",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 505]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 506]],
     "translation": "Aucune carte à échéance"
   },
   "OpNhRn": {
@@ -5090,14 +5131,14 @@
     "message": "No lists",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1022]],
+    "origin": [["src/views/board/index.tsx", 961]],
     "translation": "Aucune liste"
   },
   "fvLNDy": {
     "message": "No lists have been created yet",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/index.tsx", 1027]],
+    "origin": [["src/views/board/index.tsx", 966]],
     "translation": "Aucune liste n'a encore été créée"
   },
   "qRyiNn": {
@@ -5194,6 +5235,13 @@
     "comments": [],
     "origin": [["src/components/WorkspaceMenu.tsx", 39]],
     "translation": "Ouvrir le menu de commandes"
+  },
+  "Alx2_L": {
+    "message": "Open in new tab",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextMenu.tsx", 237]],
+    "translation": "Ouvrir dans un nouvel onglet"
   },
   "cFQEU_": {
     "message": "Open keyboard shortcuts",
@@ -5452,6 +5500,13 @@
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 93]],
     "translation": "Projet personnel"
   },
+  "mFuPvv": {
+    "message": "Pick a date...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextMenu.tsx", 330]],
+    "translation": "Choisir une date…"
+  },
   "Oi-J-N": {
     "message": "Pick a plan to get started. All paid plans include a 14-day free trial.",
     "placeholders": {},
@@ -5567,15 +5622,15 @@
       ["src/views/board/components/NewTemplateForm.tsx", 71],
       ["src/views/board/components/UpdateBoardSlugForm.tsx", 79],
       ["src/views/board/components/VisibilityButton.tsx", 60],
-      ["src/views/board/index.tsx", 313],
-      ["src/views/board/index.tsx", 371],
-      ["src/views/board/index.tsx", 409],
+      ["src/views/board/index.tsx", 309],
+      ["src/views/board/index.tsx", 367],
       ["src/views/board/members/components/AddBoardMemberForm.tsx", 42],
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
         37
       ],
       ["src/views/board/members/index.tsx", 87],
+      ["src/views/board/useCardQuickActions.ts", 52],
       ["src/views/boards/components/ImportBoardsForm.tsx", 260],
       ["src/views/boards/components/ImportBoardsForm.tsx", 453],
       ["src/views/card/components/AttachmentThumbnails.tsx", 78],
@@ -5631,9 +5686,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 110],
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 69],
-      ["src/views/board/components/CardContextMoveListModal.tsx", 51],
-      ["src/views/board/index.tsx", 466],
+      ["src/views/board/components/CardContextMenu.tsx", 185],
       ["src/views/card/components/Dropdown.tsx", 62],
       ["src/views/card/components/Dropdown.tsx", 89],
       ["src/views/card/components/Dropdown.tsx", 108],
@@ -5649,13 +5702,14 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 187]
     ],
-    "translation": "Position dans la liste (0 = premier, laisser vide pour la fin)"
+    "translation": "Position dans la liste (0 = premier, laisser vide pour la fin)",
+    "obsolete": true
   },
   "1xwZj_": {
     "message": "Previous month",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 302]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 303]],
     "translation": "Mois précédent"
   },
   "aHCEmh": {
@@ -5830,6 +5884,13 @@
       ["src/views/members/components/DeleteMemberConfirmation.tsx", 71]
     ],
     "translation": "Supprimer"
+  },
+  "WliI9l": {
+    "message": "Remove due date",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextMenu.tsx", 344]],
+    "translation": "Supprimer la date d'échéance"
   },
   "cILfnJ": {
     "message": "Remove file",
@@ -6186,7 +6247,7 @@
     "message": "See all your cards across the month, then drag and drop to reschedule. Available on paid plans.",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 552]],
+    "origin": [["src/views/board/components/CalendarView.tsx", 554]],
     "translation": "Consultez toutes vos cartes du mois, puis glissez-déposez pour reprogrammer. Disponible sur les forfaits payants."
   },
   "jzBFWO": {
@@ -6221,7 +6282,8 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 125]
     ],
-    "translation": "Sélectionner une liste"
+    "translation": "Sélectionner une liste",
+    "obsolete": true
   },
   "E5eC82": {
     "message": "Select a member",
@@ -6356,8 +6418,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CardContextDueDateModal.tsx", 23],
-      ["src/views/board/components/CardContextMenu.tsx", 60],
+      ["src/views/board/components/CardDueDateModal.tsx", 20],
       ["src/views/card/components/DueDateSelector.tsx", 133]
     ],
     "translation": "Définir la date d'échéance"
@@ -6837,8 +6898,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 884],
-      ["src/views/board/index.tsx", 921]
+      ["src/views/board/index.tsx", 802],
+      ["src/views/board/index.tsx", 839]
     ],
     "translation": "Modèle"
   },
@@ -6985,7 +7046,8 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 62]
     ],
-    "translation": "La carte a été dupliquée."
+    "translation": "La carte a été dupliquée.",
+    "obsolete": true
   },
   "CQLyFX": {
     "message": "The card is back in {listName}.",
@@ -6995,6 +7057,15 @@
     "comments": [],
     "origin": [["src/hooks/useCardArchive.ts", 54]],
     "translation": "La carte est de retour dans {listName}."
+  },
+  "h94-9K": {
+    "message": "The card is now in {listName}.",
+    "placeholders": {
+      "listName": ["listName"]
+    },
+    "comments": [],
+    "origin": [["src/views/board/index.tsx", 919]],
+    "translation": "La carte se trouve maintenant dans {listName}."
   },
   "kwssev": {
     "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
@@ -7237,7 +7308,10 @@
     "message": "Ticket ID copied to clipboard",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 101]],
+    "origin": [
+      ["src/views/board/components/CardContextMenu.tsx", 412],
+      ["src/views/card/components/Dropdown.tsx", 101]
+    ],
     "translation": "ID du ticket copié dans le presse-papiers"
   },
   "MHrjPM": {
@@ -7257,7 +7331,8 @@
     "origin": [
       ["src/views/board/components/CardContextDuplicateModal.tsx", 174]
     ],
-    "translation": "Titre (facultatif)"
+    "translation": "Titre (facultatif)",
+    "obsolete": true
   },
   "Se_UIp": {
     "message": "To Do",
@@ -7273,7 +7348,10 @@
     "message": "Today",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/board/components/CalendarView.tsx", 314]],
+    "origin": [
+      ["src/views/board/components/CalendarView.tsx", 315],
+      ["src/views/board/components/CardContextMenu.tsx", 193]
+    ],
     "translation": "Aujourd'hui"
   },
   "4gAX8s": {
@@ -7289,6 +7367,13 @@
     "comments": [],
     "origin": [["src/views/settings/IntegrationsSettings.tsx", 28]],
     "translation": "Le jeton est requis"
+  },
+  "BRMXj0": {
+    "message": "Tomorrow",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/views/board/components/CardContextMenu.tsx", 194]],
+    "translation": "Demain"
   },
   "eEQyz-": {
     "message": "Track all card changes with detailed activity history.",
@@ -7424,7 +7509,10 @@
     "message": "Unable to copy ID",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/card/components/Dropdown.tsx", 106]],
+    "origin": [
+      ["src/views/board/components/CardContextMenu.tsx", 414],
+      ["src/views/card/components/Dropdown.tsx", 106]
+    ],
     "translation": "Impossible de copier l'ID"
   },
   "W1ewR0": {
@@ -7433,7 +7521,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/BoardDropdown.tsx", 109],
-      ["src/views/board/index.tsx", 464],
+      ["src/views/board/components/CardContextMenu.tsx", 397],
       ["src/views/card/components/Dropdown.tsx", 87],
       ["src/views/public/board/CardModal.tsx", 47],
       ["src/views/public/board/index.tsx", 87]
@@ -7535,10 +7623,7 @@
     "message": "Unable to duplicate card",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/views/board/components/CardContextDuplicateModal.tsx", 68],
-      ["src/views/card/components/Dropdown.tsx", 60]
-    ],
+    "origin": [["src/views/card/components/Dropdown.tsx", 60]],
     "translation": "Impossible de dupliquer la carte"
   },
   "G_cW-p": {
@@ -7560,7 +7645,8 @@
     "placeholders": {},
     "comments": [],
     "origin": [["src/views/board/components/CardContextMoveListModal.tsx", 50]],
-    "translation": "Impossible de déplacer la carte"
+    "translation": "Impossible de déplacer la carte",
+    "obsolete": true
   },
   "8yFGGF": {
     "message": "Unable to remove member",
@@ -7642,7 +7728,8 @@
     "comments": [],
     "origin": [
       ["src/hooks/useCardArchive.ts", 27],
-      ["src/views/board/index.tsx", 370],
+      ["src/views/board/index.tsx", 366],
+      ["src/views/board/useCardQuickActions.ts", 51],
       ["src/views/card/index.tsx", 234]
     ],
     "translation": "Impossible de mettre à jour la carte"
@@ -7672,10 +7759,7 @@
     "message": "Unable to update due date",
     "placeholders": {},
     "comments": [],
-    "origin": [
-      ["src/views/board/index.tsx", 408],
-      ["src/views/card/components/DueDateSelector.tsx", 78]
-    ],
+    "origin": [["src/views/card/components/DueDateSelector.tsx", 78]],
     "translation": "Impossible de mettre à jour la date d'échéance"
   },
   "delOXn": {
@@ -7690,7 +7774,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/index.tsx", 312],
+      ["src/views/board/index.tsx", 308],
       ["src/views/card/components/ListSelector.tsx", 59]
     ],
     "translation": "Impossible de mettre à jour la liste"
@@ -7964,7 +8048,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/views/board/components/CalendarView.tsx", 555],
+      ["src/views/board/components/CalendarView.tsx", 557],
       ["src/views/members/index.tsx", 300],
       ["src/views/onboarding/select-plan/index.tsx", 253]
     ],
@@ -8619,8 +8703,8 @@
     "origin": [
       ["src/views/board/components/List.tsx", 157],
       ["src/views/board/components/VisibilityButton.tsx", 76],
-      ["src/views/board/index.tsx", 955],
-      ["src/views/board/index.tsx", 1033],
+      ["src/views/board/index.tsx", 873],
+      ["src/views/board/index.tsx", 972],
       ["src/views/boards/components/BoardsList.tsx", 84],
       ["src/views/boards/index.tsx", 59],
       ["src/views/boards/index.tsx", 81]
