@@ -203,7 +203,7 @@ export default function Avatar({
     <div>
       <div className="relative">
         <input
-          className="absolute z-10 h-16 w-16 cursor-pointer rounded-full opacity-0"
+          className="absolute z-10 h-12 w-12 cursor-pointer rounded-full opacity-0"
           type="file"
           id="single"
           accept="image/*"
@@ -214,12 +214,12 @@ export default function Avatar({
           <Image
             src={avatarUrl}
             alt="Avatar"
-            width={64}
-            height={64}
+            width={48}
+            height={48}
             className="rounded-full"
           />
         ) : (
-          <span className="inline-block h-16 w-16 overflow-hidden rounded-full bg-light-400 dark:bg-dark-400">
+          <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-light-400 dark:bg-dark-400">
             <svg
               className="h-full w-full text-dark-700"
               fill="currentColor"
@@ -236,7 +236,7 @@ export default function Avatar({
         <Modal modalSize="md" positionFromTop="sm" isVisible>
           <div className="p-4 sm:p-6">
             <div className="mb-4">
-              <h3 className="text-base font-semibold text-light-1000 dark:text-dark-1000">
+              <h3 className="text-sm font-semibold text-light-1000 dark:text-dark-1000">
                 {t`Crop your avatar`}
               </h3>
               <p className="mt-1 text-sm text-light-800 dark:text-dark-800">
@@ -267,13 +267,14 @@ export default function Avatar({
             </div>
             <div className="mt-6 flex items-center justify-end gap-2">
               <Button
+                size="sm"
                 variant="ghost"
                 onClick={handleCancelCrop}
                 disabled={uploading}
               >
                 {t`Cancel`}
               </Button>
-              <Button onClick={handleSaveCrop} isLoading={uploading}>
+              <Button size="sm" onClick={handleSaveCrop} isLoading={uploading}>
                 {t`Save`}
               </Button>
             </div>

@@ -11,6 +11,7 @@ import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { DeleteWorkspaceConfirmation } from "./components/DeleteWorkspaceConfirmation";
+import { SettingsRow } from "./components/SettingsRow";
 import UpdateWeekStartDayForm from "./components/UpdateWeekStartDayForm";
 import UpdateWorkspaceDescriptionForm from "./components/UpdateWorkspaceDescriptionForm";
 import UpdateWorkspaceEmailVisibilityForm from "./components/UpdateWorkspaceEmailVisibilityForm";
@@ -32,71 +33,64 @@ export default function WorkspaceSettings() {
     <>
       <PageHead title={t`Settings | Workspace`} />
 
-      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Workspace name`}
-        </h2>
-        <UpdateWorkspaceNameForm
-          workspacePublicId={workspace.publicId}
-          workspaceName={workspace.name}
-          disabled={!canEditWorkspace}
-        />
-
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Workspace URL`}
-        </h2>
-        <UpdateWorkspaceUrlForm
-          workspacePublicId={workspace.publicId}
-          workspaceUrl={workspace.slug ?? ""}
-          workspacePlan={workspace.plan ?? "free"}
-          disabled={!canEditWorkspace}
-        />
-
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Workspace description`}
-        </h2>
-        <UpdateWorkspaceDescriptionForm
-          workspacePublicId={workspace.publicId}
-          workspaceDescription={workspace.description ?? ""}
-          disabled={!canEditWorkspace}
-        />
-
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Week start day`}
-        </h2>
-        <UpdateWeekStartDayForm
-          workspacePublicId={workspace.publicId}
-          weekStartDay={workspaceData?.weekStartDay ?? 1}
-          disabled={!canEditWorkspace}
-        />
-
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Email visibility`}
-        </h2>
-        <UpdateWorkspaceEmailVisibilityForm
-          workspacePublicId={workspace.publicId}
-          showEmailsToMembers={Boolean(
-            workspaceData?.showEmailsToMembers ?? false,
-          )}
-          disabled={!canEditWorkspace}
-        />
-
-        <div className="border-t border-light-300 dark:border-dark-300">
-          <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-            {t`Delete workspace`}
-          </h2>
-          <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-            {t`Once you delete your workspace, there is no going back. This action cannot be undone.`}
-          </p>
-          <div className="mt-4">
+      <div className="mb-8 divide-y divide-light-300 dark:divide-dark-200">
+        <div className="py-3">
+          <SettingsRow stacked title={t`Workspace name`}>
+            <UpdateWorkspaceNameForm
+              workspacePublicId={workspace.publicId}
+              workspaceName={workspace.name}
+              disabled={!canEditWorkspace}
+            />
+          </SettingsRow>
+          <SettingsRow stacked title={t`Workspace URL`}>
+            <UpdateWorkspaceUrlForm
+              workspacePublicId={workspace.publicId}
+              workspaceUrl={workspace.slug ?? ""}
+              workspacePlan={workspace.plan ?? "free"}
+              disabled={!canEditWorkspace}
+            />
+          </SettingsRow>
+          <SettingsRow stacked title={t`Workspace description`}>
+            <UpdateWorkspaceDescriptionForm
+              workspacePublicId={workspace.publicId}
+              workspaceDescription={workspace.description ?? ""}
+              disabled={!canEditWorkspace}
+            />
+          </SettingsRow>
+          <SettingsRow stacked title={t`Week start day`}>
+            <UpdateWeekStartDayForm
+              workspacePublicId={workspace.publicId}
+              weekStartDay={workspaceData?.weekStartDay ?? 1}
+              disabled={!canEditWorkspace}
+            />
+          </SettingsRow>
+          <SettingsRow
+            title={t`Email visibility`}
+            description={t`Allow workspace members to see each other's email addresses`}
+          >
+            <UpdateWorkspaceEmailVisibilityForm
+              workspacePublicId={workspace.publicId}
+              showEmailsToMembers={Boolean(
+                workspaceData?.showEmailsToMembers ?? false,
+              )}
+              disabled={!canEditWorkspace}
+            />
+          </SettingsRow>
+        </div>
+        <div className="py-3">
+          <SettingsRow
+            title={t`Delete workspace`}
+            description={t`Once you delete your workspace, there is no going back. This action cannot be undone.`}
+          >
             <Button
+              size="sm"
               variant="secondary"
               onClick={() => openModal("DELETE_WORKSPACE")}
               disabled={workspace.role !== "admin"}
             >
               {t`Delete workspace`}
             </Button>
-          </div>
+          </SettingsRow>
         </div>
       </div>
 

@@ -18,7 +18,6 @@ interface TableRowProps {
   active?: boolean;
   createdAt?: string | null;
   dateLocale?: DateFnsLocale;
-  isLastRow?: boolean;
   showSkeleton?: boolean;
   onEdit?: () => void;
   onTest?: () => void;
@@ -41,21 +40,20 @@ function TableRow({
   active,
   createdAt,
   dateLocale,
-  isLastRow,
   showSkeleton,
   onEdit,
   onTest,
   onDelete,
 }: TableRowProps) {
   return (
-    <tr className="rounded-b-lg">
-      <td className={twMerge("w-[25%]", isLastRow ? "rounded-bl-lg" : "")}>
-        <div className="flex items-center p-4">
-          <div className="ml-2 min-w-0 flex-1">
+    <tr className="group/row h-12 transition-colors hover:bg-light-200 dark:hover:bg-dark-100">
+      <td className="w-[25%] whitespace-nowrap">
+        <div className="flex items-center px-2">
+          <div className="min-w-0 flex-1">
             <div className="flex items-center">
               <p
                 className={twMerge(
-                  "mr-2 text-sm font-medium text-light-900 dark:text-dark-900",
+                  "mr-2 text-sm font-medium text-neutral-900 dark:text-dark-1000",
                   showSkeleton &&
                     "mb-2 h-3 w-[125px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
                 )}
@@ -66,10 +64,10 @@ function TableRow({
           </div>
         </div>
       </td>
-      <td className="w-[30%] px-3 py-4">
+      <td className="w-[30%] max-w-0 px-2">
         <p
           className={twMerge(
-            "truncate text-sm text-light-900 dark:text-dark-900",
+            "truncate text-xs text-light-900 dark:text-dark-900",
             showSkeleton &&
               "h-3 w-[180px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
           )}
@@ -78,10 +76,10 @@ function TableRow({
           {url}
         </p>
       </td>
-      <td className="w-[20%] px-3 py-4">
+      <td className="w-[20%] px-2 whitespace-nowrap">
         <p
           className={twMerge(
-            "text-sm text-light-900 dark:text-dark-900",
+            "text-xs text-light-900 dark:text-dark-900",
             showSkeleton &&
               "h-3 w-[100px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
           )}
@@ -89,24 +87,24 @@ function TableRow({
           {events && formatEvents(events)}
         </p>
       </td>
-      <td className="w-[10%] px-3 py-4">
+      <td className="w-[10%] px-2 whitespace-nowrap">
         <span
           className={twMerge(
-            "inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-medium ring-1 ring-inset",
+            "inline-flex items-center rounded-full px-2 py-0.5 text-[11px]",
             active
-              ? "bg-emerald-500/10 text-emerald-400 ring-emerald-500/20"
-              : "bg-gray-500/10 text-gray-400 ring-gray-500/20",
+              ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+              : "bg-light-300 text-light-950 dark:bg-dark-200 dark:text-dark-900",
             showSkeleton &&
-              "h-5 w-[50px] animate-pulse bg-light-200 ring-0 dark:bg-dark-200",
+              "h-5 w-[50px] animate-pulse bg-light-200 dark:bg-dark-200",
           )}
         >
           {!showSkeleton && (active ? t`Active` : t`Inactive`)}
         </span>
       </td>
-      <td className="w-[10%] px-3 py-4">
+      <td className="w-[10%] px-2 whitespace-nowrap">
         <p
           className={twMerge(
-            "text-sm text-light-900 dark:text-dark-900",
+            "text-xs text-light-900 dark:text-dark-900",
             showSkeleton &&
               "h-3 w-[80px] animate-pulse rounded-xs bg-light-200 dark:bg-dark-200",
           )}
@@ -114,14 +112,13 @@ function TableRow({
           {formatDate(createdAt, dateLocale)}
         </p>
       </td>
-      <td
-        className={twMerge("w-[5%] min-w-[50px]", isLastRow && "rounded-br-lg")}
-      >
+      <td className="w-[5%] min-w-[40px]">
         {!showSkeleton && (
-          <div className="flex w-full items-center justify-center px-3">
-            <div className="relative z-50">
+          <div className="flex w-full items-center justify-end px-2">
+            <div className="relative transition-opacity md:opacity-0 md:group-focus-within/row:opacity-100 md:group-hover/row:opacity-100">
               <Dropdown
                 ariaLabel={t`Webhook options`}
+                buttonClassName="h-6 w-6 hover:bg-light-400 dark:hover:bg-dark-300"
                 items={[
                   {
                     label: t`Edit`,
@@ -138,7 +135,7 @@ function TableRow({
                 ]}
               >
                 <HiEllipsisHorizontal
-                  size={25}
+                  size={16}
                   className="text-light-900 dark:text-dark-900"
                 />
               </Dropdown>
@@ -194,7 +191,7 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
 
   if (!isLoading && (!webhooks || webhooks.length === 0)) {
     return (
-      <div className="rounded-lg border border-light-300 bg-light-50 p-8 text-center dark:border-dark-300 dark:bg-dark-100">
+      <div className="py-10 text-center">
         <p className="text-sm text-neutral-500 dark:text-dark-900">
           {t`No webhooks configured. Add a webhook to receive notifications.`}
         </p>
@@ -203,54 +200,54 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
   }
 
   return (
-    <div className="mt-8 flow-root">
+    <div className="-mx-2 mt-4 flow-root">
       <div className="overflow-x-auto overflow-y-visible">
-        <div className="inline-block min-w-full py-2 pb-12 align-middle">
-          <div className="relative h-full shadow-sm ring-1 ring-black/5 sm:rounded-lg">
-            <table className="min-w-[700px] divide-y divide-light-600 dark:divide-dark-600">
-              <thead className="rounded-t-lg bg-light-300 dark:bg-dark-200">
+        <div className="inline-block min-w-full py-2 pb-32 align-middle">
+          <div className="relative h-full">
+            <table className="w-full min-w-[700px]">
+              <thead className="border-b border-light-400 dark:border-dark-300">
                 <tr>
                   <th
                     scope="col"
-                    className="w-[25%] rounded-tl-lg py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-light-900 sm:pl-6 dark:text-dark-900"
+                    className="w-[25%] px-2 pb-2 text-left text-xs font-medium text-light-900 dark:text-dark-900"
                   >
                     {t`Name`}
                   </th>
                   <th
                     scope="col"
-                    className="w-[30%] px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
+                    className="w-[30%] px-2 pb-2 text-left text-xs font-medium text-light-900 dark:text-dark-900"
                   >
                     {t`URL`}
                   </th>
                   <th
                     scope="col"
-                    className="w-[20%] px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
+                    className="w-[20%] px-2 pb-2 text-left text-xs font-medium text-light-900 dark:text-dark-900"
                   >
                     {t`Events`}
                   </th>
                   <th
                     scope="col"
-                    className="w-[10%] px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
+                    className="w-[10%] px-2 pb-2 text-left text-xs font-medium text-light-900 dark:text-dark-900"
                   >
                     {t`Status`}
                   </th>
                   <th
                     scope="col"
-                    className="w-[10%] px-3 py-3.5 text-left text-sm font-semibold text-light-900 dark:text-dark-900"
+                    className="w-[10%] px-2 pb-2 text-left text-xs font-medium text-light-900 dark:text-dark-900"
                   >
                     {t`Created`}
                   </th>
                   <th
                     scope="col"
-                    className="w-[5%] rounded-tr-lg px-3 py-3.5 text-center text-sm font-semibold text-light-900 dark:text-dark-900"
+                    className="w-[5%] px-2 pb-2 text-center text-xs font-medium text-light-900 dark:text-dark-900"
                   >
                     {/* Actions column */}
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-light-600 bg-light-50 dark:divide-dark-600 dark:bg-dark-100">
+              <tbody className="divide-y divide-light-300 dark:divide-dark-200">
                 {!isLoading &&
-                  webhooks?.map((webhook, index) => (
+                  webhooks?.map((webhook) => (
                     <TableRow
                       key={webhook.publicId}
                       name={webhook.name}
@@ -259,7 +256,6 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
                       active={webhook.active}
                       createdAt={webhook.createdAt}
                       dateLocale={dateLocale}
-                      isLastRow={index === webhooks.length - 1}
                       onEdit={() => {
                         setModalState("EDIT_WEBHOOK", {
                           publicId: webhook.publicId,
@@ -294,7 +290,7 @@ export default function WebhookList({ workspacePublicId }: WebhookListProps) {
                   <>
                     <TableRow showSkeleton />
                     <TableRow showSkeleton />
-                    <TableRow showSkeleton isLastRow />
+                    <TableRow showSkeleton />
                   </>
                 )}
               </tbody>

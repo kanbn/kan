@@ -50,19 +50,16 @@ export default function UpdateWeekStartDayForm({
   };
 
   return (
-    <div className="flex gap-2">
-      <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
-        <select
-          value={value}
-          onChange={handleChange}
-          disabled={disabled || updateWorkspace.isPending}
-          className="block w-full rounded-md border-0 bg-dark-300 bg-white/5 py-1.5 text-sm shadow-xs ring-1 ring-light-600 ring-inset placeholder:text-dark-800 focus:ring-2 focus:ring-light-700 focus:ring-inset sm:leading-6 dark:text-dark-1000 dark:ring-dark-700 dark:focus:ring-dark-700"
-        >
-          <option value={0}>{t`Sunday`}</option>
-          <option value={1}>{t`Monday`}</option>
-          <option value={6}>{t`Saturday`}</option>
-        </select>
-      </div>
-    </div>
+    <select
+      value={value}
+      onChange={handleChange}
+      disabled={disabled || updateWorkspace.isPending}
+      aria-label={t`Week start day`}
+      className="block w-full rounded-md border-0 bg-transparent py-1.5 text-sm ring-1 ring-light-600 ring-inset focus:ring-2 focus:ring-light-700 focus:ring-inset sm:w-[180px] dark:text-dark-1000 dark:ring-dark-600 dark:focus:ring-dark-700 [&>option]:bg-light-50 dark:[&>option]:bg-dark-200"
+    >
+      <option value={0}>{t`Sunday`}</option>
+      <option value={1}>{t`Monday`}</option>
+      <option value={6}>{t`Saturday`}</option>
+    </select>
   );
 }

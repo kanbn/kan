@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { t } from "@lingui/core/macro";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { HiCheck, HiMiniStar } from "react-icons/hi2";
+import { HiCheck } from "react-icons/hi2";
 import { z } from "zod";
 
 import {
@@ -121,17 +121,11 @@ const UpdateWorkspaceUrlForm = ({
   };
 
   return (
-    <div className="flex gap-2">
-      <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
+    <div className="flex w-full items-start gap-2">
+      <div className="w-full max-w-[325px] min-w-0">
         <Input
           aria-label={t`Workspace URL`}
           {...register("slug")}
-          className={`${
-            isWorkspaceSlugAvailable?.isAvailable ||
-            (workspacePlan !== "free" && slug === workspaceUrl)
-              ? "focus:ring-yellow-500 dark:focus:ring-yellow-500"
-              : ""
-          }`}
           errorMessage={
             errors.slug?.message ||
             (isWorkspaceSlugAvailable?.isAvailable === false
@@ -144,10 +138,7 @@ const UpdateWorkspaceUrlForm = ({
               : `${env("NEXT_PUBLIC_BASE_URL")}/`
           }
           iconRight={
-            isWorkspaceSlugAvailable?.isAvailable ||
-            (workspacePlan !== "free" && slug === workspaceUrl) ? (
-              <HiMiniStar className="h-4 w-4 text-yellow-500" />
-            ) : isWorkspaceSlugAvailable?.isAvailable ? (
+            isWorkspaceSlugAvailable?.isAvailable ? (
               <HiCheck className="h-4 w-4 dark:text-dark-1000" />
             ) : null
           }
@@ -158,7 +149,7 @@ const UpdateWorkspaceUrlForm = ({
         <div>
           <Button
             onClick={handleSubmit(onSubmit)}
-            variant="primary"
+            size="sm"
             disabled={
               updateWorkspaceSlug.isPending ||
               checkWorkspaceSlugAvailability.isPending ||

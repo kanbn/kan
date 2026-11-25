@@ -84,9 +84,10 @@ const UpdateWorkspaceDescriptionForm = ({
   };
 
   return (
-    <div className="flex gap-2">
-      <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
+    <div className="flex w-full items-start gap-2">
+      <div className="w-full max-w-[325px] min-w-0">
         <Input
+          aria-label={t`Workspace description`}
           {...register("description")}
           errorMessage={errors.description?.message}
           disabled={disabled}
@@ -96,7 +97,7 @@ const UpdateWorkspaceDescriptionForm = ({
         <div>
           <Button
             onClick={handleSubmit(onSubmit)}
-            variant="primary"
+            size="sm"
             disabled={updateWorkspaceDescription.isPending}
             isLoading={updateWorkspaceDescription.isPending}
           >

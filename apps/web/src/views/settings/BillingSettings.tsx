@@ -12,6 +12,7 @@ import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
+import { SettingsRow } from "./components/SettingsRow";
 
 export default function BillingSettings() {
   const { modalContentType, isOpen } = useModal();
@@ -64,42 +65,38 @@ export default function BillingSettings() {
     <>
       <PageHead title={t`Settings | Billing`} />
 
-      <div className="border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Plan`}
-        </h2>
-        <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-          {planLabel}
-        </p>
-        {!subscription && isCloud && (
-          <div className="mb-8">
+      <div className="mb-8 divide-y divide-light-300 dark:divide-dark-200">
+        <div className="py-3">
+          <SettingsRow title={t`Plan`} description={planLabel}>
+            {!subscription && isCloud && (
+              <Button
+                size="sm"
+                onClick={() =>
+                  router.push(
+                    `/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`,
+                  )
+                }
+              >
+                {t`Choose plan`}
+              </Button>
+            )}
+          </SettingsRow>
+        </div>
+        <div className="py-3">
+          <SettingsRow
+            title={t`Billing`}
+            description={t`View and manage your billing and subscription.`}
+          >
             <Button
-              onClick={() =>
-                router.push(
-                  `/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/settings/billing")}`,
-                )
-              }
+              size="sm"
+              variant="secondary"
+              iconRight={<HiMiniArrowTopRightOnSquare />}
+              onClick={handleOpenBillingPortal}
             >
-              {t`Choose plan`}
+              {t`Billing portal`}
             </Button>
-          </div>
-        )}
-      </div>
-
-      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Billing`}
-        </h2>
-        <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-          {t`View and manage your billing and subscription.`}
-        </p>
-        <Button
-          variant="primary"
-          iconRight={<HiMiniArrowTopRightOnSquare />}
-          onClick={handleOpenBillingPortal}
-        >
-          {t`Billing portal`}
-        </Button>
+          </SettingsRow>
+        </div>
       </div>
 
       {/* Global modals */}

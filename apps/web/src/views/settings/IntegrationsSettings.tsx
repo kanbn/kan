@@ -22,6 +22,7 @@ import { NewWorkspaceForm } from "~/components/NewWorkspaceForm";
 import { PageHead } from "~/components/PageHead";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
+import { SettingsRow } from "./components/SettingsRow";
 
 const githubTokenSchema = z.object({
   token: z.string().min(1, { message: t`Token is required` }),
@@ -148,44 +149,29 @@ export default function IntegrationsSettings() {
     },
   });
 
+  const isTrelloConnected = integrations?.some(
+    (integration) => integration.provider === "trello",
+  );
+
   return (
     <>
       <PageHead title={t`Settings | Integrations`} />
 
-      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Trello`}
-        </h2>
-        {!integrations?.some(
-          (integration) => integration.provider === "trello",
-        ) && trelloUrl ? (
-          <>
-            <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-              {t`Connect your Trello account to import boards.`}
-            </p>
-            <Button
-              variant="primary"
-              iconRight={<HiMiniArrowTopRightOnSquare />}
-              onClick={() =>
-                window.open(
-                  trelloUrl.url,
-                  "trello_auth",
-                  "height=800,width=600",
-                )
-              }
-            >
-              {t`Connect Trello`}
-            </Button>
-          </>
-        ) : (
-          integrations?.some(
-            (integration) => integration.provider === "trello",
-          ) && (
-            <>
-              <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-                {t`Your Trello account is connected.`}
-              </p>
+      <div className="mb-8 divide-y divide-light-300 dark:divide-dark-200">
+        <div className="py-3">
+          <SettingsRow
+            title={t`Trello`}
+            description={
+              isTrelloConnected
+                ? t`Your Trello account is connected.`
+                : trelloUrl
+                  ? t`Connect your Trello account to import boards.`
+                  : undefined
+            }
+          >
+            {isTrelloConnected ? (
               <Button
+                size="sm"
                 variant="secondary"
                 onClick={() =>
                   disconnectTrello({ data: { provider: "trello" } })
@@ -193,34 +179,55 @@ export default function IntegrationsSettings() {
               >
                 {t`Disconnect Trello`}
               </Button>
-            </>
-          )
-        )}
-      </div>
-
-      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`GitHub`}
-        </h2>
-        {!githubStatus?.connected ? (
-          <>
-            <p className="mb-4 text-sm text-neutral-500 dark:text-dark-900">
-              {t`Connect your GitHub account to import projects.`}
-            </p>
-            <form
-              onSubmit={handleSubmit(onSubmitGithubToken)}
-              className="flex gap-2"
-            >
-              <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
+            ) : trelloUrl ? (
+              <Button
+                size="sm"
+                variant="secondary"
+                iconRight={<HiMiniArrowTopRightOnSquare />}
+                onClick={() =>
+                  window.open(
+                    trelloUrl.url,
+                    "trello_auth",
+                    "height=800,width=600",
+                  )
+                }
+              >
+                {t`Connect Trello`}
+              </Button>
+            ) : null}
+          </SettingsRow>
+        </div>
+        <div className="py-3">
+          <SettingsRow
+            stacked={!githubStatus?.connected}
+            title={t`GitHub`}
+            description={
+              githubStatus?.connected
+                ? t`Your GitHub account is connected.`
+                : t`Connect your GitHub account to import projects.`
+            }
+          >
+            {githubStatus?.connected ? (
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => disconnectGithub()}
+              >
+                {t`Disconnect GitHub`}
+              </Button>
+            ) : (
+              <form
+                onSubmit={handleSubmit(onSubmitGithubToken)}
+                className="flex w-full items-start gap-2 sm:w-[420px]"
+              >
                 <Input
                   type="password"
                   placeholder="Personal Access Token"
                   {...register("token")}
                   errorMessage={errors.token?.message}
                 />
-              </div>
-              <div>
                 <Button
+                  size="sm"
                   variant="secondary"
                   type="submit"
                   disabled={!isDirty || isSavingGithubToken}
@@ -228,19 +235,10 @@ export default function IntegrationsSettings() {
                 >
                   {t`Connect GitHub`}
                 </Button>
-              </div>
-            </form>
-          </>
-        ) : (
-          <>
-            <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-              {t`Your GitHub account is connected.`}
-            </p>
-            <Button variant="secondary" onClick={() => disconnectGithub()}>
-              {t`Disconnect GitHub`}
-            </Button>
-          </>
-        )}
+              </form>
+            )}
+          </SettingsRow>
+        </div>
       </div>
 
       {/* Global modals */}

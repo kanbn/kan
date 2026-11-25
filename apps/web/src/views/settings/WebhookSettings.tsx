@@ -9,6 +9,7 @@ import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
 import { DeleteWebhookConfirmation } from "./components/DeleteWebhookConfirmation";
 import { NewWebhookModal } from "./components/NewWebhookModal";
+import { SettingsRow } from "./components/SettingsRow";
 import WebhookList from "./components/WebhookList";
 
 export default function WebhookSettings() {
@@ -19,20 +20,16 @@ export default function WebhookSettings() {
     <>
       <PageHead title={t`Settings | Webhooks`} />
 
-      <div className="mb-8 border-t border-light-300 dark:border-dark-300">
-        <h2 className="mt-8 mb-4 text-[14px] font-bold text-neutral-900 dark:text-dark-1000">
-          {t`Webhooks`}
-        </h2>
-        <p className="mb-8 text-sm text-neutral-500 dark:text-dark-900">
-          {t`Configure webhooks to receive notifications when cards are created, updated, moved, or deleted.`}
-        </p>
-
-        <div className="mb-4 flex items-center justify-between">
-          <Button variant="primary" onClick={() => openModal("NEW_WEBHOOK")}>
-            {t`Add webhook`}
-          </Button>
-        </div>
-
+      <div className="mb-8 py-3">
+        <SettingsRow
+          title={t`Webhooks`}
+          description={t`Configure webhooks to receive notifications when cards are created, updated, moved, or deleted.`}
+        >
+          <Button
+            size="sm"
+            onClick={() => openModal("NEW_WEBHOOK")}
+          >{t`Add webhook`}</Button>
+        </SettingsRow>
         <WebhookList workspacePublicId={workspace.publicId} />
       </div>
 

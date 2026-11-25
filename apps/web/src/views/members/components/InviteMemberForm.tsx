@@ -3,12 +3,7 @@ import { t } from "@lingui/core/macro";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  HiInformationCircle,
-  HiMiniCheck,
-  HiOutlineDocumentDuplicate,
-  HiXMark,
-} from "react-icons/hi2";
+import { HiXMark } from "react-icons/hi2";
 import { z } from "zod";
 
 import type { Subscription } from "@kan/shared/utils";
@@ -49,10 +44,7 @@ export function InviteMemberForm({
 }) {
   const boardCache = useBoardCache();
   const queryClient = useQueryClient();
-  const [isShareInviteLinkEnabled, setIsShareInviteLinkEnabled] =
-    useState(false);
   const [inviteLink, setInviteLink] = useState<string>("");
-  const [_isLoadingInviteLink, setIsLoadingInviteLink] = useState(false);
   const [copied, setCopied] = useState(false);
   const { closeModal } = useModal();
   const { workspace } = useWorkspace();
@@ -87,7 +79,6 @@ export function InviteMemberForm({
 
   useEffect(() => {
     if (activeInviteLink) {
-      setIsShareInviteLinkEnabled(activeInviteLink.data.isActive);
       setInviteLink(activeInviteLink.data.inviteLink ?? "");
     }
   }, [activeInviteLink]);
@@ -103,7 +94,7 @@ export function InviteMemberForm({
       },
       onError: (error) => {
         reset();
-        if (!isShareInviteLinkEnabled) closeModal();
+        if (!inviteLink) closeModal();
 
         const status = getApiErrorStatus(error);
 
@@ -138,12 +129,8 @@ export function InviteMemberForm({
     mutation: {
       onSuccess: (result) => {
         setInviteLink(result.data.inviteLink);
-        setIsLoadingInviteLink(false);
       },
       onError: (error) => {
-        setIsLoadingInviteLink(false);
-        setIsShareInviteLinkEnabled(false);
-
         if (getApiErrorStatus(error) === 403) {
           showPopup({
             header: t`Subscription Required`,
@@ -165,10 +152,8 @@ export function InviteMemberForm({
     mutation: {
       onSuccess: () => {
         setInviteLink("");
-        setIsLoadingInviteLink(false);
       },
       onError: () => {
-        setIsLoadingInviteLink(false);
         showPopup({
           header: t`Error deactivating invite link`,
           message: t`Please try again later.`,
@@ -215,22 +200,11 @@ export function InviteMemberForm({
     !hasTeamSubscription &&
     !hasProSubscription;
 
-  const handleInviteLinkToggle = async () => {
+  const toggleInviteLink = () => {
     if (isFreePlan) return;
 
-    setIsLoadingInviteLink(true);
-
-    if (isShareInviteLinkEnabled && workspace.publicId) {
-      await deactivateInviteLink.mutateAsync({
-        workspacePublicId: workspace.publicId,
-      });
-      setIsShareInviteLinkEnabled(false);
-    } else {
-      await createInviteLink.mutateAsync({
-        workspacePublicId: workspace.publicId,
-      });
-      setIsShareInviteLinkEnabled(true);
-    }
+    const mutation = inviteLink ? deactivateInviteLink : createInviteLink;
+    mutation.mutate({ workspacePublicId: workspace.publicId });
   };
 
   const copyToClipboard = async () => {
@@ -261,8 +235,8 @@ export function InviteMemberForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="px-5 pt-5">
-        <div className="text-neutral-9000 flex w-full items-center justify-between pb-4 dark:text-dark-1000">
-          <h2 className="text-sm font-bold">{t`Add member`}</h2>
+        <div className="flex w-full items-center justify-between pb-4 dark:text-dark-1000">
+          <h2 className="text-sm font-semibold text-neutral-900 dark:text-dark-1000">{t`Add member`}</h2>
           <button
             type="button"
             className="hover:bg-li ght-300 rounded-sm p-1 focus:outline-hidden dark:hover:bg-dark-300"
@@ -271,7 +245,7 @@ export function InviteMemberForm({
               closeModal();
             }}
           >
-            <HiXMark size={18} className="dark:text-dark-9000 text-light-900" />
+            <HiXMark size={16} className="dark:text-dark-9000 text-light-900" />
           </button>
         </div>
         {isEmailEnabled && (
@@ -289,41 +263,36 @@ export function InviteMemberForm({
             errorMessage={errors.email?.message}
           />
         )}
-        {!isFreePlan &&
-          (!isEmailEnabled || (isShareInviteLinkEnabled && inviteLink)) && (
-            <div className="my-4">
-              <div className="relative">
-                <Input
-                  value={inviteLink}
-                  className="pr-10 text-sm text-light-900 dark:text-dark-900"
-                  readOnly
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-light-900 hover:text-light-950 dark:text-dark-900 dark:hover:text-dark-950"
-                  onClick={copyToClipboard}
-                >
-                  {copied ? (
-                    <HiMiniCheck className="h-5 w-5 text-green-600" />
-                  ) : (
-                    <HiOutlineDocumentDuplicate className="h-5 w-5" />
-                  )}
-                </button>
-              </div>
-              <div className="mt-2 flex items-start gap-1">
-                <HiInformationCircle className="mt-0.5 h-4 w-4 text-dark-900" />
-                <p className="text-xs text-gray-500 dark:text-dark-900">
-                  {t`Anyone with this link can join your workspace`}
-                </p>
-              </div>
+        {!isFreePlan && inviteLink && (
+          <div className="mt-3">
+            <div className="flex items-center rounded-md bg-light-200 py-1 pr-1 pl-3 dark:bg-dark-200">
+              <input
+                readOnly
+                value={inviteLink}
+                aria-label={t`Invite link`}
+                onFocus={(e) => e.target.select()}
+                className="min-w-0 flex-1 truncate border-0 bg-transparent p-0 text-xs text-light-950 focus:ring-0 focus-visible:outline-hidden dark:text-dark-950"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="xs"
+                onClick={copyToClipboard}
+              >
+                {copied ? t`Copied` : t`Copy`}
+              </Button>
             </div>
-          )}
+            <p className="mt-2 pl-3 text-xs text-light-900 dark:text-dark-900">
+              {t`Anyone with this link can join your workspace`}
+            </p>
+          </div>
+        )}
 
         {env("NEXT_PUBLIC_KAN_ENV") === "cloud" &&
           (isPartnerTier && seatLimit !== null ? (
-            <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
+            <div className="mt-3 text-xs text-light-900 dark:text-dark-900">
               <div className="flex items-center justify-between">
-                <span className="font-medium text-emerald-500 dark:text-emerald-400">
+                <span className="font-medium text-light-1000 dark:text-dark-1000">
                   {hasTeamSubscription ? t`Team Plan` : t`Pro Plan`}
                 </span>
                 <span className="text-light-900 dark:text-dark-900">
@@ -332,10 +301,10 @@ export function InviteMemberForm({
               </div>
             </div>
           ) : !unlimitedSeats ? (
-            <div className="mt-3 rounded-md bg-light-100 p-3 text-xs text-light-900 dark:bg-dark-200 dark:text-dark-900">
+            <div className="mt-3 text-xs text-light-900 dark:text-dark-900">
               {hasTeamSubscription || hasProSubscription ? (
                 <div>
-                  <span className="font-medium text-emerald-500 dark:text-emerald-400">
+                  <span className="font-medium text-light-1000 dark:text-dark-1000">
                     {hasTeamSubscription ? t`Team Plan` : t`Pro Plan ∞`}
                   </span>
                   <p className="mt-1">
@@ -356,21 +325,23 @@ export function InviteMemberForm({
           ) : null)}
       </div>
 
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-400 px-5 py-4 dark:border-dark-400">
         {!isFreePlan && (
           <Toggle
             label={
-              isShareInviteLinkEnabled
-                ? t`Deactivate invite link`
-                : t`Create invite link`
+              inviteLink ? t`Deactivate invite link` : t`Create invite link`
             }
-            isChecked={isShareInviteLinkEnabled}
-            onChange={handleInviteLinkToggle}
+            isChecked={!!inviteLink}
+            onChange={toggleInviteLink}
+            disabled={
+              createInviteLink.isPending || deactivateInviteLink.isPending
+            }
           />
         )}
         <div>
           {isFreePlan ? (
             <Button
+              size="sm"
               type="button"
               href={`/upgrade/select-plan?plan=team&workspacePublicId=${workspace.publicId}&returnUrl=${encodeURIComponent("/members")}`}
             >
@@ -378,6 +349,7 @@ export function InviteMemberForm({
             </Button>
           ) : (
             <Button
+              size="sm"
               type="submit"
               disabled={inviteMember.isPending || !isEmailEnabled}
               isLoading={inviteMember.isPending}

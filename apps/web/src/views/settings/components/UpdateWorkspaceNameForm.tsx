@@ -79,8 +79,8 @@ const UpdateWorkspaceNameForm = ({
   };
 
   return (
-    <div className="flex gap-2">
-      <div className="mb-4 flex w-full max-w-[325px] items-center gap-2">
+    <div className="flex w-full items-start gap-2">
+      <div className="w-full max-w-[325px] min-w-0">
         <Input
           aria-label={t`Workspace name`}
           {...register("name")}
@@ -92,7 +92,7 @@ const UpdateWorkspaceNameForm = ({
         <div>
           <Button
             onClick={handleSubmit(onSubmit)}
-            variant="primary"
+            size="sm"
             disabled={updateWorkspaceName.isPending}
             isLoading={updateWorkspaceName.isPending}
           >
