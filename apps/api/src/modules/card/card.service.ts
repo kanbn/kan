@@ -32,6 +32,7 @@ import {
 } from "@kan/server/utils/webhook";
 import { generateAttachmentUrl, normalizeDescription } from "@kan/shared/utils";
 
+import { publishBoardChange } from "../../common/realtime.js";
 import { db } from "../../common/session.util.js";
 import { toJson } from "../../common/to-json.util.js";
 
@@ -234,6 +235,8 @@ export class CardService {
       log.error({ err: error }, "Webhook delivery failed");
     });
 
+    publishBoardChange(list.boardId, newCard.publicId);
+
     return newCard;
   }
 
@@ -287,6 +290,8 @@ export class CardService {
       commenterUserId: userId,
       commentId: newComment.id,
     });
+
+    publishBoardChange(card.boardId, input.cardPublicId);
 
     return newComment;
   }
@@ -364,6 +369,8 @@ export class CardService {
       commentId: updatedComment.id,
     });
 
+    publishBoardChange(card.boardId, input.cardPublicId);
+
     return updatedComment;
   }
 
@@ -422,6 +429,8 @@ export class CardService {
       createdBy: userId,
     });
 
+    publishBoardChange(card.boardId, input.cardPublicId);
+
     return { publicId: input.commentPublicId };
   }
 
@@ -478,6 +487,8 @@ export class CardService {
         createdBy: userId,
       });
 
+      publishBoardChange(card.boardId, input.cardPublicId);
+
       return { newLabel: false };
     }
 
@@ -501,6 +512,8 @@ export class CardService {
       labelId: label.id,
       createdBy: userId,
     });
+
+    publishBoardChange(card.boardId, input.cardPublicId);
 
     return { newLabel: true };
   }
@@ -562,6 +575,8 @@ export class CardService {
         createdBy: userId,
       });
 
+      publishBoardChange(card.boardId, input.cardPublicId);
+
       return { newMember: false };
     }
 
@@ -591,6 +606,8 @@ export class CardService {
       workspaceMemberId: member.id,
       createdBy: userId,
     });
+
+    publishBoardChange(card.boardId, input.cardPublicId);
 
     return { newMember: true };
   }
@@ -1060,6 +1077,10 @@ export class CardService {
       log.error({ err: error }, "Webhook delivery failed");
     });
 
+    publishBoardChange(card.boardId, input.cardPublicId);
+    if (newList && newList.boardId !== card.boardId)
+      publishBoardChange(newList.boardId, input.cardPublicId);
+
     return toJson(result);
   }
 
@@ -1109,6 +1130,8 @@ export class CardService {
 
     if (fullCard) this.sendCardWebhook("card.deleted", card, fullCard, input);
 
+    publishBoardChange(card.boardId, input.cardPublicId);
+
     return { success: true };
   }
 
@@ -1138,6 +1161,8 @@ export class CardService {
 
     const fullCard = await cardRepo.getByPublicId(db, input.cardPublicId);
     if (fullCard) this.sendCardWebhook("card.archived", card, fullCard, input);
+
+    publishBoardChange(card.boardId, input.cardPublicId);
 
     return { success: true };
   }
@@ -1172,6 +1197,8 @@ export class CardService {
     const fullCard = await cardRepo.getByPublicId(db, input.cardPublicId);
     if (fullCard)
       this.sendCardWebhook("card.unarchived", card, fullCard, input);
+
+    publishBoardChange(card.boardId, input.cardPublicId);
 
     return { list: { publicId: list.publicId, name: list.name } };
   }
@@ -1417,6 +1444,8 @@ export class CardService {
         });
       }
     }
+
+    publishBoardChange(targetList.boardId, newCard.publicId);
 
     return { publicId: newCard.publicId };
   }

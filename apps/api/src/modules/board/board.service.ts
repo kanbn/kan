@@ -28,6 +28,10 @@ import {
   generateUID,
 } from "@kan/shared/utils";
 
+import {
+  closeBoardStreams,
+  publishBoardChange,
+} from "../../common/realtime.js";
 import { db } from "../../common/session.util.js";
 import { toJson } from "../../common/to-json.util.js";
 
@@ -471,6 +475,8 @@ export class BoardService {
     if (!result)
       throw new InternalServerErrorException(`Failed to update board`);
 
+    publishBoardChange(board.id);
+
     return result;
   }
 
@@ -584,6 +590,8 @@ export class BoardService {
       }
     }
 
+    publishBoardChange(board.id);
+
     return { success: true };
   }
 
@@ -652,6 +660,10 @@ export class BoardService {
       userId,
       slug,
     );
+
+    publishBoardChange(board.id);
+    // People who aren't in the new workspace lose access.
+    closeBoardStreams({ boardId: board.id });
 
     return { success: true };
   }

@@ -37,6 +37,7 @@ services:
       - NEXT_PUBLIC_USE_STANDALONE_OUTPUT=${NEXT_PUBLIC_USE_STANDALONE_OUTPUT}
       - REDIS_URL=${REDIS_URL}
       - RATE_LIMIT_IP_HEADER=${RATE_LIMIT_IP_HEADER}
+      - DISABLE_REALTIME_UPDATES=${DISABLE_REALTIME_UPDATES}
       - KAN_API_URL=${KAN_API_URL}
 
       # Logging (optional - debug, info, warn, error; defaults to debug in dev, info in prod)

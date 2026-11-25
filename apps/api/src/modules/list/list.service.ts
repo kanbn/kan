@@ -12,6 +12,7 @@ import {
 } from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
+import { publishBoardChange } from "../../common/realtime.js";
 import { db } from "../../common/session.util.js";
 
 @Injectable()
@@ -25,11 +26,15 @@ export class ListService {
     await assertPermission(db, input.userId, board.workspaceId, "list:create");
     await assertBoardAccess(db, input.userId, board);
 
-    return listRepo.create(db, {
+    const list = await listRepo.create(db, {
       name: input.name,
       createdBy: input.userId,
       boardId: board.id,
     });
+
+    publishBoardChange(board.id);
+
+    return list;
   }
 
   async delete(input: { listPublicId: string; userId: string }) {
@@ -73,6 +78,8 @@ export class ListService {
     }));
 
     if (activities.length) await activityRepo.bulkCreate(db, activities);
+
+    publishBoardChange(list.boardId);
 
     return { success: true };
   }
@@ -120,6 +127,8 @@ export class ListService {
 
     if (!result)
       throw new InternalServerErrorException("Failed to update list");
+
+    publishBoardChange(list.boardId);
 
     return result;
   }

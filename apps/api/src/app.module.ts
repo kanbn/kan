@@ -7,6 +7,7 @@ import { RateLimitGuard } from "./common/guards/rate-limit.guard.js";
 import { ErrorCaptureFilter } from "./common/logging/error-capture.filter.js";
 import { RequestLoggingMiddleware } from "./common/logging/request-logging.middleware.js";
 import { createRateLimiter, RATE_LIMITER } from "./common/rate-limiter.js";
+import { TabIdMiddleware } from "./common/realtime.js";
 import { HealthController } from "./health.controller.js";
 import { AttachmentModule } from "./modules/attachment/attachment.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
@@ -23,6 +24,7 @@ import { ListModule } from "./modules/list/list.module.js";
 import { McpModule } from "./modules/mcp/mcp.module.js";
 import { MemberModule } from "./modules/member/member.module.js";
 import { PermissionModule } from "./modules/permission/permission.module.js";
+import { RealtimeModule } from "./modules/realtime/realtime.module.js";
 import { SessionModule } from "./modules/session/session.module.js";
 import { StatsModule } from "./modules/stats/stats.module.js";
 import { UserModule } from "./modules/user/user.module.js";
@@ -45,6 +47,7 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
     McpModule,
     MemberModule,
     PermissionModule,
+    RealtimeModule,
     SessionModule,
     StatsModule,
     UserModule,
@@ -62,6 +65,8 @@ import { WorkspaceModule } from "./modules/workspace/workspace.module.js";
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(RequestLoggingMiddleware).forRoutes("*path");
+    consumer
+      .apply(RequestLoggingMiddleware, TabIdMiddleware)
+      .forRoutes("*path");
   }
 }
