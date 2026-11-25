@@ -35,6 +35,7 @@ import {
 import { generateUID, normalizeDescription } from "@kan/shared/utils";
 
 import * as boardMemberRepo from "./boardMember.repo";
+import { activeCard } from "./card.repo";
 
 export const getCount = async (db: dbClient) => {
   const result = await db
@@ -198,7 +199,7 @@ export const getByPublicId = async (
         eq(boards.publicId, boardPublicId),
         isNull(boards.deletedAt),
         isNull(lists.deletedAt),
-        isNull(cards.deletedAt),
+        activeCard,
         isNull(workspaceMembers.deletedAt),
       ),
     );
@@ -384,7 +385,7 @@ export const getByPublicId = async (
             },
             where: and(
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
-              isNull(cards.deletedAt),
+              activeCard,
               buildDueDateWhere(filters.dueDate),
             ),
             orderBy: [asc(cards.index)],
@@ -677,7 +678,7 @@ export const getBySlug = async (
             },
             where: and(
               cardIds.length > 0 ? inArray(cards.publicId, cardIds) : undefined,
-              isNull(cards.deletedAt),
+              activeCard,
               buildDueDateWhere(filters.dueDate),
             ),
             orderBy: [asc(cards.index)],

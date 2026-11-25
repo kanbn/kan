@@ -224,7 +224,7 @@ describe("BoardService.update", () => {
 });
 
 describe("BoardService.delete", () => {
-  it("soft deletes the board, its lists and cards, and logs card archive activity", async () => {
+  it("soft deletes the board, its lists and cards, and logs card deleted activity", async () => {
     vi.spyOn(boardRepo, "getWithListIdsByPublicId").mockResolvedValue({
       ...board,
       lists: [{ id: 5 }],
@@ -242,7 +242,7 @@ describe("BoardService.delete", () => {
       await service.delete({ boardPublicId: "board_123456", userId: "user_1" }),
     ).toEqual({ success: true });
     expect(activities).toHaveBeenCalledWith(expect.anything(), [
-      { type: "card.archived", createdBy: "user_1", cardId: 7 },
+      { type: "card.deleted", createdBy: "user_1", cardId: 7 },
     ]);
   });
 });

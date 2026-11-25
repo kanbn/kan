@@ -50,7 +50,7 @@ const tools = TOOL_CLASSES.flatMap((cls) =>
 
 describe("MCP tool parameters", () => {
   it("finds every tool", () => {
-    expect(tools.length).toBe(71);
+    expect(tools.length).toBe(74);
   });
 
   it.each(tools.map((tool) => [tool.name, tool] as const))(

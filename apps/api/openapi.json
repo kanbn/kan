@@ -465,6 +465,84 @@
         "tags": ["Boards"]
       }
     },
+    "/boards/{boardPublicId}/archived-cards": {
+      "get": {
+        "operationId": "getArchivedCards",
+        "parameters": [
+          {
+            "name": "boardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Maximum number of cards to return.",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 50,
+              "type": "integer"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "description": "Only return cards whose title contains this text.",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "description": "Pagination cursor: nextCursor from the previous page.",
+            "schema": {
+              "format": "date-time",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "cursorPublicId",
+            "required": false,
+            "in": "query",
+            "description": "Pagination cursor: nextCursorPublicId from the previous page.",
+            "schema": {
+              "minLength": 12,
+              "maxLength": 12,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchivedCardsDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List a board's archived cards",
+        "tags": ["Boards"]
+      }
+    },
     "/boards/{boardPublicId}/move": {
       "post": {
         "operationId": "moveBoard",
@@ -952,6 +1030,74 @@
           }
         },
         "summary": "Get a card by public ID",
+        "tags": ["Cards"]
+      }
+    },
+    "/cards/{cardPublicId}/archive": {
+      "post": {
+        "operationId": "archiveCard",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Archive a card",
+        "tags": ["Cards"]
+      }
+    },
+    "/cards/{cardPublicId}/unarchive": {
+      "post": {
+        "operationId": "unarchiveCard",
+        "parameters": [
+          {
+            "name": "cardPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnarchiveCardResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Unarchive a card",
         "tags": ["Cards"]
       }
     },
@@ -4302,6 +4448,109 @@
         ],
         "additionalProperties": false
       },
+      "ArchivedCardsDto_Output": {
+        "type": "object",
+        "properties": {
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "cardNumber": {
+                  "type": "number",
+                  "nullable": true
+                },
+                "createdBy": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "archivedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                },
+                "archivedBy": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  },
+                  "required": ["name"],
+                  "additionalProperties": false,
+                  "nullable": true
+                },
+                "labels": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "publicId": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "colourCode": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    },
+                    "required": ["publicId", "name", "colourCode"],
+                    "additionalProperties": false
+                  }
+                },
+                "list": {
+                  "type": "object",
+                  "properties": {
+                    "publicId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["publicId", "name"],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "publicId",
+                "title",
+                "cardNumber",
+                "createdBy",
+                "archivedAt",
+                "archivedBy",
+                "labels",
+                "list"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "hasMore": {
+            "type": "boolean"
+          },
+          "nextCursor": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+            "nullable": true
+          },
+          "nextCursorPublicId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": ["cards", "hasMore", "nextCursor", "nextCursorPublicId"],
+        "additionalProperties": false
+      },
       "UpdateBoardDto": {
         "type": "object",
         "properties": {
@@ -4841,6 +5090,26 @@
         "required": ["publicId", "title", "description", "dueDate"],
         "additionalProperties": false
       },
+      "UnarchiveCardResponseDto_Output": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "object",
+            "properties": {
+              "publicId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": ["publicId", "name"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["list"],
+        "additionalProperties": false
+      },
       "DuplicateCardDto": {
         "type": "object",
         "properties": {
@@ -4953,6 +5222,12 @@
           },
           "createdBy": {
             "type": "string",
+            "nullable": true
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
             "nullable": true
           },
           "labels": {
@@ -5428,6 +5703,7 @@
           "index",
           "dueDate",
           "createdBy",
+          "archivedAt",
           "labels",
           "attachments",
           "checklists",
@@ -6569,6 +6845,8 @@
                 "card.created",
                 "card.updated",
                 "card.moved",
+                "card.archived",
+                "card.unarchived",
                 "card.deleted"
               ]
             }
@@ -6626,6 +6904,8 @@
                 "card.created",
                 "card.updated",
                 "card.moved",
+                "card.archived",
+                "card.unarchived",
                 "card.deleted"
               ]
             },
@@ -6662,6 +6942,8 @@
                 "card.created",
                 "card.updated",
                 "card.moved",
+                "card.archived",
+                "card.unarchived",
                 "card.deleted"
               ]
             }

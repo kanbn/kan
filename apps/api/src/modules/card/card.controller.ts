@@ -30,6 +30,7 @@ import {
   SuccessResponseDto,
   ToggleLabelResponseDto,
   ToggleMemberResponseDto,
+  UnarchiveCardResponseDto,
   UpdateCardDto,
 } from "./dto/card.dto.js";
 
@@ -74,6 +75,36 @@ export class CardController {
     @Param("cardPublicId") cardPublicId: string,
   ) {
     return this.cardService.delete({
+      cardPublicId,
+      userId: user.id,
+      userName: user.name,
+    });
+  }
+
+  @Post(":cardPublicId/archive")
+  @ApiOperation({ operationId: "archiveCard", summary: "Archive a card" })
+  @ApiParam({ name: "cardPublicId" })
+  @ZodResponse({ status: 201, type: SuccessResponseDto })
+  async archive(
+    @CurrentUser() user: User,
+    @Param("cardPublicId") cardPublicId: string,
+  ) {
+    return this.cardService.archive({
+      cardPublicId,
+      userId: user.id,
+      userName: user.name,
+    });
+  }
+
+  @Post(":cardPublicId/unarchive")
+  @ApiOperation({ operationId: "unarchiveCard", summary: "Unarchive a card" })
+  @ApiParam({ name: "cardPublicId" })
+  @ZodResponse({ status: 201, type: UnarchiveCardResponseDto })
+  async unarchive(
+    @CurrentUser() user: User,
+    @Param("cardPublicId") cardPublicId: string,
+  ) {
+    return this.cardService.unarchive({
       cardPublicId,
       userId: user.id,
       userName: user.name,

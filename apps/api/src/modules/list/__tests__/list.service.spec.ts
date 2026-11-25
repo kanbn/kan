@@ -90,7 +90,7 @@ describe("ListService.delete", () => {
     // toHaveBeenCalledWith/toEqual on this spy's args crashes vitest (OOM) here — check shallowly.
     const activities = bulkCreate.mock.calls[0]?.[1] as
       { type: string; createdBy: string; cardId: number }[] | undefined;
-    expect(activities?.[0]?.type).toBe("card.archived");
+    expect(activities?.[0]?.type).toBe("card.deleted");
     expect(activities?.[0]?.cardId).toBe(1);
   });
 

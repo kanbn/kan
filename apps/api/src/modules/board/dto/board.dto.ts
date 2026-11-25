@@ -166,6 +166,55 @@ export const BoardDetailSchema = z.object({
 
 export class BoardDetailDto extends createZodDto(BoardDetailSchema) {}
 
+export const ArchivedCardsQuerySchema = z.object({
+  limit: z.coerce
+    .number()
+    .int()
+    .min(1)
+    .max(100)
+    .optional()
+    .default(50)
+    .describe("Maximum number of cards to return."),
+  search: z
+    .string()
+    .max(200)
+    .optional()
+    .describe("Only return cards whose title contains this text."),
+  cursor: z.iso
+    .datetime()
+    .optional()
+    .describe("Pagination cursor: nextCursor from the previous page."),
+  cursorPublicId: z
+    .string()
+    .length(12)
+    .optional()
+    .describe("Pagination cursor: nextCursorPublicId from the previous page."),
+});
+
+export class ArchivedCardsQueryDto extends createZodDto(
+  ArchivedCardsQuerySchema,
+) {}
+
+export const ArchivedCardsSchema = z.object({
+  cards: z.array(
+    z.object({
+      publicId: z.string(),
+      title: z.string(),
+      cardNumber: z.number().nullable(),
+      createdBy: z.string().nullable(),
+      archivedAt: z.iso.datetime(),
+      archivedBy: z.object({ name: z.string().nullable() }).nullable(),
+      labels: z.array(labelSchema),
+      list: z.object({ publicId: z.string(), name: z.string() }),
+    }),
+  ),
+  hasMore: z.boolean(),
+  nextCursor: z.iso.datetime().nullable(),
+  nextCursorPublicId: z.string().nullable(),
+});
+
+export class ArchivedCardsDto extends createZodDto(ArchivedCardsSchema) {}
+
 export const BoardBySlugQuerySchema = z.object(boardFilterQuery);
 
 export class BoardBySlugQueryDto extends createZodDto(BoardBySlugQuerySchema) {}

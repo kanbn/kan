@@ -63,10 +63,11 @@ export class ListService {
       listIds: [list.id],
       deletedAt,
       deletedBy: input.userId,
+      keepArchived: true,
     });
 
     const activities = deletedCards.map((card) => ({
-      type: "card.archived" as const,
+      type: "card.deleted" as const,
       createdBy: input.userId,
       cardId: card.id,
     }));

@@ -606,7 +606,7 @@ export class CardService {
         `Card with public ID ${input.cardPublicId} not found`,
       );
 
-    if (card.workspaceVisibility === "private") {
+    if (card.workspaceVisibility === "private" || card.archivedAt) {
       const userId = input.userId;
 
       if (!userId) throw new UnauthorizedException(`User not authenticated`);
@@ -710,7 +710,7 @@ export class CardService {
         `Card with public ID ${input.cardPublicId} not found`,
       );
 
-    if (card.workspaceVisibility === "private") {
+    if (card.workspaceVisibility === "private" || card.archivedAt) {
       const userId = input.userId;
 
       if (!userId) throw new UnauthorizedException(`User not authenticated`);
@@ -794,28 +794,15 @@ export class CardService {
     userName: string;
   }) {
     const { userId } = input;
-    const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
-      db,
-      input.cardPublicId,
-    );
+    const card = await this.getEditableCard(input);
 
-    if (!card)
-      throw new NotFoundException(
-        `Card with public ID ${input.cardPublicId} not found`,
+    if (
+      card.archivedAt &&
+      (input.index !== undefined || input.listPublicId !== undefined)
+    )
+      throw new BadRequestException(
+        `Archived cards cannot be moved. Unarchive the card first.`,
       );
-
-    await assertCanEdit(
-      db,
-      userId,
-      card.workspaceId,
-      "card:edit",
-      card.createdBy,
-    );
-    await assertBoardAccess(db, userId, {
-      id: card.boardId,
-      workspaceId: card.workspaceId,
-      type: card.boardType,
-    });
 
     const existingCard = await cardRepo.getByPublicId(db, input.cardPublicId);
 
@@ -1105,51 +1092,149 @@ export class CardService {
       type: card.boardType,
     });
 
-    // Fetch full card data before delete for webhook
+    // Fetched first: the webhook describes the card as it was.
     const fullCard = await cardRepo.getByPublicId(db, input.cardPublicId);
-
-    const deletedAt = new Date();
 
     await cardRepo.softDelete(db, {
       cardId: card.id,
-      deletedAt,
+      deletedAt: new Date(),
       deletedBy: userId,
     });
 
     await cardActivityRepo.create(db, {
-      type: "card.archived",
+      type: "card.deleted",
       cardId: card.id,
       createdBy: userId,
     });
 
-    // Fire webhooks (non-blocking)
-    if (fullCard) {
-      sendWebhooksForWorkspace(
-        db,
-        card.workspaceId,
-        createCardWebhookPayload(
-          "card.deleted",
-          {
-            id: String(fullCard.id),
-            publicId: fullCard.publicId,
-            title: fullCard.title,
-            description: fullCard.description,
-            dueDate: fullCard.dueDate,
-            listId: fullCard.list.publicId,
-          },
-          {
-            boardId: card.boardPublicId,
-            boardName: card.boardName,
-            listName: fullCard.list.name,
-            user: { id: userId, name: input.userName },
-          },
-        ),
-      ).catch((error) => {
-        log.error({ err: error }, "Webhook delivery failed");
-      });
-    }
+    if (fullCard) this.sendCardWebhook("card.deleted", card, fullCard, input);
 
     return { success: true };
+  }
+
+  async archive(input: {
+    cardPublicId: string;
+    userId: string;
+    userName: string;
+  }) {
+    const card = await this.getEditableCard(input);
+
+    if (card.boardType === "template")
+      throw new BadRequestException(`Template cards cannot be archived`);
+
+    const archived = await cardRepo.archive(db, {
+      cardId: card.id,
+      archivedAt: new Date(),
+      archivedBy: input.userId,
+    });
+
+    if (!archived) throw new BadRequestException(`Card is already archived`);
+
+    await cardActivityRepo.create(db, {
+      type: "card.archived",
+      cardId: card.id,
+      createdBy: input.userId,
+    });
+
+    const fullCard = await cardRepo.getByPublicId(db, input.cardPublicId);
+    if (fullCard) this.sendCardWebhook("card.archived", card, fullCard, input);
+
+    return { success: true };
+  }
+
+  async unarchive(input: {
+    cardPublicId: string;
+    userId: string;
+    userName: string;
+  }) {
+    const card = await this.getEditableCard(input);
+
+    if (!card.archivedAt) throw new BadRequestException(`Card is not archived`);
+
+    const list = await cardRepo.unarchive(db, {
+      cardId: card.id,
+      boardId: card.boardId,
+      listPublicId: card.listPublicId,
+    });
+
+    if (!list)
+      throw new BadRequestException(
+        `Could not unarchive the card. Its board needs at least one list.`,
+      );
+
+    await cardActivityRepo.create(db, {
+      type: "card.unarchived",
+      cardId: card.id,
+      createdBy: input.userId,
+      toListId: list.id,
+    });
+
+    const fullCard = await cardRepo.getByPublicId(db, input.cardPublicId);
+    if (fullCard)
+      this.sendCardWebhook("card.unarchived", card, fullCard, input);
+
+    return { list: { publicId: list.publicId, name: list.name } };
+  }
+
+  private async getEditableCard(input: {
+    cardPublicId: string;
+    userId: string;
+  }) {
+    const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+      db,
+      input.cardPublicId,
+    );
+
+    if (!card)
+      throw new NotFoundException(
+        `Card with public ID ${input.cardPublicId} not found`,
+      );
+
+    await assertCanEdit(
+      db,
+      input.userId,
+      card.workspaceId,
+      "card:edit",
+      card.createdBy,
+    );
+    await assertBoardAccess(db, input.userId, {
+      id: card.boardId,
+      workspaceId: card.workspaceId,
+      type: card.boardType,
+    });
+
+    return card;
+  }
+
+  private sendCardWebhook(
+    event: "card.archived" | "card.unarchived" | "card.deleted",
+    card: { workspaceId: number; boardPublicId: string; boardName: string },
+    fullCard: NonNullable<Awaited<ReturnType<typeof cardRepo.getByPublicId>>>,
+    user: { userId: string; userName: string },
+  ) {
+    sendWebhooksForWorkspace(
+      db,
+      card.workspaceId,
+      createCardWebhookPayload(
+        event,
+        {
+          id: String(fullCard.id),
+          publicId: fullCard.publicId,
+          title: fullCard.title,
+          description: fullCard.description,
+          dueDate: fullCard.dueDate,
+          listId: fullCard.list.publicId,
+        },
+        {
+          boardId: card.boardPublicId,
+          boardName: card.boardName,
+          listName: fullCard.list.name,
+          user: { id: user.userId, name: user.userName },
+        },
+      ),
+    ).catch((error) => {
+      log.error({ err: error }, "Webhook delivery failed");
+    });
   }
 
   async duplicate(input: {
