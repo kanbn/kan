@@ -170,7 +170,7 @@ export function EditMemberPermissionsModal() {
       <div className="px-5 pt-5">
         <div className="mb-3 flex items-start justify-between gap-3">
           <div>
-            <h2 className="mb-1 text-sm font-semibold">
+            <h2 className="mb-1 text-sm font-semibold text-neutral-900 dark:text-dark-1000">
               {t`Edit permissions`}
             </h2>
             <p className="min-h-[16px] text-xs text-light-900 dark:text-dark-900">
@@ -238,7 +238,7 @@ export function EditMemberPermissionsModal() {
           </div>
         )}
       </div>
-      <div className="flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end border-t border-light-400 px-5 py-4 dark:border-dark-400">
         <div>
           <Button
             variant="secondary"

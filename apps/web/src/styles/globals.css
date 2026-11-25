@@ -9,18 +9,18 @@
    comes from the parent or other classes */
 @theme {
   --text-sm: initial;
-  --color-dark-50: #161616;
-  --color-dark-100: #1c1c1c;
-  --color-dark-200: #232323;
-  --color-dark-300: #282828;
-  --color-dark-400: #2e2e2e;
-  --color-dark-500: #343434;
-  --color-dark-600: #3e3e3e;
-  --color-dark-700: #505050;
-  --color-dark-800: #707070;
-  --color-dark-900: #7e7e7e;
-  --color-dark-950: #bbb;
-  --color-dark-1000: #ededed;
+  --color-dark-50: #0e0e10;
+  --color-dark-100: #141416;
+  --color-dark-200: #1a1b1d;
+  --color-dark-300: #202123;
+  --color-dark-400: #27282b;
+  --color-dark-500: #2d2e31;
+  --color-dark-600: #38393d;
+  --color-dark-700: #4d4e53;
+  --color-dark-800: #7c8088;
+  --color-dark-900: #8f939b;
+  --color-dark-950: #d0d6e0;
+  --color-dark-1000: #f7f8f8;
   --color-light-50: hsl(0deg 0% 98.8%);
   --color-light-100: hsl(0deg 0% 97.3%);
   --color-light-200: hsl(0deg 0% 95.3%);
@@ -29,9 +29,9 @@
   --color-light-500: hsl(0deg 0% 88.6%);
   --color-light-600: hsl(0deg 0% 85.9%);
   --color-light-700: hsl(0deg 0% 78%);
-  --color-light-800: hsl(0deg 0% 56.1%);
-  --color-light-900: hsl(0deg 0% 52.2%);
-  --color-light-950: hsl(0deg 0% 43.5%);
+  --color-light-800: hsl(0deg 0% 44%);
+  --color-light-900: hsl(0deg 0% 44%);
+  --color-light-950: hsl(0deg 0% 35%);
   --color-light-1000: hsl(0deg 0% 9%);
 }
 
@@ -41,6 +41,14 @@
 
 /* Keep Tailwind v3 defaults for borders, placeholders and button cursors */
 @layer base {
+  html {
+    background-color: var(--color-light-100);
+  }
+
+  html.dark {
+    background-color: var(--color-dark-50);
+  }
+
   *,
   ::after,
   ::before,
@@ -114,34 +122,12 @@
   @apply border-b-light-600 dark:border-b-dark-600;
 }
 
-/* Marketing pages use a slightly deeper dark palette and higher-contrast light greys */
-html:not(.dark) .marketing {
-  --color-light-800: hsl(0deg 0% 44%);
-  --color-light-900: hsl(0deg 0% 44%);
-  --color-light-950: hsl(0deg 0% 35%);
-}
-
-.dark .marketing {
-  --color-dark-50: #0e0e10;
-  --color-dark-100: #141416;
-  --color-dark-200: #1a1b1d;
-  --color-dark-300: #202123;
-  --color-dark-400: #27282b;
-  --color-dark-500: #2d2e31;
-  --color-dark-600: #38393d;
-  --color-dark-700: #4d4e53;
-  --color-dark-800: #7c8088;
-  --color-dark-900: #8f939b;
-  --color-dark-950: #d0d6e0;
-  --color-dark-1000: #f7f8f8;
+button:focus,
+html:not(:has(.marketing)) a:focus {
+  outline: none;
 }
 
 html:has(.marketing) {
   scroll-behavior: smooth;
   overflow: auto;
-  background-color: var(--color-light-100);
-}
-
-html.dark:has(.marketing) {
-  background-color: #0e0e10;
 }

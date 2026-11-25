@@ -97,16 +97,16 @@ export function EditYouTubeModal() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="px-5 pt-5">
         <div className="flex w-full items-center justify-between pb-4 text-neutral-900 dark:text-dark-1000">
-          <h2 className="text-sm font-medium">{t`Edit YouTube Video`}</h2>
+          <h2 className="text-sm font-semibold text-neutral-900 dark:text-dark-1000">{t`Edit YouTube Video`}</h2>
           <button
             type="button"
-            className="rounded-sm p-1 hover:bg-light-300 focus:outline-hidden dark:hover:bg-dark-300"
+            className="rounded-md p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300"
             onClick={(e) => {
               e.preventDefault();
               closeModal();
             }}
           >
-            <HiXMark size={18} className="text-light-900 dark:text-dark-900" />
+            <HiXMark size={16} className="text-light-900 dark:text-dark-900" />
           </button>
         </div>
 
@@ -158,9 +158,10 @@ export function EditYouTubeModal() {
         </div>
       </div>
 
-      <div className="mt-12 flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end border-t border-light-400 px-5 py-4 dark:border-dark-400">
         <div className="space-x-2">
           <Button
+            size="sm"
             type="button"
             variant="secondary"
             onClick={() => closeModal()}
@@ -168,6 +169,7 @@ export function EditYouTubeModal() {
             {t`Cancel`}
           </Button>
           <Button
+            size="sm"
             type="submit"
             isLoading={isValidating}
             disabled={!watch("url") || !!urlError}

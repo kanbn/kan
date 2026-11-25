@@ -115,8 +115,8 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="px-5 pt-5">
-        <div className="text-neutral-9000 flex w-full items-center justify-between pb-4 dark:text-dark-1000">
-          <h2 className="text-sm font-bold">{t`New ${isTemplate ? "template" : "board"}`}</h2>
+        <div className="flex w-full items-center justify-between pb-4 dark:text-dark-1000">
+          <h2 className="text-sm font-semibold text-neutral-900 dark:text-dark-1000">{t`New ${isTemplate ? "template" : "board"}`}</h2>
           <button
             type="button"
             className="hover:bg-li ght-300 rounded-sm p-1 focus:outline-hidden dark:hover:bg-dark-300"
@@ -125,7 +125,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
               closeModal();
             }}
           >
-            <HiXMark size={18} className="dark:text-dark-9000 text-light-900" />
+            <HiXMark size={16} className="dark:text-dark-9000 text-light-900" />
           </button>
         </div>
         <Input
@@ -147,7 +147,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
         showTemplates={showTemplates}
         customTemplates={formattedTemplates ?? []}
       />
-      <div className="mt-12 flex items-center justify-end space-x-4 border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end space-x-4 border-t border-light-400 px-5 py-4 dark:border-dark-400">
         {!isTemplate && (
           <Toggle
             label={t`Use template`}
@@ -161,7 +161,7 @@ export function NewBoardForm({ isTemplate }: { isTemplate?: boolean }) {
           />
         )}
         <div>
-          <Button type="submit" isLoading={createBoard.isPending}>
+          <Button size="sm" type="submit" isLoading={createBoard.isPending}>
             {t`Create ${isTemplate ? "template" : "board"}`}
           </Button>
         </div>

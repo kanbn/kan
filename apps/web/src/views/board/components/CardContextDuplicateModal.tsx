@@ -102,7 +102,7 @@ export function CardContextDuplicateModal({
 
   return (
     <form onSubmit={handleSubmit} className="p-4">
-      <h2 className="mb-4 text-lg font-semibold text-light-1000 dark:text-dark-1000">
+      <h2 className="mb-3 text-sm font-semibold text-neutral-900 dark:text-dark-1000">
         {t`Duplicate card`}
       </h2>
 
@@ -257,10 +257,16 @@ export function CardContextDuplicateModal({
       </div>
 
       <div className="mt-6 flex justify-end gap-2">
-        <Button type="button" variant="secondary" onClick={closeModal}>
+        <Button
+          size="sm"
+          type="button"
+          variant="secondary"
+          onClick={closeModal}
+        >
           {t`Cancel`}
         </Button>
         <Button
+          size="sm"
           type="submit"
           variant="primary"
           disabled={

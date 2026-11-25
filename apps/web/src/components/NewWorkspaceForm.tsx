@@ -147,13 +147,13 @@ export function NewWorkspaceForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="px-5 pt-5">
         <div className="flex w-full items-center justify-between pb-4">
-          <h2 className="text-sm font-bold text-neutral-900 dark:text-dark-1000">
+          <h2 className="text-sm font-semibold text-neutral-900 dark:text-dark-1000">
             {t`New workspace`}
           </h2>
           <button
             type="button"
             className={twMerge(
-              "rounded-sm p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300",
+              "rounded-md p-1 hover:bg-light-200 focus:outline-hidden dark:hover:bg-dark-300",
               !hasAvailableWorkspaces && "invisible",
             )}
             onClick={(e) => {
@@ -161,7 +161,7 @@ export function NewWorkspaceForm() {
               closeModal();
             }}
           >
-            <HiXMark size={18} className="text-light-900 dark:text-dark-900" />
+            <HiXMark size={16} className="text-light-900 dark:text-dark-900" />
           </button>
         </div>
 
@@ -216,9 +216,10 @@ export function NewWorkspaceForm() {
           />
         </div>
       </div>
-      <div className="mt-6 flex items-center justify-end border-t border-light-600 px-5 pt-5 pb-5 dark:border-dark-600">
+      <div className="mt-5 flex items-center justify-end border-t border-light-400 px-5 py-4 dark:border-dark-400">
         <div>
           <Button
+            size="sm"
             type="submit"
             isLoading={createWorkspace.isPending}
             disabled={

@@ -481,10 +481,12 @@ export default function Editor({
         }),
         Markdown.configure({ transformPastedText: true }),
         Placeholder.configure({
-          placeholder: readOnly
-            ? ""
-            : (placeholder ??
-              t`Add description... (type '/' to open commands or '@' to mention)`),
+          placeholder: ({ editor }) => {
+            if (readOnly) return "";
+            return editor.isFocused
+              ? t`Type / for commands, @ to mention`
+              : (placeholder ?? t`Add description...`);
+          },
         }),
         SlashCommands.configure({
           commandItems: getCommandItems(disableHeadings),
