@@ -57,7 +57,6 @@ export function DeleteListConfirmation({
           Cancel
         </Button>
         <Button
-          variant="danger"
           size="sm"
           isLoading={deleteList.isPending}
           onClick={() => deleteList.mutate({ listPublicId })}

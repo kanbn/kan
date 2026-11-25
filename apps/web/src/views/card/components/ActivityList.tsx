@@ -8,6 +8,7 @@ import {
   HiOutlineArrowRight,
   HiOutlineCheckCircle,
   HiOutlineClock,
+  HiOutlineInboxStack,
   HiOutlinePaperClip,
   HiOutlinePencil,
   HiOutlinePlus,
@@ -139,6 +140,8 @@ const getActivityText = ({
     "card.updated.dueDate.added": t`set the due date`,
     "card.updated.dueDate.updated": t`updated the due date`,
     "card.updated.dueDate.removed": t`removed the due date`,
+    "card.archived": t`archived the card`,
+    "card.unarchived": t`unarchived the card`,
   } as const;
 
   if (!(type in ACTIVITY_TYPE_MAP)) return null;
@@ -346,6 +349,8 @@ const ACTIVITY_ICON_MAP: Partial<Record<ActivityType, React.ReactNode | null>> =
     "card.updated.dueDate.added": <HiOutlineClock />,
     "card.updated.dueDate.updated": <HiOutlineClock />,
     "card.updated.dueDate.removed": <HiOutlineClock />,
+    "card.archived": <HiOutlineInboxStack />,
+    "card.unarchived": <HiOutlineInboxStack />,
   } as const;
 
 const getActivityIcon = (

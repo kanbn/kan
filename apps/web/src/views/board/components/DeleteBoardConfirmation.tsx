@@ -44,7 +44,6 @@ export function DeleteBoardConfirmation({
           {t`Cancel`}
         </Button>
         <Button
-          variant="danger"
           size="sm"
           onClick={handleDeleteBoard}
           isLoading={deleteBoard.isPending}

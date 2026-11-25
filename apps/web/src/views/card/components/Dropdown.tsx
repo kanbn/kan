@@ -5,6 +5,7 @@ import {
   HiLink,
   HiOutlineCheckCircle,
   HiOutlineDocumentDuplicate,
+  HiOutlineInboxStack,
   HiOutlineTrash,
 } from "react-icons/hi2";
 
@@ -12,6 +13,7 @@ import { useDuplicateCard } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
 import Dropdown from "~/components/Dropdown";
+import { useCardArchive } from "~/hooks/useCardArchive";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -25,6 +27,7 @@ export default function CardDropdown({
   ticketNumber,
   listPublicId,
   cardIndex,
+  isArchived,
 }: {
   cardPublicId: string;
   isTemplate?: boolean;
@@ -33,12 +36,14 @@ export default function CardDropdown({
   ticketNumber?: string | null;
   listPublicId?: string;
   cardIndex?: number;
+  isArchived?: boolean;
 }) {
   const { openModal } = useModal();
   const { showPopup } = usePopup();
   const { canEditCard, canDeleteCard } = usePermissions();
   const { data: session } = authClient.useSession();
   const boardCache = useBoardCache();
+  const { archive, unarchive } = useCardArchive();
   const isCreator = cardCreatedBy && session?.user.id === cardCreatedBy;
 
   const duplicateCard = useDuplicateCard({
@@ -129,6 +134,10 @@ export default function CardDropdown({
               <HiOutlineCheckCircle className="h-[16px] w-[16px] text-dark-900" />
             ),
           },
+        ]
+      : []),
+    ...(canEditCard && !isArchived
+      ? [
           {
             label: t`Duplicate card`,
             action: () => {
@@ -148,6 +157,19 @@ export default function CardDropdown({
               <HiOutlineDocumentDuplicate className="h-[16px] w-[16px] text-dark-900" />
             ),
             disabled: duplicateCard.isPending || !listPublicId,
+          },
+        ]
+      : []),
+    ...(!isTemplate && (canEditCard || isCreator)
+      ? [
+          {
+            label: isArchived ? t`Unarchive card` : t`Archive card`,
+            action: () =>
+              (isArchived ? unarchive : archive).mutate({ cardPublicId }),
+            icon: (
+              <HiOutlineInboxStack className="h-[16px] w-[16px] text-dark-900" />
+            ),
+            disabled: archive.isPending || unarchive.isPending,
           },
         ]
       : []),

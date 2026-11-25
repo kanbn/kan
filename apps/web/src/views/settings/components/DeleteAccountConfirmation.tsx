@@ -88,7 +88,6 @@ export function DeleteAccountConfirmation() {
         </Button>
         <Button
           size="sm"
-          variant="danger"
           onClick={handleDeleteAccount}
           disabled={!isAcknowledgmentChecked}
           isLoading={deleteAccountMutation.isPending}

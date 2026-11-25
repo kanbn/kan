@@ -64,7 +64,6 @@ export function DeleteMemberConfirmation() {
           {t`Cancel`}
         </Button>
         <Button
-          variant="danger"
           size="sm"
           onClick={handleDeleteMember}
           isLoading={deleteMember.isPending}

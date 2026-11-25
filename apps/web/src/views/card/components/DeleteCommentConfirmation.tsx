@@ -81,7 +81,6 @@ export function DeleteCommentConfirmation({
           {t`Cancel`}
         </button>
         <Button
-          variant="danger"
           size="sm"
           onClick={handleDeleteComment}
           isLoading={deleteCommentMutation.isPending}

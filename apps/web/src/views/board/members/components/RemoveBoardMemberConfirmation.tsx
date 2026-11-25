@@ -66,7 +66,6 @@ export function RemoveBoardMemberConfirmation({
           {t`Cancel`}
         </Button>
         <Button
-          variant="danger"
           size="sm"
           onClick={handleRemove}
           isLoading={removeMember.isPending}

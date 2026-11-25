@@ -92,7 +92,6 @@ export function DeleteCardConfirmation({
           {t`Cancel`}
         </button>
         <Button
-          variant="danger"
           size="sm"
           onClick={handleDeleteCard}
           isLoading={deleteCardMutation.isPending}
