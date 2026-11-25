@@ -24,6 +24,7 @@ import {
 import { t } from "@lingui/core/macro";
 import { keepPreviousData, useMutation } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
 import {
   HiOutlinePlusSmall,
@@ -1089,20 +1090,26 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                         <div className="min-w-[calc(100vw-18rem)] md:min-w-3" />
                       </div>
                     </SortableContext>
-                    <DragOverlay dropAnimation={activeCard ? undefined : null}>
-                      {activeCard ? (
-                        <div
-                          style={
-                            activeWidth ? { width: activeWidth } : undefined
-                          }
-                        >
-                          <CardPreview
-                            card={activeCard}
-                            cardPrefix={boardData.workspace.cardPrefix}
-                          />
-                        </div>
-                      ) : null}
-                    </DragOverlay>
+                    {/* Portalled so the scroll container's stacking and offsets can't clip or shift it. */}
+                    {createPortal(
+                      <DragOverlay
+                        dropAnimation={activeCard ? undefined : null}
+                      >
+                        {activeCard ? (
+                          <div
+                            style={
+                              activeWidth ? { width: activeWidth } : undefined
+                            }
+                          >
+                            <CardPreview
+                              card={activeCard}
+                              cardPrefix={boardData.workspace.cardPrefix}
+                            />
+                          </div>
+                        ) : null}
+                      </DragOverlay>,
+                      document.body,
+                    )}
                   </DndContext>
                 )}
               </>

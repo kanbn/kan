@@ -29,6 +29,43 @@ export function createBoardCollisionDetection(lastOverIdRef: {
       });
     }
 
+    // A card can be dropped anywhere in a list's column, not just over its
+    // cards: pick the list whose column the pointer is in (or nearest to,
+    // across the gaps), then the closest card in it.
+    const pointer = args.pointerCoordinates;
+    if (pointer) {
+      let column: { listPublicId: string; id: UniqueIdentifier } | undefined;
+      let bestDistance = Infinity;
+      for (const container of args.droppableContainers) {
+        const data = getData(container);
+        const rect = args.droppableRects.get(container.id);
+        if (data?.type !== "LIST_BODY" || !rect) continue;
+        const distance = Math.max(
+          rect.left - pointer.x,
+          0,
+          pointer.x - (rect.left + rect.width),
+        );
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          column = { listPublicId: data.listPublicId, id: container.id };
+        }
+      }
+
+      if (column) {
+        const listPublicId = column.listPublicId;
+        const cards = args.droppableContainers.filter((container) => {
+          const data = getData(container);
+          return data?.type === "CARD" && data.listPublicId === listPublicId;
+        });
+        const overId =
+          (cards.length > 0
+            ? closestCenter({ ...args, droppableContainers: cards })[0]?.id
+            : undefined) ?? column.id;
+        lastOverIdRef.current = overId;
+        return [{ id: overId }];
+      }
+    }
+
     const pointerIntersections = pointerWithin(args);
     const intersections =
       pointerIntersections.length > 0
