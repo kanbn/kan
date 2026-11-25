@@ -76,7 +76,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        339
+        342
       ]
     ],
     "translation": "{0} | {1}"
@@ -124,7 +124,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        74
+        75
       ]
     ],
     "translation": "{0} er føjet til dine favoritter."
@@ -140,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        75
+        76
       ]
     ],
     "translation": "{0} er fjernet fra dine favoritter."
@@ -172,7 +172,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        906
+        912
       ]
     ],
     "translation": "{0} blev ikke fundet"
@@ -542,7 +542,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        508
+        527
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -582,7 +582,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        51
+        54
       ]
     ],
     "translation": "Tilføj / rediger etiket"
@@ -670,7 +670,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        126
+        131
       ]
     ],
     "translation": "Tilføj tjekliste"
@@ -804,7 +804,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        198
+        210
       ]
     ],
     "translation": "Føj til favoritter"
@@ -835,7 +835,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        99
+        100
       ]
     ],
     "translation": "tilføjede {0} etiketter: <0>{labelList}</0>"
@@ -859,7 +859,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        129
+        130
       ]
     ],
     "translation": "tilføjede en tjekliste"
@@ -871,7 +871,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        132
+        133
       ]
     ],
     "translation": "tilføjede et punkt på tjeklisten"
@@ -883,7 +883,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        125
+        126
       ]
     ],
     "translation": "tilføjede en etiket til kortet"
@@ -895,7 +895,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        127
+        128
       ]
     ],
     "translation": "tilføjede et medlem til kortet"
@@ -907,7 +907,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        137
+        138
       ]
     ],
     "translation": "tilføjede en vedhæftet fil"
@@ -923,7 +923,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        275
+        278
       ]
     ],
     "translation": "tilføjede en vedhæftet fil <0>{0}</0>"
@@ -939,7 +939,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        205
+        208
       ]
     ],
     "translation": "tilføjede tjeklisten <0>{0}</0>"
@@ -955,7 +955,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        229
+        232
       ]
     ],
     "translation": "tilføjede tjeklistepunktet <0>{0}</0>"
@@ -971,7 +971,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        189
+        192
       ]
     ],
     "translation": "tilføjede etiketten <0>{0}</0>"
@@ -983,7 +983,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        71
+        72
       ]
     ],
     "translation": "Føjet til favoritter"
@@ -1427,10 +1427,26 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        178
+        190
       ]
     ],
     "translation": "Arkivér tavle"
+  },
+  "E5Y3nW": {
+    "message": "Archive card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/components/CardContextMenu.tsx",
+        78
+      ],
+      [
+        "src/views/card/components/Dropdown.tsx",
+        166
+      ]
+    ],
+    "translation": ""
   },
   "TdfEV7": {
     "message": "Archived",
@@ -1438,11 +1454,47 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/archived/index.tsx",
+        233
+      ],
+      [
         "src/views/boards/index.tsx",
         24
       ]
     ],
     "translation": "Arkiveret"
+  },
+  "gWlA7i": {
+    "message": "Archived cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        192
+      ],
+      [
+        "src/views/board/components/BoardDropdown.tsx",
+        159
+      ]
+    ],
+    "translation": ""
+  },
+  "hl6TvQ": {
+    "message": "Archived cards | {0}",
+    "placeholders": {
+      "0": [
+        "board?.name ?? t`Board`"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        181
+      ]
+    ],
+    "translation": ""
   },
   "T5_ohn": {
     "message": "Archived lists and cards aren't imported.",
@@ -1452,6 +1504,18 @@
       [
         "src/views/boards/components/ImportBoardsForm.tsx",
         520
+      ]
+    ],
+    "translation": ""
+  },
+  "vx_87p": {
+    "message": "archived the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        143
       ]
     ],
     "translation": ""
@@ -1619,7 +1683,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        169
+        172
       ]
     ],
     "translation": "tildelte <0>{0}</0> til kortet"
@@ -1901,8 +1965,12 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/archived/index.tsx",
+        181
+      ],
+      [
         "src/views/board/index.tsx",
-        878
+        884
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1910,7 +1978,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        339
+        342
       ],
       [
         "src/views/public/board/index.tsx",
@@ -1939,7 +2007,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        60
+        61
       ]
     ],
     "translation": "Tavle arkiveret"
@@ -1963,7 +2031,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        147
+        148
       ],
       [
         "src/views/board/members/index.tsx",
@@ -2007,7 +2075,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        896
+        902
       ]
     ],
     "translation": ""
@@ -2055,7 +2123,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        227
+        239
       ]
     ],
     "translation": ""
@@ -2079,7 +2147,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        62
       ]
     ],
     "translation": "Tavle fjernet fra arkivet"
@@ -2115,7 +2183,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        120
+        121
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2261,6 +2329,22 @@
       [
         "src/components/Editor.tsx",
         401
+      ]
+    ],
+    "translation": ""
+  },
+  "aC1R98": {
+    "message": "by {archivedByName}",
+    "placeholders": {
+      "archivedByName": [
+        "archivedByName"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        147
       ]
     ],
     "translation": ""
@@ -2751,11 +2835,27 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/archived/index.tsx",
+        228
+      ],
+      [
         "src/views/card/index.tsx",
-        339
+        342
       ]
     ],
     "translation": "Kort"
+  },
+  "iQzw74": {
+    "message": "Card archived",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/hooks/useCardArchive.ts",
+        39
+      ]
+    ],
+    "translation": ""
   },
   "sU2uWc": {
     "message": "Card duplicated",
@@ -2768,7 +2868,7 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        48
+        53
       ]
     ],
     "translation": "Kort duplikeret"
@@ -2780,7 +2880,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        50
+        55
       ]
     ],
     "translation": "Kortet blev duplikeret."
@@ -2804,11 +2904,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        402
+        406
       ],
       [
         "src/views/card/index.tsx",
-        449
+        468
       ]
     ],
     "translation": "Kortet blev ikke fundet"
@@ -2819,8 +2919,16 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/archived/index.tsx",
+        156
+      ],
+      [
+        "src/views/board/archived/index.tsx",
+        235
+      ],
+      [
         "src/views/card/components/Dropdown.tsx",
-        172
+        194
       ]
     ],
     "translation": ""
@@ -2837,6 +2945,18 @@
     ],
     "translation": "Korttitel"
   },
+  "XHTtSu": {
+    "message": "Card unarchived",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/hooks/useCardArchive.ts",
+        53
+      ]
+    ],
+    "translation": ""
+  },
   "rQXTmd": {
     "message": "Card URL copied to clipboard",
     "placeholders": {},
@@ -2844,11 +2964,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        457
+        459
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        77
+        82
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -2865,6 +2985,18 @@
       [
         "src/utils/permission-category-label.ts",
         16
+      ]
+    ],
+    "translation": ""
+  },
+  "Oolif7": {
+    "message": "Cards you archive will appear here.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        219
       ]
     ],
     "translation": ""
@@ -2928,11 +3060,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        300
+        303
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        314
+        317
       ]
     ],
     "translation": "ændrede forfaldsdatoen til <0>{formattedDate}</0>"
@@ -3113,7 +3245,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        393
+        397
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3267,7 +3399,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        134
+        135
       ]
     ],
     "translation": "fuldførte et punkt på tjeklisten"
@@ -3283,7 +3415,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        246
+        249
       ]
     ],
     "translation": "fuldførte tjeklistepunktet <0>{0}</0>"
@@ -3593,7 +3725,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        131
+        132
       ]
     ],
     "translation": "Kopiér link til tavle"
@@ -3605,7 +3737,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        110
+        115
       ]
     ],
     "translation": "Kopiér link til kort"
@@ -3641,7 +3773,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        63
+        66
       ]
     ],
     "translation": "Kopiér link til kort"
@@ -3665,7 +3797,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        138
+        139
       ]
     ],
     "translation": ""
@@ -3677,7 +3809,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        117
+        122
       ]
     ],
     "translation": "Kopiér ticket-ID"
@@ -3857,11 +3989,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        157
+        159
       ],
       [
         "src/views/board/index.tsx",
-        1038
+        1044
       ]
     ],
     "translation": "Opret ny liste"
@@ -3925,7 +4057,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        121
+        122
       ]
     ],
     "translation": "oprettede kortet"
@@ -4195,7 +4327,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        58
+        54
       ],
       [
         "src/components/LabelForm.tsx",
@@ -4207,23 +4339,23 @@
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
-        52
+        51
       ],
       [
         "src/views/card/components/DeleteCardConfirmation.tsx",
-        100
+        99
       ],
       [
         "src/views/card/components/DeleteChecklistConfirmation.tsx",
-        76
+        75
       ],
       [
         "src/views/card/components/DeleteCommentConfirmation.tsx",
-        89
+        88
       ],
       [
         "src/views/settings/components/DeleteWebhookConfirmation.tsx",
-        94
+        93
       ],
       [
         "src/views/settings/components/WebhookList.tsx",
@@ -4247,7 +4379,7 @@
       ],
       [
         "src/views/settings/components/DeleteAccountConfirmation.tsx",
-        96
+        95
       ]
     ],
     "translation": "Slet konto"
@@ -4259,7 +4391,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        209
+        221
       ]
     ],
     "translation": "Slet tavle"
@@ -4270,12 +4402,16 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/archived/index.tsx",
+        104
+      ],
+      [
         "src/views/board/components/CardContextMenu.tsx",
-        75
+        84
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        157
+        179
       ]
     ],
     "translation": "Slet kort"
@@ -4323,7 +4459,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        209
+        221
       ]
     ],
     "translation": "Slet skabelon"
@@ -4347,7 +4483,7 @@
     "origin": [
       [
         "src/views/settings/components/DeleteWorkspaceConfirmation.tsx",
-        116
+        115
       ],
       [
         "src/views/settings/WorkspaceSettings.tsx",
@@ -4367,7 +4503,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        131
+        132
       ]
     ],
     "translation": "slettede en tjekliste"
@@ -4379,7 +4515,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        136
+        137
       ]
     ],
     "translation": "slettede et punkt på tjeklisten"
@@ -4395,7 +4531,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        221
+        224
       ]
     ],
     "translation": "slettede tjeklisten <0>{0}</0>"
@@ -4411,7 +4547,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        264
+        267
       ]
     ],
     "translation": "slettede tjeklistepunktet <0>{0}</0>"
@@ -4691,7 +4827,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        143
+        145
       ]
     ],
     "translation": "Forfaldsdato"
@@ -4767,11 +4903,11 @@
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
-        69
+        72
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        133
+        142
       ]
     ],
     "translation": "Duplikér kort"
@@ -4811,7 +4947,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        169
+        181
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -5732,6 +5868,18 @@
     "translation": "Find svar på ofte stillede spørgsmål om Kan. Kan du ikke finde det, du leder efter? Du er velkommen til at <0>kontakte os</0>.",
     "obsolete": true
   },
+  "Hd6x1U": {
+    "message": "Find it under Archived cards in the board's menu.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/hooks/useCardArchive.ts",
+        40
+      ]
+    ],
+    "translation": ""
+  },
   "o1n7hQ": {
     "message": "Follow our <0>step-by-step guide</0> to bring your Trello boards across in a few clicks.",
     "placeholders": {},
@@ -5998,7 +6146,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1020
+        1026
       ]
     ],
     "translation": "Kom i gang ved at oprette en ny liste"
@@ -6505,7 +6653,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        94
+        99
       ]
     ],
     "translation": "ID kopieret"
@@ -7090,7 +7238,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        123
+        125
       ]
     ],
     "translation": "Etiketter"
@@ -7291,15 +7439,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        104
+        105
       ],
       [
         "src/views/board/index.tsx",
-        455
+        457
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        75
+        80
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -7318,12 +7466,16 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/archived/index.tsx",
+        232
+      ],
+      [
         "src/views/board/components/CardContextDuplicateModal.tsx",
         112
       ],
       [
         "src/views/card/index.tsx",
-        114
+        116
       ]
     ],
     "translation": "Liste"
@@ -7376,6 +7528,18 @@
     ],
     "translation": "Lister"
   },
+  "yQ2kGp": {
+    "message": "Load more",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        253
+      ]
+    ],
+    "translation": ""
+  },
   "1rVAfU": {
     "message": "Load more activities",
     "placeholders": {},
@@ -7383,7 +7547,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        661
+        666
       ]
     ],
     "translation": "Indlæs flere aktiviteter"
@@ -7407,7 +7571,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        661
+        666
       ]
     ],
     "translation": "Indlæser..."
@@ -7492,7 +7656,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        158
+        170
       ]
     ],
     "translation": "Gør til skabelon"
@@ -7508,7 +7672,7 @@
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
-        39
+        42
       ]
     ],
     "translation": "Administrer medlemmer"
@@ -7520,7 +7684,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        135
+        136
       ]
     ],
     "translation": "markerede et punkt på tjeklisten som ikke fuldført"
@@ -7536,7 +7700,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        255
+        258
       ]
     ],
     "translation": "markerede tjeklistepunktet <0>{0}</0> som ikke fuldført"
@@ -7624,11 +7788,11 @@
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        52
+        53
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        85
+        86
       ],
       [
         "src/views/members/index.tsx",
@@ -7692,7 +7856,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        133
+        135
       ],
       [
         "src/views/members/index.tsx",
@@ -7804,7 +7968,7 @@
     "origin": [
       [
         "src/views/board/components/CardContextMenu.tsx",
-        45
+        48
       ]
     ],
     "translation": "Flyt til en anden liste"
@@ -7828,7 +7992,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        189
+        201
       ]
     ],
     "translation": "Flyt til arbejdsområde"
@@ -7859,7 +8023,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        157
+        160
       ]
     ],
     "translation": "flyttede kortet fra <0>{0}</0> til <1>{1}</1>"
@@ -7871,7 +8035,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        124
+        125
       ]
     ],
     "translation": "flyttede kortet til en anden liste"
@@ -8067,7 +8231,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        962
+        968
       ]
     ],
     "translation": "Ny liste"
@@ -8208,6 +8372,18 @@
     ],
     "translation": "Ingen arkiverede tavler"
   },
+  "5aI7Zw": {
+    "message": "No archived cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        215
+      ]
+    ],
+    "translation": ""
+  },
   "Eg99Sc": {
     "message": "No authentication methods are currently available",
     "placeholders": {},
@@ -8313,7 +8489,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1016
+        1022
       ]
     ],
     "translation": "Ingen lister"
@@ -8325,10 +8501,22 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        1021
+        1027
       ]
     ],
     "translation": "Der er endnu ikke oprettet nogen lister"
+  },
+  "qRyiNn": {
+    "message": "No matching cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        215
+      ]
+    ],
+    "translation": ""
   },
   "i30J2U": {
     "message": "No projects found",
@@ -9083,8 +9271,12 @@
         116
       ],
       [
+        "src/hooks/useCardArchive.ts",
+        31
+      ],
+      [
         "src/views/board/components/BoardDropdown.tsx",
-        83
+        84
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -9108,15 +9300,15 @@
       ],
       [
         "src/views/board/index.tsx",
-        311
+        313
       ],
       [
         "src/views/board/index.tsx",
-        369
+        371
       ],
       [
         "src/views/board/index.tsx",
-        407
+        409
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -9204,11 +9396,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        232
+        235
       ],
       [
         "src/views/card/index.tsx",
-        246
+        249
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -9300,7 +9492,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        109
+        110
       ],
       [
         "src/views/board/components/CardContextDuplicateModal.tsx",
@@ -9312,19 +9504,19 @@
       ],
       [
         "src/views/board/index.tsx",
-        464
+        466
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        57
+        62
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        84
+        89
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        103
+        108
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -9517,7 +9709,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        126
+        127
       ]
     ],
     "translation": ""
@@ -9642,11 +9834,11 @@
     "origin": [
       [
         "src/views/board/members/components/RemoveBoardMemberConfirmation.tsx",
-        74
+        73
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
-        72
+        71
       ]
     ],
     "translation": "Fjern"
@@ -9682,7 +9874,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        198
+        210
       ]
     ],
     "translation": "Fjern fra favoritter"
@@ -9713,7 +9905,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        113
+        114
       ]
     ],
     "translation": "fjernede {0} etiketter: <0>{labelList}</0>"
@@ -9725,7 +9917,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        126
+        127
       ]
     ],
     "translation": "fjernede en etiket fra kortet"
@@ -9737,7 +9929,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        128
+        129
       ]
     ],
     "translation": "fjernede et medlem fra kortet"
@@ -9749,7 +9941,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        138
+        139
       ]
     ],
     "translation": "fjernede en vedhæftet fil"
@@ -9765,7 +9957,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        285
+        288
       ]
     ],
     "translation": "fjernede en vedhæftet fil <0>{0}</0>"
@@ -9777,7 +9969,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        73
       ]
     ],
     "translation": "Fjernet fra favoritter"
@@ -9793,7 +9985,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        197
+        200
       ]
     ],
     "translation": "fjernede etiketten <0>{0}</0>"
@@ -9805,11 +9997,11 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        141
+        142
       ],
       [
         "src/views/card/components/ActivityList.tsx",
-        321
+        324
       ]
     ],
     "translation": "fjernede forfaldsdatoen"
@@ -9821,7 +10013,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        130
+        131
       ]
     ],
     "translation": "omdøbte en tjekliste"
@@ -9837,7 +10029,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        213
+        216
       ]
     ],
     "translation": "omdøbte tjeklisten <0>{0}</0>"
@@ -9853,7 +10045,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        237
+        240
       ]
     ],
     "translation": "omdøbte tjeklistepunktet til <0>{0}</0>"
@@ -10144,6 +10336,30 @@
     ],
     "translation": ""
   },
+  "09RshS": {
+    "message": "Search archived cards",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        201
+      ]
+    ],
+    "translation": ""
+  },
+  "wJajDN": {
+    "message": "Search archived cards...",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        200
+      ]
+    ],
+    "translation": ""
+  },
   "SkCNhl": {
     "message": "Search boards and cards...",
     "placeholders": {},
@@ -10382,7 +10598,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        166
+        169
       ]
     ],
     "translation": "tildelte sig selv til kortet"
@@ -10510,7 +10726,7 @@
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
-        57
+        60
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -10550,7 +10766,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        139
+        140
       ]
     ],
     "translation": "angav forfaldsdatoen"
@@ -11308,11 +11524,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        878
+        884
       ],
       [
         "src/views/board/index.tsx",
-        915
+        921
       ]
     ],
     "translation": "Skabelon"
@@ -11372,7 +11588,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        119
+        120
       ]
     ],
     "translation": ""
@@ -11517,7 +11733,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        63
+        64
       ]
     ],
     "translation": "Tavlen er blevet arkiveret."
@@ -11545,7 +11761,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        64
+        65
       ]
     ],
     "translation": "Tavlen er fjernet fra arkivet."
@@ -11561,6 +11777,22 @@
       ]
     ],
     "translation": "Kortet er blevet duplikeret."
+  },
+  "CQLyFX": {
+    "message": "The card is back in {listName}.",
+    "placeholders": {
+      "listName": [
+        "listName"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/hooks/useCardArchive.ts",
+        54
+      ]
+    ],
+    "translation": ""
   },
   "kwssev": {
     "message": "The card was created, but {failedCount} of {0} attachments could not be uploaded.",
@@ -11775,6 +12007,18 @@
     ],
     "translation": "Denne tavle-URL er allerede taget"
   },
+  "qJ-Sdy": {
+    "message": "This card is archived.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/index.tsx",
+        412
+      ]
+    ],
+    "translation": ""
+  },
   "mTwGOf": {
     "message": "This invitation link is invalid or has expired.",
     "placeholders": {},
@@ -11930,7 +12174,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        96
+        101
       ]
     ],
     "translation": "Sags-ID kopieret til udklipsholderen"
@@ -12203,7 +12447,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        245
+        248
       ]
     ],
     "translation": "Kunne ikke tilføje etiket"
@@ -12239,7 +12483,7 @@
     "origin": [
       [
         "src/views/card/components/Dropdown.tsx",
-        101
+        106
       ]
     ],
     "translation": "Kunne ikke kopiere ID"
@@ -12251,15 +12495,15 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        108
+        109
       ],
       [
         "src/views/board/index.tsx",
-        462
+        464
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        82
+        87
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -12431,10 +12675,22 @@
       ],
       [
         "src/views/card/components/Dropdown.tsx",
-        55
+        60
       ]
     ],
     "translation": "Kunne ikke duplikere kort"
+  },
+  "G_cW-p": {
+    "message": "Unable to load archived cards.",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        209
+      ]
+    ],
+    "translation": ""
   },
   "d196_6": {
     "message": "Unable to move board",
@@ -12547,7 +12803,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        82
+        83
       ]
     ],
     "translation": "Kunne ikke opdatere tavle"
@@ -12582,12 +12838,16 @@
     "comments": [],
     "origin": [
       [
+        "src/hooks/useCardArchive.ts",
+        27
+      ],
+      [
         "src/views/board/index.tsx",
-        368
+        370
       ],
       [
         "src/views/card/index.tsx",
-        231
+        234
       ]
     ],
     "translation": "Kunne ikke opdatere kort"
@@ -12635,7 +12895,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        406
+        408
       ],
       [
         "src/views/card/components/DueDateSelector.tsx",
@@ -12663,7 +12923,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        310
+        312
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -12728,6 +12988,18 @@
     ],
     "translation": "Kunne ikke opdatere webhook"
   },
+  "5JOLV9": {
+    "message": "Unarchive",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/index.tsx",
+        420
+      ]
+    ],
+    "translation": ""
+  },
   "It4_FS": {
     "message": "Unarchive board",
     "placeholders": {},
@@ -12735,10 +13007,38 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        178
+        190
       ]
     ],
     "translation": "Fjern tavle fra arkiv"
+  },
+  "bVeASS": {
+    "message": "Unarchive card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/board/archived/index.tsx",
+        96
+      ],
+      [
+        "src/views/card/components/Dropdown.tsx",
+        166
+      ]
+    ],
+    "translation": ""
+  },
+  "h6YW4A": {
+    "message": "unarchived the card",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/card/components/ActivityList.tsx",
+        144
+      ]
+    ],
+    "translation": ""
   },
   "E8zYtd": {
     "message": "unassigned <0>{0}</0> from the card",
@@ -12751,7 +13051,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        180
+        183
       ]
     ],
     "translation": "fjernede tildelingen af <0>{0}</0> fra kortet"
@@ -12763,7 +13063,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        177
+        180
       ]
     ],
     "translation": "fjernede sin egen tildeling fra kortet"
@@ -13009,7 +13309,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        133
+        134
       ]
     ],
     "translation": "opdaterede et punkt på tjeklisten"
@@ -13021,7 +13321,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        123
+        124
       ]
     ],
     "translation": "opdaterede beskrivelsen"
@@ -13033,7 +13333,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        140
+        141
       ]
     ],
     "translation": "opdaterede forfaldsdatoen"
@@ -13045,7 +13345,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        122
+        123
       ]
     ],
     "translation": "opdaterede titlen"
@@ -13061,7 +13361,7 @@
     "origin": [
       [
         "src/views/card/components/ActivityList.tsx",
-        149
+        152
       ]
     ],
     "translation": "opdaterede titlen til <0>{0}</0>"
@@ -14117,11 +14417,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        949
+        955
       ],
       [
         "src/views/board/index.tsx",
-        1027
+        1033
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
