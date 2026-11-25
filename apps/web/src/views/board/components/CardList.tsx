@@ -18,7 +18,6 @@ interface CardListProps {
   canEditCard: boolean;
   freezeHeight: boolean;
   getCardHref: (cardPublicId: string) => string;
-  onContextMenu: (event: React.MouseEvent, cardPublicId: string) => void;
 }
 
 export default function CardList({
@@ -28,7 +27,6 @@ export default function CardList({
   canEditCard,
   freezeHeight,
   getCardHref,
-  onContextMenu,
 }: CardListProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -90,7 +88,6 @@ export default function CardList({
               cardPrefix={cardPrefix}
               cardHref={getCardHref(card.publicId)}
               canEditCard={canEditCard}
-              onContextMenu={onContextMenu}
             />
           ))}
         </SortableContext>

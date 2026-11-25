@@ -2,8 +2,6 @@ import Link from "next/link";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-import { env } from "@kan/shared/env";
-
 import type { CardDragData } from "../dnd/types";
 import type { BoardCard } from "../types";
 import CardPreview from "./CardPreview";
@@ -14,7 +12,6 @@ interface SortableCardProps {
   cardPrefix: string;
   cardHref: string;
   canEditCard: boolean;
-  onContextMenu: (event: React.MouseEvent, cardPublicId: string) => void;
 }
 
 export default function SortableCard({
@@ -23,7 +20,6 @@ export default function SortableCard({
   cardPrefix,
   cardHref,
   canEditCard,
-  onContextMenu,
 }: SortableCardProps) {
   const isPlaceholder = card.publicId.startsWith("PLACEHOLDER");
 
@@ -49,13 +45,9 @@ export default function SortableCard({
   return (
     <Link
       data-board-draggable
+      data-card-id={card.publicId}
       onClick={(e) => {
         if (isPlaceholder) e.preventDefault();
-      }}
-      onContextMenu={(e) => {
-        if (isPlaceholder || env("NEXT_PUBLIC_KAN_ENV") === "cloud") return;
-        e.preventDefault();
-        onContextMenu(e, card.publicId);
       }}
       href={cardHref}
       className={`mb-2 flex flex-col ${

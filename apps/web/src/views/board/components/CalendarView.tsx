@@ -79,6 +79,7 @@ function DraggableCalendarCard({
       {...listeners}
     >
       <Link
+        data-card-id={card.publicId}
         href={href}
         onClick={(e) => {
           e.stopPropagation();
@@ -509,6 +510,7 @@ const CalendarView = ({
                   {selectedCards.map((card) => (
                     <li key={card.publicId}>
                       <Link
+                        data-card-id={card.publicId}
                         href={cardHref(card.publicId)}
                         onClick={(e) => {
                           if (isPlaceholderPublicId(card.publicId)) {

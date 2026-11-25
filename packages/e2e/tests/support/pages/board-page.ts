@@ -162,24 +162,33 @@ export class BoardPage {
     await moved;
   }
 
-  async duplicateCard(cardTitle: string, targetListName: string) {
+  async openCardMenu(cardTitle: string) {
     await this.page
-      .getByText(cardTitle, { exact: true })
-      .click({ button: "right" });
-    await this.page.getByRole("button", { name: "Duplicate card" }).click();
+      .locator("[data-card-id]")
+      .filter({ hasText: cardTitle })
+      .filter({ visible: true })
+      .first()
+      // Cards that can't be dragged are marked disabled.
+      .click({ button: "right", force: true });
+    await this.page.getByRole("menu").waitFor();
+  }
 
-    const dialog = this.page.getByRole("dialog");
-    await dialog.getByRole("button", { name: "Select a list" }).click();
-    await this.page.getByRole("option", { name: targetListName }).click();
+  // Text isn't translated until it's merged, so it's found by position.
+  async openCardMoveMenu() {
+    await this.page
+      .locator('[role="menuitem"][aria-haspopup="menu"]')
+      .last()
+      .click();
+  }
 
+  async duplicateCard(cardTitle: string) {
+    await this.openCardMenu(cardTitle);
     const duplicated = waitForApi(
       this.page,
       "POST",
       /^\/cards\/[^/]+\/duplicate$/,
     );
-    await dialog
-      .getByRole("button", { name: "Duplicate", exact: true })
-      .click();
+    await this.page.getByRole("menuitem", { name: "Duplicate card" }).click();
     await duplicated;
   }
 
