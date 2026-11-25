@@ -84,7 +84,6 @@ export function RevokeApiKeyConfirmation() {
         </Button>
         <Button
           size="sm"
-          variant="danger"
           onClick={handleRevokeApiKey}
           disabled={!isAcknowledgmentChecked}
           isLoading={deleteApiKeyMutation.isPending}

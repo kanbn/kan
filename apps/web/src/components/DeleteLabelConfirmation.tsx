@@ -51,11 +51,7 @@ export function DeleteLabelConfirmation({
         <Button size="sm" variant="secondary" onClick={() => closeModal()}>
           {t`Cancel`}
         </Button>
-        <Button
-          variant="danger"
-          size="sm"
-          onClick={handleDeleteLabel}
-        >{t`Delete`}</Button>
+        <Button size="sm" onClick={handleDeleteLabel}>{t`Delete`}</Button>
       </div>
     </div>
   );

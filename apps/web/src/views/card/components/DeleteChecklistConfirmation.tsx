@@ -68,7 +68,6 @@ export function DeleteChecklistConfirmation({
           {t`Cancel`}
         </Button>
         <Button
-          variant="danger"
           size="sm"
           onClick={handleDelete}
           isLoading={deleteChecklist.isPending}

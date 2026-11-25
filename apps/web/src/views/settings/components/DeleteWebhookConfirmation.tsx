@@ -87,7 +87,6 @@ export function DeleteWebhookConfirmation({
         </Button>
         <Button
           size="sm"
-          variant="danger"
           onClick={handleDelete}
           isLoading={deleteWebhookMutation.isPending}
         >

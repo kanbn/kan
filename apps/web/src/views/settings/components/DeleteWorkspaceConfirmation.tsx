@@ -108,7 +108,6 @@ export function DeleteWorkspaceConfirmation() {
         </Button>
         <Button
           size="sm"
-          variant="danger"
           onClick={handleDeleteWorkspace}
           disabled={!isAcknowledgmentChecked}
           isLoading={deleteWorkspaceMutation.isPending}
