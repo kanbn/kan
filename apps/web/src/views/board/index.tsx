@@ -39,7 +39,6 @@ import {
 } from "@kan/api-client/hooks";
 import { env } from "@kan/shared/env";
 
-import type { CardContextMenuAction } from "./components/CardContextMenu";
 import type { BoardView } from "./components/ViewToggle";
 import type { DragData } from "./dnd/types";
 import type { BoardCard, BoardList } from "./types";
@@ -52,7 +51,6 @@ import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
-import { useCardArchive } from "~/hooks/useCardArchive";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useScrollRestore } from "~/hooks/useScrollRestore";
@@ -65,14 +63,11 @@ import { useBoardCache } from "~/utils/boardCache";
 import { updateCardFromInput } from "~/utils/cardMutations";
 import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
+import { findCardInList } from "./boardUpdates";
 import BoardDropdown from "./components/BoardDropdown";
 import CalendarView from "./components/CalendarView";
-import { CardContextDueDateModal } from "./components/CardContextDueDateModal";
-import { CardContextDuplicateModal } from "./components/CardContextDuplicateModal";
-import { CardContextLabelsModal } from "./components/CardContextLabelsModal";
-import { CardContextMembersModal } from "./components/CardContextMembersModal";
 import { CardContextMenu } from "./components/CardContextMenu";
-import { CardContextMoveListModal } from "./components/CardContextMoveListModal";
+import { CardDueDateModal } from "./components/CardDueDateModal";
 import CardList from "./components/CardList";
 import CardPreview from "./components/CardPreview";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
@@ -87,6 +82,7 @@ import { UpdateBoardSlugForm } from "./components/UpdateBoardSlugForm";
 import ViewToggle from "./components/ViewToggle";
 import VisibilityButton from "./components/VisibilityButton";
 import { createBoardCollisionDetection } from "./dnd/collision";
+import { useCardQuickActions } from "./useCardQuickActions";
 
 interface UpdateBoardInput {
   boardPublicId: string;
@@ -107,19 +103,19 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const boardCache = useBoardCache();
   const { showPopup } = usePopup();
   const { workspace, selectWorkspaceById } = useWorkspace();
-  const { openModal, modalContentType, entityId, isOpen } = useModal();
-  const { archive } = useCardArchive();
+  const {
+    openModal,
+    modalContentType,
+    entityId,
+    isOpen,
+    modalStates,
+    clearModalState,
+  } = useModal();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
   const [newCardInitialDueDate, setNewCardInitialDueDate] =
     useState<Date | null>(null);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
-
-  const [contextMenu, setContextMenu] = useState<{
-    x: number;
-    y: number;
-    cardPublicId: string;
-  } | null>(null);
 
   const { ref: scrollRef, onMouseDown } = useDragToScroll({
     enabled: true,
@@ -377,43 +373,23 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  const updateCardDueDateMutation = useMutation({
-    mutationFn: updateCardFromInput,
-    onMutate: async (args) => {
-      await boardCache.cancel();
+  const quickActions = useCardQuickActions(queryParams);
 
-      const currentState = boardCache.getData(queryParams);
-
-      boardCache.setData(queryParams, (oldBoard) => {
-        if (!oldBoard) return oldBoard;
-
-        return {
-          ...oldBoard,
-          lists: oldBoard.lists.map((list) => ({
-            ...list,
-            cards: list.cards.map((card) =>
-              card.publicId === args.cardPublicId
-                ? { ...card, dueDate: args.dueDate?.toISOString() ?? null }
-                : card,
-            ),
-          })),
-        };
+  // A label created from a card's menu is added to that card.
+  const newLabelCardId = useRef<string | null>(null);
+  const { toggleLabel } = quickActions;
+  useEffect(() => {
+    const labelPublicId = modalStates.NEW_LABEL_CREATED as string | undefined;
+    if (labelPublicId && newLabelCardId.current) {
+      toggleLabel.mutate({
+        cardPublicId: newLabelCardId.current,
+        label: { publicId: labelPublicId, name: "", colourCode: null },
       });
-
-      return { previousState: currentState };
-    },
-    onError: (_error, _args, context) => {
-      boardCache.setData(queryParams, context?.previousState);
-      showPopup({
-        header: t`Unable to update due date`,
-        message: t`Please try again later, or contact customer support.`,
-        icon: "error",
-      });
-    },
-    onSettled: async () => {
-      await boardCache.invalidate(queryParams.boardPublicId);
-    },
-  });
+      clearModalState("NEW_LABEL_CREATED");
+    }
+    if (!isOpen) newLabelCardId.current = null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modalStates.NEW_LABEL_CREATED, isOpen]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -439,58 +415,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
       onSettled();
       return;
     }
-    updateCardDueDateMutation.mutate({ cardPublicId, dueDate }, { onSettled });
+    quickActions.setDueDate.mutate({ cardPublicId, dueDate }, { onSettled });
   };
 
-  const handleCardContextMenuAction = (action: CardContextMenuAction) => {
-    const cardPublicId = contextMenu?.cardPublicId;
-    if (!cardPublicId) return;
-    setContextMenu(null);
-    if (action === "copyLink") {
-      const path = isTemplate
-        ? `/templates/${boardId}/cards/${cardPublicId}`
-        : `/cards/${cardPublicId}`;
-      const url = `${typeof window !== "undefined" ? window.location.origin : ""}${path}`;
-      void navigator.clipboard.writeText(url).then(
-        () => {
-          showPopup({
-            header: t`Link copied`,
-            icon: "success",
-            message: t`Card URL copied to clipboard`,
-          });
-        },
-        () => {
-          showPopup({
-            header: t`Unable to copy link`,
-            icon: "error",
-            message: t`Please try again.`,
-          });
-        },
-      );
-      return;
-    }
-    if (action === "duplicate") {
-      openModal("CARD_CONTEXT_DUPLICATE", cardPublicId);
-      return;
-    }
-    if (action === "archive") {
-      archive.mutate({ cardPublicId });
-      return;
-    }
-    if (action === "delete") {
-      openModal("DELETE_CARD", cardPublicId);
-      return;
-    }
-    const modalType =
-      action === "members"
-        ? "CARD_CONTEXT_MEMBERS"
-        : action === "move"
-          ? "CARD_CONTEXT_MOVE_LIST"
-          : action === "labels"
-            ? "CARD_CONTEXT_LABELS"
-            : "CARD_CONTEXT_DUE_DATE";
-    openModal(modalType, cardPublicId);
-  };
+  const getCardHref = (cardPublicId: string) =>
+    isTemplate
+      ? `/templates/${boardId}/cards/${cardPublicId}${cardReturnQuery}`
+      : `/cards/${cardPublicId}${cardReturnQuery}`;
 
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const [activeWidth, setActiveWidth] = useState<number | null>(null);
@@ -836,33 +767,20 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
 
         <Modal
           modalSize="sm"
-          isVisible={isOpen && modalContentType === "CARD_CONTEXT_MEMBERS"}
+          isVisible={isOpen && modalContentType === "CARD_DUE_DATE"}
         >
-          <CardContextMembersModal />
-        </Modal>
-        <Modal
-          modalSize="sm"
-          isVisible={isOpen && modalContentType === "CARD_CONTEXT_MOVE_LIST"}
-        >
-          <CardContextMoveListModal />
-        </Modal>
-        <Modal
-          modalSize="sm"
-          isVisible={isOpen && modalContentType === "CARD_CONTEXT_LABELS"}
-        >
-          <CardContextLabelsModal />
-        </Modal>
-        <Modal
-          modalSize="sm"
-          isVisible={isOpen && modalContentType === "CARD_CONTEXT_DUE_DATE"}
-        >
-          <CardContextDueDateModal />
-        </Modal>
-        <Modal
-          modalSize="md"
-          isVisible={isOpen && modalContentType === "CARD_CONTEXT_DUPLICATE"}
-        >
-          <CardContextDuplicateModal lists={boardData?.lists ?? []} />
+          <CardDueDateModal
+            dueDate={
+              boardData && findCardInList(boardData, entityId)?.card.dueDate
+            }
+            weekStartsOn={workspace.weekStartDay}
+            onSelect={(dueDate) =>
+              quickActions.setDueDate.mutate({
+                cardPublicId: entityId,
+                dueDate,
+              })
+            }
+          />
         </Modal>
         <Modal
           modalSize="sm"
@@ -983,155 +901,157 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
           </div>
         </div>
 
-        {view === "calendar" ? (
-          boardData && (
-            <CalendarView
-              lists={boardData.lists}
-              cardPrefix={boardData.workspace.cardPrefix}
-              weekStartsOn={workspace.weekStartDay}
-              isTemplate={!!isTemplate}
-              boardId={boardId ?? ""}
-              canEditCard={canEditCard}
-              canCreateCard={canCreateCard}
-              cardReturnQuery={cardReturnQuery}
-              isLocked={isFreeCloudPlan}
-              upgradeUrl={upgradeUrl}
-              onDateClick={openNewCardForDate}
-              onCardDrop={handleCalendarCardDrop}
-            />
-          )
-        ) : (
-          <div
-            ref={scrollRef}
-            onMouseDown={onMouseDown}
-            className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 scrollbar flex-1 snap-x snap-mandatory scroll-pl-[10px] scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-x-scroll overflow-y-hidden overscroll-contain md:snap-none dark:scrollbar-thumb-dark-300 dark:scrollbar-track-dark-100`}
-          >
-            {isLoading ? (
-              <div className="ml-8 flex">
-                <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
-                <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
-                <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
-              </div>
-            ) : boardData ? (
-              <>
-                {boardData.lists.length === 0 ? (
-                  <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
-                    <div className="flex flex-col items-center">
-                      <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
-                      <p className="mt-4 mb-2 text-[14px] font-bold text-light-1000 dark:text-dark-950">
-                        {t`No lists`}
-                      </p>
-                      <p className="text-[14px] text-light-900 dark:text-dark-900">
-                        {canCreateList
-                          ? t`Get started by creating a new list`
-                          : t`No lists have been created yet`}
-                      </p>
-                    </div>
-                    <Tooltip
-                      content={
-                        !canCreateList
-                          ? t`You don't have permission`
-                          : undefined
-                      }
-                    >
-                      <Button
-                        onClick={() => {
-                          if (boardId && canCreateList)
-                            openNewListForm(boardId);
-                        }}
-                        disabled={!canCreateList}
-                      >
-                        {t`Create new list`}
-                      </Button>
-                    </Tooltip>
-                  </div>
-                ) : (
-                  <DndContext
-                    sensors={sensors}
-                    collisionDetection={collisionDetectionStrategy}
-                    autoScroll={{ canScroll }}
-                    onDragStart={handleDragStart}
-                    onDragOver={handleDragOver}
-                    onDragEnd={handleDragEnd}
-                  >
-                    <SortableContext
-                      items={listIds}
-                      strategy={horizontalListSortingStrategy}
-                    >
-                      <div className="flex w-max">
-                        <div className="min-w-[10px] md:min-w-8" />
-                        {lists.map((list) => (
-                          <List
-                            key={`list.${list.publicId}`}
-                            list={list}
-                            cardCount={
-                              (cardsByList[list.publicId] ?? list.cards).length
-                            }
-                            setSelectedPublicListId={(publicListId) => {
-                              setNewCardInitialDueDate(null);
-                              setSelectedPublicListId(publicListId);
-                            }}
-                          >
-                            <CardList
-                              listPublicId={list.publicId}
-                              cards={cardsByList[list.publicId] ?? list.cards}
-                              cardPrefix={boardData.workspace.cardPrefix}
-                              canEditCard={!!canEditCard}
-                              freezeHeight={dragCardsByList !== null}
-                              getCardHref={(cardPublicId) =>
-                                isTemplate
-                                  ? `/templates/${boardId}/cards/${cardPublicId}${cardReturnQuery}`
-                                  : `/cards/${cardPublicId}${cardReturnQuery}`
-                              }
-                              onContextMenu={(e, cardPublicId) => {
-                                setContextMenu({
-                                  x: e.clientX,
-                                  y: e.clientY,
-                                  cardPublicId,
-                                });
-                              }}
-                            />
-                          </List>
-                        ))}
-                        <div className="min-w-[calc(100vw-18rem)] md:min-w-3" />
+        <CardContextMenu
+          board={boardData}
+          actions={quickActions}
+          getCardHref={getCardHref}
+          isTemplate={!!isTemplate}
+          weekStartsOn={workspace.weekStartDay}
+          onCreateLabel={(cardPublicId) => {
+            newLabelCardId.current = cardPublicId;
+            openModal("NEW_LABEL");
+          }}
+          onMoved={
+            view === "calendar"
+              ? (listName) =>
+                  showPopup({
+                    header: t`Card moved`,
+                    message: t`The card is now in ${listName}.`,
+                    icon: "success",
+                  })
+              : undefined
+          }
+        >
+          {view === "calendar" ? (
+            boardData && (
+              <CalendarView
+                lists={boardData.lists}
+                cardPrefix={boardData.workspace.cardPrefix}
+                weekStartsOn={workspace.weekStartDay}
+                isTemplate={!!isTemplate}
+                boardId={boardId ?? ""}
+                canEditCard={canEditCard}
+                canCreateCard={canCreateCard}
+                cardReturnQuery={cardReturnQuery}
+                isLocked={isFreeCloudPlan}
+                upgradeUrl={upgradeUrl}
+                onDateClick={openNewCardForDate}
+                onCardDrop={handleCalendarCardDrop}
+              />
+            )
+          ) : (
+            <div
+              ref={scrollRef}
+              onMouseDown={onMouseDown}
+              className={`scrollbar-w-none scrollbar-track-rounded-[4px] scrollbar-thumb-rounded-[4px] scrollbar-h-[8px] z-0 scrollbar flex-1 snap-x snap-mandatory scroll-pl-[10px] scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-x-scroll overflow-y-hidden overscroll-contain md:snap-none dark:scrollbar-thumb-dark-300 dark:scrollbar-track-dark-100`}
+            >
+              {isLoading ? (
+                <div className="ml-8 flex">
+                  <div className="0 mr-5 h-[500px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
+                  <div className="0 mr-5 h-[275px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
+                  <div className="0 mr-5 h-[375px] w-[18rem] animate-pulse rounded-md bg-light-200 dark:bg-dark-100" />
+                </div>
+              ) : boardData ? (
+                <>
+                  {boardData.lists.length === 0 ? (
+                    <div className="z-10 flex h-full w-full flex-col items-center justify-center space-y-8 pb-[150px]">
+                      <div className="flex flex-col items-center">
+                        <HiOutlineSquare3Stack3D className="h-10 w-10 text-light-800 dark:text-dark-800" />
+                        <p className="mt-4 mb-2 text-[14px] font-bold text-light-1000 dark:text-dark-950">
+                          {t`No lists`}
+                        </p>
+                        <p className="text-[14px] text-light-900 dark:text-dark-900">
+                          {canCreateList
+                            ? t`Get started by creating a new list`
+                            : t`No lists have been created yet`}
+                        </p>
                       </div>
-                    </SortableContext>
-                    {/* Portalled so the scroll container's stacking and offsets can't clip or shift it. */}
-                    {createPortal(
-                      <DragOverlay
-                        dropAnimation={activeCard ? undefined : null}
+                      <Tooltip
+                        content={
+                          !canCreateList
+                            ? t`You don't have permission`
+                            : undefined
+                        }
                       >
-                        {activeCard ? (
-                          <div
-                            style={
-                              activeWidth ? { width: activeWidth } : undefined
-                            }
-                          >
-                            <CardPreview
-                              card={activeCard}
-                              cardPrefix={boardData.workspace.cardPrefix}
-                            />
-                          </div>
-                        ) : null}
-                      </DragOverlay>,
-                      document.body,
-                    )}
-                  </DndContext>
-                )}
-              </>
-            ) : null}
-          </div>
-        )}
-        {contextMenu && (
-          <CardContextMenu
-            x={contextMenu.x}
-            y={contextMenu.y}
-            onClose={() => setContextMenu(null)}
-            onAction={handleCardContextMenuAction}
-            canEdit={!!canEditCard}
-            canArchive={!isTemplate}
-          />
-        )}
+                        <Button
+                          onClick={() => {
+                            if (boardId && canCreateList)
+                              openNewListForm(boardId);
+                          }}
+                          disabled={!canCreateList}
+                        >
+                          {t`Create new list`}
+                        </Button>
+                      </Tooltip>
+                    </div>
+                  ) : (
+                    <DndContext
+                      sensors={sensors}
+                      collisionDetection={collisionDetectionStrategy}
+                      autoScroll={{ canScroll }}
+                      onDragStart={handleDragStart}
+                      onDragOver={handleDragOver}
+                      onDragEnd={handleDragEnd}
+                    >
+                      <SortableContext
+                        items={listIds}
+                        strategy={horizontalListSortingStrategy}
+                      >
+                        <div className="flex w-max">
+                          <div className="min-w-[10px] md:min-w-8" />
+                          {lists.map((list) => (
+                            <List
+                              key={`list.${list.publicId}`}
+                              list={list}
+                              cardCount={
+                                (cardsByList[list.publicId] ?? list.cards)
+                                  .length
+                              }
+                              setSelectedPublicListId={(publicListId) => {
+                                setNewCardInitialDueDate(null);
+                                setSelectedPublicListId(publicListId);
+                              }}
+                            >
+                              <CardList
+                                listPublicId={list.publicId}
+                                cards={cardsByList[list.publicId] ?? list.cards}
+                                cardPrefix={boardData.workspace.cardPrefix}
+                                canEditCard={!!canEditCard}
+                                freezeHeight={dragCardsByList !== null}
+                                getCardHref={getCardHref}
+                              />
+                            </List>
+                          ))}
+                          <div className="min-w-[calc(100vw-18rem)] md:min-w-3" />
+                        </div>
+                      </SortableContext>
+                      {/* Portalled so the scroll container's stacking and offsets can't clip or shift it. */}
+                      {createPortal(
+                        <DragOverlay
+                          dropAnimation={activeCard ? undefined : null}
+                        >
+                          {activeCard ? (
+                            <div
+                              style={
+                                activeWidth ? { width: activeWidth } : undefined
+                              }
+                            >
+                              <CardPreview
+                                card={activeCard}
+                                cardPrefix={boardData.workspace.cardPrefix}
+                              />
+                            </div>
+                          ) : null}
+                        </DragOverlay>,
+                        document.body,
+                      )}
+                    </DndContext>
+                  )}
+                </>
+              ) : null}
+            </div>
+          )}
+        </CardContextMenu>
         {renderModalContent()}
       </div>
     </>
