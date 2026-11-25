@@ -6,6 +6,7 @@ import {
   HiOutlineArrowRightCircle,
   HiOutlineCalendar,
   HiOutlineDocumentDuplicate,
+  HiOutlineInboxStack,
   HiOutlineTag,
   HiOutlineTrash,
   HiOutlineUserGroup,
@@ -18,6 +19,7 @@ export type CardContextMenuAction =
   | "dueDate"
   | "copyLink"
   | "duplicate"
+  | "archive"
   | "delete";
 
 interface CardContextMenuProps {
@@ -26,6 +28,7 @@ interface CardContextMenuProps {
   onClose: () => void;
   onAction: (action: CardContextMenuAction) => void;
   canEdit: boolean;
+  canArchive: boolean;
 }
 
 const MENU_ITEMS: {
@@ -71,6 +74,12 @@ const MENU_ITEMS: {
     requiresEdit: true,
   },
   {
+    action: "archive",
+    label: () => t`Archive card`,
+    icon: <HiOutlineInboxStack className="h-4 w-4 shrink-0" />,
+    requiresEdit: true,
+  },
+  {
     action: "delete",
     label: () => t`Delete card`,
     icon: <HiOutlineTrash className="h-4 w-4 shrink-0" />,
@@ -84,6 +93,7 @@ export function CardContextMenu({
   onClose,
   onAction,
   canEdit,
+  canArchive,
 }: CardContextMenuProps) {
   useLingui();
   const menuRef = useRef<HTMLDivElement>(null);
@@ -105,7 +115,11 @@ export function CardContextMenu({
     };
   }, [onClose]);
 
-  const items = MENU_ITEMS.filter((item) => !item.requiresEdit || canEdit);
+  const items = MENU_ITEMS.filter(
+    (item) =>
+      (!item.requiresEdit || canEdit) &&
+      (item.action !== "archive" || canArchive),
+  );
 
   return (
     <div

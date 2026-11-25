@@ -15,14 +15,13 @@ type BoardResponse = Awaited<ReturnType<typeof getBoard>>;
 export const boardQueryKey = ({ boardPublicId, ...params }: BoardQueryParams) =>
   getGetBoardQueryKey(boardPublicId, params);
 
-// Every cached variant (filters, card view) of one board, or of all boards.
+// Every cached variant (filters, card view, archived cards) of one board, or of all boards.
 const boardPrefix = (boardPublicId?: string) => ({
   predicate: (query: { queryKey: readonly unknown[] }) => {
     const [url] = query.queryKey;
     if (typeof url !== "string") return false;
-    return boardPublicId
-      ? url === `/boards/${boardPublicId}`
-      : /^\/boards\/[^/]+$/.test(url);
+    const board = /^\/boards\/([^/]+)(\/archived-cards)?$/.exec(url)?.[1];
+    return boardPublicId ? board === boardPublicId : !!board;
   },
 });
 

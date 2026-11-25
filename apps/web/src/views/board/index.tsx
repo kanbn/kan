@@ -52,6 +52,7 @@ import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
+import { useCardArchive } from "~/hooks/useCardArchive";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useScrollRestore } from "~/hooks/useScrollRestore";
@@ -107,6 +108,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   const { showPopup } = usePopup();
   const { workspace, selectWorkspaceById } = useWorkspace();
   const { openModal, modalContentType, entityId, isOpen } = useModal();
+  const { archive } = useCardArchive();
   const [selectedPublicListId, setSelectedPublicListId] =
     useState<PublicListId>("");
   const [newCardInitialDueDate, setNewCardInitialDueDate] =
@@ -469,6 +471,10 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     }
     if (action === "duplicate") {
       openModal("CARD_CONTEXT_DUPLICATE", cardPublicId);
+      return;
+    }
+    if (action === "archive") {
+      archive.mutate({ cardPublicId });
       return;
     }
     if (action === "delete") {
@@ -1123,6 +1129,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             onClose={() => setContextMenu(null)}
             onAction={handleCardContextMenuAction}
             canEdit={!!canEditCard}
+            canArchive={!isTemplate}
           />
         )}
         {renderModalContent()}

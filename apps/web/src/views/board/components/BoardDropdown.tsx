@@ -5,6 +5,7 @@ import {
   HiEllipsisHorizontal,
   HiLink,
   HiOutlineDocumentDuplicate,
+  HiOutlineInboxStack,
   HiOutlineLink,
   HiOutlineStar,
   HiOutlineTrash,
@@ -148,6 +149,17 @@ export default function BoardDropdown({
             action: () => router.push(`/boards/${boardPublicId}/members`),
             icon: (
               <HiOutlineUserGroup className="h-[16px] w-[16px] text-dark-900" />
+            ),
+          },
+        ]
+      : []),
+    ...(!isTemplate
+      ? [
+          {
+            label: t`Archived cards`,
+            action: () => router.push(`/boards/${boardPublicId}/archived`),
+            icon: (
+              <HiOutlineInboxStack className="h-[16px] w-[16px] text-dark-900" />
             ),
           },
         ]

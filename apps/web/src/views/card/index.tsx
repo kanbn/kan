@@ -10,6 +10,7 @@ import { IoChevronForwardSharp } from "react-icons/io5";
 import { useGetCard, useToggleCardLabel } from "@kan/api-client/hooks";
 import { authClient } from "@kan/auth/client";
 
+import Button from "~/components/Button";
 import Editor from "~/components/Editor";
 import FeedbackModal from "~/components/FeedbackModal";
 import { LabelForm } from "~/components/LabelForm";
@@ -22,6 +23,7 @@ import {
   setActivitySortOrder,
   useActivitySortOrder,
 } from "~/hooks/useActivitySortOrder";
+import { useCardArchive } from "~/hooks/useCardArchive";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
 import { usePopup } from "~/providers/popup";
@@ -116,7 +118,7 @@ export function CardRightPanel({ isTemplate }: { isTemplate?: boolean }) {
           cardPublicId={cardId ?? ""}
           lists={formattedLists}
           isLoading={!card}
-          disabled={!canEdit}
+          disabled={!canEdit || !!card?.archivedAt}
         />
       </div>
       <div className="mb-4 flex w-full flex-row">
@@ -156,6 +158,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const router = useRouter();
   const activitySortOrder = useActivitySortOrder();
   const cardCache = useCardCache();
+  const { unarchive } = useCardArchive();
   const {
     modalContentType,
     entityId,
@@ -386,6 +389,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
                   }
                   listPublicId={card.list.publicId}
                   cardIndex={card.index}
+                  isArchived={!!card.archivedAt}
                 />
                 <Link
                   href={boardReturnUrl}
@@ -403,6 +407,21 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
             </p>
           )}
         </div>
+        {card?.archivedAt && (
+          <div className="flex items-center justify-between gap-4 border-b border-light-300 bg-light-200 px-8 py-2 text-sm text-light-1000 dark:border-dark-300 dark:bg-dark-100 dark:text-dark-1000">
+            <p>{t`This card is archived.`}</p>
+            {canEdit && (
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={() => unarchive.mutate({ cardPublicId: cardId })}
+                isLoading={unarchive.isPending}
+              >
+                {t`Unarchive`}
+              </Button>
+            )}
+          </div>
+        )}
         <div className="scrollbar-thumb-rounded-[4px] scrollbar-track-rounded-[4px] scrollbar w-full flex-1 scrollbar-thumb-light-400 scrollbar-track-light-200 overflow-y-auto hover:scrollbar-thumb-light-400 dark:scrollbar-thumb-dark-300 dark:scrollbar-track-dark-100 dark:hover:scrollbar-thumb-dark-300">
           <div className="p-auto mx-auto flex h-full w-full max-w-[800px] flex-col">
             <div className="p-6 md:p-8">
