@@ -5,8 +5,12 @@ import {
   desc,
   eq,
   gt,
+  ilike,
   inArray,
+  isNotNull,
   isNull,
+  lt,
+  or,
   sql,
 } from "drizzle-orm";
 
@@ -25,6 +29,9 @@ import {
   workspaces,
 } from "@kan/db/schema";
 import { generateUID } from "@kan/shared/utils";
+
+// Cards that are on the board: the only ones that hold a position in a list.
+export const activeCard = sql`(${cards.deletedAt} is null and ${cards.archivedAt} is null)`;
 
 export const getCount = async (db: dbClient) => {
   const result = await db
@@ -55,7 +62,7 @@ export const create = async (
         columns: {
           index: true,
         },
-        where: and(eq(cards.listId, cardInput.listId), isNull(cards.deletedAt)),
+        where: and(eq(cards.listId, cardInput.listId), activeCard),
         orderBy: desc(cards.index),
       });
 
@@ -70,7 +77,7 @@ export const create = async (
         where: and(
           eq(cards.listId, cardInput.listId),
           eq(cards.index, index),
-          isNull(cards.deletedAt),
+          activeCard,
         ),
       });
 
@@ -80,7 +87,7 @@ export const create = async (
       await tx.execute(sql`
         UPDATE card
         SET index = index + 1
-        WHERE "listId" = ${cardInput.listId} AND index >= ${index} AND "deletedAt" IS NULL;
+        WHERE "listId" = ${cardInput.listId} AND index >= ${index} AND ${activeCard};
       `);
     }
 
@@ -131,7 +138,7 @@ export const create = async (
         count: countExpr,
       })
       .from(cards)
-      .where(and(eq(cards.listId, result[0].listId), isNull(cards.deletedAt)))
+      .where(and(eq(cards.listId, result[0].listId), activeCard))
       .groupBy(cards.listId, cards.index)
       .having(gt(countExpr, 1));
 
@@ -140,7 +147,7 @@ export const create = async (
         WITH ordered AS (
           SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
           FROM "card"
-          WHERE "listId" = ${result[0].listId} AND "deletedAt" IS NULL
+          WHERE "listId" = ${result[0].listId} AND ${activeCard}
         )
         UPDATE "card" c
         SET "index" = o.new_index
@@ -151,7 +158,7 @@ export const create = async (
       const postFixDupes = await tx
         .select({ index: cards.index, count: countExpr })
         .from(cards)
-        .where(and(eq(cards.listId, result[0].listId), isNull(cards.deletedAt)))
+        .where(and(eq(cards.listId, result[0].listId), activeCard))
         .groupBy(cards.listId, cards.index)
         .having(gt(countExpr, 1));
 
@@ -273,7 +280,6 @@ export const assertCardLabelBoardsMatch = async (
           pair.labelId,
         );
     }
-
   }
 };
 
@@ -467,7 +473,7 @@ export const bulkCreate = async (
     for (const [listId, items] of byList.entries()) {
       const last = await tx.query.cards.findFirst({
         columns: { index: true },
-        where: and(eq(cards.listId, listId), isNull(cards.deletedAt)),
+        where: and(eq(cards.listId, listId), activeCard),
         orderBy: [desc(cards.index)],
       });
 
@@ -504,7 +510,7 @@ export const bulkCreate = async (
       const duplicateIndices = await tx
         .select({ index: cards.index, count: countExpr })
         .from(cards)
-        .where(and(eq(cards.listId, listId), isNull(cards.deletedAt)))
+        .where(and(eq(cards.listId, listId), activeCard))
         .groupBy(cards.listId, cards.index)
         .having(gt(countExpr, 1));
 
@@ -513,7 +519,7 @@ export const bulkCreate = async (
           WITH ordered AS (
             SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
             FROM "card"
-            WHERE "listId" = ${listId} AND "deletedAt" IS NULL
+            WHERE "listId" = ${listId} AND ${activeCard}
           )
           UPDATE "card" c
           SET "index" = o.new_index
@@ -524,7 +530,7 @@ export const bulkCreate = async (
         const postFixDupes = await tx
           .select({ index: cards.index, count: countExpr })
           .from(cards)
-          .where(and(eq(cards.listId, listId), isNull(cards.deletedAt)))
+          .where(and(eq(cards.listId, listId), activeCard))
           .groupBy(cards.listId, cards.index)
           .having(gt(countExpr, 1));
 
@@ -606,6 +612,7 @@ export const getWithListAndMembersByPublicId = async (
       createdBy: true,
       cardNumber: true,
       index: true,
+      archivedAt: true,
     },
     with: {
       labels: {
@@ -835,7 +842,7 @@ export const reorder = async (
         id: true,
         index: true,
       },
-      where: and(eq(cards.id, args.cardId), isNull(cards.deletedAt)),
+      where: and(eq(cards.id, args.cardId), activeCard),
       with: {
         list: {
           columns: {
@@ -867,6 +874,7 @@ export const reorder = async (
               id: true,
               index: true,
             },
+            where: activeCard,
             orderBy: desc(cards.index),
             limit: 1,
           },
@@ -898,25 +906,25 @@ export const reorder = async (
             WHEN ${currentIndex} > ${newIndex} AND index >= ${newIndex} AND index < ${currentIndex} THEN index + 1
             ELSE index
           END
-        WHERE "listId" = ${currentList.id} AND "deletedAt" IS NULL;
+        WHERE "listId" = ${currentList.id} AND ${activeCard};
       `);
     } else {
       await tx.execute(sql`
         UPDATE card
         SET index = index + 1
-        WHERE "listId" = ${newList.id} AND index >= ${newIndex} AND "deletedAt" IS NULL;
+        WHERE "listId" = ${newList.id} AND index >= ${newIndex} AND ${activeCard};
       `);
 
       await tx.execute(sql`
         UPDATE card
         SET index = index - 1
-        WHERE "listId" = ${currentList.id} AND index >= ${currentIndex} AND "deletedAt" IS NULL;
+        WHERE "listId" = ${currentList.id} AND index >= ${currentIndex} AND ${activeCard};
       `);
 
       await tx.execute(sql`
         UPDATE card
         SET "listId" = ${newList.id}, index = ${newIndex}
-        WHERE id = ${card.id} AND "deletedAt" IS NULL;
+        WHERE id = ${card.id} AND ${activeCard};
       `);
     }
 
@@ -934,7 +942,7 @@ export const reorder = async (
             cards.listId,
             [currentList.id, newList?.id].filter((id) => id !== undefined),
           ),
-          isNull(cards.deletedAt),
+          activeCard,
         ),
       )
       .groupBy(cards.listId, cards.index)
@@ -950,7 +958,7 @@ export const reorder = async (
           WITH ordered AS (
             SELECT id, ROW_NUMBER() OVER (ORDER BY "index", id) - 1 AS new_index
             FROM "card"
-            WHERE "listId" = ${affectedListIds[0]} AND "deletedAt" IS NULL
+            WHERE "listId" = ${affectedListIds[0]} AND ${activeCard}
           )
           UPDATE "card" c
           SET "index" = o.new_index
@@ -963,7 +971,7 @@ export const reorder = async (
             SELECT id,
                    ROW_NUMBER() OVER (PARTITION BY "listId" ORDER BY "index", id) - 1 AS new_index
             FROM "card"
-            WHERE "listId" IN (${sql.join(affectedListIds, sql`,`)}) AND "deletedAt" IS NULL
+            WHERE "listId" IN (${sql.join(affectedListIds, sql`,`)}) AND ${activeCard}
           )
           UPDATE "card" c
           SET "index" = o.new_index
@@ -975,9 +983,7 @@ export const reorder = async (
       const postFixDupes = await tx
         .select({ index: cards.index, count: countExpr })
         .from(cards)
-        .where(
-          and(inArray(cards.listId, affectedListIds), isNull(cards.deletedAt)),
-        )
+        .where(and(inArray(cards.listId, affectedListIds), activeCard))
         .groupBy(cards.listId, cards.index)
         .having(gt(countExpr, 1));
 
@@ -1003,6 +1009,29 @@ export const reorder = async (
   });
 };
 
+async function closeListGap(
+  tx: DbTransaction,
+  { listId, index }: { listId: number; index: number },
+) {
+  await tx.execute(sql`
+    UPDATE card
+    SET index = index - 1
+    WHERE "listId" = ${listId} AND index > ${index} AND ${activeCard};
+  `);
+
+  const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
+
+  const duplicateIndices = await tx
+    .select({ index: cards.index, count: countExpr })
+    .from(cards)
+    .where(and(eq(cards.listId, listId), activeCard))
+    .groupBy(cards.listId, cards.index)
+    .having(gt(countExpr, 1));
+
+  if (duplicateIndices.length > 0)
+    throw new Error(`Duplicate card indices found in list ${listId}`);
+}
+
 export const softDelete = async (
   db: dbClient,
   args: {
@@ -1015,42 +1044,149 @@ export const softDelete = async (
     const [result] = await tx
       .update(cards)
       .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
-      .where(eq(cards.id, args.cardId))
+      .where(and(eq(cards.id, args.cardId), isNull(cards.deletedAt)))
       .returning({
         id: cards.id,
         listId: cards.listId,
         index: cards.index,
+        archivedAt: cards.archivedAt,
       });
 
     if (!result)
       throw new Error(`Unable to soft delete card ID ${args.cardId}`);
 
-    await tx.execute(sql`
-      UPDATE card
-      SET index = index - 1
-      WHERE "listId" = ${result.listId} AND index > ${result.index} AND "deletedAt" IS NULL;
-    `);
-
-    const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
-
-    const duplicateIndices = await tx
-      .select({
-        index: cards.index,
-        count: countExpr,
-      })
-      .from(cards)
-      .where(and(eq(cards.listId, result.listId), isNull(cards.deletedAt)))
-      .groupBy(cards.listId, cards.index)
-      .having(gt(countExpr, 1));
-
-    if (duplicateIndices.length > 0) {
-      throw new Error(
-        `Duplicate indices found after soft deleting ${result.id}`,
-      );
-    }
+    if (!result.archivedAt) await closeListGap(tx, result);
 
     return result;
   });
+};
+
+export const archive = async (
+  db: dbClient,
+  args: { cardId: number; archivedAt: Date; archivedBy: string },
+) => {
+  return db.transaction(async (tx) => {
+    const [result] = await tx
+      .update(cards)
+      .set({ archivedAt: args.archivedAt, archivedBy: args.archivedBy })
+      .where(and(eq(cards.id, args.cardId), activeCard))
+      .returning({ listId: cards.listId, index: cards.index });
+
+    if (!result) return false;
+
+    await closeListGap(tx, result);
+
+    return true;
+  });
+};
+
+// Goes back to its own list, or the board's first list if that was deleted.
+export const unarchive = async (
+  db: dbClient,
+  args: { cardId: number; boardId: number; listPublicId: string },
+) => {
+  return db.transaction(async (tx) => {
+    const [list] = await tx
+      .select({ id: lists.id, publicId: lists.publicId, name: lists.name })
+      .from(lists)
+      .where(and(eq(lists.boardId, args.boardId), isNull(lists.deletedAt)))
+      .orderBy(desc(eq(lists.publicId, args.listPublicId)), asc(lists.index))
+      .limit(1)
+      .for("update");
+
+    if (!list) return null;
+
+    const [last] = await tx
+      .select({ index: cards.index })
+      .from(cards)
+      .where(and(eq(cards.listId, list.id), activeCard))
+      .orderBy(desc(cards.index))
+      .limit(1);
+
+    const [card] = await tx
+      .update(cards)
+      .set({
+        archivedAt: null,
+        archivedBy: null,
+        listId: list.id,
+        index: last ? last.index + 1 : 0,
+      })
+      .where(
+        and(
+          eq(cards.id, args.cardId),
+          isNull(cards.deletedAt),
+          isNotNull(cards.archivedAt),
+        ),
+      )
+      .returning({ id: cards.id });
+
+    return card ? list : null;
+  });
+};
+
+export const getArchivedByBoardId = async (
+  db: dbClient,
+  boardId: number,
+  args: {
+    limit: number;
+    search?: string;
+    cursor?: { archivedAt: Date; publicId: string };
+  },
+) => {
+  const rows = await db.query.cards.findMany({
+    columns: {
+      publicId: true,
+      title: true,
+      cardNumber: true,
+      createdBy: true,
+      archivedAt: true,
+    },
+    with: {
+      archivedBy: { columns: { name: true } },
+      labels: {
+        with: {
+          label: { columns: { publicId: true, name: true, colourCode: true } },
+        },
+      },
+      list: { columns: { publicId: true, name: true } },
+    },
+    where: and(
+      isNull(cards.deletedAt),
+      isNotNull(cards.archivedAt),
+      inArray(
+        cards.listId,
+        db
+          .select({ id: lists.id })
+          .from(lists)
+          .where(eq(lists.boardId, boardId)),
+      ),
+      args.search ? ilike(cards.title, `%${args.search}%`) : undefined,
+      args.cursor
+        ? or(
+            lt(cards.archivedAt, args.cursor.archivedAt),
+            and(
+              eq(cards.archivedAt, args.cursor.archivedAt),
+              lt(cards.publicId, args.cursor.publicId),
+            ),
+          )
+        : undefined,
+    ),
+    orderBy: [desc(cards.archivedAt), desc(cards.publicId)],
+    limit: args.limit + 1,
+  });
+
+  return {
+    cards: rows.slice(0, args.limit).flatMap(({ archivedAt, ...card }) =>
+      archivedAt
+        ? {
+            ...card,
+            archivedAt,
+            labels: card.labels.map(({ label }) => label),
+          }
+        : [],
+    ),
+    hasMore: rows.length > args.limit,
+  };
 };
 
 export const softDeleteAllByListIds = async (
@@ -1059,12 +1195,18 @@ export const softDeleteAllByListIds = async (
     listIds: number[];
     deletedAt: Date;
     deletedBy: string;
+    keepArchived?: boolean;
   },
 ) => {
   const updatedCards = await db
     .update(cards)
     .set({ deletedAt: args.deletedAt, deletedBy: args.deletedBy })
-    .where(and(inArray(cards.listId, args.listIds), isNull(cards.deletedAt)))
+    .where(
+      and(
+        inArray(cards.listId, args.listIds),
+        args.keepArchived ? activeCard : isNull(cards.deletedAt),
+      ),
+    )
     .returning({
       id: cards.id,
     });
@@ -1134,7 +1276,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
   cardPublicId: string,
 ) => {
   const result = await db.query.cards.findFirst({
-    columns: { id: true, createdBy: true },
+    columns: { id: true, createdBy: true, archivedAt: true },
     where: and(eq(cards.publicId, cardPublicId), isNull(cards.deletedAt)),
     with: {
       list: {
@@ -1158,6 +1300,7 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
     ? {
         id: result.id,
         createdBy: result.createdBy,
+        archivedAt: result.archivedAt,
         workspaceId: result.list.board.workspaceId,
         workspaceVisibility: result.list.board.visibility,
         listPublicId: result.list.publicId,

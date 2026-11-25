@@ -18,6 +18,8 @@ export const webhookEvents = [
   "card.created",
   "card.updated",
   "card.moved",
+  "card.archived",
+  "card.unarchived",
   "card.deleted",
 ] as const;
 export type WebhookEvent = (typeof webhookEvents)[number];

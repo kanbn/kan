@@ -29,6 +29,7 @@ import {
 } from "@kan/shared/utils";
 
 import { db } from "../../common/session.util.js";
+import { toJson } from "../../common/to-json.util.js";
 
 type WithIsoDueDates<B> = B extends { lists: (infer L)[] }
   ? Omit<B, "lists"> & {
@@ -473,6 +474,53 @@ export class BoardService {
     return result;
   }
 
+  async archivedCards(input: {
+    boardPublicId: string;
+    limit: number;
+    search?: string;
+    cursor?: string;
+    cursorPublicId?: string;
+    userId: string;
+  }) {
+    const board = await boardRepo.getWorkspaceAndBoardIdByBoardPublicId(
+      db,
+      input.boardPublicId,
+    );
+
+    if (!board)
+      throw new NotFoundException(
+        `Board with public ID ${input.boardPublicId} not found`,
+      );
+
+    await assertPermission(db, input.userId, board.workspaceId, "card:view");
+    await assertBoardAccess(db, input.userId, board);
+
+    const { cards, hasMore } = await cardRepo.getArchivedByBoardId(
+      db,
+      board.id,
+      {
+        limit: input.limit,
+        search: input.search,
+        cursor:
+          input.cursor && input.cursorPublicId
+            ? {
+                archivedAt: new Date(input.cursor),
+                publicId: input.cursorPublicId,
+              }
+            : undefined,
+      },
+    );
+
+    const last = hasMore ? cards.at(-1) : undefined;
+
+    return toJson({
+      cards,
+      hasMore,
+      nextCursor: last?.archivedAt ?? null,
+      nextCursorPublicId: last?.publicId ?? null,
+    });
+  }
+
   async delete(input: { boardPublicId: string; userId: string }) {
     const { userId } = input;
     const board = await boardRepo.getWithListIdsByPublicId(
@@ -527,7 +575,7 @@ export class BoardService {
 
       if (deletedCards.length) {
         const activities = deletedCards.map((card) => ({
-          type: "card.archived" as const,
+          type: "card.deleted" as const,
           createdBy: userId,
           cardId: card.id,
         }));

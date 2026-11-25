@@ -10,6 +10,7 @@ import { z } from "zod";
 
 import { BoardService } from "../../board/board.service.js";
 import {
+  ArchivedCardsQuerySchema,
   CreateBoardSchema,
   MoveBoardSchema,
   UpdateBoardSchema,
@@ -90,6 +91,9 @@ const CreateBoardWithWorkspaceSchema = CreateBoardSchema.extend({
   workspacePublicId,
 });
 
+const ArchivedCardsWithBoardSchema = ArchivedCardsQuerySchema.extend(
+  BoardIdSchema.shape,
+);
 const UpdateBoardWithIdSchema = UpdateBoardSchema.extend(BoardIdSchema.shape);
 
 const MoveBoardWithIdSchema = MoveBoardSchema.extend(BoardIdSchema.shape);
@@ -204,6 +208,20 @@ export class BoardTools {
   }
 
   @Tool({
+    name: "list_archived_cards",
+    description: "List a board's archived cards, most recently archived first.",
+    parameters: ArchivedCardsWithBoardSchema,
+  })
+  async listArchivedCards(
+    @Payload() args: z.infer<typeof ArchivedCardsWithBoardSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
+  ) {
+    const user = requireMcpUser(rawRequest);
+    return this.boardService.archivedCards({ ...args, userId: user.id });
+  }
+
+  @Tool({
     name: "update_board",
     description:
       "Update a board's name, slug, visibility, favourite or archived state.",
@@ -220,7 +238,7 @@ export class BoardTools {
 
   @Tool({
     name: "delete_board",
-    description: "Delete a board and archive its lists and cards.",
+    description: "Delete a board with its lists and cards.",
     parameters: BoardIdSchema,
   })
   async deleteBoard(

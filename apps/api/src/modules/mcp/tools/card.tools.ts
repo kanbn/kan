@@ -124,7 +124,8 @@ export class CardTools {
 
   @Tool({
     name: "delete_card",
-    description: "Delete (archive) a card.",
+    description:
+      "Delete a card. This can't be undone; use archive_card to keep it.",
     parameters: CardIdSchema,
   })
   async deleteCard(
@@ -134,6 +135,44 @@ export class CardTools {
   ) {
     const user = requireMcpUser(rawRequest);
     return this.cardService.delete({
+      ...args,
+      userId: user.id,
+      userName: user.name,
+    });
+  }
+
+  @Tool({
+    name: "archive_card",
+    description:
+      "Archive a card: takes it off the board but keeps it, so it can be unarchived.",
+    parameters: CardIdSchema,
+  })
+  async archiveCard(
+    @Payload() args: z.infer<typeof CardIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
+  ) {
+    const user = requireMcpUser(rawRequest);
+    return this.cardService.archive({
+      ...args,
+      userId: user.id,
+      userName: user.name,
+    });
+  }
+
+  @Tool({
+    name: "unarchive_card",
+    description:
+      "Unarchive a card: puts it at the end of its list, or the board's first list if that list was deleted.",
+    parameters: CardIdSchema,
+  })
+  async unarchiveCard(
+    @Payload() args: z.infer<typeof CardIdSchema>,
+    @Ctx() _context: unknown,
+    @McpRawRequest() rawRequest: McpRequest,
+  ) {
+    const user = requireMcpUser(rawRequest);
+    return this.cardService.unarchive({
       ...args,
       userId: user.id,
       userName: user.name,

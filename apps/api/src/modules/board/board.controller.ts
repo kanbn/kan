@@ -16,6 +16,8 @@ import { AuthenticatedController } from "../../common/decorators/authenticated-c
 import { CurrentUser } from "../../common/decorators/current-user.decorator.js";
 import { BoardService } from "./board.service.js";
 import {
+  ArchivedCardsDto,
+  ArchivedCardsQueryDto,
   BoardBySlugDto,
   BoardBySlugQueryDto,
   BoardCreateResponseDto,
@@ -89,6 +91,25 @@ export class BoardController {
     @Query() query: BoardDetailQueryDto,
   ) {
     return this.boardService.byId({
+      boardPublicId,
+      ...query,
+      userId: user.id,
+    });
+  }
+
+  @Get(":boardPublicId/archived-cards")
+  @ApiOperation({
+    operationId: "getArchivedCards",
+    summary: "List a board's archived cards",
+  })
+  @ApiParam({ name: "boardPublicId" })
+  @ZodResponse({ status: 200, type: ArchivedCardsDto })
+  async archivedCards(
+    @CurrentUser() user: User,
+    @Param("boardPublicId") boardPublicId: string,
+    @Query() query: ArchivedCardsQueryDto,
+  ) {
+    return this.boardService.archivedCards({
       boardPublicId,
       ...query,
       userId: user.id,

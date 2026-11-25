@@ -308,6 +308,53 @@ export interface BoardDetailDtoOutput {
 }
 
 /**
+ * @nullable
+ */
+export type ArchivedCardsDtoOutputCardsItemArchivedBy = {
+  /** @nullable */
+  name: string | null;
+} | null;
+
+export type ArchivedCardsDtoOutputCardsItemLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
+export type ArchivedCardsDtoOutputCardsItemList = {
+  publicId: string;
+  name: string;
+};
+
+export type ArchivedCardsDtoOutputCardsItem = {
+  publicId: string;
+  title: string;
+  /** @nullable */
+  cardNumber: number | null;
+  /** @nullable */
+  createdBy: string | null;
+  /** @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$ */
+  archivedAt: string;
+  /** @nullable */
+  archivedBy: ArchivedCardsDtoOutputCardsItemArchivedBy;
+  labels: ArchivedCardsDtoOutputCardsItemLabelsItem[];
+  list: ArchivedCardsDtoOutputCardsItemList;
+};
+
+export interface ArchivedCardsDtoOutput {
+  cards: ArchivedCardsDtoOutputCardsItem[];
+  hasMore: boolean;
+  /**
+   * @nullable
+   * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+   */
+  nextCursor: string | null;
+  /** @nullable */
+  nextCursorPublicId: string | null;
+}
+
+/**
  * 'public' boards can be viewed by anyone with the link, 'private' only by members.
  */
 export type UpdateBoardDtoVisibility =
@@ -626,6 +673,15 @@ export interface CardUpdateResponseDtoOutput {
   dueDate: string | null;
 }
 
+export type UnarchiveCardResponseDtoOutputList = {
+  publicId: string;
+  name: string;
+};
+
+export interface UnarchiveCardResponseDtoOutput {
+  list: UnarchiveCardResponseDtoOutputList;
+}
+
 export interface DuplicateCardDto {
   /**
    * Public ID of the list to put the copy in.
@@ -928,6 +984,11 @@ export interface CardDetailDtoOutput {
   dueDate: string | null;
   /** @nullable */
   createdBy: string | null;
+  /**
+   * @nullable
+   * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+   */
+  archivedAt: string | null;
   labels: CardDetailDtoOutputLabelsItem[];
   attachments: CardDetailDtoOutputAttachmentsItem[];
   checklists: CardDetailDtoOutputChecklistsItem[];
@@ -1550,6 +1611,8 @@ export const WebhookResponseDtoOutputEventsItem = {
   cardcreated: "card.created",
   cardupdated: "card.updated",
   cardmoved: "card.moved",
+  cardarchived: "card.archived",
+  cardunarchived: "card.unarchived",
   carddeleted: "card.deleted",
 } as const;
 
@@ -1575,6 +1638,8 @@ export const CreateWebhookDtoEventsItem = {
   cardcreated: "card.created",
   cardupdated: "card.updated",
   cardmoved: "card.moved",
+  cardarchived: "card.archived",
+  cardunarchived: "card.unarchived",
   carddeleted: "card.deleted",
 } as const;
 
@@ -1606,6 +1671,8 @@ export const UpdateWebhookDtoEventsItem = {
   cardcreated: "card.created",
   cardupdated: "card.updated",
   cardmoved: "card.moved",
+  cardarchived: "card.archived",
+  cardunarchived: "card.unarchived",
   carddeleted: "card.deleted",
 } as const;
 
@@ -1974,6 +2041,31 @@ export const GetBoardCardView = {
   full: "full",
   summary: "summary",
 } as const;
+
+export type GetArchivedCardsParams = {
+  /**
+   * Maximum number of cards to return.
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Only return cards whose title contains this text.
+   * @maxLength 200
+   */
+  search?: string;
+  /**
+   * Pagination cursor: nextCursor from the previous page.
+   * @pattern ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
+   */
+  cursor?: string;
+  /**
+   * Pagination cursor: nextCursorPublicId from the previous page.
+   * @minLength 12
+   * @maxLength 12
+   */
+  cursorPublicId?: string;
+};
 
 export type CheckBoardSlugAvailabilityParams = {
   /**
@@ -3328,6 +3420,222 @@ export const useDeleteBoard = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(getDeleteBoardMutationOptions(options), queryClient);
 };
+
+export type getArchivedCardsResponse200 = {
+  data: ArchivedCardsDtoOutput;
+  status: 200;
+};
+
+export type getArchivedCardsResponseSuccess = getArchivedCardsResponse200 & {
+  headers: Headers;
+};
+export type getArchivedCardsResponse = getArchivedCardsResponseSuccess;
+
+export const getGetArchivedCardsUrl = (
+  boardPublicId: string,
+  params?: GetArchivedCardsParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : String(value));
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/boards/${boardPublicId}/archived-cards?${stringifiedParams}`
+    : `/boards/${boardPublicId}/archived-cards`;
+};
+
+/**
+ * @summary List a board's archived cards
+ */
+export const getArchivedCards = async (
+  boardPublicId: string,
+  params?: GetArchivedCardsParams,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<getArchivedCardsResponse> => {
+  return customFetch<getArchivedCardsResponse>(
+    getGetArchivedCardsUrl(boardPublicId, params),
+    {
+      credentials: "include",
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getGetArchivedCardsQueryKey = (
+  boardPublicId: string,
+  params?: GetArchivedCardsParams,
+) => {
+  return [
+    `/boards/${boardPublicId}/archived-cards`,
+    ...(params ? [params] : []),
+  ] as const;
+};
+
+export const getGetArchivedCardsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getArchivedCards>>,
+  TError = unknown,
+>(
+  boardPublicId: string,
+  params?: GetArchivedCardsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getArchivedCards>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ??
+    getGetArchivedCardsQueryKey(boardPublicId, params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getArchivedCards>>
+  > = ({ signal }) =>
+    getArchivedCards(boardPublicId, params, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: boardPublicId !== null && boardPublicId !== undefined,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getArchivedCards>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type GetArchivedCardsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getArchivedCards>>
+>;
+export type GetArchivedCardsQueryError = unknown;
+
+/** @summary List a board's archived cards */
+export function useGetArchivedCards<
+  TData = Awaited<ReturnType<typeof getArchivedCards>>,
+  TError = unknown,
+>(
+  boardPublicId: string,
+  params: undefined | GetArchivedCardsParams,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getArchivedCards>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getArchivedCards>>,
+          TError,
+          Awaited<ReturnType<typeof getArchivedCards>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary List a board's archived cards */
+export function useGetArchivedCards<
+  TData = Awaited<ReturnType<typeof getArchivedCards>>,
+  TError = unknown,
+>(
+  boardPublicId: string,
+  params?: GetArchivedCardsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getArchivedCards>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getArchivedCards>>,
+          TError,
+          Awaited<ReturnType<typeof getArchivedCards>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary List a board's archived cards */
+export function useGetArchivedCards<
+  TData = Awaited<ReturnType<typeof getArchivedCards>>,
+  TError = unknown,
+>(
+  boardPublicId: string,
+  params?: GetArchivedCardsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getArchivedCards>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary List a board's archived cards */
+export function useGetArchivedCards<
+  TData = Awaited<ReturnType<typeof getArchivedCards>>,
+  TError = unknown,
+>(
+  boardPublicId: string,
+  params?: GetArchivedCardsParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof getArchivedCards>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetArchivedCardsQueryOptions(
+    boardPublicId,
+    params,
+    options,
+  );
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
 
 export type moveBoardResponse201 = {
   data: SuccessResponseDtoOutput;
@@ -4982,6 +5290,198 @@ export function useGetCard<
 
   return withQueryKey(query, queryOptions.queryKey);
 }
+
+export type archiveCardResponse201 = {
+  data: SuccessResponseDtoOutput;
+  status: 201;
+};
+
+export type archiveCardResponseSuccess = archiveCardResponse201 & {
+  headers: Headers;
+};
+export type archiveCardResponse = archiveCardResponseSuccess;
+
+export const getArchiveCardUrl = (cardPublicId: string) => {
+  return `/cards/${cardPublicId}/archive`;
+};
+
+/**
+ * @summary Archive a card
+ */
+export const archiveCard = async (
+  cardPublicId: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<archiveCardResponse> => {
+  return customFetch<archiveCardResponse>(getArchiveCardUrl(cardPublicId), {
+    credentials: "include",
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getArchiveCardMutationKey = () => ["archiveCard"] as const;
+
+export const getArchiveCardMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof archiveCard>>,
+    TError,
+    ArchiveCardMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof archiveCard>>,
+  TError,
+  ArchiveCardMutationVariables,
+  TContext
+> => {
+  const mutationKey = getArchiveCardMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof archiveCard>>,
+    ArchiveCardMutationVariables
+  > = (props) => {
+    const { cardPublicId } = props ?? {};
+
+    return archiveCard(cardPublicId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type ArchiveCardMutationResult = NonNullable<
+  Awaited<ReturnType<typeof archiveCard>>
+>;
+
+export type ArchiveCardMutationError = unknown;
+export type ArchiveCardMutationVariables = { cardPublicId: string };
+
+/** @summary Archive a card */
+export const useArchiveCard = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof archiveCard>>,
+      TError,
+      ArchiveCardMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof archiveCard>>,
+  TError,
+  ArchiveCardMutationVariables,
+  TContext
+> => {
+  return useMutation(getArchiveCardMutationOptions(options), queryClient);
+};
+
+export type unarchiveCardResponse201 = {
+  data: UnarchiveCardResponseDtoOutput;
+  status: 201;
+};
+
+export type unarchiveCardResponseSuccess = unarchiveCardResponse201 & {
+  headers: Headers;
+};
+export type unarchiveCardResponse = unarchiveCardResponseSuccess;
+
+export const getUnarchiveCardUrl = (cardPublicId: string) => {
+  return `/cards/${cardPublicId}/unarchive`;
+};
+
+/**
+ * @summary Unarchive a card
+ */
+export const unarchiveCard = async (
+  cardPublicId: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<unarchiveCardResponse> => {
+  return customFetch<unarchiveCardResponse>(getUnarchiveCardUrl(cardPublicId), {
+    credentials: "include",
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getUnarchiveCardMutationKey = () => ["unarchiveCard"] as const;
+
+export const getUnarchiveCardMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof unarchiveCard>>,
+    TError,
+    UnarchiveCardMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof unarchiveCard>>,
+  TError,
+  UnarchiveCardMutationVariables,
+  TContext
+> => {
+  const mutationKey = getUnarchiveCardMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof unarchiveCard>>,
+    UnarchiveCardMutationVariables
+  > = (props) => {
+    const { cardPublicId } = props ?? {};
+
+    return unarchiveCard(cardPublicId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UnarchiveCardMutationResult = NonNullable<
+  Awaited<ReturnType<typeof unarchiveCard>>
+>;
+
+export type UnarchiveCardMutationError = unknown;
+export type UnarchiveCardMutationVariables = { cardPublicId: string };
+
+/** @summary Unarchive a card */
+export const useUnarchiveCard = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof unarchiveCard>>,
+      TError,
+      UnarchiveCardMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof unarchiveCard>>,
+  TError,
+  UnarchiveCardMutationVariables,
+  TContext
+> => {
+  return useMutation(getUnarchiveCardMutationOptions(options), queryClient);
+};
 
 export type duplicateCardResponse201 = {
   data: PublicIdResponseDtoOutput;

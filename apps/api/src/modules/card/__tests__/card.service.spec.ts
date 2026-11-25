@@ -115,6 +115,138 @@ describe("CardService.byId", () => {
   });
 });
 
+describe("archived cards", () => {
+  const archivedMeta = {
+    ...cardMeta("public"),
+    listPublicId: "list_1234567",
+    archivedAt: new Date("2026-01-01T00:00:00.000Z"),
+  };
+  const fullCard = {
+    id: 5,
+    publicId: "card_1234567",
+    list: { publicId: "list_1234567", name: "To do" },
+  };
+  const input = {
+    cardPublicId: "card_1234567",
+    userId: "user_1",
+    userName: "Test",
+  };
+  const stubCard = (meta: unknown) =>
+    vi
+      .spyOn(cardRepo, "getWorkspaceAndCardIdByCardPublicId")
+      .mockResolvedValue(meta as never);
+  const sentEvent = () =>
+    vi.mocked(webhook.sendWebhooksForWorkspace).mock.calls[0]?.[2].event;
+
+  beforeEach(() => {
+    vi.spyOn(cardRepo, "getByPublicId").mockResolvedValue(fullCard as never);
+    stubCard(archivedMeta);
+  });
+
+  it("can't be read anonymously, even on a public board", async () => {
+    const { cardPublicId } = input;
+
+    await expect(service.byId({ cardPublicId })).rejects.toMatchObject({
+      status: 401,
+    });
+    await expect(
+      service.getActivities({ cardPublicId, limit: 10, order: "oldest" }),
+    ).rejects.toMatchObject({ status: 401 });
+  });
+
+  it.each([{ index: 0 }, { listPublicId: "list_1234567" }])(
+    "can't be moved (%o)",
+    async (move) => {
+      const update = vi.spyOn(cardRepo, "update");
+      const reorder = vi.spyOn(cardRepo, "reorder");
+
+      await expect(
+        service.update({ ...input, title: "New", ...move }),
+      ).rejects.toMatchObject({ status: 400 });
+      expect(update).not.toHaveBeenCalled();
+      expect(reorder).not.toHaveBeenCalled();
+    },
+  );
+
+  it("archives with card:edit, logs it and fires the webhook", async () => {
+    stubCard(cardMeta());
+    vi.spyOn(cardRepo, "archive").mockResolvedValue(true);
+
+    expect(await service.archive(input)).toEqual({ success: true });
+    expect(permissions.assertCanEdit).toHaveBeenCalledWith(
+      expect.anything(),
+      "user_1",
+      1,
+      "card:edit",
+      "user_1",
+    );
+    expect(permissions.assertBoardAccess).toHaveBeenCalled();
+    expect(cardActivityRepo.create).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ type: "card.archived" }),
+    );
+    expect(sentEvent()).toBe("card.archived");
+  });
+
+  it("rejects archiving a template's card", async () => {
+    stubCard({ ...cardMeta(), boardType: "template" });
+    const archive = vi.spyOn(cardRepo, "archive");
+
+    await expect(service.archive(input)).rejects.toMatchObject({ status: 400 });
+    expect(archive).not.toHaveBeenCalled();
+  });
+
+  it("rejects archiving twice", async () => {
+    vi.spyOn(cardRepo, "archive").mockResolvedValue(false);
+
+    await expect(service.archive(input)).rejects.toMatchObject({ status: 400 });
+    expect(cardActivityRepo.create).not.toHaveBeenCalled();
+  });
+
+  it("unarchives and returns the list it went to", async () => {
+    vi.spyOn(cardRepo, "unarchive").mockResolvedValue({
+      id: 9,
+      publicId: "list_7654321",
+      name: "First",
+    });
+
+    expect(await service.unarchive(input)).toEqual({
+      list: { publicId: "list_7654321", name: "First" },
+    });
+    expect(permissions.assertCanEdit).toHaveBeenCalled();
+    expect(cardActivityRepo.create).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ type: "card.unarchived", toListId: 9 }),
+    );
+    expect(sentEvent()).toBe("card.unarchived");
+  });
+
+  it("rejects unarchiving a card that isn't archived, or onto a board with no lists", async () => {
+    vi.spyOn(cardRepo, "unarchive").mockResolvedValue(null);
+    await expect(service.unarchive(input)).rejects.toMatchObject({
+      status: 400,
+    });
+
+    stubCard(cardMeta());
+    await expect(service.unarchive(input)).rejects.toMatchObject({
+      status: 400,
+    });
+    expect(cardActivityRepo.create).not.toHaveBeenCalled();
+  });
+
+  it("can be deleted, which logs card.deleted", async () => {
+    vi.spyOn(cardRepo, "softDelete").mockResolvedValue({} as never);
+
+    await service.delete(input);
+
+    expect(cardActivityRepo.create).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ type: "card.deleted" }),
+    );
+    expect(sentEvent()).toBe("card.deleted");
+  });
+});
+
 describe("CardService.getActivities", () => {
   it("rejects anonymous callers on private boards", async () => {
     await expect(

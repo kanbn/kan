@@ -121,6 +121,14 @@ export const SuccessResponseSchema = z.object({ success: z.boolean() });
 
 export class SuccessResponseDto extends createZodDto(SuccessResponseSchema) {}
 
+export const UnarchiveCardResponseSchema = z.object({
+  list: z.object({ publicId: z.string(), name: z.string() }),
+});
+
+export class UnarchiveCardResponseDto extends createZodDto(
+  UnarchiveCardResponseSchema,
+) {}
+
 export const CommentSchema = z.object({
   comment: z
     .string()
@@ -181,6 +189,7 @@ export const CardDetailSchema = z.object({
   index: z.number(),
   dueDate: isoDate.nullable(),
   createdBy: z.string().nullable(),
+  archivedAt: isoDate.nullable(),
   labels: z.array(labelSchema),
   attachments: z.array(
     z.object({

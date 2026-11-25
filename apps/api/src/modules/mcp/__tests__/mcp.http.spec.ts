@@ -120,7 +120,7 @@ it("registers every @Tool in the tools folder with the MCP module", async () => 
     .sort();
 
   const list = await rpc("tools/list", {});
-  expect(declared).toHaveLength(71);
+  expect(declared).toHaveLength(74);
   expect(list.body.result.tools?.map((t) => t.name).sort()).toEqual(declared);
 });
 

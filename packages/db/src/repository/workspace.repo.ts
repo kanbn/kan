@@ -27,6 +27,7 @@ import {
   getDefaultPermissions,
 } from "@kan/shared";
 
+import { activeCard } from "./card.repo";
 import * as permissionRepo from "./permission.repo";
 
 const SYSTEM_ROLES: {
@@ -474,7 +475,7 @@ export const searchBoardsAndCards = async (
         eq(boards.workspaceId, workspaceId),
         eq(cards.cardNumber, ticketId.number),
         ilike(workspaces.cardPrefix, ticketId.prefix),
-        isNull(cards.deletedAt),
+        activeCard,
         isNull(lists.deletedAt),
         isNull(boards.deletedAt),
         boardAccess,
@@ -485,7 +486,7 @@ export const searchBoardsAndCards = async (
           ilike(cards.title, searchQuery),
           sql`similarity(${cards.title}, ${query}) > 0.2`,
         ),
-        isNull(cards.deletedAt),
+        activeCard,
         isNull(lists.deletedAt),
         isNull(boards.deletedAt),
         boardAccess,

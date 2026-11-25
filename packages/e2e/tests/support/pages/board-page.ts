@@ -42,7 +42,8 @@ export class BoardPage {
 
   async createCard(title: string, listName?: string) {
     const scope = listName
-      ? this.page.getByRole("button", { name: listName })
+      ? // Anchored: "To do" is also in "Add card to Done".
+        this.page.getByRole("button", { name: new RegExp(`^${listName} `) })
       : this.page;
     await scope.getByRole("button", { name: "Add card", exact: true }).click();
     await this.page.getByPlaceholder("Card title").fill(title);
