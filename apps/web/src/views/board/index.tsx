@@ -51,6 +51,7 @@ import { PageHead } from "~/components/PageHead";
 import PatternedBackground from "~/components/PatternedBackground";
 import { Tooltip } from "~/components/Tooltip";
 import { EditYouTubeModal } from "~/components/YouTubeEmbed/EditYouTubeModal";
+import { useBoardEvents } from "~/hooks/useBoardEvents";
 import { useDragToScroll } from "~/hooks/useDragToScroll";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useScrollRestore } from "~/hooks/useScrollRestore";
@@ -374,6 +375,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
   });
 
   const quickActions = useCardQuickActions(queryParams);
+  useBoardEvents(boardId ?? undefined);
 
   // A label created from a card's menu is added to that card.
   const newLabelCardId = useRef<string | null>(null);
@@ -391,11 +393,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalStates.NEW_LABEL_CREATED, isOpen]);
 
+  const boardName = boardData?.name;
   useEffect(() => {
     if (isSuccess) {
-      setValue("name", boardData.name || "");
+      setValue("name", boardName || "");
     }
-  }, [isSuccess, boardData, setValue]);
+    // Only when the name changes, so a refetch doesn't undo one being typed.
+  }, [isSuccess, boardName, setValue]);
 
   const openNewCardForDate = (date: Date) => {
     const targetListPublicId = boardData?.lists[0]?.publicId;

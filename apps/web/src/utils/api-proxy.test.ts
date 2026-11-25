@@ -1,3 +1,4 @@
+import { Writable } from "stream";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -82,5 +83,56 @@ describe("proxyToApi", () => {
     expect(mocks.status).toHaveBeenCalledWith(201);
     expect(mocks.setHeader).toHaveBeenCalledWith("retry-after", "5");
     expect(String(mocks.send.mock.calls[0]?.[0])).toBe('{"ok":true}');
+  });
+
+  it("streams events as they arrive and hangs up when the browser does", async () => {
+    const onCancel = vi.fn();
+    let send: (text: string) => void = () => undefined;
+    fetchMock.mockResolvedValue(
+      new Response(
+        new ReadableStream({
+          start: (controller) => {
+            send = (text) => controller.enqueue(new TextEncoder().encode(text));
+          },
+          cancel: onCancel,
+        }),
+        {
+          headers: {
+            "content-type": "text/event-stream",
+            "cache-control": "no-cache, no-transform",
+            "x-accel-buffering": "no",
+          },
+        },
+      ),
+    );
+    const { req } = makeReqRes();
+    const headers = new Map<string, string>();
+    let text = "";
+    const res = Object.assign(
+      new Writable({
+        write(chunk: Buffer, _encoding, callback) {
+          text += chunk.toString();
+          callback();
+        },
+      }),
+      {
+        status: vi.fn().mockReturnThis(),
+        setHeader: (name: string, value: string) => headers.set(name, value),
+        flushHeaders: vi.fn(),
+        send: vi.fn(),
+      },
+    );
+    const done = handler(req, res as unknown as NextApiResponse);
+
+    await vi.waitFor(() => expect(res.flushHeaders).toHaveBeenCalled());
+    send("data: 1\n\n");
+    await vi.waitFor(() => expect(text).toBe("data: 1\n\n"));
+    expect(headers.get("cache-control")).toContain("no-transform");
+    expect(headers.get("x-accel-buffering")).toBe("no");
+
+    res.destroy();
+    await done;
+    await vi.waitFor(() => expect(onCancel).toHaveBeenCalled());
+    expect(res.send).not.toHaveBeenCalled();
   });
 });

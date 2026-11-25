@@ -1,5 +1,7 @@
 import { env } from "@kan/shared/env";
 
+import { tabId } from "./tab-id";
+
 export const customFetch = async <T>(
   url: string,
   options: RequestInit,
@@ -7,6 +9,10 @@ export const customFetch = async <T>(
   const baseUrl = env("NEXT_PUBLIC_API_BASE_URL") ?? "/api/v1";
   const response = await fetch(`${baseUrl}${url}`, {
     ...options,
+    headers: {
+      ...options.headers,
+      ...(options.method !== "GET" && { "x-tab-id": tabId }),
+    },
     credentials: "include",
   });
   const isJson = response.headers
