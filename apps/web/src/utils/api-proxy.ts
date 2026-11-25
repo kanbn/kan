@@ -1,5 +1,8 @@
+import { Readable } from "stream";
+import { pipeline } from "stream/promises";
 import type { IncomingMessage } from "http";
 import type { NextApiRequest, NextApiResponse } from "next";
+import type { ReadableStream } from "stream/web";
 
 import { createLogger } from "@kan/logger";
 import { getClientIp } from "@kan/server/utils/rateLimit";
@@ -19,6 +22,7 @@ const FORWARDED_HEADERS = [
   "x-api-key",
   "x-file-content-type",
   "x-original-filename",
+  "x-tab-id",
 ];
 
 const log = createLogger("api-proxy");
@@ -83,11 +87,31 @@ export async function proxyToApi(
   }
 
   res.status(upstream.status);
-  for (const name of ["content-type", "location", "retry-after"]) {
-    const value = upstream.headers.get(name);
-    if (value) res.setHeader(name, value);
-  }
+  const passHeaders = (...names: string[]) => {
+    for (const name of names) {
+      const value = upstream.headers.get(name);
+      if (value) res.setHeader(name, value);
+    }
+  };
+  passHeaders("content-type", "location", "retry-after");
   const cookies = upstream.headers.getSetCookie();
   if (cookies.length) res.setHeader("set-cookie", cookies);
+
+  if (
+    req.method === "GET" &&
+    upstream.body &&
+    upstream.headers.get("content-type")?.startsWith("text/event-stream")
+  ) {
+    // These stop the stream being compressed or buffered.
+    passHeaders("cache-control", "x-accel-buffering");
+    res.flushHeaders();
+    // Also closes the API's side when the browser disconnects.
+    await pipeline(
+      Readable.fromWeb(upstream.body as ReadableStream),
+      res,
+    ).catch(() => undefined);
+    return;
+  }
+
   res.send(Buffer.from(await upstream.arrayBuffer()));
 }

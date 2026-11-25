@@ -593,13 +593,19 @@ export default function Editor({
     [],
   ) as TiptapEditor | null;
 
+  const syncedHTML = useRef<string | null>(null);
   useEffect(() => {
     if (!editor) return;
     const currentHTML = editor.getHTML();
     const safeContent = content ?? "";
     if (safeContent !== currentHTML) {
+      // Someone else's change shouldn't replace text that's still being typed.
+      const hasUnsavedText =
+        syncedHTML.current !== null && currentHTML !== syncedHTML.current;
+      if (editor.isFocused && hasUnsavedText) return;
       editor.commands.setContent(safeContent, { emitUpdate: false });
     }
+    syncedHTML.current = editor.getHTML();
   }, [content, editor]);
 
   // useEditor captures `readOnly` once, so a card whose permissions load after
