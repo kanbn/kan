@@ -9,6 +9,7 @@ import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import * as permissions from "@kan/server/utils/permissions";
 import * as stripe from "@kan/stripe";
 
+import * as realtime from "../../../common/realtime.js";
 import * as sessionUtil from "../../../common/session.util.js";
 import { MemberService } from "../member.service.js";
 
@@ -248,13 +249,15 @@ describe("MemberService.invite", () => {
 });
 
 describe("MemberService.delete", () => {
-  it("removes the member", async () => {
+  it("removes the member and closes their streams", async () => {
+    const closeStreams = vi.spyOn(realtime, "closeBoardStreams");
     vi.spyOn(workspaceRepo, "getByPublicId").mockResolvedValue(
       workspace as never,
     );
     vi.spyOn(memberRepo, "getByPublicId").mockResolvedValue({
       id: 5,
       workspaceId: 1,
+      userId: "user_2",
     } as never);
     vi.spyOn(memberRepo, "softDelete").mockResolvedValue({
       id: 5,
@@ -267,6 +270,7 @@ describe("MemberService.delete", () => {
     });
 
     expect(result).toEqual({ success: true });
+    expect(closeStreams).toHaveBeenCalledWith({ userId: "user_2" });
   });
 
   it("throws NOT_FOUND when the member belongs to a different workspace", async () => {

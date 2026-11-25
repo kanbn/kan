@@ -14,6 +14,7 @@ import {
   assertPermission,
 } from "@kan/server/utils/permissions";
 
+import { closeBoardStreams } from "../../common/realtime.js";
 import { db } from "../../common/session.util.js";
 
 type BoardMemberRole = "admin" | "member";
@@ -180,6 +181,9 @@ export class BoardMemberService {
       throw new NotFoundException(
         `${member.email} is not a member of this board`,
       );
+
+    if (member.userId)
+      closeBoardStreams({ userId: member.userId, boardId: board.id });
 
     return { publicId: member.publicId };
   }

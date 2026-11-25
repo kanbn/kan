@@ -5,6 +5,7 @@ import * as boardMemberRepo from "@kan/db/repository/boardMember.repo";
 import * as memberRepo from "@kan/db/repository/member.repo";
 import * as permissions from "@kan/server/utils/permissions";
 
+import * as realtime from "../../../common/realtime.js";
 import { BoardMemberService } from "../board-member.service.js";
 
 const regularBoard = {
@@ -195,10 +196,12 @@ describe("BoardMemberService.updateRole", () => {
 });
 
 describe("BoardMemberService.remove", () => {
-  it("removes the member from the board", async () => {
-    vi.spyOn(memberRepo, "getByPublicId").mockResolvedValue(
-      activeMember as never,
-    );
+  it("removes the member from the board and closes their streams", async () => {
+    const closeStreams = vi.spyOn(realtime, "closeBoardStreams");
+    vi.spyOn(memberRepo, "getByPublicId").mockResolvedValue({
+      ...activeMember,
+      userId: "user_2",
+    } as never);
     vi.spyOn(boardMemberRepo, "remove").mockResolvedValue({ id: 1 } as never);
 
     const result = await service.remove({
@@ -208,6 +211,7 @@ describe("BoardMemberService.remove", () => {
     });
 
     expect(result).toEqual({ publicId: "member_12345" });
+    expect(closeStreams).toHaveBeenCalledWith({ userId: "user_2", boardId: 1 });
   });
 
   it("converts CannotRemoveLastBoardAdminError to BAD_REQUEST", async () => {

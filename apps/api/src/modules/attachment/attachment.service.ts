@@ -23,6 +23,7 @@ import {
 } from "@kan/shared/utils";
 
 import { assertFound } from "../../common/assert-found.util.js";
+import { publishBoardChange } from "../../common/realtime.js";
 import { db } from "../../common/session.util.js";
 
 const log = createLogger("attachment");
@@ -104,6 +105,7 @@ export class AttachmentService {
     );
 
     return this.saveAttachment(card, {
+      cardPublicId: input.cardPublicId,
       s3Key,
       filename,
       originalFilename: input.filename,
@@ -131,8 +133,9 @@ export class AttachmentService {
   }
 
   private async saveAttachment(
-    card: { id: number },
+    card: { id: number; boardId: number },
     input: {
+      cardPublicId: string;
       s3Key: string;
       filename: string;
       originalFilename: string;
@@ -161,6 +164,8 @@ export class AttachmentService {
       toTitle: input.originalFilename,
       createdBy: input.userId,
     });
+
+    publishBoardChange(card.boardId, input.cardPublicId);
 
     return {
       publicId: attachment.publicId,
@@ -216,6 +221,8 @@ export class AttachmentService {
       fromTitle: attachment.originalFilename,
       createdBy: input.userId,
     });
+
+    publishBoardChange(board.id, attachment.card.publicId);
 
     return { success: true };
   }

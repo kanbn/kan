@@ -13,6 +13,7 @@ import {
 } from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
+import { publishBoardChange } from "../../common/realtime.js";
 import { db } from "../../common/session.util.js";
 
 @Injectable()
@@ -45,6 +46,8 @@ export class ChecklistService {
       toTitle: checklist.name,
       createdBy: input.userId,
     });
+
+    publishBoardChange(card.boardId, input.cardPublicId);
 
     return checklist;
   }
@@ -85,6 +88,8 @@ export class ChecklistService {
       toTitle: updated.name,
       createdBy: input.userId,
     });
+
+    publishBoardChange(checklist.card.list.board.id, checklist.card.publicId);
 
     return updated;
   }
@@ -128,6 +133,8 @@ export class ChecklistService {
       createdBy: input.userId,
     });
 
+    publishBoardChange(checklist.card.list.board.id, checklist.card.publicId);
+
     return { success: true };
   }
 
@@ -165,6 +172,8 @@ export class ChecklistService {
       toTitle: item.title,
       createdBy: input.userId,
     });
+
+    publishBoardChange(checklist.card.list.board.id, checklist.card.publicId);
 
     return item;
   }
@@ -245,6 +254,11 @@ export class ChecklistService {
       });
     }
 
+    publishBoardChange(
+      item.checklist.card.list.board.id,
+      item.checklist.card.publicId,
+    );
+
     return updatedItem;
   }
 
@@ -281,6 +295,11 @@ export class ChecklistService {
       fromTitle: item.title,
       createdBy: input.userId,
     });
+
+    publishBoardChange(
+      item.checklist.card.list.board.id,
+      item.checklist.card.publicId,
+    );
 
     return { success: true };
   }

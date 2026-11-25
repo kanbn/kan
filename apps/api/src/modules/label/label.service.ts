@@ -9,6 +9,7 @@ import {
 } from "@kan/server/utils/permissions";
 
 import { assertFound } from "../../common/assert-found.util.js";
+import { publishBoardChange } from "../../common/realtime.js";
 import { db } from "../../common/session.util.js";
 
 @Injectable()
@@ -62,6 +63,8 @@ export class LabelService {
     if (!result)
       throw new InternalServerErrorException("Failed to create label");
 
+    publishBoardChange(board.id);
+
     return {
       publicId: result.publicId,
       name: result.name,
@@ -96,6 +99,8 @@ export class LabelService {
     if (!result)
       throw new InternalServerErrorException("Failed to update label");
 
+    publishBoardChange(label.boardId);
+
     return {
       publicId: result.publicId,
       name: result.name,
@@ -123,6 +128,8 @@ export class LabelService {
       deletedAt: new Date(),
       deletedBy: input.userId,
     });
+
+    publishBoardChange(label.boardId);
 
     return { success: true };
   }

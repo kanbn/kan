@@ -28,6 +28,7 @@ import {
 import { updateSubscriptionSeats } from "@kan/stripe";
 
 import { assertFound } from "../../common/assert-found.util.js";
+import { closeBoardStreams } from "../../common/realtime.js";
 import { db, sendMagicLinkInvite } from "../../common/session.util.js";
 
 const log = createLogger("member");
@@ -203,6 +204,8 @@ export class MemberService {
       throw new InternalServerErrorException(
         `Failed to delete member with public ID ${input.memberPublicId}`,
       );
+
+    if (member.userId) closeBoardStreams({ userId: member.userId });
 
     if (isCloudEnv()) {
       const subscriptions = await subscriptionRepo.getByReferenceId(

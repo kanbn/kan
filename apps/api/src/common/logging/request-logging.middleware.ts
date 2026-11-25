@@ -36,6 +36,8 @@ export class RequestLoggingMiddleware implements NestMiddleware {
       const route = (req.route as { path?: string } | undefined)?.path;
       const error: unknown = res.locals.error;
       const status = res.statusCode;
+      // Open for minutes, which would skew request durations.
+      if (status === 200 && route === "/boards/:boardPublicId/events") return;
       const meta = {
         requestId,
         procedure: `${req.method} ${route ? `${req.baseUrl}${route}` : path}`,
