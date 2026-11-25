@@ -3,7 +3,6 @@ import type {
   DraggableSyntheticListeners,
 } from "@dnd-kit/core";
 import { t } from "@lingui/core/macro";
-import { useState } from "react";
 import { HiXMark } from "react-icons/hi2";
 import { RiDraggable } from "react-icons/ri";
 import { twMerge } from "tailwind-merge";
@@ -44,7 +43,6 @@ export default function ChecklistItemRow({
 }: ChecklistItemRowProps) {
   const cardCache = useCardCache();
   const { showPopup } = usePopup();
-  const [completed, setCompleted] = useState(item.completed);
 
   const updateItem = useUpdateChecklistItem({
     mutation: {
@@ -120,10 +118,9 @@ export default function ChecklistItemRow({
 
   const handleToggleCompleted = () => {
     if (viewOnly) return;
-    setCompleted((prev) => !prev);
     updateItem.mutate({
       checklistItemPublicId: item.publicId,
-      data: { completed: !completed },
+      data: { completed: !item.completed },
     });
   };
 
@@ -164,7 +161,7 @@ export default function ChecklistItemRow({
       >
         <input
           type="checkbox"
-          checked={completed}
+          checked={item.completed}
           onChange={(e) => {
             if (viewOnly) {
               e.preventDefault();

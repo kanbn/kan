@@ -11,6 +11,10 @@
     "./hooks": {
       "types": "./src/generated.ts",
       "default": "./src/generated.ts"
+    },
+    "./tab-id": {
+      "types": "./src/mutator/tab-id.ts",
+      "default": "./src/mutator/tab-id.ts"
     }
   },
   "license": "GPL-3.0",

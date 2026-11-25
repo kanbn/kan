@@ -23,6 +23,7 @@ import {
   setActivitySortOrder,
   useActivitySortOrder,
 } from "~/hooks/useActivitySortOrder";
+import { useBoardEvents } from "~/hooks/useBoardEvents";
 import { useCardArchive } from "~/hooks/useCardArchive";
 import { usePermissions } from "~/hooks/usePermissions";
 import { useModal } from "~/providers/modal";
@@ -220,6 +221,7 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   const board = card?.list.board;
   const workspaceMembers = board?.workspace.members;
   const boardId = board?.publicId;
+  useBoardEvents(boardId);
   const boardReturnUrl = getBoardReturnUrl(
     router.query.returnUrl,
     `/${isTemplate ? "templates" : "boards"}/${boardId}`,
@@ -258,15 +260,21 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
     },
   });
 
-  const { register, handleSubmit, setValue, reset } = useForm<FormValues>({
-    values: {
-      cardId: cardId ?? "",
-      title: card?.title ?? "",
-      description: card?.description ?? "",
-    },
-    // keepDirtyValues: a card.byId refetch shouldn't overwrite a field still being edited.
-    resetOptions: { keepDirtyValues: true },
-  });
+  const { register, handleSubmit, setValue, reset, getValues, resetField } =
+    useForm<FormValues>({
+      values: {
+        cardId: cardId ?? "",
+        title: card?.title ?? "",
+        description: card?.description ?? "",
+      },
+      // keepDirtyValues: a card.byId refetch shouldn't overwrite a field still being edited.
+      resetOptions: { keepDirtyValues: true },
+    });
+
+  // The editor isn't an input, so it isn't registered otherwise.
+  useEffect(() => {
+    register("description");
+  }, [register]);
 
   // Force a clean reset on card switch, since keepDirtyValues would otherwise carry a dirty field over.
   useEffect(() => {
@@ -279,11 +287,20 @@ export default function CardPage({ isTemplate }: { isTemplate?: boolean }) {
   }, [cardId]);
 
   const onSubmit = (values: FormValues) => {
-    updateCard.mutate({
-      cardPublicId: values.cardId,
-      title: values.title,
-      description: values.description,
-    });
+    const { title, description } = values;
+    updateCard.mutate(
+      { cardPublicId: values.cardId, title, description },
+      {
+        // Otherwise they'd still count as unsaved, and overwrite later changes
+        // made by someone else.
+        onSuccess: () => {
+          if (getValues("title") === title)
+            resetField("title", { defaultValue: title });
+          if (getValues("description") === description)
+            resetField("description", { defaultValue: description });
+        },
+      },
+    );
   };
 
   const handleCommentCreated = (commentPublicId: string) => {

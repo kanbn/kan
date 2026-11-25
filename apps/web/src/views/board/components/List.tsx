@@ -62,25 +62,35 @@ export default function List({
 
   const updateList = useUpdateList();
 
-  const { register, handleSubmit, control } = useForm<FormValues>({
-    defaultValues: {
-      listPublicId: list.publicId,
-      name: list.name,
-    },
-    values: {
-      listPublicId: list.publicId,
-      name: list.name,
-    },
-  });
+  const { register, handleSubmit, control, getValues, resetField } =
+    useForm<FormValues>({
+      defaultValues: {
+        listPublicId: list.publicId,
+        name: list.name,
+      },
+      values: {
+        listPublicId: list.publicId,
+        name: list.name,
+      },
+      // A refetch shouldn't undo a name being typed.
+      resetOptions: { keepDirtyValues: true },
+    });
 
   const listName = useWatch({ control, name: "name" });
 
   const onSubmit = (values: FormValues) => {
     if (!canEdit || isOptimistic) return;
-    updateList.mutate({
-      listPublicId: values.listPublicId,
-      data: { name: values.name },
-    });
+    const { listPublicId, name } = values;
+    updateList.mutate(
+      { listPublicId, data: { name } },
+      {
+        // Otherwise it'd still count as unsaved, and overwrite later renames.
+        onSuccess: () => {
+          if (getValues("name") === name)
+            resetField("name", { defaultValue: name });
+        },
+      },
+    );
   };
 
   const handleOpenDeleteListConfirmation = () => {
