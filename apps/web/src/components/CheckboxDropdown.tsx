@@ -1,6 +1,6 @@
 import { t } from "@lingui/core/macro";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   HiChevronLeft,
   HiChevronRight,
@@ -72,6 +72,10 @@ export default function CheckboxDropdown({
 }: CheckboxDropdownProps) {
   const [open, setOpen] = useState(false);
   const [groupKey, setGroupKey] = useState<string | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Switching panels unmounts the focused item, so hand focus back to the menu.
+  useEffect(() => contentRef.current?.focus(), [groupKey]);
 
   const renderItems = (items: Item[], groupKey: string | null) => (
     <>
@@ -161,6 +165,7 @@ export default function CheckboxDropdown({
           )}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content
+          ref={contentRef}
           align={position === "left" ? "start" : "end"}
           sideOffset={4}
           collisionPadding={8}
