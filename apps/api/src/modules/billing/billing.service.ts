@@ -73,15 +73,15 @@ const syncedFields = (sub: Stripe.Subscription) => {
   };
 };
 
-const findRow = async (sub: Stripe.Subscription) => {
+const findRow = async (sub: Stripe.Subscription, conn: typeof db = db) => {
   const byStripeId = await subscriptionRepo.getByStripeSubscriptionId(
-    db,
+    conn,
     sub.id,
   );
   if (byStripeId) return byStripeId;
   const rowId = Number(sub.metadata.subscriptionId);
   return Number.isInteger(rowId) && rowId > 0
-    ? subscriptionRepo.getById(db, rowId)
+    ? subscriptionRepo.getById(conn, rowId)
     : undefined;
 };
 
@@ -235,32 +235,45 @@ export class BillingService {
     const fields = syncedFields(sub);
     const plan = fields.plan ?? (meta.plan === "pro" ? "pro" : "team");
 
+    const { workspacePublicId } = meta;
+    let newWorkspace: Parameters<typeof workspaceRepo.create>[1] | undefined;
     if (meta.isNewWorkspace === "true") {
       if (!meta.workspaceName || !meta.userId || !meta.userEmail) return;
-      const existing = await workspaceRepo.getByPublicId(
-        db,
-        meta.workspacePublicId,
-      );
-      if (!existing)
-        await workspaceRepo.create(db, {
-          publicId: meta.workspacePublicId,
-          name: meta.workspaceName,
-          slug: meta.workspaceSlug ?? meta.workspacePublicId,
-          plan,
-          createdBy: meta.userId,
-          createdByEmail: meta.userEmail,
-          ...(meta.workspaceDescription && {
-            description: meta.workspaceDescription,
-          }),
-        });
-    } else {
-      await workspaceRepo.update(db, meta.workspacePublicId, { plan });
+      newWorkspace = {
+        publicId: workspacePublicId,
+        name: meta.workspaceName,
+        slug: meta.workspaceSlug ?? workspacePublicId,
+        plan,
+        createdBy: meta.userId,
+        createdByEmail: meta.userEmail,
+        ...(meta.workspaceDescription && {
+          description: meta.workspaceDescription,
+        }),
+      };
     }
 
-    const row = await findRow(sub);
-    const values = { ...fields, plan, referenceId: meta.workspacePublicId };
-    if (row) await subscriptionRepo.updateById(db, row.id, values);
-    else await subscriptionRepo.create(db, values);
+    // One transaction: if any write fails, nothing is committed and Stripe's
+    // retry starts from scratch. Without it, a failure after the workspace
+    // row is written leaves it without roles or an owner, and the retry
+    // skips it because the workspace already exists. See #697.
+    await db.transaction(async (tx) => {
+      const txDb = tx as unknown as typeof db;
+
+      if (newWorkspace) {
+        const existing = await workspaceRepo.getByPublicId(
+          txDb,
+          workspacePublicId,
+        );
+        if (!existing) await workspaceRepo.create(txDb, newWorkspace);
+      } else {
+        await workspaceRepo.update(txDb, workspacePublicId, { plan });
+      }
+
+      const row = await findRow(sub, txDb);
+      const values = { ...fields, plan, referenceId: workspacePublicId };
+      if (row) await subscriptionRepo.updateById(txDb, row.id, values);
+      else await subscriptionRepo.create(txDb, values);
+    });
 
     if (plan === "pro") {
       const workspace = await workspaceRepo.getByPublicId(
