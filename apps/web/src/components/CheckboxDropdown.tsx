@@ -2,6 +2,7 @@ import { t } from "@lingui/core/macro";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useState } from "react";
 import {
+  HiChevronLeft,
   HiChevronRight,
   HiEllipsisHorizontal,
   HiMiniPlus,
@@ -69,6 +70,7 @@ export default function CheckboxDropdown({
   footer,
 }: CheckboxDropdownProps) {
   const [open, setOpen] = useState(false);
+  const [groupKey, setGroupKey] = useState<string | null>(null);
 
   const renderItems = (items: Item[], groupKey: string | null) => (
     <>
@@ -132,60 +134,91 @@ export default function CheckboxDropdown({
       </span>
     ) : null;
 
+  const activeGroup = groups?.find((group) => group.key === groupKey);
+
   return (
-    <DropdownMenu.Root modal={false} open={open} onOpenChange={setOpen}>
-      <DropdownMenu.Trigger
-        asChild={asChild}
-        disabled={disabled}
-        aria-label={ariaLabel}
-        className="h-full w-full cursor-pointer text-left focus-visible:outline-hidden data-disabled:cursor-not-allowed"
+    // The menu renders in place, so this wrapper keeps it out of the parent's layout.
+    <div className="flex w-full flex-wrap items-center">
+      <DropdownMenu.Root
+        modal={false}
+        open={open}
+        onOpenChange={(next) => {
+          setOpen(next);
+          if (!next) setGroupKey(null);
+        }}
       >
-        {asChild ? (
-          <div tabIndex={disabled ? -1 : 0}>{children}</div>
-        ) : (
-          children
-        )}
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content
-        align={position === "left" ? "start" : "end"}
-        sideOffset={4}
-        collisionPadding={8}
-        className={contentClass}
-        // Rendered in place, so a click must not follow a link it sits in.
-        onClick={(e) => e.preventDefault()}
-        onKeyDown={(e) => e.stopPropagation()}
-        onEscapeKeyDown={(e) => e.stopPropagation()}
-      >
-        {items && renderItems(items, null)}
-        {groups?.map((group) => (
-          <DropdownMenu.Sub key={group.key}>
-            <DropdownMenu.SubTrigger className={menuItemClass}>
-              <span className="flex text-light-900 dark:text-dark-900">
-                {group.icon}
-              </span>
-              {group.label}
-              <span className="ml-auto flex items-center gap-2">
-                {selectedCount(group.selectedCount)}
-                <HiChevronRight className="h-3 w-3 text-light-900 dark:text-dark-900" />
-              </span>
-            </DropdownMenu.SubTrigger>
-            <DropdownMenu.SubContent
-              sideOffset={4}
-              collisionPadding={8}
-              className={contentClass}
-              onKeyDown={(e) => e.stopPropagation()}
-            >
-              {renderItems(group.items, group.key)}
-            </DropdownMenu.SubContent>
-          </DropdownMenu.Sub>
-        ))}
-        {footer && (
-          <>
-            <DropdownMenu.Separator className={menuSeparatorClass} />
-            <DropdownMenu.Item asChild>{footer}</DropdownMenu.Item>
-          </>
-        )}
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+        <DropdownMenu.Trigger
+          asChild={asChild}
+          disabled={disabled}
+          aria-label={ariaLabel}
+          className="h-full w-full cursor-pointer text-left focus-visible:outline-hidden data-disabled:cursor-not-allowed"
+        >
+          {asChild ? (
+            <div tabIndex={disabled ? -1 : 0}>{children}</div>
+          ) : (
+            children
+          )}
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content
+          align={position === "left" ? "start" : "end"}
+          sideOffset={4}
+          collisionPadding={8}
+          className={contentClass}
+          // Rendered in place, so a click must not follow a link it sits in.
+          onClick={(e) => e.preventDefault()}
+          onKeyDown={(e) => e.stopPropagation()}
+          onEscapeKeyDown={(e) => e.stopPropagation()}
+        >
+          {activeGroup ? (
+            <>
+              <DropdownMenu.Item
+                className={twMerge(menuItemClass, "font-semibold")}
+                onSelect={(e) => {
+                  e.preventDefault();
+                  setGroupKey(null);
+                }}
+              >
+                <HiChevronLeft className={menuIconClass} />
+                {activeGroup.label}
+                <span className="ml-auto">
+                  {selectedCount(activeGroup.selectedCount)}
+                </span>
+              </DropdownMenu.Item>
+              <DropdownMenu.Separator className={menuSeparatorClass} />
+              {renderItems(activeGroup.items, activeGroup.key)}
+            </>
+          ) : (
+            <>
+              {items && renderItems(items, null)}
+              {groups?.map((group) => (
+                <DropdownMenu.Item
+                  key={group.key}
+                  className={menuItemClass}
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    setGroupKey(group.key);
+                  }}
+                >
+                  <span className="flex text-light-900 dark:text-dark-900">
+                    {group.icon}
+                  </span>
+                  {group.label}
+                  <span className="ml-auto flex items-center gap-2">
+                    {selectedCount(group.selectedCount)}
+                    <HiChevronRight className="h-3 w-3 text-light-900 dark:text-dark-900" />
+                  </span>
+                </DropdownMenu.Item>
+              ))}
+            </>
+          )}
+          {footer && (
+            <>
+              <DropdownMenu.Separator className={menuSeparatorClass} />
+              <DropdownMenu.Item asChild>{footer}</DropdownMenu.Item>
+            </>
+          )}
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </div>
   );
 }
