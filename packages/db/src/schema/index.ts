@@ -1,5 +1,6 @@
 export * from "./auth";
 export * from "./boards";
+export * from "./boardLabels";
 export * from "./auth";
 export * from "./cards";
 export * from "./checklists";

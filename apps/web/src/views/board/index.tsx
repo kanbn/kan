@@ -63,6 +63,7 @@ import { getApiErrorStatus } from "~/utils/apiError";
 import { useBoardCache } from "~/utils/boardCache";
 import { updateCardFromInput } from "~/utils/cardMutations";
 import { formatToArray, isPlaceholderPublicId } from "~/utils/helpers";
+import { BoardLabelsModal } from "~/views/boards/components/BoardLabels";
 import { DeleteCardConfirmation } from "~/views/card/components/DeleteCardConfirmation";
 import { findCardInList } from "./boardUpdates";
 import BoardDropdown from "./components/BoardDropdown";
@@ -731,6 +732,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             labelPublicId={entityId}
           />
         </Modal>
+
+        {!isTemplate && boardId && (
+          <BoardLabelsModal
+            boardPublicId={boardId}
+            archived={boardData?.isArchived ?? false}
+          />
+        )}
 
         <Modal
           modalSize="sm"

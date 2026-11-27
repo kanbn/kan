@@ -13,6 +13,7 @@ import { usePermissions } from "~/hooks/usePermissions";
 import { useKeyboardShortcut } from "~/providers/keyboard-shortcuts";
 import { useModal } from "~/providers/modal";
 import { useWorkspace } from "~/providers/workspace";
+import { BoardFilters, BoardLabelModals } from "./components/BoardLabels";
 import { BoardsList } from "./components/BoardsList";
 import { ImportBoardsForm } from "./components/ImportBoardsForm";
 import { NewBoardForm } from "./components/NewBoardForm";
@@ -53,6 +54,7 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
             {isTemplate ? t`Templates` : t`Boards`}
           </h1>
           <div className="flex gap-2">
+            {!isTemplate && <BoardFilters />}
             {!isTemplate && (
               <Tooltip
                 content={
@@ -128,6 +130,8 @@ export default function BoardsPage({ isTemplate }: { isTemplate?: boolean }) {
           >
             <NewWorkspaceForm />
           </Modal>
+
+          <BoardLabelModals />
         </>
 
         {!isTemplate ? (

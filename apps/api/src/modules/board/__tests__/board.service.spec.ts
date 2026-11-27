@@ -2,6 +2,7 @@ import { ForbiddenException } from "@nestjs/common";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
+import * as boardLabelRepo from "@kan/db/repository/boardLabel.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
@@ -217,6 +218,37 @@ describe("BoardService.update", () => {
       service.update({
         boardPublicId: "board_123456",
         slug: "taken",
+        userId: "user_1",
+      }),
+    ).rejects.toMatchObject({ status: 400 });
+  });
+
+  it("sets board labels within the board's workspace", async () => {
+    const setForBoard = vi
+      .spyOn(boardLabelRepo, "setForBoard")
+      .mockResolvedValue(true);
+
+    const result = await service.update({
+      boardPublicId: "board_123456",
+      labelPublicIds: ["blabel_12345"],
+      userId: "user_1",
+    });
+
+    expect(result).toEqual({ success: true });
+    expect(setForBoard).toHaveBeenCalledWith(expect.anything(), {
+      boardId: 2,
+      workspaceId: 1,
+      publicIds: ["blabel_12345"],
+    });
+  });
+
+  it("rejects board labels from another workspace", async () => {
+    vi.spyOn(boardLabelRepo, "setForBoard").mockResolvedValue(false);
+
+    await expect(
+      service.update({
+        boardPublicId: "board_123456",
+        labelPublicIds: ["other_123456"],
         userId: "user_1",
       }),
     ).rejects.toMatchObject({ status: 400 });

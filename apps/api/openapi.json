@@ -2058,6 +2058,161 @@
         "tags": ["Integration"]
       }
     },
+    "/workspaces/{workspacePublicId}/board-labels": {
+      "get": {
+        "operationId": "getBoardLabels",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LabelResponseDto_Output"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "List a workspace's board labels",
+        "tags": ["Board labels"]
+      },
+      "post": {
+        "operationId": "createBoardLabel",
+        "parameters": [
+          {
+            "name": "workspacePublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLabelDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a board label",
+        "tags": ["Board labels"]
+      }
+    },
+    "/board-labels/{boardLabelPublicId}": {
+      "put": {
+        "operationId": "updateBoardLabel",
+        "parameters": [
+          {
+            "name": "boardLabelPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLabelDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LabelResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a board label",
+        "tags": ["Board labels"]
+      },
+      "delete": {
+        "operationId": "deleteBoardLabel",
+        "parameters": [
+          {
+            "name": "boardLabelPublicId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponseDto_Output"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a board label",
+        "tags": ["Board labels"]
+      }
+    },
     "/labels/{labelPublicId}": {
       "get": {
         "operationId": "getLabel",
@@ -4026,9 +4181,36 @@
               "required": ["publicId", "name", "colourCode"],
               "additionalProperties": false
             }
+          },
+          "boardLabels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "colourCode": {
+                  "type": "string",
+                  "nullable": true
+                }
+              },
+              "required": ["publicId", "name", "colourCode"],
+              "additionalProperties": false
+            }
           }
         },
-        "required": ["publicId", "name", "favorite", "lists", "labels"],
+        "required": [
+          "publicId",
+          "name",
+          "favorite",
+          "lists",
+          "labels",
+          "boardLabels"
+        ],
         "additionalProperties": false
       },
       "CreateBoardDto": {
@@ -4578,6 +4760,15 @@
           "isArchived": {
             "description": "Archive (true) or restore (false) the board.",
             "type": "boolean"
+          },
+          "labelPublicIds": {
+            "description": "Public IDs of the workspace board labels to set on the board, replacing the current ones.",
+            "maxItems": 50,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 12
+            }
           }
         }
       },
@@ -6295,6 +6486,24 @@
         "required": ["publicId", "name", "colourCode"],
         "additionalProperties": false
       },
+      "UpdateLabelDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 36,
+            "description": "Label name."
+          },
+          "colourCode": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 7,
+            "description": "Label colour as a hex code, e.g. #0d9488."
+          }
+        },
+        "required": ["name", "colourCode"]
+      },
       "CreateLabelDto": {
         "type": "object",
         "properties": {
@@ -6317,24 +6526,6 @@
           }
         },
         "required": ["name", "boardPublicId", "colourCode"]
-      },
-      "UpdateLabelDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 36,
-            "description": "Label name."
-          },
-          "colourCode": {
-            "type": "string",
-            "minLength": 7,
-            "maxLength": 7,
-            "description": "Label colour as a hex code, e.g. #0d9488."
-          }
-        },
-        "required": ["name", "colourCode"]
       },
       "DeleteLabelResponseDto_Output": {
         "type": "object",
