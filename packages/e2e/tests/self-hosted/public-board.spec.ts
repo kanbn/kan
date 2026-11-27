@@ -50,7 +50,7 @@ test(
 
     await page.getByRole("button", { name: "Visibility" }).click();
     await page
-      .getByRole("checkbox", { name: "Public" })
+      .getByRole("menuitemcheckbox", { name: "Public" })
       .filter({ visible: true })
       .click();
 

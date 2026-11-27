@@ -1,11 +1,11 @@
-import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { twMerge } from "tailwind-merge";
 
-const menuGapClass = {
-  sm: "mt-1",
-  md: "mt-2",
-};
+import {
+  menuContentClass,
+  menuIconSlotClass,
+  menuItemClass,
+} from "~/components/menuStyles";
 
 export default function Dropdown({
   items,
@@ -28,9 +28,10 @@ export default function Dropdown({
   buttonClassName?: string;
 }) {
   return (
-    <Menu as="div" className="relative inline-block text-left">
-      <div>
-        <Menu.Button
+    // The menu renders in place, so this wrapper keeps it out of the parent's layout.
+    <div className="inline-block">
+      <DropdownMenu.Root modal={false}>
+        <DropdownMenu.Trigger
           disabled={disabled}
           aria-label={ariaLabel}
           className={twMerge(
@@ -39,37 +40,30 @@ export default function Dropdown({
           )}
         >
           {children}
-        </Menu.Button>
-      </div>
-
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items
-          className={`absolute right-0 isolate z-100 ${menuGapClass[menuGap]} w-56 origin-top-right rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden dark:border-dark-400 dark:bg-dark-300`}
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content
+          align="end"
+          sideOffset={menuGap === "sm" ? 4 : 8}
+          collisionPadding={8}
+          className={menuContentClass}
+          onKeyDown={(e) => e.stopPropagation()}
+          onEscapeKeyDown={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col">
-            {items.map((item) => (
-              <Menu.Item key={item.label} disabled={item.disabled}>
-                <button
-                  onClick={item.action}
-                  disabled={item.disabled ?? !item.action}
-                  className="flex w-auto items-center gap-2 rounded-[5px] px-2.5 py-1.5 text-left text-sm text-neutral-900 hover:bg-light-200 disabled:cursor-not-allowed disabled:opacity-60 dark:text-dark-950 dark:hover:bg-dark-400"
-                >
-                  {item.icon}
-                  {item.label}
-                </button>
-              </Menu.Item>
-            ))}
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
+          {items.map((item) => (
+            <DropdownMenu.Item
+              key={item.label}
+              disabled={item.disabled ?? !item.action}
+              onSelect={item.action}
+              className={menuItemClass}
+            >
+              {item.icon && (
+                <span className={menuIconSlotClass}>{item.icon}</span>
+              )}
+              {item.label}
+            </DropdownMenu.Item>
+          ))}
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </div>
   );
 }

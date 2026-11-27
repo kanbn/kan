@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { t } from "@lingui/core/macro";
 import { useLingui } from "@lingui/react";
 import {
-  HiMiniXMark,
   HiOutlineClock,
   HiOutlineSquare3Stack3D,
   HiOutlineTag,
@@ -92,7 +91,7 @@ const Filters = ({
     selected: !!router.query.members?.includes(member.publicId),
     leftIcon: (
       <Avatar
-        size="xs"
+        size="2xs"
         name={member.user?.name ?? ""}
         imageUrl={
           member.user?.image ? getAvatarUrl(member.user.image) : undefined
@@ -230,19 +229,7 @@ const Filters = ({
         groups={groups}
         handleSelect={handleSelect}
         position={position}
-        backLabel={t`Back`}
-        footer={
-          numOfFilters > 0 ? (
-            <button
-              type="button"
-              onClick={clearFilters}
-              className="flex w-full items-center rounded-[5px] p-2 text-[12px] font-semibold text-dark-900 hover:bg-light-200 dark:hover:bg-dark-300"
-            >
-              <HiMiniXMark size={16} className="mr-2" aria-hidden="true" />
-              {t`Clear filters`}
-            </button>
-          ) : undefined
-        }
+        onClear={numOfFilters > 0 ? clearFilters : undefined}
       >
         <Button variant="secondary" size="sm" disabled={isLoading}>
           <span className="flex items-center gap-2">

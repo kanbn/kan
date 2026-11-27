@@ -25,6 +25,12 @@ import type { CardInList } from "../boardUpdates";
 import type { useCardQuickActions } from "../useCardQuickActions";
 import type { BoardDetail } from "~/utils/boardCache";
 import LabelIcon from "~/components/LabelIcon";
+import {
+  menuContentClass as contentClass,
+  menuIconClass as iconClass,
+  menuItemClass as itemClass,
+  menuSeparatorClass,
+} from "~/components/menuStyles";
 import { useCardArchive } from "~/hooks/useCardArchive";
 import { useLocalisation } from "~/hooks/useLocalisation";
 import { usePermissions } from "~/hooks/usePermissions";
@@ -34,14 +40,7 @@ import { isPlaceholderPublicId } from "~/utils/helpers";
 import { getCardMemberOptions } from "~/views/card/components/memberOptions";
 import { findCardInList } from "../boardUpdates";
 
-const iconClass = "h-3.5 w-3.5 shrink-0 text-light-900 dark:text-dark-900";
-const itemClass =
-  "flex cursor-pointer items-center gap-2 rounded-[5px] px-2.5 py-1.5 text-xs text-neutral-900 outline-hidden select-none data-disabled:cursor-default data-disabled:opacity-60 data-highlighted:bg-light-200 dark:text-dark-950 dark:data-highlighted:bg-dark-400";
-const contentClass =
-  "z-200 max-h-(--radix-context-menu-content-available-height) w-52 overflow-y-auto rounded-md border border-light-200 bg-white p-1 shadow-lg ring-1 ring-black/5 dark:border-dark-400 dark:bg-dark-300";
-const separator = (
-  <ContextMenu.Separator className="my-1 border-t border-light-200 dark:border-dark-400" />
-);
+const separator = <ContextMenu.Separator className={menuSeparatorClass} />;
 
 function Submenu({
   icon,
@@ -54,12 +53,7 @@ function Submenu({
 }) {
   return (
     <ContextMenu.Sub>
-      <ContextMenu.SubTrigger
-        className={twMerge(
-          itemClass,
-          "data-[state=open]:bg-light-200 dark:data-[state=open]:bg-dark-400",
-        )}
-      >
+      <ContextMenu.SubTrigger className={itemClass}>
         {icon}
         {label}
         <HiChevronRight className="ml-auto h-3 w-3 text-light-900 dark:text-dark-900" />

@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import {
   HiEllipsisHorizontal,
   HiMiniPlus,
-  HiMiniXMark,
   HiOutlineTag,
   HiXMark,
 } from "react-icons/hi2";
@@ -341,18 +340,7 @@ export function BoardFilters() {
           )
         }
         position="right"
-        footer={
-          selected.length > 0 ? (
-            <button
-              type="button"
-              onClick={() => void setSelected([])}
-              className="flex w-full items-center rounded-[5px] p-2 text-[12px] font-semibold text-dark-900 hover:bg-light-200 dark:hover:bg-dark-300"
-            >
-              <HiMiniXMark size={16} className="mr-2" aria-hidden="true" />
-              {t`Clear filters`}
-            </button>
-          ) : undefined
-        }
+        onClear={selected.length > 0 ? () => void setSelected([]) : undefined}
       >
         <Button variant="secondary" size="sm">
           <span className="flex items-center gap-2">

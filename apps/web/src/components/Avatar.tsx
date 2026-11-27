@@ -5,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { getInitialsFromName, inferInitialsFromEmail } from "~/utils/helpers";
 
 const sizeMap = {
+  "2xs": 16,
   xs: 20,
   sm: 24,
   md: 36,
@@ -20,7 +21,7 @@ const Avatar = ({
   isLoading,
   paused,
 }: {
-  size?: "xs" | "sm" | "md" | "lg";
+  size?: "2xs" | "xs" | "sm" | "md" | "lg";
   name: string;
   email: string;
   imageUrl?: string;
@@ -50,6 +51,7 @@ const Avatar = ({
             "inline-flex h-9 w-9 items-center justify-center rounded-full bg-light-1000 dark:bg-dark-400",
             paused && "opacity-50",
             isLoading && "animate-pulse bg-light-200 dark:bg-dark-200",
+            size === "2xs" && "h-4 w-4",
             size === "xs" && "h-5 w-5",
             size === "sm" && "h-6 w-6",
             size === "lg" && "h-12 w-12",
@@ -61,6 +63,7 @@ const Avatar = ({
             <span
               className={twMerge(
                 "text-sm leading-none font-medium text-white",
+                size === "2xs" && "text-[7px]",
                 size === "xs" && "text-[8px]",
                 size === "sm" && "text-[10px]",
                 size === "lg" && "text-md",

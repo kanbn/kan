@@ -200,7 +200,7 @@ export class BoardPage {
 
     const updated = waitForApi(this.page, "GET", /^\/boards\/[^/]+$/);
     await this.page
-      .getByRole("checkbox", { name: labelName })
+      .getByRole("menuitemcheckbox", { name: labelName })
       .filter({ visible: true })
       .click();
     await updated;
