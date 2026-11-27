@@ -62,7 +62,7 @@ export class CardPage {
 
   async createAndAssignLabel(name: string) {
     await this.labelSelectorTrigger().click();
-    await this.page.getByRole("button", { name: "Create new label" }).click();
+    await this.page.getByRole("menuitem", { name: "Create new label" }).click();
 
     const dialog = this.page.getByRole("dialog");
     await dialog.getByPlaceholder("Name").fill(name);

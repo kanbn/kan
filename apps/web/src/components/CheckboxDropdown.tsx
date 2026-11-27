@@ -14,6 +14,7 @@ import Checkbox from "~/components/Checkbox";
 import {
   menuContentClass,
   menuIconClass,
+  menuIconSlotClass,
   menuItemClass,
   menuSeparatorClass,
 } from "~/components/menuStyles";
@@ -185,7 +186,7 @@ export default function CheckboxDropdown({
                 }}
               >
                 <HiChevronLeft className={menuIconClass} />
-                {activeGroup.label}
+                <span>{activeGroup.label}</span>
                 <span className="ml-auto">
                   {selectedCount(activeGroup.selectedCount)}
                 </span>
@@ -205,10 +206,8 @@ export default function CheckboxDropdown({
                     setGroupKey(group.key);
                   }}
                 >
-                  <span className="flex text-light-900 dark:text-dark-900">
-                    {group.icon}
-                  </span>
-                  {group.label}
+                  <span className={menuIconSlotClass}>{group.icon}</span>
+                  <span>{group.label}</span>
                   <span className="ml-auto flex items-center gap-2">
                     {selectedCount(group.selectedCount)}
                     <HiChevronRight className="h-3 w-3 text-light-900 dark:text-dark-900" />

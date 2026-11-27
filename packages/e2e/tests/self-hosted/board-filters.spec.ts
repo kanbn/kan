@@ -51,7 +51,7 @@ test(
     ).toBeVisible();
     await page.getByRole("menuitem", { name: "Labels 1", exact: true }).click();
     await expect(
-      page.getByRole("checkbox", { name: "Urgent", exact: true }),
+      page.getByRole("menuitemcheckbox", { name: "Urgent", exact: true }),
     ).toBeChecked();
 
     await page
@@ -137,7 +137,7 @@ test(
     ).toBeVisible();
     await page.getByRole("menuitem", { name: "Labels 1", exact: true }).click();
     await expect(
-      page.getByRole("checkbox", { name: "Urgent", exact: true }),
+      page.getByRole("menuitemcheckbox", { name: "Urgent", exact: true }),
     ).toBeChecked();
   },
 );

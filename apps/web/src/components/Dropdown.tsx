@@ -1,7 +1,11 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { twMerge } from "tailwind-merge";
 
-import { menuContentClass, menuItemClass } from "~/components/menuStyles";
+import {
+  menuContentClass,
+  menuIconSlotClass,
+  menuItemClass,
+} from "~/components/menuStyles";
 
 export default function Dropdown({
   items,
@@ -52,7 +56,9 @@ export default function Dropdown({
               onSelect={item.action}
               className={menuItemClass}
             >
-              {item.icon}
+              {item.icon && (
+                <span className={menuIconSlotClass}>{item.icon}</span>
+              )}
               {item.label}
             </DropdownMenu.Item>
           ))}
