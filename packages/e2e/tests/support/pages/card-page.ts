@@ -83,7 +83,7 @@ export class CardPage {
     const checkbox = this.page
       .getByRole("checkbox", { name })
       .filter({ visible: true });
-    const row = checkbox.locator("..");
+    const row = checkbox.locator("../..");
 
     await row.hover();
     await row.getByRole("button").click();
