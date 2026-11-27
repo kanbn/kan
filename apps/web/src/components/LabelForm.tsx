@@ -2,7 +2,8 @@ import { Listbox, Transition } from "@headlessui/react";
 import { t } from "@lingui/core/macro";
 import { Fragment, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { HiChevronUpDown, HiXMark } from "react-icons/hi2";
+import { HiCheck, HiChevronUpDown, HiXMark } from "react-icons/hi2";
+import { twMerge } from "tailwind-merge";
 
 import type { Colour } from "@kan/shared/constants";
 import {
@@ -17,6 +18,7 @@ import { colours } from "@kan/shared/constants";
 
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import { menuContentClass, menuItemClass } from "~/components/menuStyles";
 import Toggle from "~/components/Toggle";
 import { useModal } from "~/providers/modal";
 import { resolveLabelColour } from "~/utils/labelColours";
@@ -160,7 +162,7 @@ export function LabelForm({
           name="colour"
           control={control}
           render={({ field }) => (
-            <Listbox value={field.value} onChange={field.onChange}>
+            <Listbox value={field.value} onChange={field.onChange} by="code">
               {({ open }) => (
                 <>
                   <div className="relative mt-4">
@@ -189,27 +191,28 @@ export function LabelForm({
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-50 py-2 text-base shadow-lg ring-1 ring-black/5 focus:outline-hidden sm:text-sm dark:bg-dark-300">
+                      <Listbox.Options
+                        className={twMerge(
+                          menuContentClass,
+                          "absolute z-10 mt-1 max-h-60 w-full",
+                        )}
+                      >
                         {colours.map((colour, index) => (
                           <Listbox.Option
                             key={`colours_${index}`}
-                            className="relative cursor-default px-2 text-neutral-900 select-none dark:text-dark-1000"
+                            className={twMerge(
+                              menuItemClass,
+                              "group data-focus:bg-light-200 dark:data-focus:bg-dark-400",
+                            )}
                             value={colour}
                           >
-                            {() => (
-                              <>
-                                <div className="flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-400">
-                                  <span
-                                    style={{ backgroundColor: colour.code }}
-                                    className="ml-2 inline-block h-2 w-2 shrink-0 rounded-full"
-                                    aria-hidden="true"
-                                  />
-                                  <span className="ml-3 block truncate font-normal">
-                                    {colour.name}
-                                  </span>
-                                </div>
-                              </>
-                            )}
+                            <span
+                              style={{ backgroundColor: colour.code }}
+                              className="inline-block h-2 w-2 shrink-0 rounded-full"
+                              aria-hidden="true"
+                            />
+                            <span className="truncate">{colour.name}</span>
+                            <HiCheck className="invisible ml-auto h-3.5 w-3.5 group-aria-selected:visible" />
                           </Listbox.Option>
                         ))}
                       </Listbox.Options>
