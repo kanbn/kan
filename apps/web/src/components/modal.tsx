@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { useModal } from "~/providers/modal";
 
@@ -10,6 +11,7 @@ interface Props {
   isVisible?: boolean;
   closeOnClickOutside?: boolean;
   centered?: boolean;
+  className?: string;
 }
 
 const Modal: React.FC<Props> = ({
@@ -19,6 +21,7 @@ const Modal: React.FC<Props> = ({
   isVisible,
   closeOnClickOutside,
   centered = false,
+  className,
 }) => {
   const {
     isOpen,
@@ -75,7 +78,10 @@ const Modal: React.FC<Props> = ({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-[0.98]"
             >
               <Dialog.Panel
-                className={`relative ${centered ? "" : positionFromTopMap[positionFromTop]} w-full transform rounded-xl bg-white text-left shadow-3xl-light ring-1 ring-black/5 transition-all dark:bg-dark-100 dark:shadow-3xl-dark dark:ring-white/10 ${modalSizeMap[modalSize]}`}
+                className={twMerge(
+                  `relative ${centered ? "" : positionFromTopMap[positionFromTop]} w-full transform rounded-xl bg-white text-left shadow-3xl-light ring-1 ring-black/5 transition-all dark:bg-dark-100 dark:shadow-3xl-dark dark:ring-white/10 ${modalSizeMap[modalSize]}`,
+                  className,
+                )}
               >
                 {children}
               </Dialog.Panel>
