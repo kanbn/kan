@@ -23,6 +23,22 @@
     ],
     "translation": ", or see our"
   },
+  "i9eb5u": {
+    "message": "{0, plural, one {# label} other {# labels}}",
+    "placeholders": {
+      "0": [
+        "board.boardLabels.length"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/BoardsList.tsx",
+        207
+      ]
+    ],
+    "translation": "{0, plural, one {# label} other {# labels}}"
+  },
   "8prZNK": {
     "message": "{0, plural, one {# list} other {# lists}}",
     "placeholders": {
@@ -34,7 +50,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        130
+        161
       ]
     ],
     "translation": "{0, plural, one {# list} other {# lists}}"
@@ -72,11 +88,11 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        48
+        49
       ],
       [
         "src/views/card/index.tsx",
-        342
+        359
       ]
     ],
     "translation": "{0} | {1}"
@@ -124,7 +140,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        75
+        76
       ]
     ],
     "translation": "{0} has been added to your favorites."
@@ -140,7 +156,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        76
+        77
       ]
     ],
     "translation": "{0} has been removed from your favorites."
@@ -172,7 +188,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        830
+        842
       ]
     ],
     "translation": "{0} not found"
@@ -522,7 +538,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        23
+        24
       ],
       [
         "src/views/settings/components/NewWebhookModal.tsx",
@@ -542,7 +558,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        527
+        544
       ],
       [
         "src/views/public/board/CardModal.tsx",
@@ -595,7 +611,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        176
+        186
       ]
     ],
     "translation": "Add a card"
@@ -635,11 +651,11 @@
       ],
       [
         "src/views/board/components/List.tsx",
-        163
+        173
       ],
       [
         "src/views/board/components/List.tsx",
-        224
+        234
       ]
     ],
     "translation": "Add card"
@@ -655,7 +671,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        219
+        229
       ]
     ],
     "translation": "Add card to {0}"
@@ -753,7 +769,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        187
+        184
       ]
     ],
     "translation": "Add details..."
@@ -805,7 +821,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        210
+        216
       ]
     ],
     "translation": "Add to favorites"
@@ -984,7 +1000,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        72
+        73
       ]
     ],
     "translation": "Added to favorites"
@@ -1428,7 +1444,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        190
+        196
       ]
     ],
     "translation": "Archive board"
@@ -1460,7 +1476,7 @@
       ],
       [
         "src/views/boards/index.tsx",
-        24
+        25
       ]
     ],
     "translation": "Archived"
@@ -1476,7 +1492,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        159
+        160
       ]
     ],
     "translation": "Archived cards"
@@ -1628,7 +1644,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        44
+        48
       ]
     ],
     "translation": "Are you sure you want to delete this label?"
@@ -1971,7 +1987,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        802
+        814
       ],
       [
         "src/views/board/members/index.tsx",
@@ -1979,7 +1995,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        342
+        359
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2008,10 +2024,22 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        61
+        62
       ]
     ],
     "translation": "Board archived"
+  },
+  "UVGutp": {
+    "message": "Board labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/BoardLabels.tsx",
+        167
+      ]
+    ],
+    "translation": "Board labels"
   },
   "uxBHQx": {
     "message": "Board member options",
@@ -2032,7 +2060,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        148
+        149
       ],
       [
         "src/views/board/members/index.tsx",
@@ -2076,7 +2104,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        820
+        832
       ]
     ],
     "translation": "Board name"
@@ -2124,7 +2152,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        239
+        245
       ]
     ],
     "translation": "Board options"
@@ -2148,7 +2176,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        62
+        63
       ]
     ],
     "translation": "Board unarchived"
@@ -2184,7 +2212,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        121
+        122
       ],
       [
         "src/views/public/board/index.tsx",
@@ -2261,11 +2289,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        48
+        49
       ],
       [
         "src/views/boards/index.tsx",
-        53
+        54
       ],
       [
         "src/views/pricing/components/FeatureComparisonTable.tsx",
@@ -2281,7 +2309,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        79
+        98
       ]
     ],
     "translation": "Boards you archive will appear here."
@@ -2753,7 +2781,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        52
+        56
       ],
       [
         "src/components/YouTubeEmbed/EditYouTubeModal.tsx",
@@ -2837,7 +2865,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        342
+        359
       ]
     ],
     "translation": "Card"
@@ -2905,7 +2933,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        918
+        930
       ]
     ],
     "translation": "Card moved"
@@ -2917,11 +2945,11 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        406
+        423
       ],
       [
         "src/views/card/index.tsx",
-        468
+        485
       ]
     ],
     "translation": "Card not found"
@@ -3219,6 +3247,14 @@
       [
         "src/views/board/components/Filters.tsx",
         242
+      ],
+      [
+        "src/views/boards/components/BoardLabels.tsx",
+        353
+      ],
+      [
+        "src/views/boards/components/BoardsList.tsx",
+        109
       ]
     ],
     "translation": "Clear filters"
@@ -3257,8 +3293,12 @@
         432
       ],
       [
+        "src/views/boards/components/BoardLabels.tsx",
+        262
+      ],
+      [
         "src/views/card/index.tsx",
-        397
+        414
       ],
       [
         "src/views/members/components/EditMemberPermissionsModal.tsx",
@@ -3751,7 +3791,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        132
+        133
       ]
     ],
     "translation": "Copy board link"
@@ -3831,7 +3871,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        139
+        140
       ]
     ],
     "translation": "Copy public link"
@@ -3887,7 +3927,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        217
+        228
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -3955,7 +3995,15 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        242
+        263
+      ],
+      [
+        "src/views/boards/components/BoardLabels.tsx",
+        166
+      ],
+      [
+        "src/views/boards/components/BoardLabels.tsx",
+        308
       ]
     ],
     "translation": "Create label"
@@ -3983,11 +4031,11 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        93
+        122
       ],
       [
         "src/views/boards/index.tsx",
-        36
+        37
       ]
     ],
     "translation": "Create new {0}"
@@ -4031,11 +4079,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        155
+        157
       ],
       [
         "src/views/board/index.tsx",
-        983
+        995
       ]
     ],
     "translation": "Create new list"
@@ -4382,11 +4430,11 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        54
+        58
       ],
       [
         "src/components/LabelForm.tsx",
-        233
+        249
       ],
       [
         "src/components/YouTubeEmbed/YouTubeDropdown.tsx",
@@ -4446,7 +4494,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        221
+        227
       ]
     ],
     "translation": "Delete board"
@@ -4502,7 +4550,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        187
+        197
       ]
     ],
     "translation": "Delete list"
@@ -4514,7 +4562,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        221
+        227
       ]
     ],
     "translation": "Delete template"
@@ -4887,7 +4935,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        145
+        146
       ]
     ],
     "translation": "Due date"
@@ -5005,7 +5053,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        181
+        187
       ],
       [
         "src/views/board/components/UpdateBoardSlugForm.tsx",
@@ -5033,7 +5081,11 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        123
+        134
+      ],
+      [
+        "src/views/boards/components/BoardLabels.tsx",
+        294
       ]
     ],
     "translation": "Edit label"
@@ -5426,7 +5478,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        27
+        29
       ]
     ],
     "translation": "Error deleting label"
@@ -5927,6 +5979,18 @@
     ],
     "translation": "Filter"
   },
+  "cSev-j": {
+    "message": "Filters",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/BoardLabels.tsx",
+        361
+      ]
+    ],
+    "translation": "Filters"
+  },
   "l31EoQ": {
     "message": "Find answers to common questions about Kan. Can't find what you're looking for? Feel free to <0>contact us</0>.",
     "placeholders": {},
@@ -6206,7 +6270,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        80
+        99
       ]
     ],
     "translation": "Get started by creating a new {0}"
@@ -6218,7 +6282,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        965
+        977
       ]
     ],
     "translation": "Get started by creating a new list"
@@ -6765,7 +6829,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        74
+        76
       ]
     ],
     "translation": "Import"
@@ -7310,6 +7374,10 @@
     "comments": [],
     "origin": [
       [
+        "src/views/board/components/BoardDropdown.tsx",
+        182
+      ],
+      [
         "src/views/board/components/CardContextMenu.tsx",
         245
       ],
@@ -7322,12 +7390,20 @@
         530
       ],
       [
+        "src/views/boards/components/BoardLabels.tsx",
+        258
+      ],
+      [
+        "src/views/boards/components/BoardLabels.tsx",
+        326
+      ],
+      [
         "src/views/card/components/LabelSelector.tsx",
         112
       ],
       [
         "src/views/card/index.tsx",
-        125
+        126
       ]
     ],
     "translation": "Labels"
@@ -7541,7 +7617,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        105
+        106
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -7573,7 +7649,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        116
+        117
       ]
     ],
     "translation": "List"
@@ -7585,7 +7661,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        142
+        152
       ],
       [
         "src/views/board/components/NewListForm.tsx",
@@ -7601,7 +7677,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        205
+        215
       ]
     ],
     "translation": "List options"
@@ -7754,7 +7830,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        170
+        171
       ]
     ],
     "translation": "Make template"
@@ -7959,7 +8035,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        135
+        136
       ],
       [
         "src/views/members/index.tsx",
@@ -8109,7 +8185,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        201
+        207
       ]
     ],
     "translation": "Move to workspace"
@@ -8176,7 +8252,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        139
+        150
       ],
       [
         "src/views/board/components/NewTemplateForm.tsx",
@@ -8240,7 +8316,7 @@
     "origin": [
       [
         "src/views/boards/index.tsx",
-        97
+        99
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -8332,7 +8408,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        123
+        134
       ]
     ],
     "translation": "New label"
@@ -8348,7 +8424,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        886
+        898
       ]
     ],
     "translation": "New list"
@@ -8484,7 +8560,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        75
+        93
       ]
     ],
     "translation": "No {0}"
@@ -8496,7 +8572,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardsList.tsx",
-        74
+        92
       ]
     ],
     "translation": "No archived boards"
@@ -8536,6 +8612,18 @@
       ]
     ],
     "translation": "No boards found"
+  },
+  "h5VzNA": {
+    "message": "No boards match these labels",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/views/boards/components/BoardsList.tsx",
+        90
+      ]
+    ],
+    "translation": "No boards match these labels"
   },
   "WAQMrN": {
     "message": "No cards due",
@@ -8618,7 +8706,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        961
+        973
       ]
     ],
     "translation": "No lists"
@@ -8630,7 +8718,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        966
+        978
       ]
     ],
     "translation": "No lists have been created yet"
@@ -9413,7 +9501,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        28
+        30
       ],
       [
         "src/components/FeedbackModal.tsx",
@@ -9429,7 +9517,7 @@
       ],
       [
         "src/views/board/components/BoardDropdown.tsx",
-        84
+        85
       ],
       [
         "src/views/board/components/NewCardForm.tsx",
@@ -9453,11 +9541,11 @@
       ],
       [
         "src/views/board/index.tsx",
-        309
+        311
       ],
       [
         "src/views/board/index.tsx",
-        367
+        369
       ],
       [
         "src/views/board/members/components/AddBoardMemberForm.tsx",
@@ -9489,11 +9577,11 @@
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        81
+        79
       ],
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        111
+        109
       ],
       [
         "src/views/card/components/ChecklistNameInput.tsx",
@@ -9549,11 +9637,11 @@
       ],
       [
         "src/views/card/index.tsx",
-        235
+        237
       ],
       [
         "src/views/card/index.tsx",
-        249
+        251
       ],
       [
         "src/views/members/components/DeleteMemberConfirmation.tsx",
@@ -9645,7 +9733,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        110
+        111
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -9855,7 +9943,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        127
+        128
       ]
     ],
     "translation": "Public board URL copied to clipboard"
@@ -10032,7 +10120,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        210
+        216
       ]
     ],
     "translation": "Remove from favorites"
@@ -10127,7 +10215,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        73
+        74
       ]
     ],
     "translation": "Removed from favorites"
@@ -11679,11 +11767,11 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        802
+        814
       ],
       [
         "src/views/board/index.tsx",
-        839
+        851
       ]
     ],
     "translation": "Template"
@@ -11743,7 +11831,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        120
+        121
       ]
     ],
     "translation": "Template URL copied to clipboard"
@@ -11759,11 +11847,11 @@
       ],
       [
         "src/views/boards/index.tsx",
-        48
+        49
       ],
       [
         "src/views/boards/index.tsx",
-        53
+        54
       ],
       [
         "src/views/home/components/Features.tsx",
@@ -11888,7 +11976,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        64
+        65
       ]
     ],
     "translation": "The board has been archived."
@@ -11916,7 +12004,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        65
+        66
       ]
     ],
     "translation": "The board has been unarchived."
@@ -11961,7 +12049,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        919
+        931
       ]
     ],
     "translation": "The card is now in {listName}."
@@ -12122,7 +12210,7 @@
     "origin": [
       [
         "src/components/DeleteLabelConfirmation.tsx",
-        47
+        51
       ],
       [
         "src/views/board/components/DeleteBoardConfirmation.tsx",
@@ -12186,7 +12274,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        412
+        429
       ]
     ],
     "translation": "This card is archived."
@@ -12640,7 +12728,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        248
+        250
       ]
     ],
     "translation": "Unable to add label"
@@ -12692,7 +12780,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        109
+        110
       ],
       [
         "src/views/board/components/CardContextMenu.tsx",
@@ -12832,7 +12920,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        110
+        108
       ]
     ],
     "translation": "Unable to delete checklist item"
@@ -12997,7 +13085,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        83
+        84
       ]
     ],
     "translation": "Unable to update board"
@@ -13037,7 +13125,7 @@
       ],
       [
         "src/views/board/index.tsx",
-        366
+        368
       ],
       [
         "src/views/board/useCardQuickActions.ts",
@@ -13045,7 +13133,7 @@
       ],
       [
         "src/views/card/index.tsx",
-        234
+        236
       ]
     ],
     "translation": "Unable to update card"
@@ -13069,7 +13157,7 @@
     "origin": [
       [
         "src/views/card/components/ChecklistItemRow.tsx",
-        80
+        78
       ]
     ],
     "translation": "Unable to update checklist item"
@@ -13117,7 +13205,7 @@
     "origin": [
       [
         "src/views/board/index.tsx",
-        308
+        310
       ],
       [
         "src/views/card/components/ListSelector.tsx",
@@ -13189,7 +13277,7 @@
     "origin": [
       [
         "src/views/card/index.tsx",
-        420
+        437
       ]
     ],
     "translation": "Unarchive"
@@ -13201,7 +13289,7 @@
     "origin": [
       [
         "src/views/board/components/BoardDropdown.tsx",
-        190
+        196
       ]
     ],
     "translation": "Unarchive board"
@@ -13508,7 +13596,7 @@
     "origin": [
       [
         "src/components/LabelForm.tsx",
-        242
+        263
       ]
     ],
     "translation": "Update label"
@@ -14646,7 +14734,7 @@
     "origin": [
       [
         "src/views/board/components/List.tsx",
-        157
+        167
       ],
       [
         "src/views/board/components/VisibilityButton.tsx",
@@ -14654,23 +14742,23 @@
       ],
       [
         "src/views/board/index.tsx",
-        873
+        885
       ],
       [
         "src/views/board/index.tsx",
-        972
+        984
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
-        84
+        113
       ],
       [
         "src/views/boards/index.tsx",
-        59
+        61
       ],
       [
         "src/views/boards/index.tsx",
-        81
+        83
       ]
     ],
     "translation": "You don't have permission"
