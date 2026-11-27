@@ -2036,7 +2036,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardLabels.tsx",
-        167
+        168
       ]
     ],
     "translation": ""
@@ -2281,7 +2281,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        81
+        82
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -3110,6 +3110,18 @@
     ],
     "translation": "ændrede forfaldsdatoen til <0>{formattedDate}</0>"
   },
+  "CWe7wB": {
+    "message": "Changelog",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/UserMenu.tsx",
+        206
+      ]
+    ],
+    "translation": ""
+  },
   "pFGfsR": {
     "message": "Check out some of our favorite open source projects.",
     "placeholders": {},
@@ -3250,7 +3262,7 @@
       ],
       [
         "src/views/boards/components/BoardLabels.tsx",
-        353
+        352
       ],
       [
         "src/views/boards/components/BoardsList.tsx",
@@ -3289,12 +3301,16 @@
         250
       ],
       [
+        "src/components/WhatsNew.tsx",
+        116
+      ],
+      [
         "src/views/board/components/NewCardForm.tsx",
         432
       ],
       [
         "src/views/boards/components/BoardLabels.tsx",
-        262
+        263
       ],
       [
         "src/views/card/index.tsx",
@@ -3986,11 +4002,11 @@
       ],
       [
         "src/views/boards/components/BoardLabels.tsx",
-        166
+        167
       ],
       [
         "src/views/boards/components/BoardLabels.tsx",
-        308
+        307
       ]
     ],
     "translation": "Opret etiket"
@@ -4701,6 +4717,18 @@
     ],
     "translation": ""
   },
+  "1QfxQT": {
+    "message": "Dismiss",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WhatsNew.tsx",
+        201
+      ]
+    ],
+    "translation": ""
+  },
   "pfa8F0": {
     "message": "Display name",
     "placeholders": {},
@@ -4796,7 +4824,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        209
+        217
       ],
       [
         "src/views/boards/components/TemplateBoards.tsx",
@@ -5046,7 +5074,7 @@
       ],
       [
         "src/views/boards/components/BoardLabels.tsx",
-        294
+        293
       ]
     ],
     "translation": "Rediger etiket"
@@ -5886,7 +5914,7 @@
       ],
       [
         "src/components/UserMenu.tsx",
-        217
+        225
       ]
     ],
     "translation": "Feedback"
@@ -5934,7 +5962,7 @@
     "origin": [
       [
         "src/views/boards/components/BoardLabels.tsx",
-        361
+        360
       ]
     ],
     "translation": ""
@@ -6373,7 +6401,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        89
+        90
       ],
       [
         "src/pages/404.tsx",
@@ -6401,7 +6429,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        113
+        114
       ]
     ],
     "translation": "Gå til medlemmer"
@@ -6413,7 +6441,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        125
+        126
       ]
     ],
     "translation": "Gå til indstillinger"
@@ -6425,7 +6453,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        101
+        102
       ]
     ],
     "translation": "Gå til skabeloner"
@@ -7326,11 +7354,11 @@
       ],
       [
         "src/views/boards/components/BoardLabels.tsx",
-        258
+        259
       ],
       [
         "src/views/boards/components/BoardLabels.tsx",
-        326
+        325
       ],
       [
         "src/views/card/components/LabelSelector.tsx",
@@ -7423,12 +7451,11 @@
     "comments": [],
     "origin": [
       [
-        "src/views/oss-friends/index.tsx",
-        63
+        "src/components/WhatsNew.tsx",
+        144
       ]
     ],
-    "translation": "Læs mere",
-    "obsolete": true
+    "translation": "Læs mere"
   },
   "wqxglO": {
     "message": "Learning",
@@ -7691,7 +7718,7 @@
     "origin": [
       [
         "src/components/UserMenu.tsx",
-        227
+        235
       ]
     ],
     "translation": "Log ud"
@@ -7933,7 +7960,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        105
+        106
       ],
       [
         "src/utils/permission-category-label.ts",
@@ -8423,6 +8450,18 @@
     ],
     "translation": "Nyt arbejdsområde"
   },
+  "yEMdz1": {
+    "message": "Newer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WhatsNew.tsx",
+        96
+      ]
+    ],
+    "translation": ""
+  },
   "5ACX4z": {
     "message": "Newsletter",
     "placeholders": {},
@@ -8720,6 +8759,18 @@
       ]
     ],
     "translation": "Tilbud"
+  },
+  "_fwE6J": {
+    "message": "Older",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WhatsNew.tsx",
+        106
+      ]
+    ],
+    "translation": ""
   },
   "QnzD50": {
     "message": "On-premise",
@@ -10959,7 +11010,7 @@
       ],
       [
         "src/components/SideNavigation.tsx",
-        117
+        118
       ]
     ],
     "translation": "Indstillinger"
@@ -11765,7 +11816,7 @@
     "origin": [
       [
         "src/components/SideNavigation.tsx",
-        93
+        94
       ],
       [
         "src/views/boards/index.tsx",
@@ -14142,6 +14193,38 @@
       [
         "src/views/home/components/Agents.tsx",
         38
+      ]
+    ],
+    "translation": ""
+  },
+  "3ePd3I": {
+    "message": "What's new",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WhatsNew.tsx",
+        169
+      ],
+      [
+        "src/components/WhatsNew.tsx",
+        189
+      ]
+    ],
+    "translation": ""
+  },
+  "Lxs7di": {
+    "message": "What's new: {0}",
+    "placeholders": {
+      "0": [
+        "latest.title"
+      ]
+    },
+    "comments": [],
+    "origin": [
+      [
+        "src/components/WhatsNew.tsx",
+        168
       ]
     ],
     "translation": ""

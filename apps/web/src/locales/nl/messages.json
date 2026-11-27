@@ -1216,7 +1216,7 @@
     "message": "Board labels",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/BoardLabels.tsx", 167]],
+    "origin": [["src/views/boards/components/BoardLabels.tsx", 168]],
     "translation": "Bordlabels"
   },
   "uxBHQx": {
@@ -1364,7 +1364,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 81],
+      ["src/components/SideNavigation.tsx", 82],
       ["src/utils/permission-category-label.ts", 12],
       ["src/views/boards/index.tsx", 49],
       ["src/views/boards/index.tsx", 54],
@@ -1844,6 +1844,13 @@
     ],
     "translation": "heeft de vervaldatum gewijzigd naar <0>{formattedDate}</0>"
   },
+  "CWe7wB": {
+    "message": "Changelog",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/UserMenu.tsx", 206]],
+    "translation": "Wijzigingslogboek"
+  },
   "pFGfsR": {
     "message": "Check out some of our favorite open source projects.",
     "placeholders": {},
@@ -1935,7 +1942,7 @@
     "comments": [],
     "origin": [
       ["src/views/board/components/Filters.tsx", 242],
-      ["src/views/boards/components/BoardLabels.tsx", 353],
+      ["src/views/boards/components/BoardLabels.tsx", 352],
       ["src/views/boards/components/BoardsList.tsx", 109]
     ],
     "translation": "Filters wissen"
@@ -1958,8 +1965,9 @@
     "comments": [],
     "origin": [
       ["src/components/Dashboard.tsx", 250],
+      ["src/components/WhatsNew.tsx", 116],
       ["src/views/board/components/NewCardForm.tsx", 432],
-      ["src/views/boards/components/BoardLabels.tsx", 262],
+      ["src/views/boards/components/BoardLabels.tsx", 263],
       ["src/views/card/index.tsx", 414],
       ["src/views/members/components/EditMemberPermissionsModal.tsx", 184],
       ["src/views/public/board/CardModal.tsx", 135],
@@ -2381,8 +2389,8 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 263],
-      ["src/views/boards/components/BoardLabels.tsx", 166],
-      ["src/views/boards/components/BoardLabels.tsx", 308]
+      ["src/views/boards/components/BoardLabels.tsx", 167],
+      ["src/views/boards/components/BoardLabels.tsx", 307]
     ],
     "translation": "Maak label"
   },
@@ -2806,6 +2814,13 @@
     "origin": [["src/views/home/components/Footer.tsx", 75]],
     "translation": "Discussies"
   },
+  "1QfxQT": {
+    "message": "Dismiss",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/WhatsNew.tsx", 201]],
+    "translation": "Sluiten"
+  },
   "pfa8F0": {
     "message": "Display name",
     "placeholders": {},
@@ -2871,7 +2886,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/UserMenu.tsx", 209],
+      ["src/components/UserMenu.tsx", 217],
       ["src/views/boards/components/TemplateBoards.tsx", 24],
       ["src/views/boards/components/TemplateBoards.tsx", 30],
       ["src/views/boards/components/TemplateBoards.tsx", 43],
@@ -3011,7 +3026,7 @@
     "comments": [],
     "origin": [
       ["src/components/LabelForm.tsx", 134],
-      ["src/views/boards/components/BoardLabels.tsx", 294]
+      ["src/views/boards/components/BoardLabels.tsx", 293]
     ],
     "translation": "Label bewerken"
   },
@@ -3548,7 +3563,7 @@
     "comments": [],
     "origin": [
       ["src/components/FeedbackModal.tsx", 63],
-      ["src/components/UserMenu.tsx", 217]
+      ["src/components/UserMenu.tsx", 225]
     ],
     "translation": "Feedback"
   },
@@ -3579,7 +3594,7 @@
     "message": "Filters",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/boards/components/BoardLabels.tsx", 361]],
+    "origin": [["src/views/boards/components/BoardLabels.tsx", 360]],
     "translation": "Filters"
   },
   "l31EoQ": {
@@ -3838,7 +3853,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 89],
+      ["src/components/SideNavigation.tsx", 90],
       ["src/pages/404.tsx", 30]
     ],
     "translation": "Ga naar borden"
@@ -3854,21 +3869,21 @@
     "message": "Go to members",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 113]],
+    "origin": [["src/components/SideNavigation.tsx", 114]],
     "translation": "Ga naar leden"
   },
   "1WuwiM": {
     "message": "Go to settings",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 125]],
+    "origin": [["src/components/SideNavigation.tsx", 126]],
     "translation": "Ga naar instellingen"
   },
   "csFbe-": {
     "message": "Go to templates",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/SideNavigation.tsx", 101]],
+    "origin": [["src/components/SideNavigation.tsx", 102]],
     "translation": "Ga naar sjablonen"
   },
   "mXjzXT": {
@@ -4412,8 +4427,8 @@
       ["src/views/board/components/CardContextMenu.tsx", 245],
       ["src/views/board/components/Filters.tsx", 173],
       ["src/views/board/components/NewCardForm.tsx", 530],
-      ["src/views/boards/components/BoardLabels.tsx", 258],
-      ["src/views/boards/components/BoardLabels.tsx", 326],
+      ["src/views/boards/components/BoardLabels.tsx", 259],
+      ["src/views/boards/components/BoardLabels.tsx", 325],
       ["src/views/card/components/LabelSelector.tsx", 112],
       ["src/views/card/index.tsx", 126]
     ],
@@ -4477,9 +4492,8 @@
     "message": "Learn more",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/views/oss-friends/index.tsx", 63]],
-    "translation": "Meer informatie",
-    "obsolete": true
+    "origin": [["src/components/WhatsNew.tsx", 144]],
+    "translation": "Meer informatie"
   },
   "wqxglO": {
     "message": "Learning",
@@ -4636,7 +4650,7 @@
     "message": "Logout",
     "placeholders": {},
     "comments": [],
-    "origin": [["src/components/UserMenu.tsx", 227]],
+    "origin": [["src/components/UserMenu.tsx", 235]],
     "translation": "Uitloggen"
   },
   "vuxdLS": {
@@ -4774,7 +4788,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 105],
+      ["src/components/SideNavigation.tsx", 106],
       ["src/utils/permission-category-label.ts", 20],
       ["src/views/board/components/CardContextMenu.tsx", 276],
       ["src/views/board/components/Filters.tsx", 164],
@@ -5056,6 +5070,13 @@
     "origin": [["src/components/NewWorkspaceForm.tsx", 151]],
     "translation": "Nieuwe werkruimte"
   },
+  "yEMdz1": {
+    "message": "Newer",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/WhatsNew.tsx", 96]],
+    "translation": "Nieuwer"
+  },
   "5ACX4z": {
     "message": "Newsletter",
     "placeholders": {},
@@ -5229,6 +5250,13 @@
     "comments": [],
     "origin": [["src/views/boards/components/TemplateBoards.tsx", 85]],
     "translation": "Aanbieding"
+  },
+  "_fwE6J": {
+    "message": "Older",
+    "placeholders": {},
+    "comments": [],
+    "origin": [["src/components/WhatsNew.tsx", 106]],
+    "translation": "Ouder"
   },
   "QnzD50": {
     "message": "On-premise",
@@ -6500,7 +6528,7 @@
     "comments": [],
     "origin": [
       ["src/components/SettingsLayout.tsx", 103],
-      ["src/components/SideNavigation.tsx", 117]
+      ["src/components/SideNavigation.tsx", 118]
     ],
     "translation": "Instellingen"
   },
@@ -6988,7 +7016,7 @@
     "placeholders": {},
     "comments": [],
     "origin": [
-      ["src/components/SideNavigation.tsx", 93],
+      ["src/components/SideNavigation.tsx", 94],
       ["src/views/boards/index.tsx", 49],
       ["src/views/boards/index.tsx", 54],
       ["src/views/home/components/Features.tsx", 101]
@@ -8445,6 +8473,25 @@
     "comments": [],
     "origin": [["src/views/home/components/Agents.tsx", 38]],
     "translation": "Wat houdt de lancering tegen?"
+  },
+  "3ePd3I": {
+    "message": "What's new",
+    "placeholders": {},
+    "comments": [],
+    "origin": [
+      ["src/components/WhatsNew.tsx", 169],
+      ["src/components/WhatsNew.tsx", 189]
+    ],
+    "translation": "Wat is er nieuw"
+  },
+  "Lxs7di": {
+    "message": "What's new: {0}",
+    "placeholders": {
+      "0": ["latest.title"]
+    },
+    "comments": [],
+    "origin": [["src/components/WhatsNew.tsx", 168]],
+    "translation": "Wat is er nieuw: {0}"
   },
   "H5G-qG": {
     "message": "What's the difference between Kan and Trello?",
