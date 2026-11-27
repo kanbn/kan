@@ -6,6 +6,7 @@ import {
   HiChevronRight,
   HiEllipsisHorizontal,
   HiMiniPlus,
+  HiMiniXMark,
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
@@ -47,7 +48,7 @@ interface CheckboxDropdownProps {
   asChild?: boolean;
   disabled?: boolean;
   ariaLabel?: string;
-  footer?: React.ReactNode;
+  onClear?: () => void;
 }
 
 const contentClass = twMerge(
@@ -67,7 +68,7 @@ export default function CheckboxDropdown({
   asChild = true,
   disabled = false,
   ariaLabel,
-  footer,
+  onClear,
 }: CheckboxDropdownProps) {
   const [open, setOpen] = useState(false);
   const [groupKey, setGroupKey] = useState<string | null>(null);
@@ -211,10 +212,13 @@ export default function CheckboxDropdown({
               ))}
             </>
           )}
-          {footer && (
+          {onClear && (
             <>
               <DropdownMenu.Separator className={menuSeparatorClass} />
-              <DropdownMenu.Item asChild>{footer}</DropdownMenu.Item>
+              <DropdownMenu.Item className={menuItemClass} onSelect={onClear}>
+                <HiMiniXMark className={menuIconClass} />
+                {t`Clear filters`}
+              </DropdownMenu.Item>
             </>
           )}
         </DropdownMenu.Content>
