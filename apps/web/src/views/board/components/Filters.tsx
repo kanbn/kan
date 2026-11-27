@@ -92,7 +92,7 @@ const Filters = ({
     selected: !!router.query.members?.includes(member.publicId),
     leftIcon: (
       <Avatar
-        size="xs"
+        size="2xs"
         name={member.user?.name ?? ""}
         imageUrl={
           member.user?.image ? getAvatarUrl(member.user.image) : undefined

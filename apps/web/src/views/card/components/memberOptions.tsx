@@ -42,7 +42,7 @@ export const getCardMemberOptions = (
         status: member.status,
         leftIcon: (
           <Avatar
-            size="xs"
+            size="2xs"
             name={member.user?.name ?? ""}
             imageUrl={imageUrl}
             email={email}
