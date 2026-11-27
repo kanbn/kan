@@ -31,7 +31,7 @@ export class CardPage {
     await this.currentListTrigger().click();
     const updated = waitForApi(this.page, "PUT", /^\/cards\/[^/]+$/);
     await this.page
-      .getByRole("checkbox", { name: targetListName })
+      .getByRole("menuitemcheckbox", { name: targetListName })
       .filter({ visible: true })
       .click();
     await updated;
@@ -80,13 +80,13 @@ export class CardPage {
   async openLabelEditor(name: string) {
     await this.labelSelectorTrigger().click();
 
-    const checkbox = this.page
-      .getByRole("checkbox", { name })
-      .filter({ visible: true });
-    const row = checkbox.locator("../..");
+    const row = this.page
+      .getByRole("menuitemcheckbox", { name })
+      .filter({ visible: true })
+      .locator("..");
 
     await row.hover();
-    await row.getByRole("button").click();
+    await row.getByRole("button", { name: `Edit ${name}` }).click();
   }
 
   async uploadAttachment(filePath: string) {
@@ -263,7 +263,7 @@ export class CardPage {
     await this.memberSelectorTrigger().click();
     const updated = waitForApi(this.page, "PUT", /^\/cards\/[^/]+\/members\//);
     await this.page
-      .getByRole("checkbox", { name: memberName })
+      .getByRole("menuitemcheckbox", { name: memberName })
       .filter({ visible: true })
       .click();
     await updated;

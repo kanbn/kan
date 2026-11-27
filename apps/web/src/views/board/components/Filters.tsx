@@ -230,7 +230,6 @@ const Filters = ({
         groups={groups}
         handleSelect={handleSelect}
         position={position}
-        backLabel={t`Back`}
         footer={
           numOfFilters > 0 ? (
             <button
