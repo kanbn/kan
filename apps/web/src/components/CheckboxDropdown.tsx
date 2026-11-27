@@ -8,6 +8,8 @@ import {
 } from "react-icons/hi2";
 import { twMerge } from "tailwind-merge";
 
+import Checkbox from "~/components/Checkbox";
+
 interface Item {
   key: string;
   value: string;
@@ -82,11 +84,9 @@ export default function CheckboxDropdown({
                   handleSelect(groupKey, { key: item.key, value: item.value });
                 }}
               >
-                <input
+                <Checkbox
                   id={item.key}
                   name={item.key}
-                  type="checkbox"
-                  className="h-[14px] w-[14px] rounded-sm bg-transparent"
                   onClick={(event) => event.stopPropagation()}
                   onChange={() =>
                     handleSelect(groupKey, { key: item.key, value: item.value })

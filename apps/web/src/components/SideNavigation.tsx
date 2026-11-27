@@ -22,6 +22,7 @@ import templatesIconDark from "~/assets/templates-dark.json";
 import templatesIconLight from "~/assets/templates-light.json";
 import ReactiveButton from "~/components/ReactiveButton";
 import UserMenu from "~/components/UserMenu";
+import WhatsNew from "~/components/WhatsNew";
 import WorkspaceMenu from "~/components/WorkspaceMenu";
 
 interface SideNavigationProps {
@@ -192,6 +193,7 @@ export default function SideNavigation({
         </div>
 
         <div>
+          <WhatsNew isCollapsed={isCollapsed} />
           <UserMenu
             displayName={user.displayName ?? undefined}
             email={user.email ?? "Email not provided?"}

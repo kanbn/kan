@@ -199,6 +199,14 @@ export default function UserMenu({
                 </Link>
               </Menu.Item>
               <Menu.Item>
+                <button
+                  onClick={() => handleModalOpen("WHATS_NEW")}
+                  className="flex w-full items-center rounded-[5px] px-3 py-2 text-left text-xs hover:bg-light-200 dark:hover:bg-dark-400"
+                >
+                  {t`Changelog`}
+                </button>
+              </Menu.Item>
+              <Menu.Item>
                 <Link
                   href="https://docs.kan.bn"
                   target="_blank"

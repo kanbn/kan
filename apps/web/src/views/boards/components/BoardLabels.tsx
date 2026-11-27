@@ -24,6 +24,7 @@ import {
 } from "@kan/api-client/hooks";
 
 import Button from "~/components/Button";
+import Checkbox from "~/components/Checkbox";
 import CheckboxDropdown from "~/components/CheckboxDropdown";
 import { DeleteLabelConfirmation } from "~/components/DeleteLabelConfirmation";
 import { LabelForm } from "~/components/LabelForm";
@@ -274,10 +275,8 @@ export function BoardLabelsModal({
               key={label.publicId}
               className="group/item flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
             >
-              <input
+              <Checkbox
                 id={`board-label-${label.publicId}`}
-                type="checkbox"
-                className="h-[14px] w-[14px] rounded-sm bg-transparent"
                 checked={isSelected(label.publicId)}
                 disabled={!board}
                 onChange={() => toggle(label.publicId)}
