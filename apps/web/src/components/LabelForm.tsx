@@ -6,8 +6,11 @@ import { HiChevronUpDown, HiXMark } from "react-icons/hi2";
 
 import type { Colour } from "@kan/shared/constants";
 import {
+  useCreateBoardLabel,
   useCreateLabel,
+  useGetBoardLabels,
   useGetLabel,
+  useUpdateBoardLabel,
   useUpdateLabel,
 } from "@kan/api-client/hooks";
 import { colours } from "@kan/shared/constants";
@@ -24,37 +27,46 @@ interface LabelFormInput {
   isCreateAnotherEnabled?: boolean;
 }
 
+// With a workspacePublicId it edits the workspace's board labels instead of a board's card labels.
 export function LabelForm({
-  boardPublicId,
+  boardPublicId = "",
+  workspacePublicId,
   refetch,
   isEdit,
 }: {
-  boardPublicId: string;
+  boardPublicId?: string;
+  workspacePublicId?: string;
   refetch: () => void;
   isEdit?: boolean;
 }) {
   const { closeModal, entityId, openModal, setModalState } = useModal();
 
-  const label = useGetLabel(entityId, {
-    query: { enabled: !!isEdit && entityId.length >= 12 },
+  const cardLabel = useGetLabel(entityId, {
+    query: {
+      enabled: !workspacePublicId && !!isEdit && entityId.length >= 12,
+    },
   });
+  const boardLabels = useGetBoardLabels(workspacePublicId ?? "", {
+    query: { enabled: !!workspacePublicId && !!isEdit },
+  });
+  const existing = workspacePublicId
+    ? boardLabels.data?.data.find((l) => l.publicId === entityId)
+    : cardLabel.data?.data;
 
   const { control, register, reset, handleSubmit, setValue, watch } =
     useForm<LabelFormInput>({
       values: {
-        name: isEdit && label.data?.data.name ? label.data.data.name : "",
-        colour: resolveLabelColour(
-          isEdit ? label.data?.data.colourCode : undefined,
-        ),
+        name: isEdit && existing?.name ? existing.name : "",
+        colour: resolveLabelColour(isEdit ? existing?.colourCode : undefined),
         isCreateAnotherEnabled: false,
       },
     });
 
   const isCreateAnotherEnabled = watch("isCreateAnotherEnabled");
 
-  const createLabel = useCreateLabel({
+  const createMutation = {
     mutation: {
-      onSuccess: (newLabel) => {
+      onSuccess: (newLabel: { data: { publicId: string } }) => {
         const currentColourIndex = colours.findIndex(
           (c) => c.code === watch("colour").code,
         );
@@ -76,36 +88,35 @@ export function LabelForm({
         }
       },
     },
-  });
-
-  const updateLabel = useUpdateLabel({
+  };
+  const updateMutation = {
     mutation: {
       onSuccess: () => {
         refetch();
         closeModal();
       },
     },
-  });
+  };
+  const createLabel = useCreateLabel(createMutation);
+  const updateLabel = useUpdateLabel(updateMutation);
+  const createBoardLabel = useCreateBoardLabel(createMutation);
+  const updateBoardLabel = useUpdateBoardLabel(updateMutation);
 
   const onSubmit = (values: LabelFormInput) => {
     if (!values.colour.code) return;
+    const data = { name: values.name, colourCode: values.colour.code };
 
-    if (isEdit) {
+    if (workspacePublicId) {
+      if (isEdit)
+        updateBoardLabel.mutate({ boardLabelPublicId: entityId, data });
+      else createBoardLabel.mutate({ workspacePublicId, data });
+    } else if (isEdit) {
       updateLabel.mutate({
-        labelPublicId: label.data?.data.publicId ?? "",
-        data: {
-          name: values.name,
-          colourCode: values.colour.code,
-        },
+        labelPublicId: existing?.publicId ?? "",
+        data,
       });
     } else {
-      createLabel.mutate({
-        data: {
-          name: values.name,
-          colourCode: values.colour.code,
-          boardPublicId,
-        },
-      });
+      createLabel.mutate({ data: { ...data, boardPublicId } });
     }
   };
 
@@ -228,7 +239,12 @@ export function LabelForm({
               size="sm"
               type="button"
               variant="secondary"
-              onClick={() => openModal("DELETE_LABEL", entityId)}
+              onClick={() =>
+                openModal(
+                  workspacePublicId ? "DELETE_BOARD_LABEL" : "DELETE_LABEL",
+                  entityId,
+                )
+              }
             >
               {t`Delete`}
             </Button>
@@ -236,7 +252,12 @@ export function LabelForm({
           <Button
             size="sm"
             type="submit"
-            isLoading={updateLabel.isPending || createLabel.isPending}
+            isLoading={
+              updateLabel.isPending ||
+              createLabel.isPending ||
+              updateBoardLabel.isPending ||
+              createBoardLabel.isPending
+            }
             disabled={!watch("name")}
           >
             {isEdit ? t`Update label` : t`Create label`}

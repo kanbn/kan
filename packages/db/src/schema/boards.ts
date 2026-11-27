@@ -2,6 +2,7 @@ import { relations, sql } from "drizzle-orm";
 import {
   bigint,
   bigserial,
+  boolean,
   index,
   pgEnum,
   pgTable,
@@ -11,8 +12,9 @@ import {
   uniqueIndex,
   uuid,
   varchar,
-  boolean,
 } from "drizzle-orm/pg-core";
+
+import { boardsToBoardLabels } from "./boardLabels";
 import { imports } from "./imports";
 import { labels } from "./labels";
 import { lists } from "./lists";
@@ -87,6 +89,7 @@ export const boardsRelations = relations(boards, ({ one, many }) => ({
   lists: many(lists),
   allLists: many(lists),
   labels: many(labels),
+  boardLabels: many(boardsToBoardLabels),
   deletedBy: one(users, {
     fields: [boards.deletedBy],
     references: [users.id],

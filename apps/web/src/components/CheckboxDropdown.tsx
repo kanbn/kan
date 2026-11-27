@@ -76,7 +76,7 @@ export default function CheckboxDropdown({
         ? items.map((item) => (
             <Menu.Item key={item.key}>
               <div
-                className="group flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
+                className="group/item flex items-center rounded-[5px] p-2 hover:bg-light-200 dark:hover:bg-dark-300"
                 onClick={(e) => {
                   e.preventDefault();
                   handleSelect(groupKey, { key: item.key, value: item.value });
@@ -107,7 +107,7 @@ export default function CheckboxDropdown({
                 {handleEdit && (
                   <button
                     type="button"
-                    className="invisible ml-auto group-hover:visible"
+                    className="invisible ml-auto group-hover/item:visible"
                     onClick={(event) => {
                       event.preventDefault();
                       event.stopPropagation();

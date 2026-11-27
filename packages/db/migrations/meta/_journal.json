@@ -288,6 +288,13 @@
       "when": 1795602275504,
       "tag": "20261125102435_AddCardArchive",
       "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1795777115032,
+      "tag": "20261127105835_AddBoardLabels",
+      "breakpoints": true
     }
   ]
 }

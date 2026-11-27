@@ -79,12 +79,20 @@ export type BoardListItemDtoOutputLabelsItem = {
   colourCode: string | null;
 };
 
+export type BoardListItemDtoOutputBoardLabelsItem = {
+  publicId: string;
+  name: string;
+  /** @nullable */
+  colourCode: string | null;
+};
+
 export interface BoardListItemDtoOutput {
   publicId: string;
   name: string;
   favorite: boolean;
   lists: BoardListItemDtoOutputListsItem[];
   labels: BoardListItemDtoOutputLabelsItem[];
+  boardLabels: BoardListItemDtoOutputBoardLabelsItem[];
 }
 
 /**
@@ -384,6 +392,12 @@ export interface UpdateBoardDto {
   favorite?: boolean;
   /** Archive (true) or restore (false) the board. */
   isArchived?: boolean;
+  /**
+   * Public IDs of the workspace board labels to set on the board, replacing the current ones.
+   * @maxItems 50
+   * @items.minLength 12
+   */
+  labelPublicIds?: string[];
 }
 
 export interface BoardUpdateResponseDtoOutput {
@@ -1321,6 +1335,21 @@ export interface LabelResponseDtoOutput {
   colourCode: string | null;
 }
 
+export interface UpdateLabelDto {
+  /**
+   * Label name.
+   * @minLength 1
+   * @maxLength 36
+   */
+  name: string;
+  /**
+   * Label colour as a hex code, e.g. #0d9488.
+   * @minLength 7
+   * @maxLength 7
+   */
+  colourCode: string;
+}
+
 export interface CreateLabelDto {
   /**
    * Label name.
@@ -1333,21 +1362,6 @@ export interface CreateLabelDto {
    * @minLength 12
    */
   boardPublicId: string;
-  /**
-   * Label colour as a hex code, e.g. #0d9488.
-   * @minLength 7
-   * @maxLength 7
-   */
-  colourCode: string;
-}
-
-export interface UpdateLabelDto {
-  /**
-   * Label name.
-   * @minLength 1
-   * @maxLength 36
-   */
-  name: string;
   /**
    * Label colour as a hex code, e.g. #0d9488.
    * @minLength 7
@@ -8863,6 +8877,532 @@ export function useGetGitHubStatus<
 
   return withQueryKey(query, queryOptions.queryKey);
 }
+
+export type getBoardLabelsResponse200 = {
+  data: LabelResponseDtoOutput[];
+  status: 200;
+};
+
+export type getBoardLabelsResponseSuccess = getBoardLabelsResponse200 & {
+  headers: Headers;
+};
+export type getBoardLabelsResponse = getBoardLabelsResponseSuccess;
+
+export const getGetBoardLabelsUrl = (workspacePublicId: string) => {
+  return `/workspaces/${workspacePublicId}/board-labels`;
+};
+
+/**
+ * @summary List a workspace's board labels
+ */
+export const getBoardLabels = async (
+  workspacePublicId: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<getBoardLabelsResponse> => {
+  return customFetch<getBoardLabelsResponse>(
+    getGetBoardLabelsUrl(workspacePublicId),
+    {
+      credentials: "include",
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getGetBoardLabelsQueryKey = (workspacePublicId: string) => {
+  return [`/workspaces/${workspacePublicId}/board-labels`] as const;
+};
+
+export const getGetBoardLabelsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getBoardLabels>>,
+  TError = unknown,
+>(
+  workspacePublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getBoardLabels>>, TError, TData>
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetBoardLabelsQueryKey(workspacePublicId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBoardLabels>>> = ({
+    signal,
+  }) => getBoardLabels(workspacePublicId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: workspacePublicId !== null && workspacePublicId !== undefined,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getBoardLabels>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export type GetBoardLabelsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getBoardLabels>>
+>;
+export type GetBoardLabelsQueryError = unknown;
+
+/** @summary List a workspace's board labels */
+export function useGetBoardLabels<
+  TData = Awaited<ReturnType<typeof getBoardLabels>>,
+  TError = unknown,
+>(
+  workspacePublicId: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getBoardLabels>>, TError, TData>
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getBoardLabels>>,
+          TError,
+          Awaited<ReturnType<typeof getBoardLabels>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary List a workspace's board labels */
+export function useGetBoardLabels<
+  TData = Awaited<ReturnType<typeof getBoardLabels>>,
+  TError = unknown,
+>(
+  workspacePublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getBoardLabels>>, TError, TData>
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getBoardLabels>>,
+          TError,
+          Awaited<ReturnType<typeof getBoardLabels>>
+        >,
+        "initialData"
+      >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary List a workspace's board labels */
+export function useGetBoardLabels<
+  TData = Awaited<ReturnType<typeof getBoardLabels>>,
+  TError = unknown,
+>(
+  workspacePublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getBoardLabels>>, TError, TData>
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+};
+/** @summary List a workspace's board labels */
+export function useGetBoardLabels<
+  TData = Awaited<ReturnType<typeof getBoardLabels>>,
+  TError = unknown,
+>(
+  workspacePublicId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<Awaited<ReturnType<typeof getBoardLabels>>, TError, TData>
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & {
+  queryKey: DataTag<QueryKey, TData, TError>;
+} {
+  const queryOptions = getGetBoardLabelsQueryOptions(
+    workspacePublicId,
+    options,
+  );
+
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<
+    TData,
+    TError
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+export type createBoardLabelResponse201 = {
+  data: LabelResponseDtoOutput;
+  status: 201;
+};
+
+export type createBoardLabelResponseSuccess = createBoardLabelResponse201 & {
+  headers: Headers;
+};
+export type createBoardLabelResponse = createBoardLabelResponseSuccess;
+
+export const getCreateBoardLabelUrl = (workspacePublicId: string) => {
+  return `/workspaces/${workspacePublicId}/board-labels`;
+};
+
+/**
+ * @summary Create a board label
+ */
+export const createBoardLabel = async (
+  workspacePublicId: string,
+  updateLabelDto: UpdateLabelDto,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<createBoardLabelResponse> => {
+  const getHeaders = (
+    h?: NonNullable<RequestInit["headers"]>,
+  ): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(
+          h as Iterable<Iterable<string>>,
+          (entry) => Array.from(entry) as [string, string],
+        ),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<
+      string | readonly string[] | undefined
+    >(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+  return customFetch<createBoardLabelResponse>(
+    getCreateBoardLabelUrl(workspacePublicId),
+    {
+      credentials: "include",
+      ...options,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...getHeaders(options?.headers),
+      },
+      body: JSON.stringify(updateLabelDto),
+    },
+  );
+};
+
+export const getCreateBoardLabelMutationKey = () =>
+  ["createBoardLabel"] as const;
+
+export const getCreateBoardLabelMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createBoardLabel>>,
+    TError,
+    CreateBoardLabelMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createBoardLabel>>,
+  TError,
+  CreateBoardLabelMutationVariables,
+  TContext
+> => {
+  const mutationKey = getCreateBoardLabelMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createBoardLabel>>,
+    CreateBoardLabelMutationVariables
+  > = (props) => {
+    const { workspacePublicId, data } = props ?? {};
+
+    return createBoardLabel(workspacePublicId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateBoardLabelMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createBoardLabel>>
+>;
+export type CreateBoardLabelMutationBody = UpdateLabelDto;
+export type CreateBoardLabelMutationError = unknown;
+export type CreateBoardLabelMutationVariables = {
+  workspacePublicId: string;
+  data: UpdateLabelDto;
+};
+
+/** @summary Create a board label */
+export const useCreateBoardLabel = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof createBoardLabel>>,
+      TError,
+      CreateBoardLabelMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof createBoardLabel>>,
+  TError,
+  CreateBoardLabelMutationVariables,
+  TContext
+> => {
+  return useMutation(getCreateBoardLabelMutationOptions(options), queryClient);
+};
+
+export type updateBoardLabelResponse200 = {
+  data: LabelResponseDtoOutput;
+  status: 200;
+};
+
+export type updateBoardLabelResponseSuccess = updateBoardLabelResponse200 & {
+  headers: Headers;
+};
+export type updateBoardLabelResponse = updateBoardLabelResponseSuccess;
+
+export const getUpdateBoardLabelUrl = (boardLabelPublicId: string) => {
+  return `/board-labels/${boardLabelPublicId}`;
+};
+
+/**
+ * @summary Update a board label
+ */
+export const updateBoardLabel = async (
+  boardLabelPublicId: string,
+  updateLabelDto: UpdateLabelDto,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<updateBoardLabelResponse> => {
+  const getHeaders = (
+    h?: NonNullable<RequestInit["headers"]>,
+  ): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(
+          h as Iterable<Iterable<string>>,
+          (entry) => Array.from(entry) as [string, string],
+        ),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<
+      string | readonly string[] | undefined
+    >(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+  return customFetch<updateBoardLabelResponse>(
+    getUpdateBoardLabelUrl(boardLabelPublicId),
+    {
+      credentials: "include",
+      ...options,
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...getHeaders(options?.headers),
+      },
+      body: JSON.stringify(updateLabelDto),
+    },
+  );
+};
+
+export const getUpdateBoardLabelMutationKey = () =>
+  ["updateBoardLabel"] as const;
+
+export const getUpdateBoardLabelMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof updateBoardLabel>>,
+    TError,
+    UpdateBoardLabelMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof updateBoardLabel>>,
+  TError,
+  UpdateBoardLabelMutationVariables,
+  TContext
+> => {
+  const mutationKey = getUpdateBoardLabelMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof updateBoardLabel>>,
+    UpdateBoardLabelMutationVariables
+  > = (props) => {
+    const { boardLabelPublicId, data } = props ?? {};
+
+    return updateBoardLabel(boardLabelPublicId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type UpdateBoardLabelMutationResult = NonNullable<
+  Awaited<ReturnType<typeof updateBoardLabel>>
+>;
+export type UpdateBoardLabelMutationBody = UpdateLabelDto;
+export type UpdateBoardLabelMutationError = unknown;
+export type UpdateBoardLabelMutationVariables = {
+  boardLabelPublicId: string;
+  data: UpdateLabelDto;
+};
+
+/** @summary Update a board label */
+export const useUpdateBoardLabel = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof updateBoardLabel>>,
+      TError,
+      UpdateBoardLabelMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof updateBoardLabel>>,
+  TError,
+  UpdateBoardLabelMutationVariables,
+  TContext
+> => {
+  return useMutation(getUpdateBoardLabelMutationOptions(options), queryClient);
+};
+
+export type deleteBoardLabelResponse200 = {
+  data: SuccessResponseDtoOutput;
+  status: 200;
+};
+
+export type deleteBoardLabelResponseSuccess = deleteBoardLabelResponse200 & {
+  headers: Headers;
+};
+export type deleteBoardLabelResponse = deleteBoardLabelResponseSuccess;
+
+export const getDeleteBoardLabelUrl = (boardLabelPublicId: string) => {
+  return `/board-labels/${boardLabelPublicId}`;
+};
+
+/**
+ * @summary Delete a board label
+ */
+export const deleteBoardLabel = async (
+  boardLabelPublicId: string,
+  options?: Parameters<typeof customFetch>[1],
+): Promise<deleteBoardLabelResponse> => {
+  return customFetch<deleteBoardLabelResponse>(
+    getDeleteBoardLabelUrl(boardLabelPublicId),
+    {
+      credentials: "include",
+      ...options,
+      method: "DELETE",
+    },
+  );
+};
+
+export const getDeleteBoardLabelMutationKey = () =>
+  ["deleteBoardLabel"] as const;
+
+export const getDeleteBoardLabelMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteBoardLabel>>,
+    TError,
+    DeleteBoardLabelMutationVariables,
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteBoardLabel>>,
+  TError,
+  DeleteBoardLabelMutationVariables,
+  TContext
+> => {
+  const mutationKey = getDeleteBoardLabelMutationKey();
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteBoardLabel>>,
+    DeleteBoardLabelMutationVariables
+  > = (props) => {
+    const { boardLabelPublicId } = props ?? {};
+
+    return deleteBoardLabel(boardLabelPublicId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type DeleteBoardLabelMutationResult = NonNullable<
+  Awaited<ReturnType<typeof deleteBoardLabel>>
+>;
+
+export type DeleteBoardLabelMutationError = unknown;
+export type DeleteBoardLabelMutationVariables = { boardLabelPublicId: string };
+
+/** @summary Delete a board label */
+export const useDeleteBoardLabel = <TError = unknown, TContext = unknown>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof deleteBoardLabel>>,
+      TError,
+      DeleteBoardLabelMutationVariables,
+      TContext
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof deleteBoardLabel>>,
+  TError,
+  DeleteBoardLabelMutationVariables,
+  TContext
+> => {
+  return useMutation(getDeleteBoardLabelMutationOptions(options), queryClient);
+};
 
 export type getLabelResponse200 = {
   data: LabelResponseDtoOutput;

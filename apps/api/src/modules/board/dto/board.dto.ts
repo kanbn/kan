@@ -75,6 +75,7 @@ export const BoardListItemSchema = z.object({
     z.object({ publicId: z.string(), name: z.string(), index: z.number() }),
   ),
   labels: z.array(labelSchema),
+  boardLabels: z.array(labelSchema),
 });
 
 export class BoardListItemDto extends createZodDto(BoardListItemSchema) {}
@@ -310,6 +311,13 @@ export const UpdateBoardSchema = z.object({
     .boolean()
     .optional()
     .describe("Archive (true) or restore (false) the board."),
+  labelPublicIds: z
+    .array(z.string().min(12))
+    .max(50)
+    .optional()
+    .describe(
+      "Public IDs of the workspace board labels to set on the board, replacing the current ones.",
+    ),
 });
 
 export class UpdateBoardDto extends createZodDto(UpdateBoardSchema) {}

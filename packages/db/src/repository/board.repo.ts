@@ -19,6 +19,7 @@ import type { BoardVisibilityStatus } from "@kan/db/schema";
 import {
   boardMembers,
   boards,
+  boardsToBoardLabels,
   cardActivities,
   cardAttachments,
   cards,
@@ -92,6 +93,14 @@ export const getAllByWorkspaceId = async (
         },
         where: isNull(labels.deletedAt),
       },
+      boardLabels: {
+        columns: {},
+        with: {
+          boardLabel: {
+            columns: { publicId: true, name: true, colourCode: true },
+          },
+        },
+      },
     },
     where: and(
       eq(boards.workspaceId, workspaceId),
@@ -101,10 +110,7 @@ export const getAllByWorkspaceId = async (
         ? eq(boards.isArchived, opts.archived)
         : undefined,
       memberBoardIds
-        ? or(
-            eq(boards.type, "template"),
-            inArray(boards.id, memberBoardIds),
-          )
+        ? or(eq(boards.type, "template"), inArray(boards.id, memberBoardIds))
         : undefined,
     ),
   });
@@ -114,6 +120,9 @@ export const getAllByWorkspaceId = async (
       ...board,
       favorite: board.userFavorites.length > 0,
       userFavorites: undefined,
+      boardLabels: board.boardLabels
+        .map(({ boardLabel }) => boardLabel)
+        .sort((a, b) => a.name.localeCompare(b.name)),
     }))
     .sort((a, b) => {
       if (a.favorite && !b.favorite) return -1;
@@ -1197,6 +1206,10 @@ export const moveToWorkspace = async (
       });
 
     if (!updatedBoard) throw new Error("Failed to move board");
+
+    await tx
+      .delete(boardsToBoardLabels)
+      .where(eq(boardsToBoardLabels.boardId, boardId));
 
     // Includes soft-deleted cards: their assignments point at members of the old
     // workspace and would come back on restore.

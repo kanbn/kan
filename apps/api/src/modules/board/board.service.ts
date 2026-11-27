@@ -7,6 +7,7 @@ import {
 } from "@nestjs/common";
 
 import * as boardRepo from "@kan/db/repository/board.repo";
+import * as boardLabelRepo from "@kan/db/repository/boardLabel.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
@@ -410,6 +411,7 @@ export class BoardService {
     visibility?: "public" | "private";
     favorite?: boolean;
     isArchived?: boolean;
+    labelPublicIds?: string[];
     userId: string;
   }) {
     const { userId } = input;
@@ -438,6 +440,16 @@ export class BoardService {
       } else {
         await boardRepo.removeUserFavorite(db, userId, board.id);
       }
+    }
+
+    if (input.labelPublicIds) {
+      const labelsSet = await boardLabelRepo.setForBoard(db, {
+        boardId: board.id,
+        workspaceId: board.workspaceId,
+        publicIds: input.labelPublicIds,
+      });
+      if (!labelsSet)
+        throw new BadRequestException("One or more board labels not found");
     }
 
     const hasOtherUpdates =
