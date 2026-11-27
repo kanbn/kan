@@ -86,7 +86,7 @@ export class CardPage {
       .locator("..");
 
     await row.hover();
-    await row.getByRole("button", { name: `Edit ${name}` }).click();
+    await row.getByRole("button").click();
   }
 
   async uploadAttachment(filePath: string) {
